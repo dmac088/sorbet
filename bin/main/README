@@ -1,0 +1,12 @@
+when using genkeys use password = "password"
+
+when importing the certificate use password = "changeit"
+
+#example of adding certificate to keytool (don't use sudo)
+
+#importing the ssl cert into the java keytool
+keytool -importcert -file myCertificate.crt -alias spring -keystore /usr/local/Cellar/openjdk@8/1.8.0+322/libexec/openjdk.jdk/Contents/Home/jre/lib/security/cacerts
+
+
+#finding colliding processess
+sudo lsof -i tcp:8090

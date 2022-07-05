@@ -1,0 +1,99 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.ehcache.org/v3"
+	xmlns:jsr107="http://www.ehcache.org/v3/jsr107"
+	xsi:schemaLocation="
+            http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd
+            http://www.ehcache.org/v3/jsr107 http://www.ehcache.org/schema/ehcache-107-ext-3.0.xsd">
+
+	<cache alias="categoryCache" uses-template="default">
+		<key-type>java.lang.String</key-type>
+		<value-type>java.lang.Object</value-type>
+	</cache>
+
+	<cache alias="categoryCacheOther" uses-template="default">
+		<key-type>java.lang.String</key-type>
+		<value-type>java.lang.Object</value-type>
+	</cache>
+	
+	<cache alias="productCategoryCache" uses-template="default">
+		<key-type>java.lang.String</key-type>
+		<value-type>java.lang.Object</value-type>
+	</cache>
+	
+	<cache alias="productCategoryCacheOther" uses-template="default">
+		<key-type>java.lang.String</key-type>
+		<value-type>java.lang.Object</value-type>
+	</cache>
+	
+	<cache alias="brandCache" uses-template="default">
+		<key-type>java.lang.String</key-type>
+		<value-type>java.lang.Object</value-type>
+	</cache>
+	
+	<cache alias="brandCacheOther" uses-template="default">
+		<key-type>java.lang.String</key-type>
+		<value-type>java.lang.Object</value-type>
+	</cache>
+	
+	<cache alias="tagCache" uses-template="default">
+		<key-type>java.lang.String</key-type>
+		<value-type>java.lang.Object</value-type>
+	</cache>
+	
+	<cache alias="tagCacheOther" uses-template="default">
+		<key-type>java.lang.String</key-type>
+		<value-type>java.lang.Object</value-type>
+	</cache>
+	
+	<cache alias="promotionCache" uses-template="default">
+		<key-type>java.lang.String</key-type>
+		<value-type>java.lang.Object</value-type>
+	</cache>
+	
+	<cache alias="promotionCacheOther" uses-template="default">
+		<key-type>java.lang.String</key-type>
+		<value-type>java.lang.Object</value-type>
+	</cache>
+	
+	<cache alias="productCache" uses-template="default">
+		<key-type>java.lang.String</key-type>
+		<value-type>java.lang.Object</value-type>
+	</cache>
+	
+	<cache alias="productLightCache" uses-template="default">
+		<key-type>java.lang.String</key-type>
+		<value-type>java.lang.Object</value-type>
+	</cache>
+	
+	<cache alias="productCacheOther" uses-template="default">
+		<key-type>java.lang.String</key-type>
+		<value-type>java.lang.Object</value-type>
+	</cache>
+	
+	<cache alias="promotionMechanicCache" uses-template="default">
+		<key-type>java.lang.String</key-type>
+		<value-type>java.lang.Object</value-type>
+	</cache>
+
+	<cache-template name="default">
+		<expiry>
+			<ttl unit="seconds">30</ttl>
+		</expiry>
+
+		<listeners>
+			<listener>
+				<class>io.nzbee.cache.CacheEventLogger</class>
+				<event-firing-mode>ASYNCHRONOUS</event-firing-mode>
+				<event-ordering-mode>UNORDERED</event-ordering-mode>
+				<events-to-fire-on>CREATED</events-to-fire-on>
+				<events-to-fire-on>EXPIRED</events-to-fire-on>
+			</listener>
+		</listeners>
+
+		<resources>
+			<heap unit="entries">2</heap>
+			<offheap unit="MB">10</offheap>
+		</resources>
+	</cache-template>
+
+</config>

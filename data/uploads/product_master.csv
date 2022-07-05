@@ -1,0 +1,30 @@
+_BRAND_CODE	_BRAND_DESCRIPTION_EN	_BRAND_DESCRIPTION_HK	_PRIMARY_CATEGORY_CODE	_PRIMARY_CATEGORY_DESC_EN	_PRIMARY_CATEGORY_DESC_HK	_PRODUCT_CREATED_DATE	_PRODUCT_DESCRIPTION_EN	_PRODUCT_DESCRIPTION_HK	_PRODUCT_IMAGE_EN	_PRODUCT_IMAGE_HK	_PRODUCT_MARKDOWN_PRICE_HKD	_PRODUCT_MARKDOWN_PRICE_USD	_PRODUCT_RETAIL_PRICE_HKD	_PRODUCT_RETAIL_PRICE_USD	_PRODUCT_STATUS_CODE	_PRODUCT_UPC_CODE	_PRODUCT_TEMPLATE_CODE
+DRI01	Driscolls	Driscolls	ALM01	Almonds	杏仁	2019-02-05 00:00:00	Almonds	杏仁	almonds.jpg	almonds.jpg	180	23.04	200	25.6	ACT01	13627671	ACC01
+DIV01	Diva	Diva	ONT01	Other Nuts	其他堅果	2019-02-05 00:00:00	Nuts Mixture	堅果混合物	nuts-mixture.jpg	nuts-mixture.jpg	855	109.62	950	121.8	ACT01	16153782	ACC01
+ENZ01	Enza	Enza	SVG01	Starchy	澱粉蔬菜	2019-02-05 00:00:00	potato	土豆	potato.jpg	potato.jpg	19.8	2.52	22	2.8	ACT01	76477789	ACC01
+SHI01	Shine	Shine	SVG01	Starchy	澱粉蔬菜	2019-02-05 00:00:00	cauliflower	菜花	cauliflower.jpg	cauliflower.jpg	54	6.93	60	7.7	ACT01	23456645	ACC01
+PLA01	Planters	Planters	SVG01	Starchy	澱粉蔬菜	2019-02-05 00:00:00	carrot	胡萝卜	carrots.jpg	carrots.jpg	50.4	6.48	56	7.2	ACT01	14445678	ACC01
+DLE01	Dole	Dole	BAP01	Beans and Peas	豆類和豌豆	2019-02-05 00:00:00	beans	豆子	beans.jpg	beans.jpg	73.8	9.45	82	10.5	ACT01	12366678	ACC01
+ENZ01	Enza	Enza	ONT01	Other Nuts	其他堅果	2019-02-05 00:00:00	Walnuts	核桃	walnuts.jpg	walnuts.jpg	153	19.62	170	21.8	ACT01	16067775	ACC01
+PLA01	Planters	Planters	MEL01	Melons	瓜	2019-02-05 00:00:00	Musk Melon	麝香甜瓜	musk-melon.jpg	musk-melon.jpg	32.4	4.14	36	4.6	ACT01	10688155	ACC01
+GLO01	Glorys	Glorys	POM01	Pomes	梨果	2019-02-05 00:00:00	Pears	梨	pears.jpg	pears.jpg	62.1	7.92	69	8.8	ACT01	18170258	ACC01
+DIV01	Diva	Diva	OTH01	Other	其他蔬菜	2019-02-05 00:00:00	mushroom	蘑菇	button-mushroom.jpg	button-mushroom.jpg	54	6.93	60	7.7	ACT01	64377789	ACC01
+ENZ01	Enza	Enza	CIT01	Citrus	柑橘	2019-02-05 00:00:00	Grapes	葡萄	grapes.jpg	grapes.jpg	54	6.93	60	7.7	ACT01	10760430	ACC01
+ENZ01	Enza	Enza	CAS01	Cashews	腰果	2019-02-05 00:00:00	Cashews	腰果	cashews.jpg	cashews.jpg	585	74.97	650	83.3	ACT01	17152401	ACC01
+ADO01	Adora	Adora	TRO01	Tropical	熱帶	2019-02-05 00:00:00	Banana	香蕉	banana.jpg	banana.jpg	40.5	5.22	45	5.8	ACT01	17366878	ACC01
+GLO01	Glorys	Glorys	TRO01	Tropical	熱帶	2019-02-05 00:00:00	mango	芒果	mango.jpg	mango.jpg	67.5	8.64	75	9.6	ACT01	12345678	ACC01
+SHI01	Shine	Shine	OTH01	Other	其他蔬菜	2019-02-05 00:00:00	Onion	洋蔥	onion.jpg	onion.jpg	14.4	1.89	16	2.1	ACT01	18188784	ACC01
+PLA01	Planters	Planters	POM01	Pomes	梨果	2019-02-05 00:00:00	Apple	蘋果	apple.jpg	apple.jpg	64.8	8.28	72	9.2	ACT01	18911676	ACC01
+DRI01	Driscolls	Driscolls	OTH01	Other	其他蔬菜	2019-02-05 00:00:00	brinjal	茄子	brinjal.jpg	brinjal.jpg	31.5	4.05	35	4.5	ACT01	23477789	ACC01
+GLO01	Glorys	Glorys	OTH01	Other	其他蔬菜	2019-02-05 00:00:00	Corn	玉米	corn.jpg	corn.jpg	67.5	8.64	75	9.6	ACT01	15410595	ACC01
+SHI01	Shine	Shine	CIT01	Citrus	柑橘	2019-02-05 00:00:00	tomato	番茄	tomato.jpg	tomato.jpg	14.4	1.89	16	2.1	ACT01	25556789	ACC01
+ADO01	Adora	Adora	POM01	Pomes	梨果	2019-02-05 00:00:00	Pomegranate	石榴	pomegranate.jpg	pomegranate.jpg	85.5	10.98	95	12.2	ACT01	17235347	ACC01
+DLE01	Dole	Dole	SVG01	Starchy	澱粉蔬菜	2019-02-05 00:00:00	Pumpkin	南瓜	pumpkin.jpg	pumpkin.jpg	43.2	5.58	48	6.2	ACT01	13159658	ACC01
+GLO01	Glorys	Glorys	ROV01	Red and Orange	紅色和橙色蔬菜	2019-02-05 00:00:00	beetroot	红菜头	beetroot.jpg	beetroot.jpg	28.8	3.69	32	4.1	ACT01	23739283	ACC01
+DRI01	Driscolls	Driscolls	BER01	Berries	漿果	2019-02-05 00:00:00	RaspberryDan	覆盆子	raspberry.jpg	raspberry.jpg	144	18.45	160	20.5	ACT01	17236024	ACC01
+SHI01	Shine	Shine	BER01	Berries	漿果	2019-02-05 00:00:00	Strawberry	草莓	strawberry.jpg	strawberry.jpg	162	20.79	180	23.1	ACT01	19037164	ACC01
+ADO01	Adora	Adora	PIS01	Pistachios	開心果	2019-02-05 00:00:00	Pistachio	開心果	pistachio.jpg	pistachio.jpg	171	21.96	190	24.4	ACT01	15946292	ACC01
+GOL01	Gold	Gold	CIT01	Citrus	柑橘	2019-02-05 00:00:00	orange	橙子	orange.jpg	orange.jpg	67.5	8.64	75	9.6	ACT01	23464789	ACC01
+PLA01	Planters	Planters	DGV01	Dark Green	深綠色蔬菜	2019-02-05 00:00:00	brocolli	西兰花	broccoli.jpg	broccoli.jpg	108	13.86	120	15.4	ACT01	19633678	ACC01
+DIV01	Diva	Diva	DGV01	Dark Green	深綠色蔬菜	2019-02-05 00:00:00	cucumber	黄瓜	cucumber.jpg	cucumber.jpg	43.2	5.58	48	6.2	ACT01	12383658	ACC01
+DRI01	Driscolls	Driscolls	MEL01	Melons	瓜	2019-02-05 00:00:00	Water Melon	西瓜	water-melon.jpg	water-melon.jpg	25.2	3.24	28	3.6	ACT01	15483827	ACC01

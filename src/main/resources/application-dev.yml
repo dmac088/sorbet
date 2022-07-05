@@ -1,0 +1,61 @@
+spring:
+
+  output:
+    ansi:
+      enabled: ALWAYS
+
+  datasource:
+    mochi:
+      application: 
+        max-lifetime: 45000
+        maximum-pool-size: 15 
+        connection-timeout: 30000
+        minimum-idle: 0 
+        idleTimeout: 35000
+        url: jdbc:postgresql://localhost:5432/mochidb?currentSchema=mochi
+        username: mochi_app
+        password: password
+        driver-class-name: org.postgresql.Driver
+     
+      owner:
+        max-lifetime: 45000
+        maximum-pool-size: 15 
+        connection-timeout: 30000
+        minimum-idle: 0
+        idleTimeout: 35000
+        url: jdbc:postgresql://localhost:5432/mochidb?currentSchema=mochi
+        username: mochidb_owner
+        password: password
+        driver-class-name: org.postgresql.Driver
+      
+    security: 
+      application:
+        max-lifetime: 45000
+        maximum-pool-size: 15 
+        connection-timeout: 30000
+        idleTimeout: 35000
+        minimum-idle: 0
+        url: jdbc:postgresql://localhost:5432/mochidb?currentSchema=security
+        username: security_app
+        password: password
+        driver-class-name: org.postgresql.Driver
+     
+      owner: 
+        max-lifetime: 45000
+        maximum-pool-size: 15 
+        connection-timeout: 30000
+        idleTimeout: 35000
+        minimum-idle: 0
+        url: jdbc:postgresql://localhost:5432/mochidb?currentSchema=security
+        username: security_owner
+        password: password
+        driver-class-name: org.postgresql.Driver 
+        
+server:
+  port: 8090
+  ssl:
+    key-store-type: PKCS12
+    key-store: classpath:mochi.p12
+    key-store-password: password
+    key-alias: mochi
+

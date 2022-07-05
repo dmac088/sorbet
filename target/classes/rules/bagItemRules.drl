@@ -1,0 +1,88 @@
+import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.bag.item.BagItem;
+import io.nzbee.domain.bag.discount.Discount;
+import io.nzbee.domain.bag.item.DroolsBagItemWrapper;
+import java.util.List;
+import org.apache.tomcat.util.buf.StringUtils;
+
+dialect "mvel"
+
+function String pendingItemKey(DroolsBagItemWrapper bagItem) { 
+	return bagItem.getCustomerId() + "-"+ bagItem.getProductUPC();
+}
+
+rule "Is Out-Of Stock"
+when
+$bagItem : DroolsBagItemWrapper(!bagItemStatus.equals("PRO01") && !isInStock())
+then
+System.out.println("\nIs Out-Of Stock Rule");
+System.out.println("************************************");
+String error = "Can't process " +  $bagItem.getProductUPC() + " is Out-Of-Stock" ;
+System.out.println(error);
+$bagItem.setErrors(true);
+$bagItem.setError(error);
+$bagItem.logItemError(pendingItemKey($bagItem), $bagItem.getBagItem());
+end
+
+rule "Buy 2 get 1 free"
+when 
+$bagItem : DroolsBagItemWrapper(isInStock() && bagItemQuantity >= 2 && promotionCodes.contains("B2G50"))
+then  
+System.out.println("promotion codes = " + StringUtils.join($bagItem.getPromotionCodes()));
+System.out.println("current quantity = " + $bagItem.getBagItemQuantity());
+System.out.println("promotion = \"Buy 2 get 50% off\"");
+System.out.println("total line amount = " + $bagItem.getBagItemQuantity() * $bagItem.getMarkdownPrice());
+Double discAmt = new Double((Math.floor($bagItem.getBagItemQuantity() / 2) * $bagItem.getMarkdownPrice()));
+System.out.println("discount amount is = " + discAmt);
+Discount discount = new Discount($bagItem.getBagItem(), $bagItem.getPromotion("B2G50"), discAmt);
+$bagItem.addDiscount(discount);
+end
+
+rule "Buy 3 get 1 free"
+when 
+$bagItem : DroolsBagItemWrapper(isInStock() && promotionCodes.contains("B3G33") && bagItemQuantity >= 2)
+then  
+System.out.println("promotion codes = " + StringUtils.join($bagItem.getPromotionCodes()));
+System.out.println("current quantity = " + $bagItem.getBagItemQuantity());
+System.out.println("promotion = \"Buy 3 get 33% off\"");
+System.out.println("total line amount = " + $bagItem.getBagItemQuantity() * $bagItem.getMarkdownPrice());
+Double discAmt = new Double((Math.floor($bagItem.getBagItemQuantity() / 3) * $bagItem.getMarkdownPrice()));
+System.out.println("discount amount is = " + discAmt);
+Discount discount = new Discount($bagItem.getBagItem(), $bagItem.getPromotion("B3G33"), discAmt);
+$bagItem.addDiscount(discount);
+end
+
+rule "Item quantity exceeds limit"
+when 
+$bagItem : DroolsBagItemWrapper(	!bagItemStatus.equals("PRO01")
+									&& bagItemQuantity > 6)
+then 
+String error = "Can't process " +  $bagItem.getProductUPC() + ", quantity " + $bagItem.getBagItemQuantity() + " is more than the maximum allowed" ;
+System.out.println(error);
+$bagItem.setErrors(true);
+$bagItem.setError(error);
+$bagItem.logItemError(pendingItemKey($bagItem), $bagItem.getBagItem());
+end
+
+rule "Item quantity below minumum"
+when 
+$bagItem : DroolsBagItemWrapper(!bagItemStatus.equals("PRO01")
+								&& bagItemQuantity < 1)
+then 
+String error = "Can't process " +  $bagItem.getProductUPC() + ", quantity " + $bagItem.getBagItemQuantity() + " is below minimum allowed" ;
+System.out.println(error);
+$bagItem.setErrors(true);
+$bagItem.setError(error);
+$bagItem.logItemError(pendingItemKey($bagItem), $bagItem.getBagItem());
+end
+
+rule "Bag quantity exceeds limit"
+when  
+$bagItem : DroolsBagItemWrapper(getBag().getTotalQuantity() > 50)
+then 
+String error = "Can't process " +  $bagItem.getProductUPC() + ", bag quantity " + $bagItem.getBagItemQuantity() + " is more than the maximum allowed" ;
+$bagItem.setErrors(true);
+$bagItem.setError(error);
+$bagItem.logItemError(pendingItemKey($bagItem), $bagItem.getBagItem());
+end
+

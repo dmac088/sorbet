@@ -1,0 +1,97 @@
+spring:
+
+  profiles.active: dev
+
+  output:
+    ansi:
+      enabled: ALWAYS
+    
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
+    banner-mode: "off"
+
+  cache:
+    jcache:
+      config: ehcache.xml
+      provider: EHCACHE 
+  
+  mail:
+    host: smtp.gmail.com
+    password: ${SMTPPassword}
+    port: 465
+    properties:
+        mail:
+            smtps:
+                auth: true
+                starttls:
+                    enable: true
+                timeout: 8000
+            transport:
+                protocol: smtps
+    protocol: smtps
+    username: danielmackie82@gmail.com
+
+  devtools:
+    restart:
+      enabled: false
+      exclude: downloads/**,target/**
+      
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-request-size: 215MB
+      max-file-size: 200MB
+      
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        order_inserts: true
+        order_updates: true
+        batch_versioned_data: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        driver_class: org.postgresql.Driver  
+        jdbc:
+          timezone: UTC  
+          batch_size: 50
+    
+logging:
+  level: 
+    root: WARN
+    org:
+      springframework:  
+        web: DEBUG
+      hibernate: 
+        type: DEBUG
+    io:
+      nzbee: DEBUG
+
+
+file:
+  upload-dir: data/uploads/
+  download-dir: data/downloads/
+  product-master-file: product_master.tsv
+  
+
+
+server:
+  port: 8090
+  ssl:
+    key-store-type: PKCS12
+    key-store: classpath:mochi.p12
+    key-store-password: password
+    key-alias: mochi
+
+app:
+  globals:
+    baseURL: https://localhost:8090
+    defaultPage: 0
+    defaultPageSize: 10
+
+support:
+    email: admin@littlebagshop.com
+    
