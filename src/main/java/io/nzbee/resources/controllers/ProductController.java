@@ -1,5 +1,7 @@
 package io.nzbee.resources.controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.Principal;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import io.nzbee.Globals;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.IBagDomainService;
 import io.nzbee.enums.FacetNameEnum;
@@ -59,6 +62,9 @@ import io.nzbee.view.product.shipping.type.ShippingTypeView;
 public class ProductController {
 
 	private Logger LOGGER = LoggerFactory.getLogger(getClass());
+	
+	@Autowired
+	private Globals globalVars;
 
 	@Autowired
 	private IPhysicalProductFullService physicalProductFullService;
@@ -112,19 +118,19 @@ public class ProductController {
 		return new ResponseEntity<>(pr, HttpStatus.OK);
 	}
 
+	@SuppressWarnings("unused")
 	@GetMapping(value = "/Product/Image/{imageFileName}", produces = MediaType.IMAGE_JPEG_VALUE)
 	public @ResponseBody ResponseEntity<byte[]> getImageWithMediaType(@PathVariable String imageFileName) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getImageWithMediaType with parameter {}", imageFileName);
-		InputStream in = getClass().getResourceAsStream("/public/images/" + imageFileName);
+		
+		File initialFile = new File(globalVars.getImagePath() + imageFileName);
+		InputStream in;
 		try {
-			if (!(in == null)) {
-				return new ResponseEntity<byte[]>(IOUtils.toByteArray(in), HttpStatus.OK);
-			}
-			return new ResponseEntity<byte[]>(HttpStatus.NOT_FOUND);
-
-		} catch (IOException e) {
+			in = new FileInputStream(initialFile);
+			return new ResponseEntity<byte[]>(IOUtils.toByteArray(in), HttpStatus.OK);
+		} catch (IOException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
 		return new ResponseEntity<byte[]>(HttpStatus.NOT_FOUND);
 	}

@@ -4,37 +4,37 @@
       "name": "spring.datasource.mochi.application",
       "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
       "sourceType": "io.nzbee.integration.controller.ConfigControllerTest",
-      "sourceMethod": "mochiDataSourceProperties()"
+      "sourceMethod": "public org.springframework.boot.autoconfigure.jdbc.DataSourceProperties mochiDataSourceProperties() "
     },
     {
       "name": "spring.datasource.mochi.application.xa",
       "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties$Xa",
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
-      "sourceMethod": "getXa()"
+      "sourceMethod": "public org.springframework.boot.autoconfigure.jdbc.DataSourceProperties.Xa getXa() "
     },
     {
       "name": "spring.datasource.mochi.owner",
       "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
       "sourceType": "io.nzbee.integration.controller.ConfigControllerTest",
-      "sourceMethod": "mochiDataSourcePropertiesOwner()"
+      "sourceMethod": "public org.springframework.boot.autoconfigure.jdbc.DataSourceProperties mochiDataSourcePropertiesOwner() "
     },
     {
       "name": "spring.datasource.mochi.owner.xa",
       "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties$Xa",
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
-      "sourceMethod": "getXa()"
+      "sourceMethod": "public org.springframework.boot.autoconfigure.jdbc.DataSourceProperties.Xa getXa() "
     },
     {
       "name": "spring.datasource.security.application",
       "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
       "sourceType": "io.nzbee.integration.controller.ConfigControllerTest",
-      "sourceMethod": "securityDataSourceProperties()"
+      "sourceMethod": "public org.springframework.boot.autoconfigure.jdbc.DataSourceProperties securityDataSourceProperties() "
     },
     {
       "name": "spring.datasource.security.application.xa",
       "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties$Xa",
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
-      "sourceMethod": "getXa()"
+      "sourceMethod": "public org.springframework.boot.autoconfigure.jdbc.DataSourceProperties.Xa getXa() "
     }
   ],
   "properties": [

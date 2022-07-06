@@ -1,5 +1,6 @@
 package io.nzbee.security;
 
+import com.google.common.io.Resources;
 import com.maxmind.geoip2.DatabaseReader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +9,7 @@ import ua_parser.Parser;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 @Configuration
 public class LoginNotificationConfig {
@@ -19,9 +21,8 @@ public class LoginNotificationConfig {
 
     @Bean(name="GeoIPCity")
     public DatabaseReader databaseReader() throws IOException {
-        File database = ResourceUtils
-                .getFile("src/main/resources/maxmind/GeoLite2-City.mmdb");
-        return new DatabaseReader.Builder(database)
+        final InputStream resource = Resources.getResource("classpath:maxmind/GeoLite2-City.mmdb").openStream();
+        return new DatabaseReader.Builder(resource)
                 .build();
     }
 }

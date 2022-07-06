@@ -77,7 +77,6 @@ file:
   product-master-file: product_master.tsv
   
 
-
 server:
   port: 8090
   ssl:
@@ -89,8 +88,10 @@ server:
 app:
   globals:
     baseURL: https://localhost:8090
+    imagePath: ${RESOURCEPATH}/images/
     defaultPage: 0
     defaultPageSize: 10
+    
 
 support:
     email: admin@littlebagshop.com
