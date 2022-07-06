@@ -89,6 +89,7 @@ app:
   globals:
     baseURL: https://localhost:8090
     imagePath: ${RESOURCEPATH}/images/
+    indexPath: ${RESOURCEPATH}/lucene/indexes
     defaultPage: 0
     defaultPageSize: 10
     

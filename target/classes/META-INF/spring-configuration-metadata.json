@@ -22,10 +22,22 @@
       "sourceMethod": "public com.zaxxer.hikari.HikariDataSource dataSource(org.springframework.boot.autoconfigure.jdbc.DataSourceProperties) "
     },
     {
+      "name": "spring.datasource.mochi.application",
+      "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
+      "sourceType": "io.nzbee.entity.DataSourceBeanMochi",
+      "sourceMethod": "public org.springframework.boot.autoconfigure.jdbc.DataSourceProperties dataSourceProperties() "
+    },
+    {
       "name": "spring.datasource.mochi.application.xa",
       "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties$Xa",
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
       "sourceMethod": "public org.springframework.boot.autoconfigure.jdbc.DataSourceProperties.Xa getXa() "
+    },
+    {
+      "name": "spring.datasource.mochi.owner",
+      "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
+      "sourceType": "io.nzbee.entity.DataSourceBeanMochi",
+      "sourceMethod": "public org.springframework.boot.autoconfigure.jdbc.DataSourceProperties dataSourcePropertiesOwner() "
     },
     {
       "name": "spring.datasource.mochi.owner",
@@ -46,10 +58,22 @@
       "sourceMethod": "public org.springframework.boot.autoconfigure.jdbc.DataSourceProperties dataSourceProperties() "
     },
     {
+      "name": "spring.datasource.security.application",
+      "type": "com.zaxxer.hikari.HikariDataSource",
+      "sourceType": "io.nzbee.security.DataSourceBeanSecurity",
+      "sourceMethod": "public com.zaxxer.hikari.HikariDataSource dataSource(org.springframework.boot.autoconfigure.jdbc.DataSourceProperties) "
+    },
+    {
       "name": "spring.datasource.security.application.xa",
       "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties$Xa",
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
       "sourceMethod": "public org.springframework.boot.autoconfigure.jdbc.DataSourceProperties.Xa getXa() "
+    },
+    {
+      "name": "spring.datasource.security.owner",
+      "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
+      "sourceType": "io.nzbee.security.DataSourceBeanSecurity",
+      "sourceMethod": "public org.springframework.boot.autoconfigure.jdbc.DataSourceProperties dataSourcePropertiesOwner() "
     },
     {
       "name": "spring.datasource.security.owner",
@@ -97,6 +121,11 @@
     },
     {
       "name": "app.globals.image-path",
+      "type": "java.lang.String",
+      "sourceType": "io.nzbee.Globals"
+    },
+    {
+      "name": "app.globals.index-path",
       "type": "java.lang.String",
       "sourceType": "io.nzbee.Globals"
     },
@@ -201,6 +230,11 @@
       "sourceType": "com.zaxxer.hikari.HikariDataSource"
     },
     {
+      "name": "spring.datasource.mochi.application.driver-class-name",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
       "name": "spring.datasource.mochi.application.embedded-database-connection",
       "type": "org.springframework.boot.jdbc.EmbeddedDatabaseConnection",
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
@@ -301,6 +335,11 @@
       "sourceType": "com.zaxxer.hikari.HikariDataSource"
     },
     {
+      "name": "spring.datasource.mochi.application.password",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
       "name": "spring.datasource.mochi.application.pool-name",
       "type": "java.lang.String",
       "sourceType": "com.zaxxer.hikari.HikariDataSource"
@@ -344,6 +383,11 @@
       "name": "spring.datasource.mochi.application.username",
       "type": "java.lang.String",
       "sourceType": "com.zaxxer.hikari.HikariDataSource"
+    },
+    {
+      "name": "spring.datasource.mochi.application.username",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
     },
     {
       "name": "spring.datasource.mochi.application.validation-timeout",
@@ -409,6 +453,11 @@
       "name": "spring.datasource.mochi.owner.driver-class-name",
       "type": "java.lang.String",
       "sourceType": "com.zaxxer.hikari.HikariDataSource"
+    },
+    {
+      "name": "spring.datasource.mochi.owner.driver-class-name",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
     },
     {
       "name": "spring.datasource.mochi.owner.embedded-database-connection",
@@ -511,6 +560,11 @@
       "sourceType": "com.zaxxer.hikari.HikariDataSource"
     },
     {
+      "name": "spring.datasource.mochi.owner.password",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
       "name": "spring.datasource.mochi.owner.pool-name",
       "type": "java.lang.String",
       "sourceType": "com.zaxxer.hikari.HikariDataSource"
@@ -554,6 +608,11 @@
       "name": "spring.datasource.mochi.owner.username",
       "type": "java.lang.String",
       "sourceType": "com.zaxxer.hikari.HikariDataSource"
+    },
+    {
+      "name": "spring.datasource.mochi.owner.username",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
     },
     {
       "name": "spring.datasource.mochi.owner.validation-timeout",
@@ -619,6 +678,11 @@
       "name": "spring.datasource.security.application.driver-class-name",
       "type": "java.lang.String",
       "sourceType": "com.zaxxer.hikari.HikariDataSource"
+    },
+    {
+      "name": "spring.datasource.security.application.driver-class-name",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
     },
     {
       "name": "spring.datasource.security.application.embedded-database-connection",
@@ -721,6 +785,11 @@
       "sourceType": "com.zaxxer.hikari.HikariDataSource"
     },
     {
+      "name": "spring.datasource.security.application.password",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
       "name": "spring.datasource.security.application.pool-name",
       "type": "java.lang.String",
       "sourceType": "com.zaxxer.hikari.HikariDataSource"
@@ -764,6 +833,11 @@
       "name": "spring.datasource.security.application.username",
       "type": "java.lang.String",
       "sourceType": "com.zaxxer.hikari.HikariDataSource"
+    },
+    {
+      "name": "spring.datasource.security.application.username",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
     },
     {
       "name": "spring.datasource.security.application.validation-timeout",
@@ -829,6 +903,11 @@
       "name": "spring.datasource.security.owner.driver-class-name",
       "type": "java.lang.String",
       "sourceType": "com.zaxxer.hikari.HikariDataSource"
+    },
+    {
+      "name": "spring.datasource.security.owner.driver-class-name",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
     },
     {
       "name": "spring.datasource.security.owner.embedded-database-connection",
@@ -931,6 +1010,11 @@
       "sourceType": "com.zaxxer.hikari.HikariDataSource"
     },
     {
+      "name": "spring.datasource.security.owner.password",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+    },
+    {
       "name": "spring.datasource.security.owner.pool-name",
       "type": "java.lang.String",
       "sourceType": "com.zaxxer.hikari.HikariDataSource"
@@ -974,6 +1058,11 @@
       "name": "spring.datasource.security.owner.username",
       "type": "java.lang.String",
       "sourceType": "com.zaxxer.hikari.HikariDataSource"
+    },
+    {
+      "name": "spring.datasource.security.owner.username",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
     },
     {
       "name": "spring.datasource.security.owner.validation-timeout",
@@ -1042,6 +1131,15 @@
       "deprecated": true,
       "deprecation": {
         "replacement": "spring.sql.init.platform"
+      }
+    },
+    {
+      "name": "spring.datasource.mochi.application.schema",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "spring.sql.init.schema-locations"
       }
     },
     {
@@ -1135,6 +1233,15 @@
       }
     },
     {
+      "name": "spring.datasource.mochi.owner.schema",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "spring.sql.init.schema-locations"
+      }
+    },
+    {
       "name": "spring.datasource.mochi.owner.schema-password",
       "type": "java.lang.String",
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
@@ -1225,6 +1332,15 @@
       }
     },
     {
+      "name": "spring.datasource.security.application.schema",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "spring.sql.init.schema-locations"
+      }
+    },
+    {
       "name": "spring.datasource.security.application.schema-password",
       "type": "java.lang.String",
       "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
@@ -1312,6 +1428,15 @@
       "deprecated": true,
       "deprecation": {
         "replacement": "spring.sql.init.platform"
+      }
+    },
+    {
+      "name": "spring.datasource.security.owner.schema",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "spring.sql.init.schema-locations"
       }
     },
     {

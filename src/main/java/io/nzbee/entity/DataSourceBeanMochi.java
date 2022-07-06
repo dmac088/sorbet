@@ -19,7 +19,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.zaxxer.hikari.HikariDataSource;
 
-
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
@@ -68,6 +67,7 @@ public class DataSourceBeanMochi {
 		Properties properties = new Properties();
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
 		//properties.setProperty("hibernate.show_sql", "true");
+		//properties.setProperty("hibernate.search.default.indexBase", globalVars.getIndexPath());
 		return properties;
 	}
      

@@ -3,7 +3,6 @@ package io.nzbee.resources.controllers;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-
 import org.hibernate.CacheMode;
 import org.hibernate.search.batchindexing.impl.SimpleIndexingProgressMonitor;
 import org.hibernate.search.jpa.FullTextEntityManager;
@@ -12,8 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import io.nzbee.entity.product.physical.entity.PhysicalProductEntity;
+import io.nzbee.entity.product.ProductEntity;
 
 
 @RestController
@@ -38,7 +36,7 @@ public class SearchIndexController {
 		  = org.hibernate.search.jpa.Search.getFullTextEntityManager(em);
 		try {
 			fullTextEntityManager
-			.createIndexer( PhysicalProductEntity.class )
+			.createIndexer(ProductEntity.class )
 			.batchSizeToLoadObjects( 25 )
 			.cacheMode( CacheMode.IGNORE )
 			.threadsToLoadObjects( 12 )

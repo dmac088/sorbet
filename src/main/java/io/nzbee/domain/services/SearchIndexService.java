@@ -23,14 +23,11 @@ public class SearchIndexService {
 	public void createSearchIndex() {
 		FullTextEntityManager fullTextEntityManager 
 		  = Search.getFullTextEntityManager(em);
-		try {
-			fullTextEntityManager.createIndexer(ProductEntity.class).batchSizeToLoadObjects(25)
-			.cacheMode(CacheMode.NORMAL).threadsToLoadObjects(12).idFetchSize(150).transactionTimeout(1800)
-			.progressMonitor(new SimpleIndexingProgressMonitor()) // a MassIndexerProgressMonitor implementation
-			.startAndWait();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		fullTextEntityManager.createIndexer(ProductEntity.class)
+		.cacheMode(CacheMode.NORMAL)
+		.progressMonitor(new SimpleIndexingProgressMonitor()) // a MassIndexerProgressMonitor implementation
+		.start();
+		fullTextEntityManager.close();
+		
 	}
 }

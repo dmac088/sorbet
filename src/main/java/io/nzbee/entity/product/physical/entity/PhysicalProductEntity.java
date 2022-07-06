@@ -15,17 +15,12 @@ import javax.persistence.ColumnResult;
 import javax.persistence.OneToOne;
 import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
-
-import org.hibernate.search.annotations.Indexed;
-
 import io.nzbee.Constants;
 import io.nzbee.entity.product.ProductEntity;
 import io.nzbee.entity.product.physical.light.PhysicalProductLightDTO;
 import io.nzbee.entity.stock.StockOnHandEntity;
 
-
 @Entity
-@Indexed
 @Table(name = "product_basic", schema = "mochi")
 @NamedNativeQuery(
 	    name = "QueryForListOfProducts",

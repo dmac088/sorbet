@@ -7,6 +7,7 @@ public class Globals {
 
 	private String baseURL;
 	private String imagePath;
+	private String indexPath;
 	private String localeENGB;
 	private String localeZHHK;
 	private String currencyHKD;
@@ -130,6 +131,14 @@ public class Globals {
 
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
+	}
+
+	public String getIndexPath() {
+		return indexPath;
+	}
+
+	public void setIndexPath(String indexPath) {
+		this.indexPath = indexPath;
 	}
 
 }
