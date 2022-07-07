@@ -13,7 +13,7 @@ public class SecurityBeanConfiguration {
  
 	@Bean(name="GeoIPCountry")
     public DatabaseReader databaseReader() throws IOException, GeoIp2Exception {
-		final InputStream resource = Resources.getResource("classpath:maxmind/GeoLite2-Country.mmdb").openStream();
+		final InputStream resource = getClass().getClassLoader().getResourceAsStream("maxmind/GeoLite2-Country.mmdb");
 		return new DatabaseReader.Builder(resource).build();
     }
 	
