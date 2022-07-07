@@ -1,6 +1,5 @@
 package io.nzbee.security;
 
-import com.google.common.io.Resources;
 import com.maxmind.geoip2.DatabaseReader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
