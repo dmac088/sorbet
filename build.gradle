@@ -101,6 +101,7 @@ dockerRun {
     clean true
     env 'STRIPE_SECRET_KEY': 'testkey', 'SPRING_DATASOURCE_MOCHI_APPLICATION_URL': 'jdbc:postgresql://my-postgresdb-container:5432/mochidb?currentSchema=mochi', 'SPRING_DATASOURCE_MOCHI_OWNER_URL': 'jdbc:postgresql://my-postgresdb-container:5432/mochidb?currentSchema=mochi', 'SPRING_DATASOURCE_SECURITY_APPLICATION_URL': 'jdbc:postgresql://my-postgresdb-container:5432/mochidb?currentSchema=security', 'SPRING_DATASOURCE_SECURITY_OWNER_URL': 'jdbc:postgresql://my-postgresdb-container:5432/mochidb?currentSchema=security'
     ports '8090:8090'
+    volumes 'images': '/images'
     arguments '--network=my-net'
 }
 

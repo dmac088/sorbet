@@ -6,4 +6,5 @@ docker run -e STRIPE_SECRET_KEY=testkey \
            --name my-spring-container  \
 	   -p 8090:8090 \
            --network my-net \
+           -v images:/images \
  my-sv2-app
