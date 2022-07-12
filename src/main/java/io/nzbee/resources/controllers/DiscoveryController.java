@@ -22,7 +22,7 @@ public class DiscoveryController {
 	@GetMapping("/Discovery")
 	public ResponseEntity<DiscoveryResource> getDiscovery() {
 		LOGGER.debug("call " + getClass() + ".getDiscovery()");
-		DiscoveryResource dr = new DiscoveryResource(globalVars.getBaseURL());
+		DiscoveryResource dr = new DiscoveryResource();
 		return ResponseEntity.ok(dr);
 	}
 	

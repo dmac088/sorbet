@@ -12,7 +12,7 @@ import io.nzbee.resources.controllers.SearchController;
 	
 public class DiscoveryResource extends RepresentationModel<DiscoveryResource> {
 
-	public DiscoveryResource(String rootURL) {
+	public DiscoveryResource() {
 
 		this.add(linkTo(methodOn(CategoryController.class).getProductCategories(null))
 				.withRel("getAllCategories"));
@@ -33,7 +33,7 @@ public class DiscoveryResource extends RepresentationModel<DiscoveryResource> {
 		this.add(linkTo(methodOn(SearchController.class).search(null, null, null, null, null, null, null, null)).withRel("searchProduct"));
 		this.add(linkTo(methodOn(SearchController.class).getSuggestions(null, null, null)).withRel("searchSuggestion"));
 		this.add(linkTo(methodOn(BagController.class).getCustomerBag(null, null, null)).withRel("getBag"));
-		this.add(Link.of(rootURL + "/oauth/token").withRel("accessTokens"));
+		this.add(Link.of("/oauth/token").withRel("accessTokens"));
 
 	}  
 
