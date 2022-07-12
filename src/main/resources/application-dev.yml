@@ -51,11 +51,20 @@ spring:
         password: password
         driver-class-name: org.postgresql.Driver 
         
+        
 server:
   port: 8090
   ssl:
     key-store-type: PKCS12
-    key-store: classpath:mochi.p12
-    key-store-password: password
-    key-alias: mochi
+    key-store: classpath:springboot_letsencrypt.p12
+    key-store-password: password99
+    key-alias: bootalias
+    
+#server:
+#  port: 8090
+#  ssl:
+#    key-store-type: PKCS12
+#    key-store: classpath:mochi.p12
+#    key-store-password: password
+#    key-alias: mochi
 

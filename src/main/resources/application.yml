@@ -81,13 +81,13 @@ server:
   port: 8090
   ssl:
     key-store-type: PKCS12
-    key-store: classpath:mochi.p12
-    key-store-password: password
-    key-alias: mochi
+    key-store: classpath:springboot_letsencrypt.p12
+    key-store-password: password99
+    key-alias: bootalias
 
 app:
   globals:
-    baseURL: https://localhost:8090
+    baseURL: https://littlebagshop.com:8090
     imagePath: ${RESOURCEPATH}/images/
     indexPath: ${RESOURCEPATH}/lucene/indexes
     defaultPage: 0
