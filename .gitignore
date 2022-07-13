@@ -2,5 +2,5 @@ luke-with-deps.jar
 GeoLite2-*.mmdb
 build
 data
-certs
+*.crt
 *.p12
