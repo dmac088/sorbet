@@ -3,3 +3,4 @@ GeoLite2-*.mmdb
 build
 data
 certs
+*.p12
