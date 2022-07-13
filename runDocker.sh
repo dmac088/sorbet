@@ -9,4 +9,5 @@ docker run -d -e STRIPE_SECRET_KEY=testkey \
 	   -p 8090:8090 \
            --network my-net \
            -v $(pwd)/images:/images \
+           -v $(pwd)/lucene/indexes:/lucene/indexes \
  my-sv2-app
