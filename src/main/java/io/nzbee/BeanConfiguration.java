@@ -91,7 +91,7 @@ import io.nzbee.view.product.tag.facet.ITagFacetViewService;
 import io.nzbee.view.product.tag.facet.TagFacetViewServiceImpl;
 
 @Configuration
-public class BeanConfigurationDev {
+public class BeanConfiguration {
 	
 	@Bean
 	public IRegularBagItemDomainService regularBagItemDomainService() {
