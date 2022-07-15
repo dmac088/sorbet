@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LBSHOME=~/projects/lychee/data/certbot/conf/live/littlebagshop.com
+LBSHOME=~/projects/lychee/data/certbot/conf/live/app.sv2.io
 
 if [[ -z "${OSSLPWD}" ]]; then
    echo "environment variable OSSLPWD is not set" 
