@@ -12,7 +12,7 @@ spring:
         connection-timeout: 30000
         minimum-idle: 0 
         idleTimeout: 35000
-        url: jdbc:postgresql://localhost:5438/mochidb?currentSchema=mochi
+        url: jdbc:postgresql://localhost:5432/mochidb?currentSchema=mochi
         username: mochi_app
         password: password
         driver-class-name: org.postgresql.Driver
@@ -23,7 +23,7 @@ spring:
         connection-timeout: 30000
         minimum-idle: 0
         idleTimeout: 35000
-        url: jdbc:postgresql://localhost:5438/mochidb?currentSchema=mochi
+        url: jdbc:postgresql://localhost:5432/mochidb?currentSchema=mochi
         username: mochidb_owner
         password: password
         driver-class-name: org.postgresql.Driver
@@ -35,7 +35,7 @@ spring:
         connection-timeout: 30000
         idleTimeout: 35000
         minimum-idle: 0
-        url: jdbc:postgresql://localhost:5438/mochidb?currentSchema=security
+        url: jdbc:postgresql://localhost:5432/mochidb?currentSchema=security
         username: security_app
         password: password
         driver-class-name: org.postgresql.Driver
@@ -46,7 +46,7 @@ spring:
         connection-timeout: 30000
         idleTimeout: 35000
         minimum-idle: 0
-        url: jdbc:postgresql://localhost:5438/mochidb?currentSchema=security
+        url: jdbc:postgresql://localhost:5432/mochidb?currentSchema=security
         username: security_owner
         password: password
         driver-class-name: org.postgresql.Driver 
