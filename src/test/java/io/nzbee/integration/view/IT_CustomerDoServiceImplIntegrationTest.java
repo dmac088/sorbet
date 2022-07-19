@@ -20,6 +20,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import io.nzbee.Constants;
 import io.nzbee.integration.view.beans.customer.ICustomerViewBeanFactory;
 import io.nzbee.view.customer.CustomerDTOIn;
 import io.nzbee.view.customer.CustomerDTOOut;
@@ -64,7 +66,7 @@ public class IT_CustomerDoServiceImplIntegrationTest {
 	public void persistNewCustomer() { 
 		CustomerDTOIn customer = customerViewBeanFactory.getBean();
 	    	
-		customerService.save(customer);
+		customerService.save(customer, Constants.localeENGB);
 	}
 	
 	@After

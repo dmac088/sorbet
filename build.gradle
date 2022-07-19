@@ -107,7 +107,7 @@ dockerRun {
 
 test {
     useJUnitPlatform()
-    systemProperty 'spring.profiles.active', 'test'
+    systemProperty 'spring.profiles.active', 'dev'
 }
 
 

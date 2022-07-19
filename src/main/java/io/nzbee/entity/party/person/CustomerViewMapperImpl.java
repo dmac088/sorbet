@@ -5,15 +5,20 @@ import java.util.Date;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import io.nzbee.Constants;
+import io.nzbee.ErrorKeys;
 import io.nzbee.domain.customer.Customer;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.party.Party;
+import io.nzbee.entity.party.address.entity.PartyAddressEntity;
+import io.nzbee.entity.party.address.type.AddressTypeEntity;
+import io.nzbee.entity.party.address.type.IAddressTypeService;
 import io.nzbee.entity.party.type.IPartyTypeService;
 import io.nzbee.entity.party.type.PartyTypeEntity;
 import io.nzbee.entity.role.IRoleTypeRepository;
 import io.nzbee.entity.role.RoleEntity;
 import io.nzbee.entity.role.RoleTypeEntity;
 import io.nzbee.entity.role.customer.CustomerEntity;
+import io.nzbee.exceptions.EntityNotFoundException;
 import io.nzbee.security.user.User;
 import io.nzbee.security.user.role.IUserRoleService;
 import io.nzbee.security.user.role.UserRole;
@@ -30,6 +35,10 @@ public class CustomerViewMapperImpl implements ICustomerViewMapper {
 	
 	@Autowired 
 	private IPartyTypeService partyTypeService;
+	
+	@Autowired
+	private IAddressTypeService addressTypeService;
+	
 	
 	@Override
 	public CustomerDTOOut toView(PersonEntity person) {
@@ -49,7 +58,7 @@ public class CustomerViewMapperImpl implements ICustomerViewMapper {
 	}
 
 	@Override
-	public PersonEntity toEntity(CustomerDTOIn dtoObject) {
+	public PersonEntity toEntity(CustomerDTOIn dtoObject, String locale) {
 		//in our domain world a customer is a person
 		
 		Optional<PartyTypeEntity> opte = partyTypeService.findByPartyTypeDesc(Constants.partyTypePerson);
@@ -96,6 +105,21 @@ public class CustomerViewMapperImpl implements ICustomerViewMapper {
 		b.setBagUpdatedDateTime(LocalDateTime.now());
 		p.getPersonParty().setBag(b);
 		b.setParty(p.getPersonParty());
+		
+		//we need to add some empty addresses just like we create an empty bag
+		PartyAddressEntity ba = new PartyAddressEntity();
+		PartyAddressEntity ma = new PartyAddressEntity();
+		Optional<AddressTypeEntity> obat = addressTypeService.findByCode(Constants.billingAddressCode);
+		Optional<AddressTypeEntity> omat = addressTypeService.findByCode(Constants.shippingAddressCode);
+		
+		AddressTypeEntity bat = obat.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.addressTypeNotFound, locale, Constants.billingAddressCode));
+		AddressTypeEntity mat = omat.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.addressTypeNotFound, locale, Constants.shippingAddressCode));
+		
+		ba.setType(bat);
+		ma.setType(mat);
+		
+		p.getPersonParty().addAddress(ba);
+		p.getPersonParty().addAddress(ma);
 		
 		return p;
 	}

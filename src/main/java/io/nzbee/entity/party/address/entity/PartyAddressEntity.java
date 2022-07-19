@@ -34,7 +34,6 @@ public class PartyAddressEntity {
 	@Column(name="addr_ln_3")
 	private String addressLine3;
 	
-	@NotNull
 	@Column(name="addr_cnty")
 	private String addressCountry;
 	

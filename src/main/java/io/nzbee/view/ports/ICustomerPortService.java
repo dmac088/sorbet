@@ -1,7 +1,5 @@
 package io.nzbee.view.ports;
 
-import java.util.Locale;
-
 import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.customer.Customer;
 import io.nzbee.view.customer.CustomerDTOIn;
@@ -17,11 +15,11 @@ public interface ICustomerPortService {
 
 	void authWithoutPassword(String token);
 
-	void registerNewCustomer(CustomerDTOIn customer, String ipAddress, String url, Locale locale);
-
-	void save(CustomerDTOIn customer);
-
 	void addItemToBag(String locale, Customer customer, BagItem bagItem);
+
+	void save(CustomerDTOIn customer, String locale);
+
+	void registerNewCustomer(CustomerDTOIn customer, String ipAddress, String url, String locale);
 
 	
 }

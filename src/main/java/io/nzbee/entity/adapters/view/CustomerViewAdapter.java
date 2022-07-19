@@ -3,7 +3,6 @@ package io.nzbee.entity.adapters.view;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
@@ -154,7 +153,7 @@ private final Logger LOGGER = LoggerFactory.getLogger(getClass());
     
 	@Override
     @Transactional
-	public void registerNewCustomer(CustomerDTOIn customer, String ipAddress, String url, Locale locale) {
+	public void registerNewCustomer(CustomerDTOIn customer, String ipAddress, String url, String locale) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".registerNewCustomer with parameters {}", customer);
 		boolean exists = personService.userExists(customer.getUserName(), Constants.partyRoleCustomer);
 		if(exists) {
@@ -176,7 +175,7 @@ private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 		}
 
 		//if we succeed then we persist the CustomerDTOIn, not the domain object
-  		this.save(customer);
+  		this.save(customer, locale);
 			
 	    this.addCustomerLocation(customer, ipAddress);
 
@@ -184,9 +183,9 @@ private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
 	@Override
 	@Transactional
-	public void save(CustomerDTOIn customer) {
+	public void save(CustomerDTOIn customer, String locale) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".save with parameters {}", customer);
-		personService.save(customerViewMapper.toEntity(customer));
+		personService.save(customerViewMapper.toEntity(customer, locale));
 	}
 
 }

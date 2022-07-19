@@ -47,7 +47,7 @@ public class CustomerViewServiceImpl implements ICustomerViewService {
     
 
 	@Override
-	public void registerNewCustomer(CustomerDTOIn customer, String ipAddress, String url, Locale locale) {
+	public void registerNewCustomer(CustomerDTOIn customer, String ipAddress, String url, String locale) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".registerNewCustomer with parameters {}", customer);
 		customerService.registerNewCustomer(customer, ipAddress, url, locale);
 	}

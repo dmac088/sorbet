@@ -87,7 +87,7 @@ server:
 
 app:
   globals:
-    baseURL: https://littlebagshop.com:8090
+    baseURL: https://app.sv2.io:8090
     imagePath: ${RESOURCEPATH}/images/
     indexPath: ${RESOURCEPATH}/lucene/indexes
     defaultPage: 0

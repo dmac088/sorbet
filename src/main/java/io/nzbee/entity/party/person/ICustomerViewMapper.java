@@ -7,9 +7,9 @@ import io.nzbee.view.customer.CustomerDTOOut;
 public interface ICustomerViewMapper {
 
 	CustomerDTOOut toView(PersonEntity person);
-	
-	PersonEntity toEntity(CustomerDTOIn dtoObject);
 
 	Customer toDomain(CustomerDTOIn customer);
+
+	PersonEntity toEntity(CustomerDTOIn dtoObject, String locale);
 
 }

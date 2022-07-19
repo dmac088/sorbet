@@ -18,6 +18,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import io.nzbee.entity.bag.entity.BagEntity;
+import io.nzbee.entity.party.address.entity.PartyAddressEntity;
 import io.nzbee.entity.party.organization.OrganizationEntity;
 import io.nzbee.entity.party.person.PersonEntity;
 import io.nzbee.entity.party.type.PartyTypeEntity;
@@ -45,6 +46,14 @@ public class Party {
 				orphanRemoval = true
 			  )
 	private Set<RoleEntity> partyRoles = new HashSet<RoleEntity>();
+	
+	@OneToMany(	
+			fetch = FetchType.LAZY, 
+			mappedBy="party",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true
+		  )
+	private Set<PartyAddressEntity> partyAddresses = new HashSet<PartyAddressEntity>();
 	
 	@OneToOne(	mappedBy="userParty", 
 				fetch = FetchType.LAZY, 
@@ -121,6 +130,16 @@ public class Party {
 	public void removeRole(RoleEntity role) {
 		this.partyRoles.remove(role);
 		role.setRoleParty(null);
+	}
+	
+	public void addAddress(PartyAddressEntity address) {
+		this.partyAddresses.add(address);
+		address.setParty(this);
+	}
+	
+	public void removeAddress(PartyAddressEntity address) {
+		this.partyAddresses.remove(address);
+		address.setParty(null);
 	}
 	
 	public void addUser(User user) {

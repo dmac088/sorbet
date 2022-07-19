@@ -10,6 +10,7 @@ public class ErrorKeys {
 	public static final String priceTypeNotFound 			= "PTPNF001";
 	public static final String productNotFound 				= "PRDNF001";
 	public static final String customerNotFound 			= "CSTNF001";
+	public static final String addressTypeNotFound 			= "ADTNF001";
 	public static final String customerAlreadyExists        = "CSTAE001";
 	public static final String bagNotFound 					= "BAGNF001";
 	public static final String promotionNotFound			= "PRMNF001";

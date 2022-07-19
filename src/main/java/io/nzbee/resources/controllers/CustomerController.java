@@ -62,10 +62,10 @@ public class CustomerController {
     }
     
     @PostMapping("/Customer/Signup")
-    public GenericResponse registerNewCustomer(@RequestBody final CustomerDTOIn customer, final HttpServletRequest request) {
+    public GenericResponse registerNewCustomer(@RequestBody final CustomerDTOIn customer, String locale, final HttpServletRequest request) {
       LOGGER.debug("Signing up a new customer with information: {}", customer);
         
-        customerViewService.registerNewCustomer(customer, getClientIP(request), getAppUrl(request), request.getLocale());
+        customerViewService.registerNewCustomer(customer, getClientIP(request), getAppUrl(request), locale);
         
         eventPublisher.publishEvent(new OnRegistrationCompleteEvent(customer, request.getLocale(), request.getRequestURI()));
         
