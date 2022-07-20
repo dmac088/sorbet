@@ -10,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
 import io.nzbee.entity.party.Party;
 import io.nzbee.entity.party.address.type.AddressTypeEntity;
 
