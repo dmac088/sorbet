@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import io.nzbee.ErrorKeys;
 import io.nzbee.exceptions.AlreadyExistsException;
 import io.nzbee.exceptions.EntityNotFoundException;
+import io.nzbee.exceptions.ImageNotFoundException;
 import io.nzbee.exceptions.PasswordsNotMatchException;
 import io.nzbee.exceptions.response.CustomExceptionResponse;
 
@@ -34,5 +35,12 @@ public class CustomControllerAdvice {
 		CustomExceptionResponse response = new CustomExceptionResponse(ex.getErrorCode(), ex.getLocalizedMessage());
 		return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	}
+
 	
+	@ResponseBody
+	@ExceptionHandler(ImageNotFoundException.class)
+	public final ResponseEntity<CustomExceptionResponse> notFoundResponse(ImageNotFoundException ex) {
+		CustomExceptionResponse response = new CustomExceptionResponse(ex.getErrorCode(), ex.getLocalizedMessage());
+		return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+	}
 }
