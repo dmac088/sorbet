@@ -19,6 +19,6 @@ public class ErrorKeys {
 	public static final String promotionLevelNotFound    	= "PRMNF004";
 	public static final String promotionTypeNotFound        = "PRMNF005";
 	public static final String passwordsDontMatch        	= "PASNM001";
-	
+	public static final String imageNotFound        		= "IMGNF001";
 	
 }

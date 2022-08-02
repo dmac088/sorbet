@@ -11,8 +11,8 @@ public class Constants {
 	public static final String markdownPriceCode = "MKD01";
 	public static final String unknownProductDesc = "Not Applicable";
 	public static final String activeSKUCode = "ACT01";
-	public static final String defaultProductRootCategoryCode = "PRM01";
-	public static final String primaryProductRootCategoryCode = "PRM01";
+	public static final String defaultProductRootCategoryCode = "PRM04";
+	public static final String primaryProductRootCategoryCode = "PRM04";
 	public static final String secondaryProductRootCategoryCode = "PRM05";
 	public static final String primaryBrandRootCategoryCode = "FBR01";
 	public static final String shippingRootCategoryCode = "SHP01";
@@ -31,7 +31,7 @@ public class Constants {
 	public static final String shippingAddressCode = "MAI01";
 	public static final String physicalProductDepartmentCode = "ACC01";
 	public static final String shippingProductDepartmentCode = "SHP01";
-	public static final String indexCategoryHierarchyRootNode = "PRM01";
+	public static final String indexCategoryHierarchyRootNode = "PRM04";
 	public static final String partyTypePerson = "Person";
 	public static final String hongKongPostBrandCode = "HKP01";
 	public static final String hongKongLocalShipCode = "HKG";

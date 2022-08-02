@@ -11,6 +11,14 @@ public class LocalizedException extends RuntimeException {
     private final static String propertySuffix = ".exception";
 
     public LocalizedException(String messageKey, String locale) {
+    	super();
+        this.messageKey = messageKey + propertySuffix;
+        this.exceptionCode = messageKey;
+        this.locale = locale;
+    }
+    
+    public LocalizedException(String messageKey, String locale, final Throwable cause) {
+    	super(cause);
         this.messageKey = messageKey + propertySuffix;
         this.exceptionCode = messageKey;
         this.locale = locale;
