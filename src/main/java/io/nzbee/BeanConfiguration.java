@@ -91,226 +91,226 @@ import io.nzbee.view.product.tag.facet.ITagFacetViewService;
 import io.nzbee.view.product.tag.facet.TagFacetViewServiceImpl;
 
 @Configuration
-public class BeanConfiguration {
+class BeanConfiguration {
 	
 	@Bean
-	public IRegularBagItemDomainService regularBagItemDomainService() {
+	IRegularBagItemDomainService regularBagItemDomainService() {
 		return new RegularBagItemServiceImpl();
 	}
 	
 	@Bean
-	public IBagDomainDTODao bagDomainDTODao() {
+	IBagDomainDTODao bagDomainDTODao() {
 		return new BagDomainDTODaoImpl();
 	}
 	
 	@Bean
-	public IBagDomainDTOService bagDomainDTOService() {
+	IBagDomainDTOService bagDomainDTOService() {
 		return new BagDomainDTOServiceImpl();
 	}
 	
 	@Bean
-	public IShippingProductViewDTOMapper shippingProductViewMapper() {
+	IShippingProductViewDTOMapper shippingProductViewMapper() {
 		return new ShippingProductViewDTOMapperImpl();
 	}
 	
 	@Bean
-	public IShippingProductViewService shippingProductViewService() {
+	IShippingProductViewService shippingProductViewService() {
 		return new ShippingProductViewServiceImpl();
 	}
 	
 	@Bean 
-	public IRegularBagItemDomainDTOMapper bagItemDomainDTOMapper() {
+	IRegularBagItemDomainDTOMapper bagItemDomainDTOMapper() {
 		return new RegularBagItemDomainDTOMapperImpl();
 	}
 	
 	@Bean
-	public IRegularBagItemDomainDTOService bagItemDomainDTOService() {
+	IRegularBagItemDomainDTOService bagItemDomainDTOService() {
 		return new RegularBagItemDomainDTOServiceImpl();
 	}
 	
 	@Bean 
-	public IShippingTypePortService shippingTypePortService() {
+	IShippingTypePortService shippingTypePortService() {
 		return new ShippingTypeAdapterImpl();
 	}
 	
 	@Bean
-	public IShippingTypeViewService shippingTypeViewService() {
+	IShippingTypeViewService shippingTypeViewService() {
 		return new ShippingTypeViewServiceImpl(); 
 	}
 	
 	@Bean
-	public IShippingDestinationPortService shippingDestinationPortService() {
+	IShippingDestinationPortService shippingDestinationPortService() {
 		return new ShippingDestinationAdapterImpl();
 	}
 	
 	@Bean
-	public IShippingDestiantionViewService shippingDestiantionViewService() {
+	IShippingDestiantionViewService shippingDestiantionViewService() {
 		return new ShippingDestinationViewServiceImpl();
 	}
 	
 	@Bean
-	public IProductStatusService productStatusService() {
+	IProductStatusService productStatusService() {
 		return new ProductStatusServiceImpl();
 	}
 	
 	@Bean 
-	public IPhysicalProductMasterPort physicalProductMasterPort() {
+	IPhysicalProductMasterPort physicalProductMasterPort() {
 		return new PhysicalProductMasterAdapter();
 	}
 	
 	@Bean 
-	public IHKPostPort hKPostPort() { 
+	IHKPostPort hKPostPort() { 
 		return new HKPostAdapter();
 	}
 	
 	@Bean
-	public IProductCategoryViewService productCategoryViewService() {
+	IProductCategoryViewService productCategoryViewService() {
 		return new ProductCategoryViewServiceImpl();
 	}
 	
 	@Bean
-	public ICustomerPortService customerPortService() {
+	ICustomerPortService customerPortService() {
 		return new CustomerViewAdapter();
 	}
 	
 	@Bean
-	public ICustomerViewService customerViewService() {
+	ICustomerViewService customerViewService() {
 		return new CustomerViewServiceImpl();
 	}
 	
 	@Bean
-	public ICustomerViewMapper customerViewMapper() {
+	ICustomerViewMapper customerViewMapper() {
 		return new CustomerViewMapperImpl();
 	}
 	
 	@Bean
-	public IBagViewDTOService bagViewDTOService() {
+	IBagViewDTOService bagViewDTOService() {
 		return new BagViewDTOServiceImpl();
 	}
 	
 	@Bean 
-	public IBagPortService bagPortService() {
+	IBagPortService bagPortService() {
 		return new BagViewAdapterImpl();
 	}
 	
 	@Bean
-	public IBagViewService bagViewService() {
+	IBagViewService bagViewService() {
 		return new BagViewServiceImpl();
 	}
 
 	@Bean
-	public IPhysicalProductDTOMapper physicalProductViewDTOMapper() {
+	IPhysicalProductDTOMapper physicalProductViewDTOMapper() {
 		return new PhysicalProductDTOMapperImpl();
 	}
 	
 	@Bean
-	public IBrandFacetDTOService brandFAcetDTOService() {
+	IBrandFacetDTOService brandFAcetDTOService() {
 		return new BrandFacetDTOServiceImpl();
 	}
 	
 	@Bean
-	public ICategoryViewPortService productCategoryPortService() {
+	ICategoryViewPortService productCategoryPortService() {
 		return new ProductCategoryAdapterImpl();
 	}
 	
 	@Bean
-	public IBrandFacetDTOMapper brandFacetViewMapper() { 
+	IBrandFacetDTOMapper brandFacetViewMapper() { 
 		return new BrandFacetDTOMapperImpl();
 	}
 	
 	@Bean
-	public IBrandFacetViewPortService brandEntityViewService() {
+	IBrandFacetViewPortService brandEntityViewService() {
 		return new BrandFacetAdapterImpl();
 	}
 	
 	@Bean
-	public IBrandFacetViewService brandFacetViewService() {
+	IBrandFacetViewService brandFacetViewService() {
 		return new BrandFacetViewServiceImpl();
 	}
 	
 	@Bean
-	public IBrandDTOService test() {
+	IBrandDTOService test() {
 		return new BrandDTOServiceImpl();
 	}
 	
 	@Bean
-	public IBrandViewService brandViewService() {
+	IBrandViewService brandViewService() {
 		return new BrandViewServiceImpl();
 	}
 	
 	@Bean
-	public IBrandViewPortService brandViewPortService() {
+	IBrandViewPortService brandViewPortService() {
 		return new BrandAdapterImpl();
 	}
 	
 	@Bean
-	public IPhysicalProductLightViewService physicalProductLightService() {
+	IPhysicalProductLightViewService physicalProductLightService() {
 		return new PhysicalProductLightViewServiceImpl();
 	}
 	
 	@Bean
-	public IPhysicalProductFullService physicalProductFullService() {
+	IPhysicalProductFullService physicalProductFullService() {
 		return new PhysicalProductFullServiceImpl();
 	}
 	
 	@Bean
-	public IShippingProductPortService shippingProductPortService() {
+	IShippingProductPortService shippingProductPortService() {
 		return new ShippingProductAdapterImpl();
 	}
 	
 	@Bean	
-	public IPhysicalProductLightPortService productLightPortService() {
+	IPhysicalProductLightPortService productLightPortService() {
 		return new PhysicalProductLightAdapterImpl();
 	}
 	
 	@Bean
-	public IPhysicalProductLightMapper productLightMapper() {
+	IPhysicalProductLightMapper productLightMapper() {
 		return new PhysicalProductLightMapperImpl();
 	}
 
 	
 	@Bean
-	public IPhysicalProductFullPortService productFullPortService() {
+	IPhysicalProductFullPortService productFullPortService() {
 		return new PhysicalProductFullAdapterImpl();
 	}
 	
 	@Bean
-	public IPhysicalProductFullViewMapper productFullMapper() {
+	IPhysicalProductFullViewMapper productFullMapper() {
 		return new PhysicalProductFullViewMapperImpl();
 	}
 	
 	@Bean
-    public PagedResourcesAssembler<ShippingProductResource> pagedShippingProductResourceAssembler() {
+    PagedResourcesAssembler<ShippingProductResource> pagedShippingProductResourceAssembler() {
     	return new PagedResourcesAssembler<ShippingProductResource>(null, null);
     }
 	
 	@Bean
-    public PagedResourcesAssembler<PhysicalProductLightModel> pagedPhysicalProductLightResourceAssembler() {
+    PagedResourcesAssembler<PhysicalProductLightModel> pagedPhysicalProductLightResourceAssembler() {
     	return new PagedResourcesAssembler<PhysicalProductLightModel>(null, null);
     }
     
     @Bean
-    public ITagFacetViewService tagService() {
+    ITagFacetViewService tagService() {
         return new TagFacetViewServiceImpl();
     }
     
     @Bean
-    public IPromotionService promotionService() {
+    IPromotionService promotionService() {
         return new PromotionServiceImpl();
     }
     
     @Bean
-    public ICustomerService customerService() {
+    ICustomerService customerService() {
         return new CustomerServiceImpl();
     }
     
     @Bean
-    public IBagDomainService bagService() {
+    IBagDomainService bagService() {
         return new BagDomainServiceImpl();
     }
     
     @Bean 
-    public IPhysicalProductDTODao physicalProductDao() {
+    IPhysicalProductDTODao physicalProductDao() {
     	return new PhysicalProductDTODaoPostgresImpl();
     }
     

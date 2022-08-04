@@ -1,6 +1,8 @@
 package io.nzbee.integration.entity;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+
+import io.nzbee.Globals;
 import io.nzbee.entity.DataSourceBeanMochi;
 import io.nzbee.security.DataSourceBeanSecurity;
 import io.nzbee.util.FileStorageProperties;
@@ -15,7 +17,7 @@ import io.nzbee.util.FileStorageServiceUpload;
 		 DataSourceBeanSecurity.class,
 		 FileStorageProperties.class,
 		 FileStorageServiceUpload.class,
-		 //Globals.class
+		 Globals.class
 		 })
 public class ConfigEntityTests {
 	
