@@ -107,9 +107,9 @@ dockerRun {
 
 test {
     useJUnitPlatform()
+    maxHeapSize = "4g"
     systemProperty 'spring.profiles.active', 'dev'
 }
-
 
 publishing {
     publications {
