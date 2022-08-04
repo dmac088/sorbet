@@ -2,7 +2,7 @@ package io.nzbee;
 
 public class Constants {
 
-	public static final String testDbScriptPath = "src/test/java/database";
+	public static final String testDbScriptPath = "src/test/resources/database";
 	public static final String timeFromat = "yyyy-MM-dd HH:mm:ss.SSSX";
 	public static final String localeENGB = "en-GB";
 	public static final String localeZHHK = "zh-HK";

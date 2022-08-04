@@ -65,6 +65,7 @@ INSERT INTO security.user_ VALUES (234477, false, false, false, true, '$2a$08$lM
 INSERT INTO security.user_ VALUES (234482, false, false, false, true, '$2a$08$QDQfUEzVtkaILBRHdkVUquBq/ylLqS.DESfiNAvW0N11mw2a1kn0K', 'nob@nob', false, NULL);
 INSERT INTO security.user_ VALUES (2030867, false, false, false, true, '$2a$08$hcg54Vn8ksH8iv.Y2LTBr.mcGRBnNrv7EynIBNyBSBf/IhI0aoIlG', 'mackdad', false, NULL);
 INSERT INTO security.user_ VALUES (234485, false, false, false, false, '$2a$08$.KhZEsHxZO1fBcZ/iOzVPu2T5mk82K/jXGKb/q0fph/bQN3NmFApK', 'dmac1124', false, NULL);
+INSERT INTO security.user_ VALUES (234489, false, false, false, true, '$2a$08$AV8.r7Jm9K1/girJ6WZqzOvqRwxf4Jv9waE0oR0/DKePU0BOJaSr6', 'mackdada', false, NULL);
 
 
 --
@@ -301,6 +302,7 @@ INSERT INTO security.user_role VALUES (226, 234477, 2);
 INSERT INTO security.user_role VALUES (227, 234482, 2);
 INSERT INTO security.user_role VALUES (255, 2030867, 2);
 INSERT INTO security.user_role VALUES (257, 234485, 2);
+INSERT INTO security.user_role VALUES (259, 234489, 2);
 
 
 --
@@ -344,7 +346,7 @@ SELECT pg_catalog.setval('security.role_permission_id_seq', 77, true);
 -- Name: user_role_id_seq; Type: SEQUENCE SET; Schema: security; Owner: security_owner
 --
 
-SELECT pg_catalog.setval('security.user_role_id_seq', 258, true);
+SELECT pg_catalog.setval('security.user_role_id_seq', 259, true);
 
 
 --

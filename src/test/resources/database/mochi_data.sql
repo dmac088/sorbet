@@ -10047,14 +10047,14 @@ SELECT pg_catalog.setval('mochi.brand_attr_lcl_bnd_id_seq', 78, true);
 -- Name: brand_attr_lcl_bnd_lcl_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
 --
 
-SELECT pg_catalog.setval('mochi.brand_attr_lcl_bnd_lcl_id_seq', 233223, true);
+SELECT pg_catalog.setval('mochi.brand_attr_lcl_bnd_lcl_id_seq', 233225, true);
 
 
 --
 -- Name: brand_bnd_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
 --
 
-SELECT pg_catalog.setval('mochi.brand_bnd_id_seq', 233219, true);
+SELECT pg_catalog.setval('mochi.brand_bnd_id_seq', 233220, true);
 
 
 --
