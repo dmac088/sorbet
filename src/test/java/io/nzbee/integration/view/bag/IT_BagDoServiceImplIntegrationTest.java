@@ -1,4 +1,4 @@
-package io.nzbee.integration.view;
+package io.nzbee.integration.view.bag;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
@@ -19,6 +19,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import io.nzbee.Constants;
 import io.nzbee.domain.bag.Bag;
@@ -27,11 +28,13 @@ import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.customer.Customer;
 import io.nzbee.domain.customer.ICustomerService;
 import io.nzbee.domain.ports.IBagPortService;
+import io.nzbee.integration.entity.bag.ConfigBagEntityTests;
 import io.nzbee.integration.view.beans.bag.IBagViewBeanFactory;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
+@ContextConfiguration(classes = ConfigBagEntityTests.class)
 public class IT_BagDoServiceImplIntegrationTest {
 
 	@Autowired

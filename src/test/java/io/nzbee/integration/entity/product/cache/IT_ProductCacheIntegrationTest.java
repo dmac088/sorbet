@@ -124,12 +124,6 @@ public class IT_ProductCacheIntegrationTest {
 		
 	}
 	
-//	@Test
-//	@Rollback(false)
-//    public void whenFindAllDTOForClassType_thenReturnCorrectResultFromCache() {
-//		
-//	}
-	
 	
 	@Test
 	@Rollback(false)
@@ -215,7 +209,7 @@ public class IT_ProductCacheIntegrationTest {
 	    assertNotNull(ob);
 	    assertNotNull(ob.get());
 	    assertThat(ob.get().getClass().getSimpleName()).isEqualTo(PageImpl.class.getSimpleName());
-	    assertThat(((PageImpl<PhysicalProductLightDTO>) ob.get()).getTotalElements()).isEqualTo(Long.valueOf(12));
+	    assertThat(((PageImpl<PhysicalProductLightDTO>) ob.get()).getTotalElements()).isEqualTo(Long.valueOf(13));
 	    
 	}
 	
@@ -261,7 +255,7 @@ public class IT_ProductCacheIntegrationTest {
 	    assertNotNull(ob);
 	    assertNotNull(ob.get());
 	    assertThat(ob.get().getClass().getSimpleName()).isEqualTo(PageImpl.class.getSimpleName());
-	    assertThat(((PageImpl<PhysicalProductLightDTO>) ob.get()).getTotalElements()).isEqualTo(Long.valueOf(12));
+	    assertThat(((PageImpl<PhysicalProductLightDTO>) ob.get()).getTotalElements()).isEqualTo(Long.valueOf(13));
 	    
 	}
 
