@@ -31,7 +31,7 @@ public class IT_RefreshSchema {
 	@Qualifier("mochiDataSourceOwner")
 	private DataSource database;
 	 
-	private final String dbScriptPath = Constants.testDbScriptPath + "/database";
+	private final String dbScriptPath = Constants.testDbScriptPath + "";
 	
     @Test
     @Rollback(false)
@@ -47,7 +47,7 @@ public class IT_RefreshSchema {
     	ScriptUtils.executeSqlScript(con, new FileSystemResource(dbScriptPath + "/mochi_schema.sql"));
     	ScriptUtils.executeSqlScript(con, new FileSystemResource(dbScriptPath + "/security_schema.sql"));
   
-    	LOGGER.debug((new FileSystemResource(Constants.testDbScriptPath + "/database/mochi_schema.sql")).getFile().getAbsolutePath());
+    	LOGGER.debug((new FileSystemResource(Constants.testDbScriptPath + "/mochi_schema.sql")).getFile().getAbsolutePath());
 		LOGGER.debug("Schema Refreshed!");
     }
     

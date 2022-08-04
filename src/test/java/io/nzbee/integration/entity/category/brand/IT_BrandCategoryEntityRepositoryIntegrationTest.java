@@ -57,8 +57,8 @@ public class IT_BrandCategoryEntityRepositoryIntegrationTest {
 			return;
 		}
 		try (Connection con = database.getConnection()) {
-			ScriptUtils.executeSqlScript(con, new FileSystemResource(Constants.testDbScriptPath + "/database/mochi_schema.sql"));
-			ScriptUtils.executeSqlScript(con, new FileSystemResource(Constants.testDbScriptPath + "/database/mochi_data.sql"));
+			ScriptUtils.executeSqlScript(con, new FileSystemResource(Constants.testDbScriptPath + "/mochi_schema.sql"));
+			ScriptUtils.executeSqlScript(con, new FileSystemResource(Constants.testDbScriptPath + "/mochi_data.sql"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
