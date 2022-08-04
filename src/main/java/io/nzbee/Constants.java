@@ -2,6 +2,7 @@ package io.nzbee;
 
 public class Constants {
 
+	public static final String testDbScriptPath = "src/test/java/database";
 	public static final String timeFromat = "yyyy-MM-dd HH:mm:ss.SSSX";
 	public static final String localeENGB = "en-GB";
 	public static final String localeZHHK = "zh-HK";
@@ -27,7 +28,7 @@ public class Constants {
 	public static final String shippingAddressCode = "MAI01";
 	public static final String physicalProductDepartmentCode = "ACC01";
 	public static final String shippingProductDepartmentCode = "SHP01";
-	public static final String indexCategoryHierarchyRootNode = "PRM04";
+	public static final String indexCategoryHierarchyRootNode = "PRM01";
 	public static final String partyTypePerson = "Person";
 	public static final String hongKongPostBrandCode = "HKP01";
 	public static final String hongKongLocalShipCode = "HKG";

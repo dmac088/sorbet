@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import io.nzbee.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class IT_RefreshSchema {
 	@Qualifier("mochiDataSourceOwner")
 	private DataSource database;
 	 
-	private final String dbScriptPath = "src/test/java/database";
+	private final String dbScriptPath = Constants.testDbScriptPath + "/database";
 	
     @Test
     @Rollback(false)
@@ -46,7 +47,7 @@ public class IT_RefreshSchema {
     	ScriptUtils.executeSqlScript(con, new FileSystemResource(dbScriptPath + "/mochi_schema.sql"));
     	ScriptUtils.executeSqlScript(con, new FileSystemResource(dbScriptPath + "/security_schema.sql"));
   
-    	LOGGER.debug((new FileSystemResource("src/test/java/database/mochi_schema.sql")).getFile().getAbsolutePath());
+    	LOGGER.debug((new FileSystemResource(Constants.testDbScriptPath + "/database/mochi_schema.sql")).getFile().getAbsolutePath());
 		LOGGER.debug("Schema Refreshed!");
     }
     

@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.annotation.Rollback;
@@ -26,6 +26,7 @@ import io.nzbee.entity.party.person.IPersonService;
 import io.nzbee.entity.party.person.PersonEntity;
 import io.nzbee.entity.role.customer.CustomerEntity;
 import io.nzbee.integration.entity.beans.party.IPartyEntityBeanFactory;
+import io.nzbee.Constants;
 
 
 @RunWith(SpringRunner.class)
@@ -59,10 +60,10 @@ public class IT_PartyPersonEntityRepositoryIntegrationTest {
 			return;
 		}
 		try (Connection con = database.getConnection()) {
-			ScriptUtils.executeSqlScript(con, new ClassPathResource("/database/security_schema.sql"));
-			ScriptUtils.executeSqlScript(con, new ClassPathResource("/database/security_data.sql"));
-			ScriptUtils.executeSqlScript(con, new ClassPathResource("/database/mochi_schema.sql"));
-			ScriptUtils.executeSqlScript(con, new ClassPathResource("/database/mochi_data.sql"));
+			ScriptUtils.executeSqlScript(con, new FileSystemResource(Constants.testDbScriptPath + "/database/security_schema.sql"));
+			ScriptUtils.executeSqlScript(con, new FileSystemResource(Constants.testDbScriptPath + "/database/security_data.sql"));
+			ScriptUtils.executeSqlScript(con, new FileSystemResource(Constants.testDbScriptPath + "/database/mochi_schema.sql"));
+			ScriptUtils.executeSqlScript(con, new FileSystemResource(Constants.testDbScriptPath + "/database/mochi_data.sql"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

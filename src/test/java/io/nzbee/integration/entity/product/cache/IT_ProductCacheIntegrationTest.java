@@ -22,7 +22,7 @@ import org.springframework.cache.Cache;
 import org.springframework.cache.jcache.JCacheCache;
 import org.springframework.cache.jcache.JCacheCacheManager;
 import org.springframework.cache.support.SimpleValueWrapper;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.test.annotation.Rollback;
@@ -77,8 +77,8 @@ public class IT_ProductCacheIntegrationTest {
                return;
            }
        	try (Connection con = database.getConnection()) {
-               ScriptUtils.executeSqlScript(con, new ClassPathResource("/database/mochi_schema.sql"));
-               ScriptUtils.executeSqlScript(con, new ClassPathResource("/database/mochi_data.sql"));
+               ScriptUtils.executeSqlScript(con, new FileSystemResource(Constants.testDbScriptPath + "/database/mochi_schema.sql"));
+               ScriptUtils.executeSqlScript(con, new FileSystemResource(Constants.testDbScriptPath + "/database/mochi_data.sql"));
            } catch (SQLException e) {
    			// TODO Auto-generated catch block
    			e.printStackTrace();

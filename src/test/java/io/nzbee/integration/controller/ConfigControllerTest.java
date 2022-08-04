@@ -25,66 +25,66 @@ import io.nzbee.entity.DataSourceBeanMochi;
 import io.nzbee.security.DataSourceBeanSecurity;
 
 @Configuration
-public class ConfigControllerTest {
+class ConfigControllerTest {
 
-	public static String TEST_USERNAME = "nob@nob";
-	public static String TEST_PASSWORD = "nob";
+	static String TEST_USERNAME = "nob@nob";
+	static String TEST_PASSWORD = "nob";
 	
 	@Bean
-	public DataSourceBeanMochi dataSourceBeanMochi() {
+	DataSourceBeanMochi dataSourceBeanMochi() {
 		return new DataSourceBeanMochi();
 	}
 	
 	@Bean
     @ConfigurationProperties("spring.datasource.mochi.application")
-    public DataSourceProperties mochiDataSourceProperties() {
+    DataSourceProperties mochiDataSourceProperties() {
 		return new DataSourceProperties();
     }
 	
 	@Bean
     @ConfigurationProperties("spring.datasource.mochi.owner")
-    public DataSourceProperties mochiDataSourcePropertiesOwner() {
+    DataSourceProperties mochiDataSourcePropertiesOwner() {
 		return new DataSourceProperties();
     }
 	
 	@Bean(name = "mochiDataSourceOwner")
-	public HikariDataSource mochiDataSourceOwner() {
+	HikariDataSource mochiDataSourceOwner() {
 		return dataSourceBeanMochi().dataSource(mochiDataSourcePropertiesOwner());
 	}
 	
 	@Bean(name = "mochiDataSource")
-	public HikariDataSource mochiDataSource() {
+	HikariDataSource mochiDataSource() {
 		return dataSourceBeanMochi().dataSource(mochiDataSourceProperties());
 	}
 	
 	@Bean(name = "securityDataSource")
-	public HikariDataSource securityDataSource() {
+	HikariDataSource securityDataSource() {
 		return dataSourceBeanSecurity().dataSource(securityDataSourceProperties());
 	}
 	
 	@Bean(name = "mochiEntityManagerFactory") 
-    public LocalContainerEntityManagerFactoryBean mochiEntityManagerFactory() {
+    LocalContainerEntityManagerFactoryBean mochiEntityManagerFactory() {
        return dataSourceBeanMochi().entityManagerFactory(mochiDataSource());
     }
 	
 	@Bean(name = "mochiTransactionManager")
-    public PlatformTransactionManager mochiTransactionManager() {
+    PlatformTransactionManager mochiTransactionManager() {
 		return dataSourceBeanMochi().TransactionManager(mochiEntityManagerFactory());
     }
 	
 	@Bean
-	public DataSourceBeanSecurity dataSourceBeanSecurity() {
+	DataSourceBeanSecurity dataSourceBeanSecurity() {
 		return new DataSourceBeanSecurity();
 	}
 	
 	@Bean
     @ConfigurationProperties("spring.datasource.security.application")
-    public DataSourceProperties securityDataSourceProperties() {
+    DataSourceProperties securityDataSourceProperties() {
         return new DataSourceProperties();
     }
 	
 
-	public static String obtainAccessToken(String username, String password, WebApplicationContext webApplicationContext) throws Exception {
+	static String obtainAccessToken(String username, String password, WebApplicationContext webApplicationContext) throws Exception {
 		MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).apply(springSecurity()).build();
 		ResultActions result = mockMvc.perform(post("/oauth/token").header("Authorization",
 				"Basic c3ByaW5nLXNlY3VyaXR5LW9hdXRoMi1yZWFkLXdyaXRlLWNsaWVudDpzcHJpbmctc2VjdXJpdHktb2F1dGgyLXJlYWQtd3JpdGUtY2xpZW50LXBhc3N3b3JkMTIzNA==")

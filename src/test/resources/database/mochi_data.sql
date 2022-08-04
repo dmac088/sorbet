@@ -384,7 +384,7 @@ INSERT INTO mochi.promotion_order VALUES (2030864, 'ABCD1');
 INSERT INTO mochi.bag VALUES (234473, 232304, '2020-12-01 21:33:14.43+08', '2020-12-01 21:33:14.431+08', NULL);
 INSERT INTO mochi.bag VALUES (234476, 232304, '2020-12-01 21:40:31.98+08', '2020-12-01 21:40:31.98+08', NULL);
 INSERT INTO mochi.bag VALUES (234487, 234485, '2022-06-23 16:36:19.391+08', '2022-06-23 16:36:19.391+08', NULL);
-INSERT INTO mochi.bag VALUES (234484, 234482, '2020-12-02 12:54:34.693+08', '2022-06-23 17:00:04.502+08', NULL);
+INSERT INTO mochi.bag VALUES (234484, 234482, '2020-12-02 12:54:34.693+08', '2022-08-04 13:20:27.968+08', NULL);
 
 
 --
@@ -400,7 +400,8 @@ INSERT INTO mochi.bag_item_status VALUES (3, 'PND01', 'Pending');
 -- Data for Name: bag_item; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
-INSERT INTO mochi.bag_item VALUES (234517, 234484, 18, 4, 1);
+INSERT INTO mochi.bag_item VALUES (234518, 234484, 1, 1, 1);
+INSERT INTO mochi.bag_item VALUES (234519, 234484, 22, 1, 1);
 
 
 --
@@ -433,7 +434,6 @@ INSERT INTO mochi.brand VALUES (233209, 'LINSY');
 INSERT INTO mochi.brand VALUES (233212, 'PHONY');
 INSERT INTO mochi.brand VALUES (233215, 'HLEAF');
 INSERT INTO mochi.brand VALUES (42, 'HKP01');
-INSERT INTO mochi.brand VALUES (233218, 'TST02');
 
 
 --
@@ -480,8 +480,6 @@ INSERT INTO mochi.brand_attr_lcl VALUES (233216, 233215, 'HAPPYLEAF', NULL, 'en-
 INSERT INTO mochi.brand_attr_lcl VALUES (233217, 233215, '開心葉', NULL, 'zh-HK');
 INSERT INTO mochi.brand_attr_lcl VALUES (79, 42, 'Hong Kong Post', NULL, 'en-GB');
 INSERT INTO mochi.brand_attr_lcl VALUES (80, 42, '香港郵政', NULL, 'zh-HK');
-INSERT INTO mochi.brand_attr_lcl VALUES (233221, 233218, 'test brand', NULL, 'en-GB');
-INSERT INTO mochi.brand_attr_lcl VALUES (233222, 233218, '測試品牌', NULL, 'zh-HK');
 
 
 --
@@ -10000,7 +9998,7 @@ SELECT pg_catalog.setval('mochi.accessories_attr_lcl_prd_lcl_id_seq', 71, true);
 -- Name: address_addr_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
 --
 
-SELECT pg_catalog.setval('mochi.address_addr_id_seq', 3, true);
+SELECT pg_catalog.setval('mochi.address_addr_id_seq', 9, true);
 
 
 --
@@ -10014,14 +10012,14 @@ SELECT pg_catalog.setval('mochi.address_type_addr_typ_id_seq', 3, true);
 -- Name: bag_bag_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
 --
 
-SELECT pg_catalog.setval('mochi.bag_bag_id_seq', 234487, true);
+SELECT pg_catalog.setval('mochi.bag_bag_id_seq', 234490, true);
 
 
 --
 -- Name: bag_item_bag_item_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
 --
 
-SELECT pg_catalog.setval('mochi.bag_item_bag_item_id_seq', 234517, true);
+SELECT pg_catalog.setval('mochi.bag_item_bag_item_id_seq', 234519, true);
 
 
 --
@@ -10140,7 +10138,7 @@ SELECT pg_catalog.setval('mochi.currency_ccy_id_seq', 3, true);
 -- Name: customer_cst_num_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
 --
 
-SELECT pg_catalog.setval('mochi.customer_cst_num_seq', 6, true);
+SELECT pg_catalog.setval('mochi.customer_cst_num_seq', 7, true);
 
 
 --
@@ -10238,7 +10236,7 @@ SELECT pg_catalog.setval('mochi.order_ord_id_seq', 1, false);
 -- Name: party_pty_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
 --
 
-SELECT pg_catalog.setval('mochi.party_pty_id_seq', 234485, true);
+SELECT pg_catalog.setval('mochi.party_pty_id_seq', 234488, true);
 
 
 --
@@ -10399,7 +10397,7 @@ SELECT pg_catalog.setval('mochi.rating_rat_id_seq', 6, true);
 -- Name: role_rle_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
 --
 
-SELECT pg_catalog.setval('mochi.role_rle_id_seq', 234486, true);
+SELECT pg_catalog.setval('mochi.role_rle_id_seq', 234489, true);
 
 
 --

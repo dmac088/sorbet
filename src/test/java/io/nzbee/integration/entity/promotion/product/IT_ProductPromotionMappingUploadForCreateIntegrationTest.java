@@ -16,10 +16,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
-import org.springframework.core.io.ClassPathResource;
+import io.nzbee.Constants;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
-
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -32,7 +31,6 @@ import io.nzbee.util.promotion.product.ProductPromotionMasterService;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @ContextConfiguration(classes = ConfigProductPromotionEntityTests.class)
-
 public class IT_ProductPromotionMappingUploadForCreateIntegrationTest {
 
 
@@ -54,8 +52,8 @@ public class IT_ProductPromotionMappingUploadForCreateIntegrationTest {
             return;
         }
     	try (Connection con = database.getConnection()) {
-            ScriptUtils.executeSqlScript(con, new ClassPathResource("/database/mochi_schema.sql"));
-            ScriptUtils.executeSqlScript(con, new ClassPathResource("/database/mochi_data.sql"));
+            ScriptUtils.executeSqlScript(con, new FileSystemResource(Constants.testDbScriptPath + "/database/mochi_schema.sql"));
+            ScriptUtils.executeSqlScript(con, new FileSystemResource(Constants.testDbScriptPath + "/database/mochi_data.sql"));
         } catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

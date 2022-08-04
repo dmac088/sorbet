@@ -1,9 +1,7 @@
 package io.nzbee.cache;
 
 import java.io.IOException;
-
 import javax.cache.Caching;
-
 import org.ehcache.jsr107.EhcacheCachingProvider;
 import org.ehcache.xml.XmlConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;

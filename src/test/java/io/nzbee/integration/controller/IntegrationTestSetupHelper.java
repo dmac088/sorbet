@@ -11,10 +11,11 @@ import org.hibernate.CacheMode;
 import org.hibernate.search.batchindexing.impl.SimpleIndexingProgressMonitor;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
+import io.nzbee.Constants;
 
 public class IntegrationTestSetupHelper {
 
-	private static final String dbScriptPath = "src/test/java/database";
+	
 	private static boolean setUpDBIsDone = false;
 	private static boolean setUpIndexIsDone = false;
 
@@ -25,10 +26,10 @@ public class IntegrationTestSetupHelper {
 		System.out.println("setting up");
 		try (Connection con = database.getConnection()) {
 			
-		 	ScriptUtils.executeSqlScript(con, new FileSystemResource(dbScriptPath + "/mochi_schema.sql"));
-	    	ScriptUtils.executeSqlScript(con, new FileSystemResource(dbScriptPath + "/security_schema.sql"));
-	    	ScriptUtils.executeSqlScript(con, new FileSystemResource(dbScriptPath + "/mochi_data.sql"));
-	    	ScriptUtils.executeSqlScript(con, new FileSystemResource(dbScriptPath + "/security_data.sql"));
+		 	ScriptUtils.executeSqlScript(con, new FileSystemResource(Constants.testDbScriptPath + "/mochi_schema.sql"));
+	    	ScriptUtils.executeSqlScript(con, new FileSystemResource(Constants.testDbScriptPath + "/security_schema.sql"));
+	    	ScriptUtils.executeSqlScript(con, new FileSystemResource(Constants.testDbScriptPath + "/mochi_data.sql"));
+	    	ScriptUtils.executeSqlScript(con, new FileSystemResource(Constants.testDbScriptPath + "/security_data.sql"));
 	    	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
