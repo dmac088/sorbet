@@ -11,10 +11,6 @@ public class Constants {
 	public static final String markdownPriceCode = "MKD01";
 	public static final String unknownProductDesc = "Not Applicable";
 	public static final String activeSKUCode = "ACT01";
-	public static final String defaultProductRootCategoryCode = "PRM04";
-	public static final String primaryProductRootCategoryCode = "PRM04";
-	public static final String secondaryProductRootCategoryCode = "PRM05";
-	public static final String primaryBrandRootCategoryCode = "FBR01";
 	public static final String shippingRootCategoryCode = "SHP01";
 	public static final String TOKEN_INVALID = "invalidToken";
 	public static final String TOKEN_EXPIRED = "expired";

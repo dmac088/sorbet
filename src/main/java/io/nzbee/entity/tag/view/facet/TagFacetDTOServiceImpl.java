@@ -2,7 +2,6 @@ package io.nzbee.entity.tag.view.facet;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.apache.tomcat.util.buf.StringUtils;
 import org.mockito.internal.util.StringUtil;
 import org.slf4j.Logger;
@@ -10,8 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-
-import io.nzbee.Constants;
+import io.nzbee.Globals;
 import io.nzbee.entity.StringCollectionWrapper;
 import io.nzbee.search.IFacetService;
 
@@ -21,6 +19,9 @@ public class TagFacetDTOServiceImpl implements ITagFacetDTOService, IFacetServic
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 	
 	public static final String CACHE_NAME = "tagCache";
+	
+	@Autowired
+	private Globals globals;
 	
 	@Autowired
 	private ITagFacetDao tagDao;
@@ -71,12 +72,12 @@ public class TagFacetDTOServiceImpl implements ITagFacetDTOService, IFacetServic
 
 	@Override
 	public Optional<TagFacetDTO> findByCode(String locale, String code) {
-		return this.findByCode(locale, Constants.defaultProductRootCategoryCode, code);
+		return this.findByCode(locale, globals.getDefaultProductRootCategoryCode(), code);
 	}
 
 	@Override
 	public List<TagFacetDTO> findAll(String locale, StringCollectionWrapper codes) {
-		return this.findAll(locale, Constants.defaultProductRootCategoryCode, codes);
+		return this.findAll(locale, globals.getDefaultProductRootCategoryCode(), codes);
 	}	
 
 }

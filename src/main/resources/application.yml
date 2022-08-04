@@ -92,6 +92,7 @@ app:
     indexPath: ${RESOURCEPATH}/lucene/indexes
     defaultPage: 0
     defaultPageSize: 10
+    defaultProductRootCategoryCode: PRM02
     
 
 support:

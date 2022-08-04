@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import io.nzbee.Constants;
+import io.nzbee.Globals;
 import io.nzbee.resources.category.facet.CategoryFacetModel;
 import io.nzbee.resources.category.facet.CategoryFacetModelAssembler;
 import io.nzbee.resources.product.price.facet.PriceFacetResource;
@@ -33,6 +33,9 @@ import io.nzbee.view.category.product.ProductCategoryView;
 public class CategoryController {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+	
+	@Autowired
+	private Globals globals;
 	
 	@Autowired
 	private IFacetMapper<Double, EntityFacet> priceFacetMapper;
@@ -59,9 +62,9 @@ public class CategoryController {
 	@GetMapping("/Category/Product/{locale}/{currency}")
 	public ResponseEntity<CollectionModel<CategoryFacetModel>> getProductCategories(@PathVariable String locale) {
 		LOGGER.debug("Fetching product categories for parameters : {}, {}", locale);
-		List<EntityFacetHierarchical> collection = categoryService.findAll(locale, Constants.primaryProductRootCategoryCode)
+		List<EntityFacetHierarchical> collection = categoryService.findAll(locale, globals.getDefaultProductRootCategoryCode())
 				.stream().map(c -> facetMapper.toEntityFacet(c)).collect(Collectors.toList());
-		return ResponseEntity.ok(categoryResourceAssember.toCollectionModel(collection));
+		return ResponseEntity.ok(categoryResourceAssember.toCollectionModel(collection)); 
 	}
 
 

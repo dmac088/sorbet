@@ -8,16 +8,12 @@ public class Globals {
 	private String baseURL;
 	private String imagePath;
 	private String indexPath;
-	private String localeENGB;
-	private String localeZHHK;
-	private String currencyHKD;
-	private String currencyUSD;
 	private String retailPriceCode;
 	private String markdownPriceCode;
 	private String unknownProductDesc;
 	private String unknownProductImage;
 	private String activeSKUCode;
-	private String primaryProductRootCategoryCode;
+	private String defaultProductRootCategoryCode;
 	private int defaultPage;
 	private int defaultPageSize;
 
@@ -27,38 +23,6 @@ public class Globals {
 
 	public void setBaseURL(String baseURL) {
 		this.baseURL = baseURL;
-	}
-
-	public String getLocaleENGB() {
-		return localeENGB;
-	}
-
-	public void setLocaleENGB(String localeENGB) {
-		this.localeENGB = localeENGB;
-	}
-
-	public String getLocaleZHHK() {
-		return localeZHHK;
-	}
-
-	public void setLocaleZHHK(String localeZHHK) {
-		this.localeZHHK = localeZHHK;
-	}
-
-	public String getCurrencyHKD() {
-		return currencyHKD;
-	}
-
-	public void setCurrencyHKD(String currencyHKD) {
-		this.currencyHKD = currencyHKD;
-	}
-
-	public String getCurrencyUSD() {
-		return currencyUSD;
-	}
-
-	public void setCurrencyUSD(String currencyUSD) {
-		this.currencyUSD = currencyUSD;
 	}
 
 	public String getRetailPriceCode() {
@@ -101,14 +65,6 @@ public class Globals {
 		this.activeSKUCode = activeSKUCode;
 	}
 
-	public String getPrimaryRootCategoryCode() {
-		return primaryProductRootCategoryCode;
-	}
-
-	public void setPrimaryRootCategoryCode(String primaryProductRootCategoryCode) {
-		this.primaryProductRootCategoryCode = primaryProductRootCategoryCode;
-	}
-
 	public int getDefaultPage() {
 		return defaultPage;
 	}
@@ -139,6 +95,14 @@ public class Globals {
 
 	public void setIndexPath(String indexPath) {
 		this.indexPath = indexPath;
+	}
+
+	public String getDefaultProductRootCategoryCode() {
+		return defaultProductRootCategoryCode;
+	}
+
+	public void setDefaultProductRootCategoryCode(String defaultProductRootCategoryCode) {
+		this.defaultProductRootCategoryCode = defaultProductRootCategoryCode;
 	}
 
 }

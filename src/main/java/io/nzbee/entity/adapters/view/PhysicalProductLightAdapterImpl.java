@@ -3,12 +3,10 @@ package io.nzbee.entity.adapters.view;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import io.nzbee.Constants;
+import io.nzbee.Globals;
 import io.nzbee.entity.StringCollectionWrapper;
 import io.nzbee.entity.product.physical.light.IPhysicalProductLightMapper;
 import io.nzbee.entity.product.physical.light.IPhysicalProductLightDTOService;
@@ -20,6 +18,9 @@ import io.nzbee.view.product.physical.light.PhysicalProductLightView;
 
 public class PhysicalProductLightAdapterImpl implements IPhysicalProductLightPortService {
 
+	@Autowired
+	private Globals globals;
+	
 	@Autowired
 	private IPhysicalProductLightDTOService productEntityService;
 	
@@ -90,7 +91,7 @@ public class PhysicalProductLightAdapterImpl implements IPhysicalProductLightPor
 	@Override
 	@Transactional
 	public List<PhysicalProductLightView> findAll(String locale, String currency, Set<String> codes) {
-		List<PhysicalProductLightDTO> lp =  productEntityService.findAll(locale, currency, Constants.defaultProductRootCategoryCode ,new StringCollectionWrapper(codes));
+		List<PhysicalProductLightDTO> lp =  productEntityService.findAll(locale, currency, globals.getDefaultProductRootCategoryCode() ,new StringCollectionWrapper(codes));
 		return lp.stream().map(p -> productLightMapper.toView(p)).collect(Collectors.toList());
 	}
 

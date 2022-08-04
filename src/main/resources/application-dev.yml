@@ -50,6 +50,10 @@ spring:
         username: security_owner
         password: password
         driver-class-name: org.postgresql.Driver 
+    
+app:
+  globals:
+    defaultProductRootCategoryCode: PRM04
         
 server:
   port: 8080
@@ -58,4 +62,6 @@ server:
     key-store: classpath:mochi.p12
     key-store-password: password
     key-alias: mochi
+    
+    
 

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import io.nzbee.Constants;
+import io.nzbee.Globals;
 import io.nzbee.resources.product.physical.light.PhysicalProductLightModel;
 import io.nzbee.resources.product.physical.light.PhysicalProductLightModelAssembler;
 import io.nzbee.resources.search.SearchFacetModel;
@@ -30,6 +30,9 @@ import io.nzbee.view.product.physical.light.IPhysicalProductLightViewService;
 public class SearchController {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+	
+	@Autowired
+	private Globals globals;
 	
 	@Autowired
     private IPhysicalProductLightViewService productService;
@@ -84,7 +87,7 @@ public class SearchController {
 		
 		LOGGER.debug("Searching for suggestions with patameters: {}, {}", locale, term);
 		
-		return new ResponseEntity< >(productService.getSuggestion(term, Constants.defaultProductRootCategoryCode, locale, currency), HttpStatus.OK);
+		return new ResponseEntity< >(productService.getSuggestion(term, globals.getDefaultProductRootCategoryCode(), locale, currency), HttpStatus.OK);
 	}
 	
 }
