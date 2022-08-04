@@ -29,6 +29,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import io.nzbee.Constants;
+import io.nzbee.Globals;
 import io.nzbee.entity.product.ProductEntity;
 import io.nzbee.entity.product.physical.light.PhysicalProductLightDTO;
 import io.nzbee.entity.product.physical.light.IPhysicalProductLightDTOService;
@@ -43,6 +44,8 @@ import io.nzbee.integration.entity.beans.product.physical.IPhysicalProductEntity
 @ContextConfiguration(classes = {ConfigProductCacheEntityTests.class})
 public class IT_ProductCacheIntegrationTest {
 
+	@Autowired
+	private Globals globals;
 	
 	@Autowired
 	private JCacheCacheManager cacheManager;
@@ -103,7 +106,7 @@ public class IT_ProductCacheIntegrationTest {
 		ss.add(product.getProductUPC());
 		
 		 // when
-		physicalProductService.findAll(Constants.localeENGB, Constants.currencyHKD, Constants.primaryProductRootCategoryCode, new StringCollectionWrapper(ss));
+		physicalProductService.findAll(Constants.localeENGB, Constants.currencyHKD, globals.getDefaultProductRootCategoryCode(), new StringCollectionWrapper(ss));
 		
 		// then
 	    Cache cache = cacheManager.getCache(PhysicalProductLightDTOServiceImpl.CACHE_NAME);
@@ -111,7 +114,7 @@ public class IT_ProductCacheIntegrationTest {
 		assertNotNull(cache);
     	
 	    JCacheCache jCache = (JCacheCache) cache;
-	    String key = Constants.localeENGB + ", " + Constants.currencyHKD + ", " + Constants.primaryProductRootCategoryCode + ", " + new StringCollectionWrapper(ss).getCacheKey();
+	    String key = Constants.localeENGB + ", " + Constants.currencyHKD + ", " + globals.getDefaultProductRootCategoryCode() + ", " + new StringCollectionWrapper(ss).getCacheKey();
 		
 	    SimpleValueWrapper ob = (SimpleValueWrapper) jCache.get(key);
     	
@@ -134,7 +137,7 @@ public class IT_ProductCacheIntegrationTest {
 		
 		physicalProductService.findAll(	Constants.localeENGB, 
 								Constants.currencyHKD, 
-								Constants.primaryProductRootCategoryCode, 
+								globals.getDefaultProductRootCategoryCode(), 
 								new StringCollectionWrapper(new HashSet<String>()), 
 								new StringCollectionWrapper(new HashSet<String>()), 
 								new StringCollectionWrapper(new HashSet<String>()), 
@@ -152,7 +155,7 @@ public class IT_ProductCacheIntegrationTest {
 	    
 	    String key = Constants.localeENGB + ", " + 
 	    			 Constants.currencyHKD + ", " + 
-	    			 Constants.primaryProductRootCategoryCode + ", " +
+	    			 globals.getDefaultProductRootCategoryCode() + ", " +
 	    			 (new StringCollectionWrapper(new HashSet<String>()).getCacheKey()) + ", " +
 	    			 (new StringCollectionWrapper(new HashSet<String>()).getCacheKey()) + ", " +
 	    			 (new StringCollectionWrapper(new HashSet<String>()).getCacheKey()) + ", " +

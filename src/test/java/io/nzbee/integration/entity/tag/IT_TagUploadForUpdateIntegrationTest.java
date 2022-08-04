@@ -23,6 +23,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import io.nzbee.Constants;
+import io.nzbee.Globals;
 import io.nzbee.entity.tag.view.facet.ITagFacetDTOService;
 import io.nzbee.entity.tag.view.facet.TagFacetDTO;
 import io.nzbee.util.tag.TagMasterService;
@@ -33,6 +34,9 @@ import io.nzbee.util.tag.TagMasterService;
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class IT_TagUploadForUpdateIntegrationTest {
 
+	@Autowired
+	private Globals globals;
+	
 	@Autowired
 	@Qualifier("mochiEntityManagerFactory")
 	private EntityManager entityManager;
@@ -76,7 +80,7 @@ public class IT_TagUploadForUpdateIntegrationTest {
 	@Rollback(false)
 	public void whenTagUploadedForUpdate_thenReturnCorrectlyUpdatedTag_ENGB() {
 		// when
-		Optional<TagFacetDTO> found = tagService.findByCode(Constants.localeENGB, Constants.primaryProductRootCategoryCode, "GFR01");
+		Optional<TagFacetDTO> found = tagService.findByCode(Constants.localeENGB, globals.getDefaultProductRootCategoryCode(), "GFR01");
 
 		// then
 		assertFound_ENGB(found);
@@ -86,7 +90,7 @@ public class IT_TagUploadForUpdateIntegrationTest {
 	@Rollback(false)
 	public void whenTagUploadedForUpdate_thenReturnCorrectlyUpdatedTag_ZHHK() {
 		// when
-		Optional<TagFacetDTO> found = tagService.findByCode(Constants.localeZHHK, Constants.primaryProductRootCategoryCode, "GFR01");
+		Optional<TagFacetDTO> found = tagService.findByCode(Constants.localeZHHK, globals.getDefaultProductRootCategoryCode(), "GFR01");
 
 		// then
 		assertFound_ZHHK(found);

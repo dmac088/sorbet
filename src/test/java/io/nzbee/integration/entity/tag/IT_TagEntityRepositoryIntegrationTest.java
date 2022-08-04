@@ -26,6 +26,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import io.nzbee.Constants;
+import io.nzbee.Globals;
 import io.nzbee.entity.StringCollectionWrapper;
 import io.nzbee.entity.tag.ITagService;
 import io.nzbee.entity.tag.TagEntity;
@@ -39,6 +40,9 @@ import io.nzbee.integration.entity.beans.tag.ITagEntityBeanFactory;
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class IT_TagEntityRepositoryIntegrationTest {
 
+	@Autowired
+	private Globals globals;
+	
 	@Autowired
 	private ITagEntityBeanFactory tagEntityBeanFactory;
 
@@ -111,7 +115,7 @@ public class IT_TagEntityRepositoryIntegrationTest {
 		tagCodes.add("ORG01");
 
 		// when
-		List<TagFacetDTO> lb = tagFacetService.findAll(Constants.localeENGB, Constants.primaryProductRootCategoryCode, new StringCollectionWrapper(tagCodes));
+		List<TagFacetDTO> lb = tagFacetService.findAll(Constants.localeENGB, globals.getDefaultProductRootCategoryCode(), new StringCollectionWrapper(tagCodes));
 
 		// then
 		assertNotNull(lb);

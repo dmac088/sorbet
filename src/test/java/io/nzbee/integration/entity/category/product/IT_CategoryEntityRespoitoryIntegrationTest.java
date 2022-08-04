@@ -26,6 +26,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.google.common.collect.Ordering;
 import io.nzbee.Constants;
+import io.nzbee.Globals;
 import io.nzbee.entity.StringCollectionWrapper;
 import io.nzbee.entity.category.CategoryEntity;
 import io.nzbee.entity.category.ICategoryService;
@@ -39,6 +40,9 @@ import io.nzbee.integration.entity.beans.category.product.IProductCategoryEntity
 @ContextConfiguration(classes = {ConfigCategoryProductEntityTests.class})
 public class IT_CategoryEntityRespoitoryIntegrationTest {
 
+	@Autowired
+	private Globals globals;
+	
 	@Autowired
 	private ICategoryService categoryService;
 
@@ -96,7 +100,7 @@ public class IT_CategoryEntityRespoitoryIntegrationTest {
 	public void whenFindAll_thenReturnAllCategories() {
 
 		// when
-		List<ProductCategoryFacetDTO> found = categoryFacetService.findAll(Constants.localeENGB, Constants.primaryProductRootCategoryCode);
+		List<ProductCategoryFacetDTO> found = categoryFacetService.findAll(Constants.localeENGB, globals.getDefaultProductRootCategoryCode());
 
 		// then
 		assertNotNull(found);
@@ -116,7 +120,7 @@ public class IT_CategoryEntityRespoitoryIntegrationTest {
 		// when
 		List<ProductCategoryFacetDTO> found = categoryFacetService.findAll(	Constants.localeENGB,
 													  						Constants.currencyHKD, 
-													  						Constants.primaryProductRootCategoryCode,
+													  						globals.getDefaultProductRootCategoryCode(),
 													  						new StringCollectionWrapper(ls));
 
 		// then
@@ -135,7 +139,7 @@ public class IT_CategoryEntityRespoitoryIntegrationTest {
 		ls.add("CIT01");
 		
 		// when
-		List<ProductCategoryFacetDTO> found = categoryFacetService.findAll(Constants.localeENGB, Constants.currencyHKD, Constants.primaryProductRootCategoryCode, new StringCollectionWrapper(ls));
+		List<ProductCategoryFacetDTO> found = categoryFacetService.findAll(Constants.localeENGB, Constants.currencyHKD, globals.getDefaultProductRootCategoryCode(), new StringCollectionWrapper(ls));
 
 		// then
 		assertNotNull(found);
@@ -301,7 +305,7 @@ public class IT_CategoryEntityRespoitoryIntegrationTest {
 		// when
 		Double found = categoryFacetService.getMaxPrice(Constants.localeENGB, 
 														Constants.currencyHKD, 
-														Constants.primaryProductRootCategoryCode,
+														globals.getDefaultProductRootCategoryCode(),
 														new StringCollectionWrapper(new HashSet<String>()), 
 														new StringCollectionWrapper(new HashSet<String>()), 
 														new StringCollectionWrapper(new HashSet<String>()));
@@ -369,7 +373,7 @@ public class IT_CategoryEntityRespoitoryIntegrationTest {
 		// when
 		Double found = categoryFacetService.getMaxPrice(	Constants.localeENGB, 
 															Constants.currencyUSD, 
-															Constants.primaryProductRootCategoryCode,
+															globals.getDefaultProductRootCategoryCode(),
 															new StringCollectionWrapper(new HashSet<String>()), 
 															new StringCollectionWrapper(new HashSet<String>()), 
 															new StringCollectionWrapper(new HashSet<String>()));

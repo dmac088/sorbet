@@ -143,6 +143,9 @@ import io.nzbee.view.product.shipping.type.ShippingTypeViewServiceImpl;
 public class CT_SearchControllerIntegrationTest {
 
 	@Autowired
+	private Globals globals;
+	
+	@Autowired
 	@Qualifier("mochiEntityManagerFactory")
 	private EntityManager em;
 
@@ -162,7 +165,7 @@ public class CT_SearchControllerIntegrationTest {
 	public void testWhenSearchWithFacetParameterThenCorrectResultIsReturned() throws Exception {
 
 		mockMvc.perform(post("/api/Search/" + Constants.localeENGB + "/" + Constants.currencyHKD + "/Category/Code/"
-				+ Constants.defaultProductRootCategoryCode)
+				+ globals.getDefaultProductRootCategoryCode())
 
 				.param("q", "fruit").param("page", "0").param("size", "10").param("sort", "nameAsc")
 				.contentType(MediaType.APPLICATION_JSON)

@@ -22,6 +22,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import io.nzbee.Constants;
+import io.nzbee.Globals;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.bag.entity.IBagEntityService;
 import io.nzbee.entity.bag.view.BagViewDTO;
@@ -49,7 +50,8 @@ public class IT_BagEntityRepositoryIntegrationTest {
 	@Autowired
     private IPersonService personService;
  	
-	
+	@Autowired
+	private Globals globals;
 	
 	@Autowired
 	@Qualifier("mochiDataSourceOwner")
@@ -119,7 +121,7 @@ public class IT_BagEntityRepositoryIntegrationTest {
     public void whenFindByUsername_thenReturnBagDTO() {
     	
     	//persist a bag and then make sure we can retrieve it by username which is the natural key of the bag
-    	Optional<BagViewDTO> found = bagViewService.findByCode(Constants.localeENGB, Constants.currencyHKD, Constants.primaryProductRootCategoryCode, "bob@bob");
+    	Optional<BagViewDTO> found = bagViewService.findByCode(Constants.localeENGB, Constants.currencyHKD, globals.getDefaultProductRootCategoryCode(), "bob@bob");
     	
     	//then
     	assertDTOFound(found);

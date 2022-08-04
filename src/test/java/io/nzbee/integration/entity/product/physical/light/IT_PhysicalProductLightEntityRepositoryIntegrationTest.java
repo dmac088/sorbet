@@ -24,6 +24,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import io.nzbee.Constants;
+import io.nzbee.Globals;
 import io.nzbee.entity.StringCollectionWrapper;
 import io.nzbee.entity.product.IProductService;
 import io.nzbee.entity.product.ProductEntity;
@@ -37,6 +38,9 @@ import io.nzbee.integration.entity.beans.product.physical.IPhysicalProductEntity
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class IT_PhysicalProductLightEntityRepositoryIntegrationTest {
 
+	@Autowired
+	private Globals globals;
+	
 	@Autowired
 	private IPhysicalProductEntityBeanFactory productEntityBeanFactory;
  
@@ -90,7 +94,7 @@ public class IT_PhysicalProductLightEntityRepositoryIntegrationTest {
 		 // when
     	List<PhysicalProductLightDTO> found = physicalProductLightService.findAll(Constants.localeENGB, 
 									  								  	 		  Constants.currencyUSD,
-									  								  	 		  Constants.primaryProductRootCategoryCode,
+									  								  	 		  globals.getDefaultProductRootCategoryCode(),
 									  								  	 		  new StringCollectionWrapper(codes));
      
         // then

@@ -120,11 +120,13 @@ public class CT_BagControllerTest {
 		
 		
 		// remove the items to empty the bag
+		//this is a Pomegranate
 		String url = "/api/Bag/" + Constants.localeENGB + "/" + Constants.currencyHKD + "/Items/Remove/17235347";
 		mockMvc.perform(get(url).header("Authorization", "Bearer " + accessToken).with(csrf())
 				.contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8").accept(MediaType.ALL))
 				.andDo(print()).andExpect(status().isOk());
 		
+		//this is a mango
 		url = "/api/Bag/" + Constants.localeENGB + "/" + Constants.currencyHKD + "/Items/Remove/12345678";
 		mockMvc.perform(get(url).header("Authorization", "Bearer " + accessToken).with(csrf())
 				.contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8").accept(MediaType.ALL))

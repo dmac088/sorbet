@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.24
--- Dumped by pg_dump version 9.6.24
+-- Dumped from database version 14.1
+-- Dumped by pg_dump version 14.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -299,13 +299,6 @@ INSERT INTO mochi.accessories_attr_lcl VALUES (58, 18, NULL, NULL, 'zh-HK');
 
 
 --
--- Name: accessories_attr_lcl_prd_lcl_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.accessories_attr_lcl_prd_lcl_id_seq', 71, true);
-
-
---
 -- Data for Name: address_type; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
@@ -369,20 +362,6 @@ INSERT INTO mochi.address VALUES (2, 'Test Line 1', 'Test Line 2', 'Test Line 3'
 
 
 --
--- Name: address_addr_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.address_addr_id_seq', 3, true);
-
-
---
--- Name: address_type_addr_typ_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.address_type_addr_typ_id_seq', 3, true);
-
-
---
 -- Data for Name: promotion; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
@@ -409,13 +388,6 @@ INSERT INTO mochi.bag VALUES (234484, 234482, '2020-12-02 12:54:34.693+08', '202
 
 
 --
--- Name: bag_bag_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.bag_bag_id_seq', 234487, true);
-
-
---
 -- Data for Name: bag_item_status; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
@@ -432,30 +404,9 @@ INSERT INTO mochi.bag_item VALUES (234517, 234484, 18, 4, 1);
 
 
 --
--- Name: bag_item_bag_item_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.bag_item_bag_item_id_seq', 234517, true);
-
-
---
 -- Data for Name: bag_item_disc; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
-
-
---
--- Name: bag_item_disc_bag_item_disc_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.bag_item_disc_bag_item_disc_id_seq', 1, false);
-
-
---
--- Name: bag_item_status_bag_item_sts_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.bag_item_status_bag_item_sts_id_seq', 4, true);
 
 
 --
@@ -531,27 +482,6 @@ INSERT INTO mochi.brand_attr_lcl VALUES (79, 42, 'Hong Kong Post', NULL, 'en-GB'
 INSERT INTO mochi.brand_attr_lcl VALUES (80, 42, '香港郵政', NULL, 'zh-HK');
 INSERT INTO mochi.brand_attr_lcl VALUES (233221, 233218, 'test brand', NULL, 'en-GB');
 INSERT INTO mochi.brand_attr_lcl VALUES (233222, 233218, '測試品牌', NULL, 'zh-HK');
-
-
---
--- Name: brand_attr_lcl_bnd_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.brand_attr_lcl_bnd_id_seq', 78, true);
-
-
---
--- Name: brand_attr_lcl_bnd_lcl_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.brand_attr_lcl_bnd_lcl_id_seq', 233223, true);
-
-
---
--- Name: brand_bnd_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.brand_bnd_id_seq', 233219, true);
 
 
 --
@@ -651,30 +581,9 @@ INSERT INTO mochi.brand_category VALUES (14, 35, 45);
 
 
 --
--- Name: brand_category_bnd_cat_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.brand_category_bnd_cat_id_seq', 15, true);
-
-
---
 -- Data for Name: brand_promotion; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
-
-
---
--- Name: brand_promotion_bnd_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.brand_promotion_bnd_id_seq', 1, false);
-
-
---
--- Name: brand_promotion_prm_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.brand_promotion_prm_id_seq', 1, false);
 
 
 --
@@ -844,31 +753,10 @@ INSERT INTO mochi.category_attr_lcl VALUES (107, 46, '船運', NULL, 'zh-HK');
 
 
 --
--- Name: category_attr_lcl_cat_lcl_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.category_attr_lcl_cat_lcl_id_seq', 233191, true);
-
-
---
 -- Data for Name: category_brand; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
 INSERT INTO mochi.category_brand VALUES (45);
-
-
---
--- Name: category_brand_cat_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.category_brand_cat_id_seq', 46, true);
-
-
---
--- Name: category_cat_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.category_cat_id_seq', 233189, true);
 
 
 --
@@ -957,32 +845,11 @@ INSERT INTO mochi.category_product VALUES (46);
 
 
 --
--- Name: category_product_cat_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.category_product_cat_id_seq', 233189, true);
-
-
---
 -- Data for Name: category_promotion; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
 INSERT INTO mochi.category_promotion VALUES (10, 234464);
 INSERT INTO mochi.category_promotion VALUES (14, 234467);
-
-
---
--- Name: category_promotion_cat_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.category_promotion_cat_id_seq', 15, true);
-
-
---
--- Name: category_promotion_prm_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.category_promotion_prm_id_seq', 234468, true);
 
 
 --
@@ -996,25 +863,11 @@ INSERT INTO mochi.category_type VALUES (4, 'LAY01', 'layout');
 
 
 --
--- Name: category_type_cat_typ_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.category_type_cat_typ_id_seq', 5, true);
-
-
---
 -- Data for Name: currency; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
 INSERT INTO mochi.currency VALUES (1, 'HKD');
 INSERT INTO mochi.currency VALUES (2, 'USD');
-
-
---
--- Name: currency_ccy_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.currency_ccy_id_seq', 3, true);
 
 
 --
@@ -1103,20 +956,6 @@ INSERT INTO mochi.customer VALUES (234486, '6         ');
 
 
 --
--- Name: customer_cst_num_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.customer_cst_num_seq', 6, true);
-
-
---
--- Name: customer_rle_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.customer_rle_id_seq', 234484, true);
-
-
---
 -- Data for Name: department; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
@@ -1135,30 +974,9 @@ INSERT INTO mochi.department_attr_lcl VALUES (4, 1, '船運', 'zh-HK');
 
 
 --
--- Name: department_attr_lcl_dept_lcl_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.department_attr_lcl_dept_lcl_id_seq', 5, true);
-
-
---
--- Name: department_dept_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.department_dept_id_seq', 3, true);
-
-
---
 -- Data for Name: discount; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
-
-
---
--- Name: discount_dis_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.discount_dis_id_seq', 1, false);
 
 
 --
@@ -1170,24 +988,10 @@ INSERT INTO mochi.discount_type VALUES (2, 'value');
 
 
 --
--- Name: discount_type_dis_typ_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.discount_type_dis_typ_id_seq', 3, true);
-
-
---
 -- Data for Name: inventory_location; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
 INSERT INTO mochi.inventory_location VALUES (1, 'LCK01', 'Lai Chi Kok Apartment', true);
-
-
---
--- Name: inventory_location_inv_loc_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.inventory_location_inv_loc_id_seq', 2, true);
 
 
 --
@@ -2232,27 +2036,6 @@ INSERT INTO mochi.inventory_transaction VALUES (234428, 1, 5, 10, 2.59, 2, 1, 23
 
 
 --
--- Name: inventory_transaction_inv_trx_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.inventory_transaction_inv_trx_id_seq', 234429, true);
-
-
---
--- Name: inventory_transaction_type_inv_trx_typ_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.inventory_transaction_type_inv_trx_typ_id_seq', 3, true);
-
-
---
--- Name: locale_lcl_cd_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.locale_lcl_cd_seq', 1, false);
-
-
---
 -- Data for Name: order; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
@@ -2265,52 +2048,10 @@ SELECT pg_catalog.setval('mochi.locale_lcl_cd_seq', 1, false);
 
 
 --
--- Name: order_line_ord_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.order_line_ord_id_seq', 1, false);
-
-
---
--- Name: order_line_ord_lne_no_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.order_line_ord_lne_no_seq', 1, false);
-
-
---
--- Name: order_line_prd_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.order_line_prd_id_seq', 1, false);
-
-
---
--- Name: order_ord_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.order_ord_id_seq', 1, false);
-
-
---
 -- Data for Name: organisation; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
 INSERT INTO mochi.organisation VALUES (233055, 'Taobao', 'NA');
-
-
---
--- Name: party_pty_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.party_pty_id_seq', 234485, true);
-
-
---
--- Name: party_type_pty_typ_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.party_type_pty_typ_id_seq', 3, true);
 
 
 --
@@ -6026,25 +5767,11 @@ INSERT INTO mochi.price VALUES (2035088, 2, 2031888, 7, 2);
 
 
 --
--- Name: price_prc_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.price_prc_id_seq', 2035088, true);
-
-
---
 -- Data for Name: price_type; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
 INSERT INTO mochi.price_type VALUES (1, 'retail', 'RET01');
 INSERT INTO mochi.price_type VALUES (2, 'markdown', 'MKD01');
-
-
---
--- Name: price_type_prc_typ_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.price_type_prc_typ_id_seq', 3, true);
 
 
 --
@@ -6248,13 +5975,6 @@ INSERT INTO mochi.product_attr_lcl VALUES (233737, 2031888, 'organic cucumber', 
 
 
 --
--- Name: product_attr_lcl_prd_lcl_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.product_attr_lcl_prd_lcl_id_seq', 233737, true);
-
-
---
 -- Data for Name: product_basic; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
@@ -6355,13 +6075,6 @@ INSERT INTO mochi.product_basic VALUES (8, NULL, NULL, NULL, 0.33);
 INSERT INTO mochi.product_basic VALUES (1, NULL, NULL, NULL, 0.38);
 INSERT INTO mochi.product_basic VALUES (5, NULL, NULL, NULL, 0.42);
 INSERT INTO mochi.product_basic VALUES (2031888, 0, 0, 0, 0.00);
-
-
---
--- Name: product_basic_prd_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.product_basic_prd_id_seq', 233731, true);
 
 
 --
@@ -7309,40 +7022,12 @@ INSERT INTO mochi.product_category VALUES (2288, 2031888, 8);
 
 
 --
--- Name: product_category_prd_cat_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.product_category_prd_cat_id_seq', 2288, true);
-
-
---
--- Name: product_prd_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.product_prd_id_seq', 2031888, true);
-
-
---
 -- Data for Name: product_promotion; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
 INSERT INTO mochi.product_promotion VALUES (13, 234464);
 INSERT INTO mochi.product_promotion VALUES (25, 234467);
 INSERT INTO mochi.product_promotion VALUES (2031276, 234464);
-
-
---
--- Name: product_promotion_prd_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.product_promotion_prd_id_seq', 2031277, true);
-
-
---
--- Name: product_promotion_prm_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.product_promotion_prm_id_seq', 234468, true);
 
 
 --
@@ -7469,13 +7154,6 @@ INSERT INTO mochi.product_rating VALUES (117, 27, 2, 232254, '2020-04-21 12:26:0
 INSERT INTO mochi.product_rating VALUES (118, 29, 4, 232254, '2020-04-21 12:26:01.053376+08');
 INSERT INTO mochi.product_rating VALUES (119, 1, 1, 232254, '2020-04-21 12:26:01.053376+08');
 INSERT INTO mochi.product_rating VALUES (120, 18, 3, 232254, '2020-04-21 12:26:01.053376+08');
-
-
---
--- Name: product_rating_prd_rat_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.product_rating_prd_rat_id_seq', 121, true);
 
 
 --
@@ -9951,27 +9629,6 @@ INSERT INTO mochi.product_shipping_attr_lcl VALUES (2081, 2031886, '特快專遞
 
 
 --
--- Name: product_shipping_attr_lcl_prd_lcl_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.product_shipping_attr_lcl_prd_lcl_id_seq', 2082, true);
-
-
---
--- Name: product_shipping_prd_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.product_shipping_prd_id_seq', 2031887, true);
-
-
---
--- Name: product_status_prd_sts_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.product_status_prd_sts_id_seq', 3, true);
-
-
---
 -- Data for Name: product_supplier; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
@@ -10119,13 +9776,6 @@ INSERT INTO mochi.product_tag VALUES (136, 2031888, 15);
 
 
 --
--- Name: product_tag_prd_tag_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.product_tag_prd_tag_id_seq', 136, true);
-
-
---
 -- Data for Name: promotion_attr_lcl; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
@@ -10138,26 +9788,12 @@ INSERT INTO mochi.promotion_attr_lcl VALUES (2030866, 2030864, '總籃可享10�
 
 
 --
--- Name: promotion_attr_lcl_prm_lcl_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.promotion_attr_lcl_prm_lcl_id_seq', 2030867, true);
-
-
---
 -- Data for Name: promotion_level; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
 INSERT INTO mochi.promotion_level VALUES (1, 'PRD01', 'Product');
 INSERT INTO mochi.promotion_level VALUES (2, 'CAT01', 'Category');
 INSERT INTO mochi.promotion_level VALUES (3, 'ORD01', 'Order');
-
-
---
--- Name: promotion_level_prm_lvl_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.promotion_level_prm_lvl_id_seq', 4, true);
 
 
 --
@@ -10170,39 +9806,11 @@ INSERT INTO mochi.promotion_mechanic VALUES (3, 'ORDPCTOFF', 'Percentage off tot
 
 
 --
--- Name: promotion_mechanic_prm_mec_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.promotion_mechanic_prm_mec_id_seq', 4, true);
-
-
---
--- Name: promotion_order_prm_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.promotion_order_prm_id_seq', 2030865, true);
-
-
---
--- Name: promotion_prm_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.promotion_prm_id_seq', 2030865, true);
-
-
---
 -- Data for Name: promotion_product; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
 INSERT INTO mochi.promotion_product VALUES (234464);
 INSERT INTO mochi.promotion_product VALUES (234467);
-
-
---
--- Name: promotion_product_prm_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.promotion_product_prm_id_seq', 234468, true);
 
 
 --
@@ -10214,13 +9822,6 @@ INSERT INTO mochi.promotion_type VALUES (2, 'ORD01', 'PromotionOrderDTO', 'Order
 
 
 --
--- Name: promotion_type_prm_typ_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.promotion_type_prm_typ_id_seq', 3, true);
-
-
---
 -- Data for Name: rating; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
@@ -10229,27 +9830,6 @@ INSERT INTO mochi.rating VALUES (2, 'Two Star', 2);
 INSERT INTO mochi.rating VALUES (3, 'Three Star', 3);
 INSERT INTO mochi.rating VALUES (4, 'Four Star', 4);
 INSERT INTO mochi.rating VALUES (5, 'Five Star', 5);
-
-
---
--- Name: rating_rat_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.rating_rat_id_seq', 6, true);
-
-
---
--- Name: role_rle_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.role_rle_id_seq', 234486, true);
-
-
---
--- Name: role_type_rle_typ_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.role_type_rle_typ_id_seq', 3, true);
 
 
 --
@@ -10355,31 +9935,10 @@ INSERT INTO mochi.stock_on_hand VALUES (234303, 233373, 0);
 
 
 --
--- Name: stock_on_hand_soh_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.stock_on_hand_soh_id_seq', 234430, true);
-
-
---
 -- Data for Name: supplier; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
 INSERT INTO mochi.supplier VALUES (233056, '1000000002');
-
-
---
--- Name: supplier_rle_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
---
-
-SELECT pg_catalog.setval('mochi.supplier_rle_id_seq', 233057, true);
-
-
---
--- Name: supplier_sup_num_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
---
-
-SELECT pg_catalog.setval('mochi.supplier_sup_num_seq', 1000000002, true);
 
 
 --
@@ -10428,6 +9987,447 @@ INSERT INTO mochi.tag_attr_lcl VALUES (233274, 233272, '滑板風', NULL, 'zh-HK
 INSERT INTO mochi.tag_attr_lcl VALUES (1, 15, 'ORGANIC', NULL, 'en-GB');
 INSERT INTO mochi.tag_attr_lcl VALUES (3, 17, 'Gluten Free Test', NULL, 'en-GB');
 INSERT INTO mochi.tag_attr_lcl VALUES (4, 17, '無麩質測試', NULL, 'zh-HK');
+
+
+--
+-- Name: accessories_attr_lcl_prd_lcl_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.accessories_attr_lcl_prd_lcl_id_seq', 71, true);
+
+
+--
+-- Name: address_addr_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.address_addr_id_seq', 3, true);
+
+
+--
+-- Name: address_type_addr_typ_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.address_type_addr_typ_id_seq', 3, true);
+
+
+--
+-- Name: bag_bag_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.bag_bag_id_seq', 234487, true);
+
+
+--
+-- Name: bag_item_bag_item_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.bag_item_bag_item_id_seq', 234517, true);
+
+
+--
+-- Name: bag_item_disc_bag_item_disc_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.bag_item_disc_bag_item_disc_id_seq', 1, false);
+
+
+--
+-- Name: bag_item_status_bag_item_sts_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.bag_item_status_bag_item_sts_id_seq', 4, true);
+
+
+--
+-- Name: brand_attr_lcl_bnd_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.brand_attr_lcl_bnd_id_seq', 78, true);
+
+
+--
+-- Name: brand_attr_lcl_bnd_lcl_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.brand_attr_lcl_bnd_lcl_id_seq', 233223, true);
+
+
+--
+-- Name: brand_bnd_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.brand_bnd_id_seq', 233219, true);
+
+
+--
+-- Name: brand_category_bnd_cat_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.brand_category_bnd_cat_id_seq', 15, true);
+
+
+--
+-- Name: brand_promotion_bnd_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.brand_promotion_bnd_id_seq', 1, false);
+
+
+--
+-- Name: brand_promotion_prm_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.brand_promotion_prm_id_seq', 1, false);
+
+
+--
+-- Name: category_attr_lcl_cat_lcl_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.category_attr_lcl_cat_lcl_id_seq', 233191, true);
+
+
+--
+-- Name: category_brand_cat_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.category_brand_cat_id_seq', 46, true);
+
+
+--
+-- Name: category_cat_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.category_cat_id_seq', 233189, true);
+
+
+--
+-- Name: category_product_cat_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.category_product_cat_id_seq', 233189, true);
+
+
+--
+-- Name: category_promotion_cat_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.category_promotion_cat_id_seq', 15, true);
+
+
+--
+-- Name: category_promotion_prm_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.category_promotion_prm_id_seq', 234468, true);
+
+
+--
+-- Name: category_type_cat_typ_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.category_type_cat_typ_id_seq', 5, true);
+
+
+--
+-- Name: currency_ccy_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.currency_ccy_id_seq', 3, true);
+
+
+--
+-- Name: customer_cst_num_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.customer_cst_num_seq', 6, true);
+
+
+--
+-- Name: customer_rle_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.customer_rle_id_seq', 234484, true);
+
+
+--
+-- Name: department_attr_lcl_dept_lcl_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.department_attr_lcl_dept_lcl_id_seq', 5, true);
+
+
+--
+-- Name: department_dept_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.department_dept_id_seq', 3, true);
+
+
+--
+-- Name: discount_dis_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.discount_dis_id_seq', 1, false);
+
+
+--
+-- Name: discount_type_dis_typ_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.discount_type_dis_typ_id_seq', 3, true);
+
+
+--
+-- Name: inventory_location_inv_loc_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.inventory_location_inv_loc_id_seq', 2, true);
+
+
+--
+-- Name: inventory_transaction_inv_trx_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.inventory_transaction_inv_trx_id_seq', 234429, true);
+
+
+--
+-- Name: inventory_transaction_type_inv_trx_typ_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.inventory_transaction_type_inv_trx_typ_id_seq', 3, true);
+
+
+--
+-- Name: locale_lcl_cd_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.locale_lcl_cd_seq', 1, false);
+
+
+--
+-- Name: order_line_ord_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.order_line_ord_id_seq', 1, false);
+
+
+--
+-- Name: order_line_ord_lne_no_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.order_line_ord_lne_no_seq', 1, false);
+
+
+--
+-- Name: order_line_prd_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.order_line_prd_id_seq', 1, false);
+
+
+--
+-- Name: order_ord_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.order_ord_id_seq', 1, false);
+
+
+--
+-- Name: party_pty_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.party_pty_id_seq', 234485, true);
+
+
+--
+-- Name: party_type_pty_typ_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.party_type_pty_typ_id_seq', 3, true);
+
+
+--
+-- Name: price_prc_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.price_prc_id_seq', 2035088, true);
+
+
+--
+-- Name: price_type_prc_typ_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.price_type_prc_typ_id_seq', 3, true);
+
+
+--
+-- Name: product_attr_lcl_prd_lcl_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.product_attr_lcl_prd_lcl_id_seq', 233737, true);
+
+
+--
+-- Name: product_basic_prd_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.product_basic_prd_id_seq', 233731, true);
+
+
+--
+-- Name: product_category_prd_cat_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.product_category_prd_cat_id_seq', 2288, true);
+
+
+--
+-- Name: product_prd_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.product_prd_id_seq', 2031888, true);
+
+
+--
+-- Name: product_promotion_prd_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.product_promotion_prd_id_seq', 2031277, true);
+
+
+--
+-- Name: product_promotion_prm_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.product_promotion_prm_id_seq', 234468, true);
+
+
+--
+-- Name: product_rating_prd_rat_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.product_rating_prd_rat_id_seq', 121, true);
+
+
+--
+-- Name: product_shipping_attr_lcl_prd_lcl_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.product_shipping_attr_lcl_prd_lcl_id_seq', 2082, true);
+
+
+--
+-- Name: product_shipping_prd_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.product_shipping_prd_id_seq', 2031887, true);
+
+
+--
+-- Name: product_status_prd_sts_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.product_status_prd_sts_id_seq', 3, true);
+
+
+--
+-- Name: product_tag_prd_tag_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.product_tag_prd_tag_id_seq', 136, true);
+
+
+--
+-- Name: promotion_attr_lcl_prm_lcl_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.promotion_attr_lcl_prm_lcl_id_seq', 2030867, true);
+
+
+--
+-- Name: promotion_level_prm_lvl_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.promotion_level_prm_lvl_id_seq', 4, true);
+
+
+--
+-- Name: promotion_mechanic_prm_mec_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.promotion_mechanic_prm_mec_id_seq', 4, true);
+
+
+--
+-- Name: promotion_order_prm_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.promotion_order_prm_id_seq', 2030865, true);
+
+
+--
+-- Name: promotion_prm_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.promotion_prm_id_seq', 2030865, true);
+
+
+--
+-- Name: promotion_product_prm_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.promotion_product_prm_id_seq', 234468, true);
+
+
+--
+-- Name: promotion_type_prm_typ_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.promotion_type_prm_typ_id_seq', 3, true);
+
+
+--
+-- Name: rating_rat_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.rating_rat_id_seq', 6, true);
+
+
+--
+-- Name: role_rle_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.role_rle_id_seq', 234486, true);
+
+
+--
+-- Name: role_type_rle_typ_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.role_type_rle_typ_id_seq', 3, true);
+
+
+--
+-- Name: stock_on_hand_soh_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.stock_on_hand_soh_id_seq', 234430, true);
+
+
+--
+-- Name: supplier_rle_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mochi.supplier_rle_id_seq', 233057, true);
+
+
+--
+-- Name: supplier_sup_num_seq; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.supplier_sup_num_seq', 1000000002, true);
 
 
 --

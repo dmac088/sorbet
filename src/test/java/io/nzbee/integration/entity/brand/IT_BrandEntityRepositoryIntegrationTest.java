@@ -25,6 +25,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import io.nzbee.Constants;
+import io.nzbee.Globals;
 import io.nzbee.entity.StringCollectionWrapper;
 import io.nzbee.entity.brand.BrandEntity;
 import io.nzbee.entity.brand.IBrandService;
@@ -38,6 +39,9 @@ import io.nzbee.integration.entity.beans.brand.IBrandEntityBeanFactory;
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class IT_BrandEntityRepositoryIntegrationTest {
 
+	@Autowired
+	private Globals globals;
+	
 	@Autowired
 	private IBrandEntityBeanFactory brandEntityBeanFactory;
 
@@ -96,7 +100,7 @@ public class IT_BrandEntityRepositoryIntegrationTest {
 
 		// when
 		Optional<BrandFacetDTO> found = brandFacetService.findByCode(Constants.localeENGB,
-																	 Constants.primaryProductRootCategoryCode, 
+																	 globals.getDefaultProductRootCategoryCode(), 
 																	 "DRI01");
 
 		// then
@@ -109,7 +113,7 @@ public class IT_BrandEntityRepositoryIntegrationTest {
 
 		// when
 		Optional<BrandFacetDTO> found = brandFacetService.findByCode(Constants.localeZHHK,
-																	 Constants.primaryProductRootCategoryCode, 
+																	 globals.getDefaultProductRootCategoryCode(), 
 																	 "DRI01");
 
 		// then

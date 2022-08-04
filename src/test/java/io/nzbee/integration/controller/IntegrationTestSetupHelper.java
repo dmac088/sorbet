@@ -1,6 +1,6 @@
 package io.nzbee.integration.controller;
 
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 import io.nzbee.entity.product.ProductEntity;
 import java.sql.Connection;
@@ -14,6 +14,7 @@ import org.hibernate.search.jpa.Search;
 
 public class IntegrationTestSetupHelper {
 
+	private static final String dbScriptPath = "src/test/java/database";
 	private static boolean setUpDBIsDone = false;
 	private static boolean setUpIndexIsDone = false;
 
@@ -23,10 +24,12 @@ public class IntegrationTestSetupHelper {
 		}
 		System.out.println("setting up");
 		try (Connection con = database.getConnection()) {
-	    	ScriptUtils.executeSqlScript(con, new ClassPathResource("/database/mochi_schema.sql"));
-	    	ScriptUtils.executeSqlScript(con, new ClassPathResource("/database/security_schema.sql"));
-	    	ScriptUtils.executeSqlScript(con, new ClassPathResource("/database/mochi_data.sql"));
-	    	ScriptUtils.executeSqlScript(con, new ClassPathResource("/database/security_data.sql"));
+			
+		 	ScriptUtils.executeSqlScript(con, new FileSystemResource(dbScriptPath + "/mochi_schema.sql"));
+	    	ScriptUtils.executeSqlScript(con, new FileSystemResource(dbScriptPath + "/security_schema.sql"));
+	    	ScriptUtils.executeSqlScript(con, new FileSystemResource(dbScriptPath + "/mochi_data.sql"));
+	    	ScriptUtils.executeSqlScript(con, new FileSystemResource(dbScriptPath + "/security_data.sql"));
+	    	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

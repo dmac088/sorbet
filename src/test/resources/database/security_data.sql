@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.24
--- Dumped by pg_dump version 9.6.24
+-- Dumped from database version 14.1
+-- Dumped by pg_dump version 14.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -17,13 +17,6 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: authority_id_seq; Type: SEQUENCE SET; Schema: security; Owner: security_owner
---
-
-SELECT pg_catalog.setval('security.authority_id_seq', 1, false);
-
-
---
 -- Data for Name: clientdetails; Type: TABLE DATA; Schema: security; Owner: security_owner
 --
 
@@ -33,13 +26,6 @@ SELECT pg_catalog.setval('security.authority_id_seq', 1, false);
 -- Data for Name: device_metadata; Type: TABLE DATA; Schema: security; Owner: security_owner
 --
 
-
-
---
--- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: security; Owner: security_owner
---
-
-SELECT pg_catalog.setval('security.hibernate_sequence', 3, true);
 
 
 --
@@ -208,13 +194,6 @@ INSERT INTO security.role VALUES (1, 'Admin');
 
 
 --
--- Name: role_id_seq; Type: SEQUENCE SET; Schema: security; Owner: security_owner
---
-
-SELECT pg_catalog.setval('security.role_id_seq', 1, false);
-
-
---
 -- Data for Name: role_permission; Type: TABLE DATA; Schema: security; Owner: security_owner
 --
 
@@ -270,13 +249,6 @@ INSERT INTO security.role_permission VALUES (77, 2, 35);
 
 
 --
--- Name: role_permission_id_seq; Type: SEQUENCE SET; Schema: security; Owner: security_owner
---
-
-SELECT pg_catalog.setval('security.role_permission_id_seq', 77, true);
-
-
---
 -- Data for Name: user_role; Type: TABLE DATA; Schema: security; Owner: security_owner
 --
 
@@ -316,19 +288,47 @@ INSERT INTO security.user_role VALUES (257, 234485, 2);
 
 
 --
--- Name: user_role_id_seq; Type: SEQUENCE SET; Schema: security; Owner: security_owner
---
-
-SELECT pg_catalog.setval('security.user_role_id_seq', 257, true);
-
-
---
 -- Data for Name: verification_token; Type: TABLE DATA; Schema: security; Owner: security_owner
 --
 
 INSERT INTO security.verification_token VALUES (1, '2020-08-21 22:41:05.192', 'f70d05b5-0239-4901-9326-5fe401981474', 233054);
 INSERT INTO security.verification_token VALUES (2, '2020-12-03 12:06:31.233', 'f69065e6-212a-4d50-bd45-a45f9203a3cf', 234477);
 INSERT INTO security.verification_token VALUES (3, '2020-12-03 12:54:35.06', 'fa3e4d83-5c34-4a4c-8233-0448063190c8', 234482);
+
+
+--
+-- Name: authority_id_seq; Type: SEQUENCE SET; Schema: security; Owner: security_owner
+--
+
+SELECT pg_catalog.setval('security.authority_id_seq', 1, false);
+
+
+--
+-- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: security; Owner: security_owner
+--
+
+SELECT pg_catalog.setval('security.hibernate_sequence', 3, true);
+
+
+--
+-- Name: role_id_seq; Type: SEQUENCE SET; Schema: security; Owner: security_owner
+--
+
+SELECT pg_catalog.setval('security.role_id_seq', 1, false);
+
+
+--
+-- Name: role_permission_id_seq; Type: SEQUENCE SET; Schema: security; Owner: security_owner
+--
+
+SELECT pg_catalog.setval('security.role_permission_id_seq', 77, true);
+
+
+--
+-- Name: user_role_id_seq; Type: SEQUENCE SET; Schema: security; Owner: security_owner
+--
+
+SELECT pg_catalog.setval('security.user_role_id_seq', 257, true);
 
 
 --

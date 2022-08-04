@@ -23,6 +23,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import io.nzbee.Constants;
+import io.nzbee.Globals;
 import io.nzbee.entity.brand.view.facet.BrandFacetDTO;
 import io.nzbee.entity.brand.view.facet.IBrandFacetDTOService;
 import io.nzbee.util.brand.BrandMasterService;
@@ -33,6 +34,10 @@ import io.nzbee.util.brand.BrandMasterService;
 @ContextConfiguration(classes = {ConfigBrandEntityTests.class})
 public class IT_BrandUploadForUpdateIntegrationTest {
 
+	
+	@Autowired
+	private Globals globals;
+	
 	@Autowired
 	private BrandMasterService pms;
 
@@ -73,7 +78,7 @@ public class IT_BrandUploadForUpdateIntegrationTest {
 	@Rollback(false)
 	public void whenBrandUploadedForUpdate_thenReturnCorrectlyUpdatedBrand_ENGB() {
 		// when
-		Optional<BrandFacetDTO> found = brandFacetService.findByCode(Constants.localeENGB, Constants.primaryProductRootCategoryCode, "ENZ01");
+		Optional<BrandFacetDTO> found = brandFacetService.findByCode(Constants.localeENGB, globals.getDefaultProductRootCategoryCode(), "ENZ01");
 
 		// then
 		assertFound_ENGB(found);
@@ -83,7 +88,7 @@ public class IT_BrandUploadForUpdateIntegrationTest {
 	@Rollback(false)
 	public void whenBrandUploadedForUpdate_thenReturnCorrectlyUpdatedBrand_ZHHK() {
 		// when
-		Optional<BrandFacetDTO> found = brandFacetService.findByCode(Constants.localeZHHK, Constants.primaryProductRootCategoryCode, "ENZ01");
+		Optional<BrandFacetDTO> found = brandFacetService.findByCode(Constants.localeZHHK, globals.getDefaultProductRootCategoryCode(), "ENZ01");
 
 		// then
 		assertFound_ZHHK(found);

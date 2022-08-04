@@ -19,6 +19,7 @@ import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import io.nzbee.Constants;
+import io.nzbee.Globals;
 import io.nzbee.view.category.product.ProductCategoryView;
 import io.nzbee.view.ports.ICategoryViewPortService;
 
@@ -27,7 +28,8 @@ import io.nzbee.view.ports.ICategoryViewPortService;
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class IT_ProductCategoryViewServiceImplIntegrationTest {
 	
-	
+	@Autowired
+	private Globals globals;
 	
 	@Autowired
 	private ICategoryViewPortService categoryService;
@@ -59,7 +61,7 @@ public class IT_ProductCategoryViewServiceImplIntegrationTest {
 	public void whenFindAll_thenReturnAllCategories() {
 
 		// when
-		List<ProductCategoryView> found = categoryService.findAll(Constants.localeENGB, Constants.primaryProductRootCategoryCode);
+		List<ProductCategoryView> found = categoryService.findAll(Constants.localeENGB, globals.getDefaultProductRootCategoryCode());
 
 		// then
 		assertFound(found);

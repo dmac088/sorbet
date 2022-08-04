@@ -27,6 +27,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import io.nzbee.Constants;
+import io.nzbee.Globals;
 import io.nzbee.entity.product.ProductEntity;
 import io.nzbee.search.facet.IFacet;
 import io.nzbee.view.ports.IPhysicalProductLightPortService;
@@ -38,6 +39,12 @@ import io.nzbee.view.product.physical.light.PhysicalProductLightView;
 @ContextConfiguration(classes = {ConfigProductSearchEntityTests.class})
 public class IT_ProductEntitySearchIntegrationTest {
 
+	
+	private final String secondaryProductRootCategoryCode = "PRM05";
+	
+	@Autowired
+	private Globals globals;
+	
 	@Autowired
 	@Qualifier("mochiEntityManagerFactory")
 	private EntityManager entityManager;
@@ -99,7 +106,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 						pp = productService.search(
 							  "en-GB", 
 							  "HKD",
-							  Constants.primaryProductRootCategoryCode,
+							  globals.getDefaultProductRootCategoryCode(),
 							  0,
 							  10,
 							  "nameAsc",							 							
@@ -122,7 +129,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 						pp = productService.search(
 							  "zh-HK", 
 							  "HKD",
-							  Constants.primaryProductRootCategoryCode,
+							  globals.getDefaultProductRootCategoryCode(),
 							  0,
 							  10,
 							  "nameAsc",							 							
@@ -148,7 +155,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 						pp = productService.search(
 							  "en-GB", 
 							  "HKD",
-							  Constants.primaryProductRootCategoryCode,
+							  globals.getDefaultProductRootCategoryCode(),
 							  0,
 							  10, 
 							  "nameAsc",
@@ -172,7 +179,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 						pp = productService.search(
 							  "en-GB", 
 							  "HKD", 
-							  Constants.primaryProductRootCategoryCode,
+							  globals.getDefaultProductRootCategoryCode(),
 							  0,
 							  10,
 							  "nameAsc",							 							
@@ -196,7 +203,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 						pp = productService.search(
 							  "en-GB", 
 							  "HKD", 
-							  Constants.primaryProductRootCategoryCode,
+							  globals.getDefaultProductRootCategoryCode(),
 							  0,
 							  10, 
 							  "nameAsc",
@@ -220,7 +227,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 						pp = productService.search(
 							  "en-GB", 
 							  "HKD", 
-							  Constants.primaryProductRootCategoryCode,
+							  globals.getDefaultProductRootCategoryCode(),
 							  0,
 							  10,
 							  "nameAsc",							 							
@@ -244,7 +251,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 						pp = productService.search(
 							  "en-GB", 
 							  "HKD", 
-							  Constants.primaryProductRootCategoryCode,
+							  globals.getDefaultProductRootCategoryCode(),
 							  0,
 							  10,
 							  "nameAsc",							 							
@@ -268,7 +275,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 						pp = productService.search(
 							  "en-GB", 
 							  "HKD", 
-							  Constants.primaryProductRootCategoryCode,
+							  globals.getDefaultProductRootCategoryCode(),
 							  0,
 							  10,
 							  "nameAsc",							 							
@@ -292,7 +299,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 						pp = productService.search(
 							  "zh-HK", 
 							  "HKD", 
-							  Constants.primaryProductRootCategoryCode,
+							  globals.getDefaultProductRootCategoryCode(),
 							  0,
 							  10,
 							  "nameAsc",							 							
@@ -316,7 +323,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 						pp = productService.search(
 							  "zh-HK", 
 							  "HKD", 
-							  Constants.primaryProductRootCategoryCode,
+							  globals.getDefaultProductRootCategoryCode(),
 							  0,
 							  10,
 							  "nameAsc",							 							
@@ -340,7 +347,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 						pp = productService.search(
 							  "en-GB", 
 							  "HKD", 
-							  Constants.primaryProductRootCategoryCode,
+							  globals.getDefaultProductRootCategoryCode(),
 							  0,
 							  10,
 							  "nameAsc",							 							
@@ -364,7 +371,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 						pp = productService.search(
 							  "en-GB", 
 							  "HKD", 
-							  Constants.primaryProductRootCategoryCode,
+							  globals.getDefaultProductRootCategoryCode(),
 							  0,
 							  10,
 							  "nameAsc",							 							
@@ -388,7 +395,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 						pp = productService.search(
 							  "en-GB", 
 							  "HKD", 
-							  Constants.primaryProductRootCategoryCode,
+							  globals.getDefaultProductRootCategoryCode(),
 							  0,
 							  10,
 							  "nameAsc",							 							
@@ -412,7 +419,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 						pp = productService.search(
 							  "en-GB", 
 							  "HKD", 
-							  Constants.primaryProductRootCategoryCode,
+							  globals.getDefaultProductRootCategoryCode(),
 							  0,
 							  10,
 							  "nameAsc",							 							
@@ -436,7 +443,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 						pp = productService.search(
 							  "en-GB", 
 							  "HKD", 
-							  Constants.primaryProductRootCategoryCode,
+							  globals.getDefaultProductRootCategoryCode(),
 							  0,
 							  10, 
 							  "nameAsc",
@@ -460,7 +467,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 						pp = productService.search(
 							  "en-GB", 
 							  "HKD", 
-							  Constants.primaryProductRootCategoryCode,
+							  globals.getDefaultProductRootCategoryCode(),
 							  0,
 							  10,
 							  "nameAsc",							 							
@@ -486,7 +493,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 						pp = productService.search(
 							  "en-GB", 
 							  "HKD", 
-							  Constants.primaryProductRootCategoryCode,
+							  globals.getDefaultProductRootCategoryCode(),
 							  0,
 							  10, 
 							  "nameAsc",
@@ -510,7 +517,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		// when
 		productService.search( 	"en-GB", 
 								"HKD", 
-								Constants.primaryProductRootCategoryCode,
+								globals.getDefaultProductRootCategoryCode(),
 								0,
 								10, 
 								"nameAsc",
@@ -526,7 +533,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		Page<PhysicalProductLightView> pp = 
 		productService.search( 	"en-GB", 
 								"HKD", 
-								Constants.primaryProductRootCategoryCode,
+								globals.getDefaultProductRootCategoryCode(),
 								  0,
 								  10, 
 								  "nameAsc",
@@ -550,7 +557,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		Page<PhysicalProductLightView> pp = 
 		productService.search( 	"en-GB", 
 								"HKD", 
-								Constants.primaryProductRootCategoryCode,
+								globals.getDefaultProductRootCategoryCode(),
 								0,
 								10,
 								"nameAsc",
@@ -578,7 +585,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		pp = 
 		productService.search( 	"en-GB", 
 								"HKD", 
-								Constants.primaryProductRootCategoryCode,
+								globals.getDefaultProductRootCategoryCode(),
 								  0,
 								  10,
 								  "nameAsc",
@@ -601,7 +608,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 	public void whenEnterSearchTermKor_thenReturnCorrectSuggestions() {
 		
 		// when
-		String[] sp = productService.getSuggestion("kor", Constants.secondaryProductRootCategoryCode, Constants.localeENGB, Constants.currencyUSD);
+		String[] sp = productService.getSuggestion("kor", secondaryProductRootCategoryCode, Constants.localeENGB, Constants.currencyUSD);
 		
         // then
 		assertThat(sp.length)
@@ -613,7 +620,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 	public void whenEnterSearchTermPretty_thenReturnCorrectSuggestions() {
 		
 		// when
-		String[] sp = productService.getSuggestion("pretty", Constants.secondaryProductRootCategoryCode, Constants.localeENGB, Constants.currencyUSD);
+		String[] sp = productService.getSuggestion("pretty", secondaryProductRootCategoryCode, Constants.localeENGB, Constants.currencyUSD);
 		
         // then
 		assertThat(sp.length)
@@ -625,7 +632,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 	public void whenEnterSearchTermApple_thenReturnCorrectSuggestions() {
 		
 		// when
-		String[] sp = productService.getSuggestion("apple", Constants.primaryProductRootCategoryCode, Constants.localeENGB, Constants.currencyUSD);
+		String[] sp = productService.getSuggestion("apple", globals.getDefaultProductRootCategoryCode(), Constants.localeENGB, Constants.currencyUSD);
 		
 		System.out.println("results = " + String.join(",", sp));
         // then

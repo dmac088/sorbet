@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.24
--- Dumped by pg_dump version 9.6.24
+-- Dumped from database version 14.1
+-- Dumped by pg_dump version 14.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -3174,7 +3174,7 @@ ALTER TABLE mochi.accessories_attr_lcl_prd_lcl_id_seq OWNER TO postgres;
 
 SET default_tablespace = '';
 
-SET default_with_oids = false;
+SET default_table_access_method = heap;
 
 --
 -- Name: accessories_attr_lcl; Type: TABLE; Schema: mochi; Owner: mochidb_owner
