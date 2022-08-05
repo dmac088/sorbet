@@ -63,11 +63,8 @@ public class CategoryEntity implements Serializable {
 	@Column(name="cat_prnt_id")
 	private Long categoryParentId;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="cat_typ_id",
-				nullable = false,  
-				updatable = false, 
-				insertable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="cat_typ_id")
 	private CategoryTypeEntity categoryType;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional=false)
