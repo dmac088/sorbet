@@ -63,14 +63,14 @@ public class PhysicalProductEntityBeanFactory implements IPhysicalProductEntityB
 		ProductAttributeEntity paEng = new ProductAttributeEntity();
 		paEng.setProductDesc("test product");
 		paEng.setProductImage("testpath/");
-		paEng.setLclCd("en-GB");
+		paEng.setLclCd(Constants.localeENGB);
 		paEng.setProduct(product.getPhysicalProduct());
 		product.getPhysicalProduct().addProductAttribute(paEng);
 		
 		ProductAttributeEntity paCn = new ProductAttributeEntity();
 		paCn.setProductDesc("測試產品");
 		paEng.setProductImage("testpath/");
-		paCn.setLclCd("zh-HK");
+		paCn.setLclCd(Constants.localeZHHK);
 		paCn.setProduct(product.getPhysicalProduct());
 		product.getPhysicalProduct().addProductAttribute(paCn);
 

@@ -105,7 +105,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		// when
 		Page<PhysicalProductLightView> 
 						pp = productService.search(
-							  "en-GB", 
+							  Constants.localeENGB, 
 							  "HKD",
 							  globals.getDefaultProductRootCategoryCode(),
 							  0,
@@ -128,7 +128,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		// when
 		Page<PhysicalProductLightView> 
 						pp = productService.search(
-							  "zh-HK", 
+							  Constants.localeZHHK, 
 							  "HKD",
 							  globals.getDefaultProductRootCategoryCode(),
 							  0,
@@ -154,7 +154,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		// when
 		Page<PhysicalProductLightView> 
 						pp = productService.search(
-							  "en-GB", 
+							  Constants.localeENGB, 
 							  "HKD",
 							  globals.getDefaultProductRootCategoryCode(),
 							  0,
@@ -178,7 +178,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		// when
 		Page<PhysicalProductLightView> 
 						pp = productService.search(
-							  "en-GB", 
+							  Constants.localeENGB, 
 							  "HKD", 
 							  globals.getDefaultProductRootCategoryCode(),
 							  0,
@@ -202,7 +202,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		// when
 		Page<PhysicalProductLightView> 
 						pp = productService.search(
-							  "en-GB", 
+							  Constants.localeENGB, 
 							  "HKD", 
 							  globals.getDefaultProductRootCategoryCode(),
 							  0,
@@ -226,7 +226,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		// when
 		Page<PhysicalProductLightView> 
 						pp = productService.search(
-							  "en-GB", 
+							  Constants.localeENGB, 
 							  "HKD", 
 							  globals.getDefaultProductRootCategoryCode(),
 							  0,
@@ -250,7 +250,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		// when
 		Page<PhysicalProductLightView> 
 						pp = productService.search(
-							  "en-GB", 
+							  Constants.localeENGB, 
 							  "HKD", 
 							  globals.getDefaultProductRootCategoryCode(),
 							  0,
@@ -274,7 +274,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		// when
 		Page<PhysicalProductLightView> 
 						pp = productService.search(
-							  "en-GB", 
+							  Constants.localeENGB, 
 							  "HKD", 
 							  globals.getDefaultProductRootCategoryCode(),
 							  0,
@@ -298,7 +298,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		// when
 		Page<PhysicalProductLightView> 
 						pp = productService.search(
-							  "zh-HK", 
+							  Constants.localeZHHK, 
 							  "HKD", 
 							  globals.getDefaultProductRootCategoryCode(),
 							  0,
@@ -322,7 +322,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		// when
 		Page<PhysicalProductLightView> 
 						pp = productService.search(
-							  "zh-HK", 
+							  Constants.localeZHHK, 
 							  "HKD", 
 							  globals.getDefaultProductRootCategoryCode(),
 							  0,
@@ -346,7 +346,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		// when
 		Page<PhysicalProductLightView> 
 						pp = productService.search(
-							  "en-GB", 
+							  Constants.localeENGB, 
 							  "HKD", 
 							  globals.getDefaultProductRootCategoryCode(),
 							  0,
@@ -370,7 +370,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		// when
 		Page<PhysicalProductLightView> 
 						pp = productService.search(
-							  "en-GB", 
+							  Constants.localeENGB, 
 							  "HKD", 
 							  globals.getDefaultProductRootCategoryCode(),
 							  0,
@@ -394,7 +394,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		// when
 		Page<PhysicalProductLightView> 
 						pp = productService.search(
-							  "en-GB", 
+							  Constants.localeENGB, 
 							  "HKD", 
 							  globals.getDefaultProductRootCategoryCode(),
 							  0,
@@ -418,7 +418,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		// when
 		Page<PhysicalProductLightView> 
 						pp = productService.search(
-							  "en-GB", 
+							  Constants.localeENGB, 
 							  "HKD", 
 							  globals.getDefaultProductRootCategoryCode(),
 							  0,
@@ -442,7 +442,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		// when
 		Page<PhysicalProductLightView> 
 						pp = productService.search(
-							  "en-GB", 
+							  Constants.localeENGB, 
 							  "HKD", 
 							  globals.getDefaultProductRootCategoryCode(),
 							  0,
@@ -466,7 +466,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		// when
 		Page<PhysicalProductLightView> 
 						pp = productService.search(
-							  "en-GB", 
+							  Constants.localeENGB, 
 							  "HKD", 
 							  globals.getDefaultProductRootCategoryCode(),
 							  0,
@@ -492,7 +492,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		// when
 		Page<PhysicalProductLightView> 
 						pp = productService.search(
-							  "en-GB", 
+							  Constants.localeENGB, 
 							  "HKD", 
 							  globals.getDefaultProductRootCategoryCode(),
 							  0,
@@ -516,7 +516,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		returnFacets.clear();
 		
 		// when
-		productService.search( 	"en-GB", 
+		productService.search( 	Constants.localeENGB, 
 								"HKD", 
 								globals.getDefaultProductRootCategoryCode(),
 								0,
@@ -532,7 +532,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		returnFacets.clear();
 		
 		Page<PhysicalProductLightView> pp = 
-		productService.search( 	"en-GB", 
+		productService.search( 	Constants.localeENGB, 
 								"HKD", 
 								globals.getDefaultProductRootCategoryCode(),
 								  0,
@@ -556,7 +556,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 
 		// when
 		Page<PhysicalProductLightView> pp = 
-		productService.search( 	"en-GB", 
+		productService.search( 	Constants.localeENGB, 
 								"HKD", 
 								globals.getDefaultProductRootCategoryCode(),
 								0,
@@ -584,7 +584,7 @@ public class IT_ProductEntitySearchIntegrationTest {
 		returnFacets.clear();
 		
 		pp = 
-		productService.search( 	"en-GB", 
+		productService.search( 	Constants.localeENGB, 
 								"HKD", 
 								globals.getDefaultProductRootCategoryCode(),
 								  0,

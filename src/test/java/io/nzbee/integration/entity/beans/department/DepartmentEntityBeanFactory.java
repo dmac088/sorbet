@@ -2,6 +2,8 @@ package io.nzbee.integration.entity.beans.department;
 
 
 import org.springframework.stereotype.Service;
+
+import io.nzbee.Constants;
 import io.nzbee.entity.product.department.DepartmentEntity;
 import io.nzbee.entity.product.department.attribute.DepartmentAttribute;
 
@@ -16,7 +18,7 @@ public class DepartmentEntityBeanFactory implements IDepartmentEntityBeanFactory
 		DepartmentAttribute da = new DepartmentAttribute();
 		
 		da.setDesc("test department");
-		da.setLclCd("en-GB");
+		da.setLclCd(Constants.localeENGB);
 	
 		dept.setDepartmentCode("TST01");
 		dept.getAttributes().add(da);
