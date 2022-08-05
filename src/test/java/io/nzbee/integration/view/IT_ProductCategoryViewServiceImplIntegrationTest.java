@@ -21,13 +21,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import io.nzbee.Constants;
 import io.nzbee.Globals;
+import io.nzbee.integration.view.bag.ConfigBagViewTests;
 import io.nzbee.view.category.product.ProductCategoryView;
 import io.nzbee.view.ports.ICategoryViewPortService;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-@ContextConfiguration(classes = ConfigViewTests.class)
+@ContextConfiguration(classes = ConfigBagViewTests.class)
 public class IT_ProductCategoryViewServiceImplIntegrationTest {
 	
 	@Autowired

@@ -18,22 +18,22 @@ import io.nzbee.integration.entity.party.ConfigPartyEntityTests;
 public class ConfigPartyAddressEntityTests {
 	
 	@Bean
-	public IPartyAddressViewService partyAddressService() {
+	IPartyAddressViewService partyAddressService() {
 		return new PartyAddressViewServiceImpl();
 	}
 	
 	@Bean
-	public IPartyAddressEntityBeanFactory partyAddressEntityBeanFactory() {
+	IPartyAddressEntityBeanFactory partyAddressEntityBeanFactory() {
 		return new PartyAddressEntityBeanFactory();
 	}
 	
 	@Bean 
-	public IAddressTypeService addressTypeService() {
+	IAddressTypeService addressTypeService() {
 		return new AddressTypeServiceImpl();
 	}
 
 	@Bean 
-	public IPartyAddressEntityService partyAddressEntityService() {
+	IPartyAddressEntityService partyAddressEntityService() {
 		return new PartyAddressEntityServiceImpl();
 	}
 }

@@ -4,6 +4,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.core.userdetails.UserDetailsService;
+
+import io.nzbee.entity.party.IPartyDao;
+import io.nzbee.entity.party.IPartyService;
+import io.nzbee.entity.party.PartyDaoImpl;
+import io.nzbee.entity.party.PartyServiceImpl;
 import io.nzbee.entity.party.person.IPersonService;
 import io.nzbee.entity.party.person.PersonServiceImpl;
 import io.nzbee.entity.role.IRoleTypeService;
@@ -22,27 +27,37 @@ import io.nzbee.security.user.role.UserRoleServiceImpl;
 public class ConfigPartyEntityTests {
 	
 	@Bean
-	public IPersonService personService() {
+	IPartyDao partyDao() {
+		return new PartyDaoImpl();
+	}
+	
+	@Bean 
+	IPartyService partyService() {
+		return new PartyServiceImpl();
+	}
+	
+	@Bean
+	IPersonService personService() {
 		return new PersonServiceImpl();
 	}
 	
 	@Bean
-	public IPartyEntityBeanFactory partyEntityBeanFactory() {
+	IPartyEntityBeanFactory partyEntityBeanFactory() {
 		return new PartyEntityBeanFactory();
 	}
 	
 	@Bean
-	public IUserRoleService userRoleService() {
+	IUserRoleService userRoleService() {
 		return new UserRoleServiceImpl();
 	}
 	
 	@Bean
-	public IRoleTypeService roleTypeService() {
+	IRoleTypeService roleTypeService() {
 		return new RoleTypeServiceImpl();
 	}
 	
 	@Bean 
-	public UserDetailsService userDetailsService() {
+	UserDetailsService userDetailsService() {
 		return new UserService();
 	}
 }
