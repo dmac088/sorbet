@@ -35,7 +35,7 @@ import io.nzbee.Constants;
 import io.nzbee.entity.category.attribute.CategoryAttributeEntity;
 import io.nzbee.entity.category.brand.CategoryBrandEntity;
 import io.nzbee.entity.category.product.CategoryProductEntity;
-import io.nzbee.entity.category.type.CategoryType;
+import io.nzbee.entity.category.type.CategoryTypeEntity;
 import io.nzbee.entity.promotion.product.PromotionProductEntity;
 
 @Entity
@@ -68,7 +68,7 @@ public class CategoryEntity implements Serializable {
 				nullable = false,  
 				updatable = false, 
 				insertable = false)
-	private CategoryType categoryType;
+	private CategoryTypeEntity categoryType;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional=false)
 	@JoinColumn(name="cat_prnt_id", nullable=false, insertable = false, updatable = false)
@@ -211,11 +211,11 @@ public class CategoryEntity implements Serializable {
 		this.categoryCode = categoryCode;
 	}
 		
-	public CategoryType getCategoryType() {
+	public CategoryTypeEntity getCategoryType() {
 		return categoryType;
 	}
 
-	public void setCategoryType(CategoryType categoryType) {
+	public void setCategoryType(CategoryTypeEntity categoryType) {
 		this.categoryType = categoryType;
 	}
 

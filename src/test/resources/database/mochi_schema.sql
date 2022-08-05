@@ -3519,7 +3519,7 @@ ALTER TABLE mochi.category_cat_id_seq OWNER TO mochidb_owner;
 CREATE TABLE mochi.category (
     cat_id bigint DEFAULT nextval('mochi.category_cat_id_seq'::regclass) NOT NULL,
     cat_cd character(5) NOT NULL,
-    cat_typ_id bigint,
+    cat_typ_id bigint NOT NULL,
     cat_lvl bigint,
     cat_prnt_cd character(5),
     cat_prnt_id bigint

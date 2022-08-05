@@ -5,12 +5,12 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ICategoryTypeRepository extends JpaRepository<CategoryType, Long> {
+public interface ICategoryTypeRepository extends JpaRepository<CategoryTypeEntity, Long> {
 	
-	List<CategoryType> findAll(); 
+	List<CategoryTypeEntity> findAll(); 
 	 
-	Optional<CategoryType> findByCategoryTypeId(Long id);
+	Optional<CategoryTypeEntity> findByCategoryTypeId(Long id);
 	
-	Optional<CategoryType> findByCategoryTypeCode(String code);
+	Optional<CategoryTypeEntity> findByCategoryTypeCode(String code);
 }
 
