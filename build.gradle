@@ -111,6 +111,13 @@ test {
     systemProperty 'spring.profiles.active', 'dev'
 }
 
+bootRun {
+    systemProperty 'spring.profiles.active', 'dev'
+    environment 'RESOURCEPATH', '/Users/danielmackie/projects/sorbet' 
+}
+
+
+
 publishing {
     publications {
         maven(MavenPublication) {
