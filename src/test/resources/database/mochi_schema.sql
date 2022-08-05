@@ -3214,7 +3214,7 @@ CREATE TABLE mochi.address (
     addr_ln_1 character varying(100),
     addr_ln_2 character varying(100),
     addr_ln_3 character varying(100),
-    addr_cnty character varying(100) NOT NULL,
+    addr_cnty character varying(100),
     addr_pst_cd character varying(10),
     addr_typ_id bigint NOT NULL,
     pty_id bigint

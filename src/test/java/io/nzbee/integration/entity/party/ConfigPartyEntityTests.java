@@ -11,6 +11,8 @@ import io.nzbee.entity.party.PartyDaoImpl;
 import io.nzbee.entity.party.PartyServiceImpl;
 import io.nzbee.entity.party.person.IPersonService;
 import io.nzbee.entity.party.person.PersonServiceImpl;
+import io.nzbee.entity.party.type.IPartyTypeService;
+import io.nzbee.entity.party.type.PartyTypeServiceImpl;
 import io.nzbee.entity.role.IRoleTypeService;
 import io.nzbee.entity.role.RoleTypeServiceImpl;
 import io.nzbee.integration.entity.ConfigEntityTests;
@@ -59,5 +61,10 @@ public class ConfigPartyEntityTests {
 	@Bean 
 	UserDetailsService userDetailsService() {
 		return new UserService();
+	}
+	
+	@Bean
+	IPartyTypeService partyTypeService() {
+		return new PartyTypeServiceImpl();
 	}
 }
