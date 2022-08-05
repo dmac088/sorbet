@@ -37,78 +37,78 @@ import io.nzbee.view.ports.IPhysicalProductLightPortService;
 public class ConfigProductSearchEntityTests {
 	
 	@Bean
-	public IPhysicalProductLightPortService physicalProductLightPortService() {
+	IPhysicalProductLightPortService physicalProductLightPortService() {
 		return new PhysicalProductLightAdapterImpl();
 	}
 	
 	@Bean
-	public IPhysicalProductLightDTOService physicalProductLightService() {
+	IPhysicalProductLightDTOService physicalProductLightService() {
 		return new PhysicalProductLightDTOServiceImpl();
 	}
 	
 	@Bean
-	public IPhysicalProductLightDao physicalProductLightDao() {
+	IPhysicalProductLightDao physicalProductLightDao() {
 		return new PhysicalProductLightDaoImpl();
 	}
 	
 	@Bean 
-	public IPhysicalProductLightMapper physicalProductLightMapper() {
+	IPhysicalProductLightMapper physicalProductLightMapper() {
 		return new PhysicalProductLightMapperImpl();
 	}
 	
 	@Bean
-	public ISearchService searchService() {
+	ISearchService searchService() {
 		return new SearchServiceImpl();
 	}
 	
 	@Bean
-	public IFacetServices facetServices() {
+	IFacetServices facetServices() {
 		return new FacetServicesImpl();
 	}
 	
 	@Bean
-	public List<IFacetService> facets() {
+	List<IFacetService> facets() {
 		return new ArrayList<IFacetService>();
 	}
 	
 	@Bean
-	public IFacetService tagFacetService() {
+	IFacetService tagFacetService() {
 		return new TagFacetDTOServiceImpl();
 	}
 	
 	@Bean
-	public ITagFacetDao tagFacetDao() {
+	ITagFacetDao tagFacetDao() {
 		return new TagFacetDTOPostgresDaoImpl();
 	}
 	
 	@Bean
-	public IFacetService categoryFacetService() {
+	IFacetService categoryFacetService() {
 		return new ProductCategoryFacetDTOServiceImpl();
 	}
 	
 	@Bean
-	public IFacetService brandFacetService() {
+	IFacetService brandFacetService() {
 		return new BrandFacetDTOServiceImpl();
 	}
 	
 	@Bean 
-	public PhysicalProductEntityBeanFactory productEntityBeanFactory() {
+	PhysicalProductEntityBeanFactory productEntityBeanFactory() {
 		return new PhysicalProductEntityBeanFactory();
 	}
 
 	
 	@Bean
-	public IDepartmentDao departmentDao() {
+	IDepartmentDao departmentDao() {
 		return new DepartmentDaoImpl();
 	}
 	
 	@Bean
-	public IPromotionDao promotionDao() {
+	IPromotionDao promotionDao() {
 		return new PromotionDaoPostgresImpl();
 	}
 	
 	@Bean
-	public ITagDao tagDao() {
+	ITagDao tagDao() {
 		return new TagDaoPostgresImpl();
 	}
 	
