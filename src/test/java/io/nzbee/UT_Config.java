@@ -14,32 +14,32 @@ import io.nzbee.unit.domain.beans.promotion.PromotionDoBeanFactory;
 public class UT_Config {
 
 	@Bean 
-    public RestTemplate unitTestTemplate() {
+    RestTemplate unitTestTemplate() {
 		return new RestTemplate();
     }
 	
 	@Bean
-	public CustomerDoBeanFactory customerDoBeanFactory() {
+	CustomerDoBeanFactory customerDoBeanFactory() {
 		return new CustomerDoBeanFactory();
 	}
 	
 	@Bean
-	public PromotionDoBeanFactory PromotionDoBeanFactory() {
+	PromotionDoBeanFactory PromotionDoBeanFactory() {
 		return new PromotionDoBeanFactory();
 	}
 	
 	@Bean 
-	public KieServices kieServices() {
+	KieServices kieServices() {
 		return KieServices.Factory.get();
 	}
 	
 	@Bean 
-	public BagItemConfiguration bagItemConfiguration() {
+	BagItemConfiguration bagItemConfiguration() {
 		return new BagItemConfiguration();
 	}
 	
 	@Bean 
-	public KieContainer kieConfiguration() {
+	KieContainer kieConfiguration() {
 		return bagItemConfiguration().kieContainer();
 	}
 	

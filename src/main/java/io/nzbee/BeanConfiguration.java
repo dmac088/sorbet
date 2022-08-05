@@ -39,6 +39,8 @@ import io.nzbee.entity.brand.view.facet.BrandFacetDTOMapperImpl;
 import io.nzbee.entity.brand.view.facet.BrandFacetDTOServiceImpl;
 import io.nzbee.entity.brand.view.facet.IBrandFacetDTOMapper;
 import io.nzbee.entity.brand.view.facet.IBrandFacetDTOService;
+import io.nzbee.entity.category.type.CategoryTypeServiceImpl;
+import io.nzbee.entity.category.type.ICategoryTypeService;
 import io.nzbee.entity.party.person.CustomerViewMapperImpl;
 import io.nzbee.entity.party.person.ICustomerViewMapper;
 import io.nzbee.entity.product.physical.full.IPhysicalProductFullViewMapper;
@@ -92,6 +94,11 @@ import io.nzbee.view.product.tag.facet.TagFacetViewServiceImpl;
 
 @Configuration
 class BeanConfiguration {
+	
+	@Bean
+	ICategoryTypeService categoryTypeService() {
+		return new CategoryTypeServiceImpl();
+	}
 	
 	@Bean
 	IRegularBagItemDomainService regularBagItemDomainService() {

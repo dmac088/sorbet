@@ -11,6 +11,8 @@ import io.nzbee.entity.category.product.view.facet.IProductCategoryFacetDTODao;
 import io.nzbee.entity.category.product.view.facet.IProductCategoryFacetDTOService;
 import io.nzbee.entity.category.product.view.facet.ProductCategoryFacetDTODaoImpl;
 import io.nzbee.entity.category.product.view.facet.ProductCategoryFacetDTOServiceImpl;
+import io.nzbee.entity.category.type.CategoryTypeServiceImpl;
+import io.nzbee.entity.category.type.ICategoryTypeService;
 import io.nzbee.integration.entity.ConfigEntityTests;
 import io.nzbee.util.category.CategoryMasterService;
 
@@ -19,27 +21,32 @@ import io.nzbee.util.category.CategoryMasterService;
 public class ConfigCategoryEntityTests {
 	
 	@Bean
-	public CategoryMasterService categoryMasterService() {
+	ICategoryTypeService CategoryTypeService() {
+		return new CategoryTypeServiceImpl();
+	}
+	
+	@Bean
+	CategoryMasterService categoryMasterService() {
 		return new CategoryMasterService();
 	}
 	
 	@Bean
-	public ICategoryService categoryService() {
+	ICategoryService categoryService() {
 		return new CategoryServiceImpl();
 	}
 		
 	@Bean 
-	public IProductCategoryFacetDTOService productCategoryFacetDTOService() {
+	IProductCategoryFacetDTOService productCategoryFacetDTOService() {
 		return new ProductCategoryFacetDTOServiceImpl();
 	}
 	
 	@Bean
-	public IProductCategoryFacetDTODao productCategoryFacetDTODao() {
+	IProductCategoryFacetDTODao productCategoryFacetDTODao() {
 		return new ProductCategoryFacetDTODaoImpl();
 	}
 	
 	@Bean
-	public ICategoryProductService categoryProductService() {
+	ICategoryProductService categoryProductService() {
 		return new CategoryProductServiceImpl();
 	}
 }

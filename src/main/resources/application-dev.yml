@@ -53,7 +53,7 @@ spring:
     
 app:
   globals:
-    defaultProductRootCategoryCode: PRM02
+    defaultProductRootCategoryCode: PRM01
         
 server:
   port: 8080
