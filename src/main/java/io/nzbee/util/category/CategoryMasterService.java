@@ -58,9 +58,11 @@ public class CategoryMasterService {
 				if (!(c.getCategoryParentCode() == null)) {
 					Optional<io.nzbee.entity.category.CategoryEntity> opc = categoryService
 							.findByCode(c.getCategoryParentCode());
-					CategoryEntity pc = opc.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.categoryNotFound,
+					if (opc.isPresent()) {
+						CategoryEntity pc = opc.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.categoryNotFound,
 							Constants.localeENGB, c.getCategoryParentCode()));
-					c.setCategoryParentId(pc.getCategoryId());
+						c.setCategoryParentId(pc.getCategoryId());
+					}
 					categoryService.save(c);
 				}
 			});
