@@ -19,6 +19,7 @@ import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import io.nzbee.Constants;
@@ -30,6 +31,7 @@ import io.nzbee.view.ports.ICustomerPortService;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
+@ContextConfiguration(classes = ConfigViewTests.class)
 public class IT_CustomerDoServiceImplIntegrationTest {
 
 	@Autowired

@@ -75,7 +75,8 @@ public class IT_ProductCacheIntegrationTest {
    	public void setUp() {
        	if (setUpIsDone) {
                return;
-           }
+        }
+       	
        	try (Connection con = database.getConnection()) {
                ScriptUtils.executeSqlScript(con, new FileSystemResource(Constants.testDbScriptPath + "/mochi_schema.sql"));
                ScriptUtils.executeSqlScript(con, new FileSystemResource(Constants.testDbScriptPath + "/mochi_data.sql"));

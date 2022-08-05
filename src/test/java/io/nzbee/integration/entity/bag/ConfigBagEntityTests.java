@@ -25,32 +25,32 @@ import io.nzbee.integration.entity.product.ConfigProductEntityTests;
 public class ConfigBagEntityTests {
 	
 	@Bean
-	public IBagEntityBeanFactory bagEntityBeanFactory() {
+	IBagEntityBeanFactory bagEntityBeanFactory() {
 		return new BagEntityBeanFactory();
 	}
 	
 	@Bean
-	public IBagItemService bagItemService() {
+	IBagItemService bagItemService() {
 		return new BagItemEntityServiceImpl();
 	}
 	
 	@Bean 
-	public IBagItemStatusService bagItemStatusService() {
+	IBagItemStatusService bagItemStatusService() {
 		return new BagItemStatusServiceImpl();
 	}
 	
 	@Bean
-	public IBagViewDTOService bagViewDTOService() {
+	IBagViewDTOService bagViewDTOService() {
 		return new BagViewDTOServiceImpl();
 	}
 	
 	@Bean 
-	public IBagViewDTODao bagViewDTODao() {
+	IBagViewDTODao bagViewDTODao() {
 		return new BagViewDTODaoPostgresImpl();
 	}
 	
 	@Bean
-	public IBagEntityService bagEntityService() {
+	IBagEntityService bagEntityService() {
 		return new BagEntityServiceImpl();
 	}
 }
