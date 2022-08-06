@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 //import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 import io.nzbee.security.user.IUserService;
@@ -25,13 +26,11 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
     @Autowired
     private MessageSource messages;
 
-//    @Autowired
-//    private JavaMailSender mailSender;
+    @Autowired
+    private JavaMailSender mailSender;
 
     @Autowired
     private Environment env;
-
-    // API
 
     @Override
     public void onApplicationEvent(final OnRegistrationCompleteEvent event) {
@@ -48,7 +47,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         final SimpleMailMessage email = constructEmailMessage(event, event.getCustomer().getUserName(), token);
         LOGGER.debug("sending email with message: {}", email);
         
-      //  mailSender.send(email);
+        mailSender.send(email);
     }
 
 

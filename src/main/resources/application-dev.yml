@@ -1,5 +1,21 @@
 spring:
 
+  mail:
+    host: 127.0.0.1
+    password: ${SMTPPassword}
+    port: 1025
+    properties:
+        mail:
+            smtps:
+                auth: true
+                starttls:
+                    enable: false
+                timeout: 8000
+            transport:
+                protocol: smtps
+    protocol: smtps
+    username: dmac088@proton.me
+
   output:
     ansi:
       enabled: ALWAYS
@@ -63,5 +79,6 @@ server:
     key-store-password: password
     key-alias: mochi
     
-    
+support:
+    email: dan@sv2.io
 

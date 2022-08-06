@@ -93,7 +93,6 @@ app:
     defaultPage: 0
     defaultPageSize: 10
     defaultProductRootCategoryCode: PRM02
-    
 
 support:
     email: admin@littlebagshop.com
