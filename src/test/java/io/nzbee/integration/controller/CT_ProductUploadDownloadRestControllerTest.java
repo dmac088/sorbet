@@ -28,6 +28,7 @@ import io.nzbee.entity.adapters.view.PhysicalProductFullAdapterImpl;
 import io.nzbee.entity.brand.BrandServiceImpl;
 import io.nzbee.entity.category.CategoryServiceImpl;
 import io.nzbee.entity.category.product.CategoryProductServiceImpl;
+import io.nzbee.entity.category.type.CategoryTypeServiceImpl;
 import io.nzbee.entity.inventory.InventoryTransactionServiceImpl;
 import io.nzbee.entity.inventory.location.InventoryLocationServiceImpl;
 import io.nzbee.entity.inventory.type.InventoryTypeServiceImpl;
@@ -120,7 +121,8 @@ import io.nzbee.util.tag.TagMasterService;
 							     StockOnHandServiceImpl.class,
 							     InventoryLocationMasterService.class,
 							     CustomControllerAdvice.class,
-							     PhysicalProductMasterAdapter.class
+							     PhysicalProductMasterAdapter.class,
+							     CategoryTypeServiceImpl.class
 							     })
 @WebMvcTest(FileController.class)
 public class CT_ProductUploadDownloadRestControllerTest {

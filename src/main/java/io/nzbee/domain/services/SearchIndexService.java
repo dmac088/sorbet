@@ -27,7 +27,5 @@ public class SearchIndexService {
 		.cacheMode(CacheMode.NORMAL)
 		.progressMonitor(new SimpleIndexingProgressMonitor()) // a MassIndexerProgressMonitor implementation
 		.start();
-		fullTextEntityManager.close();
-		
 	}
 }

@@ -78,8 +78,6 @@ public class IT_ProductEntitySearchIntegrationTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
-    	entityManager.close();
 		
     	try {
 			fullTextEntityManager

@@ -165,8 +165,4 @@ public class IT_PartyAddressEntityRepositoryIntegrationTest {
     	assertThat(found.get().getPerson().getUserName()).isEqualTo("bob@bob");
     }
     
-    @After
-    public void closeConnection() {
-    	entityManager.close();
-    }
 }
