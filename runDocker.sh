@@ -1,5 +1,5 @@
 docker run -d -e STRIPE_SECRET_KEY=testkey \
-           -e APP_GLOBALS_BASEURL=littlebagshop.com:8090 \
+           -e APP_GLOBALS_BEURL=littlebagshop.com:8090 \
            -e SPRING_PROFILES_ACTIVE=prd \
            --name my-spring-container  \
 	   -p 8090:8090 \

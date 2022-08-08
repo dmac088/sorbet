@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.nzbee.Globals;
 import io.nzbee.domain.services.GenericResponse;
 import io.nzbee.resources.customer.CustomerResource;
 import io.nzbee.resources.customer.CustomerResourceAssembler;
@@ -35,6 +37,9 @@ import io.nzbee.view.ports.ICustomerAddressPortService;
 public class CustomerController {
 	
     private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+    
+    @Autowired 
+    private Globals globals;
     
     @Autowired
     private ICustomerViewService customerViewService;
@@ -67,7 +72,9 @@ public class CustomerController {
         
         customerViewService.registerNewCustomer(customer, getClientIP(request), getAppUrl(request), locale);
         
-        eventPublisher.publishEvent(new OnRegistrationCompleteEvent(customer, request.getLocale(), getAppUrl(request)));
+        String redirect = globals.getFeURL() + request.getRequestURI();
+        
+        eventPublisher.publishEvent(new OnRegistrationCompleteEvent(customer, request.getLocale(), redirect));
         
         return new GenericResponse("success");
     }

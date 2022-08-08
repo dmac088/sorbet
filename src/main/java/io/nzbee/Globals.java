@@ -5,7 +5,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("app.globals")
 public class Globals {
 
-	private String baseURL;
+	//back end url
+	private String beURL;
+	
+	//front end url
+	private String feURL;
 	private String imagePath;
 	private String indexPath;
 	private String retailPriceCode;
@@ -17,12 +21,21 @@ public class Globals {
 	private int defaultPage;
 	private int defaultPageSize;
 
-	public String getBaseURL() {
-		return baseURL;
+
+	public String getBeURL() {
+		return beURL;
 	}
 
-	public void setBaseURL(String baseURL) {
-		this.baseURL = baseURL;
+	public void setBeURL(String beURL) {
+		this.beURL = beURL;
+	}
+
+	public String getFeURL() {
+		return feURL;
+	}
+
+	public void setFeURL(String feURL) {
+		this.feURL = feURL;
 	}
 
 	public String getRetailPriceCode() {

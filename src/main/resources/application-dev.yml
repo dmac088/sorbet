@@ -70,6 +70,8 @@ spring:
 app:
   globals:
     defaultProductRootCategoryCode: PRM01
+    beURL: https://localhost:8080
+    feURL: https://localhost:3000
         
 server:
   port: 8080

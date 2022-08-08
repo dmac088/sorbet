@@ -87,7 +87,8 @@ server:
 
 app:
   globals:
-    baseURL: https://app.sv2.io:8090
+    beURL: https://app.sv2.io:8090
+    feURL: https://app.sv2.io
     imagePath: ${RESOURCEPATH}/images/
     indexPath: ${RESOURCEPATH}/lucene/indexes
     defaultPage: 0
