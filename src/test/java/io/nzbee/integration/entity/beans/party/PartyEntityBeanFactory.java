@@ -1,12 +1,9 @@
 package io.nzbee.integration.entity.beans.party;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
-
 import io.nzbee.entity.party.Party;
 import io.nzbee.entity.party.person.PersonEntity;
 import io.nzbee.entity.party.type.IPartyTypeRepository;
@@ -61,7 +58,7 @@ public class PartyEntityBeanFactory implements IPartyEntityBeanFactory {
 		Optional<RoleTypeEntity> rtype = roleTypeService.findByRoleTypeId(new Long(1));
 		re.setRoleType(rtype.get());
 		
-		re.setRoleStart(new Date());
+		re.setRoleStart(LocalDateTime.now());
 		partyRole.setCustomerNumber("9832145731");
 		
 		person.getPersonParty().addRole(re);

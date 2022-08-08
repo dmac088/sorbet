@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 14.1
+-- Dumped from database version 14.4
 -- Dumped by pg_dump version 14.4
 
 SET statement_timeout = 0;
@@ -10174,6 +10174,13 @@ SELECT pg_catalog.setval('mochi.discount_dis_id_seq', 1, false);
 --
 
 SELECT pg_catalog.setval('mochi.discount_type_dis_typ_id_seq', 3, true);
+
+
+--
+-- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: mochi; Owner: mochidb_owner
+--
+
+SELECT pg_catalog.setval('mochi.hibernate_sequence', 1, false);
 
 
 --

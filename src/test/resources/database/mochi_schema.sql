@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 14.1
+-- Dumped from database version 14.4
 -- Dumped by pg_dump version 14.4
 
 SET statement_timeout = 0;
@@ -246,6 +246,7 @@ DROP TABLE mochi.inventory_transaction;
 DROP SEQUENCE mochi.inventory_transaction_inv_trx_id_seq;
 DROP TABLE mochi.inventory_location;
 DROP SEQUENCE mochi.inventory_location_inv_loc_id_seq;
+DROP SEQUENCE mochi.hibernate_sequence;
 DROP TABLE mochi.discount_type;
 DROP SEQUENCE mochi.discount_type_dis_typ_id_seq;
 DROP TABLE mochi.discount;
@@ -3850,6 +3851,20 @@ CREATE TABLE mochi.discount_type (
 ALTER TABLE mochi.discount_type OWNER TO mochidb_owner;
 
 --
+-- Name: hibernate_sequence; Type: SEQUENCE; Schema: mochi; Owner: mochidb_owner
+--
+
+CREATE SEQUENCE mochi.hibernate_sequence
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE mochi.hibernate_sequence OWNER TO mochidb_owner;
+
+--
 -- Name: inventory_location_inv_loc_id_seq; Type: SEQUENCE; Schema: mochi; Owner: postgres
 --
 
@@ -6510,6 +6525,13 @@ GRANT ALL ON SEQUENCE mochi.discount_type_dis_typ_id_seq TO mochidb_owner;
 --
 
 GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE mochi.discount_type TO mochi_app;
+
+
+--
+-- Name: SEQUENCE hibernate_sequence; Type: ACL; Schema: mochi; Owner: mochidb_owner
+--
+
+GRANT ALL ON SEQUENCE mochi.hibernate_sequence TO mochi_app;
 
 
 --

@@ -82,6 +82,10 @@ public class CT_CustomerControllerIntegrationTest {
 
 	@Autowired
 	private WebApplicationContext webApplicationContext;
+	
+	private String TEST_NEW_USERNAME = "test01@test01";
+	private String TEST_NEW_PASSWORD = "test01";
+			
 
 	@Before
 	public void setUp() throws Exception {
@@ -102,8 +106,8 @@ public class CT_CustomerControllerIntegrationTest {
 
 	@Test
 	public void testWhenRegistrationIsSuccessfulThenRegistrationConfirmationIsSuccess() throws Exception {
-		String accessToken = ConfigControllerTest.obtainAccessToken(ConfigControllerTest.TEST_USERNAME,
-				ConfigControllerTest.TEST_PASSWORD, webApplicationContext);
+		String accessToken = ConfigControllerTest.obtainAccessToken(TEST_NEW_USERNAME,
+				TEST_NEW_PASSWORD, webApplicationContext);
 
 		System.out.println("token = " + accessToken);
 		
@@ -212,8 +216,8 @@ public class CT_CustomerControllerIntegrationTest {
 		mockMvc.perform(post("/api/Customer/Signup").with(csrf()).contentType(MediaType.APPLICATION_JSON)
 				.characterEncoding("utf-8")
 				.content("{"+ "\"givenName\": \"Daniel\","
-						+ "\"familyName\": \"Mackie\"," + "\"userName\": \"dmac1124\"," + "\"password\": \"1234567\","
-						+ "\"confirmPassword\": \"1234567\"	"
+						+ "\"familyName\": \"Mackie\"," + "\"userName\": \"" + TEST_NEW_USERNAME + "\"," + "\"password\": \"" + TEST_NEW_PASSWORD + "\","
+						+ "\"confirmPassword\": \"" + TEST_NEW_PASSWORD + "\"	"
 						+ "}")
 				.accept(MediaType.ALL)).andDo(print()).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON));

@@ -95,7 +95,7 @@ public class CustomerController {
 	}
     
     @PostMapping("/Customer/Address/Update")
-    public GenericResponse updateCustomerAddres(@RequestBody final CustomerAddressDTOIn address, Principal customer, final HttpServletRequest request) {
+    public GenericResponse updateCustomerAddress(@RequestBody final CustomerAddressDTOIn address, Principal customer, final HttpServletRequest request) {
         LOGGER.debug("Updating customer address with information: {}", address);
         
         addressService.save(address, customer.getName());

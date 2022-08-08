@@ -10,7 +10,7 @@ spring:
         max-lifetime: 45000
         maximum-pool-size: 15 
         connection-timeout: 30000
-        minimum-idle: 0 
+        minimum-idle: 1 
         idleTimeout: 35000
         url: jdbc:postgresql://my-postgresdb-container:5432/mochidb?currentSchema=mochi
         username: mochi_app
@@ -21,7 +21,7 @@ spring:
         max-lifetime: 45000
         maximum-pool-size: 15 
         connection-timeout: 30000
-        minimum-idle: 0
+        minimum-idle: 1
         idleTimeout: 35000
         url: jdbc:postgresql://my-postgresdb-container:5432/mochidb?currentSchema=mochi
         username: mochidb_owner
@@ -34,7 +34,7 @@ spring:
         maximum-pool-size: 15 
         connection-timeout: 30000
         idleTimeout: 35000
-        minimum-idle: 0
+        minimum-idle: 1
         url: jdbc:postgresql://my-postgresdb-container:5432/mochidb?currentSchema=security
         username: security_app
         password: password
@@ -45,7 +45,7 @@ spring:
         maximum-pool-size: 15 
         connection-timeout: 30000
         idleTimeout: 35000
-        minimum-idle: 0
+        minimum-idle: 1
         url: jdbc:postgresql://my-postgresdb-container:5432/mochidb?currentSchema=security
         username: security_owner
         password: password

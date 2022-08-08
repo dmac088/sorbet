@@ -16,12 +16,12 @@ public class Encoders {
 	private transient BCryptPasswordEncoder userPasswordEncoder = new BCryptPasswordEncoder(userRounds);
 	
     @Bean
-    public PasswordEncoder oauthClientPasswordEncoder() {
+    PasswordEncoder oauthClientPasswordEncoder() {
         return clientPasswordEncoder;
     }
     
     @Bean(name = "userPasswordEncoder")
-    public PasswordEncoder userPasswordEncoder() {
+    PasswordEncoder userPasswordEncoder() {
         return userPasswordEncoder;
     }
 }  

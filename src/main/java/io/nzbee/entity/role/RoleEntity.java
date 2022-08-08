@@ -1,7 +1,6 @@
 package io.nzbee.entity.role;
 
-import java.util.Date;
-
+import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +29,7 @@ public class RoleEntity {
 	private Long roleId;
 	
 	@Column(name="rle_start_dt")
-	private Date RoleStart; 
+	private LocalDateTime RoleStart; 
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional=false)
 	@JoinColumn(name="rle_typ_id")
@@ -80,12 +79,12 @@ public class RoleEntity {
 		this.roleParty = roleParty;
 	}
 
-	public Date getRoleStart() {
+	public LocalDateTime getRoleStart() {
 		return RoleStart;
 	}
 
-	public void setRoleStart(Date roleStart) {
-		RoleStart = roleStart;
+	public void setRoleStart(LocalDateTime localDateTime) {
+		RoleStart = localDateTime;
 	}
 	
 	public String getClassName() {

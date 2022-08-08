@@ -1,7 +1,6 @@
 package io.nzbee.entity.party.person;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import io.nzbee.Constants;
@@ -76,7 +75,7 @@ public class CustomerViewMapperImpl implements ICustomerViewMapper {
 		re.setRoleCustomer(c);
 		c.setCustomerRole(re);
 		c.setCustomerNumber(dtoObject.getCustomerId());
-		re.setRoleStart(new Date());
+		re.setRoleStart(LocalDateTime.now());
 		
 		RoleTypeEntity roleType = roleTypeRepository.findByRoleTypeDesc(Constants.partyRoleCustomer).get();
 		re.setRoleType(roleType);
