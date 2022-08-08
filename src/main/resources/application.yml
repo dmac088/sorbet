@@ -89,11 +89,13 @@ app:
   globals:
     beURL: https://app.sv2.io:8090
     feURL: https://app.sv2.io
+    rcURI: /registrationConfirmation
     imagePath: ${RESOURCEPATH}/images/
     indexPath: ${RESOURCEPATH}/lucene/indexes
     defaultPage: 0
     defaultPageSize: 10
     defaultProductRootCategoryCode: PRM02
+    
 
 support:
     email: admin@littlebagshop.com

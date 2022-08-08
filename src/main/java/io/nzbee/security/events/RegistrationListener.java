@@ -1,7 +1,7 @@
 package io.nzbee.security.events;
 
+import java.util.Locale;
 import java.util.UUID;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +54,8 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
     private SimpleMailMessage constructEmailMessage(final OnRegistrationCompleteEvent event, final String userName, final String token) {
         final String recipientAddress = userName;
         final String subject = "Registration Confirmation";
-        final String confirmationUrl = event.getAppUrl() + "/api/registrationConfirmation?token=" + token;
-        final String message = messages.getMessage("message.regSuccLink", null, "You registered successfully. To confirm your registration, please click on the below link.", event.getLocale());
+        final String confirmationUrl = event.getAppUrl() + "/" + event.getLocale() + "/" + event.getCurrency() + "/registrationConfirmation?token=" + token;
+        final String message = messages.getMessage("message.regSuccLink", null, "You registered successfully. To confirm your registration, please click on the below link.", Locale.forLanguageTag(event.getLocale()));
         final SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(recipientAddress);
         email.setSubject(subject);

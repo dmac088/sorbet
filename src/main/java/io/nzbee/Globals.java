@@ -10,6 +10,10 @@ public class Globals {
 	
 	//front end url
 	private String feURL;
+	
+	//registration confirmation URI
+	private String rcURI;
+	
 	private String imagePath;
 	private String indexPath;
 	private String retailPriceCode;
@@ -33,9 +37,17 @@ public class Globals {
 	public String getFeURL() {
 		return feURL;
 	}
-
+	
 	public void setFeURL(String feURL) {
 		this.feURL = feURL;
+	}
+	
+	public String getRcURI() {
+		return rcURI;
+	}
+
+	public void setRcURI(String rcURI) {
+		this.rcURI = rcURI;
 	}
 
 	public String getRetailPriceCode() {

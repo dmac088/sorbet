@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import io.nzbee.Globals;
 import io.nzbee.domain.services.GenericResponse;
 import io.nzbee.resources.customer.CustomerResource;
@@ -66,15 +65,13 @@ public class CustomerController {
         return principal.getName();
     }
     
-    @PostMapping("/Customer/Signup")
-    public GenericResponse registerNewCustomer(@RequestBody final CustomerDTOIn customer, String locale, final HttpServletRequest request) {
+    @PostMapping("/Customer/Signup/{locale}/{currency}")
+    public GenericResponse registerNewCustomer(@RequestBody final CustomerDTOIn customer, @PathVariable String locale, @PathVariable String currency, final HttpServletRequest request) {
       LOGGER.debug("Signing up a new customer with information: {}", customer);
         
         customerViewService.registerNewCustomer(customer, getClientIP(request), getAppUrl(request), locale);
         
-        String redirect = globals.getFeURL() + request.getRequestURI();
-        
-        eventPublisher.publishEvent(new OnRegistrationCompleteEvent(customer, request.getLocale(), redirect));
+        eventPublisher.publishEvent(new OnRegistrationCompleteEvent(customer, locale, currency, globals.getFeURL()));
         
         return new GenericResponse("success");
     }
