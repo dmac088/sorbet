@@ -104,17 +104,6 @@ public class CT_CustomerControllerIntegrationTest {
 		;
 	}
 
-	@Test
-	public void testWhenRegistrationIsSuccessfulThenRegistrationConfirmationIsSuccess() throws Exception {
-		String accessToken = ConfigControllerTest.obtainAccessToken(TEST_NEW_USERNAME,
-				TEST_NEW_PASSWORD, webApplicationContext);
-
-		System.out.println("token = " + accessToken);
-		
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/registrationConfirmation")
-				.header("Authorization", "Bearer " + accessToken).with(csrf()).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.ALL)).andDo(print()).andExpect(status().isOk());
-	}
 
 	@Test
 	public void testWhenRequestCustomerThenCustomerIsReturned() throws Exception {

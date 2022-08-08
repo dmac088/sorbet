@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 import javax.transaction.Transactional;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -127,23 +128,25 @@ public class CT_CustomerRegistrationControllerIntegrationTest {
 	@Autowired
 	private WebApplicationContext webApplicationContext;
 
-	private String  TEST_NEW_USERNAME = "test01@test01";
-	private String  TEST_NEW_PASSWORD = "test01";
+	private String TEST_NEW_USERNAME = "test01@test01";
+	private String TEST_NEW_PASSWORD = "test01";
 	private Boolean TEST_ISENABLED = false;
-	private String  TEST_CUSTOMERID = "74185293";
-	private String  TEST_GIVENNAME = "Ron";
-	private String  TEST_FAMILYNAME = "Moody";
-
+	private String TEST_CUSTOMERID = "74185293";
+	private String TEST_GIVENNAME = "Ron";
+	private String TEST_FAMILYNAME = "Moody";
 
 	@Before
 	public void setUp() {
-		
-		//initialise the database
+
+		// initialise the database
 		IntegrationTestSetupHelper.dbInit(database);
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
-		
-		//create a new user
+	}
+
+	@BeforeAll
+	public void createNewUser() {
+		// create a new user
 		Optional<PartyTypeEntity> opte = partyTypeService.findByPartyTypeDesc(Constants.partyTypePerson);
 		UserRole ur = userRoleService.findByName(Constants.partyRoleCustomer);
 		User u = new User();
@@ -205,11 +208,11 @@ public class CT_CustomerRegistrationControllerIntegrationTest {
 
 		p.getPersonParty().addAddress(ba);
 		p.getPersonParty().addAddress(ma);
-		
+
 		personService.save(p);
-		
+
 		this.token = UUID.randomUUID().toString();
-		
+
 		VerificationToken verificationToken = new VerificationToken(token, u);
 		verificationToken.setExpiryDate(Date.from(Instant.now().plus(2, ChronoUnit.DAYS)));
 
@@ -217,14 +220,14 @@ public class CT_CustomerRegistrationControllerIntegrationTest {
 
 		em.persist(verificationToken);
 		em.flush();
-		em.clear();	
-
+		em.clear();
 	}
 
 	@Test
 	public void testRegistrationConfirm() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/registrationConfirmation?token=" + token)
-				.with(csrf()).contentType(MediaType.APPLICATION_JSON).accept(MediaType.ALL)).andDo(print())
+
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/registrationConfirmation?token=" + token).with(csrf())
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.ALL)).andDo(print())
 				.andExpect(status().isOk());
 
 //        ResultActions resultActions = this.mockMvc.perform(get("/registrationConfirm?token=" + token));
