@@ -48,7 +48,6 @@ INSERT INTO security.user_ VALUES (232248, false, false, false, true, '$2a$08$Ae
 INSERT INTO security.user_ VALUES (232250, false, false, false, true, '$2a$08$kbU80lL54gj.H333EHle9.uGYOgYu9jUf0TVqhxUR5QqquQQyQDjy', 'moobot', false, NULL);
 INSERT INTO security.user_ VALUES (232252, false, false, false, true, '$2a$08$0rG7b0MAv3NhnhUnm9Wo/ue/OF3HeOxEpzjgAK8IIsVxQCpgFA6ji', 'Labrador', false, NULL);
 INSERT INTO security.user_ VALUES (232254, false, false, false, true, '$2a$08$p1t6.ZTkGYnpgb/ZJ93n/eR3mPck7483VDthqLjMmq87C5eFPLlNi', 'bill', false, NULL);
-INSERT INTO security.user_ VALUES (232256, false, false, false, true, '$2a$08$ZYgWAyU302Vu55IyqGY6KewH5dcTp5bfCQcD0VoFxRdJ6Jm6SOUKe', 'danielmackie82@gmail.com', false, NULL);
 INSERT INTO security.user_ VALUES (232258, false, false, false, true, '$2a$08$FshVXmerj.mItbrKW1Dn8OvXo00F0SFC0XM6Is90HU29csTinQTt2', 'dan', false, NULL);
 INSERT INTO security.user_ VALUES (232260, false, false, false, true, '$2a$08$LD84vr08Qr3eDbwuXshAXusm4eJ2qhN1kyMsOAD/LpdsreQjYBkkC', 'nod', false, NULL);
 INSERT INTO security.user_ VALUES (232262, false, false, false, true, '$2a$08$c8qi4W9yonajx5mQ6GIsFe.BlpqfoIqa9YGwGvM7R99.RHu.SQ22a', 'dmac269', false, NULL);
@@ -284,7 +283,6 @@ INSERT INTO security.user_role VALUES (13, 232248, 2);
 INSERT INTO security.user_role VALUES (14, 232250, 2);
 INSERT INTO security.user_role VALUES (15, 232252, 2);
 INSERT INTO security.user_role VALUES (16, 232254, 2);
-INSERT INTO security.user_role VALUES (17, 232256, 2);
 INSERT INTO security.user_role VALUES (18, 232258, 2);
 INSERT INTO security.user_role VALUES (19, 232260, 2);
 INSERT INTO security.user_role VALUES (20, 232262, 2);

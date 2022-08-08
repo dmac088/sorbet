@@ -67,7 +67,7 @@ public class CustomerController {
         
         customerViewService.registerNewCustomer(customer, getClientIP(request), getAppUrl(request), locale);
         
-        eventPublisher.publishEvent(new OnRegistrationCompleteEvent(customer, request.getLocale(), request.getRequestURI()));
+        eventPublisher.publishEvent(new OnRegistrationCompleteEvent(customer, request.getLocale(), getAppUrl(request)));
         
         return new GenericResponse("success");
     }

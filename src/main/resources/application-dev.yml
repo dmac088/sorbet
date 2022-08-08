@@ -10,7 +10,7 @@ spring:
                 auth: true
                 starttls:
                     enable: false
-                timeout: 8000
+                timeout: 80000
             transport:
                 protocol: smtps
     protocol: smtps

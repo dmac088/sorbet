@@ -79,6 +79,7 @@ jar {
 
 bootRun {
     environment 'STRIPE_SECRET_KEY', '7'
+    environment 'SMTPPassword', 'zNFA6wlHCLxjyav4xiIwww'
 }
 
 String dockerHubUsernameProperty = 'dannymack'
