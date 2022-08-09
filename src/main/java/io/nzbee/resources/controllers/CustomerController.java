@@ -1,6 +1,5 @@
 package io.nzbee.resources.controllers;
 
-import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -77,7 +76,7 @@ public class CustomerController {
     }
     
     @GetMapping("/registrationConfirmation")
-    public GenericResponse confirmRegistration(final HttpServletRequest request, final Model model, @RequestParam("token") final String token) throws UnsupportedEncodingException {
+    public GenericResponse confirmRegistration(final HttpServletRequest request, final Model model, @RequestParam("token") final String token) {
         final String result = customerViewService.validateVerificationToken(token);
         if (result.equals("valid")) {
         	customerViewService.authWithoutPassword(token);

@@ -36,11 +36,18 @@ public class CustomControllerAdvice {
 		return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	}
 
-	
 	@ResponseBody
 	@ExceptionHandler(ImageNotFoundException.class)
 	public final ResponseEntity<CustomExceptionResponse> notFoundResponse(ImageNotFoundException ex) {
 		CustomExceptionResponse response = new CustomExceptionResponse(ex.getErrorCode(), ex.getLocalizedMessage());
 		return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	}
+	
+//	@ResponseBody
+//	@ExceptionHandler({InvalidGrantException.class})
+//	public ResponseEntity<Object> handleOAuth2Exception(OAuth2Exception ex) {
+//		UserIsDisabledException cex = new UserIsDisabledException(ErrorKeys.userIsDisabled, Constants.localeENGB, "test");
+//		CustomExceptionResponse response = new CustomExceptionResponse(cex.getErrorCode(), cex.getLocalizedMessage());
+//		return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+//	}
 }

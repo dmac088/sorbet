@@ -8,7 +8,7 @@ public class LocalizedException extends RuntimeException {
     protected final String exceptionCode;
     protected final String locale;
     
-    private final static String propertySuffix = ".exception";
+    public final static String propertySuffix = ".exception";
 
     public LocalizedException(String messageKey, String locale) {
     	super();

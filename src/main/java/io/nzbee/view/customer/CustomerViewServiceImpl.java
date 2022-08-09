@@ -44,7 +44,6 @@ public class CustomerViewServiceImpl implements ICustomerViewService {
 		customerService.addItemToBag(locale, c, bagItem);
 	}
     
-
 	@Override
 	public void registerNewCustomer(CustomerDTOIn customer, String ipAddress, String url, String locale) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".registerNewCustomer with parameters {}", customer);
