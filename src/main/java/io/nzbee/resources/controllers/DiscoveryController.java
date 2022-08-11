@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.nzbee.Globals;
 import io.nzbee.resources.discovery.DiscoveryResource;
+import io.nzbee.resources.discovery.ISimpleResourceAssembler;
 
 @RestController
 @RequestMapping("/api")
@@ -24,6 +25,9 @@ public class DiscoveryController {
 	@Autowired 
 	private Globals globals;
 	
+	@Autowired
+	private ISimpleResourceAssembler<DiscoveryResource> discoveryResourceAssembler;
+	
 	@GetMapping("/Discovery/{locale}/{currency}")
 	public ResponseEntity<DiscoveryResource> getDiscovery(@PathVariable String locale, @PathVariable String currency) {
 		LOGGER.debug("call " + getClass() + ".getDiscovery()");
@@ -33,7 +37,7 @@ public class DiscoveryController {
 		m.put("currency", currency);
 		m.put("category", globals.getDefaultProductRootCategoryCode());
 		
-		DiscoveryResource dr = new DiscoveryResource(m);
+		DiscoveryResource dr = discoveryResourceAssembler.toModel(m);
 		return ResponseEntity.ok(dr);
 	}
 	
