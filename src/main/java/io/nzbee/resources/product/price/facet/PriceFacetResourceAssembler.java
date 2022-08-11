@@ -1,4 +1,6 @@
 package io.nzbee.resources.product.price.facet;
+import java.util.List;
+
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 import io.nzbee.resources.controllers.ProductController;
@@ -14,6 +16,11 @@ public class PriceFacetResourceAssembler extends RepresentationModelAssemblerSup
 	@Override
 	public PriceFacetResource toModel(EntityFacet price) {
 		return new PriceFacetResource(price);
+	}
+
+	public Object toCollectionModel(List<EntityFacet> collection, String locale, String currency) {
+		// TODO Auto-generated method stub
+		return null;
 	}
     
 }

@@ -33,5 +33,6 @@ public class Constants {
 	public static final String hongKongPostBrandCode = "HKP01";
 	public static final String hongKongLocalShipCode = "HKG";
 	public static final String categoryTypeProduct = "PRD01";
+	public static final String tokenUrl = "/oauth/token";
 	
 }

@@ -60,11 +60,11 @@ public class CategoryController {
 	}
 
 	@GetMapping("/Category/Product/{locale}/{currency}")
-	public ResponseEntity<CollectionModel<CategoryFacetModel>> getProductCategories(@PathVariable String locale) {
+	public ResponseEntity<CollectionModel<CategoryFacetModel>> getProductCategories(@PathVariable String locale, @PathVariable String currency) {
 		LOGGER.debug("Fetching product categories for parameters : {}, {}", locale);
 		List<EntityFacetHierarchical> collection = categoryService.findAll(locale, globals.getDefaultProductRootCategoryCode())
 				.stream().map(c -> facetMapper.toEntityFacet(c)).collect(Collectors.toList());
-		return ResponseEntity.ok(categoryResourceAssember.toCollectionModel(collection)); 
+		return ResponseEntity.ok(categoryResourceAssember.toCollectionModel(collection, locale, currency)); 
 	}
 
 

@@ -75,7 +75,7 @@ public class BagController {
     	//get the view containing additional attributes
     	BagView bv = viewBagService.toView(locale, currency, bd);
     	
-    	return ResponseEntity.ok(bagResourceAssembler.toModel(bv));
+    	return ResponseEntity.ok(bagResourceAssembler.toModel(bv, locale, currency));
 	}
     
     @PostMapping("/Bag/{locale}/{currency}/Coupon/Code/{coupon}")
@@ -98,7 +98,7 @@ public class BagController {
 		
 		domainBagService.save(b);
 		
-		return ResponseEntity.ok(bagResourceAssembler.toModel(bagDTOMapper.toView(b)));
+		return ResponseEntity.ok(bagResourceAssembler.toModel(bagDTOMapper.toView(b), locale, currency));
 	}
     
     @GetMapping("/Bag/{locale}/{currency}/Items")
@@ -132,7 +132,7 @@ public class BagController {
 		
     	BagView bv = viewBagService.toView(locale, currency, b);
     	
-    	return ResponseEntity.ok(bagResourceAssembler.toModel(bv));
+    	return ResponseEntity.ok(bagResourceAssembler.toModel(bv, locale, currency));
 	}
     
     @PostMapping("/Bag/{locale}/{currency}/Items/Shipping/Add")
@@ -151,7 +151,7 @@ public class BagController {
 												currency, 
 												principal.getName());
     	
-    	return ResponseEntity.ok(bagResourceAssembler.toModel(bv));
+    	return ResponseEntity.ok(bagResourceAssembler.toModel(bv, locale, currency));
 	}
     
     @GetMapping("/Bag/{locale}/{currency}/Items/Remove/{itemCode}")
