@@ -1,8 +1,8 @@
 package io.nzbee.resources.discovery;
 
 
-public interface ISimpleResourceAssembler<T> {
+public interface ISimpleResourceAssembler<T, L> {
 
-	T toModel(LocaliseDTO l);
+	T toModel(L l);
 
 }

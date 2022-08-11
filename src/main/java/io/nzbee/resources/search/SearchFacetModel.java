@@ -3,16 +3,10 @@ package io.nzbee.resources.search;
 import java.util.Objects;
 import org.springframework.hateoas.RepresentationModel;
 import io.nzbee.search.facet.IFacet;
-import io.nzbee.search.facet.SearchFacetDiscrete;
-
 
 public class SearchFacetModel extends RepresentationModel<SearchFacetModel> {
 
 	private IFacet searchFacet;
-	
-	public SearchFacetModel(SearchFacetDiscrete searchFacet) {
-		this.searchFacet = searchFacet;
-	}
 
 	public SearchFacetModel(IFacet searchFacet) {
 		this.searchFacet = searchFacet;
@@ -26,7 +20,7 @@ public class SearchFacetModel extends RepresentationModel<SearchFacetModel> {
 	public boolean equals(Object o) {
 		 if (this == o) return true;
 	     if (o == null || getClass() != o.getClass()) return false;
-	     SearchFacetDiscrete sf = (SearchFacetDiscrete) o;
+	     IFacet sf = (IFacet) o;
 	     return searchFacet.getValue() == sf.getValue();
 	}
 

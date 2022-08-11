@@ -85,7 +85,7 @@ import io.nzbee.entity.tag.view.facet.TagFacetDTOPostgresDaoImpl;
 import io.nzbee.entity.tag.view.facet.TagFacetDTOServiceImpl;
 import io.nzbee.resources.brand.BrandViewModelAssembler;
 import io.nzbee.resources.controllers.ProductController;
-import io.nzbee.resources.controllers.SearchController;
+import io.nzbee.resources.controllers.SearchResourceController;
 import io.nzbee.resources.product.physical.full.PhysicalProductFullModelAssembler;
 import io.nzbee.resources.product.physical.light.PhysicalProductLightModelAssembler;
 import io.nzbee.resources.product.shipping.ShippingProductResourceAssembler;
@@ -127,7 +127,7 @@ import io.nzbee.view.product.shipping.type.ShippingTypeViewServiceImpl;
 		ShippingProductResourceAssembler.class, BrandViewModelAssembler.class, PhysicalProductFullModelAssembler.class,
 		ProductAttributeServiceImpl.class, ProductPriceServiceImpl.class, CurrencyServiceImpl.class,
 		ProductPriceTypeService.class, PhysicalProductFullAdapterImpl.class, PhysicalProductFullDTOServiceImpl.class,
-		PhysicalProductFullDaoImpl.class, PhysicalProductFullViewMapperImpl.class, SearchController.class,
+		PhysicalProductFullDaoImpl.class, PhysicalProductFullViewMapperImpl.class, SearchResourceController.class,
 		SearchFacetModelAssembler.class, WebSecurityConfig.class, BagItemDomainAdapter.class,
 		BagItemEntityServiceImpl.class, BagItemConfiguration.class, ShippingDestinationViewServiceImpl.class,
 		ShippingDestinationAdapterImpl.class, ShippingDestinationViewMapperImpl.class,
@@ -138,8 +138,8 @@ import io.nzbee.view.product.shipping.type.ShippingTypeViewServiceImpl;
 		ShippingProductViewDTOServiceImpl.class, ShippingProductAttributeViewServiceImpl.class,
 		BagDomainDTOServiceImpl.class, BagDomainDTOMapperImpl.class, BagEntityServiceImpl.class,
 		RegularBagItemServiceImpl.class, BagDomainDTODaoImpl.class})
-@WebMvcTest(SearchController.class)
-@Import(SearchController.class)
+@WebMvcTest(SearchResourceController.class)
+@Import(SearchResourceController.class)
 public class CT_SearchControllerIntegrationTest {
 
 	@Autowired

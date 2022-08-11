@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import io.nzbee.resources.discovery.DiscoveryResource;
 import io.nzbee.resources.discovery.ISimpleResourceAssembler;
-import io.nzbee.resources.discovery.LocaliseDTO;
+import io.nzbee.resources.discovery.DiscoveryResourceDTO;
 
 @RestController
 @RequestMapping("/api")
@@ -19,10 +19,10 @@ public class DiscoveryController {
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
-	private ISimpleResourceAssembler<DiscoveryResource> discoveryResourceAssembler;
+	private ISimpleResourceAssembler<DiscoveryResource, DiscoveryResourceDTO> discoveryResourceAssembler;
 	
 	@PostMapping("/discover")
-	public ResponseEntity<DiscoveryResource> discover(@RequestBody LocaliseDTO l) {
+	public ResponseEntity<DiscoveryResource> discover(@RequestBody DiscoveryResourceDTO l) {
 		LOGGER.debug("call " + getClass() + ".discover()");
 		
 		DiscoveryResource dr = discoveryResourceAssembler.toModel(l);
