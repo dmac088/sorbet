@@ -47,6 +47,10 @@ public class SearchController {
 	private SearchFacetModelAssembler searchFacetResourceAssembler;
 	
 
+	//we need a new endpoint for the search resource that constructs the required URL for search and returns it to the client
+    //possibly it should live in another controller
+	
+	
 	@PostMapping(value = "/Search/{locale}/{currency}/Category/Code/{category}",
     					params = { "q", "page", "size", "sort" })
     public ResponseEntity<SearchResultResource> search(	

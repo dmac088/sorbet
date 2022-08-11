@@ -1,20 +1,16 @@
 package io.nzbee.resources.controllers;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import io.nzbee.Globals;
+import org.springframework.web.bind.annotation.RequestBody;
 import io.nzbee.resources.discovery.DiscoveryResource;
 import io.nzbee.resources.discovery.ISimpleResourceAssembler;
+import io.nzbee.resources.discovery.LocaliseDTO;
 
 @RestController
 @RequestMapping("/api")
@@ -22,22 +18,14 @@ public class DiscoveryController {
 	
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 	
-	@Autowired 
-	private Globals globals;
-	
 	@Autowired
 	private ISimpleResourceAssembler<DiscoveryResource> discoveryResourceAssembler;
 	
-	@GetMapping("/Discovery/{locale}/{currency}")
-	public ResponseEntity<DiscoveryResource> getDiscovery(@PathVariable String locale, @PathVariable String currency) {
-		LOGGER.debug("call " + getClass() + ".getDiscovery()");
+	@PostMapping("/discover")
+	public ResponseEntity<DiscoveryResource> discover(@RequestBody LocaliseDTO l) {
+		LOGGER.debug("call " + getClass() + ".discover()");
 		
-		Map<String, String> m = new HashMap<String, String>();
-		m.put("locale", locale);
-		m.put("currency", currency);
-		m.put("category", globals.getDefaultProductRootCategoryCode());
-		
-		DiscoveryResource dr = discoveryResourceAssembler.toModel(m);
+		DiscoveryResource dr = discoveryResourceAssembler.toModel(l);
 		return ResponseEntity.ok(dr);
 	}
 	
