@@ -36,12 +36,12 @@ public class DiscoveryResourceAssembler  implements ISimpleResourceAssembler<Dis
 		Link l2 = linkTo(methodOn(CustomerController.class).getCustomer(null)).withRel("customer");
 		Link l3 = linkTo(methodOn(CustomerController.class).registerNewCustomer(null, null, null, null)).withRel("register");
 		Link l4 = linkTo(methodOn(SearchResourceController.class).getSearchURI(null)).withRel("productNavigationResource");
-		//Link l5 = linkTo(methodOn(ProductResourceController.class).getProductURI(null)).withRel("productResource");
+		Link l5 = linkTo(methodOn(SearchResourceController.class).getSuggestions(null)).withRel("productSuggestResource");
 		
 		dr.add(l0);
 		dr.add(l2);
 		dr.add(l4);
-		//dr.add(l5);
+		dr.add(l5);
 		
 		if(hasNulls) {
 			dr.add(l1);

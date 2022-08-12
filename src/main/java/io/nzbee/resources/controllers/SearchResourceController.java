@@ -13,6 +13,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.nzbee.resources.ISimpleResourceAssembler;
 import io.nzbee.resources.search.SearchResourceDTO;
+import io.nzbee.resources.search.SearchSuggestResourceDTO;
+import io.nzbee.resources.search.SearchSuggestURIResource;
 import io.nzbee.resources.search.SearchURIResource;
 
 @RestController
@@ -23,6 +25,9 @@ public class SearchResourceController {
 	
 	@Autowired
 	private ISimpleResourceAssembler<SearchURIResource, Map<String, String>> assembler;
+	
+	@Autowired
+	private ISimpleResourceAssembler<SearchSuggestURIResource, Map<String, String>> suggestAssembler;
 	
 	@PostMapping(value = "/productSearchResource")
     public ResponseEntity<SearchURIResource> getSearchURI(@RequestBody SearchResourceDTO dto) {
@@ -44,18 +49,24 @@ public class SearchResourceController {
 		m.put("sort", dto.getSort());
 		m.put("q", dto.getQ());
 			
-    	return ResponseEntity.ok(assembler.toModel(m));
+    	return ResponseEntity.ok(assembler.toModel(m)); 
     }
 	
-//	@GetMapping(value = "/Search/{locale}/{currency}/Suggest",
-//				params = { "q" })
-//	public ResponseEntity<String[]> getSuggestions(	@PathVariable 		String locale, 
-//													@PathVariable 		String currency, 
-//													@RequestParam("q") 	String term) {
-//		
-//		LOGGER.debug("Searching for suggestions with patameters: {}, {}", locale, term);
-//		
-//		return new ResponseEntity< >(productService.getSuggestion(term, globals.getDefaultProductRootCategoryCode(), locale, currency), HttpStatus.OK);
-//	}
+	@PostMapping(value = "/suggestResource")
+	public ResponseEntity<SearchSuggestURIResource> getSuggestions(@RequestBody SearchSuggestResourceDTO dto) {
+		
+		LOGGER.debug("Searching for suggestions with patameters: {}, {}", dto.getLocale(), dto.getQ());
+		
+		ObjectMapper oMapper = new ObjectMapper();
+		
+		@SuppressWarnings("unchecked")
+		Map<String, String> m = oMapper.convertValue(dto, Map.class);
+		
+		m.put("locale", dto.getLocale());
+		m.put("currency", dto.getCurrency());
+		m.put("q", dto.getQ());
+		
+		return ResponseEntity.ok(suggestAssembler.toModel(m));
+	}
 	
 }

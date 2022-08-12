@@ -67,15 +67,5 @@ public class ProductResourceController {
     	return ResponseEntity.ok(productAssembler.toModel(m));
     }
 	
-//	@GetMapping(value = "/Search/{locale}/{currency}/Suggest",
-//				params = { "q" })
-//	public ResponseEntity<String[]> getSuggestions(	@PathVariable 		String locale, 
-//													@PathVariable 		String currency, 
-//													@RequestParam("q") 	String term) {
-//		
-//		LOGGER.debug("Searching for suggestions with patameters: {}, {}", locale, term);
-//		
-//		return new ResponseEntity< >(productService.getSuggestion(term, globals.getDefaultProductRootCategoryCode(), locale, currency), HttpStatus.OK);
-//	}
-	
+
 }

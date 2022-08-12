@@ -18,16 +18,16 @@ public class SearchURIResourceAssembler implements ISimpleResourceAssembler<Sear
 		Boolean hasNulls = (Collections.frequency(m.values(), null) > 0);
 		
 		Link l0 = linkTo(methodOn(SearchController.class).search(null, null, null, null, null, null, null, null)).withRel("products");
-		Link l1 = linkTo(methodOn(SearchController.class).getSuggestions(null, null, null)).withRel("suggest");
+		//Link l1 = linkTo(methodOn(SearchController.class).suggest(null, null, null)).withRel("suggest");
 		
 		if(hasNulls) {
 			sr.add(l0);
-			sr.add(l1);
+		//	sr.add(l1);
 			return sr;
 		}
 		
 		sr.add(l0.expand(m));
-		sr.add(l1.expand(m));
+		//sr.add(l1.expand(m));
 		return sr;
 	}
     

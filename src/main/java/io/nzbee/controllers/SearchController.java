@@ -85,7 +85,7 @@ public class SearchController {
 	
 	@GetMapping(value = "/Search/{locale}/{currency}/Suggest",
 				params = { "q" })
-	public ResponseEntity<String[]> getSuggestions(	@PathVariable 		String locale, 
+	public ResponseEntity<String[]> suggest(		@PathVariable 		String locale, 
 													@PathVariable 		String currency, 
 													@RequestParam("q") 	String term) {
 		
