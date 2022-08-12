@@ -5,28 +5,22 @@ import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSuppor
 import org.springframework.stereotype.Component;
 
 import io.nzbee.controllers.ProductController;
+import io.nzbee.resources.ILocalizedResourceAssember;
 import io.nzbee.view.product.physical.full.PhysicalProductFullView;
 
 @Component
-public class PhysicalProductFullModelAssembler extends RepresentationModelAssemblerSupport<PhysicalProductFullView, PhysicalProductFullModel> {
+public class PhysicalProductFullModelAssembler implements ILocalizedResourceAssember<PhysicalProductFullModel, PhysicalProductFullView> {
 	
-	public PhysicalProductFullModelAssembler() {
-		super(ProductController.class, PhysicalProductFullModel.class);
-	}
 
 	@Override
-	public PhysicalProductFullModel toModel(PhysicalProductFullView product) {
-		PhysicalProductFullModel pr = new PhysicalProductFullModel(product);
+	public PhysicalProductFullModel toModel(PhysicalProductFullView p, String locale, String currency) {
+		PhysicalProductFullModel pr = new PhysicalProductFullModel(p);
 
-		pr.add(linkTo(methodOn(ProductController.class).get(null, null,
-				product.getProductUPC())).withSelfRel(),
+		pr.add(linkTo(methodOn(ProductController.class).get(locale, currency, p.getProductUPC())).withSelfRel(),
 						
-				linkTo(methodOn(ProductController.class).getImageWithMediaType(product.getProductUPC() + "_1.jpg"))
-						.withRel("defaultImage"),
+				linkTo(methodOn(ProductController.class).getImageWithMediaType(p.getProductUPC() + "_1.jpg")).withRel("defaultImage"),
 						
-				linkTo(methodOn(ProductController.class).getImageWithMediaType(null))
-						.withRel("images")
-				);
+				linkTo(methodOn(ProductController.class).getImageWithMediaType(null)).withRel("images"));
 
 		return pr;
 	}

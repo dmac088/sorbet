@@ -76,7 +76,7 @@ public class SearchController {
 					    												sort,
 					    												term, 
 					    												selectedFacets,
-					    												returnFacets).map(p -> prodResourceAssembler.toModel(p));
+					    												returnFacets).map(p -> prodResourceAssembler.toModel(p, locale, currency));
     	
     	Set<SearchFacetModel> ssf = searchFacetResourceAssembler.toCollectionModel(returnFacets);
     	

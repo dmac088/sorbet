@@ -33,6 +33,7 @@ import io.nzbee.Globals;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.IBagDomainService;
 import io.nzbee.enums.FacetNameEnum;
+import io.nzbee.exceptions.EntityNotFoundException;
 import io.nzbee.exceptions.ImageNotFoundException;
 import io.nzbee.resources.brand.BrandViewModel;
 import io.nzbee.resources.brand.BrandViewModelAssembler;
@@ -112,11 +113,16 @@ public class ProductController {
 	private PagedResourcesAssembler<PhysicalProductLightModel> prodPhysicalPagedAssembler;
 
 	@GetMapping("/Product/{locale}/{currency}/Code/{code}")
-	public ResponseEntity<PhysicalProductFullModel> get(@PathVariable String locale, @PathVariable String currency,
-			@PathVariable String code) {
+	public ResponseEntity<PhysicalProductFullModel> get(@PathVariable String locale, 
+														@PathVariable String currency,
+														@PathVariable String code) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".get with parameter {}, {}, {}", locale, currency, code);
+		
+		PhysicalProductFullView p = physicalProductFullService.findByCode(locale, currency, code)
+				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, code));
+		
 		PhysicalProductFullModel pr = prodFullResourceAssembler
-				.toModel((PhysicalProductFullView) physicalProductFullService.findByCode(locale, currency, code).get());
+				.toModel(p, locale, currency);
 		return new ResponseEntity<>(pr, HttpStatus.OK);
 	}
 
@@ -169,7 +175,7 @@ public class ProductController {
 						.map(c -> c.getValue()).collect(Collectors.toSet()),
 				maxPrice, page, size, sort);
 
-		Page<PhysicalProductLightModel> pages = sp.map(p -> prodLightResourceAssembler.toModel(p));
+		Page<PhysicalProductLightModel> pages = sp.map(p -> prodLightResourceAssembler.toModel(p, locale, currency));
 
 		return ResponseEntity.ok(new BrowseProductResultDto(prodPhysicalPagedAssembler.toModel(pages)));
 	}
