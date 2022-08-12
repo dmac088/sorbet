@@ -111,12 +111,12 @@ public class ProductController {
 	@Autowired
 	private PagedResourcesAssembler<PhysicalProductLightModel> prodPhysicalPagedAssembler;
 
-	@GetMapping("/Product/{locale}/{currency}/Code/{category}")
+	@GetMapping("/Product/{locale}/{currency}/Code/{code}")
 	public ResponseEntity<PhysicalProductFullModel> get(@PathVariable String locale, @PathVariable String currency,
-			@PathVariable String category) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".get with parameter {}, {}, {}", locale, currency, category);
+			@PathVariable String code) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".get with parameter {}, {}, {}", locale, currency, code);
 		PhysicalProductFullModel pr = prodFullResourceAssembler
-				.toModel((PhysicalProductFullView) physicalProductFullService.findByCode(locale, currency, category).get());
+				.toModel((PhysicalProductFullView) physicalProductFullService.findByCode(locale, currency, code).get());
 		return new ResponseEntity<>(pr, HttpStatus.OK);
 	}
 

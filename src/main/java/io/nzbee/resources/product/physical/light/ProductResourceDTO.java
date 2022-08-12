@@ -3,10 +3,7 @@ package io.nzbee.resources.product.physical.light;
 public class ProductResourceDTO {
 	private String locale;
 	private String currency;
-	private String category;
-	private String page;
-	private String size;
-	private String sort;
+	private String code;
 	
 	public String getLocale() {
 		return locale;
@@ -17,31 +14,14 @@ public class ProductResourceDTO {
 	public String getCurrency() {
 		return currency;
 	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
-	}
-	public String getPage() {
-		return page;
-	}
-	public void setPage(String page) {
-		this.page = page;
-	}
-	public String getSize() {
-		return size;
-	}
-	public void setSize(String size) {
-		this.size = size;
-	}
-	public String getSort() {
-		return sort;
-	}
-	public void setSort(String sort) {
-		this.sort = sort;
-	}
+
 }

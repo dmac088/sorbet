@@ -24,7 +24,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import io.nzbee.Globals;
-import io.nzbee.resources.controllers.DiscoveryController;
+import io.nzbee.resources.controllers.DiscoveryResourceController;
 import io.nzbee.security.OAuth2ResourceServerConfig;
 import io.nzbee.security.SecurityBeanConfiguration;
 
@@ -32,7 +32,7 @@ import io.nzbee.security.SecurityBeanConfiguration;
 @EnableJpaRepositories(entityManagerFactoryRef = "mochiEntityManagerFactory", 
 					   transactionManagerRef = "mochiTransactionManager", 
 					   basePackages = {"io.nzbee.entity", "io.nzbee.security" })
-@ContextConfiguration(classes = {DiscoveryController.class, 
+@ContextConfiguration(classes = {DiscoveryResourceController.class, 
 								 Globals.class,
 								 SecurityBeanConfiguration.class,
 								 Globals.class, 

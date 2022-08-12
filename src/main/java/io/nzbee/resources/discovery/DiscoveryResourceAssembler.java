@@ -11,6 +11,7 @@ import io.nzbee.Constants;
 import io.nzbee.resources.ISimpleResourceAssembler;
 import io.nzbee.resources.controllers.CategoryController;
 import io.nzbee.resources.controllers.CustomerController;
+import io.nzbee.resources.controllers.ProductResourceController;
 import io.nzbee.resources.controllers.SearchResourceController;
 
 @Component
@@ -35,11 +36,13 @@ public class DiscoveryResourceAssembler  implements ISimpleResourceAssembler<Dis
 		Link l1 = linkTo(methodOn(CategoryController.class).getProductCategories(null, null)).withRel("categories");
 		Link l2 = linkTo(methodOn(CustomerController.class).getCustomer(null)).withRel("customer");
 		Link l3 = linkTo(methodOn(CustomerController.class).registerNewCustomer(null, null, null, null)).withRel("register");
-		Link l4 = linkTo(methodOn(SearchResourceController.class).getSearchURI(null)).withRel("searchResource");
+		Link l4 = linkTo(methodOn(SearchResourceController.class).getSearchURI(null)).withRel("productNavigationResource");
+		Link l5 = linkTo(methodOn(ProductResourceController.class).getProductURI(null)).withRel("productResource");
 		
 		dr.add(l0);
 		dr.add(l2);
 		dr.add(l4);
+		dr.add(l5);
 		
 		if(hasNulls) {
 			dr.add(l1);

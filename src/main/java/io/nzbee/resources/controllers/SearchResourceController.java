@@ -24,7 +24,7 @@ public class SearchResourceController {
 	@Autowired
 	private ISimpleResourceAssembler<SearchURIResource, Map<String, String>> assembler;
 	
-	@PostMapping(value = "/searchResource")
+	@PostMapping(value = "/productSearchResource")
     public ResponseEntity<SearchURIResource> getSearchURI(@RequestBody SearchResourceDTO dto) {
 
 		LOGGER.debug("Creating search URI with parameters: {}, {}, {}, {}, {}, {}, {}", 

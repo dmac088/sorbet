@@ -17,7 +17,7 @@ public class ProductURIResourceAssembler implements ISimpleResourceAssembler<Pro
 		
 		Boolean hasNulls = (Collections.frequency(m.values(), null) > 0);
 		
-		Link l0 = linkTo(methodOn(ProductController.class).getProducts(null, null, null, null, null, null, null)).withRel("products");
+		Link l0 = linkTo(methodOn(ProductController.class).get(null, null, null)).withRel("product");
 		
 		if(hasNulls) {
 			pr.add(l0);
