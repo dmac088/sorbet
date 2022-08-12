@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import io.nzbee.resources.ISimpleResourceAssembler;
 import io.nzbee.resources.discovery.DiscoveryResource;
-import io.nzbee.resources.discovery.ISimpleResourceAssembler;
 import io.nzbee.resources.discovery.DiscoveryResourceDTO;
 
 @RestController

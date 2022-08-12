@@ -3,7 +3,8 @@ import java.util.List;
 
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
-import io.nzbee.resources.controllers.ProductController;
+
+import io.nzbee.controllers.ProductController;
 import io.nzbee.search.facet.EntityFacet;
 
 @Component

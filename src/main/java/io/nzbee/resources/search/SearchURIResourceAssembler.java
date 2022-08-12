@@ -1,31 +1,33 @@
 package io.nzbee.resources.search;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
-
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
+import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
 import io.nzbee.controllers.SearchController;
-import io.nzbee.resources.discovery.ISimpleResourceAssembler;
+import io.nzbee.resources.ISimpleResourceAssembler;
 
 @Component
-public class SearchURIResourceAssembler implements ISimpleResourceAssembler<SearchURIResource, SearchResourceDTO> {
+public class SearchURIResourceAssembler implements ISimpleResourceAssembler<SearchURIResource, Map<String, String>> {
 
 	@Override
-	public SearchURIResource toModel(SearchResourceDTO l) {
+	public SearchURIResource toModel(Map<String, String> m) {
 		SearchURIResource sr = new SearchURIResource();
 		
-		Map<String, String> m = new HashMap<String, String>();
-		m.put("locale", l.getLocale());
-		m.put("currency", l.getCurrency());
-		m.put("category", l.getCategory());
-		m.put("page", l.getPage());
-		m.put("size", l.getSize());
-		m.put("sort", l.getSort());
-		m.put("q", l.getTerm());
+		Boolean hasNulls = (Collections.frequency(m.values(), null) > 0);
 		
-		sr.add(linkTo(methodOn(SearchController.class).search(null, null, null, null, null, null, null, null)).withRel("search").expand(m));
-		sr.add(linkTo(methodOn(SearchController.class).getSuggestions(null, null, null)).withRel("suggest").expand(m));
+		Link l0 = linkTo(methodOn(SearchController.class).search(null, null, null, null, null, null, null, null)).withRel("products");
+		Link l1 = linkTo(methodOn(SearchController.class).getSuggestions(null, null, null)).withRel("suggest");
+		
+		if(hasNulls) {
+			sr.add(l0);
+			sr.add(l1);
+			return sr;
+		}
+		
+		sr.add(l0.expand(m));
+		sr.add(l1.expand(m));
 		return sr;
 	}
     

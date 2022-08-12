@@ -2,7 +2,8 @@ package io.nzbee.resources.product.shipping.type;
 
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
-import io.nzbee.resources.controllers.ProductController;
+
+import io.nzbee.controllers.ProductController;
 import io.nzbee.view.product.shipping.type.ShippingTypeView;
 
 @Component

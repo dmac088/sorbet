@@ -5,7 +5,7 @@ public class SearchResourceDTO {
 	private String locale;
 	private String currency;
 	private String category;
-	private String term;
+	private String q;
 	private String page;
 	private String size;
 	private String sort;
@@ -28,11 +28,11 @@ public class SearchResourceDTO {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public String getTerm() {
-		return term;
+	public String getQ() {
+		return q;
 	}
-	public void setTerm(String term) {
-		this.term = term;
+	public void setQ(String q) {
+		this.q = q;
 	}
 	public String getPage() {
 		return page;
