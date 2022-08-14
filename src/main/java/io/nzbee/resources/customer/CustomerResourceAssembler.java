@@ -5,12 +5,13 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
+import io.nzbee.controllers.CustomerController;
+import io.nzbee.resources.ISimpleResourceAssembler;
 import io.nzbee.resources.controllers.BagController;
-import io.nzbee.resources.controllers.CustomerController;
 import io.nzbee.view.customer.CustomerDTOOut;
 
 @Component
-public class CustomerResourceAssembler extends RepresentationModelAssemblerSupport<CustomerDTOOut, CustomerResource> {
+public class CustomerResourceAssembler extends RepresentationModelAssemblerSupport<CustomerDTOOut, CustomerResource> implements ISimpleResourceAssembler<CustomerLinkResource> {
 
 	public CustomerResourceAssembler() {
 		super(CustomerController.class, CustomerResource.class);
@@ -20,6 +21,15 @@ public class CustomerResourceAssembler extends RepresentationModelAssemblerSuppo
 	public CustomerResource toModel(CustomerDTOOut c) {
 		CustomerResource cr = new CustomerResource(c);
 		cr.add(linkTo(methodOn(CustomerController.class).getCustomer(null)).withSelfRel());
+		cr.add(linkTo(methodOn(CustomerController.class).getCustomerAddress(null, null)).withRel("address"));
+		cr.add(linkTo(methodOn(BagController.class).getCustomerBag(null, null, null)).withRel("bag"));
+		return cr;
+	}
+
+	@Override
+	public CustomerLinkResource toModel() {
+		CustomerLinkResource cr = new CustomerLinkResource();
+		cr.add(linkTo(methodOn(CustomerController.class).registerNewCustomer(null, null, null, null)).withRel("register"));
 		cr.add(linkTo(methodOn(CustomerController.class).getCustomerAddress(null, null)).withRel("address"));
 		cr.add(linkTo(methodOn(BagController.class).getCustomerBag(null, null, null)).withRel("bag"));
 		return cr;

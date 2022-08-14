@@ -1,30 +1,21 @@
 package io.nzbee.resources.product.physical.light;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
-import java.util.Collections;
-import java.util.Map;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
 import io.nzbee.controllers.ProductController;
 import io.nzbee.resources.ISimpleResourceAssembler;
 
 @Component
-public class ProductNavigationURIResourceAssembler implements ISimpleResourceAssembler<ProductNavigationURIResource, Map<String, String>> {
+public class ProductNavigationURIResourceAssembler implements ISimpleResourceAssembler<ProductNavigationURIResource> {
 
 	@Override
-	public ProductNavigationURIResource toModel(Map<String, String> m) {
+	public ProductNavigationURIResource toModel() {
 		ProductNavigationURIResource pr = new ProductNavigationURIResource();
-		
-		Boolean hasNulls = (Collections.frequency(m.values(), null) > 0);
-		
+	
 		Link l0 = linkTo(methodOn(ProductController.class).getProducts(null, null, null, null, null, null, null)).withRel("products");
 		
-		if(hasNulls) {
-			pr.add(l0);
-			return pr;
-		}
-		
-		pr.add(l0.expand(m));
+		pr.add(l0);
 		return pr;
 	}
     

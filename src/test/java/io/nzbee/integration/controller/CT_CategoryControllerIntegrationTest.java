@@ -24,6 +24,7 @@ import org.springframework.web.context.WebApplicationContext;
 import io.nzbee.Constants;
 import io.nzbee.Globals;
 import io.nzbee.WebMvcConfig;
+import io.nzbee.controllers.CategoryController;
 import io.nzbee.entity.DataSourceBeanMochi;
 import io.nzbee.entity.adapters.view.ProductCategoryAdapterImpl;
 import io.nzbee.entity.category.CategoryServiceImpl;
@@ -35,7 +36,6 @@ import io.nzbee.entity.category.product.view.facet.ProductCategoryFacetDTOMapper
 import io.nzbee.entity.category.product.view.facet.ProductCategoryFacetDTOServiceImpl;
 import io.nzbee.resources.category.facet.CategoryFacetMapper;
 import io.nzbee.resources.category.facet.CategoryFacetModelAssembler;
-import io.nzbee.resources.controllers.CategoryController;
 import io.nzbee.resources.product.price.facet.PriceFacetMapper;
 import io.nzbee.resources.product.price.facet.PriceFacetResourceAssembler;
 import io.nzbee.security.DataSourceBeanSecurity;

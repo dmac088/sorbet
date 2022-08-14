@@ -6,8 +6,9 @@ import java.util.stream.Collectors;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
+
+import io.nzbee.controllers.CategoryController;
 import io.nzbee.resources.controllers.BrandController;
-import io.nzbee.resources.controllers.CategoryController;
 import io.nzbee.resources.controllers.ProductResourceController;
 import io.nzbee.resources.controllers.TagController;
 import io.nzbee.search.facet.EntityFacetHierarchical;
@@ -26,7 +27,7 @@ public class CategoryFacetModelAssembler extends RepresentationModelAssemblerSup
 		cfm.add(linkTo(methodOn(CategoryController.class).getChildCategoryFacets(locale, currency, category.getId(), null))
 				.withRel("children"));
 		
-		cfm.add(linkTo(methodOn(ProductResourceController.class).getProductNavigationURI(null))
+		cfm.add(linkTo(methodOn(ProductResourceController.class).getProductNavigationURI())
 				.withRel("products"));
 		
 		cfm.add(linkTo(methodOn(BrandController.class).getBrands(locale, currency, category.getId(), null))
