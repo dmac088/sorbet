@@ -19,7 +19,6 @@ public class SearchFacetModelAssembler extends RepresentationModelAssemblerSuppo
 		return new SearchFacetModel(f);
 	}
 
-
 	public Set<SearchFacetModel> toCollectionModel(Set<IFacet> returnFacets) {
 		return returnFacets.stream().map(rf -> toModel((IFacet) rf)).collect(Collectors.toSet());
 	}

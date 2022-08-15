@@ -68,15 +68,16 @@ public class SearchController {
 		final Set<IFacet> returnFacets = new HashSet<IFacet>();
 		
     	//get the resulting pages of product
-    	final Page<PhysicalProductLightModel> pages = productService.search(	locale, 
-					    												currency,
-					    												category, 
-					    												Integer.parseInt(page), 
-					    												Integer.parseInt(size),
-					    												sort,
-					    												term, 
-					    												selectedFacets,
-					    												returnFacets).map(p -> prodResourceAssembler.toModel(p, locale, currency));
+    	final Page<PhysicalProductLightModel> pages = productService.search(locale, 
+						    												currency,
+						    												category, 
+						    												Integer.parseInt(page), 
+						    												Integer.parseInt(size),
+						    												sort,
+						    												term, 
+						    												selectedFacets,
+						    												returnFacets).map(p -> prodResourceAssembler.toModel(p, locale, currency));
+    	
     	
     	Set<SearchFacetModel> ssf = searchFacetResourceAssembler.toCollectionModel(returnFacets);
     	

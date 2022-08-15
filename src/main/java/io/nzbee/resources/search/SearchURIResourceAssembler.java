@@ -3,6 +3,8 @@ package io.nzbee.resources.search;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
+
+import io.nzbee.controllers.ProductController;
 import io.nzbee.controllers.SearchController;
 import io.nzbee.resources.ISimpleResourceAssembler;
 
@@ -14,9 +16,12 @@ public class SearchURIResourceAssembler implements ISimpleResourceAssembler<Sear
 		SearchURIResource sr = new SearchURIResource();
 		
 		Link l0 = linkTo(methodOn(SearchController.class).search(null, null, null, null, null, null, null, null)).withRel("search");
-		Link l1 = linkTo(methodOn(SearchController.class).suggest(null, null, null)).withRel("suggest");
+		Link l1 = linkTo(methodOn(ProductController.class).getProducts(null, null, null, null, null, null, null)).withRel("browse");
+		Link l2 = linkTo(methodOn(SearchController.class).suggest(null, null, null)).withRel("suggest");
+		
 		sr.add(l0);
 		sr.add(l1);
+		sr.add(l2);
 		return sr;
 	}
     
