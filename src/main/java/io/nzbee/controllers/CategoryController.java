@@ -64,7 +64,7 @@ public class CategoryController {
 		LOGGER.debug("Fetching product categories for parameters : {}, {}", locale);
 		List<EntityFacetHierarchical> collection = categoryService.findAll(locale, globals.getDefaultProductRootCategoryCode())
 				.stream().map(c -> facetMapper.toEntityFacet(c)).collect(Collectors.toList());
-		return ResponseEntity.ok(categoryResourceAssember.toCollectionModel(collection, locale, currency)); 
+		return ResponseEntity.ok(categoryResourceAssember.toCollectionModel(collection)); 
 	}
 
 
