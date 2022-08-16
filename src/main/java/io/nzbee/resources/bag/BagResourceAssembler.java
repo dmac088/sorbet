@@ -17,9 +17,10 @@ public class BagResourceAssembler extends RepresentationModelAssemblerSupport<Ba
 	}
 
 	public BagResource toModel(BagView bag, String locale, String currency) {
-		BagResource br = this.toModel(bag);
+		BagResource br = new BagResource(bag);
 		br.add(linkTo(methodOn(ProductController.class).getShippingProviders(locale, currency)).withRel("getShippingProviders"));
 		br.add(linkTo(methodOn(ProductController.class).getShippingDestinations(locale)).withRel("getShippingDestinations"));
+		br.add(linkTo(methodOn(ProductController.class).getShippingTypes(null, null, null)).withRel("getShippingTypes"));
 		br.add(linkTo(methodOn(ProductController.class).getByDestinationAndType(locale, currency, null, null, null)).withRel("getShippingProduct"));
 		br.add(linkTo(methodOn(BagController.class).getCustomerBag(locale, currency, null)).withSelfRel());
 		br.add(linkTo(methodOn(BagController.class).getBagContents(locale, currency, null)).withRel("bagContents"));
@@ -30,8 +31,18 @@ public class BagResourceAssembler extends RepresentationModelAssemblerSupport<Ba
 	}
 
 	@Override
-	public BagResource toModel(BagView entity) {
-		return new BagResource(entity);
+	public BagResource toModel(BagView bag) {
+		BagResource br = new BagResource(bag);
+		br.add(linkTo(methodOn(ProductController.class).getShippingProviders(null, null)).withRel("getShippingProviders"));
+		br.add(linkTo(methodOn(ProductController.class).getShippingDestinations(null)).withRel("getShippingDestinations"));
+		br.add(linkTo(methodOn(ProductController.class).getShippingTypes(null, null, null)).withRel("getShippingTypes"));
+		br.add(linkTo(methodOn(ProductController.class).getByDestinationAndType(null, null, null, null, null)).withRel("getShippingProduct"));
+		br.add(linkTo(methodOn(BagController.class).getCustomerBag(null, null, null)).withSelfRel());
+		br.add(linkTo(methodOn(BagController.class).getBagContents(null, null, null)).withRel("bagContents"));
+		br.add(linkTo(methodOn(BagController.class).addPhysicalItemToBag(null, null, null, null)).withRel("addItem"));
+		br.add(linkTo(methodOn(BagController.class).addShippingItemToBag(null, null, null, null)).withRel("addShipping"));
+		br.add(linkTo(methodOn(BagController.class).removeItemFromBag(null, null, null, null)).withRel("removeItem"));
+		return br;
 	}
 
 }
