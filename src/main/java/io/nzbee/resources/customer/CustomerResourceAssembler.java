@@ -24,6 +24,7 @@ public class CustomerResourceAssembler extends RepresentationModelAssemblerSuppo
 	private Link l1 = linkTo(methodOn(CustomerController.class).getCustomerAddress(null, null)).withRel("address");
 	private Link l2 = linkTo(methodOn(BagController.class).getCustomerBag(null, null, null)).withRel("bag");
 	private Link l3 = linkTo(methodOn(CustomerController.class).confirmRegistration(null, null, null)).withRel("confirm");
+	private Link l4 = linkTo(methodOn(CustomerController.class).getCustomer(null)).withRel("customer");
 	
 	@Override
 	public CustomerResource toModel(CustomerDTOOut c) {
@@ -43,6 +44,7 @@ public class CustomerResourceAssembler extends RepresentationModelAssemblerSuppo
 		cr.add(l1);
 		cr.add(l2);
 		cr.add(l3);
+		cr.add(l4);
 		return cr;
 	}
 
