@@ -25,6 +25,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import io.nzbee.Globals;
 import io.nzbee.resources.controllers.DiscoveryResourceController;
+import io.nzbee.resources.discovery.DiscoveryResourceAssembler;
 import io.nzbee.security.OAuth2ResourceServerConfig;
 import io.nzbee.security.SecurityBeanConfiguration;
 
@@ -37,7 +38,8 @@ import io.nzbee.security.SecurityBeanConfiguration;
 								 SecurityBeanConfiguration.class,
 								 Globals.class, 
 								 OAuth2ResourceServerConfig.class,  
-								 ConfigControllerTest.class})
+								 ConfigControllerTest.class,
+								 DiscoveryResourceAssembler.class})
 @WebMvcTest()
 public class CT_DiscoveryControllerTest {
 
@@ -58,21 +60,15 @@ public class CT_DiscoveryControllerTest {
 	
     @Test
     public void testDiscoveryEndpoint() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/Discovery")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/discover")
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.ALL))
         		.andDo(print()).andExpect(status().isOk())
         		.andExpect(content().contentType("application/hal+json"))
-        		.andExpect(jsonPath("$._links.getAllCategories").exists())
-        		.andExpect(jsonPath("$._links.getCustomer").exists())
-        		.andExpect(jsonPath("$._links.registerCustomer").exists())
-        		.andExpect(jsonPath("$._links.getProduct").exists())
-        		.andExpect(jsonPath("$._links.getShippingProviders").exists())
-        		.andExpect(jsonPath("$._links.getShippingDestinations").exists())
-        		.andExpect(jsonPath("$._links.searchProduct").exists())
-        		.andExpect(jsonPath("$._links.searchSuggestion").exists())
-        		.andExpect(jsonPath("$._links.getBag").exists())
-        		.andExpect(jsonPath("$._links.accessTokens").exists());
+        		.andExpect(jsonPath("$._links.categoryResource").exists())
+        		.andExpect(jsonPath("$._links.customerResource").exists())
+        		.andExpect(jsonPath("$._links.searchResource").exists())
+        		.andExpect(jsonPath("$._links.productResource").exists());
     }
 }

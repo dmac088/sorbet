@@ -190,7 +190,7 @@ public class CT_CustomerControllerIntegrationTest {
 	@Test
 	public void testWhenNewCustomerIsSubmittedAndCustomerAlreadyExistsThenExceptionResponse409IsReturned()
 			throws Exception {
-		mockMvc.perform(post("/api/Customer/Signup").with(csrf()).contentType(MediaType.APPLICATION_JSON)
+		mockMvc.perform(post("/api/Customer/Signup/" + Constants.localeENGB + "/" +Constants.currencyHKD).with(csrf()).contentType(MediaType.APPLICATION_JSON)
 				.characterEncoding("utf-8")
 				.content("{"+ "\"givenName\": \"Daniel\","
 						+ "\"familyName\": \"Mackie\"," + "\"userName\": \"dmac1119\"," + "\"password\": \"1234567\","
@@ -202,7 +202,7 @@ public class CT_CustomerControllerIntegrationTest {
 
 	@Test
 	public void testWhenNewCustomerIsSubmittedAThenCustomerIsSuccessfullyCreated() throws Exception {
-		mockMvc.perform(post("/api/Customer/Signup").with(csrf()).contentType(MediaType.APPLICATION_JSON)
+		mockMvc.perform(post("/api/Customer/Signup/" + Constants.localeENGB + "/" +Constants.currencyHKD).with(csrf()).contentType(MediaType.APPLICATION_JSON)
 				.characterEncoding("utf-8")
 				.content("{"+ "\"givenName\": \"Daniel\","
 						+ "\"familyName\": \"Mackie\"," + "\"userName\": \"" + TEST_NEW_USERNAME + "\"," + "\"password\": \"" + TEST_NEW_PASSWORD + "\","

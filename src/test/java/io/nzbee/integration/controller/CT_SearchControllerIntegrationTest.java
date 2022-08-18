@@ -28,6 +28,7 @@ import io.nzbee.Constants;
 import io.nzbee.Globals;
 import io.nzbee.WebMvcConfig;
 import io.nzbee.controllers.ProductController;
+import io.nzbee.controllers.SearchController;
 import io.nzbee.domain.bag.BagConfiguration;
 import io.nzbee.domain.bag.BagDomainServiceImpl;
 import io.nzbee.domain.bag.item.BagItemConfiguration;
@@ -92,6 +93,7 @@ import io.nzbee.resources.product.shipping.ShippingProductResourceAssembler;
 import io.nzbee.resources.product.shipping.destination.ShippingDestinationResourceAssembler;
 import io.nzbee.resources.product.shipping.type.ShippingTypeResourceAssembler;
 import io.nzbee.resources.search.SearchFacetModelAssembler;
+import io.nzbee.resources.search.SearchURIResourceAssembler;
 import io.nzbee.search.FacetServicesImpl;
 import io.nzbee.search.SearchServiceImpl;
 import io.nzbee.security.DataSourceBeanSecurity;
@@ -137,9 +139,9 @@ import io.nzbee.view.product.shipping.type.ShippingTypeViewServiceImpl;
 		RegularBagItemDomainDTOMapperImpl.class, ShippingProductViewServiceImpl.class,
 		ShippingProductViewDTOServiceImpl.class, ShippingProductAttributeViewServiceImpl.class,
 		BagDomainDTOServiceImpl.class, BagDomainDTOMapperImpl.class, BagEntityServiceImpl.class,
-		RegularBagItemServiceImpl.class, BagDomainDTODaoImpl.class})
-@WebMvcTest(SearchResourceController.class)
-@Import(SearchResourceController.class)
+		RegularBagItemServiceImpl.class, BagDomainDTODaoImpl.class, SearchURIResourceAssembler.class})
+@WebMvcTest(SearchController.class)
+@Import(SearchController.class)
 public class CT_SearchControllerIntegrationTest {
 
 	@Autowired
