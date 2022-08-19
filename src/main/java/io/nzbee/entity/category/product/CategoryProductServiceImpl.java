@@ -13,26 +13,8 @@ public class CategoryProductServiceImpl implements ICategoryProductService {
 	private ICategoryProductRepository categoryRepository;
 	
 	@Override
-	public List<CategoryProductEntity> findAll() {
-		return categoryRepository.findAll();
-	}
-	
-	@Override
-	public void save(CategoryProductEntity t) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update(CategoryProductEntity t) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(CategoryProductEntity t) {
-		// TODO Auto-generated method stub
-		
+	public Optional<CategoryProductEntity> findById(Long id) {
+		return categoryRepository.findById(id);
 	}
 
 	@Override
@@ -40,4 +22,25 @@ public class CategoryProductServiceImpl implements ICategoryProductService {
 		return categoryRepository.findByCategoryCategoryCode(shippingrootcategorycode);
 	}
 
+	@Override
+	public List<CategoryProductEntity> findAll() {
+		return categoryRepository.findAll();
+	}
+	
+	@Override
+	public void save(CategoryProductEntity t) {
+		categoryRepository.save(t);
+	}
+
+	@Override
+	public void update(CategoryProductEntity t) {
+		categoryRepository.save(t);
+	}
+
+	@Override
+	public void delete(CategoryProductEntity t) {
+		categoryRepository.delete(t);
+	}
+
+	
 }

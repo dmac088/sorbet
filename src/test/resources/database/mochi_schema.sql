@@ -99,6 +99,7 @@ ALTER TABLE ONLY mochi.brand_category DROP CONSTRAINT uc_brand_category;
 ALTER TABLE ONLY mochi.brand_attr_lcl DROP CONSTRAINT uc_bnd_lcl;
 ALTER TABLE ONLY mochi.brand_attr_lcl DROP CONSTRAINT uc_bnd_desc_lcl_cd;
 ALTER TABLE ONLY mochi.brand DROP CONSTRAINT uc_bnd_cd;
+ALTER TABLE ONLY mochi.bag_item_type DROP CONSTRAINT uc_bag_typ_cd;
 ALTER TABLE ONLY mochi.bag_item_status DROP CONSTRAINT uc_bag_sts_cd;
 ALTER TABLE ONLY mochi.bag_item DROP CONSTRAINT uc_bag_item;
 ALTER TABLE ONLY mochi.tag DROP CONSTRAINT tag_pkey;
@@ -161,6 +162,7 @@ ALTER TABLE ONLY mochi.brand_promotion DROP CONSTRAINT brand_promotion_pkey;
 ALTER TABLE ONLY mochi.brand DROP CONSTRAINT brand_pkey;
 ALTER TABLE ONLY mochi.brand_category DROP CONSTRAINT brand_category_pkey;
 ALTER TABLE ONLY mochi.brand_attr_lcl DROP CONSTRAINT brand_attr_lcl_pkey;
+ALTER TABLE ONLY mochi.bag_item_type DROP CONSTRAINT bag_type_pkey;
 ALTER TABLE ONLY mochi.bag_item_status DROP CONSTRAINT bag_status_pkey;
 ALTER TABLE ONLY mochi.bag DROP CONSTRAINT bag_pkey;
 ALTER TABLE ONLY mochi.bag_item DROP CONSTRAINT bag_item_pkey;
@@ -283,6 +285,8 @@ DROP TABLE mochi.brand_attr_lcl;
 DROP SEQUENCE mochi.brand_attr_lcl_bnd_lcl_id_seq;
 DROP TABLE mochi.brand;
 DROP SEQUENCE mochi.brand_bnd_id_seq;
+DROP TABLE mochi.bag_item_type;
+DROP SEQUENCE mochi.bag_item_type_bag_item_typ_id_seq;
 DROP TABLE mochi.bag_item_status;
 DROP SEQUENCE mochi.bag_item_status_bag_item_sts_id_seq;
 DROP TABLE mochi.bag_item_disc;
@@ -3303,7 +3307,8 @@ CREATE TABLE mochi.bag_item (
     bag_id bigint NOT NULL,
     prd_id bigint NOT NULL,
     qty smallint NOT NULL,
-    bag_item_sts_id bigint NOT NULL
+    bag_item_sts_id bigint NOT NULL,
+    bag_item_typ_id bigint NOT NULL
 );
 
 
@@ -3362,6 +3367,33 @@ CREATE TABLE mochi.bag_item_status (
 
 
 ALTER TABLE mochi.bag_item_status OWNER TO mochidb_owner;
+
+--
+-- Name: bag_item_type_bag_item_typ_id_seq; Type: SEQUENCE; Schema: mochi; Owner: postgres
+--
+
+CREATE SEQUENCE mochi.bag_item_type_bag_item_typ_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE mochi.bag_item_type_bag_item_typ_id_seq OWNER TO postgres;
+
+--
+-- Name: bag_item_type; Type: TABLE; Schema: mochi; Owner: mochidb_owner
+--
+
+CREATE TABLE mochi.bag_item_type (
+    bag_item_typ_id bigint DEFAULT nextval('mochi.bag_item_type_bag_item_typ_id_seq'::regclass) NOT NULL,
+    bag_item_typ_cd character varying(5) NOT NULL,
+    bag_item_typ_desc character varying(20)
+);
+
+
+ALTER TABLE mochi.bag_item_type OWNER TO mochidb_owner;
 
 --
 -- Name: brand_bnd_id_seq; Type: SEQUENCE; Schema: mochi; Owner: mochidb_owner
@@ -4999,6 +5031,14 @@ ALTER TABLE ONLY mochi.bag_item_status
 
 
 --
+-- Name: bag_item_type bag_type_pkey; Type: CONSTRAINT; Schema: mochi; Owner: mochidb_owner
+--
+
+ALTER TABLE ONLY mochi.bag_item_type
+    ADD CONSTRAINT bag_type_pkey PRIMARY KEY (bag_item_typ_id);
+
+
+--
 -- Name: brand_attr_lcl brand_attr_lcl_pkey; Type: CONSTRAINT; Schema: mochi; Owner: mochidb_owner
 --
 
@@ -5492,6 +5532,14 @@ ALTER TABLE ONLY mochi.bag_item
 
 ALTER TABLE ONLY mochi.bag_item_status
     ADD CONSTRAINT uc_bag_sts_cd UNIQUE (bag_item_sts_cd);
+
+
+--
+-- Name: bag_item_type uc_bag_typ_cd; Type: CONSTRAINT; Schema: mochi; Owner: mochidb_owner
+--
+
+ALTER TABLE ONLY mochi.bag_item_type
+    ADD CONSTRAINT uc_bag_typ_cd UNIQUE (bag_item_typ_cd);
 
 
 --
@@ -6265,6 +6313,21 @@ GRANT ALL ON SEQUENCE mochi.bag_item_status_bag_item_sts_id_seq TO mochidb_owner
 --
 
 GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE mochi.bag_item_status TO mochi_app;
+
+
+--
+-- Name: SEQUENCE bag_item_type_bag_item_typ_id_seq; Type: ACL; Schema: mochi; Owner: postgres
+--
+
+GRANT ALL ON SEQUENCE mochi.bag_item_type_bag_item_typ_id_seq TO mochi_app;
+GRANT ALL ON SEQUENCE mochi.bag_item_type_bag_item_typ_id_seq TO mochidb_owner;
+
+
+--
+-- Name: TABLE bag_item_type; Type: ACL; Schema: mochi; Owner: mochidb_owner
+--
+
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE mochi.bag_item_type TO mochi_app;
 
 
 --

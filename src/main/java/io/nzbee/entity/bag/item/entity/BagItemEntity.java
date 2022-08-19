@@ -14,6 +14,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import io.nzbee.entity.bag.entity.BagEntity;
+import io.nzbee.entity.bag.item.type.BagItemTypeEntity;
 import io.nzbee.entity.bag.status.BagItemStatus;
 import io.nzbee.entity.product.ProductEntity;
 
@@ -38,6 +39,10 @@ public class BagItemEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="bag_item_sts_id")
 	private BagItemStatus bagItemStatus;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="bag_item_typ_id")
+	private BagItemTypeEntity bagItemType;
 	
 	@Column(name="qty")
 	private int quantity;
@@ -84,6 +89,14 @@ public class BagItemEntity {
 
 	public void setBagItemStatus(BagItemStatus bagItemStatus) {
 		this.bagItemStatus = bagItemStatus;
+	}
+	
+	public BagItemTypeEntity getBagItemType() {
+		return bagItemType;
+	}
+
+	public void setBagItemType(BagItemTypeEntity bagItemTypeEntity) {
+		this.bagItemType = bagItemTypeEntity;
 	}
 
 	@Override

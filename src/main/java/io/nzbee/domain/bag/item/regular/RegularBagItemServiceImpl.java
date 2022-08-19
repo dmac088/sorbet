@@ -27,12 +27,7 @@ public class RegularBagItemServiceImpl implements IRegularBagItemDomainService{
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewPhysicalItem with parameters {}, {}", itemUPC, quantity);
 		return bagItemService.getNewPhysicalItem(locale, currency, bag, itemUPC, quantity);
 	}
-	
-	@Override
-	public RegularBagItem getNewShippingItem(String locale, String currency, Bag bag, String destCode, String shipType) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewShippingItem with parameters {}, {}, {}", destCode, shipType, bag.getTotalWeight());
-		return bagItemService.getNewShippingItem(locale, currency, bag, destCode,  shipType);
-	}
+
 	
 	@Override
 	public void save(RegularBagItem object) {

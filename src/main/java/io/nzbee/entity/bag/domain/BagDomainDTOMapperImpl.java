@@ -14,7 +14,7 @@ import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.customer.Customer;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.bag.entity.IBagEntityService;
-import io.nzbee.entity.bag.item.domain.regular.IRegularBagItemDomainDTOMapper;
+import io.nzbee.entity.bag.item.domain.IBagItemDomainDTOMapper;
 import io.nzbee.entity.bag.item.entity.BagItemEntity;
 import io.nzbee.entity.party.person.ICustomerDomainMapper;
 import io.nzbee.entity.party.person.IPersonService;
@@ -36,7 +36,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 	private ICustomerDomainMapper personMapper;
 
 	@Autowired
-	private IRegularBagItemDomainDTOMapper bagItemMapper;
+	private IBagItemDomainDTOMapper bagItemMapper;
 
 	@Autowired
 	private IPersonService personService;
@@ -46,6 +46,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 
 	@Override
 	public Bag DTOToDo(BagDomainDTO dto) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo()");
 		Bag b = new Bag(personMapper.DTOToDo(dto.getCustomer()));
 
 		// map the entity bagItems to the domain bagItems
@@ -63,7 +64,8 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 
 	@Override
 	public Bag DTOToDo(String locale, String currency, PersonDomainDTO pDto, BagDomainDTO bDto) {
-
+		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo() with parameters: {}, {}", locale, currency);
+		
 		// we need a customer to instantiate a new bag
 		Customer c = personMapper.DTOToDo(pDto);
 
@@ -85,12 +87,14 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 
 	@Override
 	public BagEntity doToEntity(Bag d) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".doToEntity");
+		LOGGER.debug("call " + getClass().getSimpleName() + ".doToEntity()");
+		
 		// get the bag, status, and customer from the database
 		Optional<BagEntity> obe = bagService.findByCode(d.getCustomer().getUserName());
 		Optional<PersonEntity> op = personService.findByUsernameAndRole(d.getCustomer().getUserName(),
 				Constants.partyRoleCustomer);
 		Optional<PromotionEntity> opr = Optional.ofNullable(null);
+		
 		if (d.getPromotion().isPresent()) {
 			opr = promotionService.findByCode(d.getPromotion().get().getPromotionCode());
 		}
@@ -105,7 +109,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		nbe.setBagUpdatedDateTime(LocalDateTime.now());
 
 		// use the existing bag if it exists otherwise use newly created
-		BagEntity b = (obe.isPresent()) ? obe.get() : nbe;
+		BagEntity b = obe.orElse(nbe);
 
 		b.setBagUpdatedDateTime(LocalDateTime.now());
 
@@ -119,10 +123,12 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 				bie.setQuantity(bi.getBagItem().getQuantity());
 				return bie;
 			}
-
 			return bagItemMapper.doToEntity(bi);
 		}).collect(Collectors.toSet());
 
+		//add the shipping item
+		sbi.add(bagItemMapper.doToEntity(d.getShippingItem()));
+		
 		// add the bag items to the bag
 		sbi.stream().forEach(bi -> {
 			b.addItem(bi);

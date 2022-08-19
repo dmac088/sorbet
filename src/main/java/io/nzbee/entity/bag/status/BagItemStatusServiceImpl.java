@@ -36,5 +36,4 @@ public class BagItemStatusServiceImpl implements IBagItemStatusService {
 		bagStatusRepository.delete(t);
 	}
 
-
 }

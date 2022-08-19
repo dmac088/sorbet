@@ -2,24 +2,14 @@ package io.nzbee.view.product.shipping;
 
 public class ShippingItemDTOIn {
 
-	private String shippingDestinationCode;
-	
-	private String shippingTypeCode;
+	private String shippingProductCode;
 
-	public String getShippingDestinationCode() {
-		return shippingDestinationCode;
+	public String getShippingProductCode() {
+		return shippingProductCode;
 	}
 
-	public void setShippingDestinationCode(String shippingDestinationCode) {
-		this.shippingDestinationCode = shippingDestinationCode;
-	}
-
-	public String getShippingTypeCode() {
-		return shippingTypeCode;
-	}
-
-	public void setShippingTypeCode(String shippingTypeCode) {
-		this.shippingTypeCode = shippingTypeCode;
+	public void setShippingProductCode(String shippingProductCode) {
+		this.shippingProductCode = shippingProductCode;
 	}
 	
 }

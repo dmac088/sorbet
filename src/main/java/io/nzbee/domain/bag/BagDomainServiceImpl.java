@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import io.nzbee.domain.bag.item.regular.IRegularBagItemDomainService;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
+import io.nzbee.domain.bag.item.shipping.IShippingBagItemDomainService;
+import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
 import io.nzbee.domain.ports.IBagPortService;
 import io.nzbee.view.bag.item.BagItemViewIn;
+import io.nzbee.view.product.shipping.ShippingItemDTOIn;
 
 public class BagDomainServiceImpl implements IBagDomainService {
 	
@@ -20,9 +23,12 @@ public class BagDomainServiceImpl implements IBagDomainService {
 	
     @Autowired
     private IRegularBagItemDomainService domainBagItemService;
+    
+    @Autowired
+    private IShippingBagItemDomainService shippingBagItemService;
 	
     @Autowired
-    @Qualifier("bagRulesContainer")
+    @Qualifier("bagRulesContainer") 
     private KieContainer kieContainer;
 	
 	@Override
@@ -78,8 +84,8 @@ public class BagDomainServiceImpl implements IBagDomainService {
 	
 	
 	@Override
-	public Bag addShippingItem(String locale, String currency, BagItemViewIn dto, String username) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".addItem with parameters {}, {}, {}, {}, {}", locale, currency, dto.getItemUPC(), dto.getItemQty(), username);
+	public Bag addShippingItem(String locale, String currency, ShippingItemDTOIn dto, String username) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".addShippingItem with parameters {}, {}, {}, {}", locale, currency, dto.getShippingProductCode(), username);
 		
 		//get the bag domain model with the items
     	Bag b = this.findByCode(locale, 
@@ -87,31 +93,16 @@ public class BagDomainServiceImpl implements IBagDomainService {
     							username);
 
     	
-    	//check if the product already exists in the bag
-    	boolean exists = b.bagItemExists(dto.getItemUPC());
+    	//get the shipping item 
+    	ShippingBagItem sbi = shippingBagItemService.getShippingItem(currency, b, dto.getShippingProductCode());
     	
-    	//create a bag item if one does not exists otherwise retrieve the existing bag item
-    	RegularBagItem bagItem = exists 
-    					? b.getBagItem(dto.getItemUPC()) 
-    					: domainBagItemService.getNewPhysicalItem(locale, currency, b, dto.getItemUPC(), dto.getItemQty());
-    		
-    	if(exists) {
-    		b.addItem(bagItem, dto.getItemQty());
-    	}
-    
-     	if(bagItem.getBagItem().isErrors()) {
-     		LOGGER.debug("The BagItem has errors!");
-     		return b;
-    		//return ResponseEntity.ok(bagResourceAssembler.toModel(bagDTOMapper.toView(b)));
-    	}
+    	//add the shipping item to the bag
+    	b.addShippingItem(sbi);
     	
-    	if(!exists) {
-    		b.addItem(bagItem, dto.getItemQty());
-    	}
-    	
-    	//save the current state of the bag to the database 
+    	//save the bag to the database 
     	this.save(b);
     	
+    	//return the bag
     	return b;
 	}
 

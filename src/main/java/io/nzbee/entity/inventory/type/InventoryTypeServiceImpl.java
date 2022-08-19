@@ -11,6 +11,11 @@ public class InventoryTypeServiceImpl implements IInventoryTypeService {
 	private IInventoryTypeRepository inventoryTypeRepository;
 
 	@Override
+	public Optional<InventoryType> findById(Long id) {
+		return inventoryTypeRepository.findById(id);
+	}
+	
+	@Override
 	public Optional<InventoryType> findByCode(String code) {
 		return inventoryTypeRepository.findByInventoryTypeCode(code);
 	}

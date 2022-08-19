@@ -14,7 +14,7 @@ public class ProductCategoryFacetDTOServiceImpl implements IProductCategoryFacet
 	
 	@Autowired
 	private IProductCategoryFacetDTODao productCategoryDao;
-
+	
 
 	@Override
 	public String getFacetField() {
@@ -59,26 +59,5 @@ public class ProductCategoryFacetDTOServiceImpl implements IProductCategoryFacet
 	public String tokenToCode(String token) {
 		return token.substring(token.lastIndexOf('/')+1,token.length());
 	}
-	
-	@Override
-	public void save(ProductCategoryFacetDTO t) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update(ProductCategoryFacetDTO t) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(ProductCategoryFacetDTO t) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
 
 }

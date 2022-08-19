@@ -1,11 +1,10 @@
 package io.nzbee.entity.category.product.view.facet;
 
 import java.util.List;
-import io.nzbee.entity.IEntityService;
 import io.nzbee.entity.StringCollectionWrapper;
 import io.nzbee.search.ISearchDimensionService;
 
-public interface IProductCategoryFacetDTOService extends IEntityService<ProductCategoryFacetDTO>, ISearchDimensionService<ProductCategoryFacetDTO> {
+public interface IProductCategoryFacetDTOService extends  ISearchDimensionService<ProductCategoryFacetDTO> {
 
 	List<ProductCategoryFacetDTO> findAll(String locale, String rootCategory);
 

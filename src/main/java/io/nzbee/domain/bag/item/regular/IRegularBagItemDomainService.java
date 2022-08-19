@@ -10,7 +10,5 @@ public interface IRegularBagItemDomainService {
 
 	RegularBagItem getNewPhysicalItem(String locale, String currency, Bag bag, String itemUPC, int quantity);
 
-	RegularBagItem getNewShippingItem(String locale, String currency, Bag bag, String destCode, String shipType);
-
 	void checkAllBagItemRules(RegularBagItem object);
 }

@@ -25,23 +25,24 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import io.nzbee.Constants;
 import io.nzbee.Globals;
+import io.nzbee.controllers.BagController;
 import io.nzbee.domain.bag.BagConfiguration;
 import io.nzbee.domain.bag.BagDomainServiceImpl;
 import io.nzbee.domain.bag.item.BagItemConfiguration;
 import io.nzbee.domain.bag.item.regular.RegularBagItemServiceImpl;
 import io.nzbee.domain.promotion.PromotionServiceImpl;
 import io.nzbee.entity.adapters.domain.BagDomainAdapter;
-import io.nzbee.entity.adapters.domain.BagItemDomainAdapter;
+import io.nzbee.entity.adapters.domain.RegularBagItemDomainAdapter;
 import io.nzbee.entity.adapters.domain.PromotionAdapter;
 import io.nzbee.entity.adapters.view.BagViewAdapterImpl;
 import io.nzbee.entity.bag.domain.BagDomainDTODaoImpl;
 import io.nzbee.entity.bag.domain.BagDomainDTOMapperImpl;
 import io.nzbee.entity.bag.domain.BagDomainDTOServiceImpl;
 import io.nzbee.entity.bag.entity.BagEntityServiceImpl;
-import io.nzbee.entity.bag.item.entity.BagItemEntityServiceImpl;
 import io.nzbee.entity.bag.item.view.BagItemViewDTOMapperImpl;
-import io.nzbee.entity.bag.item.domain.regular.RegularBagItemDomainDTOMapperImpl;
-import io.nzbee.entity.bag.item.domain.regular.RegularBagItemDomainDTOServiceImpl;
+import io.nzbee.entity.bag.item.domain.BagItemDomainDTOMapperImpl;
+import io.nzbee.entity.bag.item.domain.BagItemDomainDTOServiceImpl;
+import io.nzbee.entity.bag.item.entity.BagItemEntityServiceImpl;
 import io.nzbee.entity.bag.status.BagItemStatusServiceImpl;
 import io.nzbee.entity.bag.view.BagViewDTODaoPostgresImpl;
 import io.nzbee.entity.bag.view.BagViewDTOMapperImpl;
@@ -65,7 +66,6 @@ import io.nzbee.entity.promotion.product.PromotionProductMapperImpl;
 import io.nzbee.payment.PaymentService;
 import io.nzbee.resources.bag.BagResourceAssembler;
 import io.nzbee.resources.bag.item.BagItemResourceAssembler;
-import io.nzbee.resources.controllers.BagController;
 import io.nzbee.security.OAuth2AuthorizationServerConfig;
 import io.nzbee.security.OAuth2ResourceServerConfig;
 import io.nzbee.security.SecurityBeanConfiguration;
@@ -84,15 +84,15 @@ import io.nzbee.view.bag.item.BagItemViewMapperImpl;
 		PromotionMapperImpl.class, PromotionOrderMapperImpl.class, PromotionProductMapperImpl.class,
 		ProductEntityServiceImpl.class, BagItemStatusServiceImpl.class, PersonServiceImpl.class,
 		PromotionServiceImpl.class, PromotionEntityServiceImpl.class, PromotionDaoPostgresImpl.class,
-		BagDomainServiceImpl.class, BagConfiguration.class, BagItemDomainAdapter.class, BagItemEntityServiceImpl.class,
+		BagDomainServiceImpl.class, BagConfiguration.class, RegularBagItemDomainAdapter.class, BagItemEntityServiceImpl.class,
 		BagItemConfiguration.class, ProductAttributeServiceImpl.class, ProductPriceServiceImpl.class,
 		CurrencyServiceImpl.class, ProductPriceTypeService.class, PromotionAdapter.class,
 		PromotionOrderServiceImpl.class, BagViewMapperImpl.class, BagItemViewMapperImpl.class,
 		BagResourceAssembler.class, BagItemResourceAssembler.class, BagViewServiceImpl.class, BagViewAdapterImpl.class,
 		PhysicalProductDTOServiceImpl.class, PhysicalProductDTODaoPostgresImpl.class, BagViewDTOServiceImpl.class,
 		BagViewDTODaoPostgresImpl.class, BagViewDTOMapperImpl.class, BagItemViewMapperImpl.class,
-		BagItemViewDTOMapperImpl.class, PhysicalProductDTOMapperImpl.class, RegularBagItemDomainDTOServiceImpl.class,
-		RegularBagItemDomainDTOMapperImpl.class, BagDomainDTOServiceImpl.class, BagDomainDTOMapperImpl.class,
+		BagItemViewDTOMapperImpl.class, PhysicalProductDTOMapperImpl.class, BagItemDomainDTOServiceImpl.class,
+		BagItemDomainDTOMapperImpl.class, BagDomainDTOServiceImpl.class, BagDomainDTOMapperImpl.class,
 		BagEntityServiceImpl.class, RegularBagItemServiceImpl.class, BagDomainDTODaoImpl.class})
 @WebMvcTest
 public class CT_BagControllerTest {

@@ -15,6 +15,11 @@ public class ShippingProductAttributeEntityServiceImpl implements IShippingProdu
 	private IShippingProductAttributeEntityRepository productAttributeRepository; 
 	
 	@Override
+	public Optional<ShippingProductAttributeEntity> findById(Long id) {
+		return productAttributeRepository.findById(id);
+	}
+
+	@Override
 	public Optional<ShippingProductAttributeEntity> findByCode(String locale, String code) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findByProductCode with parameter {} ,{}", locale, code);
 		return productAttributeRepository.findByLclCdAndProductShippingProductProductUPC(locale, code);
@@ -34,5 +39,4 @@ public class ShippingProductAttributeEntityServiceImpl implements IShippingProdu
 	public void delete(ShippingProductAttributeEntity t) {
 		productAttributeRepository.delete(t);		
 	}
-
 }

@@ -179,7 +179,7 @@ public class ProductController {
 
 		return ResponseEntity.ok(new BrowseProductResultDto(prodPhysicalPagedAssembler.toModel(pages)));
 	}
-
+	
 	@GetMapping(value = "/Product/Shipping/Provider/{locale}/{currency}")
 	public ResponseEntity<CollectionModel<BrandViewModel>> getShippingProviders(@PathVariable String locale,
 			@PathVariable String currency) {

@@ -5,7 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.transform.ResultTransformer;
-import io.nzbee.entity.bag.item.domain.regular.RegularBagItemWithQuantityDomainDTO;
+
+import io.nzbee.entity.bag.item.domain.BagItemWithQuantityDomainDTO;
 
 public class BagDomainDTOResultTransformer implements ResultTransformer {
 
@@ -13,7 +14,7 @@ public class BagDomainDTOResultTransformer implements ResultTransformer {
 
 	private Map<Long, BagDomainDTO> bagDTOMap = new LinkedHashMap<>();
 
-	private Map<Long, RegularBagItemWithQuantityDomainDTO> bagItemDTOMap = new LinkedHashMap<>();
+	private Map<Long, BagItemWithQuantityDomainDTO> bagItemDTOMap = new LinkedHashMap<>();
 	
 	@Override
 	public BagDomainDTO transformTuple(Object[] tuple, String[] aliases) {
@@ -27,12 +28,12 @@ public class BagDomainDTOResultTransformer implements ResultTransformer {
 			return b;
 		});
 
-		if (!(tuple[aliasToIndexMap.get(RegularBagItemWithQuantityDomainDTO.ID_ALIAS)] == null)) {
+		if (!(tuple[aliasToIndexMap.get(BagItemWithQuantityDomainDTO.ID_ALIAS)] == null)) {
 
-				Long bagItemId = ((Number) tuple[aliasToIndexMap.get(RegularBagItemWithQuantityDomainDTO.ID_ALIAS)]).longValue();
+				Long bagItemId = ((Number) tuple[aliasToIndexMap.get(BagItemWithQuantityDomainDTO.ID_ALIAS)]).longValue();
 
-				RegularBagItemWithQuantityDomainDTO bagItemDTO = bagItemDTOMap.computeIfAbsent(bagItemId, biId -> {
-				RegularBagItemWithQuantityDomainDTO bi = new RegularBagItemWithQuantityDomainDTO(tuple, aliasToIndexMap);
+				BagItemWithQuantityDomainDTO bagItemDTO = bagItemDTOMap.computeIfAbsent(bagItemId, biId -> {
+				BagItemWithQuantityDomainDTO bi = new BagItemWithQuantityDomainDTO(tuple, aliasToIndexMap);
 
 				return bi;
 			});

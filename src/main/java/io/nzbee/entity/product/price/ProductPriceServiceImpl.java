@@ -12,6 +12,11 @@ public class ProductPriceServiceImpl implements IProductPriceService {
 	private IProductPriceRepository productPriceRepository; 
 	
 	@Override
+	public Optional<ProductPriceEntity> findById(Long id) {
+		return productPriceRepository.findById(id);
+	}
+
+	@Override
 	public Optional<ProductPriceEntity> findByProductId(Long productId, String priceTypeCode, String currencyCode) {
 		return productPriceRepository.findByTypeCodeAndProductProductIdAndCurrencyCode(priceTypeCode, productId, currencyCode);
 	}
@@ -40,6 +45,7 @@ public class ProductPriceServiceImpl implements IProductPriceService {
 	public void delete(ProductPriceEntity t) {
 		productPriceRepository.delete(t);
 	}
+
 
 
 }

@@ -34,5 +34,7 @@ public class Constants {
 	public static final String hongKongLocalShipCode = "HKG";
 	public static final String categoryTypeProduct = "PRD01";
 	public static final String tokenUrl = "/oauth/token";
+	public static final String regularBagItemType = "REG01";
+	public static final String shippingBagItemType = "SHP01";
 	
 }

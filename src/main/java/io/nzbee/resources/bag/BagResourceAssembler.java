@@ -4,8 +4,8 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
+import io.nzbee.controllers.BagController;
 import io.nzbee.controllers.ProductController;
-import io.nzbee.resources.controllers.BagController;
 import io.nzbee.view.bag.BagView;
 
 @Component

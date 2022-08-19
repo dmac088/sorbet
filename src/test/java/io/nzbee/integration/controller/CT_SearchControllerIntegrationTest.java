@@ -35,7 +35,7 @@ import io.nzbee.domain.bag.item.BagItemConfiguration;
 import io.nzbee.domain.bag.item.regular.RegularBagItemServiceImpl;
 import io.nzbee.entity.DataSourceBeanMochi;
 import io.nzbee.entity.adapters.domain.BagDomainAdapter;
-import io.nzbee.entity.adapters.domain.BagItemDomainAdapter;
+import io.nzbee.entity.adapters.domain.RegularBagItemDomainAdapter;
 import io.nzbee.entity.adapters.view.BrandAdapterImpl;
 import io.nzbee.entity.adapters.view.PhysicalProductFullAdapterImpl;
 import io.nzbee.entity.adapters.view.PhysicalProductLightAdapterImpl;
@@ -46,8 +46,8 @@ import io.nzbee.entity.bag.domain.BagDomainDTODaoImpl;
 import io.nzbee.entity.bag.domain.BagDomainDTOMapperImpl;
 import io.nzbee.entity.bag.domain.BagDomainDTOServiceImpl;
 import io.nzbee.entity.bag.entity.BagEntityServiceImpl;
-import io.nzbee.entity.bag.item.domain.regular.RegularBagItemDomainDTOMapperImpl;
-import io.nzbee.entity.bag.item.domain.regular.RegularBagItemDomainDTOServiceImpl;
+import io.nzbee.entity.bag.item.domain.BagItemDomainDTOMapperImpl;
+import io.nzbee.entity.bag.item.domain.BagItemDomainDTOServiceImpl;
 import io.nzbee.entity.bag.item.entity.BagItemEntityServiceImpl;
 import io.nzbee.entity.bag.status.BagItemStatusServiceImpl;
 import io.nzbee.entity.bag.view.BagViewDTODaoPostgresImpl;
@@ -130,13 +130,13 @@ import io.nzbee.view.product.shipping.type.ShippingTypeViewServiceImpl;
 		ProductAttributeServiceImpl.class, ProductPriceServiceImpl.class, CurrencyServiceImpl.class,
 		ProductPriceTypeService.class, PhysicalProductFullAdapterImpl.class, PhysicalProductFullDTOServiceImpl.class,
 		PhysicalProductFullDaoImpl.class, PhysicalProductFullViewMapperImpl.class, SearchResourceController.class,
-		SearchFacetModelAssembler.class, WebSecurityConfig.class, BagItemDomainAdapter.class,
+		SearchFacetModelAssembler.class, WebSecurityConfig.class, RegularBagItemDomainAdapter.class,
 		BagItemEntityServiceImpl.class, BagItemConfiguration.class, ShippingDestinationViewServiceImpl.class,
 		ShippingDestinationAdapterImpl.class, ShippingDestinationViewMapperImpl.class,
 		ShippingTypeViewServiceImpl.class, ShippingTypeAdapterImpl.class, ShippingTypeViewMapperImpl.class,
 		BagViewDTOServiceImpl.class, BagViewDTODaoPostgresImpl.class, PhysicalProductDTOServiceImpl.class,
-		PhysicalProductDTODaoPostgresImpl.class, RegularBagItemDomainDTOServiceImpl.class,
-		RegularBagItemDomainDTOMapperImpl.class, ShippingProductViewServiceImpl.class,
+		PhysicalProductDTODaoPostgresImpl.class, BagItemDomainDTOServiceImpl.class,
+		BagItemDomainDTOMapperImpl.class, ShippingProductViewServiceImpl.class,
 		ShippingProductViewDTOServiceImpl.class, ShippingProductAttributeViewServiceImpl.class,
 		BagDomainDTOServiceImpl.class, BagDomainDTOMapperImpl.class, BagEntityServiceImpl.class,
 		RegularBagItemServiceImpl.class, BagDomainDTODaoImpl.class, SearchURIResourceAssembler.class})

@@ -19,8 +19,8 @@ import io.nzbee.entity.bag.domain.BagDomainDTOServiceImpl;
 import io.nzbee.entity.bag.domain.IBagDomainDTODao;
 import io.nzbee.entity.bag.domain.IBagDomainDTOMapper;
 import io.nzbee.entity.bag.domain.IBagDomainDTOService;
-import io.nzbee.entity.bag.item.domain.regular.IRegularBagItemDomainDTOMapper;
-import io.nzbee.entity.bag.item.domain.regular.RegularBagItemDomainDTOMapperImpl;
+import io.nzbee.entity.bag.item.domain.IBagItemDomainDTOMapper;
+import io.nzbee.entity.bag.item.domain.BagItemDomainDTOMapperImpl;
 import io.nzbee.entity.bag.item.view.BagItemViewDTOMapperImpl;
 import io.nzbee.entity.bag.item.view.IBagItemViewDTOMapper;
 import io.nzbee.entity.bag.view.BagViewDTODaoPostgresImpl;
@@ -109,8 +109,8 @@ public class ConfigBagViewTests {
 	}
 	
 	@Bean
-	IRegularBagItemDomainDTOMapper regularBagItemDomainDTOMapper() {
-		return new RegularBagItemDomainDTOMapperImpl();
+	IBagItemDomainDTOMapper regularBagItemDomainDTOMapper() {
+		return new BagItemDomainDTOMapperImpl();
 	}
 	
 	@Bean 

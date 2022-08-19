@@ -7,6 +7,8 @@ import io.nzbee.domain.bag.BagDomainServiceImpl;
 import io.nzbee.domain.bag.IBagDomainService;
 import io.nzbee.domain.bag.item.regular.IRegularBagItemDomainService;
 import io.nzbee.domain.bag.item.regular.RegularBagItemServiceImpl;
+import io.nzbee.domain.bag.item.shipping.IShippingBagItemDomainService;
+import io.nzbee.domain.bag.item.shipping.ShippingBagItemDomainServiceImpl;
 import io.nzbee.domain.customer.CustomerServiceImpl;
 import io.nzbee.domain.customer.ICustomerService;
 import io.nzbee.domain.promotion.IPromotionService;
@@ -23,16 +25,18 @@ import io.nzbee.entity.adapters.view.ProductCategoryAdapterImpl;
 import io.nzbee.entity.adapters.view.ShippingDestinationAdapterImpl;
 import io.nzbee.entity.adapters.view.ShippingProductAdapterImpl;
 import io.nzbee.entity.adapters.view.ShippingTypeAdapterImpl;
-import io.nzbee.entity.bag.item.domain.regular.RegularBagItemDomainDTOMapperImpl;
-import io.nzbee.entity.bag.item.domain.regular.RegularBagItemDomainDTOServiceImpl;
 import io.nzbee.entity.bag.view.BagViewDTOServiceImpl;
 import io.nzbee.entity.bag.view.IBagViewDTOService;
 import io.nzbee.entity.bag.domain.BagDomainDTODaoImpl;
 import io.nzbee.entity.bag.domain.BagDomainDTOServiceImpl;
 import io.nzbee.entity.bag.domain.IBagDomainDTODao;
 import io.nzbee.entity.bag.domain.IBagDomainDTOService;
-import io.nzbee.entity.bag.item.domain.regular.IRegularBagItemDomainDTOMapper;
-import io.nzbee.entity.bag.item.domain.regular.IRegularBagItemDomainDTOService;
+import io.nzbee.entity.bag.item.domain.IBagItemDomainDTOMapper;
+import io.nzbee.entity.bag.item.domain.IBagItemDomainDTOService;
+import io.nzbee.entity.bag.item.type.BagItemTypeServiceImpl;
+import io.nzbee.entity.bag.item.type.IBagItemTypeService;
+import io.nzbee.entity.bag.item.domain.BagItemDomainDTOMapperImpl;
+import io.nzbee.entity.bag.item.domain.BagItemDomainDTOServiceImpl;
 import io.nzbee.entity.brand.view.BrandDTOServiceImpl;
 import io.nzbee.entity.brand.view.IBrandDTOService;
 import io.nzbee.entity.brand.view.facet.BrandFacetDTOMapperImpl;
@@ -95,6 +99,16 @@ import io.nzbee.view.product.tag.facet.TagFacetViewServiceImpl;
 @Configuration
 class BeanConfiguration {
 	
+	@Bean 
+	IShippingBagItemDomainService shippingBagItemDomainService() {
+		return new ShippingBagItemDomainServiceImpl();
+	}
+	
+	@Bean
+	IBagItemTypeService bagItemTypeService() {
+		return new BagItemTypeServiceImpl();
+	}
+	
 	@Bean
 	ICategoryTypeService categoryTypeService() {
 		return new CategoryTypeServiceImpl();
@@ -126,13 +140,13 @@ class BeanConfiguration {
 	}
 	
 	@Bean 
-	IRegularBagItemDomainDTOMapper bagItemDomainDTOMapper() {
-		return new RegularBagItemDomainDTOMapperImpl();
+	IBagItemDomainDTOMapper bagItemDomainDTOMapper() {
+		return new BagItemDomainDTOMapperImpl();
 	}
 	
 	@Bean
-	IRegularBagItemDomainDTOService bagItemDomainDTOService() {
-		return new RegularBagItemDomainDTOServiceImpl();
+	IBagItemDomainDTOService bagItemDomainDTOService() {
+		return new BagItemDomainDTOServiceImpl();
 	}
 	
 	@Bean 

@@ -18,7 +18,7 @@ public class BagItemEntityServiceImpl implements IBagItemService {
 	public Optional<BagItemEntity> findById(Long id) {
 		return bagItemRepository.findById(id);
 	}
-
+	
 	@Override
 	public void save(BagItemEntity t) {
 		bagItemRepository.save(t);
@@ -26,6 +26,7 @@ public class BagItemEntityServiceImpl implements IBagItemService {
 
 	@Override
 	public void update(BagItemEntity t) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".save with parameters {}", t.getBagItemId());
 		bagItemRepository.save(t);
 	}
 
@@ -34,6 +35,7 @@ public class BagItemEntityServiceImpl implements IBagItemService {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".delete with parameters {}", t.getBagItemId());
 		bagItemRepository.delete(t);
 	}
+
 
 
 }

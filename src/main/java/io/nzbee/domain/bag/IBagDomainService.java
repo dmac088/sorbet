@@ -1,6 +1,7 @@
 package io.nzbee.domain.bag;
 
 import io.nzbee.view.bag.item.BagItemViewIn;
+import io.nzbee.view.product.shipping.ShippingItemDTOIn;
 
 public interface IBagDomainService  {
 
@@ -14,7 +15,7 @@ public interface IBagDomainService  {
 
 	Bag addPhysicalItem(String locale, String currency, BagItemViewIn dto, String username);
 
-	Bag addShippingItem(String locale, String currency, BagItemViewIn dto, String username);
+	Bag addShippingItem(String locale, String currency, ShippingItemDTOIn dto, String username);
 
 	
 

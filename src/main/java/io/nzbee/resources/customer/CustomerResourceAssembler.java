@@ -8,9 +8,9 @@ import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSuppor
 import org.springframework.stereotype.Component;
 
 import io.nzbee.Constants;
+import io.nzbee.controllers.BagController;
 import io.nzbee.controllers.CustomerController;
 import io.nzbee.resources.ISimpleResourceAssembler;
-import io.nzbee.resources.controllers.BagController;
 import io.nzbee.view.customer.CustomerDTOOut;
 
 @Component

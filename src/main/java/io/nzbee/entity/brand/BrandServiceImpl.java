@@ -17,16 +17,8 @@ public class BrandServiceImpl implements IBrandService {
 	private IBrandRepository brandRepository;
 	
 	@Override
-	@Caching(
-			evict = {
-				@CacheEvict(cacheNames = CACHE_NAME, key="#brand.brandId.toString()"),
-				@CacheEvict(cacheNames = CACHE_NAME, key="#brand.brandCode"),
-				@CacheEvict(cacheNames = CACHE_NAME, key="#brand.locale + \", \" + #brand.brandId.toString()"),
-				@CacheEvict(cacheNames = CACHE_NAME, key="#brand.locale + \", \" + #brand.brandCode"),
-				@CacheEvict(cacheNames = CACHE_NAME + "Other", 			allEntries = true)
-			})
-	public void save(BrandEntity brand) {
-		brandRepository.save(brand);
+	public Optional<BrandEntity> findById(Long id) {
+		return brandRepository.findById(id);
 	}
 	
 	@Override
@@ -44,10 +36,22 @@ public class BrandServiceImpl implements IBrandService {
 		brandRepository.delete(t);
 		
 	}
-
 	@Override
 	public List<BrandEntity> findAll() {
 		return brandRepository.findAll();
+	}
+
+	@Override
+	@Caching(
+			evict = {
+				@CacheEvict(cacheNames = CACHE_NAME, key="#brand.brandId.toString()"),
+				@CacheEvict(cacheNames = CACHE_NAME, key="#brand.brandCode"),
+				@CacheEvict(cacheNames = CACHE_NAME, key="#brand.locale + \", \" + #brand.brandId.toString()"),
+				@CacheEvict(cacheNames = CACHE_NAME, key="#brand.locale + \", \" + #brand.brandCode"),
+				@CacheEvict(cacheNames = CACHE_NAME + "Other", 			allEntries = true)
+			})
+	public void save(BrandEntity brand) {
+		brandRepository.save(brand);
 	}
 
 }
