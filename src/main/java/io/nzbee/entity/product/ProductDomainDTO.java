@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import io.nzbee.entity.category.product.CategoryProductDomainDTO;
-import io.nzbee.entity.product.department.DepartmentDomainDTO;
 import io.nzbee.entity.promotion.PromotionDomainDTO;
 
 public class ProductDomainDTO implements Serializable {
@@ -30,10 +29,7 @@ public class ProductDomainDTO implements Serializable {
     public static final String RETAIL_PRICE_ALIAS = "retail_price";
     
     public static final String MARKDOWN_PRICE_ALIAS = "markdown_price";
-    
-    public static final String CURRENCY_ALIAS = "ccy_cd";
-    
-    public static final String LOCALE_ALIAS = "lcl_cd";
+ 
  
     protected final Long productId;
 
@@ -43,10 +39,6 @@ public class ProductDomainDTO implements Serializable {
 	
 	protected final String productLongDesc;
 	
-
-	//department
-	protected final DepartmentDomainDTO department;
-		
 	
 	//these fields will contain all the categories related to the product 1->N relationship
 	protected final Set<CategoryProductDomainDTO> categories = new HashSet<CategoryProductDomainDTO>();
@@ -57,12 +49,6 @@ public class ProductDomainDTO implements Serializable {
 	protected final BigDecimal retailPrice;
 	
 	protected final BigDecimal markdownPrice;
-	
-	
-	//localization
-	protected final String locale;
-	
-	protected final String currency;
 	
 	
 	//stock and status
@@ -88,12 +74,9 @@ public class ProductDomainDTO implements Serializable {
 			  ? ""
 			  : tuple[aliasToIndexMap.get(IMAGE_ALIAS)].toString();
 		this.productStatusCode 		= tuple[aliasToIndexMap.get(CODE_ALIAS)].toString();
-		this.currency				= tuple[aliasToIndexMap.get(CURRENCY_ALIAS)].toString();
-		this.locale					= tuple[aliasToIndexMap.get(LOCALE_ALIAS)].toString();
 		this.retailPrice			= ((BigDecimal) tuple[aliasToIndexMap.get(RETAIL_PRICE_ALIAS)]);
 		this.markdownPrice			= ((BigDecimal) tuple[aliasToIndexMap.get(MARKDOWN_PRICE_ALIAS)]);
-	
-		this.department = new DepartmentDomainDTO(tuple, aliasToIndexMap);
+
 	}
 	
 
@@ -131,18 +114,6 @@ public class ProductDomainDTO implements Serializable {
 
 	public BigDecimal getMarkdownPrice() {
 		return markdownPrice;
-	}
-
-	public String getLocale() {
-		return locale;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public DepartmentDomainDTO getDepartment() {
-		return department;
 	}
 
 	public boolean isInStock() {

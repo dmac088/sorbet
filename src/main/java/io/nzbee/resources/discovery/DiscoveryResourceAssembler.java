@@ -27,6 +27,7 @@ public class DiscoveryResourceAssembler  implements ISimpleResourceAssembler<Dis
 		Link l3 = linkTo(methodOn(SearchResourceController.class).getSearchURI()).withRel("searchResource");
 		Link l4 = linkTo(methodOn(ProductResourceController.class).getProductURI()).withRel("productResource");
 		
+		
 		dr.add(l1);
 		dr.add(l2);
 		dr.add(l3);

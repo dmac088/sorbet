@@ -8,4 +8,5 @@ public interface IShippingBagItemDomainService {
 
 	ShippingBagItem getShippingItem(String currency, Bag b, String code);
 
+
 }

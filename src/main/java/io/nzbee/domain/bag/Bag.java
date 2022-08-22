@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
@@ -67,7 +69,9 @@ public class Bag {
 	}
 	
 	public int getTotalItems() {
-		return this.getBagItems().size();
+		return this.getBagItems()
+					.stream().filter(bi -> bi.getClass().getSimpleName().equals(RegularBagItem.class.getSimpleName()))
+					.collect(Collectors.toSet()).size();
 	}
 	
 	public int getTotalQuantity() {
@@ -76,6 +80,10 @@ public class Bag {
 	
 	public ShippingBagItem getShippingItem() {
 		return shippingItem;
+	}
+	
+	public Boolean hasShippingItem() {
+		return !(shippingItem == null);
 	}
 
 	public BigDecimal getTotalWeight() {
@@ -117,5 +125,9 @@ public class Bag {
 	
 	public boolean hasPromotion() {
 		return !(this.promotion == null);
+	}
+
+	public void removeShippingItem() {
+		this.shippingItem = null;
 	}
 }

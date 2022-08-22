@@ -126,14 +126,21 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 			return bagItemMapper.doToEntity(bi);
 		}).collect(Collectors.toSet());
 
-		//add the shipping item
-		sbi.add(bagItemMapper.doToEntity(d.getShippingItem()));
 		
-		// add the bag items to the bag
-		sbi.stream().forEach(bi -> {
-			b.addItem(bi);
-		});
-
+		//remove any shipping item if it exists 
+		Optional<BagItemEntity> osbi = sbi.stream().filter(i -> i.getBagItemType().getBagItemTypeCode().equals(Constants.shippingBagItemType)).findAny();
+		if(osbi.isPresent()) {
+			LOGGER.debug("Shipping item with id: {} was found!", osbi.get().getProduct().getUPC());
+			b.getBagItems().remove(osbi.get());
+		}
+				
+		//add the new shipping item to the bag
+		if(d.hasShippingItem()) {
+			BagItemEntity sie = bagItemMapper.doToEntity(d.getShippingItem());
+			LOGGER.debug("Adding shipping item with id {}", sie.getProduct().getUPC());
+			b.getBagItems().add(sie);
+		}
+		
 		// add promotion to the bag if the promotion exists
 		if (opr.isPresent()) {
 			b.setPromotion((PromotionOrderEntity) opr.get().getPromotionOrder());

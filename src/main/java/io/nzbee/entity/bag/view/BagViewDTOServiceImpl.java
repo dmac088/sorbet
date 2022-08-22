@@ -24,6 +24,7 @@ public class BagViewDTOServiceImpl implements IBagViewDTOService {
 
 	@Override
 	public BigDecimal getBagWeight(String userName) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".getBagWeight with parameter {}", userName);
 		return bagRepository.getBagWeight(userName);
 	}
 

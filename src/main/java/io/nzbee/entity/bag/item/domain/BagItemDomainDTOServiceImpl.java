@@ -3,11 +3,16 @@ package io.nzbee.entity.bag.item.domain;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import io.nzbee.Constants;
+import io.nzbee.entity.bag.item.entity.BagItemEntity;
 
 public class BagItemDomainDTOServiceImpl implements IBagItemDomainDTOService {
+	
+	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	private IBagItemDomainDTORepository bagItemRepository;
@@ -26,5 +31,12 @@ public class BagItemDomainDTOServiceImpl implements IBagItemDomainDTOService {
 	public Optional<BagItemDomainDTO> getShippingItem(String currency, String priceType, String code) {
 		return bagItemRepository.getShippingItem(currency, priceType, code);
 	}
+	
+	@Override
+	public void delete(BagItemEntity e) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".delete()");
+		bagItemRepository.delete(e);
+	}
+	
 
 }

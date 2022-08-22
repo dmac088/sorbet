@@ -155,6 +155,7 @@ public class BagController {
     	
     	return ResponseEntity.ok(bagResourceAssembler.toModel(bv));
 	}
+ 
     
     @GetMapping("/Bag/{locale}/{currency}/Items/Remove/{itemCode}")
 	public ResponseEntity<Void> removeItemFromBag(	@PathVariable String locale, 

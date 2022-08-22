@@ -1,6 +1,9 @@
 package io.nzbee.entity.adapters.domain;
 
 import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +43,10 @@ public class BagDomainAdapter implements IBagPortService {
 	}
 
 	@Override
+	@Transactional
 	public void save(Bag domainObject) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".save()");
+		
 		BagEntity b = bagMapper.doToEntity(domainObject);
 		bagService.save(b);
 	}

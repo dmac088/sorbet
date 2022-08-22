@@ -1,6 +1,9 @@
 package io.nzbee.entity.adapters.domain;
 
 import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,6 @@ import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
 import io.nzbee.domain.ports.IShippingBagItemPortService;
-import io.nzbee.entity.bag.domain.IBagDomainDTOService;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.bag.item.domain.IBagItemDomainDTOMapper;
 import io.nzbee.entity.bag.item.domain.IBagItemDomainDTOService;
@@ -31,9 +33,6 @@ public class ShippingBagItemDomainAdapter implements IShippingBagItemPortService
 	private IPersonService personService;
 	
 	@Autowired
-	private IBagDomainDTOService bagService;
-	
-	@Autowired
 	private IBagItemService bagItemService;
 	
 	@Autowired
@@ -43,22 +42,26 @@ public class ShippingBagItemDomainAdapter implements IShippingBagItemPortService
 	private IBagItemDomainDTOMapper bagItemDomainMapper;
 
 
+	public void addShippingItem(String currency, Bag b, String code) {
+		
+		
+	}
+	
 	@Override
+	@Transactional
 	public ShippingBagItem getShippingItem(Bag b, String code, String currency) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".v with parameters {}", code);
+		LOGGER.debug("call " + getClass().getSimpleName() + ".getShippingItem with parameters {}", code);
 		
 		BagItemDomainDTO biDto = bagItemDomainDTOService.getShippingItem(currency, Constants.markdownPriceCode, code)
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, Constants.localeENGB, code));
 		
 		ShippingBagItem sbi = bagItemDomainMapper.DTOToDo(b, biDto);
 		
-//		System.out.println("the shipping item is:");
-//		System.out.println(sbi.getBagItem().getProductUPC());
-//		
 		return sbi;
 	}
 	
 	@Override
+	@Transactional
 	public ShippingBagItem getNewShippingItem(String locale, String currency, Bag b, String destCode, String shipType) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewShippingItem with parameters {}, {}", destCode, shipType);
 		
@@ -75,22 +78,27 @@ public class ShippingBagItemDomainAdapter implements IShippingBagItemPortService
 	}
 	
 	@Override
+	@Transactional
 	public void delete(ShippingBagItem domainObject) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".delete with parameters {}", domainObject.getBagItem().getProductUPC());
+		LOGGER.debug("call " + getClass().getSimpleName() + ".delete()");
 		Optional<PersonEntity> op = personService.findByUsernameAndRole(domainObject.getBagItem().getBag().getCustomer().getUserName(), Constants.partyRoleCustomer);
 		BagEntity b = op.get().getPersonParty().getBag();
-		Optional<BagItemEntity> obi = b.getBagItems().stream().filter(bi -> bi.getProduct().getProductUPC().equals(domainObject.getBagItem().getProductUPC())).findAny();
-		io.nzbee.entity.bag.item.entity.BagItemEntity bi = obi.get();
-		b.removeItem(bi);
-		bagService.save(b); 
+		Optional<BagItemEntity> obi = b.getBagItems().stream().filter(bi -> bi.getBagItemType().getBagItemTypeCode().equals(Constants.shippingBagItemType)).findAny();		
+		if(obi.isPresent()) {
+			bagItemDomainDTOService.delete(obi.get());
+		}
 	}
+	
+	
 
 	@Override
+	@Transactional
 	public void save(RegularBagItem domainObject) {
 		bagItemService.save(bagItemDomainMapper.doToEntity(domainObject));
 	}
 	
 	@Override
+	@Transactional
 	public void save(ShippingBagItem domainObject) {
 		bagItemService.save(bagItemDomainMapper.doToEntity(domainObject));
 	}

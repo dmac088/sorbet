@@ -21,6 +21,9 @@ public class BagView {
 	
 	private Set<BagItemViewOut> bagItems;
 	
+	private BagItemViewOut shippingItem;
+	
+	
 
 	public String getBagStatusCode() {
 		return bagStatusCode;
@@ -77,7 +80,13 @@ public class BagView {
 	public void setBagItems(Set<BagItemViewOut> bagItems) {
 		this.bagItems = bagItems;
 	}
-	
-	
+
+	public BagItemViewOut getShippingItem() {
+		return shippingItem;
+	}
+
+	public void setShippingItem(BagItemViewOut shippingItem) {
+		this.shippingItem = shippingItem;
+	}
 	
 }

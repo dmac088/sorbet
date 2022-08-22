@@ -20,6 +20,10 @@ public class BagViewDTO {
 		this.bagId = ((Number) tuple[aliasToIndexMap.get(ID_ALIAS)]).longValue();
 	}
 
+	public Long getBagId() {
+		return bagId;
+	}
+	
 	public Set<BagItemViewDTO> getBagItems() {
 		return bagItems;
 	}
@@ -27,11 +31,7 @@ public class BagViewDTO {
 	public void setBagItems(Set<BagItemViewDTO> bagItems) {
 		this.bagItems = bagItems;
 	}
-
-	public Long getBagId() {
-		return bagId;
-	}
-
+	
 	public PersonViewDTO getCustomer() {
 		return customer;
 	}

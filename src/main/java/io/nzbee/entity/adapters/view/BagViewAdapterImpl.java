@@ -31,6 +31,7 @@ public class BagViewAdapterImpl implements IBagPortService {
 	public BagView findByCode(String locale, String currency, String userName) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode with parameter {}, {}, {}", locale, currency, userName);
 		
+		//this will also retrieve the items of the bag
 		Optional<BagViewDTO> b = bagService.findByCode(locale, currency, globals.getDefaultProductRootCategoryCode(),userName);
 		
 		return bagMapper.DTOToView(b.get());
@@ -38,7 +39,9 @@ public class BagViewAdapterImpl implements IBagPortService {
 
 	@Override
 	@Transactional
-	public BagView toview(String locale, String currency, Bag b) {
+	public BagView toView(String locale, String currency, Bag b) {
+		//this function will convert the bag domain object to a view representation
+		LOGGER.debug("call " + getClass().getSimpleName() + ".toView with parameter {}, {}, {}", locale, currency, b.getCustomer().getUserName());
 		Optional<BagViewDTO> bvDto = bagService.findByCode(locale, currency, globals.getDefaultProductRootCategoryCode(), b.getCustomer().getUserName());
 		BagView bv = bagMapper.DTOToView(bvDto.get());
     	bv.setTotalAmount(b.getTotalAmount());

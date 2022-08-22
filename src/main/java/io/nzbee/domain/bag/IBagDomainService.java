@@ -17,6 +17,4 @@ public interface IBagDomainService  {
 
 	Bag addShippingItem(String locale, String currency, ShippingItemDTOIn dto, String username);
 
-	
-
 }

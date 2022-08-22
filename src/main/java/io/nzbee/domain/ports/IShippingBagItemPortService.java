@@ -9,12 +9,12 @@ public interface IShippingBagItemPortService {
 	ShippingBagItem getNewShippingItem(String locale, String currency, Bag bag, String destCode, String shipType);
 
 	ShippingBagItem getShippingItem(Bag b, String code, String currency);
-	
-	void delete(ShippingBagItem domainObject);
 
 	void save(RegularBagItem domainObject);
 
 	void save(ShippingBagItem domainObject);
+
+	void delete(ShippingBagItem domainObject);
 
 
 

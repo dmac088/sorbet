@@ -2,6 +2,8 @@ package io.nzbee.entity.bag.item.domain;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import io.nzbee.Constants;
@@ -21,6 +23,8 @@ import io.nzbee.entity.product.ProductEntity;
 
 public class BagItemDomainDTOMapperImpl implements IBagItemDomainDTOMapper {
 
+	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+	
 	@Autowired
 	private IProductService productService;
 	
@@ -35,6 +39,7 @@ public class BagItemDomainDTOMapperImpl implements IBagItemDomainDTOMapper {
 
 	@Override
 	public RegularBagItem DTOToDo(Bag bag, BagItemWithQuantityDomainDTO dto) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo parameters: {}, {}", bag.getCustomer().getUserName(), dto.getProductUPC());
 		return new RegularBagItem(
 						new BagItem(bag, 
 						dto.getProductUPC(), 
@@ -48,6 +53,7 @@ public class BagItemDomainDTOMapperImpl implements IBagItemDomainDTOMapper {
 	
 	@Override
 	public RegularBagItem DTOToDo(Bag bag, BagItemDomainDTO dto, int quantity) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo parameters: {}, {}, {}", bag.getCustomer().getUserName(), dto.getProductUPC());
 		return new RegularBagItem(
 				new BagItem(bag, 
 				dto.getProductUPC(), 
@@ -60,6 +66,7 @@ public class BagItemDomainDTOMapperImpl implements IBagItemDomainDTOMapper {
 	
 	@Override
 	public ShippingBagItem DTOToDo(Bag bag, BagItemDomainDTO dto) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo parameters: {}, {}, {}", bag.getCustomer().getUserName(), dto.getProductUPC());
 		return new ShippingBagItem(
 				new BagItem(bag, 
 				dto.getProductUPC(), 
@@ -71,6 +78,7 @@ public class BagItemDomainDTOMapperImpl implements IBagItemDomainDTOMapper {
 
 	@Override
 	public BagItemEntity doToEntity(RegularBagItem d) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo doToEntity: {}", d.getBagItem().getProductUPC());
 		Optional<ProductEntity> op = productService.findByCode(d.getBagItem().getProductUPC());
 		Optional<BagItemStatus> obis = bagItemStatusService.findByCode(Constants.bagItemStatusCodeNew);
 		Optional<BagEntity> ob = bagEntityService.findByCode(d.getBagItem().getBag().getCustomer().getUserName());
@@ -86,6 +94,7 @@ public class BagItemDomainDTOMapperImpl implements IBagItemDomainDTOMapper {
 
 	@Override
 	public BagItemEntity doToEntity(ShippingBagItem d) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo doToEntity: {}", d.getBagItem().getProductUPC());
 		Optional<ProductEntity> op = productService.findByCode(d.getBagItem().getProductUPC());
 		Optional<BagItemStatus> obis = bagItemStatusService.findByCode(Constants.bagItemStatusCodeNew);
 		Optional<BagEntity> ob = bagEntityService.findByCode(d.getBagItem().getBag().getCustomer().getUserName());

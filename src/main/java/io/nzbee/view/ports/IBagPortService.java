@@ -7,6 +7,6 @@ public interface IBagPortService {
 
 	BagView findByCode(String locale, String currency, String userName);
 
-	BagView toview(String locale, String currency, Bag b);
+	BagView toView(String locale, String currency, Bag b);
 
 }

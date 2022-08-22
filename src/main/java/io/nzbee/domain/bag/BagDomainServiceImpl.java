@@ -1,5 +1,7 @@
 package io.nzbee.domain.bag;
 
+import javax.transaction.Transactional;
+
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.slf4j.Logger;
@@ -38,6 +40,7 @@ public class BagDomainServiceImpl implements IBagDomainService {
 	}
 	
 	@Override
+	@Transactional
 	public Bag addPhysicalItem(String locale, String currency, BagItemViewIn dto, String username) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".addPhysicalItem with parameters {}, {}, {}, {}, {}", locale, currency, dto.getItemUPC(), dto.getItemQty(), username);
 		
@@ -83,19 +86,20 @@ public class BagDomainServiceImpl implements IBagDomainService {
 	}
 	
 	
+	
 	@Override
+	@Transactional
 	public Bag addShippingItem(String locale, String currency, ShippingItemDTOIn dto, String username) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".addShippingItem with parameters {}, {}, {}, {}", locale, currency, dto.getShippingProductCode(), username);
-		
+	
 		//get the bag domain model with the items
     	Bag b = this.findByCode(locale, 
     							currency, 
     							username);
-
-    	
-    	//get the shipping item 
-    	ShippingBagItem sbi = shippingBagItemService.getShippingItem(currency, b, dto.getShippingProductCode());
-    	
+		
+    	//get the shipping item
+		ShippingBagItem sbi = shippingBagItemService.getShippingItem(currency, b, dto.getShippingProductCode());
+	
     	//add the shipping item to the bag
     	b.addShippingItem(sbi);
     	
@@ -130,5 +134,6 @@ public class BagDomainServiceImpl implements IBagDomainService {
         System.out.println("************************************");
         System.out.println("Customer bag\n" + object.getCustomer().getUserName());
 	}
+
 
 }

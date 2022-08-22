@@ -14,7 +14,11 @@ public class BagItemViewDTO {
     
     public static final String BAG_ITEM_STATUS_CODE_ALIAS = "bag_item_sts_cd";
     
+    public static final String BAG_ITEM_TYPE_CODE_ALIAS = "bag_item_typ_cd";
+    
     public static final String BAG_ITEM_STATUS_DESC_ALIAS = "bag_item_sts_desc";
+    
+    
 
 	private final Long bagItemId;
 	
@@ -23,6 +27,8 @@ public class BagItemViewDTO {
 	private final PhysicalProductDTO product;
 	
 	private final String bagItemStatusCode;
+	
+	private final String bagItemTypeCode;
 	
 	private final String bagItemStatusDesc; 
 	
@@ -34,6 +40,7 @@ public class BagItemViewDTO {
 		
 		this.bagItemId 			= ((Number) tuple[aliasToIndexMap.get(ID_ALIAS)]).longValue();
 		this.bagItemStatusCode 	= tuple[aliasToIndexMap.get(BAG_ITEM_STATUS_CODE_ALIAS)].toString();
+		this.bagItemTypeCode 	= tuple[aliasToIndexMap.get(BAG_ITEM_TYPE_CODE_ALIAS)].toString();
 		this.bagItemStatusDesc 	= tuple[aliasToIndexMap.get(BAG_ITEM_STATUS_DESC_ALIAS)].toString();
 		this.quantity			= ((Number) tuple[aliasToIndexMap.get(QUANTITY_ALIAS)]).intValue();
 	}
@@ -62,6 +69,10 @@ public class BagItemViewDTO {
 		return bagItemStatusDesc;
 	}
 	
+	public String getBagItemTypeCode() {
+		return bagItemTypeCode;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		 if (this == o) return true;
