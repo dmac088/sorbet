@@ -1,8 +1,6 @@
 package io.nzbee.view.bag.item;
 
 import java.math.BigDecimal;
-
-import io.nzbee.entity.bag.view.BagViewDTO;
 import io.nzbee.view.product.physical.full.PhysicalProductFullView;
 
 public class BagItemViewOut {
@@ -19,13 +17,13 @@ public class BagItemViewOut {
 	
 	private BigDecimal bagItemWeight;
 	
-	public BagItemViewOut(BagViewDTO bDo, PhysicalProductFullView p, int quantity) {
+	public BagItemViewOut(PhysicalProductFullView p, int quantity) {
 		this.itemUPC = p.getProductUPC();
 		this.itemDesc = p.getProductDesc();
 		this.itemQty = quantity;
 		this.markdownPrice = p.getProductMarkdown();
 		this.bagItemWeight = p.getWeight();
-		
+		this.bagItemTotal = p.getProductMarkdown().multiply(new BigDecimal(quantity));
 	}
 
 	public BagItemViewOut() {

@@ -31,13 +31,13 @@ public class BagViewDTOMapperImpl implements IBagViewDTOMapper {
 		// map the entity bagItems to the view bagItems
 		Set<BagItemViewOut> sbi = bDto.getBagItems().stream()
 				.filter(bi -> bi.getBagItemTypeCode().equals(Constants.regularBagItemType))
-				.map(bi -> bagItemMapper.DTOToView(bDto, bi)).collect(Collectors.toSet());
+				.map(bi -> bagItemMapper.DTOToView(bi)).collect(Collectors.toSet());
 
 		b.getBagItems().addAll(sbi);
 
 		b.setShippingItem(
 				bDto.getBagItems().stream().filter(bi -> bi.getBagItemTypeCode().equals(Constants.shippingBagItemType))
-						.map(bi -> bagItemMapper.DTOToView(bDto, bi)).findAny().get());
+						.map(bi -> bagItemMapper.DTOToView(bi)).findAny().get());
 
 		System.out.println(bDto.getBagItems().size());
 		System.out.println(b.getShippingItem().getItemUPC());
@@ -60,14 +60,14 @@ public class BagViewDTOMapperImpl implements IBagViewDTOMapper {
 		Set<BagItemViewOut> sbi = 
 			dto.getBagItems().stream()
 				.filter(bi -> bi.getBagItemTypeCode().equals(Constants.regularBagItemType))
-				.map(bi -> bagItemMapper.DTOToView(dto, bi)).collect(Collectors.toSet());
+				.map(bi -> bagItemMapper.DTOToView(bi)).collect(Collectors.toSet());
 		b.setBagItems(sbi);
 
 		// the shipping item
 		b.setShippingItem(
 			dto.getBagItems().stream()
 				.filter(bi -> bi.getBagItemTypeCode().equals(Constants.shippingBagItemType))
-				.map(bi -> bagItemMapper.DTOToView(dto, bi)).findAny().orElse(null));
+				.map(bi -> bagItemMapper.DTOToView(bi)).findAny().orElse(null));
 
 		return b;
 	}
