@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import io.nzbee.Constants;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
+import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
 import io.nzbee.domain.customer.Customer;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.bag.entity.IBagEntityService;
@@ -51,16 +52,26 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 
 		// map the entity bagItems to the domain bagItems
 		Set<RegularBagItem> sbi = dto.getBagItems().stream()
-			//	.filter(bi -> bi.getBagItemType().equals(Constants.regularBagItemType))
+				.filter(bi -> bi.getBagItemType().equals(Constants.regularBagItemType))
 				.map(bi -> bagItemMapper.DTOToDo(b, bi))
 				.collect(Collectors.toSet());
+		
+		Optional<ShippingBagItem> ossbi = 
+				dto.getBagItems().stream()
+				.filter(bi -> bi.getBagItemType().equals(Constants.shippingBagItemType))
+				.map(bi -> bagItemMapper.ShippingDTOToShippingDo(b, bi))
+				.findAny();
 
 		// use the add item method on the domain object to
 		// ensure business rules are fired against each added bagItem
 		sbi.forEach(bi -> {
 			b.addItem(bi, bi.getBagItem().getQuantity());
 		});
-
+		
+		if(ossbi.isPresent()) {
+			b.addShippingItem(ossbi.get());
+		}
+		
 		return b;
 	}
 
@@ -76,15 +87,25 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 
 		// map the entity bagItems to the domain bagItems
 		Set<RegularBagItem> sbi = bDto.getBagItems().stream()
-			//	.filter(bi -> bi.getBagItemType().equals(Constants.regularBagItemType))
+				.filter(bi -> bi.getBagItemType().equals(Constants.regularBagItemType))
 				.map(bi -> bagItemMapper.DTOToDo(b, bi))
 				.collect(Collectors.toSet());
 
+		Optional<ShippingBagItem> ossbi = 
+				bDto.getBagItems().stream()
+				.filter(bi -> bi.getBagItemType().equals(Constants.shippingBagItemType))
+				.map(bi -> bagItemMapper.ShippingDTOToShippingDo(b, bi))
+				.findAny();
+		
 		// use the add item method on the domain object to
 		// ensure business rules are fired against each added bagItem
 		sbi.forEach(bi -> {
 			b.addItem(bi, bi.getBagItem().getQuantity());
 		});
+		
+		if(ossbi.isPresent()) {
+			b.addShippingItem(ossbi.get());
+		}
 
 		return b;
 	}
@@ -103,11 +124,6 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 			opr = promotionService.findByCode(d.getPromotion().get().getPromotionCode());
 		}
 
-		System.out.println("username = " + d.getCustomer().getUserName());
-		System.out.println("bag is present = " + obe.isPresent());
-		System.out.println("person is present = " + op.isPresent());
-		System.out.println("bag promotion is present = " + opr.isPresent());
-
 		BagEntity nbe = new BagEntity();
 		nbe.setBagCreatedDateTime(LocalDateTime.now());
 		nbe.setBagUpdatedDateTime(LocalDateTime.now());
@@ -118,24 +134,25 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		b.setBagUpdatedDateTime(LocalDateTime.now());
 
 		// map the domain bagItems to entity bagItems
-		Set<BagItemEntity> sbi = d.getBagItems().stream().map(bi -> {
+		d.getBagItems().stream().forEach(bi -> {
 			Optional<BagItemEntity> obi = b.getBagItems().stream()
 					.filter(i -> i.getProduct().getProductUPC().equals(bi.getBagItem().getProductUPC())).findAny();
 
 			if (obi.isPresent()) {
 				BagItemEntity bie = obi.get();
 				bie.setQuantity(bi.getBagItem().getQuantity());
-				return bie;
 			}
-			return bagItemMapper.doToEntity(bi);
-		}).collect(Collectors.toSet());
-
+		});
 		
 		//remove any shipping item if it exists 
-		Optional<BagItemEntity> osbi = sbi.stream().filter(i -> i.getBagItemType().getBagItemTypeCode().equals(Constants.shippingBagItemType)).findAny();
-		if(osbi.isPresent()) {
-			LOGGER.debug("Shipping item with id: {} was found!", osbi.get().getProduct().getUPC());
-			b.getBagItems().remove(osbi.get());
+		if(d.hasShippingItem() ) {
+			//find the shipping item among the existing bag item entities 
+			Optional<BagItemEntity> oe = b.getBagItems().stream().filter(i -> i.getBagItemType().getBagItemTypeCode().equals(Constants.shippingBagItemType)).findAny();
+
+			if(oe.isPresent()) {
+				LOGGER.debug("Shipping item with id: {} was found!", d.getShippingItem().getBagItem().getProductUPC());
+				b.getBagItems().remove(oe.get());
+			}
 		}
 				
 		//add the new shipping item to the bag

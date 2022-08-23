@@ -50,6 +50,17 @@ public class BagItemDomainDTOMapperImpl implements IBagItemDomainDTOMapper {
 					);
 	}
 	
+	@Override
+	public ShippingBagItem ShippingDTOToShippingDo(Bag bag, BagItemWithQuantityDomainDTO dto) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo parameters: {}, {}", bag.getCustomer().getUserName(), dto.getProductUPC());
+		return new ShippingBagItem(
+						new BagItem(bag, 
+						dto.getProductUPC(), 
+						1, 
+						dto.getMarkdownPrice())
+					);
+	}
+	
 	
 	@Override
 	public RegularBagItem DTOToDo(Bag bag, BagItemDomainDTO dto, int quantity) {

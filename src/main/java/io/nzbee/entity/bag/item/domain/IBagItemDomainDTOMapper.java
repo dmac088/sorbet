@@ -17,4 +17,6 @@ public interface IBagItemDomainDTOMapper {
 
 	ShippingBagItem DTOToDo(Bag bag, BagItemDomainDTO biDto);
 
+	ShippingBagItem ShippingDTOToShippingDo(Bag bag, BagItemWithQuantityDomainDTO dto);
+
 }
