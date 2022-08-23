@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
 import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
@@ -49,7 +47,6 @@ public class Bag {
 		} else {
 			this.getBagItems().add(new RegularBagItem(new BagItem(this, p.getBagItem().getProductUPC(), qty, p.getBagItem().getMarkdownPrice()), p.getBagItemWeight(), p.isInStock()));
 		}
-		
 	}
 	
 	public void addShippingItem(ShippingBagItem p) {	
@@ -69,13 +66,12 @@ public class Bag {
 	}
 	
 	public int getTotalItems() {
-		return this.getBagItems()
-					.stream().filter(bi -> bi.getClass().getSimpleName().equals(RegularBagItem.class.getSimpleName()))
-					.collect(Collectors.toSet()).size();
+		return this.getBagItems().size();
 	}
 	
 	public int getTotalQuantity() {
-		return this.getBagItems().stream().mapToInt(r -> r.getBagItem().getQuantity()).sum();
+		return this.getBagItems().stream()
+				.mapToInt(r -> r.getBagItem().getQuantity()).sum();
 	}
 	
 	public ShippingBagItem getShippingItem() {
@@ -94,7 +90,20 @@ public class Bag {
 		return sum;
 	}
 	
-	public BigDecimal getTotalAmount() {
+	public BigDecimal getGrandTotalAmount() {
+		BigDecimal sum = BigDecimal.ZERO;
+        for (RegularBagItem bi : this.getBagItems()) {
+            sum = sum.add(bi.getBagItem().getBagItemTotal());
+        }
+        if(hasShippingItem()) {
+        	System.out.println("the bag has a shipping item");
+        	System.out.println("the amount is: " + shippingItem.getBagItem().getBagItemTotal());
+        	sum = sum.add(shippingItem.getBagItem().getBagItemTotal());
+        }
+		return sum;
+	}
+	
+	public BigDecimal getSubTotalAmount() {
 		BigDecimal sum = BigDecimal.ZERO;
         for (RegularBagItem bi : this.getBagItems()) {
             sum = sum.add(bi.getBagItem().getBagItemTotal());

@@ -12,7 +12,8 @@ public class BagViewMapperImpl implements IBagViewMapper {
 		BagView dto = new BagView();
 		dto.setTotalItems(d.getTotalItems());
 		dto.setTotalQuantity(d.getTotalQuantity());
-		dto.setTotalAmount(d.getTotalAmount());
+		dto.setGrandTotalAmount(d.getGrandTotalAmount());
+		dto.setSubTotalAmount(d.getSubTotalAmount());
 		dto.setTotalWeight(d.getTotalWeight());
 		return dto;
 	}

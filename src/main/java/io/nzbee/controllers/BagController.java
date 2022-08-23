@@ -90,8 +90,8 @@ public class BagController {
 		System.out.println("coupon code found " + op);
 		
 		Bag b = domainBagService.findByCode(	locale,
-										currency,
-										principal.getName());
+												currency,
+												principal.getName());
 		
 		b.setPromotion(op);
 		

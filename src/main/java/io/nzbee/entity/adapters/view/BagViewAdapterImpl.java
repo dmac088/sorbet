@@ -44,7 +44,8 @@ public class BagViewAdapterImpl implements IBagPortService {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".toView with parameter {}, {}, {}", locale, currency, b.getCustomer().getUserName());
 		Optional<BagViewDTO> bvDto = bagService.findByCode(locale, currency, globals.getDefaultProductRootCategoryCode(), b.getCustomer().getUserName());
 		BagView bv = bagMapper.DTOToView(bvDto.get());
-    	bv.setTotalAmount(b.getTotalAmount());
+    	bv.setGrandTotalAmount(b.getGrandTotalAmount());
+    	bv.setSubTotalAmount(b.getSubTotalAmount());
     	bv.setTotalQuantity(b.getTotalQuantity());
     	bv.setTotalItems(b.getTotalItems());
     	bv.setTotalWeight(b.getTotalWeight());

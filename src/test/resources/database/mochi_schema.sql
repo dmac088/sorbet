@@ -4449,8 +4449,8 @@ CREATE TABLE mochi.product_shipping (
     shp_wgt_lim numeric,
     shp_wgt_frm numeric NOT NULL,
     shp_wgt_to numeric NOT NULL,
-    shp_typ_cd character(6) NOT NULL,
-    shp_ctry_cd character(3) NOT NULL
+    shp_typ_cd character varying(6) NOT NULL,
+    shp_ctry_cd character varying(3) NOT NULL
 );
 
 

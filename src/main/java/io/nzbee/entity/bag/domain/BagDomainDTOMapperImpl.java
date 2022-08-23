@@ -50,7 +50,9 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		Bag b = new Bag(personMapper.DTOToDo(dto.getCustomer()));
 
 		// map the entity bagItems to the domain bagItems
-		Set<RegularBagItem> sbi = dto.getBagItems().stream().map(bi -> bagItemMapper.DTOToDo(b, bi))
+		Set<RegularBagItem> sbi = dto.getBagItems().stream()
+			//	.filter(bi -> bi.getBagItemType().equals(Constants.regularBagItemType))
+				.map(bi -> bagItemMapper.DTOToDo(b, bi))
 				.collect(Collectors.toSet());
 
 		// use the add item method on the domain object to
@@ -73,7 +75,9 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		Bag b = new Bag(c);
 
 		// map the entity bagItems to the domain bagItems
-		Set<RegularBagItem> sbi = bDto.getBagItems().stream().map(bi -> bagItemMapper.DTOToDo(b, bi))
+		Set<RegularBagItem> sbi = bDto.getBagItems().stream()
+			//	.filter(bi -> bi.getBagItemType().equals(Constants.regularBagItemType))
+				.map(bi -> bagItemMapper.DTOToDo(b, bi))
 				.collect(Collectors.toSet());
 
 		// use the add item method on the domain object to

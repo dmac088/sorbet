@@ -41,11 +41,6 @@ public class ShippingBagItemDomainAdapter implements IShippingBagItemPortService
 	@Autowired
 	private IBagItemDomainDTOMapper bagItemDomainMapper;
 
-
-	public void addShippingItem(String currency, Bag b, String code) {
-		
-		
-	}
 	
 	@Override
 	@Transactional

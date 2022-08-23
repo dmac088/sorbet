@@ -26,7 +26,7 @@ public class DroolsBagWrapper {
 	}
 	
 	public BigDecimal getTotalAmount() {
-		return bag.getTotalAmount();
+		return bag.getSubTotalAmount();
 	}
 
 	public String getCouponCode() {

@@ -15,7 +15,9 @@ public class BagView {
 	
 	private int totalQuantity;
 	
-	private BigDecimal totalAmount;
+	private BigDecimal grandTotalAmount;
+	
+	private BigDecimal subTotalAmount;
 	
 	private BigDecimal totalWeight;
 	
@@ -57,12 +59,20 @@ public class BagView {
 		this.totalQuantity = totalQuantity;
 	}
 
-	public BigDecimal getTotalAmount() {
-		return totalAmount;
+	public BigDecimal getGrandTotalAmount() {
+		return grandTotalAmount;
 	}
 
-	public void setTotalAmount(BigDecimal totalAmount) {
-		this.totalAmount = totalAmount;
+	public void setGrandTotalAmount(BigDecimal grandTotalAmount) {
+		this.grandTotalAmount = grandTotalAmount;
+	}
+
+	public BigDecimal getSubTotalAmount() {
+		return subTotalAmount;
+	}
+
+	public void setSubTotalAmount(BigDecimal subTotalAmount) {
+		this.subTotalAmount = subTotalAmount;
 	}
 
 	public BigDecimal getTotalWeight() {
