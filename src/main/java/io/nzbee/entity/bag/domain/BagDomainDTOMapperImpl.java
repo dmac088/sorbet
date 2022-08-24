@@ -15,7 +15,8 @@ import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
 import io.nzbee.domain.customer.Customer;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.bag.entity.IBagEntityService;
-import io.nzbee.entity.bag.item.domain.IBagItemDomainDTOMapper;
+import io.nzbee.entity.bag.item.domain.IRegularBagItemDomainDTOMapper;
+import io.nzbee.entity.bag.item.domain.IShippingBagItemDomainDTOMapper;
 import io.nzbee.entity.bag.item.entity.BagItemEntity;
 import io.nzbee.entity.party.person.ICustomerDomainMapper;
 import io.nzbee.entity.party.person.IPersonService;
@@ -37,7 +38,10 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 	private ICustomerDomainMapper personMapper;
 
 	@Autowired
-	private IBagItemDomainDTOMapper bagItemMapper;
+	private IRegularBagItemDomainDTOMapper bagItemMapper;
+	
+	@Autowired
+	private IShippingBagItemDomainDTOMapper shippingItemMapper;
 
 	@Autowired
 	private IPersonService personService;
@@ -59,7 +63,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		Optional<ShippingBagItem> ossbi = 
 				dto.getBagItems().stream()
 				.filter(bi -> bi.getBagItemType().equals(Constants.shippingBagItemType))
-				.map(bi -> bagItemMapper.ShippingDTOToShippingDo(b, bi))
+				.map(bi -> shippingItemMapper.DTOToDo(b, bi))
 				.findAny();
 
 		// use the add item method on the domain object to
@@ -94,7 +98,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		Optional<ShippingBagItem> ossbi = 
 				bDto.getBagItems().stream()
 				.filter(bi -> bi.getBagItemType().equals(Constants.shippingBagItemType))
-				.map(bi -> bagItemMapper.ShippingDTOToShippingDo(b, bi))
+				.map(bi -> shippingItemMapper.DTOToDo(b, bi))
 				.findAny();
 		
 		// use the add item method on the domain object to

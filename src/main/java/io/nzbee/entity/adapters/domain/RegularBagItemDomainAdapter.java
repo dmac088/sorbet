@@ -12,7 +12,7 @@ import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.ports.IRegularBagItemPortService;
 import io.nzbee.entity.bag.domain.IBagDomainDTOService;
 import io.nzbee.entity.bag.entity.BagEntity;
-import io.nzbee.entity.bag.item.domain.IBagItemDomainDTOMapper;
+import io.nzbee.entity.bag.item.domain.IRegularBagItemDomainDTOMapper;
 import io.nzbee.entity.bag.item.domain.IBagItemDomainDTOService;
 import io.nzbee.entity.bag.item.domain.BagItemDomainDTO;
 import io.nzbee.entity.bag.item.entity.BagItemEntity;
@@ -39,7 +39,7 @@ public class RegularBagItemDomainAdapter implements IRegularBagItemPortService {
 	private IBagItemDomainDTOService bagItemDomainDTOService;
 	
 	@Autowired
-	private IBagItemDomainDTOMapper bagItemDomainMapper;
+	private IRegularBagItemDomainDTOMapper bagItemDomainMapper;
 
 	@Override
 	public RegularBagItem getNewPhysicalItem(String locale, String currency, Bag bag, String itemUPC, int quantity) {

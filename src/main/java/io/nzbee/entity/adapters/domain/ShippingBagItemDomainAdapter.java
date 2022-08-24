@@ -15,7 +15,7 @@ import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
 import io.nzbee.domain.ports.IShippingBagItemPortService;
 import io.nzbee.entity.bag.entity.BagEntity;
-import io.nzbee.entity.bag.item.domain.IBagItemDomainDTOMapper;
+import io.nzbee.entity.bag.item.domain.IRegularBagItemDomainDTOMapper;
 import io.nzbee.entity.bag.item.domain.IBagItemDomainDTOService;
 import io.nzbee.entity.bag.item.domain.BagItemDomainDTO;
 import io.nzbee.entity.bag.item.entity.BagItemEntity;
@@ -39,7 +39,7 @@ public class ShippingBagItemDomainAdapter implements IShippingBagItemPortService
 	private IBagItemDomainDTOService bagItemDomainDTOService;
 	
 	@Autowired
-	private IBagItemDomainDTOMapper bagItemDomainMapper;
+	private IRegularBagItemDomainDTOMapper bagItemDomainMapper;
 
 	
 	@Override

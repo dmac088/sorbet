@@ -40,7 +40,7 @@ import io.nzbee.entity.bag.domain.BagDomainDTOMapperImpl;
 import io.nzbee.entity.bag.domain.BagDomainDTOServiceImpl;
 import io.nzbee.entity.bag.entity.BagEntityServiceImpl;
 import io.nzbee.entity.bag.item.view.BagItemViewDTOMapperImpl;
-import io.nzbee.entity.bag.item.domain.BagItemDomainDTOMapperImpl;
+import io.nzbee.entity.bag.item.domain.RegularBagItemDomainDTOMapperImpl;
 import io.nzbee.entity.bag.item.domain.BagItemDomainDTOServiceImpl;
 import io.nzbee.entity.bag.item.entity.BagItemEntityServiceImpl;
 import io.nzbee.entity.bag.status.BagItemStatusServiceImpl;
@@ -92,7 +92,7 @@ import io.nzbee.view.bag.item.BagItemViewMapperImpl;
 		PhysicalProductDTOServiceImpl.class, PhysicalProductDTODaoPostgresImpl.class, BagViewDTOServiceImpl.class,
 		BagViewDTODaoPostgresImpl.class, BagViewDTOMapperImpl.class, BagItemViewMapperImpl.class,
 		BagItemViewDTOMapperImpl.class, PhysicalProductDTOMapperImpl.class, BagItemDomainDTOServiceImpl.class,
-		BagItemDomainDTOMapperImpl.class, BagDomainDTOServiceImpl.class, BagDomainDTOMapperImpl.class,
+		RegularBagItemDomainDTOMapperImpl.class, BagDomainDTOServiceImpl.class, BagDomainDTOMapperImpl.class,
 		BagEntityServiceImpl.class, RegularBagItemServiceImpl.class, BagDomainDTODaoImpl.class})
 @WebMvcTest
 public class CT_BagControllerTest {

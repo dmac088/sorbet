@@ -39,12 +39,6 @@ public class BagViewDTOMapperImpl implements IBagViewDTOMapper {
 				bDto.getBagItems().stream().filter(bi -> bi.getBagItemTypeCode().equals(Constants.shippingBagItemType))
 						.map(bi -> bagItemMapper.DTOToView(bi)).findAny().get());
 
-		System.out.println(bDto.getBagItems().size());
-		System.out.println(b.getShippingItem().getItemUPC());
-		// update the total on the bag
-		// b.setTotalWeight(new BigDecimal(sbi.stream().mapToDouble(bi ->
-		// bi.getBagItemWeight().doubleValue() * bi.getItemQty()).sum()));
-
 		return b;
 	}
 
@@ -52,10 +46,7 @@ public class BagViewDTOMapperImpl implements IBagViewDTOMapper {
 	public BagView DTOToView(BagViewDTO dto) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToView()");
 		BagView b = new BagView();
-
-		// System.out.println(dto.getBagItems().size());
-		// System.out.println(b.getShippingItem().getItemUPC());
-
+		
 		// the regular physical products
 		Set<BagItemViewOut> sbi = 
 			dto.getBagItems().stream()

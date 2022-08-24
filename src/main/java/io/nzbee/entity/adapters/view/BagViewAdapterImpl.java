@@ -49,7 +49,7 @@ public class BagViewAdapterImpl implements IBagPortService {
     	bv.setTotalQuantity(b.getTotalQuantity());
     	bv.setTotalItems(b.getTotalItems());
     	bv.setTotalWeight(b.getTotalWeight());
-    	return bv;
+    	return bv;	
 	}
 
 }

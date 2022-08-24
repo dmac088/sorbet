@@ -109,9 +109,6 @@ public class IT_ProductAttributeEntityRepositoryIntegrationTest {
     	assertThat(found.getProductDto().getCategories().stream().filter(f -> f.getCategoryCode().equals("POM01")).findFirst().isPresent())
     	.isTrue();
     	
-    	assertThat(found.getProductDto().getDepartment().getDepartmentCode())
-    	.isEqualTo("ACC01");
-    	
     	assertThat(found.getProductDto().getProductStatusCode())
     	.isEqualTo("ACT01");
     	

@@ -106,13 +106,7 @@ public class IT_PhysicalProductUploadForCreateIntegrationTest {
 
 		assertThat(found.get().getProductDto().getProductLongDesc()).isEqualTo("newly fresh organic cucumber");
 
-		assertThat(found.get().getProductDto().getDepartment().getDepartmentCode()).isEqualTo("ACC01");
-
 		assertThat(found.get().getProductDto().getProductStatusCode()).isEqualTo("ACT01");
-
-		//assertThat(found.get().getBrand().getBrandCode()).isEqualTo("DRI01");
-
-		assertThat(found.get().getProductDto().getCurrency()).isEqualTo(Constants.currencyUSD);
 
 		assertThat(found.get().getProductDto().getRetailPrice()).isEqualTo(BigDecimal.valueOf(8));
 
@@ -138,13 +132,7 @@ public class IT_PhysicalProductUploadForCreateIntegrationTest {
 
 		assertThat(found.get().getProductDto().getProductLongDesc()).isEqualTo("新近新鮮的有機黃瓜");
 
-		assertThat(found.get().getProductDto().getDepartment().getDepartmentCode()).isEqualTo("ACC01");
-
 		assertThat(found.get().getProductDto().getProductStatusCode()).isEqualTo("ACT01");
-
-		//assertThat(found.get().getBrand().getBrandCode()).isEqualTo("DRI01");
-
-		assertThat(found.get().getProductDto().getCurrency()).isEqualTo(Constants.currencyHKD);
 
 		assertThat(found.get().getProductDto().getRetailPrice()).isEqualTo(BigDecimal.valueOf(60));
 

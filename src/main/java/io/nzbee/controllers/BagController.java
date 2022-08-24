@@ -69,12 +69,15 @@ public class BagController {
     	LOGGER.debug("call " + getClass().getSimpleName() + ".getCustomerBag");
     	
     	//get the domain model to compute the bag total
-    	Bag bd = domainBagService.findByCode(	locale,
+    	Bag b = domainBagService.findByCode(	locale,
 											 	currency,
 											 	principal.getName());
     	
+    	
+    	//domainBagService.checkAllBagRules(b);
+    	
     	//get the view containing additional attributes
-    	BagView bv = viewBagService.toView(locale, currency, bd);
+    	BagView bv = viewBagService.toView(locale, currency, b);
     	
     	return ResponseEntity.ok(bagResourceAssembler.toModel(bv));
 	}

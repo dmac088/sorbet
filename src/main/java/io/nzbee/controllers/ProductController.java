@@ -214,6 +214,8 @@ public class ProductController {
 	@GetMapping("/Product/{locale}/{currency}/Destination/{code}/Type/{type}")
 	public ResponseEntity<ShippingProductResource> getByDestinationAndType(@PathVariable String locale,
 			@PathVariable String currency, @PathVariable String code, @PathVariable String type, Principal principal) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".getByDestinationAndType with parameter {}, {}, {}, {}, {}", locale, currency, code, type, principal.getName());
+		
 		Bag b = bagService.findByCode(locale, currency, principal.getName());
 
 		LOGGER.debug("total weight = " + b.getTotalWeight());

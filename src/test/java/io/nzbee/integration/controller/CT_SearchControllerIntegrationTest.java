@@ -46,7 +46,7 @@ import io.nzbee.entity.bag.domain.BagDomainDTODaoImpl;
 import io.nzbee.entity.bag.domain.BagDomainDTOMapperImpl;
 import io.nzbee.entity.bag.domain.BagDomainDTOServiceImpl;
 import io.nzbee.entity.bag.entity.BagEntityServiceImpl;
-import io.nzbee.entity.bag.item.domain.BagItemDomainDTOMapperImpl;
+import io.nzbee.entity.bag.item.domain.RegularBagItemDomainDTOMapperImpl;
 import io.nzbee.entity.bag.item.domain.BagItemDomainDTOServiceImpl;
 import io.nzbee.entity.bag.item.entity.BagItemEntityServiceImpl;
 import io.nzbee.entity.bag.status.BagItemStatusServiceImpl;
@@ -136,7 +136,7 @@ import io.nzbee.view.product.shipping.type.ShippingTypeViewServiceImpl;
 		ShippingTypeViewServiceImpl.class, ShippingTypeAdapterImpl.class, ShippingTypeViewMapperImpl.class,
 		BagViewDTOServiceImpl.class, BagViewDTODaoPostgresImpl.class, PhysicalProductDTOServiceImpl.class,
 		PhysicalProductDTODaoPostgresImpl.class, BagItemDomainDTOServiceImpl.class,
-		BagItemDomainDTOMapperImpl.class, ShippingProductViewServiceImpl.class,
+		RegularBagItemDomainDTOMapperImpl.class, ShippingProductViewServiceImpl.class,
 		ShippingProductViewDTOServiceImpl.class, ShippingProductAttributeViewServiceImpl.class,
 		BagDomainDTOServiceImpl.class, BagDomainDTOMapperImpl.class, BagEntityServiceImpl.class,
 		RegularBagItemServiceImpl.class, BagDomainDTODaoImpl.class, SearchURIResourceAssembler.class})
