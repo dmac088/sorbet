@@ -1,16 +1,11 @@
 package io.nzbee.entity.promotion;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
-import io.nzbee.entity.promotion.mechanic.PromotionMechanicDTO;
 import io.nzbee.entity.promotion.type.PromotionTypeDTO;
-import io.nzbee.search.ISearchDimension;
 
-public class PromotionViewDTO implements ISearchDimension, Serializable {
-
-	private static final long serialVersionUID = -7734587026342633816L;
+public class PromotionViewDTO {
 
 	public static final String ID_ALIAS = "prm_id";
 	
@@ -22,7 +17,6 @@ public class PromotionViewDTO implements ISearchDimension, Serializable {
 	
 	public static final String END_DATE_ALIAS = "prm_en_dt";
 	
-	public static final String LOCALE_CODE_ALIAS = "lcl_cd";
 	
 	private Long promotionId;
 	
@@ -36,8 +30,6 @@ public class PromotionViewDTO implements ISearchDimension, Serializable {
 	
 	private String locale;
 	
-	protected PromotionMechanicDTO mechanicDTO;
-	
 	protected PromotionTypeDTO typeDTO;
 	
 	
@@ -47,33 +39,8 @@ public class PromotionViewDTO implements ISearchDimension, Serializable {
 		this.promotionDesc 		= tuple[aliasToIndexMap.get(DESC_ALIAS)].toString();
 		this.promotionStartDate = LocalDateTime.parse(tuple[aliasToIndexMap.get(START_DATE_ALIAS)].toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"));
 		this.promotionEndDate	= LocalDateTime.parse(tuple[aliasToIndexMap.get(END_DATE_ALIAS)].toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"));
-		this.locale 			= tuple[aliasToIndexMap.get(LOCALE_CODE_ALIAS)].toString();
 	}
 	
-	
-	public PromotionViewDTO(Long promotionId, 
-						String promotionCode, 
-						String promotionDesc,
-						Long   promotionMechanicId,
-						String promotionMechanicCode,
-						String promotionMechanicDesc,
-						Long   promotionTypeId,
-						String promotionTypeCode,
-						String promotionTypeDesc,
-						LocalDateTime promotionStartDate,
-						LocalDateTime promotionEndDate, 
-						String locale) {
-		super();
-		this.promotionId 		= promotionId;
-		this.promotionCode 		= promotionCode;
-		this.promotionDesc 		= promotionDesc;
-		this.promotionStartDate = promotionStartDate;
-		this.promotionEndDate 	= promotionEndDate;
-		this.mechanicDTO 		= new PromotionMechanicDTO(promotionMechanicId, promotionMechanicCode, promotionMechanicDesc, locale);
-		this.typeDTO 			= new PromotionTypeDTO(promotionTypeId, promotionTypeCode, promotionTypeDesc);
-		this.locale = locale;
-	}
-
 	public Long getPromotionId() {
 		return promotionId;
 	}
@@ -104,35 +71,6 @@ public class PromotionViewDTO implements ISearchDimension, Serializable {
 
 	public void setTypeDTO(PromotionTypeDTO typeDTO) {
 		this.typeDTO = typeDTO;
-	}
-
-	public PromotionMechanicDTO getMechanicDTO() {
-		return mechanicDTO;
-	}
-
-	public void setMechanicDTO(PromotionMechanicDTO mechanicDTO) {
-		this.mechanicDTO = mechanicDTO;
-	}
-
-
-	@Override
-	public String getCode() {
-		return this.promotionCode;
-	}
-
-	@Override
-	public String getDesc() {
-		return this.promotionDesc;
-	}
-
-	@Override
-	public Long getCount() {
-		return Long.valueOf(0);
-	}
-
-	@Override
-	public boolean isHierarchical() {
-		return false;
 	}
 
 }

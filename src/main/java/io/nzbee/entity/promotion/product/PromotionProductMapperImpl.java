@@ -8,15 +8,8 @@ public class PromotionProductMapperImpl implements IPromotionProductMapper {
 
 	@Override
 	public Promotion DTOToDo(PromotionProductDTO dto) {
-		
-			return new Promotion(	dto.getPromotionCode(), 
-									dto.getPromotionDesc(), 
-									dto.getPromotionStartDate(),
-									dto.getPromotionEndDate(),
-									dto.getMechanicDTO().getMechanicCode(),
-									dto.getMechanicDTO().getMechanicDesc(),
-									dto.getTypeDTO().getPromotionTypeCode(),
-									dto.getTypeDTO().getPromotionTypeDesc());
+		// TODO Auto-generated method stub
+		return null;
 		
 	}
 

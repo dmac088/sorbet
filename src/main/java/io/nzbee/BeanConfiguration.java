@@ -32,10 +32,12 @@ import io.nzbee.entity.bag.domain.BagDomainDTOServiceImpl;
 import io.nzbee.entity.bag.domain.IBagDomainDTODao;
 import io.nzbee.entity.bag.domain.IBagDomainDTOService;
 import io.nzbee.entity.bag.item.domain.IRegularBagItemDomainDTOMapper;
+import io.nzbee.entity.bag.item.domain.IShippingBagItemDomainDTOMapper;
 import io.nzbee.entity.bag.item.domain.IBagItemDomainDTOService;
 import io.nzbee.entity.bag.item.type.BagItemTypeServiceImpl;
 import io.nzbee.entity.bag.item.type.IBagItemTypeService;
 import io.nzbee.entity.bag.item.domain.RegularBagItemDomainDTOMapperImpl;
+import io.nzbee.entity.bag.item.domain.ShippingBagItemDomainDTOMapperImpl;
 import io.nzbee.entity.bag.item.domain.BagItemDomainDTOServiceImpl;
 import io.nzbee.entity.brand.view.BrandDTOServiceImpl;
 import io.nzbee.entity.brand.view.IBrandDTOService;
@@ -98,6 +100,11 @@ import io.nzbee.view.product.tag.facet.TagFacetViewServiceImpl;
 
 @Configuration
 class BeanConfiguration {
+	
+	@Bean
+	IShippingBagItemDomainDTOMapper shippingBagItemDomainDTOMapper() {
+		return new ShippingBagItemDomainDTOMapperImpl();
+	}
 	
 	@Bean 
 	IShippingBagItemDomainService shippingBagItemDomainService() {

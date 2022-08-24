@@ -5,10 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.transform.ResultTransformer;
-import io.nzbee.entity.category.product.CategoryProductDomainDTO;
 import io.nzbee.entity.product.ProductDomainDTO;
 import io.nzbee.entity.promotion.PromotionDomainDTO;
-import io.nzbee.entity.promotion.mechanic.PromotionMechanicDTO;
 
 public class PhysicalProductDTOResultTransformer implements ResultTransformer {
 
@@ -16,11 +14,7 @@ public class PhysicalProductDTOResultTransformer implements ResultTransformer {
 	
 	private Map<Long, PhysicalProductDTO> physicalProductDTOMap = new LinkedHashMap<>();
 	
-	private Map<Long, CategoryProductDomainDTO> categoryProductDTOMap = new LinkedHashMap<>();
-	
 	private Map<Long, PromotionDomainDTO> promotionDTOMap = new LinkedHashMap<>();
-	
-	private Map<Long, PromotionMechanicDTO> promotionMechanicDTOMap = new LinkedHashMap<>();
 	
 	private Map<String, Integer> aliasToIndexMap;
 	
@@ -41,26 +35,14 @@ public class PhysicalProductDTOResultTransformer implements ResultTransformer {
             	pDto = spDto.getProductDto();
             	
             			
-            	if(!( tuple[aliasToIndexMap.get(PromotionDomainDTO.ID_ALIAS)] == null)) {
+            	if(!( tuple[aliasToIndexMap.get(PromotionDomainDTO.CODE_ALIAS)] == null)) {
                 	
-                	Long promotionId = ((Number) tuple[aliasToIndexMap.get(PromotionDomainDTO.ID_ALIAS)]).longValue();
+                	Long promotionId = ((Number) tuple[aliasToIndexMap.get(PromotionDomainDTO.CODE_ALIAS)]).longValue();
                 	
                 	PromotionDomainDTO promotionDTO = promotionDTOMap.computeIfAbsent(
                 		promotionId,
             	        pId -> {
             	            PromotionDomainDTO promoDto = new PromotionDomainDTO(tuple, aliasToIndexMap);
-            	            
-            	            Long promotionMechanicId = ((Number) tuple[aliasToIndexMap.get(PromotionMechanicDTO.ID_ALIAS)]).longValue();
-                        	
-                        	PromotionMechanicDTO promotionMechanic = promotionMechanicDTOMap.computeIfAbsent(
-                        		promotionMechanicId,
-                        		pMechanicId -> {
-                        			PromotionMechanicDTO promoMechDto = new PromotionMechanicDTO(tuple, aliasToIndexMap);
-                        			return promoMechDto;
-                        		}		
-                        	);
-                        	
-                        	promoDto.setMechanicDTO(promotionMechanic);
             	            
             	            return promoDto;
             	        }
@@ -68,26 +50,11 @@ public class PhysicalProductDTOResultTransformer implements ResultTransformer {
                 	
                 	pDto.getPromotions().add(promotionDTO);
                 	
-
                 }
                  
             	return spDto;
             }
         );
-        
-        Long categoryId = ((Number) tuple[aliasToIndexMap.get(CategoryProductDomainDTO.ID_ALIAS)]).longValue();
-        
-        categoryProductDTOMap.computeIfAbsent(
-                categoryId,
-                id -> {
-                	CategoryProductDomainDTO cDto = new CategoryProductDomainDTO(tuple, aliasToIndexMap);
-                	productDTO.getProductDto().getCategories().add(
-                            new CategoryProductDomainDTO(tuple, aliasToIndexMap)
-                    );
-                	return cDto;
-                }
-        );
- 
         return productDTO;
 	}
 
