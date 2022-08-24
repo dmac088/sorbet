@@ -9,27 +9,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import io.nzbee.Constants;
 import io.nzbee.entity.bag.item.entity.BagItemEntity;
+import io.nzbee.entity.bag.item.entity.IBagItemRepository;
 
 public class BagItemDomainDTOServiceImpl implements IBagItemDomainDTOService {
 	
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
-	private IBagItemDomainDTORepository bagItemRepository;
+	private IBagItemDomainDTODao bagItemDao;
+	
+	@Autowired
+	private IBagItemRepository bagItemRepository;
 	
 	@Override
 	public Optional<BagItemDomainDTO> getNewPhysicalItem(String productUPC, String currency) {
-		return bagItemRepository.getNewPhysicalItem(productUPC, currency, Constants.markdownPriceCode);
+		return bagItemDao.getNewPhysicalItem(productUPC, currency, Constants.markdownPriceCode);
 	}
 	
 	@Override
 	public Optional<BagItemDomainDTO> getNewShippingItem(String currency, String shipDest, String shipType, BigDecimal bagWeight) {
-		return bagItemRepository.getNewShippingItem(currency, Constants.markdownPriceCode, shipDest, shipType, bagWeight);
+		return bagItemDao.getNewShippingItem(currency, Constants.markdownPriceCode, shipDest, shipType, bagWeight);
 	}
 	
 	@Override
 	public Optional<BagItemDomainDTO> getShippingItem(String currency, String priceType, String code) {
-		return bagItemRepository.getShippingItem(currency, priceType, code);
+		return bagItemDao.getShippingItem(currency, priceType, code);
 	}
 	
 	@Override
