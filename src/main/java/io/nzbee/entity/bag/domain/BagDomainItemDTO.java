@@ -1,9 +1,9 @@
-package io.nzbee.entity.bag.item.domain;
+package io.nzbee.entity.bag.domain;
 
 import java.math.BigDecimal;
 import java.util.Map;
 
-public class BagItemWithQuantityDomainDTO {
+public class BagDomainItemDTO {
 
 	public static final String ID_ALIAS = "bag_item_id";
 	
@@ -40,7 +40,10 @@ public class BagItemWithQuantityDomainDTO {
 
 	private final int quantity;
 	
-	public BagItemWithQuantityDomainDTO(	Long bagItemId, 
+	
+	
+	
+	public BagDomainItemDTO(	Long bagItemId, 
 												String productUPC,  
 												String bagItemStatus,
 												String bagItemType,
@@ -60,7 +63,7 @@ public class BagItemWithQuantityDomainDTO {
 	}
 	
 
-	public BagItemWithQuantityDomainDTO(Object[] tuple, Map<String, Integer> aliasToIndexMap) {
+	public BagDomainItemDTO(Object[] tuple, Map<String, Integer> aliasToIndexMap) {
 		this.bagItemId 			= ((Number) tuple[aliasToIndexMap.get(ID_ALIAS)]).longValue();
 		this.bagItemStatus 		= tuple[aliasToIndexMap.get(BAG_ITEM_STATUS_CODE_ALIAS)].toString();
 		this.bagItemType 		= tuple[aliasToIndexMap.get(BAG_ITEM_TYPE_CODE_ALIAS)].toString();

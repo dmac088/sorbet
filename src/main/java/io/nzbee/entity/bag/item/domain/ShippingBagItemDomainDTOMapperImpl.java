@@ -9,6 +9,7 @@ import io.nzbee.Constants;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
+import io.nzbee.entity.bag.domain.BagDomainItemDTO;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.bag.entity.IBagEntityService;
 import io.nzbee.entity.bag.item.entity.BagItemEntity;
@@ -38,7 +39,7 @@ public class ShippingBagItemDomainDTOMapperImpl implements IShippingBagItemDomai
 	
 	
 	@Override
-	public ShippingBagItem DTOToDo(Bag bag, BagItemWithQuantityDomainDTO dto) {
+	public ShippingBagItem DTOToDo(Bag bag, BagDomainItemDTO dto) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo parameters: {}, {}, {}", bag.getCustomer().getUserName(), dto.getProductUPC());
 		return new ShippingBagItem(
 				new BagItem(bag, 

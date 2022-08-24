@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import io.nzbee.entity.bag.item.domain.BagItemWithQuantityDomainDTO;
 import io.nzbee.entity.party.person.PersonDomainDTO;
 
 public class BagDomainDTO {
@@ -13,7 +12,7 @@ public class BagDomainDTO {
 	
 	private final Long bagId;
 	
-	private final Set<BagItemWithQuantityDomainDTO> bagItems  = new HashSet<BagItemWithQuantityDomainDTO>();
+	private final Set<BagDomainItemDTO> bagItems  = new HashSet<BagDomainItemDTO>();
 	
 	private final PersonDomainDTO customer;
 
@@ -27,7 +26,7 @@ public class BagDomainDTO {
 		return bagId;
 	}
 
-	public Set<BagItemWithQuantityDomainDTO> getBagItems() {
+	public Set<BagDomainItemDTO> getBagItems() {
 		return bagItems;
 	}
 

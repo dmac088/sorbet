@@ -10,6 +10,11 @@ import io.nzbee.entity.bag.item.entity.BagItemEntity;
 
 public interface IBagItemDomainDTORepository extends JpaRepository<BagItemEntity, String> {
 
+	
+	//we need a DAO object for these queries since we need to hydrate a one to many relationship
+	//specifically we need to hydrate the promotion and discount collections
+	//it's not simply a case of hydrating the bagItem
+	
 	@Query(	  " SELECT new io.nzbee.entity.bag.item.domain.BagItemDomainDTO("
 			+ "																	pe.productUPC, "
 			+ "																	'" + Constants.bagItemStatusCodeNew + "',"

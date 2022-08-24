@@ -4,39 +4,34 @@ import java.math.BigDecimal;
 
 public class BagItemDomainDTO {
 
-	//physical dimensions
+	// physical dimensions
 	private final String productUPC;
-	
+
 	private final String bagItemStatus;
-	
+
 	private final BigDecimal markdownPrice;
-	
+
 	private final BigDecimal weight;
-	
+
 	private final boolean inStock;
 
-	public BagItemDomainDTO(String productUPC,  
-							String bagItemStatus,
-							BigDecimal markdownPrice, 
-							BigDecimal weight,
-							boolean inStock) {
+	public BagItemDomainDTO(String productUPC, String bagItemStatus, BigDecimal markdownPrice, BigDecimal weight,
+			boolean inStock) {
 		super();
-		this.productUPC 	= productUPC;
-		this.bagItemStatus 	= bagItemStatus;
-		this.markdownPrice 	= markdownPrice;
-		this.weight 		= weight;
-		this.inStock 		= inStock;
+		this.productUPC = productUPC;
+		this.bagItemStatus = bagItemStatus;
+		this.markdownPrice = markdownPrice;
+		this.weight = weight;
+		this.inStock = inStock;
 	}
-	
-	public BagItemDomainDTO(String productUPC,  
-			String bagItemStatus,
-			BigDecimal markdownPrice) {
+
+	public BagItemDomainDTO(String productUPC, String bagItemStatus, BigDecimal markdownPrice) {
 		super();
-		this.productUPC 	= productUPC;
-		this.bagItemStatus 	= bagItemStatus;
-		this.markdownPrice 	= markdownPrice;
-		this.weight 		= new BigDecimal(0);
-		this.inStock 		= true;
+		this.productUPC = productUPC;
+		this.bagItemStatus = bagItemStatus;
+		this.markdownPrice = markdownPrice;
+		this.weight = new BigDecimal(0);
+		this.inStock = true;
 	}
 
 	public String getProductUPC() {
