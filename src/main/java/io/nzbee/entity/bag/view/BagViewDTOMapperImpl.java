@@ -44,7 +44,7 @@ public class BagViewDTOMapperImpl implements IBagViewDTOMapper {
 		b.getBagItems().addAll(sbi);
 
 		Optional<BagItemViewDTO> oe = bDto.getBagItems().stream()
-				.filter(vbi -> vbi.getProduct().getProductDto().getProductUPC().equals(bag.getShippingItem()))
+				.filter(vbi -> vbi.getProduct().getProductDto().getProductUPC().equals(bag.getShippingItem().getBagItem().getProductUPC()))
 				.findAny();
 
 		if (oe.isPresent()) {
