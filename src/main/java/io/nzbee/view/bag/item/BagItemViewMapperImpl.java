@@ -10,6 +10,7 @@ public class BagItemViewMapperImpl implements IBagItemViewMapper {
 	@Override
 	public BagItemViewOut toView(RegularBagItem d) {
 			BagItemViewOut bi = new BagItemViewOut();
+			//bi.setItemDesc(d);
 			bi.setItemUPC(d.getBagItem().getProductUPC());
 			bi.setItemQty(d.getBagItem().getQuantity());
 			bi.setMarkdownPrice(d.getBagItem().getMarkdownPrice());

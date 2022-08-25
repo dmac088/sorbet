@@ -18,6 +18,7 @@ public class BagItemViewDTO {
     
     public static final String BAG_ITEM_STATUS_DESC_ALIAS = "bag_item_sts_desc";
     
+    public static final String BAG_ITEM_DESC_ALIAS = "bag_item_desc";
     
 
 	private final Long bagItemId;
@@ -32,7 +33,11 @@ public class BagItemViewDTO {
 	
 	private final String bagItemStatusDesc; 
 	
+	private final String bagItemDesc; 
+	
 	private int quantity;
+	
+	
 
 	public BagItemViewDTO(Object[] tuple, Map<String, Integer> aliasToIndexMap) {
 		this.bag = new BagViewDTO(tuple, aliasToIndexMap);
@@ -42,6 +47,7 @@ public class BagItemViewDTO {
 		this.bagItemStatusCode 	= tuple[aliasToIndexMap.get(BAG_ITEM_STATUS_CODE_ALIAS)].toString();
 		this.bagItemTypeCode 	= tuple[aliasToIndexMap.get(BAG_ITEM_TYPE_CODE_ALIAS)].toString();
 		this.bagItemStatusDesc 	= tuple[aliasToIndexMap.get(BAG_ITEM_STATUS_DESC_ALIAS)].toString();
+		this.bagItemDesc 		= tuple[aliasToIndexMap.get(BAG_ITEM_DESC_ALIAS)].toString();
 		this.quantity			= ((Number) tuple[aliasToIndexMap.get(QUANTITY_ALIAS)]).intValue();
 	}
 
@@ -71,6 +77,10 @@ public class BagItemViewDTO {
 	
 	public String getBagItemTypeCode() {
 		return bagItemTypeCode;
+	}
+	
+	public String getBagItemDesc() {
+		return bagItemDesc;
 	}
 
 	@Override
