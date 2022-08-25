@@ -20,7 +20,7 @@ import io.nzbee.domain.bag.item.BagItemConfiguration;
 import io.nzbee.domain.bag.item.regular.IRegularBagItemDomainService;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.customer.Customer;
-import io.nzbee.domain.ports.IRegularBagItemPortService;
+import io.nzbee.domain.ports.IBagItemPortService;
 import io.nzbee.domain.promotion.Promotion;
 import io.nzbee.unit.domain.beans.customer.CustomerDoBeanFactory;
 
@@ -35,7 +35,7 @@ public class UT_BagItemTest {
     private IRegularBagItemDomainService bagItemService;
     
 	@MockBean
-	private IRegularBagItemPortService bagItemPortService;
+	private IBagItemPortService bagItemPortService;
 	
     private RegularBagItem bagItem = null;
     
@@ -59,13 +59,10 @@ public class UT_BagItemTest {
 		bagItem = new RegularBagItem(new BagItem(bag, "abcd123", 3, new BigDecimal(10)), new BigDecimal(1), true);
 
 		Promotion b3g33 = new Promotion("B3G33", 
-				 						"Buy 3 Get 33% off",
 										LocalDateTime.of(2020, Month.JANUARY, 8, 0,0,0),
 										LocalDateTime.of(2021, Month.JANUARY, 8, 0,0,0),
 										"BNGNPCT",
-										"Buy N Get X Percent Off",
-										"PRD01",
-										"Product");
+										"PRD01");
 		
 		bagItem.getBagItem().addPromotion(b3g33);
 		
@@ -85,13 +82,10 @@ public class UT_BagItemTest {
 		bagItem = new RegularBagItem(new BagItem(bag, "abcd123", 6, new BigDecimal(10)), new BigDecimal(1), true);
 
 		Promotion b3g33 = new 	Promotion(	"B3G33", 
-					 						"Buy 3 Get 33% off",
 											LocalDateTime.of(2020, Month.JANUARY, 8, 0,0,0),
 											LocalDateTime.of(2021, Month.JANUARY, 8, 0,0,0),
 											"BNGNPCT", 
-											"Buy N Get X Percent Off",
-											"PRD01",
-											"Product");
+											"PRD01");
 		
 		bagItem.getBagItem().addPromotion(b3g33);
 		
