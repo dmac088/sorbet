@@ -1,5 +1,6 @@
 package io.nzbee.entity.bag.view;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -9,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import io.nzbee.view.bag.BagView;
 import io.nzbee.view.bag.item.BagItemViewOut;
-import io.nzbee.Constants;
+import io.nzbee.domain.bag.Bag;
+import io.nzbee.entity.bag.item.view.BagItemViewDTO;
 import io.nzbee.entity.bag.item.view.IBagItemViewDTOMapper;
-import io.nzbee.entity.party.person.PersonDomainDTO;
 
 @Component
 public class BagViewDTOMapperImpl implements IBagViewDTOMapper {
@@ -22,43 +23,33 @@ public class BagViewDTOMapperImpl implements IBagViewDTOMapper {
 	private IBagItemViewDTOMapper bagItemMapper;
 
 	@Override
-	public BagView DTOToView(String locale, String currency, PersonDomainDTO pDto, BagViewDTO bDto) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToView with parameters: {}, {}", locale, currency);
-
+	public BagView DTOToView(BagViewDTO bDto, Bag bag) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToView()");
+ 
 		// create a new bag domain object
 		BagView b = new BagView();
 
 		// map the entity bagItems to the view bagItems
-		Set<BagItemViewOut> sbi = bDto.getBagItems().stream()
-				.filter(bi -> bi.getBagItemTypeCode().equals(Constants.regularBagItemType))
-				.map(bi -> bagItemMapper.DTOToView(bi)).collect(Collectors.toSet());
+		Set<BagItemViewOut> sbi = bag.getBagItems().stream().map(dbi -> {
+			Optional<BagItemViewDTO> oe = bDto.getBagItems().stream().filter(
+					vbi -> vbi.getProduct().getProductDto().getProductUPC().equals(dbi.getBagItem().getProductUPC()))
+					.findAny();
+
+			if (oe.isPresent()) {
+				return bagItemMapper.DTOToView(oe.get(), dbi);
+			}
+			return null;
+		}).collect(Collectors.toSet());
 
 		b.getBagItems().addAll(sbi);
 
-		b.setShippingItem(
-				bDto.getBagItems().stream().filter(bi -> bi.getBagItemTypeCode().equals(Constants.shippingBagItemType))
-						.map(bi -> bagItemMapper.DTOToView(bi)).findAny().get());
+		Optional<BagItemViewDTO> oe = bDto.getBagItems().stream()
+				.filter(vbi -> vbi.getProduct().getProductDto().getProductUPC().equals(bag.getShippingItem()))
+				.findAny();
 
-		return b;
-	}
-
-	@Override
-	public BagView DTOToView(BagViewDTO dto) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToView()");
-		BagView b = new BagView();
-		
-		// the regular physical products
-		Set<BagItemViewOut> sbi = 
-			dto.getBagItems().stream()
-				.filter(bi -> bi.getBagItemTypeCode().equals(Constants.regularBagItemType))
-				.map(bi -> bagItemMapper.DTOToView(bi)).collect(Collectors.toSet());
-		b.setBagItems(sbi);
-
-		// the shipping item
-		b.setShippingItem(
-			dto.getBagItems().stream()
-				.filter(bi -> bi.getBagItemTypeCode().equals(Constants.shippingBagItemType))
-				.map(bi -> bagItemMapper.DTOToView(bi)).findAny().orElse(null));
+		if (oe.isPresent()) {
+			b.setShippingItem(bagItemMapper.DTOToView(oe.orElse(null), bag.getShippingItem()));
+		}
 
 		return b;
 	}

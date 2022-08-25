@@ -1,22 +1,39 @@
 package io.nzbee.entity.bag.item.view;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.math.BigDecimal;
+
 import org.springframework.stereotype.Component;
-import io.nzbee.entity.product.physical.view.IPhysicalProductDTOMapper;
+import io.nzbee.domain.bag.item.regular.RegularBagItem;
+import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
 import io.nzbee.view.bag.item.BagItemViewOut;
-import io.nzbee.view.product.physical.full.PhysicalProductFullView;
 
 @Component
 public class BagItemViewDTOMapperImpl implements IBagItemViewDTOMapper {
-	
-	@Autowired
-	private IPhysicalProductDTOMapper productMapper;
 
 	@Override
-	public BagItemViewOut DTOToView(BagItemViewDTO dto) {
-		PhysicalProductFullView p = productMapper.toView(dto.getProduct());
-		BagItemViewOut bi = new BagItemViewOut(p, dto.getQuantity());
-		return bi;
+	public BagItemViewOut DTOToView(BagItemViewDTO dto, RegularBagItem rbi) {
+		BagItemViewOut biv = new BagItemViewOut();
+		biv.setBagItemTotal(rbi.getBagItem().getBagItemTotal());
+		biv.setBagItemWeight(rbi.getBagItemWeight());
+		biv.setItemId(dto.getBagItemId());
+		biv.setItemDesc(dto.getBagItemStatusDesc());
+		biv.setItemQty(dto.getQuantity());
+		biv.setItemUPC(rbi.getBagItem().getProductUPC());
+		biv.setMarkdownPrice(rbi.getBagItem().getMarkdownPrice());
+		return biv;
+	}
+
+	@Override
+	public BagItemViewOut DTOToView(BagItemViewDTO dto, ShippingBagItem sbi) {
+		BagItemViewOut biv = new BagItemViewOut();
+		biv.setBagItemTotal(sbi.getBagItem().getBagItemTotal());
+		biv.setBagItemWeight(new BigDecimal(0));
+		biv.setItemId(dto.getBagItemId());
+		biv.setItemDesc(dto.getBagItemStatusDesc());
+		biv.setItemQty(dto.getQuantity());
+		biv.setItemUPC(sbi.getBagItem().getProductUPC());
+		biv.setMarkdownPrice(sbi.getBagItem().getMarkdownPrice());
+		return biv;
 	} 
 
 }

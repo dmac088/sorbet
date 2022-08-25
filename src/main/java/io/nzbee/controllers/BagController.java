@@ -110,9 +110,15 @@ public class BagController {
 													  					   @PathVariable String currency, 
 													  					   Principal principal) {
     	LOGGER.debug("call " + getClass().getSimpleName() + ".getBagContents");
+    	
+		Bag b = domainBagService.findByCode(	locale,
+												currency,
+												principal.getName());
+    	
     	Set<BagItemViewOut> sbi =  viewBagService.findByCode(locale,
 												   	  		 currency,
-												   	  		 principal.getName()).getBagItems();
+												   	  		 principal.getName(),
+												   	  		 b).getBagItems();
     	
     	return ResponseEntity.ok(bagItemResourceAssembler.toCollectionModel(sbi));
     	
@@ -150,11 +156,16 @@ public class BagController {
     	
     	//persist the domain BagItem to the Bag
     	domainBagService.addShippingItem(locale, currency, dto, principal.getName());
+    	
+		Bag b = domainBagService.findByCode(	locale,
+												currency,
+												principal.getName());
 
     	//re-retrieve the bag view and return it 
     	BagView bv = viewBagService.findByCode(	locale, 
 												currency, 
-												principal.getName());
+												principal.getName(), 
+												b);
     	
     	return ResponseEntity.ok(bagResourceAssembler.toModel(bv));
 	}

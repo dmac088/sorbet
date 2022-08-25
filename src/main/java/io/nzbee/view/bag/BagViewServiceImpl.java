@@ -14,9 +14,9 @@ public class BagViewServiceImpl implements IBagViewService {
 	private IBagPortService bagService;
 	
 	@Override
-	public BagView findByCode(String locale, String currency, String userName) {
+	public BagView findByCode(String locale, String currency, String userName, Bag bag) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode with parameters {}, {}, {}", locale, currency, userName);
-		return bagService.findByCode(locale, currency, userName);
+		return bagService.findByCode(locale, currency, userName, bag);
 	}
 
 	@Override

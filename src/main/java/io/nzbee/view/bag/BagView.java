@@ -1,6 +1,7 @@
 package io.nzbee.view.bag;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Set;
 
 import io.nzbee.view.bag.item.BagItemViewOut;
@@ -21,7 +22,7 @@ public class BagView {
 	
 	private BigDecimal totalWeight;
 	
-	private Set<BagItemViewOut> bagItems;
+	private Set<BagItemViewOut> bagItems = new HashSet<BagItemViewOut>();
 	
 	private BagItemViewOut shippingItem;
 	

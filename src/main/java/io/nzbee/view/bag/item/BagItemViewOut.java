@@ -1,10 +1,11 @@
 package io.nzbee.view.bag.item;
 
 import java.math.BigDecimal;
-import io.nzbee.view.product.physical.full.PhysicalProductFullView;
 
 public class BagItemViewOut {
 
+	private Long itemId;
+	
 	private String itemUPC;
 	
 	private String itemDesc;
@@ -17,17 +18,19 @@ public class BagItemViewOut {
 	
 	private BigDecimal bagItemWeight;
 	
-	public BagItemViewOut(PhysicalProductFullView p, int quantity) {
-		this.itemUPC = p.getProductUPC();
-		this.itemDesc = p.getProductDesc();
-		this.itemQty = quantity;
-		this.markdownPrice = p.getProductMarkdown();
-		this.bagItemWeight = p.getWeight();
-		this.bagItemTotal = p.getProductMarkdown().multiply(new BigDecimal(quantity));
-	}
 
 	public BagItemViewOut() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	
+
+	public Long getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(Long itemId) {
+		this.itemId = itemId;
 	}
 
 	public String getItemUPC() {
