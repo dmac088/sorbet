@@ -168,8 +168,6 @@ public class BagViewDTODaoPostgresImpl implements IBagViewDTODao {
 				+ "  AND usr.user_name = :userName  "
 				+ "ORDER BY  "
 				+ "  p.bag_item_id ";
-		
-		System.out.println(sql);
 		return sql;
 	}
 

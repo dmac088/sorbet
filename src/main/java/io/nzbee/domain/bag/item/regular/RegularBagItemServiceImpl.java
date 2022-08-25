@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.item.DroolsBagItemWrapper;
-import io.nzbee.domain.ports.IRegularBagItemPortService;
+import io.nzbee.domain.ports.IBagItemPortService;
 
 public class RegularBagItemServiceImpl implements IRegularBagItemDomainService{
 
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
-	private IRegularBagItemPortService bagItemService;
+	private IBagItemPortService bagItemService;
 	
     @Autowired
     @Qualifier("bagItemRulesContainer")
@@ -28,7 +28,6 @@ public class RegularBagItemServiceImpl implements IRegularBagItemDomainService{
 		return bagItemService.getNewPhysicalItem(locale, currency, bag, itemUPC, quantity);
 	}
 
-	
 	@Override
 	public void save(RegularBagItem object) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".save()");
@@ -54,9 +53,5 @@ public class RegularBagItemServiceImpl implements IRegularBagItemDomainService{
         System.out.println("************************************");
         System.out.println("Customer bag\n" + object.getBagItem().getBag().getCustomer().getUserName());
 	}
-
-	
-
-
 
 }

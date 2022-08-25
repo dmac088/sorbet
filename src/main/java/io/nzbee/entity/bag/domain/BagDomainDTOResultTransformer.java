@@ -5,6 +5,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.transform.ResultTransformer;
+import io.nzbee.Constants;
+import io.nzbee.entity.bag.item.domain.RegularBagItemDomainDTO;
+import io.nzbee.entity.bag.item.domain.ShippingBagItemDomainDTO;
 
 public class BagDomainDTOResultTransformer implements ResultTransformer {
 
@@ -12,9 +15,10 @@ public class BagDomainDTOResultTransformer implements ResultTransformer {
 
 	private Map<Long, BagDomainDTO> bagDTOMap = new LinkedHashMap<>();
 
-	private Map<Long, BagDomainItemDTO> bagItemDTOMap = new LinkedHashMap<>();
-	
-	
+	private Map<String, RegularBagItemDomainDTO> bagItemDTOMap = new LinkedHashMap<>();
+
+	private ShippingBagItemDomainDTO shippingBagItem;
+
 	@Override
 	public BagDomainDTO transformTuple(Object[] tuple, String[] aliases) {
 
@@ -27,16 +31,24 @@ public class BagDomainDTOResultTransformer implements ResultTransformer {
 			return b;
 		});
 
-		if (!(tuple[aliasToIndexMap.get(BagDomainItemDTO.ID_ALIAS)] == null)) {
+		if (!(tuple[aliasToIndexMap.get(RegularBagItemDomainDTO.BAG_ITEM_UPC_ALIAS)] == null)) {
+			if (tuple[aliasToIndexMap.get(RegularBagItemDomainDTO.BAG_ITEM_TYPE_CODE_ALIAS)]
+					.equals(Constants.regularBagItemType)) {
+				String bagItemId = ((String) tuple[aliasToIndexMap.get(RegularBagItemDomainDTO.BAG_ITEM_UPC_ALIAS)]);
 
-				Long bagItemId = ((Number) tuple[aliasToIndexMap.get(BagDomainItemDTO.ID_ALIAS)]).longValue();
+				RegularBagItemDomainDTO bagItemDTO = bagItemDTOMap.computeIfAbsent(bagItemId, biId -> {
+					RegularBagItemDomainDTO bi = new RegularBagItemDomainDTO(tuple, aliasToIndexMap);
 
-				BagDomainItemDTO bagItemDTO = bagItemDTOMap.computeIfAbsent(bagItemId, biId -> {
-				BagDomainItemDTO bi = new BagDomainItemDTO(tuple, aliasToIndexMap);
+					return bi;
+				});
+				bagDTO.getRegularBagItems().add(bagItemDTO);
+			}
+			if (tuple[aliasToIndexMap.get(RegularBagItemDomainDTO.BAG_ITEM_TYPE_CODE_ALIAS)]
+					.equals(Constants.shippingBagItemType)) {
+				shippingBagItem = new ShippingBagItemDomainDTO(tuple, aliasToIndexMap);
 
-				return bi;
-			});
-			bagDTO.getBagItems().add(bagItemDTO);
+				bagDTO.setShippingBagItem(shippingBagItem);
+			}
 		}
 
 		return bagDTO;

@@ -16,8 +16,9 @@ import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
 import io.nzbee.domain.ports.IShippingBagItemPortService;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.bag.item.domain.IRegularBagItemDomainDTOMapper;
+import io.nzbee.entity.bag.item.domain.IShippingBagItemDomainDTOMapper;
 import io.nzbee.entity.bag.item.domain.IBagItemDomainDTOService;
-import io.nzbee.entity.bag.item.domain.BagItemDomainDTO;
+import io.nzbee.entity.bag.item.domain.ShippingBagItemDomainDTO;
 import io.nzbee.entity.bag.item.entity.BagItemEntity;
 import io.nzbee.entity.bag.item.entity.IBagItemService;
 import io.nzbee.entity.party.person.IPersonService;
@@ -39,18 +40,21 @@ public class ShippingBagItemDomainAdapter implements IShippingBagItemPortService
 	private IBagItemDomainDTOService bagItemDomainDTOService;
 	
 	@Autowired
-	private IRegularBagItemDomainDTOMapper bagItemDomainMapper;
+	private IRegularBagItemDomainDTOMapper regularBagItemDomainMapper;
+	
+	@Autowired
+	private IShippingBagItemDomainDTOMapper shippingBagItemDomainMapper;
 
 	
 	@Override
 	@Transactional
 	public ShippingBagItem getShippingItem(Bag b, String code, String currency) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".getShippingItem with parameters {}", code);
+		LOGGER.debug("call " + getClass().getSimpleName() + ".getShippingItem with parameters {}, {}, {}", currency, Constants.markdownPriceCode, code);
 		
-		BagItemDomainDTO biDto = bagItemDomainDTOService.getShippingItem(currency, Constants.markdownPriceCode, code)
+		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getShippingItem(currency, Constants.markdownPriceCode, code)
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, Constants.localeENGB, code));
 		
-		ShippingBagItem sbi = bagItemDomainMapper.DTOToDo(b, biDto);
+		ShippingBagItem sbi = shippingBagItemDomainMapper.DTOToDo(b, biDto);
 		
 		return sbi;
 	}
@@ -58,14 +62,14 @@ public class ShippingBagItemDomainAdapter implements IShippingBagItemPortService
 	@Override
 	@Transactional
 	public ShippingBagItem getNewShippingItem(String locale, String currency, Bag b, String destCode, String shipType) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewShippingItem with parameters {}, {}", destCode, shipType);
+		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewShippingItem with parameters {}, {}, {}, {}", locale, currency, destCode, shipType);
 		
 		//there is no product in the domain model just bagItem
-		BagItemDomainDTO biDto = bagItemDomainDTOService.getNewShippingItem(currency,  destCode,  shipType, b.getTotalWeight())
+		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getNewShippingItem(currency,  destCode,  shipType, b.getTotalWeight())
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, destCode + " - " + shipType + " - " + b.getTotalWeight()));
 		
 		//create, save and return domain object 
-		ShippingBagItem sbi = bagItemDomainMapper.DTOToDo(b, biDto);
+		ShippingBagItem sbi = shippingBagItemDomainMapper.DTOToDo(b, biDto);
 		
 		this.save(sbi);
 		
@@ -89,13 +93,13 @@ public class ShippingBagItemDomainAdapter implements IShippingBagItemPortService
 	@Override
 	@Transactional
 	public void save(RegularBagItem domainObject) {
-		bagItemService.save(bagItemDomainMapper.doToEntity(domainObject));
+		bagItemService.save(regularBagItemDomainMapper.doToEntity(domainObject));
 	}
 	
 	@Override
 	@Transactional
 	public void save(ShippingBagItem domainObject) {
-		bagItemService.save(bagItemDomainMapper.doToEntity(domainObject));
+		bagItemService.save(shippingBagItemDomainMapper.doToEntity(domainObject));
 	}
 
 

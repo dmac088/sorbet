@@ -9,12 +9,14 @@ import io.nzbee.Constants;
 import io.nzbee.ErrorKeys;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
-import io.nzbee.domain.ports.IRegularBagItemPortService;
+import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
+import io.nzbee.domain.ports.IBagItemPortService;
 import io.nzbee.entity.bag.domain.IBagDomainDTOService;
 import io.nzbee.entity.bag.entity.BagEntity;
-import io.nzbee.entity.bag.item.domain.IRegularBagItemDomainDTOMapper;
+import io.nzbee.entity.bag.item.domain.IBagItemDomainDTOMapper;
 import io.nzbee.entity.bag.item.domain.IBagItemDomainDTOService;
-import io.nzbee.entity.bag.item.domain.BagItemDomainDTO;
+import io.nzbee.entity.bag.item.domain.RegularBagItemDomainDTO;
+import io.nzbee.entity.bag.item.domain.ShippingBagItemDomainDTO;
 import io.nzbee.entity.bag.item.entity.BagItemEntity;
 import io.nzbee.entity.bag.item.entity.IBagItemService;
 import io.nzbee.entity.party.person.IPersonService;
@@ -22,7 +24,7 @@ import io.nzbee.entity.party.person.PersonEntity;
 import io.nzbee.exceptions.EntityNotFoundException;
 
 @Service
-public class RegularBagItemDomainAdapter implements IRegularBagItemPortService {
+public class RegularBagItemDomainAdapter implements IBagItemPortService {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 	
@@ -39,33 +41,36 @@ public class RegularBagItemDomainAdapter implements IRegularBagItemPortService {
 	private IBagItemDomainDTOService bagItemDomainDTOService;
 	
 	@Autowired
-	private IRegularBagItemDomainDTOMapper bagItemDomainMapper;
+	private IBagItemDomainDTOMapper<RegularBagItemDomainDTO, BagItemEntity, RegularBagItem> regularBagItemDomainMapper;
+	
+	@Autowired
+	private IBagItemDomainDTOMapper<ShippingBagItemDomainDTO, BagItemEntity, ShippingBagItem> shippingBagItemDomainMapper;
 
 	@Override
 	public RegularBagItem getNewPhysicalItem(String locale, String currency, Bag bag, String itemUPC, int quantity) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewPhysicalItem with parameters {}, {}", itemUPC, quantity);
 		
 		//there is no product in the domain model just bagItem
-		BagItemDomainDTO biDto = bagItemDomainDTOService.getNewPhysicalItem(itemUPC, currency)
+		RegularBagItemDomainDTO biDto = bagItemDomainDTOService.getNewPhysicalItem(itemUPC, currency)
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, itemUPC));
 		
 		//create, save and return domain object 
-		RegularBagItem bi = bagItemDomainMapper.DTOToDo(bag, biDto, quantity);
+		RegularBagItem bi = regularBagItemDomainMapper.DTOToDo(bag, biDto, quantity);
 		
 		this.save(bi);
 		return bi;
 	}
 	
 	@Override
-	public RegularBagItem getNewShippingItem(String locale, String currency, Bag bag, String destCode, String shipType) {
+	public ShippingBagItem getNewShippingItem(String locale, String currency, Bag bag, String destCode, String shipType) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewShippingItem with parameters {}, {}", destCode, shipType);
 		
 		//there is no product in the domain model just bagItem
-		BagItemDomainDTO biDto = bagItemDomainDTOService.getNewShippingItem(currency,  destCode,  shipType, bag.getTotalWeight())
+		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getNewShippingItem(currency,  destCode,  shipType, bag.getTotalWeight())
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, destCode + " - " + shipType + " - " + bag.getTotalWeight()));
 		
 		//create, save and return domain object 
-		RegularBagItem bi = bagItemDomainMapper.DTOToDo(bag, biDto, 1);
+		ShippingBagItem bi = shippingBagItemDomainMapper.DTOToDo(bag, biDto);
 		this.save(bi);
 		return bi;
 	}
@@ -83,7 +88,12 @@ public class RegularBagItemDomainAdapter implements IRegularBagItemPortService {
 
 	@Override
 	public void save(RegularBagItem domainObject) {
-		bagItemService.save(bagItemDomainMapper.doToEntity(domainObject));
+		bagItemService.save(regularBagItemDomainMapper.doToEntity(domainObject));
+	}
+	
+	@Override
+	public void save(ShippingBagItem domainObject) {
+		bagItemService.save(shippingBagItemDomainMapper.doToEntity(domainObject));
 	}
 
 }

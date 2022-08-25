@@ -9,7 +9,6 @@ import io.nzbee.Constants;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
-import io.nzbee.entity.bag.domain.BagDomainItemDTO;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.bag.entity.IBagEntityService;
 import io.nzbee.entity.bag.item.entity.BagItemEntity;
@@ -36,10 +35,21 @@ public class ShippingBagItemDomainDTOMapperImpl implements IShippingBagItemDomai
 	@Autowired
 	private IBagItemTypeService bagItemTypeService;
 
+
+	@Override
+	public ShippingBagItem DTOToDo(Bag bag, ShippingBagItemDomainDTO dto, int quantity) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo parameters: {}, {}, {}", bag.getCustomer().getUserName(), dto.getProductUPC(), quantity);
+		return new ShippingBagItem(
+				new BagItem(bag, 
+				dto.getProductUPC(), 
+				quantity, 
+				dto.getMarkdownPrice())
+			);
+	}
 	
 	
 	@Override
-	public ShippingBagItem DTOToDo(Bag bag, BagDomainItemDTO dto) {
+	public ShippingBagItem DTOToDo(Bag bag, ShippingBagItemDomainDTO dto) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo parameters: {}, {}, {}", bag.getCustomer().getUserName(), dto.getProductUPC());
 		return new ShippingBagItem(
 				new BagItem(bag, 
@@ -48,7 +58,6 @@ public class ShippingBagItemDomainDTOMapperImpl implements IShippingBagItemDomai
 				dto.getMarkdownPrice())
 			);
 	}
-
 
 	@Override
 	public BagItemEntity doToEntity(ShippingBagItem d) {
@@ -64,5 +73,6 @@ public class ShippingBagItemDomainDTOMapperImpl implements IShippingBagItemDomai
 		bi.setQuantity(d.getBagItem().getQuantity());
 		return bi;
 	}
+
 
 }

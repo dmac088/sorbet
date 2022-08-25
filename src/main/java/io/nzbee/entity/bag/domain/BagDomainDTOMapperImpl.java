@@ -17,6 +17,7 @@ import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.bag.entity.IBagEntityService;
 import io.nzbee.entity.bag.item.domain.IRegularBagItemDomainDTOMapper;
 import io.nzbee.entity.bag.item.domain.IShippingBagItemDomainDTOMapper;
+import io.nzbee.entity.bag.item.domain.ShippingBagItemDomainDTO;
 import io.nzbee.entity.bag.item.entity.BagItemEntity;
 import io.nzbee.entity.party.person.ICustomerDomainMapper;
 import io.nzbee.entity.party.person.IPersonService;
@@ -38,7 +39,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 	private ICustomerDomainMapper personMapper;
 
 	@Autowired
-	private IRegularBagItemDomainDTOMapper bagItemMapper;
+	private IRegularBagItemDomainDTOMapper regularBagItemMapper;
 	
 	@Autowired
 	private IShippingBagItemDomainDTOMapper shippingItemMapper;
@@ -55,17 +56,12 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		Bag b = new Bag(personMapper.DTOToDo(dto.getCustomer()));
 
 		// map the entity bagItems to the domain bagItems
-		Set<RegularBagItem> sbi = dto.getBagItems().stream()
-				.filter(bi -> bi.getBagItemType().equals(Constants.regularBagItemType))
-				.map(bi -> bagItemMapper.DTOToDo(b, bi))
+		Set<RegularBagItem> sbi = dto.getRegularBagItems().stream()
+				.map(bi -> regularBagItemMapper.DTOToDo(b, bi))
 				.collect(Collectors.toSet());
 		
-		Optional<ShippingBagItem> ossbi = 
-				dto.getBagItems().stream()
-				.filter(bi -> bi.getBagItemType().equals(Constants.shippingBagItemType))
-				.map(bi -> shippingItemMapper.DTOToDo(b, bi))
-				.findAny();
-
+		Optional<ShippingBagItemDomainDTO> ossbi = Optional.ofNullable(dto.getShippingBagItem());
+		
 		// use the add item method on the domain object to
 		// ensure business rules are fired against each added bagItem
 		sbi.forEach(bi -> {
@@ -73,14 +69,15 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		});
 		
 		if(ossbi.isPresent()) {
-			b.addShippingItem(ossbi.get());
+			ShippingBagItem ssbi = shippingItemMapper.DTOToDo(b, ossbi.get());
+			b.addShippingItem(ssbi);
 		}
 		
 		return b;
 	}
 
 	@Override
-	public Bag DTOToDo(String locale, String currency, PersonDomainDTO pDto, BagDomainDTO bDto) {
+	public Bag DTOToDo(String locale, String currency, PersonDomainDTO pDto, BagDomainDTO dto) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo() with parameters: {}, {}", locale, currency);
 		
 		// we need a customer to instantiate a new bag
@@ -90,16 +87,11 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		Bag b = new Bag(c);
 
 		// map the entity bagItems to the domain bagItems
-		Set<RegularBagItem> sbi = bDto.getBagItems().stream()
-				.filter(bi -> bi.getBagItemType().equals(Constants.regularBagItemType))
-				.map(bi -> bagItemMapper.DTOToDo(b, bi))
+		Set<RegularBagItem> sbi = dto.getRegularBagItems().stream()
+				.map(bi -> regularBagItemMapper.DTOToDo(b, bi))
 				.collect(Collectors.toSet());
 
-		Optional<ShippingBagItem> ossbi = 
-				bDto.getBagItems().stream()
-				.filter(bi -> bi.getBagItemType().equals(Constants.shippingBagItemType))
-				.map(bi -> shippingItemMapper.DTOToDo(b, bi))
-				.findAny();
+		Optional<ShippingBagItemDomainDTO> ossbi = Optional.ofNullable(dto.getShippingBagItem());
 		
 		// use the add item method on the domain object to
 		// ensure business rules are fired against each added bagItem
@@ -108,7 +100,8 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		});
 		
 		if(ossbi.isPresent()) {
-			b.addShippingItem(ossbi.get());
+			ShippingBagItem ssbi = shippingItemMapper.DTOToDo(b, ossbi.get());
+			b.addShippingItem(ssbi);
 		}
 
 		return b;
@@ -150,6 +143,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		
 		//remove any shipping item if it exists 
 		if(d.hasShippingItem() ) {
+		
 			//find the shipping item among the existing bag item entities 
 			Optional<BagItemEntity> oe = b.getBagItems().stream().filter(i -> i.getBagItemType().getBagItemTypeCode().equals(Constants.shippingBagItemType)).findAny();
 
@@ -161,7 +155,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 				
 		//add the new shipping item to the bag
 		if(d.hasShippingItem()) {
-			BagItemEntity sie = bagItemMapper.doToEntity(d.getShippingItem());
+			BagItemEntity sie = shippingItemMapper.doToEntity(d.getShippingItem());
 			LOGGER.debug("Adding shipping item with id {}", sie.getProduct().getUPC());
 			b.getBagItems().add(sie);
 		}

@@ -17,17 +17,21 @@ public class PromotionOrderServiceImpl implements IPromotionOrderService {
 
 	@Override
 	public Optional<PromotionOrderEntity> findByCode(String code) {
-		return promotionOrderRepository.findByOrderPromotionPromotionCode(code);
+		//to-do
+		return null;
 	}
 	
 	@Override
 	public Optional<PromotionOrderDTO> findByCode(String locale, String code) {
-		return promotionOrderRepository.findByCode(locale, code);
+		//to-do
+		return null;
 	}
 
 	@Override
 	public Optional<PromotionOrderDTO> findByCouponCode(String locale, String couponCode) {
-		return promotionOrderRepository.findByPromotionCouponCode(locale, couponCode);
+		//to-do
+		return null;
+		//return promotionOrderRepository.findByPromotionCouponCode(locale, couponCode);
 	}
 
 	@Override
