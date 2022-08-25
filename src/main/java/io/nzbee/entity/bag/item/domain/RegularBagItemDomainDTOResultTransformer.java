@@ -21,7 +21,7 @@ public class RegularBagItemDomainDTOResultTransformer implements ResultTransform
 
 		String bagItemId = ((String) tuple[aliasToIndexMap.get(RegularBagItemDomainDTO.BAG_ITEM_UPC_ALIAS)]);
 
-		if (((String) tuple[aliasToIndexMap.get(RegularBagItemDomainDTO.BAG_ITEM_UPC_ALIAS)])
+		if (((String) tuple[aliasToIndexMap.get(RegularBagItemDomainDTO.BAG_ITEM_TYPE_CODE_ALIAS)])
 				.equals(Constants.regularBagItemType)) {
 
 			RegularBagItemDomainDTO bagItemDTO = bagItemDTOMap.computeIfAbsent(bagItemId, biId -> {

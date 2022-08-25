@@ -48,7 +48,7 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 		.setParameter("priceType", priceType)
 		.setParameter("currency", currency)
 		.setParameter("productUPC", productUPC)
-		.setResultTransformer(new ShippingBagItemDomainDTOResultTransformer());
+		.setResultTransformer(new RegularBagItemDomainDTOResultTransformer());
 		
 		try {
 			return Optional.ofNullable((RegularBagItemDomainDTO) query.getSingleResult());
@@ -67,9 +67,6 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 				+ "	pe.productUPC									as upc_cd, "
 				+ " '" + Constants.bagItemStatusCodeNew + "'		as bag_item_sts_cd,"
 				+ "	prcs.priceValue									as prc_val, "
-				+ "	pp.weightDimension								as weight, "	
-				+ "	stk.stockOnHand > 0 							as in_stock, "
-				+ " 1 												as qty, "
 				+ " '" + Constants.shippingBagItemType + "' 		as bag_item_typ_cd "
 				+ " "
 				+ " FROM ProductEntity pe "
@@ -107,7 +104,6 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 				+ "	pe.productUPC									as upc_cd, "
 				+ " '" + Constants.bagItemStatusCodeNew + "'		as bag_item_sts_cd,"
 				+ "	prcs.priceValue									as prc_val, "
-				+ " 1 												as qty, "
 				+ " '" + Constants.shippingBagItemType + "' 		as bag_item_typ_cd "
 				+ " "
 				+ " FROM ProductEntity pe "
