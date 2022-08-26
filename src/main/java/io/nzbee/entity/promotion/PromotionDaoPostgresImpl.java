@@ -1,9 +1,11 @@
 package io.nzbee.entity.promotion;
 
 import java.util.Optional;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import org.drools.core.util.StringUtils;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,14 +26,35 @@ public class PromotionDaoPostgresImpl implements IPromotionDao {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public Optional<PromotionDomainDTO> findByCode(String locale, String code) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode parameters : {}, {}", locale, code);
+	public Optional<PromotionDomainDTO> findAll(String locale, Set<String> codes) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode parameters : {}, {}", locale, StringUtils.toStringArray(codes));
 		
 		Session session = em.unwrap(Session.class);
 		
-		Query query = session.createNativeQuery(constructSQL())
+		Query query = session.createNativeQuery(
+							"SELECT " +
+							"	   promo.prm_id, " +
+							"	   promo.prm_cd, " +
+							"      prmlcl.prm_desc, " +
+							"      promo.prm_st_dt, " +
+							"      promo.prm_en_dt, " +
+							"	   promo.prm_mec_id, " +
+							"	   promomec.prm_mec_cd, " +
+							"	   promomec.prm_mec_desc, " +
+							"      :locale as lcl_cd " +
+							
+							"FROM mochi.promotion promo " +
+							
+							"	INNER JOIN mochi.promotion_attr_lcl prmlcl " +
+							"	ON promo.prm_id = prmlcl.prm_id " +
+							"	AND prmlcl.lcl_cd = :locale " +
+							
+							"	INNER JOIN mochi.promotion_mechanic promomec " +
+							"	ON promo.prm_mec_id =  promomec.prm_mec_id " +
+							"	" +
+							"WHERE promo.prm_cd = :promoCode ")
 				 .setParameter("locale", locale)
-				 .setParameter("promoCode", code);
+				 .setParameter("promoCode", codes);
 		
 		query.unwrap(org.hibernate.query.Query.class)
 		.setResultTransformer(new PromotionDTOResultTransformer());
@@ -42,37 +65,6 @@ public class PromotionDaoPostgresImpl implements IPromotionDao {
 		} catch(NoResultException nre) {
 			return Optional.empty();
 		}
-	}
-
-	@Override
-	public Optional<PromotionEntity> findByCode(String code) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private String constructSQL() {
-		return 
-		"SELECT " +
-		"	   promo.prm_id, " +
-		"	   promo.prm_cd, " +
-		"      prmlcl.prm_desc, " +
-		"      promo.prm_st_dt, " +
-		"      promo.prm_en_dt, " +
-		"	   promo.prm_mec_id, " +
-		"	   promomec.prm_mec_cd, " +
-		"	   promomec.prm_mec_desc, " +
-		"      :locale as lcl_cd " +
-		
-		"FROM mochi.promotion promo " +
-		
-		"	INNER JOIN mochi.promotion_attr_lcl prmlcl " +
-		"	ON promo.prm_id = prmlcl.prm_id " +
-		"	AND prmlcl.lcl_cd = :locale " +
-		
-		"	INNER JOIN mochi.promotion_mechanic promomec " +
-		"	ON promo.prm_mec_id =  promomec.prm_mec_id " +
-		"	" +
-		"WHERE promo.prm_cd = :promoCode "; 
 	}
 
 }

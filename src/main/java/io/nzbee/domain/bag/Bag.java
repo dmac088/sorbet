@@ -8,7 +8,6 @@ import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
 import io.nzbee.domain.customer.Customer;
-import io.nzbee.domain.promotion.Promotion;
 
 public class Bag {
 	
@@ -20,7 +19,7 @@ public class Bag {
 	
 	private BagIssues bagIssues = new BagIssues();
 	
-	private Optional<Promotion> promotion = Optional.ofNullable(null);
+	private Optional<String> coupon = Optional.ofNullable(null);
 
 	public Bag(Customer customer) {
 		this.customer = customer;
@@ -120,20 +119,20 @@ public class Bag {
 		return bagIssues;
 	}
 
-	public Optional<Promotion> getPromotion() {
-		return promotion;
+	public Optional<String> getCoupon() {
+		return this.coupon;
 	}
 	
-	public void setPromotion(Promotion orderPromotion) {
-		this.promotion = Optional.ofNullable(orderPromotion);
+	public void setCoupon(String coupon) {
+		this.coupon = Optional.ofNullable(coupon);
 	}
 
 	public boolean hasIssues() {
 		return bagIssues.hasIssues();
 	}
 	
-	public boolean hasPromotion() {
-		return !(this.promotion == null);
+	public boolean hasCoupon() {
+		return this.coupon.isPresent();
 	}
 
 	public void removeShippingItem() {

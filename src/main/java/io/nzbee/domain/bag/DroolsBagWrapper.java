@@ -12,8 +12,8 @@ public class DroolsBagWrapper {
 	
 	public DroolsBagWrapper(Bag bag) {
 		this.bag = bag;
-		if(bag.getPromotion().isPresent()) {
-			this.couponCode = bag.getPromotion().get().getCouponCode();
+		if(bag.hasCoupon()) {
+			this.couponCode = bag.getCoupon().get();
 		}
 	}
 	

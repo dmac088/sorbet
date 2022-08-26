@@ -1,11 +1,10 @@
 package io.nzbee.entity.promotion;
 
 import java.util.Optional;
+import java.util.Set;
 
 
 public interface IPromotionDao {
 	
-	Optional<PromotionEntity> findByCode(String code);
-
-	Optional<PromotionDomainDTO> findByCode(String locale, String code);
+	Optional<PromotionDomainDTO> findAll(String locale, Set<String> codes);
 }

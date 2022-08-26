@@ -1,9 +1,9 @@
 package io.nzbee.domain.promotion;
 
+import io.nzbee.domain.bag.Bag;
+
 public interface IPromotionService  {
 
-	Promotion findByCode(String locale, String code);
-
-	Promotion findByCouponCode(String locale, String coupon);
+	Promotion findAll(Bag b);
 
 }
