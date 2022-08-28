@@ -22,7 +22,7 @@ import io.nzbee.entity.bag.item.entity.BagItemEntity;
 import io.nzbee.entity.party.person.ICustomerDomainMapper;
 import io.nzbee.entity.party.person.IPersonService;
 import io.nzbee.entity.party.person.PersonEntity;
-import io.nzbee.entity.promotion.IPromotionEntityService;
+//import io.nzbee.entity.promotion.IPromotionEntityService;
 import io.nzbee.entity.promotion.PromotionEntity;
 import io.nzbee.entity.promotion.order.PromotionOrderEntity;
 import io.nzbee.entity.party.person.PersonDomainDTO;
@@ -47,8 +47,8 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 	@Autowired
 	private IPersonService personService;
 
-	@Autowired
-	private IPromotionEntityService promotionService;
+//	@Autowired
+//	private IPromotionEntityService promotionService;
 
 	@Override
 	public Bag DTOToDo(BagDomainDTO dto) {
@@ -117,9 +117,9 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 				Constants.partyRoleCustomer);
 		Optional<PromotionEntity> opr = Optional.ofNullable(null);
 		
-		if (d.getPromotion().isPresent()) {
-			opr = promotionService.findByCode(d.getPromotion().get().getPromotionCode());
-		}
+//		if (d.getPromotion().isPresent()) {
+//			opr = promotionService.findByCode(d.getPromotion().get().getPromotionCode());
+//		}
 
 		BagEntity nbe = new BagEntity();
 		nbe.setBagCreatedDateTime(LocalDateTime.now());

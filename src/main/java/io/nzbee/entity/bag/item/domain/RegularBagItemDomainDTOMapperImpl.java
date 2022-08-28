@@ -26,7 +26,7 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 	private IProductService productService;
 	
 	@Autowired
-	private IBagEntityService bagEntityService;
+	private IBagEntityService bagEntityService; 
 	
 	@Autowired
 	private IBagItemStatusService bagItemStatusService;
@@ -50,7 +50,7 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 
 	
 	@Override
-	public RegularBagItem DTOToDo(Bag bag, RegularBagItemDomainDTO dto, int quantity) {
+	public RegularBagItem DTOToDo(Bag bag, RegularBagItemDomainDTO dto, Long quantity) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo parameters: {}, {}, {}", bag.getCustomer().getUserName(), dto.getProductUPC());
 		return new RegularBagItem(
 				new BagItem(bag, 

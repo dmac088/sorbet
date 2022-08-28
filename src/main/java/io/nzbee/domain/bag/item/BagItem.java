@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import io.nzbee.Constants;
 import io.nzbee.domain.bag.Bag;
-import io.nzbee.domain.bag.discount.Discount;
-import io.nzbee.domain.promotion.Promotion;
 
 public class BagItem {
 
@@ -14,7 +12,7 @@ public class BagItem {
 	
 	private String productUPC;
 	
-	private int quantity;
+	private Long quantity;
 	
 	private boolean errors;
 	
@@ -24,32 +22,30 @@ public class BagItem {
 	
 	private BigDecimal markdownPrice;
 	
-	private List<Discount> discounts;
-	
-	private List<Promotion> promotions;
+	private List<BagItemDiscount> discounts;
+
 	
 	public BagItem(	Bag bag, 
 					String productUPC,
-			  	   	int quantity,
+			  	   	Long quantity,
 			  	   	BigDecimal markdownPrice) {
 		this.bag 				= bag;
 		this.productUPC			= productUPC;
 		this.quantity 			= quantity;
 		this.bagItemStatus 		= Constants.bagItemStatusCodeNew;
 		this.markdownPrice 		= markdownPrice;
-		this.discounts 			= new ArrayList<Discount>();
-		this.promotions			= new ArrayList<Promotion>();
+		this.discounts 			= new ArrayList<BagItemDiscount>();
 	}
 
 	public Bag getBag() {
 		return bag;
 	}
 
-	public int getQuantity() {
+	public Long getQuantity() {
 		return quantity;
 	}
 	
-	public void addToQuantity(int quantity) {
+	public void addToQuantity(Long quantity) {
 		this.quantity += quantity;
 	}
 
@@ -62,7 +58,7 @@ public class BagItem {
 	}
 	
 	public BigDecimal getBagItemTotal() {
-		return new BigDecimal(this.quantity).multiply(this.markdownPrice);///* - this.getBagItemDiscount().doubleValue()*/);
+		return new BigDecimal(this.quantity).multiply((this.markdownPrice).subtract(this.getBagItemDiscount()));
 	}
 
 	public boolean isErrors() {
@@ -89,24 +85,16 @@ public class BagItem {
 		return bagItemStatus;
 	}
 	
-	public Double getBagItemDiscount() {
-		return this.discounts.stream().mapToDouble(d -> d.getDiscountAmount()).sum();
+	public BigDecimal getBagItemDiscount() {
+		return new BigDecimal(this.discounts.stream().mapToDouble(d -> d.getDiscountAmount().doubleValue()).sum());
 	}
 	
-	public void addDiscount(Discount discount) {
+	public void addDiscount(BagItemDiscount discount) {
 		this.discounts.add(discount);
 	}
 
-	public List<Discount> getDiscounts() {
+	public List<BagItemDiscount> getDiscounts() {
 		return discounts;
-	}
-
-	public List<Promotion> getPromotions() {
-		return promotions;
-	}
-
-	public void addPromotion(Promotion promotion) {
-		this.promotions.add(promotion);
 	}
 	
 }

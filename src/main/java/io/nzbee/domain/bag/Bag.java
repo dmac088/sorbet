@@ -34,7 +34,7 @@ public class Bag {
 		return bagItems;
 	}
 	
-	public void addItem(RegularBagItem p, int qty) {
+	public void addItem(RegularBagItem p, Long qty) {
 		System.out.println("adding quantity " + qty + " for product " + p.getBagItem().getProductUPC());
 		
 		Optional<RegularBagItem> obi = this.getBagItems().stream()
@@ -70,7 +70,7 @@ public class Bag {
 	
 	public int getTotalQuantity() {
 		return this.getBagItems().stream()
-				.mapToInt(r -> r.getBagItem().getQuantity()).sum();
+				.mapToInt(r -> r.getBagItem().getQuantity().intValue()).sum();
 	}
 	
 	public ShippingBagItem getShippingItem() {

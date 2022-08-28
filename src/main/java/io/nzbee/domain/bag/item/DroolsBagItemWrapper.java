@@ -1,13 +1,8 @@
 package io.nzbee.domain.bag.item;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import io.nzbee.domain.bag.Bag;
-import io.nzbee.domain.bag.discount.Discount;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
-import io.nzbee.domain.promotion.Promotion;
 
 public class DroolsBagItemWrapper {
 	
@@ -17,7 +12,7 @@ public class DroolsBagItemWrapper {
 		this.bagItem = bagItem;
 	}
 	
-	public int getBagItemQuantity() {
+	public Long getBagItemQuantity() {
 		return this.bagItem.getBagItem().getQuantity();
 	}
 	
@@ -37,17 +32,6 @@ public class DroolsBagItemWrapper {
 		return this.bagItem.getBagItem().getProductUPC();
 	}
 	
-	public List<String> getPromotionCodes() {
-		return this.bagItem.getBagItem().getPromotions().stream().map(p -> p.getPromotionCode()).collect(Collectors.toList());
-	}
-	
-	public List<Promotion> getAllPromotions() {
-		return this.bagItem.getBagItem().getPromotions();
-	}
-	
-	public Promotion getPromotion(String promotionCode) {
-		return this.bagItem.getBagItem().getPromotions().stream().filter(p -> p.getPromotionCode().equals(promotionCode)).findAny().get();
-	}
 	
 	public Boolean isInStock() {
 		return this.bagItem.isInStock();
@@ -73,7 +57,7 @@ public class DroolsBagItemWrapper {
 		return bagItem.getBagItem().getBag().getCustomer().getCustomerID();
 	}
 	
-	public void addDiscount(Discount discount) {
+	public void addDiscount(BagItemDiscount discount) {
 		this.bagItem.getBagItem().addDiscount(discount);
 	}
 	

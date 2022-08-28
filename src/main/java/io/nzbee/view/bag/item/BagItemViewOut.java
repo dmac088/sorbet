@@ -10,7 +10,7 @@ public class BagItemViewOut {
 	
 	private String itemDesc;
 	
-	private int itemQty;
+	private Long itemQty;
 	
 	private BigDecimal markdownPrice;
 	
@@ -22,8 +22,6 @@ public class BagItemViewOut {
 	public BagItemViewOut() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 
 	public Long getItemId() {
 		return itemId;
@@ -49,12 +47,12 @@ public class BagItemViewOut {
 		this.itemDesc = itemDesc;
 	}
 
-	public int getItemQty() {
+	public Long getItemQty() {
 		return itemQty;
 	}
 
-	public void setItemQty(int qty) {
-		this.itemQty = qty;
+	public void setItemQty(Long quantity) {
+		this.itemQty = quantity;
 	}
 	
 	public BigDecimal getMarkdownPrice() {

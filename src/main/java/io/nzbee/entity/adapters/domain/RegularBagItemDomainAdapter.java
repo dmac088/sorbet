@@ -47,7 +47,7 @@ public class RegularBagItemDomainAdapter implements IBagItemPortService {
 	private IBagItemDomainDTOMapper<ShippingBagItemDomainDTO, BagItemEntity, ShippingBagItem> shippingBagItemDomainMapper;
 
 	@Override
-	public RegularBagItem getNewPhysicalItem(String locale, String currency, Bag bag, String itemUPC, int quantity) {
+	public RegularBagItem getNewPhysicalItem(String locale, String currency, Bag bag, String itemUPC, Long quantity) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewPhysicalItem with parameters {}, {}", itemUPC, quantity);
 		
 		//there is no product in the domain model just bagItem

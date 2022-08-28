@@ -36,7 +36,7 @@ public class RegularBagItemDomainDTO {
 	
 	private final Boolean inStock;
 
-	private final int quantity;
+	private final Long quantity;
 	
 	
 	
@@ -48,7 +48,7 @@ public class RegularBagItemDomainDTO {
 												BigDecimal markdownPrice, 
 												BigDecimal weight,
 												boolean inStock,
-												int quantity) {
+												Long quantity) {
 		super();
 		//this.bagItemId		= bagItemId;
 		this.productUPC 	= productUPC;
@@ -62,19 +62,14 @@ public class RegularBagItemDomainDTO {
 	
 
 	public RegularBagItemDomainDTO(Object[] tuple, Map<String, Integer> aliasToIndexMap) {
-	//	this.bagItemId 			= ((Number) tuple[aliasToIndexMap.get(ID_ALIAS)]).longValue();
 		this.bagItemStatus 		= tuple[aliasToIndexMap.get(BAG_ITEM_STATUS_CODE_ALIAS)].toString();
 		this.bagItemType 		= tuple[aliasToIndexMap.get(BAG_ITEM_TYPE_CODE_ALIAS)].toString();
 		this.weight				= ((BigDecimal) tuple[aliasToIndexMap.get(BAG_ITEM_WEIGHT_ALIAS)]);
-		this.quantity 			= ((Number) tuple[aliasToIndexMap.get(BAG_ITEM_QUANTITY_ALIAS)]).intValue();
+		this.quantity 			= ((Number) tuple[aliasToIndexMap.get(BAG_ITEM_QUANTITY_ALIAS)]).longValue();
 		this.productUPC 		= tuple[aliasToIndexMap.get(BAG_ITEM_UPC_ALIAS)].toString();
 		this.markdownPrice 		= ((BigDecimal) tuple[aliasToIndexMap.get(BAG_ITEM_PRICE_ALIAS)]);
 		this.inStock 			= ((boolean) (tuple[aliasToIndexMap.get(BAG_ITEM_INSTOCK_ALIAS)]));
 	}
-
-//	public Long getBagItemId() {
-//		return bagItemId;
-//	}
 	
 	public String getProductUPC() {
 		return productUPC;
@@ -100,7 +95,7 @@ public class RegularBagItemDomainDTO {
 		return inStock;
 	}
 
-	public int getQuantity() {
+	public Long getQuantity() {
 		return quantity;
 	}
 

@@ -10,7 +10,7 @@ public interface IBagItemPortService extends IDomainPortService<RegularBagItem> 
 	
 	void save(RegularBagItem domainObject);
 
-	RegularBagItem getNewPhysicalItem(String locale, String currency, Bag bag, String itemUPC, int quantity);
+	RegularBagItem getNewPhysicalItem(String locale, String currency, Bag bag, String itemUPC, Long quantity);
 
 	ShippingBagItem getNewShippingItem(String locale, String currency, Bag bag, String destCode, String shipType);
 

@@ -4,7 +4,7 @@ public class BagItemViewIn {
 
 	private String itemUPC;
 	
-	private int itemQty;
+	private Long itemQty;
 
 	public BagItemViewIn() {
 		
@@ -18,11 +18,11 @@ public class BagItemViewIn {
 		this.itemUPC = itemUPC;
 	}
 
-	public int getItemQty() {
+	public Long getItemQty() {
 		return itemQty;
 	}
 
-	public void setItemQty(int qty) {
+	public void setItemQty(Long qty) {
 		this.itemQty = qty;
 	}
 	

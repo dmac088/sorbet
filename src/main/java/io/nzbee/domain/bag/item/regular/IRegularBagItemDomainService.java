@@ -8,7 +8,7 @@ public interface IRegularBagItemDomainService {
 
 	void delete(RegularBagItem object);
 
-	RegularBagItem getNewPhysicalItem(String locale, String currency, Bag bag, String itemUPC, int quantity);
-
 	void checkAllBagItemRules(RegularBagItem object);
+
+	RegularBagItem getNewPhysicalItem(String locale, String currency, Bag bag, String itemUPC, Long quantity);
 }

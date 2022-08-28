@@ -1,9 +1,8 @@
 package io.nzbee.entity.promotion;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.drools.core.util.StringUtils;
 import org.hibernate.Session;
@@ -24,9 +23,9 @@ public class PromotionDaoPostgresImpl implements IPromotionDao {
 	private EntityManager em;
 	
 
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Override
-	public Optional<PromotionDomainDTO> findAll(String locale, Set<String> codes) {
+	public List<PromotionDomainDTO> findAll(String locale, Set<String> codes) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode parameters : {}, {}", locale, StringUtils.toStringArray(codes));
 		
 		Session session = em.unwrap(Session.class);
@@ -59,12 +58,7 @@ public class PromotionDaoPostgresImpl implements IPromotionDao {
 		query.unwrap(org.hibernate.query.Query.class)
 		.setResultTransformer(new PromotionDTOResultTransformer());
 		
-		try {
-			PromotionDomainDTO result = (PromotionDomainDTO) query.getSingleResult();
-			return Optional.ofNullable(result);
-		} catch(NoResultException nre) {
-			return Optional.empty();
-		}
+		return query.getResultList();
 	}
 
 }

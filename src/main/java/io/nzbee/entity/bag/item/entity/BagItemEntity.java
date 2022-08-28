@@ -45,7 +45,7 @@ public class BagItemEntity {
 	private BagItemTypeEntity bagItemType;
 	
 	@Column(name="qty")
-	private int quantity;
+	private Long quantity;
 	
 	public Long getBagItemId() {
 		return bagItemId;
@@ -59,11 +59,11 @@ public class BagItemEntity {
 		this.product = p;
 	}
 	
-	public int getQuantity() {
+	public Long getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(Long quantity) {
 		this.quantity = quantity;
 	}
 

@@ -1,6 +1,5 @@
 package io.nzbee.domain.bag.item.regular;
 
-import org.apache.tomcat.util.buf.StringUtils;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.slf4j.Logger;
@@ -23,12 +22,12 @@ public class RegularBagItemServiceImpl implements IRegularBagItemDomainService{
     private KieContainer kieContainer;
 	
 	@Override
-	public RegularBagItem getNewPhysicalItem(String locale, String currency, Bag bag, String itemUPC, int quantity) {
+	public RegularBagItem getNewPhysicalItem(String locale, String currency, Bag bag, String itemUPC, Long quantity) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewPhysicalItem with parameters {}, {}", itemUPC, quantity);
 		return bagItemService.getNewPhysicalItem(locale, currency, bag, itemUPC, quantity);
 	}
 
-	@Override
+	@Override 
 	public void save(RegularBagItem object) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".save()");
 		bagItemService.save(object);
@@ -47,7 +46,7 @@ public class RegularBagItemServiceImpl implements IRegularBagItemDomainService{
     	kieSession.insert(object);
     	DroolsBagItemWrapper dpw = new DroolsBagItemWrapper(object);
     	kieSession.insert(dpw);
-    	System.out.println(StringUtils.join(dpw.getPromotionCodes()));
+    	//System.out.println(StringUtils.join(dpw.getPromotionCodes()));
     	System.out.println("************* Fire Bag Item Rules **************");
     	kieSession.fireAllRules();
         System.out.println("************************************");
