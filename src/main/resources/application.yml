@@ -50,7 +50,7 @@ spring:
       hibernate:
         "[show_sql]": true
         "[format_sql]]": true
-        "[ order_inserts]": true
+        "[order_inserts]": true
         "[order_updates]": true
         "[batch_versioned_data]": true
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -64,11 +64,18 @@ logging:
     root: WARN
     org:
       springframework:  
-        web: DEBUG
+        web: WARN
       hibernate: 
-        type: DEBUG
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql: 
+              BasicBinder: TRACE
+      jdbc:
+        core:
+          JdbcTemplate: DEBUG
     io:
-      nzbee: DEBUG
+      nzbee: WARN
 
 
 file:
