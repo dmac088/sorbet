@@ -103,7 +103,7 @@ public class IT_BagItemEntityRepositoryIntegrationTest {
 	    Optional<BagItemStatus> bis = bagItemStatus.findByCode(Constants.bagStatusCodeNew);
 	    
 	    bagItem = new BagItemEntity(product);
-	    bagItem.setQuantity(2);
+	    bagItem.setQuantity(new Long(2));
 	    bagItem.setBagItemStatus(bis.get());
 	    bag.addItem(bagItem);
 	    

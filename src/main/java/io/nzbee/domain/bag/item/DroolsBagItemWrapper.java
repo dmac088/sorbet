@@ -32,7 +32,6 @@ public class DroolsBagItemWrapper {
 		return this.bagItem.getBagItem().getProductUPC();
 	}
 	
-	
 	public Boolean isInStock() {
 		return this.bagItem.isInStock();
 	}

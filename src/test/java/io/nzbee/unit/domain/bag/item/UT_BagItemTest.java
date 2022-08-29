@@ -56,7 +56,7 @@ public class UT_BagItemTest {
 	@Test
 	public void when3EligableItemsAdded_thenB3G33PromotionDiscountIsApplied() {
 		
-		bagItem = new RegularBagItem(new BagItem(bag, "abcd123", 3, new BigDecimal(10)), new BigDecimal(1), true);
+		bagItem = new RegularBagItem(new BagItem(bag, "abcd123", new Long(3), new BigDecimal(10)), new BigDecimal(1), true);
 
 		Promotion b3g33 = new Promotion("B3G33", 
 										LocalDateTime.of(2020, Month.JANUARY, 8, 0,0,0),

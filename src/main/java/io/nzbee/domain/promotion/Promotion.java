@@ -4,13 +4,13 @@ import java.time.LocalDateTime;
 
 public abstract class Promotion {
 	
-	private final String promotionCode;
+	protected final String promotionCode;
 	
-	private final String promotionTypeCode;
+	protected final String promotionTypeCode;
 	
-	private final LocalDateTime promotionStartDt;
+	protected final LocalDateTime promotionStartDt;
 	
-	private final LocalDateTime promotionEndDt;
+	protected final LocalDateTime promotionEndDt;
 
 	
 	public Promotion(String promotionCode,

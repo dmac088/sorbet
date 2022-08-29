@@ -25,7 +25,7 @@ public class BagViewDTOMapperImpl implements IBagViewDTOMapper {
 	@Override
 	public BagView DTOToView(BagViewDTO bDto, Bag bag) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToView()");
- 
+
 		// create a new bag domain object
 		BagView b = new BagView();
 
@@ -43,12 +43,13 @@ public class BagViewDTOMapperImpl implements IBagViewDTOMapper {
 
 		b.getBagItems().addAll(sbi);
 
-		Optional<BagItemViewDTO> oe = bDto.getBagItems().stream()
-				.filter(vbi -> vbi.getProduct().getProductDto().getProductUPC().equals(bag.getShippingItem().getBagItem().getProductUPC()))
-				.findAny();
+		if (bag.hasShippingItem()) {
+			Optional<BagItemViewDTO> oe = bDto.getBagItems().stream().filter(vbi -> vbi.getProduct().getProductDto()
+					.getProductUPC().equals(bag.getShippingItem().getBagItem().getProductUPC())).findAny();
 
-		if (oe.isPresent()) {
-			b.setShippingItem(bagItemMapper.DTOToView(oe.orElse(null), bag.getShippingItem()));
+			if (oe.isPresent()) {
+				b.setShippingItem(bagItemMapper.DTOToView(oe.orElse(null), bag.getShippingItem()));
+			}
 		}
 
 		return b;
