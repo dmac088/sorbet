@@ -67,8 +67,6 @@ public class BagDomainServiceImpl implements IBagDomainService {
     	
     	domainBagItemService.checkAllBagItemRules(bagItem);
     
-    	System.out.println(bagItem.getBagItem().isErrors());
-    	
      	if(bagItem.getBagItem().isErrors()) {
      		LOGGER.debug("The BagItem has errors!");
      		return;
