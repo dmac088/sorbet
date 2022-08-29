@@ -9,9 +9,9 @@ public class RegularBagItem {
 	
 	private final BigDecimal weight;
 	
-	private final boolean inStock;
+	private final Boolean inStock;
 
-	public RegularBagItem(BagItem bagItem, BigDecimal weight, boolean inStock) {
+	public RegularBagItem(BagItem bagItem, BigDecimal weight, Boolean inStock) {
 		super();
 		this.bagItem = bagItem;
 		this.weight = weight;

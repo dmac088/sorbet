@@ -56,11 +56,15 @@ public class BagDomainServiceImpl implements IBagDomainService {
     	RegularBagItem bagItem = exists 
     					? b.getBagItem(dto.getItemUPC()) 
     					: domainBagItemService.getNewPhysicalItem(locale, currency, b, dto.getItemUPC(), dto.getItemQty());
-    		
+    	
+    	
+    	b.addItem(bagItem, dto.getItemQty());
+    	
     	//Run through the business rules
 	    	//Checks out of stock
 	    	//Checks bag and bagItem limits
 	    	//Checks promotion eligibility, and applies discount 
+    	
     	domainBagItemService.checkAllBagItemRules(bagItem);
     
     	System.out.println(bagItem.getBagItem().isErrors());
@@ -69,10 +73,6 @@ public class BagDomainServiceImpl implements IBagDomainService {
      		LOGGER.debug("The BagItem has errors!");
      		return;
     	}
-    	
- 
-     	b.addItem(bagItem, dto.getItemQty());
-    	
     	
     	//save the current state of the bag to the database 
     	this.save(b);
