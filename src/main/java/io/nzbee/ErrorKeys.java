@@ -13,6 +13,8 @@ public class ErrorKeys {
 	public static final String addressTypeNotFound 			= "ADTNF001";
 	public static final String customerAlreadyExists        = "CSTAE001";
 	public static final String bagNotFound 					= "BAGNF001";
+	public static final String bagItemStatusNotFound 		= "BISNF001";
+	public static final String bagItemTypesNotFound 		= "BITNF001";
 	public static final String promotionNotFound			= "PRMNF001";
 	public static final String promotionCouponNotFound		= "PRMNF002";
 	public static final String promotionMechanicNotFound	= "PRMNF003";

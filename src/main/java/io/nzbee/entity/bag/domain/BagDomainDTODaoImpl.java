@@ -40,7 +40,7 @@ public class BagDomainDTODaoImpl implements IBagDomainDTODao {
 									+ "				(case "
 									+ "				when bit.bag_item_typ_cd = '" + Constants.shippingBagItemType + "' "
 									+ " 			then true "
-									+ "             else stk.soh_qty > 0 "
+									+ "             else coalesce(stk.soh_qty,0) > 0 "
 									+ " 			end) as in_stock, "
 									+ "       		bi.qty, "
 									+ "       		bit.bag_item_typ_cd "

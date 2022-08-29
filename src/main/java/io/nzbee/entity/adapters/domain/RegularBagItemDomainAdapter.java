@@ -57,7 +57,7 @@ public class RegularBagItemDomainAdapter implements IBagItemPortService {
 		//create, save and return domain object 
 		RegularBagItem bi = regularBagItemDomainMapper.DTOToDo(bag, biDto, quantity);
 		
-		this.save(bi);
+		//this.save(bi);
 		return bi;
 	}
 	
@@ -71,7 +71,7 @@ public class RegularBagItemDomainAdapter implements IBagItemPortService {
 		
 		//create, save and return domain object 
 		ShippingBagItem bi = shippingBagItemDomainMapper.DTOToDo(bag, biDto);
-		this.save(bi);
+		//this.save(bi);
 		return bi;
 	}
 	

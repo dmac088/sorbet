@@ -30,7 +30,7 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 				+ "	'" + Constants.bagItemStatusCodeNew + "'		as bag_item_sts_cd,"
 				+ "	prcs.priceValue									as prc_val, "
 				+ "	pp.weightDimension								as weight, "	
-				+ "	stk.stockOnHand > 0 							as in_stock, "
+				+ "	coalesce(stk.stockOnHand,0) > 0 				as in_stock, "
 				+ " 1 												as qty, "
 				+ " '" + Constants.regularBagItemType + "' 			as bag_item_typ_cd "
 				+ " FROM ProductEntity pe "

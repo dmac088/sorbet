@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import io.nzbee.Constants;
+import io.nzbee.ErrorKeys;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
@@ -19,12 +20,16 @@ import io.nzbee.entity.bag.item.domain.IRegularBagItemDomainDTOMapper;
 import io.nzbee.entity.bag.item.domain.IShippingBagItemDomainDTOMapper;
 import io.nzbee.entity.bag.item.domain.ShippingBagItemDomainDTO;
 import io.nzbee.entity.bag.item.entity.BagItemEntity;
+import io.nzbee.entity.bag.item.type.IBagItemTypeService;
+import io.nzbee.entity.bag.status.IBagItemStatusService;
 import io.nzbee.entity.party.person.ICustomerDomainMapper;
 import io.nzbee.entity.party.person.IPersonService;
 import io.nzbee.entity.party.person.PersonEntity;
+import io.nzbee.entity.product.IProductService;
 //import io.nzbee.entity.promotion.IPromotionEntityService;
 import io.nzbee.entity.promotion.PromotionEntity;
 import io.nzbee.entity.promotion.order.PromotionOrderEntity;
+import io.nzbee.exceptions.EntityNotFoundException;
 import io.nzbee.entity.party.person.PersonDomainDTO;
 
 @Component
@@ -43,12 +48,19 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 	
 	@Autowired
 	private IShippingBagItemDomainDTOMapper shippingItemMapper;
+	
+	@Autowired
+	private IBagItemStatusService bagItemStatusService;
+	
+	@Autowired
+	private IBagItemTypeService bagItemTypeService;
 
 	@Autowired
 	private IPersonService personService;
+	
+	@Autowired
+	private IProductService productService;
 
-//	@Autowired
-//	private IPromotionEntityService promotionService;
 
 	@Override
 	public Bag DTOToDo(BagDomainDTO dto) {
@@ -116,10 +128,6 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		Optional<PersonEntity> op = personService.findByUsernameAndRole(d.getCustomer().getUserName(),
 				Constants.partyRoleCustomer);
 		Optional<PromotionEntity> opr = Optional.ofNullable(null);
-		
-//		if (d.getPromotion().isPresent()) {
-//			opr = promotionService.findByCode(d.getPromotion().get().getPromotionCode());
-//		}
 
 		BagEntity nbe = new BagEntity();
 		nbe.setBagCreatedDateTime(LocalDateTime.now());
@@ -138,6 +146,17 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 			if (obi.isPresent()) {
 				BagItemEntity bie = obi.get();
 				bie.setQuantity(bi.getBagItem().getQuantity());
+			} else {
+				BagItemEntity i = new BagItemEntity();
+				i.setBag(b);
+				i.setBagItemStatus(bagItemStatusService.findByCode(Constants.bagItemStatusCodeNew)
+						.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.bagItemStatusNotFound,Constants.localeENGB,Constants.bagItemStatusCodeNew)));
+				i.setBagItemType(bagItemTypeService.findByCode(Constants.regularBagItemType)
+						.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.bagItemTypesNotFound,Constants.localeENGB,Constants.regularBagItemType)));
+				i.setProduct(productService.findByCode(bi.getBagItem().getProductUPC())
+						.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound,Constants.localeENGB,bi.getBagItem().getProductUPC())));
+				i.setQuantity(bi.getBagItem().getQuantity());
+				b.addItem(i);
 			}
 		});
 		

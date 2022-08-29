@@ -41,7 +41,7 @@ public class BagDomainServiceImpl implements IBagDomainService {
 	
 	@Override
 	@Transactional
-	public Bag addPhysicalItem(String locale, String currency, BagItemViewIn dto, String username) {
+	public void addPhysicalItem(String locale, String currency, BagItemViewIn dto, String username) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".addPhysicalItem with parameters {}, {}, {}, {}, {}", locale, currency, dto.getItemUPC(), dto.getItemQty(), username);
 		
 		//get the bag domain model with the items
@@ -49,8 +49,6 @@ public class BagDomainServiceImpl implements IBagDomainService {
     							currency, 
     							username);
 
-    	System.out.println("the number of items in the bag is " + b.getTotalItems());
-    	System.out.println("the weight of items in the bag is " + b.getTotalWeight());
     	//check if the product already exists in the bag
     	boolean exists = b.bagItemExists(dto.getItemUPC());
     	
@@ -59,30 +57,25 @@ public class BagDomainServiceImpl implements IBagDomainService {
     					? b.getBagItem(dto.getItemUPC()) 
     					: domainBagItemService.getNewPhysicalItem(locale, currency, b, dto.getItemUPC(), dto.getItemQty());
     		
-    	if(exists) {
-    		b.addItem(bagItem, dto.getItemQty());
-    	}
-    	
     	//Run through the business rules
 	    	//Checks out of stock
 	    	//Checks bag and bagItem limits
 	    	//Checks promotion eligibility, and applies discount 
     	domainBagItemService.checkAllBagItemRules(bagItem);
     
+    	System.out.println(bagItem.getBagItem().isErrors());
+    	
      	if(bagItem.getBagItem().isErrors()) {
      		LOGGER.debug("The BagItem has errors!");
-     		return b;
-    		//return ResponseEntity.ok(bagResourceAssembler.toModel(bagDTOMapper.toView(b)));
+     		return;
     	}
     	
-    	if(!exists) {
-    		b.addItem(bagItem, dto.getItemQty());
-    	}
+ 
+     	b.addItem(bagItem, dto.getItemQty());
+    	
     	
     	//save the current state of the bag to the database 
     	this.save(b);
-    	
-    	return b;
 	}
 	
 	

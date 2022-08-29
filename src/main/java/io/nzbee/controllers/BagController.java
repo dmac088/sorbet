@@ -32,159 +32,130 @@ import io.nzbee.view.product.shipping.ShippingItemDTOIn;
 @RestController
 @RequestMapping("/api")
 public class BagController {
-    private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
-    @Autowired
-    private IBagViewService viewBagService;
-    
-    @Autowired
-    private IBagDomainService domainBagService;
-    
-    @Autowired
-    private IRegularBagItemDomainService domainBagItemService;
-    
-    @Autowired
-    private IBagViewMapper bagDTOMapper;
-    
-    @Autowired
-    private BagResourceAssembler bagResourceAssembler; 
-    
-    @Autowired
-    private BagItemResourceAssembler bagItemResourceAssembler; 
-      
+	@Autowired
+	private IBagViewService viewBagService;
 
-    public BagController() {
-        super();
-    }
+	@Autowired
+	private IBagDomainService domainBagService;
 
-    @GetMapping("/Bag/{locale}/{currency}")
-	public ResponseEntity<BagResource> getCustomerBag(	@PathVariable String locale, 
-														@PathVariable String currency, 
-														Principal principal) {
-    	LOGGER.debug("call " + getClass().getSimpleName() + ".getCustomerBag");
-    	
-    	//get the domain model to compute the bag total
-    	Bag b = domainBagService.findByCode(	locale,
-											 	currency,
-											 	principal.getName());
-    	
-    	
-    	//domainBagService.checkAllBagRules(b);
-    	
-    	//get the view containing additional attributes
-    	BagView bv = viewBagService.toView(locale, currency, b);
-    	
-    	return ResponseEntity.ok(bagResourceAssembler.toModel(bv));
+	@Autowired
+	private IRegularBagItemDomainService domainBagItemService;
+
+	@Autowired
+	private IBagViewMapper bagDTOMapper;
+
+	@Autowired
+	private BagResourceAssembler bagResourceAssembler;
+
+	@Autowired
+	private BagItemResourceAssembler bagItemResourceAssembler;
+
+	public BagController() {
+		super();
 	}
-    
-    @PostMapping("/Bag/{locale}/{currency}/Coupon/Code/{coupon}")
-    public ResponseEntity<BagResource> addCouponToBag( 	@PathVariable String locale, 
-														@PathVariable String currency, 
-														@PathVariable String coupon, 
-														Principal principal) {
+
+	@GetMapping("/Bag/{locale}/{currency}")
+	public ResponseEntity<BagResource> getCustomerBag(@PathVariable String locale, @PathVariable String currency,
+			Principal principal) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".getCustomerBag");
+
+		// get the domain model to compute the bag total
+		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
+
+		// domainBagService.checkAllBagRules(b);
+
+		// get the view containing additional attributes
+		BagView bv = viewBagService.toView(locale, currency, b);
+
+		return ResponseEntity.ok(bagResourceAssembler.toModel(bv));
+	}
+
+	@PostMapping("/Bag/{locale}/{currency}/Coupon/Code/{coupon}")
+	public ResponseEntity<BagResource> addCouponToBag(@PathVariable String locale, @PathVariable String currency,
+			@PathVariable String coupon, Principal principal) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".addCouponToBag");
-		
+
 //		Promotion op = promotionService.findByCouponCode(locale, coupon);
 //		System.out.println("coupon code found " + op);
-		
-		Bag b = domainBagService.findByCode(	locale,
-												currency,
-												principal.getName());
-		
+
+		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
+
 		b.setCoupon(coupon);
-		
+
 		domainBagService.checkAllBagRules(b);
-		
+
 		domainBagService.save(b);
-		
+
 		return ResponseEntity.ok(bagResourceAssembler.toModel(bagDTOMapper.toView(b)));
 	}
-    
-    @GetMapping("/Bag/{locale}/{currency}/Items")
-	public ResponseEntity<CollectionModel<BagItemResource>> getBagContents(@PathVariable String locale, 
-													  					   @PathVariable String currency, 
-													  					   Principal principal) {
-    	LOGGER.debug("call " + getClass().getSimpleName() + ".getBagContents");
-    	
-		Bag b = domainBagService.findByCode(	locale,
-												currency,
-												principal.getName());
-    	
-    	Set<BagItemViewOut> sbi =  viewBagService.findByCode(locale,
-												   	  		 currency,
-												   	  		 principal.getName(),
-												   	  		 b).getBagItems();
-    	
-    	return ResponseEntity.ok(bagItemResourceAssembler.toCollectionModel(sbi));
-    	
-	}
-    
-    @PostMapping("/Bag/{locale}/{currency}/Items/Physical/Add")
-	public ResponseEntity<BagResource>  addPhysicalItemToBag(	@PathVariable String locale, 
-																@PathVariable String currency,
-																@RequestBody BagItemViewIn dto, 
-																Principal principal) {
-    	
-    	LOGGER.debug("call " + getClass().getSimpleName() + ".addPhysicalItem with parameters {}, {}, {}, {}", locale, currency, dto.getItemUPC(), dto.getItemQty());
-    	
-    	//persist the domain BagItem to the Bag
-    	domainBagService.addPhysicalItem(locale, currency, dto, principal.getName());
 
-    	//re-retrieve the bag view and return it 
-		Bag b = domainBagService.findByCode(	locale,
-				currency,
-				principal.getName());
-		
-    	BagView bv = viewBagService.toView(locale, currency, b);
-    	
-    	return ResponseEntity.ok(bagResourceAssembler.toModel(bv));
-	}
-    
-    
-    @PostMapping("/Bag/{locale}/{currency}/Items/Shipping/Add")
-	public ResponseEntity<BagResource>  addShippingItemToBag(	@PathVariable String locale, 
-																@PathVariable String currency,
-																@RequestBody ShippingItemDTOIn dto, 
-																Principal principal) {
-    	
-    	LOGGER.debug("call " + getClass().getSimpleName() + ".addShippingItemToBag with parameters {}, {}, {}", locale, currency, dto.getShippingProductCode());
-    	
-    	//persist the domain BagItem to the Bag
-    	domainBagService.addShippingItem(locale, currency, dto, principal.getName());
-    	
-		Bag b = domainBagService.findByCode(	locale,
-												currency,
-												principal.getName());
+	@GetMapping("/Bag/{locale}/{currency}/Items")
+	public ResponseEntity<CollectionModel<BagItemResource>> getBagContents(@PathVariable String locale,
+			@PathVariable String currency, Principal principal) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".getBagContents");
 
-    	//re-retrieve the bag view and return it 
-    	BagView bv = viewBagService.findByCode(	locale, 
-												currency, 
-												principal.getName(), 
-												b);
-    	
-    	return ResponseEntity.ok(bagResourceAssembler.toModel(bv));
+		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
+
+		Set<BagItemViewOut> sbi = viewBagService.findByCode(locale, currency, principal.getName(), b).getBagItems();
+
+		return ResponseEntity.ok(bagItemResourceAssembler.toCollectionModel(sbi));
+
 	}
- 
-    
-    @GetMapping("/Bag/{locale}/{currency}/Items/Remove/{itemCode}")
-	public ResponseEntity<Void> removeItemFromBag(	@PathVariable String locale, 
-													@PathVariable String currency,
-													@PathVariable String itemCode, 
-													Principal principal) {
-    	
-    	LOGGER.debug("call " + getClass().getSimpleName() + ".removeItemFromBag for parameters {}, {}, {} ", locale, currency, itemCode);
-    	//here we get the bag and bagItems but the products are null
-    	Bag b = domainBagService.findByCode(	locale, 
-		    									currency, 
-		    									principal.getName());
-    	
-    	Optional<RegularBagItem> obi = b.getBagItems().stream().filter(bi -> bi.getBagItem().getProductUPC().equals(itemCode)).findAny();
-    	
-    	if(obi.isPresent()) {
-    		domainBagItemService.delete(obi.get());	
-    	}
+
+	@PostMapping("/Bag/{locale}/{currency}/Items/Physical/Add")
+	public ResponseEntity<BagResource> addPhysicalItemToBag(@PathVariable String locale, @PathVariable String currency,
+			@RequestBody BagItemViewIn dto, Principal principal) {
+
+		LOGGER.debug("call " + getClass().getSimpleName() + ".addPhysicalItemToBag with parameters {}, {}, {}, {}", locale,
+				currency, dto.getItemUPC(), dto.getItemQty());
+
+		// persist the domain BagItem to the Bag
+		domainBagService.addPhysicalItem(locale, currency, dto, principal.getName());
+
+		// rehydrate the bag domain model and view, then return it
+		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
+
+		BagView bv = viewBagService.toView(locale, currency, b);
+
+		return ResponseEntity.ok(bagResourceAssembler.toModel(bv));
+	}
+
+	@PostMapping("/Bag/{locale}/{currency}/Items/Shipping/Add")
+	public ResponseEntity<BagResource> addShippingItemToBag(@PathVariable String locale, @PathVariable String currency,
+			@RequestBody ShippingItemDTOIn dto, Principal principal) {
+
+		LOGGER.debug("call " + getClass().getSimpleName() + ".addShippingItemToBag with parameters {}, {}, {}", locale,
+				currency, dto.getShippingProductCode());
+
+		// persist the domain BagItem to the Bag
+		domainBagService.addShippingItem(locale, currency, dto, principal.getName());
+
+		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
+
+		// re-retrieve the bag view and return it
+		BagView bv = viewBagService.findByCode(locale, currency, principal.getName(), b);
+
+		return ResponseEntity.ok(bagResourceAssembler.toModel(bv));
+	}
+
+	@GetMapping("/Bag/{locale}/{currency}/Items/Remove/{itemCode}")
+	public ResponseEntity<Void> removeItemFromBag(@PathVariable String locale, @PathVariable String currency,
+			@PathVariable String itemCode, Principal principal) {
+
+		LOGGER.debug("call " + getClass().getSimpleName() + ".removeItemFromBag for parameters {}, {}, {} ", locale,
+				currency, itemCode);
+		// here we get the bag and bagItems but the products are null
+		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
+
+		Optional<RegularBagItem> obi = b.getBagItems().stream()
+				.filter(bi -> bi.getBagItem().getProductUPC().equals(itemCode)).findAny();
+
+		if (obi.isPresent()) {
+			domainBagItemService.delete(obi.get());
+		}
 		return null;
 	}
- 
-    
+
 }

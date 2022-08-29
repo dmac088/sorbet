@@ -13,7 +13,7 @@ public interface IBagDomainService  {
 
 	void update(Bag object);
 
-	Bag addPhysicalItem(String locale, String currency, BagItemViewIn dto, String username);
+	void addPhysicalItem(String locale, String currency, BagItemViewIn dto, String username);
 
 	Bag addShippingItem(String locale, String currency, ShippingItemDTOIn dto, String username);
 
