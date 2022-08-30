@@ -2,14 +2,12 @@ package io.nzbee.domain.dto.promotion.in;
 
 public class BagItemQuantityDTO {
 
-	private final String itemUPC;
+	private  String itemUPC;
 	
-	private final Long itemQuantity;
+	private  Long itemQuantity;
 
-	public BagItemQuantityDTO(String itemUPC, Long itemQuantity) {
-		super();
-		this.itemUPC = itemUPC;
-		this.itemQuantity = itemQuantity;
+	public BagItemQuantityDTO() {
+	
 	}
 
 	public String getItemUPC() {
@@ -18,6 +16,14 @@ public class BagItemQuantityDTO {
 
 	public Long getItemQuantity() {
 		return itemQuantity;
+	}
+
+	public void setItemUPC(String itemUPC) {
+		this.itemUPC = itemUPC;
+	}
+
+	public void setItemQuantity(Long itemQuantity) {
+		this.itemQuantity = itemQuantity;
 	}
 	
 }

@@ -75,7 +75,7 @@ logging:
         core:
           JdbcTemplate: DEBUG
     io:
-      nzbee: WARN
+      nzbee: DEBUG
 
 
 file:

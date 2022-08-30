@@ -9,7 +9,7 @@ import io.nzbee.entity.bag.entity.BagEntity;
 public interface IBagViewDTORepository extends JpaRepository<BagEntity, Long> {
 
 	
-	@Query("SELECT sum(pphy.weightDimension * bie.quantity) as weight " +
+	@Query("SELECT coalesce(sum(pphy.weightDimension * bie.quantity), 0.01) as weight " +
 		   "FROM BagEntity be " + 
 		   "JOIN be.bagItems bie " + 
 		   "JOIN bie.product prd " + 

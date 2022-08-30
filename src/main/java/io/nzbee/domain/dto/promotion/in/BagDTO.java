@@ -5,13 +5,11 @@ import java.util.List;
 
 public class BagDTO {
 
-	private final String coupon;
+	private String coupon;
 	
-	private final List<BagItemQuantityDTO> items = new ArrayList<BagItemQuantityDTO>();
+	private List<BagItemQuantityDTO> items = new ArrayList<BagItemQuantityDTO>();
 	
-	public BagDTO(String coupon) {
-		super();
-		this.coupon = coupon;
+	public BagDTO() {
 	}
 
 	public List<BagItemQuantityDTO> getItems() {
@@ -20,6 +18,14 @@ public class BagDTO {
 
 	public String getCoupon() {
 		return coupon;
+	}
+
+	public void setCoupon(String coupon) {
+		this.coupon = coupon;
+	}
+
+	public void setItems(List<BagItemQuantityDTO> items) {
+		this.items = items;
 	}
 	
 }

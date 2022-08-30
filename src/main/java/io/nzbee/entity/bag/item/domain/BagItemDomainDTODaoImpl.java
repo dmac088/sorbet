@@ -78,7 +78,7 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 				+ " AND curr.code 				= :currency "
 				+ " AND ps.shippingTypeCode 	= :shipType "
 				+ " AND ps.shippingCountryCode 	= :shipDest "
-				+ " AND :bagWeight 				between ps.weightFrom and ps.weightTo ")
+				+ " AND coalesce(:bagWeight, 0.1) between ps.weightFrom and ps.weightTo ")
 		.unwrap(org.hibernate.query.Query.class)
 		.setParameter("currency", currency)
 		.setParameter("priceType", priceType)

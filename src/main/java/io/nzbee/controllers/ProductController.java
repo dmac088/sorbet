@@ -218,9 +218,6 @@ public class ProductController {
 		
 		Bag b = bagService.findByCode(locale, currency, principal.getName());
 
-		LOGGER.debug("total weight = " + b.getTotalWeight());
-		LOGGER.debug("total quantity = " + b.getTotalQuantity());
-
 		ShippingProductResource pr = prodShippingResourceAssembler.toModel(shippingProductViewService
 				.findByDestinationAndTypeAndBagWeight(locale, currency, code, type, b.getTotalWeight()));
 

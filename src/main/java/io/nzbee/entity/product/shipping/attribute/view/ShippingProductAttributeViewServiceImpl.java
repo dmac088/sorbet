@@ -27,7 +27,7 @@ public class ShippingProductAttributeViewServiceImpl implements IShippingProduct
 	public List<ShippingTypeDTO> findAllShippingTypeByDestinationAndWeight(String locale, String shippingDestination,
 			BigDecimal bagWeight) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findAllShippingTypeByDestinationAndWeight with parameter {}, {}, {}", locale, shippingDestination, bagWeight);
-		return productAttributeRepository.findAllShippingType(locale, shippingDestination, bagWeight);
+		return productAttributeRepository.findAllShippingType(locale, shippingDestination, (bagWeight == null) ? new BigDecimal(0.01) : bagWeight );
 	}
 
 }
