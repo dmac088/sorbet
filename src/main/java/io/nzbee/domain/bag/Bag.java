@@ -19,7 +19,7 @@ public class Bag {
 	
 	private BagIssues bagIssues = new BagIssues();
 	
-	private Optional<String> coupon = Optional.ofNullable(null);
+	private List<String> coupons = new ArrayList<String>();
 
 	public Bag(Customer customer) {
 		this.customer = customer;
@@ -119,22 +119,22 @@ public class Bag {
 		return bagIssues;
 	}
 
-	public Optional<String> getCoupon() {
-		return this.coupon;
-	}
-	
-	public void setCoupon(String coupon) {
-		this.coupon = Optional.ofNullable(coupon);
+	public void addCoupon(String couponCode) {
+		this.getCoupons().add(couponCode);
 	}
 
+	public List<String> getCoupons() {
+		return coupons;
+	}
+
+	public boolean hasCoupon() {
+		return this.coupons.size() > 0;
+	}
+	
 	public boolean hasIssues() {
 		return bagIssues.hasIssues();
 	}
 	
-	public boolean hasCoupon() {
-		return this.coupon.isPresent();
-	}
-
 	public void removeShippingItem() {
 		this.shippingItem = null;
 	}

@@ -44,7 +44,7 @@ public class PromotionController {
 		//we could just hydrate the Bag domian model and pass to the promotion service 
 		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
 		
-		b.setCoupon(dto.getCoupon());
+		b.addCoupon(dto.getCoupon());
 		
 		promotionService.applyAll(b);
 		

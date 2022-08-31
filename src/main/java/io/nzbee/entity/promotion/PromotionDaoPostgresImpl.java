@@ -20,7 +20,6 @@ public class PromotionDaoPostgresImpl implements IPromotionDao {
 	@Autowired
 	@Qualifier("mochiEntityManagerFactory")
 	private EntityManager em;
-	
 
 	@SuppressWarnings({ "deprecation"})
 	@Override
@@ -73,7 +72,7 @@ public class PromotionDaoPostgresImpl implements IPromotionDao {
 							+ "    promo.prm_trg_cd,\n"
 							+ "    promotyp.prm_typ_cd,\n"
 							+ "    bngn.buy_qty as bngn_buy_qty,\n"
-							+ "    bngn.disc_pctg as bngn_disc_pctg,\n"
+							+ "    bngn.disc_pctg as bngn_disc_pctg\n"
 							+ "    \n"
 							+ "  FROM \n"
 							+ "    mochi.promotion promo \n"
@@ -91,7 +90,7 @@ public class PromotionDaoPostgresImpl implements IPromotionDao {
 							+ "  pmp.prm_mec_cd,\n"
 							+ "  pmp.prm_typ_cd,\n"
 							+ "  pmp.bngn_buy_qty,\n"
-							+ "  pmp.bngn_disc_pctg,\n"
+							+ "  pmp.bngn_disc_pctg\n"
 							+ "FROM \n"
 							+ "  mochi.product prod \n"
 							+ "  INNER JOIN mochi.product_promotion prodpromo ON prod.prd_id = prodpromo.prd_id \n"
@@ -105,7 +104,7 @@ public class PromotionDaoPostgresImpl implements IPromotionDao {
 							+ "  pmc.prm_mec_cd,\n"
 							+ "  pmc.prm_typ_cd,\n"
 							+ "  pmc.bngn_buy_qty,\n"
-							+ "  pmc.bngn_disc_pctg,\n"
+							+ "  pmc.bngn_disc_pctg\n"
 							+ "FROM \n"
 							+ "  ancestors ans \n"
 							+ "  INNER JOIN mochi.product_category pc ON ans.cat_id = pc.cat_id \n"

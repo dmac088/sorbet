@@ -18,6 +18,7 @@ import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.IBagDomainService;
 import io.nzbee.domain.bag.item.regular.IRegularBagItemDomainService;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
+import io.nzbee.domain.dto.promotion.in.CouponDTO;
 import io.nzbee.resources.bag.BagResource;
 import io.nzbee.resources.bag.BagResourceAssembler;
 import io.nzbee.resources.bag.item.BagItemResource;
@@ -72,17 +73,14 @@ public class BagController {
 		return ResponseEntity.ok(bagResourceAssembler.toModel(bv));
 	}
 
-	@PostMapping("/Bag/{locale}/{currency}/Coupon/Code/{coupon}")
+	@PostMapping("/Bag/{locale}/{currency}/Coupon/Add")
 	public ResponseEntity<BagResource> addCouponToBag(@PathVariable String locale, @PathVariable String currency,
-			@PathVariable String coupon, Principal principal) {
+			 @RequestBody CouponDTO dto, Principal principal) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".addCouponToBag");
-
-//		Promotion op = promotionService.findByCouponCode(locale, coupon);
-//		System.out.println("coupon code found " + op);
 
 		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
 
-		b.setCoupon(coupon);
+		b.addCoupon(dto.getCoupon());
 
 		domainBagService.checkAllBagRules(b);
 
