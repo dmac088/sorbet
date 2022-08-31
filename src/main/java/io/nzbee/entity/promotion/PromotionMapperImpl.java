@@ -3,34 +3,42 @@ package io.nzbee.entity.promotion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import io.nzbee.domain.promotion.Promotion;
-import io.nzbee.entity.promotion.order.IPromotionOrderMapper;
-import io.nzbee.entity.promotion.order.PromotionOrderDTO;
-import io.nzbee.entity.promotion.product.IPromotionProductMapper;
-import io.nzbee.entity.promotion.product.PromotionProductDTO;
+import io.nzbee.entity.promotion.bngn.IPromotionBngnMapper;
+import io.nzbee.entity.promotion.bngn.PromotionBngnDTO;
+import io.nzbee.entity.promotion.disc.IPromotionDiscMapper;
+import io.nzbee.entity.promotion.disc.PromotionDiscDTO;
 
 @Component(value = "promotionMapper")
 public class PromotionMapperImpl implements IPromotionMapper {
 
 	@Autowired
-	private IPromotionOrderMapper promotionOrderMapper;
+	private IPromotionBngnMapper promotionBngnMapper;
 	
 	@Autowired
-	private IPromotionProductMapper promotionProductMapper;
+	private IPromotionDiscMapper promotionDiscMapper;
 	
 	@Override
 	public Promotion DTOToDo(PromotionDomainDTO dto) {
-		System.out.println("The instance is of type......");
-		System.out.println(dto.getClass());
-		if(dto instanceof PromotionProductDTO) {
-			return promotionProductMapper.DTOToDo((PromotionProductDTO) dto);
+		if(dto instanceof PromotionBngnDTO) {
+			return this.DTOToDo((PromotionBngnDTO) dto);
 		}
 		
-		if(dto instanceof PromotionOrderDTO) {
-			return promotionOrderMapper.DTOToDo((PromotionOrderDTO) dto);
+		if(dto instanceof PromotionDiscDTO) {
+			return this.DTOToDo((PromotionDiscDTO) dto);
 		}
 		return null;
 	}
 
+	@Override
+	public Promotion DTOToDo(PromotionBngnDTO dto) {
+		return promotionBngnMapper.DTOToDo(dto);
+	}
+	
+	@Override
+	public Promotion DTOToDo(PromotionDiscDTO dto) {
+		return promotionDiscMapper.DTOToDo(dto);
+	}
+		
 	@Override
 	public PromotionEntity doToEntity(Promotion d) {
 		// TODO Auto-generated method stub

@@ -364,22 +364,6 @@ INSERT INTO mochi.address VALUES (2, 'Test Line 1', 'Test Line 2', 'Test Line 3'
 
 
 --
--- Data for Name: promotion; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
---
-
-INSERT INTO mochi.promotion VALUES (234464, 'RB2G50', '2020-03-07 00:00:00+08', '2021-01-31 00:00:00+08', 1, true, 1, 1, 1);
-INSERT INTO mochi.promotion VALUES (234467, 'RB3G33', '2020-03-08 00:00:00+08', '2021-02-01 00:00:00+08', 1, true, 1, 1, 1);
-INSERT INTO mochi.promotion VALUES (2030864, 'C10PCT', '2020-03-07 00:00:00+08', '2021-01-31 00:00:00+08', 3, true, 2, 3, 2);
-
-
---
--- Data for Name: promotion_order; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
---
-
-INSERT INTO mochi.promotion_order VALUES (2030864, 'ABCD1');
-
-
---
 -- Data for Name: bag; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
@@ -9785,6 +9769,16 @@ INSERT INTO mochi.product_tag VALUES (136, 2031888, 15);
 
 
 --
+-- Data for Name: promotion; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
+--
+
+INSERT INTO mochi.promotion VALUES (234464, 'RB2G50', '2020-03-07 00:00:00+08', '2021-01-31 00:00:00+08', 1, true, 'test 1', 1, true);
+INSERT INTO mochi.promotion VALUES (234467, 'RB3G33', '2020-03-08 00:00:00+08', '2021-02-01 00:00:00+08', 1, true, 'test 2', 1, true);
+INSERT INTO mochi.promotion VALUES (2030864, 'C10PCT', '2020-03-07 00:00:00+08', '2021-01-31 00:00:00+08', 3, true, 'test 3', 2, true);
+INSERT INTO mochi.promotion VALUES (2030866, 'SHPFRE', '2020-03-07 00:00:00+08', '2020-03-07 00:00:00+08', 2, true, NULL, 3, NULL);
+
+
+--
 -- Data for Name: promotion_attr_lcl; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
@@ -9797,37 +9791,42 @@ INSERT INTO mochi.promotion_attr_lcl VALUES (2030866, 2030864, '總籃可享10�
 
 
 --
--- Data for Name: promotion_level; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
+-- Data for Name: promotion_bngn; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
-INSERT INTO mochi.promotion_level VALUES (1, 'PRD01', 'Product');
-INSERT INTO mochi.promotion_level VALUES (2, 'CAT01', 'Category');
-INSERT INTO mochi.promotion_level VALUES (3, 'ORD01', 'Order');
-
-
---
--- Data for Name: promotion_mechanic; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
---
-
-INSERT INTO mochi.promotion_mechanic VALUES (1, 'BNGNPCT', 'Buy N Get X Percent Off');
-INSERT INTO mochi.promotion_mechanic VALUES (2, 'BNGNF', 'Buy N Get N Free');
-INSERT INTO mochi.promotion_mechanic VALUES (3, 'ORDPCTOFF', 'Percentage off total order');
+INSERT INTO mochi.promotion_bngn VALUES (234464, 2, 0.5);
+INSERT INTO mochi.promotion_bngn VALUES (234467, 3, 0.33);
 
 
 --
--- Data for Name: promotion_product; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
+-- Data for Name: promotion_disc; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
-INSERT INTO mochi.promotion_product VALUES (234464);
-INSERT INTO mochi.promotion_product VALUES (234467);
+INSERT INTO mochi.promotion_disc VALUES (2030864, 0.1);
+
+
+--
+-- Data for Name: promotion_mech; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
+--
+
+INSERT INTO mochi.promotion_mech VALUES (3, 'PCTGOFF', 'Percentage of whole bag');
+INSERT INTO mochi.promotion_mech VALUES (1, 'BNGNF', 'Buy N Get N Free');
+INSERT INTO mochi.promotion_mech VALUES (2, 'VALPCTOFF', 'Value threshold percentage discount');
 
 
 --
 -- Data for Name: promotion_type; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
-INSERT INTO mochi.promotion_type VALUES (1, 'PRD01', 'PromotionProductDTO', 'Product');
-INSERT INTO mochi.promotion_type VALUES (2, 'ORD01', 'PromotionOrderDTO', 'Order');
+INSERT INTO mochi.promotion_type VALUES (1, 'PRD', 'Product promotion');
+INSERT INTO mochi.promotion_type VALUES (2, 'BAG', 'Bag promotion');
+INSERT INTO mochi.promotion_type VALUES (3, 'SHP', 'Shipping promotion');
+
+
+--
+-- Data for Name: promotion_valdisc; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
+--
+
 
 
 --
@@ -10394,7 +10393,7 @@ SELECT pg_catalog.setval('mochi.promotion_order_prm_id_seq', 2030865, true);
 -- Name: promotion_prm_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
 --
 
-SELECT pg_catalog.setval('mochi.promotion_prm_id_seq', 2030865, true);
+SELECT pg_catalog.setval('mochi.promotion_prm_id_seq', 2030866, true);
 
 
 --

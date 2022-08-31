@@ -1,10 +1,11 @@
 package io.nzbee.entity.promotion;
 
-import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 
 public interface IPromotionDTOService  {
 
-	List<PromotionDomainDTO> findAll(String locale, Set<String> codes);
+	Optional<PromotionDomainDTO> findProductPromotion(String locale, String triggerCode);
+
+	Optional<PromotionDomainDTO> findBagPromotion(String triggerCode);
 	
 }

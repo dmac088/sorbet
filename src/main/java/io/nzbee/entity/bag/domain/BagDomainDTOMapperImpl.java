@@ -28,7 +28,7 @@ import io.nzbee.entity.party.person.PersonEntity;
 import io.nzbee.entity.product.IProductService;
 //import io.nzbee.entity.promotion.IPromotionEntityService;
 import io.nzbee.entity.promotion.PromotionEntity;
-import io.nzbee.entity.promotion.order.PromotionOrderEntity;
+import io.nzbee.entity.promotion.bngn.PromotionBngnEntity;
 import io.nzbee.exceptions.EntityNotFoundException;
 import io.nzbee.entity.party.person.PersonDomainDTO;
 
@@ -181,7 +181,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		
 		// add promotion to the bag if the promotion exists
 		if (opr.isPresent()) {
-			b.setPromotion((PromotionOrderEntity) opr.get().getPromotionOrder());
+			b.setPromotion((PromotionBngnEntity) opr.get().getPromotionBngn());
 		}
 
 		// set the customer of the bag

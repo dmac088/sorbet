@@ -20,7 +20,7 @@ import javax.persistence.Table;
 
 import io.nzbee.entity.bag.item.entity.BagItemEntity;
 import io.nzbee.entity.party.Party;
-import io.nzbee.entity.promotion.order.PromotionOrderEntity;
+import io.nzbee.entity.promotion.bngn.PromotionBngnEntity;
 
 @Entity
 @Table(name = "bag", schema = "mochi")
@@ -49,7 +49,7 @@ public class BagEntity {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="prm_id")
-	private PromotionOrderEntity promotion;
+	private PromotionBngnEntity promotion;
 
 	public Long getBagId() {
 		return bagId;
@@ -97,11 +97,11 @@ public class BagEntity {
 		this.bagUpdatedDateTime = bagUpdatedDateTime;
 	}
 	
-	public PromotionOrderEntity getPromotion() {
+	public PromotionBngnEntity getPromotion() {
 		return promotion;
 	}
 
-	public void setPromotion(PromotionOrderEntity promotion) {
+	public void setPromotion(PromotionBngnEntity promotion) {
 		this.promotion = promotion;
 	}
 

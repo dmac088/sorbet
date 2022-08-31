@@ -11,10 +11,11 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import io.nzbee.entity.promotion.product.PromotionProductEntity;
+
 import io.nzbee.entity.category.CategoryEntity;
 import io.nzbee.entity.category.ICategoryService;
 import io.nzbee.entity.promotion.IPromotionEntityService;
+import io.nzbee.entity.promotion.disc.PromotionDiscEntity;
 import io.nzbee.util.FileStorageServiceUpload;
 
 @Service
@@ -55,7 +56,7 @@ public class CategoryPromotionMasterService {
 	public void persistCategoryPromotionMaster(CategoryPromotionMasterSchema pms) {
 		LOGGER.debug("called persistCategoryPromotionMaster() ");
 
-		PromotionProductEntity p = (PromotionProductEntity) promotionService.findByCode(pms.get_PROMOTION_CODE()).get().getPromotionProduct();
+		PromotionDiscEntity p = (PromotionDiscEntity) promotionService.findByCode(pms.get_PROMOTION_CODE()).get().getPromotionProduct();
 		Optional<CategoryEntity> oc = categoryService.findByCode(pms.get_CATEGORY_CODE());
 
 		p.getProductPromotion().setPromotionCode(pms.get_PROMOTION_CODE());

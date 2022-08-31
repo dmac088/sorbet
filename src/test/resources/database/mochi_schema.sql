@@ -22,8 +22,9 @@ ALTER TABLE ONLY mochi.supplier DROP CONSTRAINT supplier_role_id_fkey;
 ALTER TABLE ONLY mochi.stock_on_hand DROP CONSTRAINT stock_on_hand_prd_id_fkey;
 ALTER TABLE ONLY mochi.role DROP CONSTRAINT role_role_typ_id_fkey;
 ALTER TABLE ONLY mochi.role DROP CONSTRAINT role_party_id_fkey;
-ALTER TABLE ONLY mochi.promotion_product DROP CONSTRAINT promotion_regular_promotion_prm_id_fkey;
-ALTER TABLE ONLY mochi.promotion_order DROP CONSTRAINT promotion_coupon_promotion_prm_id_fkey;
+ALTER TABLE ONLY mochi.promotion_valdisc DROP CONSTRAINT promotion_valdisc_prm_id_fkey;
+ALTER TABLE ONLY mochi.promotion_disc DROP CONSTRAINT promotion_disc_prm_id_fkey;
+ALTER TABLE ONLY mochi.promotion_bngn DROP CONSTRAINT promotion_bngn_prm_id_fkey;
 ALTER TABLE ONLY mochi.promotion_attr_lcl DROP CONSTRAINT promotion_attr_lcl_prm_id_fkey;
 ALTER TABLE ONLY mochi.promotion_attr_lcl DROP CONSTRAINT promotion_attr_lcl_lcl_cd_fkey;
 ALTER TABLE ONLY mochi.product DROP CONSTRAINT product_typ_id_product_type_typ_id_fkey;
@@ -63,7 +64,6 @@ ALTER TABLE ONLY mochi.brand_category DROP CONSTRAINT brand_category_bnd_id_bran
 ALTER TABLE ONLY mochi.brand_attr_lcl DROP CONSTRAINT brand_attr_lcl_lcl_cd_fkey;
 ALTER TABLE ONLY mochi.brand_attr_lcl DROP CONSTRAINT brand_attr_lcl_bnd_id_fkey;
 ALTER TABLE ONLY mochi.bag DROP CONSTRAINT bag_pty_id_party_pty_id_fkey;
-ALTER TABLE ONLY mochi.bag DROP CONSTRAINT bag_prm_id_promotion_order_prm_id_fkey;
 ALTER TABLE ONLY mochi.bag_item DROP CONSTRAINT bag_item_sts_id_bag_item_sts_bag_item_sts_id_fkey;
 ALTER TABLE ONLY mochi.bag_item_disc DROP CONSTRAINT bag_item_disc_bag_item_id_bag_item_bag_item_id_fkey;
 ALTER TABLE ONLY mochi.bag_item DROP CONSTRAINT bag_item_bag_id_bag_bag_id_fkey;
@@ -81,8 +81,7 @@ ALTER TABLE ONLY mochi.product DROP CONSTRAINT uc_product_upc_cd;
 ALTER TABLE ONLY mochi.product_tag DROP CONSTRAINT uc_product_tag;
 ALTER TABLE ONLY mochi.product_category DROP CONSTRAINT uc_product_category;
 ALTER TABLE ONLY mochi.promotion_type DROP CONSTRAINT uc_prm_typ_cd;
-ALTER TABLE ONLY mochi.promotion_mechanic DROP CONSTRAINT uc_prm_mec_cd;
-ALTER TABLE ONLY mochi.promotion_level DROP CONSTRAINT uc_prm_lvl_cd;
+ALTER TABLE ONLY mochi.promotion_mech DROP CONSTRAINT uc_prm_mec_cd;
 ALTER TABLE ONLY mochi.promotion_attr_lcl DROP CONSTRAINT uc_prm_lcl_1;
 ALTER TABLE ONLY mochi.promotion DROP CONSTRAINT uc_prm_cd;
 ALTER TABLE ONLY mochi.department DROP CONSTRAINT uc_prd_typ_cd;
@@ -111,12 +110,12 @@ ALTER TABLE ONLY mochi.role_type DROP CONSTRAINT role_type_pkey;
 ALTER TABLE ONLY mochi.role DROP CONSTRAINT role_pty_id_key;
 ALTER TABLE ONLY mochi.role DROP CONSTRAINT role_pkey;
 ALTER TABLE ONLY mochi.rating DROP CONSTRAINT rating_pkey;
+ALTER TABLE ONLY mochi.promotion_valdisc DROP CONSTRAINT promotion_valdisc_pkey;
 ALTER TABLE ONLY mochi.promotion_type DROP CONSTRAINT promotion_type_pkey;
-ALTER TABLE ONLY mochi.promotion_product DROP CONSTRAINT promotion_regular_pkey;
 ALTER TABLE ONLY mochi.promotion DROP CONSTRAINT promotion_pkey;
-ALTER TABLE ONLY mochi.promotion_mechanic DROP CONSTRAINT promotion_mechanic_pkey;
-ALTER TABLE ONLY mochi.promotion_level DROP CONSTRAINT promotion_level_pkey;
-ALTER TABLE ONLY mochi.promotion_order DROP CONSTRAINT promotion_coupon_pkey;
+ALTER TABLE ONLY mochi.promotion_mech DROP CONSTRAINT promotion_mechanic_pkey;
+ALTER TABLE ONLY mochi.promotion_disc DROP CONSTRAINT promotion_disc_pkey;
+ALTER TABLE ONLY mochi.promotion_bngn DROP CONSTRAINT promotion_bngn_pkey;
 ALTER TABLE ONLY mochi.promotion_attr_lcl DROP CONSTRAINT promotion_attr_lcl_pkey;
 ALTER TABLE ONLY mochi.product_tag DROP CONSTRAINT product_tag_pkey;
 ALTER TABLE ONLY mochi.product_status DROP CONSTRAINT product_status_pkey;
@@ -188,16 +187,16 @@ DROP TABLE mochi.role;
 DROP SEQUENCE mochi.role_rle_id_seq;
 DROP TABLE mochi.rating;
 DROP SEQUENCE mochi.rating_rat_id_seq;
+DROP TABLE mochi.promotion_valdisc;
 DROP TABLE mochi.promotion_type;
 DROP SEQUENCE mochi.promotion_type_prm_typ_id_seq;
-DROP TABLE mochi.promotion_product;
 DROP SEQUENCE mochi.promotion_product_prm_id_seq;
-DROP TABLE mochi.promotion_order;
 DROP SEQUENCE mochi.promotion_order_prm_id_seq;
-DROP TABLE mochi.promotion_mechanic;
+DROP TABLE mochi.promotion_mech;
 DROP SEQUENCE mochi.promotion_mechanic_prm_mec_id_seq;
-DROP TABLE mochi.promotion_level;
 DROP SEQUENCE mochi.promotion_level_prm_lvl_id_seq;
+DROP TABLE mochi.promotion_disc;
+DROP TABLE mochi.promotion_bngn;
 DROP TABLE mochi.promotion_attr_lcl;
 DROP SEQUENCE mochi.promotion_attr_lcl_prm_lcl_id_seq;
 DROP TABLE mochi.promotion;
@@ -4574,9 +4573,9 @@ CREATE TABLE mochi.promotion (
     prm_en_dt timestamp(4) with time zone NOT NULL,
     prm_mec_id bigint NOT NULL,
     prm_act boolean NOT NULL,
+    prm_trg_cd character varying(20),
     prm_typ_id bigint NOT NULL,
-    prm_lvl_id bigint NOT NULL,
-    prm_dis_id bigint
+    prm_trg_rq boolean
 );
 
 
@@ -4611,6 +4610,31 @@ CREATE TABLE mochi.promotion_attr_lcl (
 ALTER TABLE mochi.promotion_attr_lcl OWNER TO mochidb_owner;
 
 --
+-- Name: promotion_bngn; Type: TABLE; Schema: mochi; Owner: mochidb_owner
+--
+
+CREATE TABLE mochi.promotion_bngn (
+    prm_id bigint NOT NULL,
+    buy_qty integer,
+    disc_pctg numeric
+);
+
+
+ALTER TABLE mochi.promotion_bngn OWNER TO mochidb_owner;
+
+--
+-- Name: promotion_disc; Type: TABLE; Schema: mochi; Owner: mochidb_owner
+--
+
+CREATE TABLE mochi.promotion_disc (
+    prm_id bigint NOT NULL,
+    disc_pctg numeric
+);
+
+
+ALTER TABLE mochi.promotion_disc OWNER TO mochidb_owner;
+
+--
 -- Name: promotion_level_prm_lvl_id_seq; Type: SEQUENCE; Schema: mochi; Owner: postgres
 --
 
@@ -4623,19 +4647,6 @@ CREATE SEQUENCE mochi.promotion_level_prm_lvl_id_seq
 
 
 ALTER TABLE mochi.promotion_level_prm_lvl_id_seq OWNER TO postgres;
-
---
--- Name: promotion_level; Type: TABLE; Schema: mochi; Owner: mochidb_owner
---
-
-CREATE TABLE mochi.promotion_level (
-    prm_lvl_id bigint DEFAULT nextval('mochi.promotion_level_prm_lvl_id_seq'::regclass) NOT NULL,
-    prm_lvl_cd character varying(5) NOT NULL,
-    prm_lvl_desc character varying(50) NOT NULL
-);
-
-
-ALTER TABLE mochi.promotion_level OWNER TO mochidb_owner;
 
 --
 -- Name: promotion_mechanic_prm_mec_id_seq; Type: SEQUENCE; Schema: mochi; Owner: postgres
@@ -4652,17 +4663,17 @@ CREATE SEQUENCE mochi.promotion_mechanic_prm_mec_id_seq
 ALTER TABLE mochi.promotion_mechanic_prm_mec_id_seq OWNER TO postgres;
 
 --
--- Name: promotion_mechanic; Type: TABLE; Schema: mochi; Owner: mochidb_owner
+-- Name: promotion_mech; Type: TABLE; Schema: mochi; Owner: mochidb_owner
 --
 
-CREATE TABLE mochi.promotion_mechanic (
+CREATE TABLE mochi.promotion_mech (
     prm_mec_id bigint DEFAULT nextval('mochi.promotion_mechanic_prm_mec_id_seq'::regclass) NOT NULL,
     prm_mec_cd character varying(10) NOT NULL,
     prm_mec_desc character varying
 );
 
 
-ALTER TABLE mochi.promotion_mechanic OWNER TO mochidb_owner;
+ALTER TABLE mochi.promotion_mech OWNER TO mochidb_owner;
 
 --
 -- Name: promotion_order_prm_id_seq; Type: SEQUENCE; Schema: mochi; Owner: postgres
@@ -4679,18 +4690,6 @@ CREATE SEQUENCE mochi.promotion_order_prm_id_seq
 ALTER TABLE mochi.promotion_order_prm_id_seq OWNER TO postgres;
 
 --
--- Name: promotion_order; Type: TABLE; Schema: mochi; Owner: mochidb_owner
---
-
-CREATE TABLE mochi.promotion_order (
-    prm_id bigint DEFAULT nextval('mochi.promotion_order_prm_id_seq'::regclass) NOT NULL,
-    prm_cpn_cd character varying(15) NOT NULL
-);
-
-
-ALTER TABLE mochi.promotion_order OWNER TO mochidb_owner;
-
---
 -- Name: promotion_product_prm_id_seq; Type: SEQUENCE; Schema: mochi; Owner: postgres
 --
 
@@ -4703,17 +4702,6 @@ CREATE SEQUENCE mochi.promotion_product_prm_id_seq
 
 
 ALTER TABLE mochi.promotion_product_prm_id_seq OWNER TO postgres;
-
---
--- Name: promotion_product; Type: TABLE; Schema: mochi; Owner: mochidb_owner
---
-
-CREATE TABLE mochi.promotion_product (
-    prm_id bigint DEFAULT nextval('mochi.promotion_product_prm_id_seq'::regclass) NOT NULL
-);
-
-
-ALTER TABLE mochi.promotion_product OWNER TO mochidb_owner;
 
 --
 -- Name: promotion_type_prm_typ_id_seq; Type: SEQUENCE; Schema: mochi; Owner: postgres
@@ -4736,12 +4724,24 @@ ALTER TABLE mochi.promotion_type_prm_typ_id_seq OWNER TO postgres;
 CREATE TABLE mochi.promotion_type (
     prm_typ_id bigint DEFAULT nextval('mochi.promotion_type_prm_typ_id_seq'::regclass) NOT NULL,
     prm_typ_cd character varying(5) NOT NULL,
-    prm_class character varying(20) NOT NULL,
     prm_typ_desc character varying(50) NOT NULL
 );
 
 
 ALTER TABLE mochi.promotion_type OWNER TO mochidb_owner;
+
+--
+-- Name: promotion_valdisc; Type: TABLE; Schema: mochi; Owner: mochidb_owner
+--
+
+CREATE TABLE mochi.promotion_valdisc (
+    prm_id bigint NOT NULL,
+    bag_val_tld numeric,
+    disc_pctg numeric
+);
+
+
+ALTER TABLE mochi.promotion_valdisc OWNER TO mochidb_owner;
 
 --
 -- Name: rating_rat_id_seq; Type: SEQUENCE; Schema: mochi; Owner: postgres
@@ -5399,26 +5399,26 @@ ALTER TABLE ONLY mochi.promotion_attr_lcl
 
 
 --
--- Name: promotion_order promotion_coupon_pkey; Type: CONSTRAINT; Schema: mochi; Owner: mochidb_owner
+-- Name: promotion_bngn promotion_bngn_pkey; Type: CONSTRAINT; Schema: mochi; Owner: mochidb_owner
 --
 
-ALTER TABLE ONLY mochi.promotion_order
-    ADD CONSTRAINT promotion_coupon_pkey PRIMARY KEY (prm_id);
-
-
---
--- Name: promotion_level promotion_level_pkey; Type: CONSTRAINT; Schema: mochi; Owner: mochidb_owner
---
-
-ALTER TABLE ONLY mochi.promotion_level
-    ADD CONSTRAINT promotion_level_pkey PRIMARY KEY (prm_lvl_id);
+ALTER TABLE ONLY mochi.promotion_bngn
+    ADD CONSTRAINT promotion_bngn_pkey PRIMARY KEY (prm_id);
 
 
 --
--- Name: promotion_mechanic promotion_mechanic_pkey; Type: CONSTRAINT; Schema: mochi; Owner: mochidb_owner
+-- Name: promotion_disc promotion_disc_pkey; Type: CONSTRAINT; Schema: mochi; Owner: mochidb_owner
 --
 
-ALTER TABLE ONLY mochi.promotion_mechanic
+ALTER TABLE ONLY mochi.promotion_disc
+    ADD CONSTRAINT promotion_disc_pkey PRIMARY KEY (prm_id);
+
+
+--
+-- Name: promotion_mech promotion_mechanic_pkey; Type: CONSTRAINT; Schema: mochi; Owner: mochidb_owner
+--
+
+ALTER TABLE ONLY mochi.promotion_mech
     ADD CONSTRAINT promotion_mechanic_pkey PRIMARY KEY (prm_mec_id);
 
 
@@ -5431,19 +5431,19 @@ ALTER TABLE ONLY mochi.promotion
 
 
 --
--- Name: promotion_product promotion_regular_pkey; Type: CONSTRAINT; Schema: mochi; Owner: mochidb_owner
---
-
-ALTER TABLE ONLY mochi.promotion_product
-    ADD CONSTRAINT promotion_regular_pkey PRIMARY KEY (prm_id);
-
-
---
 -- Name: promotion_type promotion_type_pkey; Type: CONSTRAINT; Schema: mochi; Owner: mochidb_owner
 --
 
 ALTER TABLE ONLY mochi.promotion_type
     ADD CONSTRAINT promotion_type_pkey PRIMARY KEY (prm_typ_id);
+
+
+--
+-- Name: promotion_valdisc promotion_valdisc_pkey; Type: CONSTRAINT; Schema: mochi; Owner: mochidb_owner
+--
+
+ALTER TABLE ONLY mochi.promotion_valdisc
+    ADD CONSTRAINT promotion_valdisc_pkey PRIMARY KEY (prm_id);
 
 
 --
@@ -5671,18 +5671,10 @@ ALTER TABLE ONLY mochi.promotion_attr_lcl
 
 
 --
--- Name: promotion_level uc_prm_lvl_cd; Type: CONSTRAINT; Schema: mochi; Owner: mochidb_owner
+-- Name: promotion_mech uc_prm_mec_cd; Type: CONSTRAINT; Schema: mochi; Owner: mochidb_owner
 --
 
-ALTER TABLE ONLY mochi.promotion_level
-    ADD CONSTRAINT uc_prm_lvl_cd UNIQUE (prm_lvl_cd);
-
-
---
--- Name: promotion_mechanic uc_prm_mec_cd; Type: CONSTRAINT; Schema: mochi; Owner: mochidb_owner
---
-
-ALTER TABLE ONLY mochi.promotion_mechanic
+ALTER TABLE ONLY mochi.promotion_mech
     ADD CONSTRAINT uc_prm_mec_cd UNIQUE (prm_mec_cd);
 
 
@@ -5816,14 +5808,6 @@ ALTER TABLE ONLY mochi.bag_item_disc
 
 ALTER TABLE ONLY mochi.bag_item
     ADD CONSTRAINT bag_item_sts_id_bag_item_sts_bag_item_sts_id_fkey FOREIGN KEY (bag_item_sts_id) REFERENCES mochi.bag_item_status(bag_item_sts_id);
-
-
---
--- Name: bag bag_prm_id_promotion_order_prm_id_fkey; Type: FK CONSTRAINT; Schema: mochi; Owner: mochidb_owner
---
-
-ALTER TABLE ONLY mochi.bag
-    ADD CONSTRAINT bag_prm_id_promotion_order_prm_id_fkey FOREIGN KEY (prm_id) REFERENCES mochi.promotion_order(prm_id);
 
 
 --
@@ -6139,19 +6123,27 @@ ALTER TABLE ONLY mochi.promotion_attr_lcl
 
 
 --
--- Name: promotion_order promotion_coupon_promotion_prm_id_fkey; Type: FK CONSTRAINT; Schema: mochi; Owner: mochidb_owner
+-- Name: promotion_bngn promotion_bngn_prm_id_fkey; Type: FK CONSTRAINT; Schema: mochi; Owner: mochidb_owner
 --
 
-ALTER TABLE ONLY mochi.promotion_order
-    ADD CONSTRAINT promotion_coupon_promotion_prm_id_fkey FOREIGN KEY (prm_id) REFERENCES mochi.promotion(prm_id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY mochi.promotion_bngn
+    ADD CONSTRAINT promotion_bngn_prm_id_fkey FOREIGN KEY (prm_id) REFERENCES mochi.promotion(prm_id);
 
 
 --
--- Name: promotion_product promotion_regular_promotion_prm_id_fkey; Type: FK CONSTRAINT; Schema: mochi; Owner: mochidb_owner
+-- Name: promotion_disc promotion_disc_prm_id_fkey; Type: FK CONSTRAINT; Schema: mochi; Owner: mochidb_owner
 --
 
-ALTER TABLE ONLY mochi.promotion_product
-    ADD CONSTRAINT promotion_regular_promotion_prm_id_fkey FOREIGN KEY (prm_id) REFERENCES mochi.promotion(prm_id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY mochi.promotion_disc
+    ADD CONSTRAINT promotion_disc_prm_id_fkey FOREIGN KEY (prm_id) REFERENCES mochi.promotion(prm_id);
+
+
+--
+-- Name: promotion_valdisc promotion_valdisc_prm_id_fkey; Type: FK CONSTRAINT; Schema: mochi; Owner: mochidb_owner
+--
+
+ALTER TABLE ONLY mochi.promotion_valdisc
+    ADD CONSTRAINT promotion_valdisc_prm_id_fkey FOREIGN KEY (prm_id) REFERENCES mochi.promotion(prm_id);
 
 
 --
@@ -6966,18 +6958,25 @@ GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE mochi.promotion_attr_lcl TO mochi_app
 
 
 --
+-- Name: TABLE promotion_bngn; Type: ACL; Schema: mochi; Owner: mochidb_owner
+--
+
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE mochi.promotion_bngn TO mochi_app;
+
+
+--
+-- Name: TABLE promotion_disc; Type: ACL; Schema: mochi; Owner: mochidb_owner
+--
+
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE mochi.promotion_disc TO mochi_app;
+
+
+--
 -- Name: SEQUENCE promotion_level_prm_lvl_id_seq; Type: ACL; Schema: mochi; Owner: postgres
 --
 
 GRANT ALL ON SEQUENCE mochi.promotion_level_prm_lvl_id_seq TO mochi_app;
 GRANT ALL ON SEQUENCE mochi.promotion_level_prm_lvl_id_seq TO mochidb_owner;
-
-
---
--- Name: TABLE promotion_level; Type: ACL; Schema: mochi; Owner: mochidb_owner
---
-
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE mochi.promotion_level TO mochi_app;
 
 
 --
@@ -6989,10 +6988,10 @@ GRANT ALL ON SEQUENCE mochi.promotion_mechanic_prm_mec_id_seq TO mochidb_owner;
 
 
 --
--- Name: TABLE promotion_mechanic; Type: ACL; Schema: mochi; Owner: mochidb_owner
+-- Name: TABLE promotion_mech; Type: ACL; Schema: mochi; Owner: mochidb_owner
 --
 
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE mochi.promotion_mechanic TO mochi_app;
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE mochi.promotion_mech TO mochi_app;
 
 
 --
@@ -7004,25 +7003,11 @@ GRANT ALL ON SEQUENCE mochi.promotion_order_prm_id_seq TO mochidb_owner;
 
 
 --
--- Name: TABLE promotion_order; Type: ACL; Schema: mochi; Owner: mochidb_owner
---
-
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE mochi.promotion_order TO mochi_app;
-
-
---
 -- Name: SEQUENCE promotion_product_prm_id_seq; Type: ACL; Schema: mochi; Owner: postgres
 --
 
 GRANT ALL ON SEQUENCE mochi.promotion_product_prm_id_seq TO mochi_app;
 GRANT ALL ON SEQUENCE mochi.promotion_product_prm_id_seq TO mochidb_owner;
-
-
---
--- Name: TABLE promotion_product; Type: ACL; Schema: mochi; Owner: mochidb_owner
---
-
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE mochi.promotion_product TO mochi_app;
 
 
 --
@@ -7038,6 +7023,13 @@ GRANT ALL ON SEQUENCE mochi.promotion_type_prm_typ_id_seq TO mochidb_owner;
 --
 
 GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE mochi.promotion_type TO mochi_app;
+
+
+--
+-- Name: TABLE promotion_valdisc; Type: ACL; Schema: mochi; Owner: mochidb_owner
+--
+
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE mochi.promotion_valdisc TO mochi_app;
 
 
 --

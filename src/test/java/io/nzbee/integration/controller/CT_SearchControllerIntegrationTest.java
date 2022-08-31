@@ -81,8 +81,8 @@ import io.nzbee.entity.product.shipping.view.ShippingProductViewDTOServiceImpl;
 import io.nzbee.entity.promotion.PromotionDaoPostgresImpl;
 import io.nzbee.entity.promotion.PromotionEntityServiceImpl;
 import io.nzbee.entity.promotion.PromotionMapperImpl;
-import io.nzbee.entity.promotion.order.PromotionOrderMapperImpl;
-import io.nzbee.entity.promotion.product.PromotionProductMapperImpl;
+import io.nzbee.entity.promotion.bngn.PromotionBngnMapperImpl;
+import io.nzbee.entity.promotion.disc.PromotionDiscMapperImpl;
 import io.nzbee.entity.tag.view.facet.TagFacetDTOPostgresDaoImpl;
 import io.nzbee.entity.tag.view.facet.TagFacetDTOServiceImpl;
 import io.nzbee.resources.brand.BrandViewModelAssembler;
@@ -120,7 +120,7 @@ import io.nzbee.view.product.shipping.type.ShippingTypeViewServiceImpl;
 		BrandFacetDTOServiceImpl.class, TagFacetDTOServiceImpl.class, FacetServicesImpl.class,
 		ProductCategoryFacetDTODaoImpl.class, BrandFacetDTODaoImpl.class, TagFacetDTOPostgresDaoImpl.class,
 		BagDomainAdapter.class, BagDomainServiceImpl.class, CustomerMapperImpl.class, PromotionMapperImpl.class,
-		PromotionOrderMapperImpl.class, PromotionProductMapperImpl.class, ProductEntityServiceImpl.class,
+		PromotionBngnMapperImpl.class, PromotionDiscMapperImpl.class, ProductEntityServiceImpl.class,
 		BagItemStatusServiceImpl.class, PersonServiceImpl.class, PromotionEntityServiceImpl.class,
 		PromotionDaoPostgresImpl.class, BagConfiguration.class, BrandViewServiceImpl.class, BrandAdapterImpl.class,
 		BrandViewServiceImpl.class, BrandDTOServiceImpl.class, BrandDTOMapperImpl.class,

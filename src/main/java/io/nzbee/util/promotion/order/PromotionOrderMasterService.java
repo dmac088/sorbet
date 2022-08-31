@@ -15,11 +15,11 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import io.nzbee.entity.promotion.PromotionEntity;
 import io.nzbee.entity.promotion.attribute.PromotionAttributeEntity;
+import io.nzbee.entity.promotion.bngn.PromotionBngnEntity;
 import io.nzbee.entity.promotion.level.IPromotionLevelService;
 import io.nzbee.entity.promotion.level.PromotionLevelEntity;
 import io.nzbee.entity.promotion.mechanic.IPromotionMechanicService;
 import io.nzbee.entity.promotion.mechanic.PromotionMechanicEntity;
-import io.nzbee.entity.promotion.order.PromotionOrderEntity;
 import io.nzbee.entity.promotion.type.IPromotionTypeService;
 import io.nzbee.entity.promotion.type.PromotionTypeEntity;
 import io.nzbee.exceptions.EntityNotFoundException;
@@ -75,9 +75,9 @@ public class PromotionOrderMasterService {
 
 		Optional<PromotionEntity> op = promotionService.findByCode(pms.get_PROMOTION_CODE());
 
-		PromotionOrderEntity p = 	(op.isPresent()) 
-									? (PromotionOrderEntity) op.get().getPromotionOrder()
-									: new PromotionOrderEntity();
+		PromotionBngnEntity p = 	(op.isPresent()) 
+									? (PromotionBngnEntity) op.get().getPromotionBngn()
+									: new PromotionBngnEntity();
 	
 		LocalDateTime psd = LocalDateTime.parse(pms.get_PROMOTION_START_DATE(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 		LocalDateTime ped = LocalDateTime.parse(pms.get_PROMOTION_END_DATE(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
@@ -101,7 +101,7 @@ public class PromotionOrderMasterService {
 		p.getOrderPromotion().setPromotionLevel(pl.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.promotionLevelNotFound, Constants.localeENGB, pms.get_PROMOTION_LEVEL_CODE())));
 		p.getOrderPromotion().setPromotionType(pt.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.promotionTypeNotFound, Constants.localeENGB, pms.get_PROMOTION_TYPE_CODE())));
 		p.getOrderPromotion().setPromotionActive(pms.get_PROMOTION_ACTIVE());
-		p.setPromotionCouponCode(pms.get_PROMOTION_COUPON_CODE());
+		p.getOrderPromotion().setPromotionCoupon(pms.get_PROMOTION_COUPON_CODE());
 		
 		promotionService.save(p.getOrderPromotion());
 	}

@@ -60,9 +60,9 @@ import io.nzbee.entity.product.price.ProductPriceTypeService;
 import io.nzbee.entity.promotion.PromotionDaoPostgresImpl;
 import io.nzbee.entity.promotion.PromotionEntityServiceImpl;
 import io.nzbee.entity.promotion.PromotionMapperImpl;
-import io.nzbee.entity.promotion.order.PromotionOrderMapperImpl;
-import io.nzbee.entity.promotion.order.PromotionOrderServiceImpl;
-import io.nzbee.entity.promotion.product.PromotionProductMapperImpl;
+import io.nzbee.entity.promotion.bngn.PromotionBngnMapperImpl;
+import io.nzbee.entity.promotion.bngn.PromotionBngnServiceImpl;
+import io.nzbee.entity.promotion.disc.PromotionDiscMapperImpl;
 import io.nzbee.payment.PaymentService;
 import io.nzbee.resources.bag.BagResourceAssembler;
 import io.nzbee.resources.bag.item.BagItemResourceAssembler;
@@ -81,13 +81,13 @@ import io.nzbee.view.bag.item.BagItemViewMapperImpl;
 @ContextConfiguration(classes = { PaymentService.class, ConfigControllerTest.class, SecurityBeanConfiguration.class,
 		OAuth2AuthorizationServerConfig.class, OAuth2ResourceServerConfig.class, UserService.class,
 		WebSecurityConfig.class, Globals.class, BagController.class, BagDomainAdapter.class, CustomerMapperImpl.class,
-		PromotionMapperImpl.class, PromotionOrderMapperImpl.class, PromotionProductMapperImpl.class,
+		PromotionMapperImpl.class, PromotionBngnMapperImpl.class, PromotionDiscMapperImpl.class,
 		ProductEntityServiceImpl.class, BagItemStatusServiceImpl.class, PersonServiceImpl.class,
 		PromotionServiceImpl.class, PromotionEntityServiceImpl.class, PromotionDaoPostgresImpl.class,
 		BagDomainServiceImpl.class, BagConfiguration.class, RegularBagItemDomainAdapter.class, BagItemEntityServiceImpl.class,
 		BagItemConfiguration.class, ProductAttributeServiceImpl.class, ProductPriceServiceImpl.class,
 		CurrencyServiceImpl.class, ProductPriceTypeService.class, PromotionAdapter.class,
-		PromotionOrderServiceImpl.class, BagViewMapperImpl.class, BagItemViewMapperImpl.class,
+		PromotionBngnServiceImpl.class, BagViewMapperImpl.class, BagItemViewMapperImpl.class,
 		BagResourceAssembler.class, BagItemResourceAssembler.class, BagViewServiceImpl.class, BagViewAdapterImpl.class,
 		PhysicalProductDTOServiceImpl.class, PhysicalProductDTODaoPostgresImpl.class, BagViewDTOServiceImpl.class,
 		BagViewDTODaoPostgresImpl.class, BagViewDTOMapperImpl.class, BagItemViewMapperImpl.class,

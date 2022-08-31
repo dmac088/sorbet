@@ -1,17 +1,19 @@
 package io.nzbee.domain.promotion;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.ports.IPromotionPortService;
 
 public class PromotionServiceImpl implements IPromotionService {
 
-	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+	@Autowired
+	private IPromotionPortService promotionService;
 	
 	@Override
-	public Promotion findAll(Bag b) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".findAll() with parameters {}", b.getCustomer().getUserName());
-		return null;
+	public Bag applyAll(Bag bag) {
+		return promotionService.applyAll(bag);
 	}
+
 	
 }

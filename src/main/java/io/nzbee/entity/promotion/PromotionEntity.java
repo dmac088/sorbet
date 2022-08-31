@@ -27,10 +27,10 @@ import org.hibernate.search.annotations.Store;
 
 import io.nzbee.Constants;
 import io.nzbee.entity.promotion.attribute.PromotionAttributeEntity;
+import io.nzbee.entity.promotion.bngn.PromotionBngnEntity;
+import io.nzbee.entity.promotion.disc.PromotionDiscEntity;
 import io.nzbee.entity.promotion.level.PromotionLevelEntity;
 import io.nzbee.entity.promotion.mechanic.PromotionMechanicEntity;
-import io.nzbee.entity.promotion.order.PromotionOrderEntity;
-import io.nzbee.entity.promotion.product.PromotionProductEntity;
 import io.nzbee.entity.promotion.type.PromotionTypeEntity;
 
 @Entity
@@ -49,6 +49,9 @@ public class PromotionEntity implements Serializable {
 	@Column(name="prm_cd", unique = true, updatable = false)
 	private String promotionCode;
 	
+	@Column(name="prm_trg_cd", unique = true)
+	private String triggerCode;
+	
 	@Column(name="prm_st_dt")
 	private LocalDateTime promotionStartDate;
 	
@@ -57,6 +60,9 @@ public class PromotionEntity implements Serializable {
 	
 	@Column(name="prm_act")
 	private Boolean promotionActive;
+	
+	@Column(name="prm_trg_rq")
+	private Boolean promotionCouponRequired;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="prm_mec_id")
@@ -75,17 +81,17 @@ public class PromotionEntity implements Serializable {
 				orphanRemoval = true)
 	private Set<PromotionAttributeEntity> attributes = new HashSet<PromotionAttributeEntity>();
 	
-	@OneToOne(	mappedBy="orderPromotion",
+	@OneToOne(	mappedBy="bngnPromotion",
 			fetch = FetchType.LAZY,
 			cascade = CascadeType.ALL,
 			orphanRemoval = true)
-	private PromotionOrderEntity promotionOrder;
+	private PromotionBngnEntity promotionBngn;
 	
 	@OneToOne(	mappedBy="productPromotion",
 			fetch = FetchType.LAZY,
 			cascade = CascadeType.ALL,
 			orphanRemoval = true)
-	private PromotionProductEntity promotionProduct;
+	private PromotionDiscEntity promotionProduct;
 
 	@Transient
 	private String locale;
@@ -104,6 +110,14 @@ public class PromotionEntity implements Serializable {
 
 	public void setPromotionCode(String promotionCode) {
 		this.promotionCode = promotionCode;
+	}
+	
+	public String getTriggerCode() {
+		return triggerCode;
+	}
+
+	public void setTriggerCode(String triggerCode) {
+		this.triggerCode = triggerCode;
 	}
 
 	public LocalDateTime getPromotionStartDate() {
@@ -180,14 +194,30 @@ public class PromotionEntity implements Serializable {
 		this.promotionLevel = promotionLevel;
 	}
 	
-	public PromotionOrderEntity getPromotionOrder() {
-		return promotionOrder;
+	public PromotionBngnEntity getPromotionBngn() {
+		return promotionBngn;
 	}
 
-	public void setPromotionOrder(PromotionOrderEntity promotionOrder) {
-		this.promotionOrder = promotionOrder;
+	public void setPromotionBngn(PromotionBngnEntity promotionBngn) {
+		this.promotionBngn = promotionBngn;
 	}
 	
+	public String getPromotionCoupon() {
+		return triggerCode;
+	}
+
+	public void setPromotionCoupon(String triggerCode) {
+		this.triggerCode = triggerCode;
+	}
+
+	public Boolean getPromotionCouponRequired() {
+		return promotionCouponRequired;
+	}
+
+	public void setPromotionCouponRequired(Boolean promotionCouponRequired) {
+		this.promotionCouponRequired = promotionCouponRequired;
+	}
+
 	@Transient
 	@Field(analyze = Analyze.YES, store=Store.NO, analyzer = @Analyzer(definition = Constants.localeENGB))
 	public String getPromotionDescENGB() {
@@ -200,11 +230,11 @@ public class PromotionEntity implements Serializable {
 		return this.getAttributes().stream().filter(pa -> pa.getLocale().equals(Constants.localeZHHK)).findFirst().get().getPromotionDesc();
 	}
 	
-	public PromotionProductEntity getPromotionProduct() {
+	public PromotionDiscEntity getPromotionProduct() {
 		return promotionProduct;
 	}
 
-	public void setPromotionProduct(PromotionProductEntity promotionProduct) {
+	public void setPromotionProduct(PromotionDiscEntity promotionProduct) {
 		this.promotionProduct = promotionProduct;
 	}
 

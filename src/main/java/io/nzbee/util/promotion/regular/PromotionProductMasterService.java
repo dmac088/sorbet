@@ -15,11 +15,11 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import io.nzbee.entity.promotion.PromotionEntity;
 import io.nzbee.entity.promotion.attribute.PromotionAttributeEntity;
+import io.nzbee.entity.promotion.disc.PromotionDiscEntity;
 import io.nzbee.entity.promotion.level.IPromotionLevelService;
 import io.nzbee.entity.promotion.level.PromotionLevelEntity;
 import io.nzbee.entity.promotion.mechanic.IPromotionMechanicService;
 import io.nzbee.entity.promotion.mechanic.PromotionMechanicEntity;
-import io.nzbee.entity.promotion.product.PromotionProductEntity;
 import io.nzbee.entity.promotion.type.IPromotionTypeService;
 import io.nzbee.entity.promotion.type.PromotionTypeEntity;
 import io.nzbee.exceptions.EntityNotFoundException;
@@ -82,9 +82,9 @@ public class PromotionProductMasterService {
 		p.setPromotionCode(pms.get_PROMOTION_CODE());
 		
 		
-		PromotionProductEntity pe = (op.isPresent()) 
-									? (PromotionProductEntity) p.getPromotionProduct()
-									: new PromotionProductEntity();
+		PromotionDiscEntity pe = (op.isPresent()) 
+									? (PromotionDiscEntity) p.getPromotionProduct()
+									: new PromotionDiscEntity();
 									
 		p.setPromotionProduct(pe);	
 		pe.setProductPromotion(p);

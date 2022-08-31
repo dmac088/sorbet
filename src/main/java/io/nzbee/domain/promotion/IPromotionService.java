@@ -4,6 +4,6 @@ import io.nzbee.domain.bag.Bag;
 
 public interface IPromotionService  {
 
-	Promotion findAll(Bag b);
-
+	Bag applyAll(Bag bag);
+	
 }

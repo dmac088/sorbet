@@ -36,7 +36,7 @@ import io.nzbee.entity.category.attribute.CategoryAttributeEntity;
 import io.nzbee.entity.category.brand.CategoryBrandEntity;
 import io.nzbee.entity.category.product.CategoryProductEntity;
 import io.nzbee.entity.category.type.CategoryTypeEntity;
-import io.nzbee.entity.promotion.product.PromotionProductEntity;
+import io.nzbee.entity.promotion.disc.PromotionDiscEntity;
 
 @Entity
 @Table(name = "category", schema = "mochi")
@@ -78,7 +78,7 @@ public class CategoryEntity implements Serializable {
 	private Set<CategoryAttributeEntity> attributes = new HashSet<CategoryAttributeEntity>();
 
 	@ManyToMany(mappedBy = "categories")
-    private Set<PromotionProductEntity> promotions = new HashSet<PromotionProductEntity>();
+    private Set<PromotionDiscEntity> promotions = new HashSet<PromotionDiscEntity>();
 	
 	@OneToOne(	mappedBy="category",
 			fetch = FetchType.LAZY,
@@ -270,20 +270,20 @@ public class CategoryEntity implements Serializable {
 		return currency;
 	}
 	
-	public Set<PromotionProductEntity> getPromotions() {
+	public Set<PromotionDiscEntity> getPromotions() {
 		return promotions;
 	}
 
-	public void setPromotions(Set<PromotionProductEntity> promotions) {
+	public void setPromotions(Set<PromotionDiscEntity> promotions) {
 		this.promotions = promotions;
 	}
 
-	public void addPromotion(PromotionProductEntity promotion) {
+	public void addPromotion(PromotionDiscEntity promotion) {
 		this.getPromotions().add(promotion);
 		promotion.getCategories().add(this);
 	}
 	
-	public void removePromotion(PromotionProductEntity promotion) {
+	public void removePromotion(PromotionDiscEntity promotion) {
 		this.getPromotions().remove(promotion);
 		promotion.removeCategory(this);
 	}

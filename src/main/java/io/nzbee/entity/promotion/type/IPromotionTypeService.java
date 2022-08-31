@@ -9,5 +9,7 @@ public interface IPromotionTypeService extends IEntityService<PromotionTypeEntit
 	Optional<PromotionTypeEntity> findByCode(String code);
 
 	Optional<PromotionTypeEntity> findById(Long id);
+
+	Optional<PromotionTypeEntity> findByTriggerCode(String triggerCode);
 	
 }

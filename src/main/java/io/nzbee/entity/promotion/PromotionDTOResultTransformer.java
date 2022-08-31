@@ -1,11 +1,13 @@
 package io.nzbee.entity.promotion;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.transform.ResultTransformer;
+import io.nzbee.Constants;
+import io.nzbee.entity.promotion.bngn.PromotionBngnDTO;
+import io.nzbee.entity.promotion.disc.PromotionDiscDTO;
 
 public class PromotionDTOResultTransformer implements ResultTransformer {
 
@@ -15,17 +17,21 @@ public class PromotionDTOResultTransformer implements ResultTransformer {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Map<Long, PromotionDomainDTO> promotionDTOMap = new LinkedHashMap<>();
+	private Map<String, PromotionDomainDTO> promotionDTOMap = new LinkedHashMap<>();
 	
 	@Override
 	public Object transformTuple(Object[] tuple, String[] aliases) {
 		Map<String, Integer> aliasToIndexMap = aliasToIndexMap(aliases);
 		
-        Long promotionId = ((BigInteger) tuple[aliasToIndexMap.get(PromotionDomainDTO.CODE_ALIAS)]).longValue();
-   
+        String promotionId = ((String) tuple[aliasToIndexMap.get(PromotionDomainDTO.CODE_ALIAS)]).toString();
+        
+        String discriminator = ((String) tuple[aliasToIndexMap.get(PromotionDomainDTO.MECH_CODE_ALIAS)]).toString();
+        
         PromotionDomainDTO promotionDTO = promotionDTOMap.computeIfAbsent(
             promotionId,
-            id -> new PromotionDomainDTO(tuple, aliasToIndexMap)
+            id -> (discriminator.equals(Constants.promotionDiscriminatorBNGN)) 
+            	  ?	new PromotionBngnDTO(tuple, aliasToIndexMap)
+            	  : new PromotionDiscDTO(tuple, aliasToIndexMap)
         );
         
         return promotionDTO;

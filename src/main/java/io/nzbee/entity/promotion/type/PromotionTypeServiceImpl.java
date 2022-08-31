@@ -25,19 +25,28 @@ public class PromotionTypeServiceImpl implements IPromotionTypeService {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode parameters : {}", code);
 		return promotionTypeRepository.findByPromotionTypeCode(code);
 	}
+	
+	@Override
+	public Optional<PromotionTypeEntity> findByTriggerCode(String triggerCode) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".findByTriggerCode parameters: {}", triggerCode);
+		return promotionTypeRepository.findByPromotionEntityPromotionTriggerCode(triggerCode);
+	}
 
 	@Override
 	public void save(PromotionTypeEntity t) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".save()");
 		promotionTypeRepository.save(t);
 	}
 
 	@Override
 	public void update(PromotionTypeEntity t) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".update()");
 		promotionTypeRepository.save(t);
 	}
 
 	@Override
 	public void delete(PromotionTypeEntity t) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".delete()");
 		promotionTypeRepository.delete(t);
 		
 	}
