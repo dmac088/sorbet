@@ -15,5 +15,10 @@ public class PromotionServiceImpl implements IPromotionService {
 		return promotionService.applyAll(bag);
 	}
 
+	@Override
+	public void validateCouponCode(String locale, String currency, String code) {
+		System.out.println("validating coupon code " + code);
+	}
+
 	
 }

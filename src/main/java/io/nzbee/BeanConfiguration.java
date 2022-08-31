@@ -9,8 +9,8 @@ import io.nzbee.domain.bag.item.regular.IRegularBagItemDomainService;
 import io.nzbee.domain.bag.item.regular.RegularBagItemServiceImpl;
 import io.nzbee.domain.bag.item.shipping.IShippingBagItemDomainService;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItemDomainServiceImpl;
-import io.nzbee.domain.customer.CustomerServiceImpl;
-import io.nzbee.domain.customer.ICustomerService;
+import io.nzbee.domain.customer.CustomerDomainServiceImpl;
+import io.nzbee.domain.customer.ICustomerDomainService;
 import io.nzbee.domain.promotion.IPromotionService;
 import io.nzbee.domain.promotion.PromotionServiceImpl;
 import io.nzbee.entity.adapters.hkpost.HKPostAdapter;
@@ -350,8 +350,8 @@ class BeanConfiguration {
     }
     
     @Bean
-    ICustomerService customerService() {
-        return new CustomerServiceImpl();
+    ICustomerDomainService customerService() {
+        return new CustomerDomainServiceImpl();
     }
     
     @Bean

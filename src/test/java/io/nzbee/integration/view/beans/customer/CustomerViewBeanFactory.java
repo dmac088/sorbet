@@ -2,7 +2,8 @@ package io.nzbee.integration.view.beans.customer;
 
 
 import org.springframework.stereotype.Service;
-import io.nzbee.view.customer.CustomerDTOIn;
+
+import io.nzbee.domain.customer.dto.in.CustomerDTOIn;
 
 @Service
 public class CustomerViewBeanFactory implements ICustomerViewBeanFactory {

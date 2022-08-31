@@ -28,7 +28,7 @@ import org.springframework.web.context.WebApplicationContext;
 import io.nzbee.Globals;
 import io.nzbee.cache.CacheConfiguration;
 import io.nzbee.controllers.CustomerController;
-import io.nzbee.domain.customer.CustomerServiceImpl;
+import io.nzbee.domain.customer.CustomerDomainServiceImpl;
 import io.nzbee.entity.adapters.domain.CustomerAdapter;
 import io.nzbee.entity.adapters.view.AddressAdapter;
 import io.nzbee.entity.adapters.view.CustomerViewAdapter;
@@ -68,7 +68,7 @@ import io.nzbee.view.customer.address.CustomerAddressDTOMapperImpl;
 @RunWith(SpringRunner.class)
 @EnableJpaRepositories(entityManagerFactoryRef = "mochiEntityManagerFactory", transactionManagerRef = "mochiTransactionManager", basePackages = {
 		"io.nzbee.entity", "io.nzbee.security" })
-@ContextConfiguration(classes = { PartyTypeServiceImpl.class, CustomerServiceImpl.class, CustomerAdapter.class,
+@ContextConfiguration(classes = { PartyTypeServiceImpl.class, CustomerDomainServiceImpl.class, CustomerAdapter.class,
 		PersonServiceImpl.class, CustomerMapperImpl.class, UserRoleServiceImpl.class, IUserRoleRepository.class,
 		UserService.class, Encoders.class, SecurityBeanConfiguration.class, ProductEntityServiceImpl.class,
 		WebSecurityConfig.class, Globals.class, SecurityBeanConfiguration.class, OAuth2AuthorizationServerConfig.class,

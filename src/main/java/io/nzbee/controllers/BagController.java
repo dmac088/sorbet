@@ -18,7 +18,7 @@ import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.IBagDomainService;
 import io.nzbee.domain.bag.item.regular.IRegularBagItemDomainService;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
-import io.nzbee.domain.dto.promotion.in.CouponDTO;
+import io.nzbee.domain.promotion.dto.in.CouponDTO;
 import io.nzbee.resources.bag.BagResource;
 import io.nzbee.resources.bag.BagResourceAssembler;
 import io.nzbee.resources.bag.item.BagItemResource;
@@ -78,14 +78,10 @@ public class BagController {
 			 @RequestBody CouponDTO dto, Principal principal) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".addCouponToBag");
 
+		domainBagService.addItemToBag(locale, currency, dto.getCoupon(), principal.getName());
+		
 		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
-
-		b.addCoupon(dto.getCoupon());
-
-		domainBagService.checkAllBagRules(b);
-
-		domainBagService.save(b);
-
+		
 		return ResponseEntity.ok(bagResourceAssembler.toModel(bagDTOMapper.toView(b)));
 	}
 

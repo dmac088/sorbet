@@ -1,7 +1,8 @@
 package io.nzbee.security.events;
 
 import org.springframework.context.ApplicationEvent;
-import io.nzbee.view.customer.CustomerDTOIn;
+
+import io.nzbee.domain.customer.dto.in.CustomerDTOIn;
 
 @SuppressWarnings("serial")
 public class OnRegistrationCompleteEvent extends ApplicationEvent {

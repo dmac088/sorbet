@@ -22,8 +22,8 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import io.nzbee.Constants;
+import io.nzbee.domain.customer.dto.in.CustomerDTOIn;
 import io.nzbee.integration.view.beans.customer.ICustomerViewBeanFactory;
-import io.nzbee.view.customer.CustomerDTOIn;
 import io.nzbee.view.customer.CustomerDTOOut;
 import io.nzbee.view.ports.ICustomerPortService;
 

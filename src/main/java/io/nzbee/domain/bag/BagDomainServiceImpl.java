@@ -40,6 +40,38 @@ public class BagDomainServiceImpl implements IBagDomainService {
 	}
 	
 	@Override
+	public void addItemToBag(String locale, String currency, String coupon, String username) {
+		Bag b = this.findByCode(locale, currency, username);
+
+		b.addCoupon(coupon);
+
+		this.checkAllBagRules(b);
+
+		this.save(b);
+		
+	}
+
+	@Override
+	@Transactional
+	public void addShippingItem(String locale, String currency, ShippingItemDTOIn dto, String username) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".addShippingItem with parameters {}, {}, {}, {}", locale, currency, dto.getShippingProductCode(), username);
+		
+		//get the bag domain model with the items
+    	Bag b = this.findByCode(locale, 
+    							currency, 
+    							username);
+		
+    	//get the shipping item
+		ShippingBagItem sbi = shippingBagItemService.getShippingItem(currency, b, dto.getShippingProductCode());
+	
+    	//add the shipping item to the bag
+    	b.addShippingItem(sbi);
+    	
+    	//save the bag to the database 
+    	this.save(b);
+	}
+	
+	@Override
 	@Transactional
 	public void addPhysicalItem(String locale, String currency, BagItemViewIn dto, String username) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".addPhysicalItem with parameters {}, {}, {}, {}, {}", locale, currency, dto.getItemUPC(), dto.getItemQty(), username);
@@ -76,30 +108,6 @@ public class BagDomainServiceImpl implements IBagDomainService {
     	this.save(b);
 	}
 	
-	
-	
-	@Override
-	@Transactional
-	public Bag addShippingItem(String locale, String currency, ShippingItemDTOIn dto, String username) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".addShippingItem with parameters {}, {}, {}, {}", locale, currency, dto.getShippingProductCode(), username);
-	
-		//get the bag domain model with the items
-    	Bag b = this.findByCode(locale, 
-    							currency, 
-    							username);
-		
-    	//get the shipping item
-		ShippingBagItem sbi = shippingBagItemService.getShippingItem(currency, b, dto.getShippingProductCode());
-	
-    	//add the shipping item to the bag
-    	b.addShippingItem(sbi);
-    	
-    	//save the bag to the database 
-    	this.save(b);
-    	
-    	//return the bag
-    	return b;
-	}
 
 	@Override
 	public void save(Bag object) {
@@ -125,6 +133,8 @@ public class BagDomainServiceImpl implements IBagDomainService {
         System.out.println("************************************");
         System.out.println("Customer bag\n" + object.getCustomer().getUserName());
 	}
+
+
 
 
 }

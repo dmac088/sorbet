@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.nzbee.Constants;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.IBagDomainService;
 import io.nzbee.domain.promotion.IPromotionService;
+import io.nzbee.domain.services.GenericResponse;
 import io.nzbee.resources.product.physical.full.PhysicalProductFullModel;
 
 @RestController
@@ -21,9 +24,6 @@ public class PromotionController {
 
 	private Logger LOGGER = LoggerFactory.getLogger(getClass());
 
-//	@Autowired
-//	private Globals globalVars;
-	
 	@Autowired
 	private IBagDomainService domainBagService;
 	
@@ -44,6 +44,17 @@ public class PromotionController {
 		promotionService.applyAll(b);
 		
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@PostMapping("/Promotion/{locale}/{currency}/Code/Validate/{code}")
+	public GenericResponse validateCouponCode(  	  @PathVariable String locale, 
+														  @PathVariable String currency,
+														  @PathVariable String code) {
+		
+		
+		promotionService.validateCouponCode(locale, currency, code);
+		
+		return new GenericResponse(Constants.genericResponseSuccess);
 	}
 
 	

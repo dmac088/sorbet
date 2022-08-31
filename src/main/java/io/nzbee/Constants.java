@@ -42,4 +42,7 @@ public class Constants {
 	
 	public static final String promotionDiscriminatorBNGN = "BNGNF";
 	public static final String promotionDiscriminatorDISC = "PCTGOFF";
+	
+	public static final String genericResponseSuccess = "success";
+	public static final String genericResponseFailure = "failure";
 }

@@ -6,8 +6,8 @@ import io.nzbee.integration.view.beans.bag.IBagViewBeanFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import io.nzbee.Globals;
-import io.nzbee.domain.customer.CustomerServiceImpl;
-import io.nzbee.domain.customer.ICustomerService;
+import io.nzbee.domain.customer.CustomerDomainServiceImpl;
+import io.nzbee.domain.customer.ICustomerDomainService;
 import io.nzbee.domain.ports.ICustomerPortService;
 import io.nzbee.entity.DataSourceBeanMochi;
 import io.nzbee.entity.adapters.domain.BagDomainAdapter;
@@ -114,8 +114,8 @@ public class ConfigBagViewTests {
 	}
 	
 	@Bean 
-	ICustomerService customerService() {
-		return new CustomerServiceImpl();
+	ICustomerDomainService customerService() {
+		return new CustomerDomainServiceImpl();
 	}
 	
 	@Bean

@@ -15,6 +15,10 @@ public interface IBagDomainService  {
 
 	void addPhysicalItem(String locale, String currency, BagItemViewIn dto, String username);
 
-	Bag addShippingItem(String locale, String currency, ShippingItemDTOIn dto, String username);
+	void addShippingItem(String locale, String currency, ShippingItemDTOIn dto, String username);
+
+	void addItemToBag(String locale, String currency, String coupon, String name);
+
+	
 
 }
