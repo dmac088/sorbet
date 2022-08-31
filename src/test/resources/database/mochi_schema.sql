@@ -3277,7 +3277,7 @@ CREATE TABLE mochi.bag (
     pty_id bigint NOT NULL,
     bag_crd_dt timestamp with time zone NOT NULL,
     bag_upd_dt timestamp with time zone NOT NULL,
-    prm_id bigint
+    coupons text[]
 );
 
 

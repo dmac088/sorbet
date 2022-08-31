@@ -371,7 +371,7 @@ INSERT INTO mochi.bag VALUES (234473, 232304, '2020-12-01 21:33:14.43+08', '2020
 INSERT INTO mochi.bag VALUES (234476, 232304, '2020-12-01 21:40:31.98+08', '2020-12-01 21:40:31.98+08', NULL);
 INSERT INTO mochi.bag VALUES (234487, 234485, '2022-06-23 16:36:19.391+08', '2022-06-23 16:36:19.391+08', NULL);
 INSERT INTO mochi.bag VALUES (234491, 234489, '2022-08-18 11:08:53.563+08', '2022-08-18 11:08:53.563+08', NULL);
-INSERT INTO mochi.bag VALUES (234484, 234482, '2020-12-02 12:54:34.693+08', '2022-08-18 16:15:09.075+08', NULL);
+INSERT INTO mochi.bag VALUES (234484, 234482, '2020-12-02 12:54:34.693+08', '2022-08-31 11:40:49.198+08', NULL);
 
 
 --
@@ -387,8 +387,7 @@ INSERT INTO mochi.bag_item_status VALUES (3, 'PND01', 'Pending');
 -- Data for Name: bag_item; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
-INSERT INTO mochi.bag_item VALUES (234523, 234484, 26, 1, 1, 1);
-INSERT INTO mochi.bag_item VALUES (234524, 234484, 29, 2, 1, 1);
+INSERT INTO mochi.bag_item VALUES (234525, 234484, 25, 1, 1, 1);
 
 
 --
@@ -10029,7 +10028,7 @@ SELECT pg_catalog.setval('mochi.bag_bag_id_seq', 234491, true);
 -- Name: bag_item_bag_item_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
 --
 
-SELECT pg_catalog.setval('mochi.bag_item_bag_item_id_seq', 234524, true);
+SELECT pg_catalog.setval('mochi.bag_item_bag_item_id_seq', 234525, true);
 
 
 --

@@ -2,6 +2,7 @@ package io.nzbee.entity.bag.entity;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -17,13 +18,22 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
+import com.vladmihalcea.hibernate.type.array.ListArrayType;
 import io.nzbee.entity.bag.item.entity.BagItemEntity;
 import io.nzbee.entity.party.Party;
 import io.nzbee.entity.promotion.bngn.PromotionBngnEntity;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+
+
 @Entity
 @Table(name = "bag", schema = "mochi")
+@TypeDef(
+	    name = "list-array",
+	    typeClass = ListArrayType.class
+	)
 public class BagEntity {
 
 	@Id
@@ -50,6 +60,13 @@ public class BagEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="prm_id")
 	private PromotionBngnEntity promotion;
+	
+	@Type(type = "list-array")
+	    @Column(
+	        name = "coupons",
+	        columnDefinition = "text[]"
+	)
+	private List<String> couponCodes;
 
 	public Long getBagId() {
 		return bagId;
