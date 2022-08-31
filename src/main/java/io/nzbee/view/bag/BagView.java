@@ -1,7 +1,9 @@
 package io.nzbee.view.bag;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import io.nzbee.view.bag.item.BagItemViewOut;
@@ -26,6 +28,7 @@ public class BagView {
 	
 	private BagItemViewOut shippingItem;
 	
+	private List<String> coupons = new ArrayList<String>();
 	
 
 	public String getBagStatusCode() {
@@ -98,6 +101,14 @@ public class BagView {
 
 	public void setShippingItem(BagItemViewOut shippingItem) {
 		this.shippingItem = shippingItem;
+	}
+
+	public List<String> getCoupons() {
+		return coupons;
+	}
+
+	public void setCoupons(List<String> coupons) {
+		this.coupons = coupons;
 	}
 	
 }

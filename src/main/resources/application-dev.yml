@@ -32,7 +32,7 @@ spring:
         username: mochi_app
         password: password
         driver-class-name: org.postgresql.Driver
-     
+      
       owner:
         max-lifetime: 45000
         maximum-pool-size: 2
@@ -65,7 +65,7 @@ spring:
         url: jdbc:postgresql://localhost:5432/mochidb?currentSchema=security
         username: security_owner
         password: password
-        driver-class-name: org.postgresql.Driver 
+        driver-class-name: org.postgresql.Driver
     
 app:
   globals:

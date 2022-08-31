@@ -1,5 +1,7 @@
 package io.nzbee.entity.bag.domain;
 
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
@@ -26,9 +28,6 @@ import io.nzbee.entity.party.person.ICustomerDomainMapper;
 import io.nzbee.entity.party.person.IPersonService;
 import io.nzbee.entity.party.person.PersonEntity;
 import io.nzbee.entity.product.IProductService;
-//import io.nzbee.entity.promotion.IPromotionEntityService;
-import io.nzbee.entity.promotion.PromotionEntity;
-import io.nzbee.entity.promotion.bngn.PromotionBngnEntity;
 import io.nzbee.exceptions.EntityNotFoundException;
 import io.nzbee.entity.party.person.PersonDomainDTO;
 
@@ -85,6 +84,10 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 			b.addShippingItem(ssbi);
 		}
 		
+		dto.getCoupons().stream().forEach(cpn -> {
+			b.addCoupon(cpn);
+		});
+		
 		return b;
 	}
 
@@ -115,7 +118,11 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 			ShippingBagItem ssbi = shippingItemMapper.DTOToDo(b, ossbi.get());
 			b.addShippingItem(ssbi);
 		}
-
+		
+		dto.getCoupons().stream().forEach(cpn -> {
+			b.addCoupon(cpn);
+		});
+		
 		return b;
 	}
 
@@ -127,7 +134,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		Optional<BagEntity> obe = bagService.findByCode(d.getCustomer().getUserName());
 		Optional<PersonEntity> op = personService.findByUsernameAndRole(d.getCustomer().getUserName(),
 				Constants.partyRoleCustomer);
-		Optional<PromotionEntity> opr = Optional.ofNullable(null);
+		
 
 		BagEntity nbe = new BagEntity();
 		nbe.setBagCreatedDateTime(LocalDateTime.now());
@@ -180,10 +187,13 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		}
 		
 		// add promotion to the bag if the promotion exists
-		if (opr.isPresent()) {
-			b.setPromotion((PromotionBngnEntity) opr.get().getPromotionBngn());
-		}
-
+		d.getCoupons().stream().forEach(c -> {
+			if(!b.getCouponCodes().contains(c)) {
+				if(!c.isEmpty()) {
+					b.getCouponCodes().add(c);
+				}
+			}
+		});
 		// set the customer of the bag
 		b.setParty(op.get().getPersonParty());
 

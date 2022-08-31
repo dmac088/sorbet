@@ -24,6 +24,7 @@ public class BagDomainDTODaoImpl implements IBagDomainDTODao {
 	public Optional<BagDomainDTO> findByCode(String currency, String username) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode, with parameters {}, {}", currency, username);
 		Query query = em.createNativeQuery(" SELECT be.bag_id, "
+									+ "		  		array_to_string(be.coupons, ',') as coupons, "
 									+ "		  		pty.pty_id, "
 									+ "		  		pu.user_name, "
 									+ "       		cst.cst_num, "

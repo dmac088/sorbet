@@ -65,9 +65,7 @@ public class DataSourceBeanMochi {
 	
 	private Properties additionalJpaProperties(){
 		Properties properties = new Properties();
-		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-		//properties.setProperty("hibernate.show_sql", "true");
-		//properties.setProperty("hibernate.search.default.indexBase", globalVars.getIndexPath());
+		properties.setProperty("hibernate.dialect", env.getProperty("spring.jpa.properties.hibernate.dialect"));
 		return properties;
 	}
      

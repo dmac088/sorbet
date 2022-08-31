@@ -1,6 +1,7 @@
 package io.nzbee.entity.bag.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -8,12 +9,10 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -21,13 +20,11 @@ import javax.persistence.Table;
 import com.vladmihalcea.hibernate.type.array.ListArrayType;
 import io.nzbee.entity.bag.item.entity.BagItemEntity;
 import io.nzbee.entity.party.Party;
-import io.nzbee.entity.promotion.bngn.PromotionBngnEntity;
-
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
 
 
+@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "bag", schema = "mochi")
 @TypeDef(
@@ -57,16 +54,12 @@ public class BagEntity {
 	@Column(name="bag_upd_dt")
 	private LocalDateTime bagUpdatedDateTime;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="prm_id")
-	private PromotionBngnEntity promotion;
-	
 	@Type(type = "list-array")
 	    @Column(
 	        name = "coupons",
 	        columnDefinition = "text[]"
 	)
-	private List<String> couponCodes;
+	private List<String> couponCodes = new ArrayList<String>();
 
 	public Long getBagId() {
 		return bagId;
@@ -113,13 +106,13 @@ public class BagEntity {
 	public void setBagUpdatedDateTime(LocalDateTime bagUpdatedDateTime) {
 		this.bagUpdatedDateTime = bagUpdatedDateTime;
 	}
-	
-	public PromotionBngnEntity getPromotion() {
-		return promotion;
+
+	public List<String> getCouponCodes() {
+		return couponCodes;
 	}
 
-	public void setPromotion(PromotionBngnEntity promotion) {
-		this.promotion = promotion;
+	public void setCouponCodes(List<String> couponCodes) {
+		this.couponCodes = couponCodes;
 	}
 
 	@Override

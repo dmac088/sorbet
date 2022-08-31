@@ -11,19 +11,20 @@ import io.nzbee.domain.customer.Customer;
 
 public class Bag {
 	
-	private List<RegularBagItem> bagItems;
-	
 	private ShippingBagItem shippingItem;
 	
 	private Customer customer;
 	
 	private BagIssues bagIssues = new BagIssues();
 	
-	private List<String> coupons = new ArrayList<String>();
+	private final List<String> coupons;
+	
+	private final List<RegularBagItem> bagItems;
 
 	public Bag(Customer customer) {
 		this.customer = customer;
 		this.bagItems = new ArrayList<>();
+		this.coupons = new ArrayList<String>();
 	}
 	
 	public Customer getCustomer() {
@@ -120,7 +121,9 @@ public class Bag {
 	}
 
 	public void addCoupon(String couponCode) {
-		this.getCoupons().add(couponCode);
+		if(!this.getCoupons().contains(couponCode)) {
+			this.getCoupons().add(couponCode);
+		}
 	}
 
 	public List<String> getCoupons() {

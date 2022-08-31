@@ -65,7 +65,7 @@ public class BagController {
 		// get the domain model to compute the bag total
 		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
 
-		// domainBagService.checkAllBagRules(b);
+		domainBagService.checkAllBagRules(b);
 
 		// get the view containing additional attributes
 		BagView bv = viewBagService.toView(locale, currency, b);
