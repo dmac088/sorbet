@@ -4,7 +4,11 @@ import java.util.List;
 
 public interface IPromotionDao {
 	
-	List<PromotionDomainDTO> findAll(List<String> coupons, List<String> items);
+	List<PromotionDomainDTO> findShippingPromotion();
+
+	List<PromotionDomainDTO> findBagPromotions();
 	
+	List<PromotionDomainDTO> findItemPromotion(String itemUPC);
+
 }
 

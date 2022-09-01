@@ -16,10 +16,21 @@ public class PromotionDTOServiceImpl implements IPromotionDTOService {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".validateCouponCode with parameters {}, {}, {}", locale, currency, code);
 		
 	}
+
 	@Override
-	public List<PromotionDomainDTO> findAll(List<String> coupons, List<String> items) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".findAll()");
-		return promotionDao.findAll(coupons, items);
+	public List<PromotionDomainDTO> findShippingPromotion() {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".findShippingPromotion()");
+		return promotionDao.findShippingPromotion();
+	}
+	@Override
+	public List<PromotionDomainDTO> findBagPromotions() {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".findBagPromotions()");
+		return promotionDao.findBagPromotions();
+	}
+	@Override
+	public List<PromotionDomainDTO> findItemPromotion(String itemUPC) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".findItemPromotion()");
+		return promotionDao.findItemPromotion(itemUPC);
 	}
 	
 	

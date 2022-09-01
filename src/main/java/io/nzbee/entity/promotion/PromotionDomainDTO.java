@@ -20,7 +20,6 @@ public class PromotionDomainDTO {
 	
 	public static final String ACTIVE_ALIAS = "prm_act";
 	
-	public static final String UPC_ALIAS = "upc_cd";
 	
 	
 	private final String promotionCode;
@@ -35,8 +34,6 @@ public class PromotionDomainDTO {
 	
 	private final Boolean promotionIsActive;
 	
-	private final String promotionUPC;
-	
 	
 	public PromotionDomainDTO(Object[] tuple, Map<String, Integer> aliasToIndexMap) {
 		this.promotionCode 				= tuple[aliasToIndexMap.get(CODE_ALIAS)].toString();
@@ -44,9 +41,6 @@ public class PromotionDomainDTO {
 		this.promotionEndDate			= LocalDateTime.parse(tuple[aliasToIndexMap.get(END_DATE_ALIAS)].toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"));
 		this.promotionMechanicCode 		= tuple[aliasToIndexMap.get(MECH_CODE_ALIAS)].toString();
 		this.promotionTypeCode			= tuple[aliasToIndexMap.get(TYPE_CODE_ALIAS)].toString();
-		this.promotionUPC				= !(tuple[aliasToIndexMap.get(UPC_ALIAS)] == null) 
-											? tuple[aliasToIndexMap.get(UPC_ALIAS)].toString()
-											: "";
 		this.promotionIsActive 			= ((Boolean) tuple[aliasToIndexMap.get(ACTIVE_ALIAS)]);
 	}
 
@@ -74,10 +68,6 @@ public class PromotionDomainDTO {
 
 	public Boolean getPromotionIsActive() {
 		return promotionIsActive;
-	}
-
-	public String getPromotionUPC() {
-		return promotionUPC;
 	}
 	
 	public Boolean isBagType() {

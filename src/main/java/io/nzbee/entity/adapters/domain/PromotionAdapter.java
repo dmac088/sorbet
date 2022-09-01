@@ -42,40 +42,44 @@ public class PromotionAdapter implements IPromotionPortService {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".applyAll with parameter {}",
 				bag.getCustomer().getUserName());
 
-		List<String> ss = bag.getBagItems().stream().map(i -> i.getBagItem().getProductUPC())
-				.collect(Collectors.toList());
-		List<PromotionDomainDTO> sp = promotionService.findAll(bag.getCoupons(), ss);
-
-		// for each promotion apply it
-		sp.forEach(p -> {
-
-			if (p.isBagType()) {
-				Promotion pdo = promotionMapper.DTOToDo(p);
-				IBagPromotion blp = (IBagPromotion) pdo;
-				blp.execute(bag);
-				return;
-			}
-
-			if (p.isProductType()) {
-				bag.getBagItems().stream().forEach(i -> {
-					if (i.getBagItem().getProductUPC().equals(p.getPromotionUPC())) {
-						Promotion pdo = promotionMapper.DTOToDo(p);
-						IBagPromotion rbip = (IBagPromotion) pdo;
-						rbip.execute(i);
-						return;
-					}
-				});
-			}
-
-			if (p.isShippingType()) {
-				Promotion pdo = promotionMapper.DTOToDo(p);
-				IBagPromotion sbip = (IBagPromotion) pdo;
-				if (bag.hasShippingItem()) {
-					sbip.execute(bag.getShippingItem());
-				}
-			}
-
-		});
+	
+		
+		//get tehbag promotions
+		System.out.println(promotionService.findBagPromotions().size());
+		System.out.println(promotionService.findShippingPromotion().size());
+		System.out.println(promotionService.findItemPromotion("15483827").size());
+		
+//		
+//		// for each promotion apply it
+//		sp.forEach(p -> {
+//
+//			if (p.isBagType()) {
+//				Promotion pdo = promotionMapper.DTOToDo(p);
+//				IBagPromotion blp = (IBagPromotion) pdo;
+//				blp.execute(bag);
+//				return;
+//			}
+//
+//			if (p.isProductType()) {
+//				bag.getBagItems().stream().forEach(i -> {
+//					if (i.getBagItem().getProductUPC().equals(p.getPromotionUPC())) {
+//						Promotion pdo = promotionMapper.DTOToDo(p);
+//						IBagPromotion rbip = (IBagPromotion) pdo;
+//						rbip.execute(i);
+//						return;
+//					}
+//				});
+//			}
+//
+//			if (p.isShippingType()) {
+//				Promotion pdo = promotionMapper.DTOToDo(p);
+//				IBagPromotion sbip = (IBagPromotion) pdo;
+//				if (bag.hasShippingItem()) {
+//					sbip.execute(bag.getShippingItem());
+//				}
+//			}
+//
+//		});
 
 		return bag;
 	}
