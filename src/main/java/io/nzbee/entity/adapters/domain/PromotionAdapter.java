@@ -53,7 +53,7 @@ public class PromotionAdapter implements IPromotionPortService {
 			if (opt.isPresent()) {
 				LOGGER.debug("promotion type found: " + opt.get().getPromotionTypeDesc());
 
-				//bag level logic
+				//bag level promotion logic
 				//bag level discounts require a coupon at this stage
 				//these are for arbitrary discounts like 20% of for a 2 week period
 				if (opt.get().getPromotionTypeCode().equals(Constants.promotionTypeBag)) {
@@ -63,7 +63,7 @@ public class PromotionAdapter implements IPromotionPortService {
 					return;
 				}
 
-				//item level logic
+				//item level promotion logic
 				//promotions include category and brand level promotions
 				//item level promotions require a coupon at this stage 
 				if (opt.get().getPromotionTypeCode().equals(Constants.promotionTypeProduct)) {
@@ -80,9 +80,8 @@ public class PromotionAdapter implements IPromotionPortService {
 			}
 		});
 		
-		//shipping logic
+		//shipping promotion logic
 		//we don't need a coupon to get the discounted shipping, it's automatic
-		
 		Optional<PromotionDomainDTO> opdto = promotionService.findAllByType(Constants.promotionTypeShipping);
 		if (opdto.isPresent()) {
 			Promotion p = promotionMapper.DTOToDo(opdto.get());

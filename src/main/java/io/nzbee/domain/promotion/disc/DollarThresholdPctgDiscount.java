@@ -6,9 +6,9 @@ import java.util.List;
 import io.nzbee.domain.promotion.DiscountItem;
 import io.nzbee.domain.promotion.IBagPromotion;
 import io.nzbee.domain.promotion.Promotion;
-import io.nzbee.domain.promotion.ports.IPromotionPort;
+import io.nzbee.domain.promotion.ports.IDiscountThresholdPromotionPort;
 
-public class DollarThresholdPctgDiscount extends Promotion implements IBagPromotion {
+public class DollarThresholdPctgDiscount extends Promotion implements IBagPromotion<IDiscountThresholdPromotionPort> {
 	
 	private final BigDecimal discountPctg;
 	
@@ -53,9 +53,9 @@ public class DollarThresholdPctgDiscount extends Promotion implements IBagPromot
 	}
 
 	@Override
-	public List<DiscountItem> execute(IPromotionPort object) {
+	public List<DiscountItem> execute(IDiscountThresholdPromotionPort object) {
 		System.out.println("executing shipping promotion: " + this.getClass().getSimpleName().toString());
-		return this.execute(object.getTotal());
+		return this.execute(object.getTotalAmount());
 	}
 
 	@Override

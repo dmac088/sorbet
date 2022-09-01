@@ -3,12 +3,13 @@ package io.nzbee.domain.promotion.bngn;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+
 import io.nzbee.domain.promotion.DiscountItem;
 import io.nzbee.domain.promotion.IBagPromotion;
 import io.nzbee.domain.promotion.Promotion;
-import io.nzbee.domain.promotion.ports.IPromotionPort;
+import io.nzbee.domain.promotion.ports.IBnGnFreePromotionPort;
 
-public class BuyNGetNFree extends Promotion implements IBagPromotion {
+public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePromotionPort> {
 	
 	private Long buyQuantity;
 	
@@ -45,8 +46,8 @@ public class BuyNGetNFree extends Promotion implements IBagPromotion {
 	}
 
 	@Override
-	public List<DiscountItem> execute(IPromotionPort item) {
-		System.out.println("executing promotion: " + this.getClass().getSimpleName().toString() + " for total: " + item.getTotal());
+	public List<DiscountItem> execute(IBnGnFreePromotionPort item) {
+		System.out.println("executing promotion: " + this.getClass().getSimpleName().toString() + " for total: " + item.getTotalAmount());
 		return null;
 	}
 
