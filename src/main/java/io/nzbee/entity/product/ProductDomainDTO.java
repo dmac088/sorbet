@@ -29,7 +29,7 @@ public class ProductDomainDTO implements Serializable {
     public static final String RETAIL_PRICE_ALIAS = "retail_price";
     
     public static final String MARKDOWN_PRICE_ALIAS = "markdown_price";
- 
+    
  
     protected final Long productId;
 

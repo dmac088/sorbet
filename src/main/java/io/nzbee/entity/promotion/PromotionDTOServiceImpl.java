@@ -13,6 +13,11 @@ public class PromotionDTOServiceImpl implements IPromotionDTOService {
 	@Autowired
 	private IPromotionDao promotionDao;
 
+	public void validateCouponCode(String locale, String currency, String code) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".validateCouponCode with parameters {}, {}, {}", locale, currency, code);
+		
+	}
+	
 	@Override
 	public Optional<PromotionDomainDTO> findProductPromotion(String upc, String triggerCode) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findAll parameters : {}, {}", upc, triggerCode);

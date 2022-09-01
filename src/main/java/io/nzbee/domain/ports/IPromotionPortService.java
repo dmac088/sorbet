@@ -6,6 +6,8 @@ import io.nzbee.domain.promotion.Promotion;
 
 public interface IPromotionPortService extends IDomainPortService<Promotion> {
 
-	Bag applyAll(Bag bag); 
+	Bag applyAll(Bag bag);
+
+	Promotion findByCode(String coupon); 
 	
 }

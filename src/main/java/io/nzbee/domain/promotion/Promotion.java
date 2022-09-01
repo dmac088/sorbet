@@ -2,7 +2,7 @@ package io.nzbee.domain.promotion;
 
 import java.time.LocalDateTime;
 
-public abstract class Promotion {
+public class Promotion {
 	
 	protected final String promotionCode;
 	
@@ -11,16 +11,20 @@ public abstract class Promotion {
 	protected final LocalDateTime promotionStartDt;
 	
 	protected final LocalDateTime promotionEndDt;
+	
+	protected final Boolean active;
 
 	
 	public Promotion(String promotionCode,
 					 String promotionTypeCode,
 					 LocalDateTime promotionStartDt,
-					 LocalDateTime promotionEndDt) {
+					 LocalDateTime promotionEndDt,
+					 Boolean active) {
 		this.promotionCode 			= promotionCode;
 		this.promotionTypeCode		= promotionTypeCode;
 		this.promotionStartDt 		= promotionStartDt;
 		this.promotionEndDt 		= promotionEndDt;
+		this.active					= active;
 	}
 
 	public String getPromotionCode() {
@@ -39,6 +43,8 @@ public abstract class Promotion {
 		return promotionTypeCode;
 	}
 	
-	public abstract void compute();
+	public Boolean validate() {
+		return true;
+	}
 	
 }

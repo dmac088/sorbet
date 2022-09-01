@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +16,8 @@ import io.nzbee.Constants;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.IBagDomainService;
 import io.nzbee.domain.promotion.IPromotionService;
+import io.nzbee.domain.promotion.Promotion;
+import io.nzbee.domain.promotion.dto.in.CouponDTO;
 import io.nzbee.domain.services.GenericResponse;
 import io.nzbee.resources.product.physical.full.PhysicalProductFullModel;
 
@@ -46,13 +49,15 @@ public class PromotionController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@PostMapping("/Promotion/{locale}/{currency}/Code/Validate/{code}")
-	public GenericResponse validateCouponCode(  	  @PathVariable String locale, 
+	@PostMapping("/Promotion/{locale}/{currency}/Code/Validate")
+	public GenericResponse validateCouponCode(  	  	  @PathVariable String locale, 
 														  @PathVariable String currency,
-														  @PathVariable String code) {
+														  @RequestBody CouponDTO dto) {
 		
 		
-		promotionService.validateCouponCode(locale, currency, code);
+		Promotion p = promotionService.findByCouponCode(dto.getCoupon());
+		
+		p.validate();
 		
 		return new GenericResponse(Constants.genericResponseSuccess);
 	}
