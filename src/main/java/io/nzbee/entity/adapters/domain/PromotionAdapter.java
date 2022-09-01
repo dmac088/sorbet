@@ -73,7 +73,16 @@ public class PromotionAdapter implements IPromotionPortService {
 			p.execute(bag);
 		});
 		
-		
+		if(bag.hasShippingItem()) {
+			promotionService.findShippingPromotion()
+			.forEach(dto -> {
+				//we need to check if the bag is eligible for the promotion before executing
+				//or this should be done within the execute method of the promotion object itself
+				IBagPromotion p = (IBagPromotion)promotionMapper.DTOToDo(dto);
+				p.execute(bag.getShippingItem());
+				
+			});
+		}
 		
 		//shipping promotions
 		
