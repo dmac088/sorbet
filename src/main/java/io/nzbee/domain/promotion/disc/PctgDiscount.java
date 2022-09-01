@@ -17,8 +17,10 @@ public class PctgDiscount extends Promotion implements IBagPromotion<IPctgDiscou
 						LocalDateTime promotionStartDt,
 						LocalDateTime promotionEndDt,
 						BigDecimal discountPctg,
-						Boolean active) {
-		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active);
+						Boolean active,
+						Boolean couponRequired,
+						String couponCode) {
+		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
 		
 		this.discountPctg = discountPctg;
 	}

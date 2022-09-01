@@ -1,17 +1,13 @@
 package io.nzbee.entity.adapters.domain;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.ports.IPromotionPortService;
-import io.nzbee.domain.promotion.IBagPromotion;
 import io.nzbee.domain.promotion.Promotion;
 import io.nzbee.entity.promotion.IPromotionMapper;
-import io.nzbee.entity.promotion.PromotionDomainDTO;
 import io.nzbee.entity.promotion.type.IPromotionTypeService;
 import io.nzbee.entity.promotion.IPromotionDTOService;
 

@@ -22,9 +22,11 @@ public class DollarThresholdPctgDiscount extends Promotion implements IBagPromot
 						LocalDateTime promotionEndDt,
 						BigDecimal discountPctg,
 						Boolean active, 
+						Boolean couponRequired,
+						String couponCode,
 						BigDecimal dollarThreshold,
 						String currency) {
-		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active);
+		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
 		
 		this.discountPctg = discountPctg;
 		this.dollarThreshold = dollarThreshold;

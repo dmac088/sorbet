@@ -21,9 +21,11 @@ public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePr
 						LocalDateTime promotionStartDt,
 						LocalDateTime promotionEndDt,
 						Boolean active,
+						Boolean couponRequired,
+						String couponCode,
 						Long buyQuantity,
 						BigDecimal discountPctg) {
-		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active);
+		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
 		this.buyQuantity = buyQuantity;
 		this.discountPctg = discountPctg;
 	}

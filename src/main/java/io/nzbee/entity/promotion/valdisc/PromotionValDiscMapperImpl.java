@@ -10,7 +10,7 @@ public class PromotionValDiscMapperImpl implements IPromotionValDiscMapper {
 	@Override
 	public Promotion DTOToDo(PromotionValDiscDTO dto) {		
 		return new PctgDiscount(dto.getPromotionCode(), dto.getPromotionTypeCode(), dto.getPromotionStartDate(),
-				dto.getPromotionEndDate(), dto.getDiscountPercentage(), dto.getPromotionIsActive());
+				dto.getPromotionEndDate(), dto.getDiscountPercentage(), dto.getPromotionIsActive(), dto.getCouponRequired(), dto.getCouponCode());
 	}
 
 	@Override

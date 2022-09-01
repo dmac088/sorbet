@@ -13,18 +13,26 @@ public class Promotion {
 	protected final LocalDateTime promotionEndDt;
 	
 	protected final Boolean active;
+	
+	protected final Boolean couponRequired;
+	
+	protected final String couponCode;
 
 	
 	public Promotion(String promotionCode,
 					 String promotionTypeCode,
 					 LocalDateTime promotionStartDt,
 					 LocalDateTime promotionEndDt,
-					 Boolean active) {
+					 Boolean active,
+					 Boolean couponRequired,
+					 String couponCode) {
 		this.promotionCode 			= promotionCode;
 		this.promotionTypeCode		= promotionTypeCode;
 		this.promotionStartDt 		= promotionStartDt;
 		this.promotionEndDt 		= promotionEndDt;
 		this.active					= active;
+		this.couponRequired			= couponRequired;
+		this.couponCode 			= couponCode;
 	}
 
 	public String getPromotionCode() {
@@ -46,5 +54,19 @@ public class Promotion {
 	public Boolean validate() {
 		return true;
 	}
+	
+	public Boolean getActive() {
+		return active;
+	}
+
+	public Boolean getCouponRequired() {
+		return couponRequired;
+	}
+
+	public String getCouponCode() {
+		return couponCode;
+	}
+	
+	
 	
 }
