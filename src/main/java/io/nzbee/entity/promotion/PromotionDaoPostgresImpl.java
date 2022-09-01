@@ -1,8 +1,7 @@
 package io.nzbee.entity.promotion;
 
-import java.util.Optional;
+import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.hibernate.Session;
 import org.slf4j.Logger;
@@ -21,10 +20,10 @@ public class PromotionDaoPostgresImpl implements IPromotionDao {
 	@Qualifier("mochiEntityManagerFactory")
 	private EntityManager em;
 
-	@SuppressWarnings({ "deprecation"})
+	@SuppressWarnings({ "deprecation", "unchecked"})
 	@Override
-	public Optional<PromotionDomainDTO> findProductPromotion(String itemUPC, String triggerCode) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".findProductPromotion parameters : {}, {}", itemUPC, triggerCode);
+	public List<PromotionDomainDTO> findAll(List<String> coupons, List<String> items) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".findAll()");
 		
 		Session session = em.unwrap(Session.class);
 		
@@ -37,6 +36,8 @@ public class PromotionDaoPostgresImpl implements IPromotionDao {
 							+ "    t.cat_prnt_id, \n"
 							+ "    t.cat_prnt_cd, \n"
 							+ "    t.cat_typ_id, \n"
+							+ "    p.prd_id,\n"
+							+ "    p.upc_cd,\n"
 							+ "    cast(\n"
 							+ "      '/' || cast(t.cat_id AS text) || '/' AS text\n"
 							+ "    ) node \n"
@@ -44,7 +45,7 @@ public class PromotionDaoPostgresImpl implements IPromotionDao {
 							+ "    mochi.category AS t \n"
 							+ "    JOIN mochi.product_category pc ON t.cat_id = pc.cat_id \n"
 							+ "    JOIN mochi.product p ON pc.prd_id = p.prd_id \n"
-							+ "    AND p.upc_cd = :upc\n"
+							+ "    AND p.upc_cd in (:productCodes)\n"
 							+ "  WHERE \n"
 							+ "    0 = 0 \n"
 							+ "  UNION ALL \n"
@@ -55,6 +56,8 @@ public class PromotionDaoPostgresImpl implements IPromotionDao {
 							+ "    t.cat_prnt_id, \n"
 							+ "    t.cat_prnt_cd, \n"
 							+ "    t.cat_typ_id, \n"
+							+ "    d.prd_id,\n"
+							+ "    d.upc_cd,\n"
 							+ "    cast(\n"
 							+ "      d.node || cast(t.cat_id AS text) || '/' AS text\n"
 							+ "    ) node \n"
@@ -72,17 +75,25 @@ public class PromotionDaoPostgresImpl implements IPromotionDao {
 							+ "    promo.prm_trg_cd,\n"
 							+ "    promotyp.prm_typ_cd,\n"
 							+ "    bngn.buy_qty as bngn_buy_qty,\n"
-							+ "    bngn.disc_pctg as bngn_disc_pctg,"
-							+ "	   promo.prm_act\n"
+							+ "    bngn.disc_pctg as bngn_disc_pctg,\n"
+							+ "	promo.prm_act,\n"
+							+ "    promo.prm_trg_rq,\n"
+							+ "    disc.disc_pctg,\n"
+							+ "    valdisc.bag_val_tld,\n"
+							+ "    valdisc.bag_disc_pctg,\n"
+							+ "    valdisc.bag_disc_curr,\n"
+							+ "    valdisc.bag_disc_dir\n"
 							+ "    \n"
 							+ "  FROM \n"
 							+ "    mochi.promotion promo \n"
 							+ "    LEFT JOIN mochi.promotion_mech promomec ON promo.prm_mec_id = promomec.prm_mec_id\n"
 							+ "    LEFT JOIN mochi.promotion_type promotyp ON promo.prm_typ_id = promotyp.prm_typ_id\n"
 							+ "    LEFT JOIN mochi.promotion_bngn bngn ON promo.prm_id = bngn.prm_id\n"
-							+ "   WHERE promo.prm_trg_cd = :triggerCode\n"
-							+ "    and promotyp.prm_typ_cd = :typeCode\n"
+							+ "    LEFT JOIN mochi.promotion_disc disc ON promo.prm_id = disc.prm_id\n"
+							+ "    LEFT JOIN mochi.promotion_valdisc valdisc ON promo.prm_id = valdisc.prm_id\n"
 							+ ") \n"
+							+ "--product\n"
+							+ "--only bngn promotions at this stage\n"
 							+ "SELECT \n"
 							+ "  pmp.prm_cd, \n"
 							+ "  pmp.prm_st_dt, \n"
@@ -90,14 +101,59 @@ public class PromotionDaoPostgresImpl implements IPromotionDao {
 							+ "  pmp.prm_mec_cd,\n"
 							+ "  pmp.prm_typ_cd,\n"
 							+ "  pmp.bngn_buy_qty,\n"
-							+ "  pmp.bngn_disc_pctg,"
-							+ "  pmp.prm_act\n"
+							+ "  pmp.bngn_disc_pctg,\n"
+							+ "  pmp.disc_pctg,\n"
+							+ "  pmp.bag_val_tld,\n"
+							+ "  pmp.bag_disc_pctg,\n"
+							+ "  pmp.bag_disc_curr,\n"
+							+ "  pmp.bag_disc_dir,\n"
+							+ "  pmp.prm_act,\n"
+							+ "  prod.upc_cd\n"
 							+ "FROM \n"
 							+ "  mochi.product prod \n"
 							+ "  INNER JOIN mochi.product_promotion prodpromo ON prod.prd_id = prodpromo.prd_id \n"
 							+ "  INNER JOIN promo_master as pmp ON prodpromo.prm_id = pmp.prm_id \n"
-							+ "  WHERE prod.upc_cd = :upc\n"
+							+ "  WHERE \n"
+							+ "  (prod.upc_cd in (:productCodes)\n"
+							+ "   AND pmp.prm_trg_cd in (:couponCodes)\n"
+							+ "   AND pmp.prm_typ_cd = :productPromotion\n"
+							+ "   AND prm_trg_rq)\n"
+							+ "   OR \n"
+							+ "  (prod.upc_cd in (:productCodes)\n"
+							+ "   AND pmp.prm_typ_cd = :productPromotion\n"
+							+ "   AND NOT prm_trg_rq)\n"
+							+ "UNION\n"
+							+ "--brand\n"
+							+ "SELECT \n"
+							+ "  pmp.prm_cd, \n"
+							+ "  pmp.prm_st_dt, \n"
+							+ "  pmp.prm_en_dt, \n"
+							+ "  pmp.prm_mec_cd,\n"
+							+ "  pmp.prm_typ_cd,\n"
+							+ "  pmp.bngn_buy_qty,\n"
+							+ "  pmp.bngn_disc_pctg,\n"
+							+ "  pmp.disc_pctg,\n"
+							+ "  pmp.bag_val_tld,\n"
+							+ "  pmp.bag_disc_pctg,\n"
+							+ "  pmp.bag_disc_curr,\n"
+							+ "  pmp.bag_disc_dir,\n"
+							+ "  pmp.prm_act,\n"
+							+ "  prod.upc_cd\n"
+							+ "FROM \n"
+							+ "  mochi.product prod\n"
+							+ "  INNER JOIN mochi.brand_promotion brandpromo ON prod.bnd_id = brandpromo.bnd_id \n"
+							+ "  INNER JOIN promo_master as pmp ON brandpromo.prm_id = pmp.prm_id \n"
+							+ "  WHERE \n"
+							+ "  (prod.upc_cd in (:productCodes)\n"
+							+ "   AND pmp.prm_trg_cd in (:couponCodes)\n"
+							+ "   AND pmp.prm_typ_cd = :productPromotion\n"
+							+ "   AND prm_trg_rq)\n"
+							+ "   OR \n"
+							+ "  (prod.upc_cd in (:productCodes)\n"
+							+ "   AND pmp.prm_typ_cd = :productPromotion\n"
+							+ "   AND NOT prm_trg_rq)\n"
 							+ "UNION \n"
+							+ "--category\n"
 							+ "SELECT \n"
 							+ "  pmc.prm_cd, \n"
 							+ "  pmc.prm_st_dt, \n"
@@ -106,65 +162,96 @@ public class PromotionDaoPostgresImpl implements IPromotionDao {
 							+ "  pmc.prm_typ_cd,\n"
 							+ "  pmc.bngn_buy_qty,\n"
 							+ "  pmc.bngn_disc_pctg,\n"
-							+ "  pmc.prm_act\n"
+							+ "  pmc.disc_pctg,\n"
+							+ "  pmc.bag_val_tld,\n"
+							+ "  pmc.bag_disc_pctg,\n"
+							+ "  pmc.bag_disc_curr,\n"
+							+ "  pmc.bag_disc_dir,\n"
+							+ "  pmc.prm_act,\n"
+							+ "  ans.upc_cd\n"
 							+ "FROM \n"
 							+ "  ancestors ans \n"
-							+ "  INNER JOIN mochi.product_category pc ON ans.cat_id = pc.cat_id \n"
+							+ "  INNER JOIN mochi.product_category pc ON ans.cat_id = pc.cat_id AND ans.prd_id = pc.prd_id\n"
 							+ "  INNER JOIN mochi.category_promotion catpromo ON pc.cat_id = catpromo.cat_id \n"
 							+ "  INNER JOIN promo_master as pmc ON catpromo.prm_id = pmc.prm_id\n"
-							+ "")
-				 .setParameter("upc", itemUPC)
-				 .setParameter("triggerCode", triggerCode)
-				 .setParameter("typeCode", Constants.promotionTypeProduct);
-		
-		query.unwrap(org.hibernate.query.Query.class)
-		.setResultTransformer(new PromotionDTOResultTransformer());
-		
-		try {
-			return Optional.ofNullable((PromotionDomainDTO) query.getSingleResult());
-		} catch(NoResultException nre) {
-			return Optional.empty();
-		}
-	}
-
-	
-	@SuppressWarnings({ "deprecation"})
-	@Override
-	public Optional<PromotionDomainDTO> findBagPromotion(String triggerCode) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".findBagPromotion parameters : {}", triggerCode);
-		
-		Session session = em.unwrap(Session.class);
-		
-		Query query = session.createNativeQuery(
-							"  SELECT \n"
-							+ "    promo.prm_cd, \n"
-							+ "    promo.prm_st_dt, \n"
-							+ "    promo.prm_en_dt, \n"
-							+ "    promomec.prm_mec_cd,\n"
-							+ "    promo.prm_trg_cd,\n"
-							+ "    promotyp.prm_typ_cd,\n"
-							+ "    disc.disc_pctg,\n"
-							+ "    promo.prm_act\n"
-							+ "  FROM \n"
-							+ "    mochi.promotion promo \n"
-							+ "    LEFT JOIN mochi.promotion_mech promomec ON promo.prm_mec_id = promomec.prm_mec_id\n"
-							+ "    LEFT JOIN mochi.promotion_type promotyp ON promo.prm_typ_id = promotyp.prm_typ_id\n"
-							+ "    LEFT JOIN mochi.promotion_disc disc ON promo.prm_id = disc.prm_id\n"
+							+ "  WHERE \n"
+							+ "  (ans.upc_cd in (:productCodes)\n"
+							+ "   AND pmc.prm_trg_cd in (:couponCodes)\n"
+							+ "   AND pmc.prm_typ_cd = :productPromotion\n"
+							+ "   AND prm_trg_rq)\n"
+							+ "   OR \n"
+							+ "  (ans.upc_cd in (:productCodes)\n"
+							+ "   AND pmc.prm_typ_cd = :productPromotion\n"
+							+ "   AND NOT prm_trg_rq)  \n"
+							+ "UNION \n"
+							+ "\n"
+							+ "--bag promotions\n"
+							+ "--arbitrary discounts only at this stage\n"
+							+ "SELECT \n"
+							+ "  promo.prm_cd, \n"
+							+ "  promo.prm_st_dt, \n"
+							+ "  promo.prm_en_dt, \n"
+							+ "  promomec.prm_mec_cd,\n"
+							+ "  promotyp.prm_typ_cd,\n"
+							+ "  pmc.bngn_buy_qty,\n"
+							+ "  pmc.bngn_disc_pctg,\n"
+							+ "  pmc.disc_pctg,\n"
+							+ "  pmc.bag_val_tld,\n"
+							+ "  pmc.bag_disc_pctg,\n"
+							+ "  pmc.bag_disc_curr,\n"
+							+ "  pmc.bag_disc_dir,\n"
+							+ "  pmc.prm_act,\n"
+							+ "  null as upc_cd\n"
+							+ "FROM mochi.promotion promo \n"
+							+ "  LEFT JOIN mochi.promotion_mech promomec ON promo.prm_mec_id = promomec.prm_mec_id\n"
+							+ "  LEFT JOIN mochi.promotion_type promotyp ON promo.prm_typ_id = promotyp.prm_typ_id\n"
+							+ "  LEFT JOIN promo_master as pmc ON promo.prm_id = pmc.prm_id\n"
+							+ "WHERE (\n"
+							+ "  promo.prm_trg_cd in (:couponCodes)\n"
+							+ "  AND promotyp.prm_typ_cd = :bagPromotion\n"
+							+ "  AND promo.prm_trg_rq)\n"
+							+ "OR (promotyp.prm_typ_cd = :bagPromotion\n"
+							+ "  AND NOT promo.prm_trg_rq)\n"
+							+ "\n"
+							+ "UNION \n"
+							+ "--shipping promotions\n"
+							+ "--theshold based promotion \n"
+							+ "SELECT \n"
+							+ "  promo.prm_cd, \n"
+							+ "  promo.prm_st_dt, \n"
+							+ "  promo.prm_en_dt, \n"
+							+ "  promomec.prm_mec_cd,\n"
+							+ "  promotyp.prm_typ_cd,\n"
+							+ "  pmc.bngn_buy_qty,\n"
+							+ "  pmc.bngn_disc_pctg,\n"
+							+ "  pmc.disc_pctg,\n"
+							+ "  pmc.bag_val_tld,\n"
+							+ "  pmc.bag_disc_pctg,\n"
+							+ "  pmc.bag_disc_curr,\n"
+							+ "  pmc.bag_disc_dir,\n"
+							+ "  pmc.prm_act,\n"
+							+ "  null as upc_cd\n"
+							+ "FROM mochi.promotion promo \n"
+							+ "  LEFT JOIN mochi.promotion_mech promomec ON promo.prm_mec_id = promomec.prm_mec_id\n"
+							+ "  LEFT JOIN mochi.promotion_type promotyp ON promo.prm_typ_id = promotyp.prm_typ_id\n"
+							+ "  LEFT JOIN promo_master as pmc ON promo.prm_id = pmc.prm_id\n"
 							+ "  \n"
-							+ "   WHERE promo.prm_trg_cd = :triggerCode\n"
-							+ "  AND promotyp.prm_typ_cd = :typeCode")
-				 .setParameter("triggerCode", triggerCode)
-				 .setParameter("typeCode", Constants.promotionTypeBag);
+							+ "WHERE (\n"
+							+ "  promo.prm_trg_cd in (:couponCodes)\n"
+							+ "  AND promotyp.prm_typ_cd = :shippingPromotion\n"
+							+ "  AND promo.prm_trg_rq)\n"
+							+ "OR (promotyp.prm_typ_cd = :shippingPromotion\n"
+							+ "  AND NOT promo.prm_trg_rq)")
+				 .setParameter("productCodes", items)
+				 .setParameter("couponCodes", coupons)
+				 .setParameter("productPromotion", Constants.promotionTypeProduct)
+				 .setParameter("shippingPromotion", Constants.promotionTypeShipping)
+				 .setParameter("bagPromotion", Constants.promotionTypeBag);
 		
 		query.unwrap(org.hibernate.query.Query.class)
 		.setResultTransformer(new PromotionDTOResultTransformer());
 		
-		try {
-			return Optional.ofNullable((PromotionDomainDTO) query.getSingleResult());
-		} catch(NoResultException nre) {
-			return Optional.empty();
-		}
-		
+		return query.getResultList();
 	}
 	
 }

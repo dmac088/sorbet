@@ -1,7 +1,6 @@
 package io.nzbee.entity.promotion;
 
-import java.util.Optional;
-
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +16,11 @@ public class PromotionDTOServiceImpl implements IPromotionDTOService {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".validateCouponCode with parameters {}, {}, {}", locale, currency, code);
 		
 	}
-	
 	@Override
-	public Optional<PromotionDomainDTO> find(String upc, String triggerCode) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".findAll parameters : {}, {}", upc, triggerCode);
-		return promotionDao.findProductPromotion(upc, triggerCode);
+	public List<PromotionDomainDTO> findAll(List<String> coupons, List<String> items) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".findAll()");
+		return promotionDao.findAll(coupons, items);
 	}
 	
-	@Override
-	public Optional<PromotionDomainDTO> find(String triggerCode) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".findBagPromotion parameters : {}", triggerCode);
-		return promotionDao.findBagPromotion(triggerCode);
-	}
 	
 }

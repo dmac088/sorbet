@@ -33,7 +33,7 @@ public class PctgDiscount extends Promotion implements IBagPromotion<IPctgDiscou
 
 	@Override
 	public List<DiscountItem> execute(IPctgDiscountPromotionPort object) {
-		System.out.println("executing promotion: " + this.getClass().getSimpleName().toString() + " with total: " + object.getTotal());
+		System.out.println("executing promotion: " + this.getClass().getSimpleName().toString() + " with total: " + object.getTotalAmount());
 		return null;
 	}
 

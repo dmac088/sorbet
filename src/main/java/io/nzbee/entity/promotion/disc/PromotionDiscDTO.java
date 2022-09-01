@@ -12,7 +12,7 @@ public class PromotionDiscDTO extends PromotionDomainDTO {
 	
 	public PromotionDiscDTO(Object[] tuple, Map<String, Integer> aliasToIndexMap) {
 		super(tuple, aliasToIndexMap);
-		this.discountPercentage =  new BigDecimal(((Number) tuple[aliasToIndexMap.get(DISCOUNT_PERCENTAGE_ALIAS)]).doubleValue());
+		this.discountPercentage = new BigDecimal(((Number) tuple[aliasToIndexMap.get(DISCOUNT_PERCENTAGE_ALIAS)]).doubleValue());
 	}
 	
 	public BigDecimal getDiscountPercentage() {

@@ -4736,8 +4736,10 @@ ALTER TABLE mochi.promotion_type OWNER TO mochidb_owner;
 
 CREATE TABLE mochi.promotion_valdisc (
     prm_id bigint NOT NULL,
-    bag_val_tld numeric,
-    disc_pctg numeric
+    bag_val_tld numeric NOT NULL,
+    bag_disc_pctg numeric NOT NULL,
+    bag_disc_curr character(3) NOT NULL,
+    bag_disc_dir character varying(3) NOT NULL
 );
 
 
@@ -6386,6 +6388,13 @@ GRANT ALL ON SEQUENCE mochi.brand_promotion_bnd_id_seq TO mochidb_owner;
 
 GRANT ALL ON SEQUENCE mochi.brand_promotion_prm_id_seq TO mochi_app;
 GRANT ALL ON SEQUENCE mochi.brand_promotion_prm_id_seq TO mochidb_owner;
+
+
+--
+-- Name: TABLE brand_promotion; Type: ACL; Schema: mochi; Owner: mochidb_owner
+--
+
+GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE mochi.brand_promotion TO mochi_app;
 
 
 --

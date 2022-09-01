@@ -1,12 +1,10 @@
 package io.nzbee.entity.promotion;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface IPromotionDao {
 	
-	Optional<PromotionDomainDTO> findProductPromotion(String itemUPC, String triggerCode);
-
-	Optional<PromotionDomainDTO> findBagPromotion(String triggerCode);
+	List<PromotionDomainDTO> findAll(List<String> coupons, List<String> items);
 	
 }
 

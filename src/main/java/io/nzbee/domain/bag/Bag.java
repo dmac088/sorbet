@@ -9,8 +9,9 @@ import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
 import io.nzbee.domain.customer.Customer;
 import io.nzbee.domain.promotion.ports.IDiscountThresholdPromotionPort;
+import io.nzbee.domain.promotion.ports.IPctgDiscountPromotionPort;
 
-public class Bag implements IDiscountThresholdPromotionPort {
+public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromotionPort {
 	
 	private ShippingBagItem shippingItem;
 	
@@ -147,4 +148,5 @@ public class Bag implements IDiscountThresholdPromotionPort {
 	public BigDecimal getTotalAmount() {
 		return this.getSubTotalAmount();
 	}
+
 }

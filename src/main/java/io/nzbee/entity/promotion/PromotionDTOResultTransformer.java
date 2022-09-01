@@ -8,6 +8,7 @@ import org.hibernate.transform.ResultTransformer;
 import io.nzbee.Constants;
 import io.nzbee.entity.promotion.bngn.PromotionBngnDTO;
 import io.nzbee.entity.promotion.disc.PromotionDiscDTO;
+import io.nzbee.entity.promotion.valdisc.PromotionValDiscDTO;
 
 public class PromotionDTOResultTransformer implements ResultTransformer {
 
@@ -31,7 +32,9 @@ public class PromotionDTOResultTransformer implements ResultTransformer {
             promotionId,
             id -> (discriminator.equals(Constants.promotionDiscriminatorBNGN)) 
             	  ?	new PromotionBngnDTO(tuple, aliasToIndexMap)
-            	  : new PromotionDiscDTO(tuple, aliasToIndexMap)
+            	  : (discriminator.equals(Constants.promotionDiscriminatorDISC))  
+            	  		? new PromotionDiscDTO(tuple, aliasToIndexMap)
+            	  		: new PromotionValDiscDTO(tuple, aliasToIndexMap)
         );
         
         return promotionDTO;

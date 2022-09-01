@@ -40,12 +40,12 @@ public class RegularBagItem implements IDiscountThresholdPromotionPort, IBnGnFre
 
 	@Override
 	public BigDecimal getTotalAmount() {
-		return this.getTotalAmount();
+		return this.getBagItem().getBagItemTotal();
 	}
 
 
 	@Override
 	public Long getTotalQuantity() {
-		return this.getTotalQuantity();
+		return this.getBagItem().getQuantity();
 	}
 }
