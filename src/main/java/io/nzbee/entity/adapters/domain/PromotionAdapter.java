@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 import io.nzbee.Constants;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.ports.IPromotionPortService;
-import io.nzbee.domain.promotion.IBagLevelPromotion;
-import io.nzbee.domain.promotion.IRegularBagItemLevelPromotion;
-import io.nzbee.domain.promotion.IShippingBagItemLevelPromotion;
+import io.nzbee.domain.promotion.IBagPromotion;
+import io.nzbee.domain.promotion.IRegularBagItemPromotion;
+import io.nzbee.domain.promotion.IShippingBagItemPromotion;
 import io.nzbee.domain.promotion.Promotion;
 import io.nzbee.entity.promotion.IPromotionMapper;
 import io.nzbee.entity.promotion.PromotionDomainDTO;
@@ -53,40 +53,44 @@ public class PromotionAdapter implements IPromotionPortService {
 			if (opt.isPresent()) {
 				LOGGER.debug("promotion type found: " + opt.get().getPromotionTypeDesc());
 
-				// bag logic
+				//bag level logic
+				//bag level discounts require a coupon at this stage
+				//these are for arbitrary discounts like 20% of for a 2 week period
 				if (opt.get().getPromotionTypeCode().equals(Constants.promotionTypeBag)) {
-					Promotion p = promotionMapper.DTOToDo(promotionService.findBagPromotion(c).get());
-					IBagLevelPromotion blp = (IBagLevelPromotion) p;
+					Promotion p = promotionMapper.DTOToDo(promotionService.find(c).get());
+					IBagPromotion blp = (IBagPromotion) p;
 					blp.execute(bag);
 					return;
 				}
 
 				//item level logic
+				//promotions include category and brand level promotions
+				//item level promotions require a coupon at this stage 
 				if (opt.get().getPromotionTypeCode().equals(Constants.promotionTypeProduct)) {
 					bag.getBagItems().stream().forEach(i -> {
-						Optional<PromotionDomainDTO> opdto = promotionService.findProductPromotion(i.getBagItem().getProductUPC(), c);
+						Optional<PromotionDomainDTO> opdto = promotionService.find(i.getBagItem().getProductUPC(), c);
 						if (opdto.isPresent()) {
 							Promotion p = promotionMapper.DTOToDo(opdto.get());
-							IRegularBagItemLevelPromotion rbip = (IRegularBagItemLevelPromotion) p;
+							IBagPromotion rbip = (IBagPromotion) p;
 							rbip.execute(i);
 							return;
 						}
 					});
 				}
-				
-				//shipping logic
-				if (opt.get().getPromotionTypeCode().equals(Constants.promotionTypeShipping)) {
-					
-					Optional<PromotionDomainDTO> opdto = promotionService.findProductPromotion(bag.getShippingItem().getBagItem().getProductUPC(), c);
-					if (opdto.isPresent()) {
-						Promotion p = promotionMapper.DTOToDo(opdto.get());
-						IShippingBagItemLevelPromotion sbip = (IShippingBagItemLevelPromotion) p;
-						sbip.execute(bag.getShippingItem());
-					}
-					
-				}
 			}
 		});
+		
+		//shipping logic
+		//we don't need a coupon to get the discounted shipping, it's automatic
+		
+		Optional<PromotionDomainDTO> opdto = promotionService.findAllByType(Constants.promotionTypeShipping);
+		if (opdto.isPresent()) {
+			Promotion p = promotionMapper.DTOToDo(opdto.get());
+			IBagPromotion sbip = (IBagPromotion) p;
+			sbip.execute(bag.getShippingItem());
+		}
+			
+		
 		
 		return bag;
 	}

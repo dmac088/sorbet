@@ -3,14 +3,12 @@ package io.nzbee.domain.promotion.disc;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import io.nzbee.domain.bag.Bag;
-import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.promotion.DiscountItem;
-import io.nzbee.domain.promotion.IBagLevelPromotion;
-import io.nzbee.domain.promotion.IRegularBagItemLevelPromotion;
+import io.nzbee.domain.promotion.IBagPromotion;
 import io.nzbee.domain.promotion.Promotion;
+import io.nzbee.domain.promotion.ports.IPromotionPort;
 
-public class PctgDiscount extends Promotion implements IRegularBagItemLevelPromotion, IBagLevelPromotion {
+public class PctgDiscount extends Promotion implements IBagPromotion {
 	
 	private BigDecimal discountPctg;
 	
@@ -34,14 +32,14 @@ public class PctgDiscount extends Promotion implements IRegularBagItemLevelPromo
 	}
 
 	@Override
-	public List<DiscountItem> execute(RegularBagItem item) {
-		System.out.println("executing promotion: " + this.getClass().getSimpleName().toString() + " for product: " + item.getBagItem().getProductUPC());
+	public List<DiscountItem> execute(IPromotionPort object) {
+		System.out.println("executing promotion: " + this.getClass().getSimpleName().toString() + " with total: " + object.getTotal());
 		return null;
 	}
 
 	@Override
-	public List<DiscountItem> execute(Bag bag) {
-		System.out.println("executing promotion: " + this.getClass().getSimpleName().toString() + " for bag: " + bag.getCustomer().getUserName());
+	public Boolean qualifies() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

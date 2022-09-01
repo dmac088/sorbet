@@ -2,8 +2,9 @@ package io.nzbee.domain.bag.item.regular;
 
 import java.math.BigDecimal;
 import io.nzbee.domain.bag.item.BagItem;
+import io.nzbee.domain.promotion.ports.IPromotionPort;
 
-public class RegularBagItem {
+public class RegularBagItem implements IPromotionPort {
 	
 	private final BagItem bagItem;
 	
@@ -33,5 +34,11 @@ public class RegularBagItem {
 
 	public BigDecimal getWeight() {
 		return weight;
+	}
+
+
+	@Override
+	public BigDecimal getTotal() {
+		return this.getTotal();
 	}
 }

@@ -1,8 +1,11 @@
 package io.nzbee.domain.bag.item.shipping;
 
-import io.nzbee.domain.bag.item.BagItem;
+import java.math.BigDecimal;
 
-public class ShippingBagItem {
+import io.nzbee.domain.bag.item.BagItem;
+import io.nzbee.domain.promotion.ports.IPromotionPort;
+
+public class ShippingBagItem implements IPromotionPort {
 
 	private final BagItem bagItem;
 
@@ -13,6 +16,11 @@ public class ShippingBagItem {
 
 	public BagItem getBagItem() {
 		return bagItem;
+	}
+
+	@Override
+	public BigDecimal getTotal() {
+		return this.getBagItem().getBagItemTotal();
 	}
 	
 }

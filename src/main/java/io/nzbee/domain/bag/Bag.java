@@ -8,8 +8,9 @@ import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
 import io.nzbee.domain.customer.Customer;
+import io.nzbee.domain.promotion.ports.IPromotionPort;
 
-public class Bag {
+public class Bag implements IPromotionPort {
 	
 	private ShippingBagItem shippingItem;
 	
@@ -140,5 +141,10 @@ public class Bag {
 	
 	public void removeShippingItem() {
 		this.shippingItem = null;
+	}
+
+	@Override
+	public BigDecimal getTotal() {
+		return this.getSubTotalAmount();
 	}
 }

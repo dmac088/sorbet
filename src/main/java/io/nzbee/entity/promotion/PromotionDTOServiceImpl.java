@@ -19,13 +19,13 @@ public class PromotionDTOServiceImpl implements IPromotionDTOService {
 	}
 	
 	@Override
-	public Optional<PromotionDomainDTO> findProductPromotion(String upc, String triggerCode) {
+	public Optional<PromotionDomainDTO> find(String upc, String triggerCode) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findAll parameters : {}, {}", upc, triggerCode);
 		return promotionDao.findProductPromotion(upc, triggerCode);
 	}
 	
 	@Override
-	public Optional<PromotionDomainDTO> findBagPromotion(String triggerCode) {
+	public Optional<PromotionDomainDTO> find(String triggerCode) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findBagPromotion parameters : {}", triggerCode);
 		return promotionDao.findBagPromotion(triggerCode);
 	}
