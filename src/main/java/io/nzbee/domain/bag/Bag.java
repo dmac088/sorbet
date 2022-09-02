@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import io.nzbee.domain.bag.item.BagItem;
-import io.nzbee.domain.bag.item.IBagItem;
+import io.nzbee.domain.bag.item.IDiscountableBagItem;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
 import io.nzbee.domain.customer.Customer;
@@ -148,8 +148,8 @@ public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromot
 	}
 
 	@Override
-	public List<IBagItem> getItems() {
-		return this.getBagItems().stream().map(i -> (IBagItem) i).collect(Collectors.toList());
+	public List<IDiscountableBagItem> getItems() {
+		return this.getBagItems().stream().map(i -> (IDiscountableBagItem) i).collect(Collectors.toList());
 	}
 
 }

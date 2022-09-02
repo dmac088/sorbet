@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import io.nzbee.domain.bag.item.BagItem;
-import io.nzbee.domain.bag.item.IBagItem;
+import io.nzbee.domain.bag.item.IDiscountableBagItem;
 import io.nzbee.domain.promotion.ports.IBnGnFreePromotionPort;
 import io.nzbee.domain.promotion.ports.IDiscountThresholdPromotionPort;
 
-public class RegularBagItem implements IDiscountThresholdPromotionPort, IBnGnFreePromotionPort, IBagItem {
+public class RegularBagItem implements IDiscountThresholdPromotionPort, IBnGnFreePromotionPort, IDiscountableBagItem {
 	
 	private final BagItem bagItem;
 	
@@ -29,7 +29,7 @@ public class RegularBagItem implements IDiscountThresholdPromotionPort, IBnGnFre
 	}
 
 	public BagItem getBagItem() {
-		return bagItem;
+		return bagItem; 
 	}
 
 	public boolean isInStock() {
@@ -54,8 +54,8 @@ public class RegularBagItem implements IDiscountThresholdPromotionPort, IBnGnFre
 
 
 	@Override
-	public List<IBagItem> getItems() {
-		List<IBagItem> rbi = new ArrayList<IBagItem>();
+	public List<IDiscountableBagItem> getItems() {
+		List<IDiscountableBagItem> rbi = new ArrayList<IDiscountableBagItem>();
 		rbi.add(this);
 		return rbi;
 	}

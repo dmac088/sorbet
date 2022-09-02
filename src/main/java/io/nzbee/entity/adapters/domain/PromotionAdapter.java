@@ -1,11 +1,14 @@
 package io.nzbee.entity.adapters.domain;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.ports.IPromotionPortService;
+import io.nzbee.domain.promotion.DiscountItem;
 import io.nzbee.domain.promotion.IBagPromotion;
 import io.nzbee.domain.promotion.Promotion;
 import io.nzbee.entity.promotion.IPromotionMapper;
@@ -47,7 +50,13 @@ public class PromotionAdapter implements IPromotionPortService {
 			//or this should be done within the execute method of the promotion object itself
 			
 			IBagPromotion p = (IBagPromotion)promotionMapper.DTOToDo(dto);
-			p.execute(bag);
+			List<DiscountItem> discounts = p.execute(bag);
+			
+			discounts.forEach(d -> {
+				System.out.println("promotion code = " + d.getPromotionCode() +"\n"
+								 + "promotion item = " + d.getUpcCode() +"\n"
+								 + "promotion discount amount = " + d.getDiscountAmount());
+			});
 		});
 		
 		

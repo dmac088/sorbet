@@ -2,7 +2,10 @@ package io.nzbee.domain.promotion.disc;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+
+import io.nzbee.domain.bag.item.IDiscountableBagItem;
 import io.nzbee.domain.promotion.DiscountItem;
 import io.nzbee.domain.promotion.IBagPromotion;
 import io.nzbee.domain.promotion.Promotion;
@@ -36,10 +39,16 @@ public class PctgDiscount extends Promotion implements IBagPromotion<IPctgDiscou
 	@Override
 	public List<DiscountItem> execute(IPctgDiscountPromotionPort object) {
 		System.out.println("executing promotion: " + this.getClass().getSimpleName().toString());
+		List<DiscountItem> ldi = new ArrayList<DiscountItem>(); 
 		object.getItems().stream().forEach(bi -> {
-			System.out.println(bi.getUPC());
+			ldi.add(applyDiscount(bi));
 		}); 
-		return null;
+		return ldi;
+	}
+
+	private DiscountItem applyDiscount(IDiscountableBagItem bi) {
+		BigDecimal amount = bi.getTotalAmount().multiply(discountPctg);
+		return new DiscountItem(this.promotionCode, bi.getUPC(), amount);
 	}
 
 	@Override
