@@ -9,16 +9,12 @@ import io.nzbee.domain.ports.IPromotionPortService;
 import io.nzbee.domain.promotion.IBagPromotion;
 import io.nzbee.domain.promotion.Promotion;
 import io.nzbee.entity.promotion.IPromotionMapper;
-import io.nzbee.entity.promotion.type.IPromotionTypeService;
 import io.nzbee.entity.promotion.IPromotionDTOService;
 
 @Component
 public class PromotionAdapter implements IPromotionPortService {
 
 	private Logger LOGGER = LoggerFactory.getLogger(getClass());
-
-	@Autowired
-	private IPromotionTypeService promotionTypeService;
 
 	@Autowired
 	private IPromotionDTOService promotionService;
@@ -30,7 +26,6 @@ public class PromotionAdapter implements IPromotionPortService {
 	public Promotion findByCode(String coupon) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode with parameters {}", coupon);
 
-		promotionTypeService.findByTriggerCode(coupon);
 		return null;
 	}
 
@@ -54,9 +49,11 @@ public class PromotionAdapter implements IPromotionPortService {
 			IBagPromotion p = (IBagPromotion) promotionMapper.DTOToDo(dto);
 			p.execute(bag);
 			
-			bag.getShippingItem().getBagItem().getDiscounts().forEach(d -> {
-				System.out.println("promotion item = " + d.getBagItem().getUPC()  +"\n"
+			bag.getBagItems().forEach(i -> {
+				i.getBagItem().getDiscounts().forEach(d -> {
+					System.out.println("promotion item = " + d.getBagItem().getUPC()  +"\n"
 								 + "promotion discount amount = " + d.getDiscountAmount());
+				});
 			});
 		});
 
@@ -69,6 +66,7 @@ public class PromotionAdapter implements IPromotionPortService {
 			IBagPromotion p = (IBagPromotion) promotionMapper.DTOToDo(dto);
 			if(bag.hasShippingItem()) {
 				System.out.println(bag.getShippingItem().getUPC());
+				System.out.println(dto.getType());
 				p.execute(bag.getShippingItem());
 				
 				bag.getShippingItem().getBagItem().getDiscounts().forEach(d -> {

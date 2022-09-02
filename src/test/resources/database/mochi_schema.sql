@@ -23,6 +23,9 @@ ALTER TABLE ONLY mochi.stock_on_hand DROP CONSTRAINT stock_on_hand_prd_id_fkey;
 ALTER TABLE ONLY mochi.role DROP CONSTRAINT role_role_typ_id_fkey;
 ALTER TABLE ONLY mochi.role DROP CONSTRAINT role_party_id_fkey;
 ALTER TABLE ONLY mochi.promotion_valdisc DROP CONSTRAINT promotion_valdisc_prm_id_fkey;
+ALTER TABLE ONLY mochi.promotion DROP CONSTRAINT promotion_prm_upc_cd_product_upc_cd;
+ALTER TABLE ONLY mochi.promotion DROP CONSTRAINT promotion_prm_cat_cd_category_cat_cd;
+ALTER TABLE ONLY mochi.promotion DROP CONSTRAINT promotion_prm_bnd_cd_brand_bnd_cd;
 ALTER TABLE ONLY mochi.promotion_disc DROP CONSTRAINT promotion_disc_prm_id_fkey;
 ALTER TABLE ONLY mochi.promotion_bngn DROP CONSTRAINT promotion_bngn_prm_id_fkey;
 ALTER TABLE ONLY mochi.promotion_attr_lcl DROP CONSTRAINT promotion_attr_lcl_prm_id_fkey;
@@ -71,6 +74,7 @@ ALTER TABLE ONLY mochi.address DROP CONSTRAINT address_pty_id_party_pty_id_fkey;
 ALTER TABLE ONLY mochi.address DROP CONSTRAINT address_addr_typ_id_address_type_addr_typ_id_fkey;
 ALTER TABLE ONLY mochi.accessories_attr_lcl DROP CONSTRAINT accessories_attr_lcl_lcl_cd_fkey;
 DROP INDEX mochi.role_role_typ_id_role_start_dttm_party_id_key;
+DROP INDEX mochi.fki_promotion_prm_cat_cd_category_cat_cd;
 DROP INDEX mochi.fki_promotion_attr_lcl_prm_id_fkey;
 DROP INDEX mochi.fki_product_shipping_attr_lcl_prd_id_fkey;
 DROP INDEX mochi.fki_product_attr_lcl_prd_id_fkey;
@@ -4575,7 +4579,10 @@ CREATE TABLE mochi.promotion (
     prm_act boolean NOT NULL,
     prm_trg_cd character varying(20),
     prm_typ_id bigint NOT NULL,
-    prm_trg_rq boolean
+    prm_trg_rq boolean,
+    prm_cat_cd character(5),
+    prm_bnd_cd character(5),
+    prm_upc_cd character varying(30)
 );
 
 
@@ -5758,6 +5765,13 @@ CREATE INDEX fki_promotion_attr_lcl_prm_id_fkey ON mochi.promotion_attr_lcl USIN
 
 
 --
+-- Name: fki_promotion_prm_cat_cd_category_cat_cd; Type: INDEX; Schema: mochi; Owner: mochidb_owner
+--
+
+CREATE INDEX fki_promotion_prm_cat_cd_category_cat_cd ON mochi.promotion USING btree (prm_cat_cd);
+
+
+--
 -- Name: role_role_typ_id_role_start_dttm_party_id_key; Type: INDEX; Schema: mochi; Owner: mochidb_owner
 --
 
@@ -6138,6 +6152,30 @@ ALTER TABLE ONLY mochi.promotion_bngn
 
 ALTER TABLE ONLY mochi.promotion_disc
     ADD CONSTRAINT promotion_disc_prm_id_fkey FOREIGN KEY (prm_id) REFERENCES mochi.promotion(prm_id);
+
+
+--
+-- Name: promotion promotion_prm_bnd_cd_brand_bnd_cd; Type: FK CONSTRAINT; Schema: mochi; Owner: mochidb_owner
+--
+
+ALTER TABLE ONLY mochi.promotion
+    ADD CONSTRAINT promotion_prm_bnd_cd_brand_bnd_cd FOREIGN KEY (prm_bnd_cd) REFERENCES mochi.brand(bnd_cd) NOT VALID;
+
+
+--
+-- Name: promotion promotion_prm_cat_cd_category_cat_cd; Type: FK CONSTRAINT; Schema: mochi; Owner: mochidb_owner
+--
+
+ALTER TABLE ONLY mochi.promotion
+    ADD CONSTRAINT promotion_prm_cat_cd_category_cat_cd FOREIGN KEY (prm_cat_cd) REFERENCES mochi.category(cat_cd) NOT VALID;
+
+
+--
+-- Name: promotion promotion_prm_upc_cd_product_upc_cd; Type: FK CONSTRAINT; Schema: mochi; Owner: mochidb_owner
+--
+
+ALTER TABLE ONLY mochi.promotion
+    ADD CONSTRAINT promotion_prm_upc_cd_product_upc_cd FOREIGN KEY (prm_upc_cd) REFERENCES mochi.product(upc_cd) NOT VALID;
 
 
 --

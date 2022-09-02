@@ -3,8 +3,15 @@ package io.nzbee.entity.promotion;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import io.nzbee.Constants;
+import io.nzbee.entity.promotion.type.IPromotionType;
+import io.nzbee.entity.promotion.type.PromotionTypeProductDTO;
+import io.nzbee.entity.promotion.valdisc.IPromotionDTO;
+import io.nzbee.entity.promotion.type.PromotionTypeBrandDTO;
+import io.nzbee.entity.promotion.type.PromotionTypeCategoryDTO;
+import io.nzbee.entity.promotion.type.PromotionTypeDTO;
 
-public class PromotionDomainDTO {
+public class PromotionDomainDTO implements IPromotionDTO {
 
 	public static final String CODE_ALIAS = "prm_cd";
 	
@@ -14,13 +21,13 @@ public class PromotionDomainDTO {
  
 	public static final String MECH_CODE_ALIAS = "prm_mec_cd";
 	
-	public static final String TYPE_CODE_ALIAS = "prm_typ_cd";
-	
 	public static final String ACTIVE_ALIAS = "prm_act";
 	
 	public static final String COUPON_REQUIRED_ALIAS = "prm_trg_rq";
 	
 	public static final String COUPON_CODE_ALIAS = "prm_trg_cd";
+	
+	public static final String TYPE_CODE_ALIAS = "prm_typ_cd";
 	
 	
 	private final String promotionCode;
@@ -31,13 +38,13 @@ public class PromotionDomainDTO {
 	
 	private final String promotionMechanicCode;
 	
-	private final String promotionTypeCode;
-	
 	private final Boolean promotionIsActive;
 	
 	private final Boolean couponRequired;
 	
 	private final String couponCode;
+	
+	private final IPromotionType promotionType;
 	
 	
 	public PromotionDomainDTO(Object[] tuple, Map<String, Integer> aliasToIndexMap) {
@@ -45,10 +52,33 @@ public class PromotionDomainDTO {
 		this.promotionStartDate 		= LocalDateTime.parse(tuple[aliasToIndexMap.get(START_DATE_ALIAS)].toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"));
 		this.promotionEndDate			= LocalDateTime.parse(tuple[aliasToIndexMap.get(END_DATE_ALIAS)].toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"));
 		this.promotionMechanicCode 		= tuple[aliasToIndexMap.get(MECH_CODE_ALIAS)].toString();
-		this.promotionTypeCode			= tuple[aliasToIndexMap.get(TYPE_CODE_ALIAS)].toString();
 		this.couponRequired 			= ((Boolean) tuple[aliasToIndexMap.get(ACTIVE_ALIAS)]);
 		this.promotionIsActive 			= ((Boolean) tuple[aliasToIndexMap.get(COUPON_REQUIRED_ALIAS)]);
 		this.couponCode					= tuple[aliasToIndexMap.get(COUPON_CODE_ALIAS)].toString();
+		this.promotionType				= getSubType(tuple[aliasToIndexMap.get(TYPE_CODE_ALIAS)].toString(), tuple, aliasToIndexMap);		   
+	}
+	
+	private IPromotionType getSubType(String key, Object[] tuple, Map<String, Integer> aliasToIndexMap) {
+		 switch(key) {
+			case Constants.promotionTypeProduct:
+				return new PromotionTypeProductDTO(tuple, aliasToIndexMap);
+			
+			case Constants.promotionTypeBrand:
+				return new PromotionTypeBrandDTO(tuple, aliasToIndexMap);
+				
+			case Constants.promotionTypeCategory:
+				return new PromotionTypeCategoryDTO(tuple, aliasToIndexMap);
+				
+			case Constants.promotionTypeBag:
+				return new PromotionTypeDTO(tuple, aliasToIndexMap);
+				
+			case Constants.promotionTypeShipping:
+				return new PromotionTypeDTO(tuple, aliasToIndexMap);
+				
+			default:
+				return new PromotionTypeDTO(tuple, aliasToIndexMap);
+		}
+		
 	}
 
 	public String getPromotionCode() {
@@ -68,11 +98,6 @@ public class PromotionDomainDTO {
 		return promotionMechanicCode;
 	}
 
-	public String getPromotionTypeCode() {
-		return promotionTypeCode;
-	}
-
-
 	public Boolean getPromotionIsActive() {
 		return promotionIsActive;
 	}
@@ -83,6 +108,15 @@ public class PromotionDomainDTO {
 
 	public String getCouponCode() {
 		return couponCode;
+	}
+
+	public IPromotionType getPromotionType() {
+		return promotionType;
+	}
+
+	@Override
+	public String getType() {
+		return this.getPromotionType().typeCode();
 	}
 	
 }

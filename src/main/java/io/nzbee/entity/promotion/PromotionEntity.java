@@ -24,12 +24,10 @@ import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.Analyzer;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Store;
-
 import io.nzbee.Constants;
 import io.nzbee.entity.promotion.attribute.PromotionAttributeEntity;
 import io.nzbee.entity.promotion.bngn.PromotionBngnEntity;
 import io.nzbee.entity.promotion.disc.PromotionDiscEntity;
-import io.nzbee.entity.promotion.level.PromotionLevelEntity;
 import io.nzbee.entity.promotion.mechanic.PromotionMechanicEntity;
 import io.nzbee.entity.promotion.type.PromotionTypeEntity;
 
@@ -74,7 +72,7 @@ public class PromotionEntity implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="prm_lvl_id")
-	private PromotionLevelEntity promotionLevel;
+	private PromotionTypeEntity promotionLevel;
 	
 	@OneToMany(	mappedBy="promotion",  
 				cascade = CascadeType.ALL,
@@ -186,11 +184,11 @@ public class PromotionEntity implements Serializable {
 		this.locale = locale;
 	}
 	
-	public PromotionLevelEntity getPromotionLevel() {
+	public PromotionTypeEntity getPromotionLevel() {
 		return promotionLevel;
 	}
 
-	public void setPromotionLevel(PromotionLevelEntity promotionLevel) {
+	public void setPromotionLevel(PromotionTypeEntity promotionLevel) {
 		this.promotionLevel = promotionLevel;
 	}
 	

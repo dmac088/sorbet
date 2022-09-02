@@ -1,5 +1,7 @@
 package io.nzbee.entity.promotion;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import io.nzbee.domain.promotion.Promotion;
@@ -7,12 +9,13 @@ import io.nzbee.entity.promotion.bngn.IPromotionBngnMapper;
 import io.nzbee.entity.promotion.bngn.PromotionBngnDTO;
 import io.nzbee.entity.promotion.disc.IPromotionDiscMapper;
 import io.nzbee.entity.promotion.disc.PromotionDiscDTO;
+import io.nzbee.entity.promotion.valdisc.IPromotionDTO;
 import io.nzbee.entity.promotion.valdisc.IPromotionValDiscMapper;
 import io.nzbee.entity.promotion.valdisc.PromotionValDiscDTO;
 
 @Component(value = "promotionMapper")
 public class PromotionMapperImpl implements IPromotionMapper {
-
+	
 	@Autowired
 	private IPromotionBngnMapper promotionBngnMapper;
 	
@@ -23,7 +26,9 @@ public class PromotionMapperImpl implements IPromotionMapper {
 	private IPromotionValDiscMapper promotionValDiscMapper;
 	
 	@Override
-	public Promotion DTOToDo(PromotionDomainDTO dto) {
+	public Promotion DTOToDo(IPromotionDTO dto) {
+		System.out.println(dto.getClass().getSimpleName());
+		System.out.println(dto.getType());
 		if(dto instanceof PromotionBngnDTO) {
 			return this.DTOToDo((PromotionBngnDTO) dto);
 		}
@@ -35,7 +40,7 @@ public class PromotionMapperImpl implements IPromotionMapper {
 		if(dto instanceof PromotionValDiscDTO) {
 			return this.DTOToDo((PromotionValDiscDTO) dto);
 		}
-		return null;
+		return this.DTOToDo((PromotionDomainDTO) dto);
 	}
 
 	@Override
@@ -52,13 +57,17 @@ public class PromotionMapperImpl implements IPromotionMapper {
 	public Promotion DTOToDo(PromotionValDiscDTO dto) {
 		return promotionValDiscMapper.DTOToDo(dto);
 	}
-		
+	
 	@Override
-	public PromotionEntity doToEntity(Promotion d) {
-		// TODO Auto-generated method stub
-		return null;
+	public Promotion DTOToDo(PromotionDomainDTO dto) {
+		return new Promotion(dto.getPromotionCode(),
+							 dto.getPromotionType().typeCode(), 
+							 dto.getPromotionStartDate(), 
+							 dto.getPromotionEndDate(),
+							 dto.getPromotionIsActive(), 
+							 dto.getCouponRequired(), 
+							 dto.getCouponCode());
+
 	}
-
-
 
 }

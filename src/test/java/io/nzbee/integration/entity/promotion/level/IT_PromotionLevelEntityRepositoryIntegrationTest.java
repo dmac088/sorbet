@@ -16,13 +16,15 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import io.nzbee.Constants;
+import io.nzbee.entity.promotion.type.IPromotionLevelService;
+import io.nzbee.entity.promotion.type.PromotionTypeEntity;
+
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import io.nzbee.entity.promotion.level.IPromotionLevelService;
-import io.nzbee.entity.promotion.level.PromotionLevelEntity;
+
 import io.nzbee.integration.entity.beans.promotion.level.IPromotionLevelEntityBeanFactory;
 import io.nzbee.integration.entity.promotion.product.ConfigProductPromotionEntityTests;
 
@@ -43,7 +45,7 @@ public class IT_PromotionLevelEntityRepositoryIntegrationTest {
 	@Qualifier("mochiDataSourceOwner")
 	private DataSource database;
 
-	private static PromotionLevelEntity promotionLevel = null;
+	private static PromotionTypeEntity promotionLevel = null;
 
 	private static boolean setUpIsDone = false;
 
@@ -76,7 +78,7 @@ public class IT_PromotionLevelEntityRepositoryIntegrationTest {
 	public void whenFindById_thenReturnPromotionLevelEntity() {
 
 		// when
-		Optional<PromotionLevelEntity> found = promotionLevelService.findById(promotionLevel.getPromotionLevelId());
+		Optional<PromotionTypeEntity> found = promotionLevelService.findById(promotionLevel.getPromotionLevelId());
 
 		// then
 		assertFoundEntity(found);
@@ -87,13 +89,13 @@ public class IT_PromotionLevelEntityRepositoryIntegrationTest {
 	public void whenFindByCode_thenReturnPromotionLevelEntity() {
 
 		// when
-		Optional<PromotionLevelEntity> found = promotionLevelService.findByCode("TST01");
+		Optional<PromotionTypeEntity> found = promotionLevelService.findByCode("TST01");
 
 		// then
 		assertFoundEntity(found);
 	}
      
-	private void assertFoundEntity(Optional<PromotionLevelEntity> found) {
+	private void assertFoundEntity(Optional<PromotionTypeEntity> found) {
 
 		assertNotNull(found);
 

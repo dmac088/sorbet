@@ -43,8 +43,8 @@ import io.nzbee.entity.product.price.ProductPriceServiceImpl;
 import io.nzbee.entity.product.price.ProductPriceTypeService;
 import io.nzbee.entity.promotion.PromotionDaoPostgresImpl;
 import io.nzbee.entity.promotion.PromotionEntityServiceImpl;
-import io.nzbee.entity.promotion.level.PromotionLevelServiceImpl;
 import io.nzbee.entity.promotion.mechanic.PromotionMechanicServiceImpl;
+import io.nzbee.entity.promotion.type.PromotionTypeServiceImpl;
 import io.nzbee.entity.promotion.type.PromotionTypeServiceImpl;
 import io.nzbee.entity.role.supplier.SupplierServiceImpl;
 import io.nzbee.entity.stock.StockOnHandServiceImpl;
@@ -108,7 +108,7 @@ import io.nzbee.util.tag.TagMasterService;
 							     PromotionDaoPostgresImpl.class,
 							     PromotionTypeServiceImpl.class,
 							     PromotionMechanicServiceImpl.class,
-							     PromotionLevelServiceImpl.class,
+							     PromotionTypeServiceImpl.class,
 							     PromotionOrderMasterService.class,
 							     CategoryPromotionMasterService.class,
 							     ProductPromotionMasterService.class,

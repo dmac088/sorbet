@@ -38,11 +38,14 @@ public class Constants {
 	public static final String shippingBagItemType = "SHP01";
 	
 	public static final String promotionTypeProduct 	= "PRD";
+	public static final String promotionTypeBrand 		= "BND";
+	public static final String promotionTypeCategory 	= "CAT";
 	public static final String promotionTypeShipping 	= "SHP";
 	public static final String promotionTypeBag 		= "BAG";
 	
-	public static final String promotionDiscriminatorBNGN = "BNGNF";
-	public static final String promotionDiscriminatorDISC = "PCTGOFF";
+	public static final String promotionDiscriminatorBNGN 		= "BNGNF";
+	public static final String promotionDiscriminatorDISC 		= "PCTGOFF";
+	public static final String promotionDiscriminatorValDISC 	= "VALPCTOFF";
 	
 	public static final String genericResponseSuccess = "success";
 	public static final String genericResponseFailure = "failure";

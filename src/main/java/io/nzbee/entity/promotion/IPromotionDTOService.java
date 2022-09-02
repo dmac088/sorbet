@@ -2,12 +2,14 @@ package io.nzbee.entity.promotion;
 
 import java.util.List;
 
+import io.nzbee.entity.promotion.valdisc.IPromotionDTO;
+
 public interface IPromotionDTOService  {
 
-	List<PromotionDomainDTO> findItemPromotion(String itemUPC);
+	List<IPromotionDTO> findItemPromotion(String itemUPC);
 
-	List<PromotionDomainDTO> findBagPromotions();
+	List<IPromotionDTO> findBagPromotions();
 
-	List<PromotionDomainDTO> findShippingPromotions();
+	List<IPromotionDTO> findShippingPromotions();
 
 }

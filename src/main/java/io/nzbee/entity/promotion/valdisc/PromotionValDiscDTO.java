@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Map;
 import io.nzbee.entity.promotion.PromotionDomainDTO;
 
-public class PromotionValDiscDTO extends PromotionDomainDTO {
+public class PromotionValDiscDTO implements IPromotionDTO {
 	
 	public static final String DISCOUNT_PERCENTAGE_ALIAS = "bag_disc_pctg";
 	
@@ -15,6 +15,8 @@ public class PromotionValDiscDTO extends PromotionDomainDTO {
 	public static final String DIRECTION_ALIAS = "bag_disc_dir";
 	
 	
+	private final PromotionDomainDTO promotion;
+	
 	private final BigDecimal discountPercentage;
 	
 	private final BigDecimal valueThreshold;
@@ -24,7 +26,7 @@ public class PromotionValDiscDTO extends PromotionDomainDTO {
 	private final String direction;
 	
 	public PromotionValDiscDTO(Object[] tuple, Map<String, Integer> aliasToIndexMap) {
-		super(tuple, aliasToIndexMap);
+		this.promotion = new PromotionDomainDTO(tuple, aliasToIndexMap);
 		this.discountPercentage = new BigDecimal(((Number) tuple[aliasToIndexMap.get(DISCOUNT_PERCENTAGE_ALIAS)]).doubleValue());
 		this.valueThreshold = new BigDecimal(((Number) tuple[aliasToIndexMap.get(VALUE_THRESHOLD_ALIAS)]).doubleValue());
 		this.currency = tuple[aliasToIndexMap.get(CURRENCY_ALIAS)].toString();
@@ -46,6 +48,15 @@ public class PromotionValDiscDTO extends PromotionDomainDTO {
 
 	public String getDirection() {
 		return direction;
+	}
+	
+	public PromotionDomainDTO getPromotion() {
+		return promotion;
+	}
+	
+	@Override
+	public String getType() {
+		return this.getPromotion().getPromotionType().typeCode();
 	}
 
 }

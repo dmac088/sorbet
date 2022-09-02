@@ -16,11 +16,11 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import io.nzbee.entity.promotion.PromotionEntity;
 import io.nzbee.entity.promotion.attribute.PromotionAttributeEntity;
 import io.nzbee.entity.promotion.bngn.PromotionBngnEntity;
-import io.nzbee.entity.promotion.level.IPromotionLevelService;
-import io.nzbee.entity.promotion.level.PromotionLevelEntity;
 import io.nzbee.entity.promotion.mechanic.IPromotionMechanicService;
 import io.nzbee.entity.promotion.mechanic.PromotionMechanicEntity;
-import io.nzbee.entity.promotion.type.IPromotionTypeService;
+import io.nzbee.entity.promotion.type.IPromotionLevelService;
+//import io.nzbee.entity.promotion.type.IPromotionTypeService;
+import io.nzbee.entity.promotion.type.PromotionTypeEntity;
 import io.nzbee.entity.promotion.type.PromotionTypeEntity;
 import io.nzbee.exceptions.EntityNotFoundException;
 import io.nzbee.Constants;
@@ -36,8 +36,8 @@ public class PromotionOrderMasterService {
 	@Autowired
 	private IPromotionEntityService promotionService;
 
-	@Autowired
-	private IPromotionTypeService promotionTypeService;
+//	@Autowired
+//	private IPromotionTypeService promotionTypeService;
 	
 	@Autowired
 	private IPromotionMechanicService promotionMechanicService;
@@ -84,9 +84,9 @@ public class PromotionOrderMasterService {
 
 		Optional<PromotionMechanicEntity> pm = promotionMechanicService.findByCode(pms.get_PROMOTION_MECHANIC_CODE());
 		
-		Optional<PromotionLevelEntity> pl = promotionLevelService.findByCode(pms.get_PROMOTION_LEVEL_CODE());
+		Optional<PromotionTypeEntity> pl = promotionLevelService.findByCode(pms.get_PROMOTION_LEVEL_CODE());
 		
-		Optional<PromotionTypeEntity> pt = promotionTypeService.findByCode(pms.get_PROMOTION_TYPE_CODE());
+	//	Optional<PromotionTypeEntity> pt = promotionTypeService.findByCode(pms.get_PROMOTION_TYPE_CODE());
 
 		p.getOrderPromotion().setPromotionCode(pms.get_PROMOTION_CODE());
 		PromotionAttributeEntity paEN = mapAttribute(p.getOrderPromotion(), pms.get_PROMOTION_DESC_EN(), Constants.localeENGB);
@@ -99,7 +99,7 @@ public class PromotionOrderMasterService {
 		p.getOrderPromotion().setPromotionEndDate(ped);
 		p.getOrderPromotion().setPromotionMechanic(pm.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.promotionMechanicNotFound, Constants.localeENGB, pms.get_PROMOTION_MECHANIC_CODE())));
 		p.getOrderPromotion().setPromotionLevel(pl.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.promotionLevelNotFound, Constants.localeENGB, pms.get_PROMOTION_LEVEL_CODE())));
-		p.getOrderPromotion().setPromotionType(pt.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.promotionTypeNotFound, Constants.localeENGB, pms.get_PROMOTION_TYPE_CODE())));
+		//p.getOrderPromotion().setPromotionType(pt.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.promotionTypeNotFound, Constants.localeENGB, pms.get_PROMOTION_TYPE_CODE())));
 		p.getOrderPromotion().setPromotionActive(pms.get_PROMOTION_ACTIVE());
 		p.getOrderPromotion().setPromotionCoupon(pms.get_PROMOTION_COUPON_CODE());
 		

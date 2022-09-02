@@ -4,10 +4,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import io.nzbee.entity.promotion.level.IPromotionLevelService;
-import io.nzbee.entity.promotion.level.PromotionLevelServiceImpl;
 import io.nzbee.entity.promotion.mechanic.IPromotionMechanicService;
 import io.nzbee.entity.promotion.mechanic.PromotionMechanicServiceImpl;
+import io.nzbee.entity.promotion.type.IPromotionLevelService;
+import io.nzbee.entity.promotion.type.PromotionTypeServiceImpl;
 import io.nzbee.integration.entity.product.ConfigProductEntityTests;
 import io.nzbee.integration.entity.promotion.ConfigPromotionEntityTests;
 import io.nzbee.integration.entity.promotion.type.ConfigPromotionTypeEntityTests;
@@ -31,6 +31,6 @@ public class ConfigProductPromotionEntityTests {
 	
 	@Bean
 	public IPromotionLevelService promotionLevelService() {
-		return new PromotionLevelServiceImpl();
+		return new PromotionTypeServiceImpl();
 	}
 }

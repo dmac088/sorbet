@@ -8,6 +8,7 @@ import org.hibernate.transform.ResultTransformer;
 import io.nzbee.Constants;
 import io.nzbee.entity.promotion.bngn.PromotionBngnDTO;
 import io.nzbee.entity.promotion.disc.PromotionDiscDTO;
+import io.nzbee.entity.promotion.valdisc.IPromotionDTO;
 import io.nzbee.entity.promotion.valdisc.PromotionValDiscDTO;
 
 public class PromotionDTOResultTransformer implements ResultTransformer {
@@ -18,7 +19,7 @@ public class PromotionDTOResultTransformer implements ResultTransformer {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Map<String, PromotionDomainDTO> promotionDTOMap = new LinkedHashMap<>();
+	private Map<String, IPromotionDTO> promotionDTOMap = new LinkedHashMap<>();
 	
 	@Override
 	public Object transformTuple(Object[] tuple, String[] aliases) {
@@ -28,16 +29,29 @@ public class PromotionDTOResultTransformer implements ResultTransformer {
         
         String discriminator = ((String) tuple[aliasToIndexMap.get(PromotionDomainDTO.MECH_CODE_ALIAS)]).toString();
         
-        PromotionDomainDTO promotionDTO = promotionDTOMap.computeIfAbsent(
+        IPromotionDTO promotionDTO = promotionDTOMap.computeIfAbsent(
             promotionId,
-            id -> (discriminator.equals(Constants.promotionDiscriminatorBNGN)) 
-            	  ?	new PromotionBngnDTO(tuple, aliasToIndexMap)
-            	  : (discriminator.equals(Constants.promotionDiscriminatorDISC))  
-            	  		? new PromotionDiscDTO(tuple, aliasToIndexMap)
-            	  		: new PromotionValDiscDTO(tuple, aliasToIndexMap)
+            id -> getSubType(discriminator, tuple, aliasToIndexMap)
         );
         
         return promotionDTO;
+	}
+	
+	private IPromotionDTO getSubType(String key, Object[] tuple, Map<String, Integer> aliasToIndexMap) {
+		 switch(key) {
+			case Constants.promotionDiscriminatorBNGN:
+				return new PromotionBngnDTO(tuple, aliasToIndexMap);
+			
+			case Constants.promotionDiscriminatorDISC:
+				return new PromotionDiscDTO(tuple, aliasToIndexMap);
+		
+			case Constants.promotionDiscriminatorValDISC:
+				return new PromotionValDiscDTO(tuple, aliasToIndexMap);
+				
+			default:
+				return new PromotionDomainDTO(tuple, aliasToIndexMap);
+		}
+		
 	}
 
 	@SuppressWarnings("rawtypes")

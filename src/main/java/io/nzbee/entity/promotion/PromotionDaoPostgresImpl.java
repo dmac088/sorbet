@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import io.nzbee.Constants;
+import io.nzbee.entity.promotion.valdisc.IPromotionDTO;
 
 @Component(value = "promotionEntityDao")
 public class PromotionDaoPostgresImpl implements IPromotionDao {
@@ -22,7 +23,7 @@ public class PromotionDaoPostgresImpl implements IPromotionDao {
 	
 	@SuppressWarnings({ "deprecation", "unchecked"})
 	@Override
-	public List<PromotionDomainDTO> findShippingPromotions() {
+	public List<IPromotionDTO> findShippingPromotions() {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findShippingPromotion()");
 		
 		Session session = em.unwrap(Session.class);
@@ -88,7 +89,7 @@ public class PromotionDaoPostgresImpl implements IPromotionDao {
 	
 	@SuppressWarnings({ "deprecation", "unchecked"})
 	@Override
-	public List<PromotionDomainDTO> findBagPromotions() {
+	public List<IPromotionDTO> findBagPromotions() {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findShippingPromotion()");
 		
 		Session session = em.unwrap(Session.class);
@@ -155,7 +156,7 @@ public class PromotionDaoPostgresImpl implements IPromotionDao {
 
 	@SuppressWarnings({ "deprecation", "unchecked"})
 	@Override
-	public List<PromotionDomainDTO> findItemPromotion(String itemUPC) {
+	public List<IPromotionDTO> findItemPromotion(String itemUPC) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findAll()");
 		
 		Session session = em.unwrap(Session.class);

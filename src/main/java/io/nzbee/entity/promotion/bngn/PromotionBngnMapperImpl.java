@@ -9,8 +9,9 @@ public class PromotionBngnMapperImpl implements IPromotionBngnMapper {
 	@Override
 	public BuyNGetNFree DTOToDo(PromotionBngnDTO dto) {
 
-		return new BuyNGetNFree(dto.getPromotionCode(), dto.getPromotionTypeCode(), dto.getPromotionStartDate(),
-				dto.getPromotionEndDate(), dto.getPromotionIsActive(), dto.getCouponRequired(), dto.getCouponCode(), dto.getBuyQuantity(), dto.getDiscountPercentage());
+		return new BuyNGetNFree(dto.getPromotion().getPromotionCode(), dto.getPromotion().getPromotionType().typeCode(), dto.getPromotion().getPromotionStartDate(),
+				dto.getPromotion().getPromotionEndDate(), dto.getPromotion().getPromotionIsActive(), dto.getPromotion().getCouponRequired(), dto.getPromotion().getCouponCode(), 
+				dto.getBuyQuantity(), dto.getDiscountPercentage());
 
 	}
 

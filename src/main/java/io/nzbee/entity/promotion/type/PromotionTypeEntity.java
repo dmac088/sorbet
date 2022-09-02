@@ -13,46 +13,46 @@ import javax.persistence.Table;
 import org.hibernate.annotations.NaturalId;
 
 @Entity
-@Table(name = "promotion_type", schema = "mochi")
+@Table(name = "promotion_level", schema = "mochi")
 public class PromotionTypeEntity implements Serializable {
-	
-	private static final long serialVersionUID = -4218197340727931791L;
+
+	private static final long serialVersionUID = -6852695326648001491L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "promotionTypeIdGenerator")
-	@SequenceGenerator(name="promotionTypeIdGenerator", sequenceName = "promotion_type_prm_typ_id_seq", schema="mochi",  allocationSize=1)
-	@Column(name="prm_typ_id")
-	private Long promotionTypeId;
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "promotionLevelIdGenerator")
+	@SequenceGenerator(name="promotionLevelIdGenerator", sequenceName = "promotion_level_prm_lvl_id_seq", schema="mochi",  allocationSize=1)
+	@Column(name="prm_lvl_id")
+	private Long promotionLevelId;
 	
 	@NaturalId
-	@Column(name="prm_typ_cd", unique = true, updatable = false)
-	private String promotionTypeCode;
+	@Column(name="prm_lvl_cd", unique = true, updatable = false)
+	private String promotionLevelCode;
 	
-	@Column(name="prm_typ_desc")
-	private String promotionTypeDesc;
-	
-	public Long getPromotionTypeId() {
-		return promotionTypeId;
+	@Column(name="prm_lvl_desc")
+	private String promotionLevelDesc;
+
+	public Long getPromotionLevelId() {
+		return promotionLevelId;
 	}
 
-	public void setPromotionTypeId(Long promotionTypeId) {
-		this.promotionTypeId = promotionTypeId;
+	public void setPromotionLevelId(Long promotionLevelId) {
+		this.promotionLevelId = promotionLevelId;
 	}
 
-	public String getPromotionTypeCode() {
-		return promotionTypeCode;
+	public String getPromotionLevelCode() {
+		return promotionLevelCode;
 	}
 
-	public void setPromotionTypeCode(String promotionTypeCode) {
-		this.promotionTypeCode = promotionTypeCode;
+	public void setPromotionLevelCode(String promotionLevelCode) {
+		this.promotionLevelCode = promotionLevelCode;
 	}
 
-	public String getPromotionTypeDesc() {
-		return promotionTypeDesc;
+	public String getPromotionLevelDesc() {
+		return promotionLevelDesc;
 	}
 
-	public void setPromotionTypeDesc(String promotionTypeDesc) {
-		this.promotionTypeDesc = promotionTypeDesc;
+	public void setPromotionLevelDesc(String promotionLevelDesc) {
+		this.promotionLevelDesc = promotionLevelDesc;
 	}
 
 }
