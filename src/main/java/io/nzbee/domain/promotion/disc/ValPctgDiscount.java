@@ -2,11 +2,8 @@ package io.nzbee.domain.promotion.disc;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import io.nzbee.domain.bag.item.BagItemDiscount;
 import io.nzbee.domain.bag.item.IDiscountableBagItem;
-import io.nzbee.domain.promotion.DiscountItem;
 import io.nzbee.domain.promotion.IBagPromotion;
 import io.nzbee.domain.promotion.Promotion;
 import io.nzbee.domain.promotion.ports.IDiscountThresholdPromotionPort;
