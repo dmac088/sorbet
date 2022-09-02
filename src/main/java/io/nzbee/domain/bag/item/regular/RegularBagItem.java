@@ -65,4 +65,10 @@ public class RegularBagItem implements IDiscountThresholdPromotionPort, IBnGnFre
 	public String getUPC() {
 		return this.getBagItem().getProductUPC();
 	}
+
+
+	@Override
+	public BigDecimal getBagTotalAmount() {
+		return this.getBagItem().getBag().getSubTotalAmount();
+	}
 }

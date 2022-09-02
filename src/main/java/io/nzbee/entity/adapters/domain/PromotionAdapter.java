@@ -1,7 +1,6 @@
 package io.nzbee.entity.adapters.domain;
 
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +41,11 @@ public class PromotionAdapter implements IPromotionPortService {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".applyAll with parameter {}",
 				bag.getCustomer().getUserName());
 
+		
+		
+		bag.getCoupons().forEach(c -> {
+			System.out.println("coupon found: " + c);
+		});
 	
 		//bag promotions
 		promotionService.findBagPromotions()
@@ -49,7 +53,7 @@ public class PromotionAdapter implements IPromotionPortService {
 			//we need to check if the bag is eligible for the promotion before executing
 			//or this should be done within the execute method of the promotion object itself
 			
-			IBagPromotion p = (IBagPromotion)promotionMapper.DTOToDo(dto);
+			IBagPromotion p = (IBagPromotion) promotionMapper.DTOToDo(dto);
 			List<DiscountItem> discounts = p.execute(bag);
 			
 			discounts.forEach(d -> {
@@ -58,8 +62,29 @@ public class PromotionAdapter implements IPromotionPortService {
 								 + "promotion discount amount = " + d.getDiscountAmount());
 			});
 		});
+
+		//shipping promotions
+		promotionService.findShippingPromotions()
+		.forEach(dto -> {
+			//we need to check if the bag is eligible for the promotion before executing
+			//or this should be done within the execute method of the promotion object itself
+					
+			IBagPromotion p = (IBagPromotion) promotionMapper.DTOToDo(dto);
+			if(bag.hasShippingItem()) {
+				System.out.println(bag.getShippingItem().getUPC());
+				List<DiscountItem> discounts = p.execute(bag.getShippingItem());
+				
+				System.out.println("the size of discounts is: " + discounts.size());
+				
+				discounts.forEach(d -> {
+					System.out.println("promotion code = " + d.getPromotionCode() +"\n"
+									 + "promotion item = " + d.getUpcCode() +"\n"
+									 + "promotion discount amount = " + d.getDiscountAmount());
+				});
+			}
+		});
 		
-		
+		 
 //		//item level promotions
 //		bag.getBagItems().forEach(i -> {
 //			List<Promotion> lp = 

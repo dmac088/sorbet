@@ -36,5 +36,10 @@ public class ShippingBagItem implements IDiscountThresholdPromotionPort, IDiscou
 	public BigDecimal getTotalAmount() {
 		return this.getBagItem().getBagItemTotal();
 	}
+
+	@Override
+	public BigDecimal getBagTotalAmount() {
+		return this.getBagItem().getBag().getSubTotalAmount();
+	}
 	
 }

@@ -7,6 +7,8 @@ import io.nzbee.entity.promotion.bngn.IPromotionBngnMapper;
 import io.nzbee.entity.promotion.bngn.PromotionBngnDTO;
 import io.nzbee.entity.promotion.disc.IPromotionDiscMapper;
 import io.nzbee.entity.promotion.disc.PromotionDiscDTO;
+import io.nzbee.entity.promotion.valdisc.IPromotionValDiscMapper;
+import io.nzbee.entity.promotion.valdisc.PromotionValDiscDTO;
 
 @Component(value = "promotionMapper")
 public class PromotionMapperImpl implements IPromotionMapper {
@@ -17,6 +19,9 @@ public class PromotionMapperImpl implements IPromotionMapper {
 	@Autowired
 	private IPromotionDiscMapper promotionDiscMapper;
 	
+	@Autowired
+	private IPromotionValDiscMapper promotionValDiscMapper;
+	
 	@Override
 	public Promotion DTOToDo(PromotionDomainDTO dto) {
 		if(dto instanceof PromotionBngnDTO) {
@@ -25,6 +30,10 @@ public class PromotionMapperImpl implements IPromotionMapper {
 		
 		if(dto instanceof PromotionDiscDTO) {
 			return this.DTOToDo((PromotionDiscDTO) dto);
+		}
+		
+		if(dto instanceof PromotionValDiscDTO) {
+			return this.DTOToDo((PromotionValDiscDTO) dto);
 		}
 		return null;
 	}
@@ -38,11 +47,18 @@ public class PromotionMapperImpl implements IPromotionMapper {
 	public Promotion DTOToDo(PromotionDiscDTO dto) {
 		return promotionDiscMapper.DTOToDo(dto);
 	}
+	
+	@Override
+	public Promotion DTOToDo(PromotionValDiscDTO dto) {
+		return promotionValDiscMapper.DTOToDo(dto);
+	}
 		
 	@Override
 	public PromotionEntity doToEntity(Promotion d) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 }

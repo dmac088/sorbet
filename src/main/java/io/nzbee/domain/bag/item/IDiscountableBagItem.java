@@ -7,5 +7,7 @@ public interface IDiscountableBagItem {
 	String getUPC();
 	
 	BigDecimal getTotalAmount();
+	
+	BigDecimal getBagTotalAmount();
 }
  

@@ -22,7 +22,7 @@ public class PromotionDaoPostgresImpl implements IPromotionDao {
 	
 	@SuppressWarnings({ "deprecation", "unchecked"})
 	@Override
-	public List<PromotionDomainDTO> findShippingPromotion() {
+	public List<PromotionDomainDTO> findShippingPromotions() {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findShippingPromotion()");
 		
 		Session session = em.unwrap(Session.class);
