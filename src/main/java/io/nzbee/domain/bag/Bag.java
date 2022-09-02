@@ -4,7 +4,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import io.nzbee.domain.bag.item.BagItem;
+import io.nzbee.domain.bag.item.IBagItem;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
 import io.nzbee.domain.customer.Customer;
@@ -145,8 +148,8 @@ public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromot
 	}
 
 	@Override
-	public BigDecimal getTotalAmount() {
-		return this.getSubTotalAmount();
+	public List<IBagItem> getItems() {
+		return this.getBagItems().stream().map(i -> (IBagItem) i).collect(Collectors.toList());
 	}
 
 }

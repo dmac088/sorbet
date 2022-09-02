@@ -1,9 +1,11 @@
 package io.nzbee.domain.promotion.ports;
 
-import java.math.BigDecimal;
+import java.util.List;
+import io.nzbee.domain.bag.item.IBagItem;
 
 public interface IPctgDiscountPromotionPort {
 
-	BigDecimal getTotalAmount();
+	//we need to spread the discount amount across the line items
+	List<IBagItem> getItems();
 	
 }
