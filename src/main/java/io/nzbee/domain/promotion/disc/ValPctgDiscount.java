@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
+import io.nzbee.domain.bag.item.BagItemDiscount;
 import io.nzbee.domain.bag.item.IDiscountableBagItem;
 import io.nzbee.domain.promotion.DiscountItem;
 import io.nzbee.domain.promotion.IBagPromotion;
@@ -49,19 +49,17 @@ public class ValPctgDiscount extends Promotion implements IBagPromotion<IDiscoun
 	}
 
 	@Override
-	public List<DiscountItem> execute(IDiscountThresholdPromotionPort object) {
-		List<DiscountItem> ldi = new ArrayList<DiscountItem>();
+	public void execute(IDiscountThresholdPromotionPort object) {
 		object.getItems().stream().forEach(bi -> {
 			if (bi.getBagTotalAmount().compareTo(this.getDollarThreshold()) >= 0) {
-				ldi.add(applyDiscount(bi));
+				bi.addDiscount(applyDiscount(bi));
 			}
 		});
-		return ldi;
 	}
 
-	private DiscountItem applyDiscount(IDiscountableBagItem bi) {
+	private BagItemDiscount applyDiscount(IDiscountableBagItem bi) {
 		BigDecimal amount = bi.getTotalAmount().multiply(discountPctg);
-		return new DiscountItem(this.promotionCode, bi.getUPC(), amount);
+		return new BagItemDiscount(bi, amount);
 	}
 
 	@Override

@@ -9,5 +9,7 @@ public interface IDiscountableBagItem {
 	BigDecimal getTotalAmount();
 	
 	BigDecimal getBagTotalAmount();
+	
+	void addDiscount(BagItemDiscount discountItem);
 }
  

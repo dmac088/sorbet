@@ -54,11 +54,10 @@ public class PromotionAdapter implements IPromotionPortService {
 			//or this should be done within the execute method of the promotion object itself
 			
 			IBagPromotion p = (IBagPromotion) promotionMapper.DTOToDo(dto);
-			List<DiscountItem> discounts = p.execute(bag);
+			p.execute(bag);
 			
-			discounts.forEach(d -> {
-				System.out.println("promotion code = " + d.getPromotionCode() +"\n"
-								 + "promotion item = " + d.getUpcCode() +"\n"
+			bag.getShippingItem().getBagItem().getDiscounts().forEach(d -> {
+				System.out.println("promotion item = " + d.getBagItem().getUPC()  +"\n"
 								 + "promotion discount amount = " + d.getDiscountAmount());
 			});
 		});
@@ -72,14 +71,10 @@ public class PromotionAdapter implements IPromotionPortService {
 			IBagPromotion p = (IBagPromotion) promotionMapper.DTOToDo(dto);
 			if(bag.hasShippingItem()) {
 				System.out.println(bag.getShippingItem().getUPC());
-				List<DiscountItem> discounts = p.execute(bag.getShippingItem());
+				p.execute(bag.getShippingItem());
 				
-				System.out.println("the size of discounts is: " + discounts.size());
-				
-				discounts.forEach(d -> {
-					System.out.println("promotion code = " + d.getPromotionCode() +"\n"
-									 + "promotion item = " + d.getUpcCode() +"\n"
-									 + "promotion discount amount = " + d.getDiscountAmount());
+				bag.getShippingItem().getBagItem().getDiscounts().forEach(d -> {
+					System.out.println("shipping discount is: " + d.getDiscountAmount());
 				});
 			}
 		});

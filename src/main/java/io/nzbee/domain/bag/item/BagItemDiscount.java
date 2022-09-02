@@ -6,16 +6,16 @@ import java.math.BigDecimal;
 //we only need what we need to compute the bagItem total
 public class BagItemDiscount {
 
-	private BagItem bagItem;
+	private IDiscountableBagItem bagItem;
 	
 	private BigDecimal discountAmount; 
 	
-	public BagItemDiscount(BagItem bagItem, BigDecimal discount) {
-		this.bagItem 		= bagItem;
+	public BagItemDiscount(IDiscountableBagItem bi, BigDecimal discount) {
+		this.bagItem 		= bi;
 		this.discountAmount = discount;
 	}
 
-	public BagItem getBagItem() {
+	public IDiscountableBagItem getBagItem() {
 		return bagItem;
 	}
 	
