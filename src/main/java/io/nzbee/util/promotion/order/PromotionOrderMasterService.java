@@ -18,7 +18,7 @@ import io.nzbee.entity.promotion.attribute.PromotionAttributeEntity;
 import io.nzbee.entity.promotion.bngn.PromotionBngnEntity;
 import io.nzbee.entity.promotion.mechanic.IPromotionMechanicService;
 import io.nzbee.entity.promotion.mechanic.PromotionMechanicEntity;
-import io.nzbee.entity.promotion.type.IPromotionLevelService;
+import io.nzbee.entity.promotion.type.IPromotionTypeService;
 //import io.nzbee.entity.promotion.type.IPromotionTypeService;
 import io.nzbee.entity.promotion.type.PromotionTypeEntity;
 import io.nzbee.entity.promotion.type.PromotionTypeEntity;
@@ -43,7 +43,7 @@ public class PromotionOrderMasterService {
 	private IPromotionMechanicService promotionMechanicService;
 	
 	@Autowired
-	private IPromotionLevelService promotionLevelService;
+	private IPromotionTypeService promotionLevelService;
 	
 
 	@Autowired

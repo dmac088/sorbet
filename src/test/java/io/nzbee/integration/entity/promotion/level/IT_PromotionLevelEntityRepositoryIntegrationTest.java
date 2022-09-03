@@ -16,7 +16,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import io.nzbee.Constants;
-import io.nzbee.entity.promotion.type.IPromotionLevelService;
+import io.nzbee.entity.promotion.type.IPromotionTypeService;
 import io.nzbee.entity.promotion.type.PromotionTypeEntity;
 
 import org.springframework.core.io.FileSystemResource;
@@ -39,7 +39,7 @@ public class IT_PromotionLevelEntityRepositoryIntegrationTest {
 	private IPromotionLevelEntityBeanFactory promotionLevelEntityBeanFactory;
 
 	@Autowired
-	private IPromotionLevelService promotionLevelService;
+	private IPromotionTypeService promotionLevelService;
 
 	@Autowired
 	@Qualifier("mochiDataSourceOwner")

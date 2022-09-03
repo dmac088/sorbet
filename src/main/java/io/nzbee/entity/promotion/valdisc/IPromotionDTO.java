@@ -4,4 +4,5 @@ public interface IPromotionDTO {
 
 	String getType();
 	
+	
 }

@@ -34,14 +34,12 @@ public class PromotionAdapter implements IPromotionPortService {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".applyAll with parameter {}",
 				bag.getCustomer().getUserName());
 
-		
-		
 		bag.getCoupons().forEach(c -> {
 			System.out.println("coupon found: " + c);
 		});
 	
 		//bag promotions
-		promotionService.findBagPromotions()
+		promotionService.findAll()
 		.forEach(dto -> {
 			//we need to check if the bag is eligible for the promotion before executing
 			//or this should be done within the execute method of the promotion object itself
@@ -52,28 +50,28 @@ public class PromotionAdapter implements IPromotionPortService {
 			bag.getBagItems().forEach(i -> {
 				i.getBagItem().getDiscounts().forEach(d -> {
 					System.out.println("promotion item = " + d.getBagItem().getUPC()  +"\n"
-								 + "promotion discount amount = " + d.getDiscountAmount());
+									 + "promotion discount amount = " + d.getDiscountAmount());
 				});
 			});
 		});
 
 		//shipping promotions
-		promotionService.findShippingPromotions()
-		.forEach(dto -> {
-			//we need to check if the bag is eligible for the promotion before executing
-			//or this should be done within the execute method of the promotion object itself
-					
-			IBagPromotion p = (IBagPromotion) promotionMapper.DTOToDo(dto);
-			if(bag.hasShippingItem()) {
-				System.out.println(bag.getShippingItem().getUPC());
-				System.out.println(dto.getType());
-				p.execute(bag.getShippingItem());
-				
-				bag.getShippingItem().getBagItem().getDiscounts().forEach(d -> {
-					System.out.println("shipping discount is: " + d.getDiscountAmount());
-				});
-			}
-		});
+//		promotionService.findShippingPromotions()
+//		.forEach(dto -> {
+//			//we need to check if the bag is eligible for the promotion before executing
+//			//or this should be done within the execute method of the promotion object itself
+//					
+//			IBagPromotion p = (IBagPromotion) promotionMapper.DTOToDo(dto);
+//			if(bag.hasShippingItem()) {
+//				System.out.println(bag.getShippingItem().getUPC());
+//				System.out.println(dto.getType());
+//				p.execute(bag.getShippingItem());
+//				
+//				bag.getShippingItem().getBagItem().getDiscounts().forEach(d -> {
+//					System.out.println("shipping discount is: " + d.getDiscountAmount());
+//				});
+//			}
+//		});
 
 		return bag;
 	}

@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service(value="promotionLevelService")
-public class PromotionTypeServiceImpl implements IPromotionLevelService {
+public class PromotionTypeServiceImpl implements IPromotionTypeService {
 	
 	@Autowired
-	private IPromotionLevelRepository promotionLevelRepository; 
+	private IPromotionTypeRepository promotionLevelRepository; 
 
 	@Override
 	public Optional<PromotionTypeEntity> findById(Long id) {

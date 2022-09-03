@@ -8,6 +8,11 @@ import org.hibernate.transform.ResultTransformer;
 import io.nzbee.Constants;
 import io.nzbee.entity.promotion.bngn.PromotionBngnDTO;
 import io.nzbee.entity.promotion.disc.PromotionDiscDTO;
+import io.nzbee.entity.promotion.type.IPromotionType;
+import io.nzbee.entity.promotion.type.PromotionTypeBrandDTO;
+import io.nzbee.entity.promotion.type.PromotionTypeCategoryDTO;
+import io.nzbee.entity.promotion.type.PromotionTypeNullDTO;
+import io.nzbee.entity.promotion.type.PromotionTypeProductDTO;
 import io.nzbee.entity.promotion.valdisc.IPromotionDTO;
 import io.nzbee.entity.promotion.valdisc.PromotionValDiscDTO;
 
@@ -29,12 +34,34 @@ public class PromotionDTOResultTransformer implements ResultTransformer {
         
         String discriminator = ((String) tuple[aliasToIndexMap.get(PromotionDomainDTO.MECH_CODE_ALIAS)]).toString();
         
+        String typeDiscriminator = ((String) tuple[aliasToIndexMap.get(PromotionDomainDTO.TYPE_CODE_ALIAS)]).toString();
+         
         IPromotionDTO promotionDTO = promotionDTOMap.computeIfAbsent(
             promotionId,
             id -> getSubType(discriminator, tuple, aliasToIndexMap)
         );
         
+        IPromotionType promotionType = getType(typeDiscriminator, tuple, aliasToIndexMap);
+        promotionType.setPromotion(promotionDTO);
+        
         return promotionDTO;
+	}
+	
+	public static IPromotionType getType(String key, Object[] tuple, Map<String, Integer> aliasToIndexMap) {
+		 switch(key) {
+			case Constants.promotionTypeProduct:
+				return new PromotionTypeProductDTO(tuple, aliasToIndexMap);
+			
+			case Constants.promotionTypeBrand:
+				return new PromotionTypeBrandDTO(tuple, aliasToIndexMap);
+				
+			case Constants.promotionTypeCategory:
+				return new PromotionTypeCategoryDTO(tuple, aliasToIndexMap);
+		
+			default:
+				return new PromotionTypeNullDTO(tuple, aliasToIndexMap);
+		}
+		
 	}
 	
 	private IPromotionDTO getSubType(String key, Object[] tuple, Map<String, Integer> aliasToIndexMap) {
@@ -53,6 +80,12 @@ public class PromotionDTOResultTransformer implements ResultTransformer {
 		}
 		
 	}
+	
+	
+
+	
+	
+	
 
 	@SuppressWarnings("rawtypes")
 	@Override

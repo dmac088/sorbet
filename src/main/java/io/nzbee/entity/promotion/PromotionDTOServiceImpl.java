@@ -20,19 +20,9 @@ public class PromotionDTOServiceImpl implements IPromotionDTOService {
 	}
 
 	@Override
-	public List<IPromotionDTO> findShippingPromotions() {
+	public List<IPromotionDTO> findAll() {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findShippingPromotion()");
-		return promotionDao.findShippingPromotions();
-	}
-	@Override
-	public List<IPromotionDTO> findBagPromotions() {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".findBagPromotions()");
-		return promotionDao.findBagPromotions();
-	}
-	@Override
-	public List<IPromotionDTO> findItemPromotion(String itemUPC) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".findItemPromotion()");
-		return promotionDao.findItemPromotion(itemUPC);
+		return promotionDao.findAll();
 	}
 	
 	

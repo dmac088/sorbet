@@ -2,7 +2,7 @@ package io.nzbee.entity.promotion.type;
 
 import java.util.Map;
 
-public class PromotionTypeDTO implements IPromotionType {
+public class PromotionTypeDTO {
 	
 	private final String PROMOTION_TYPE_CODE_ALIAS = "prm_typ_cd";
 
@@ -18,10 +18,5 @@ public class PromotionTypeDTO implements IPromotionType {
 		return promotionTypeCode;
 	}
 
-
-	@Override
-	public String typeCode() {
-		return this.getPromotionTypeCode();
-	}
-
+	
 }

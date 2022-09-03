@@ -2,6 +2,7 @@ package io.nzbee.entity.promotion.valdisc;
 
 import java.math.BigDecimal;
 import java.util.Map;
+import io.nzbee.Constants;
 import io.nzbee.entity.promotion.PromotionDomainDTO;
 
 public class PromotionValDiscDTO implements IPromotionDTO {
@@ -31,7 +32,6 @@ public class PromotionValDiscDTO implements IPromotionDTO {
 		this.valueThreshold = new BigDecimal(((Number) tuple[aliasToIndexMap.get(VALUE_THRESHOLD_ALIAS)]).doubleValue());
 		this.currency = tuple[aliasToIndexMap.get(CURRENCY_ALIAS)].toString();
 		this.direction = tuple[aliasToIndexMap.get(DIRECTION_ALIAS)].toString();
-		
 	}
 	
 	public BigDecimal getDiscountPercentage() {
@@ -56,7 +56,8 @@ public class PromotionValDiscDTO implements IPromotionDTO {
 	
 	@Override
 	public String getType() {
-		return this.getPromotion().getPromotionType().typeCode();
+		return Constants.promotionDiscriminatorValDISC;
 	}
+
 
 }

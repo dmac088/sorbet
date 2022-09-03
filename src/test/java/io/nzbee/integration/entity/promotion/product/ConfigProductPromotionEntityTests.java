@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Import;
 
 import io.nzbee.entity.promotion.mechanic.IPromotionMechanicService;
 import io.nzbee.entity.promotion.mechanic.PromotionMechanicServiceImpl;
-import io.nzbee.entity.promotion.type.IPromotionLevelService;
+import io.nzbee.entity.promotion.type.IPromotionTypeService;
 import io.nzbee.entity.promotion.type.PromotionTypeServiceImpl;
 import io.nzbee.integration.entity.product.ConfigProductEntityTests;
 import io.nzbee.integration.entity.promotion.ConfigPromotionEntityTests;
@@ -30,7 +30,7 @@ public class ConfigProductPromotionEntityTests {
 	}
 	
 	@Bean
-	public IPromotionLevelService promotionLevelService() {
+	public IPromotionTypeService promotionLevelService() {
 		return new PromotionTypeServiceImpl();
 	}
 }

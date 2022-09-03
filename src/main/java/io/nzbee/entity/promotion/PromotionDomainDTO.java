@@ -3,13 +3,8 @@ package io.nzbee.entity.promotion;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
-import io.nzbee.Constants;
 import io.nzbee.entity.promotion.type.IPromotionType;
-import io.nzbee.entity.promotion.type.PromotionTypeProductDTO;
 import io.nzbee.entity.promotion.valdisc.IPromotionDTO;
-import io.nzbee.entity.promotion.type.PromotionTypeBrandDTO;
-import io.nzbee.entity.promotion.type.PromotionTypeCategoryDTO;
-import io.nzbee.entity.promotion.type.PromotionTypeDTO;
 
 public class PromotionDomainDTO implements IPromotionDTO {
 
@@ -44,7 +39,9 @@ public class PromotionDomainDTO implements IPromotionDTO {
 	
 	private final String couponCode;
 	
-	private final IPromotionType promotionType;
+	private final String promotionTypeCode;
+	
+	private IPromotionType promotionType;
 	
 	
 	public PromotionDomainDTO(Object[] tuple, Map<String, Integer> aliasToIndexMap) {
@@ -55,36 +52,13 @@ public class PromotionDomainDTO implements IPromotionDTO {
 		this.couponRequired 			= ((Boolean) tuple[aliasToIndexMap.get(ACTIVE_ALIAS)]);
 		this.promotionIsActive 			= ((Boolean) tuple[aliasToIndexMap.get(COUPON_REQUIRED_ALIAS)]);
 		this.couponCode					= tuple[aliasToIndexMap.get(COUPON_CODE_ALIAS)].toString();
-		this.promotionType				= getSubType(tuple[aliasToIndexMap.get(TYPE_CODE_ALIAS)].toString(), tuple, aliasToIndexMap);		   
-	}
-	
-	private IPromotionType getSubType(String key, Object[] tuple, Map<String, Integer> aliasToIndexMap) {
-		 switch(key) {
-			case Constants.promotionTypeProduct:
-				return new PromotionTypeProductDTO(tuple, aliasToIndexMap);
-			
-			case Constants.promotionTypeBrand:
-				return new PromotionTypeBrandDTO(tuple, aliasToIndexMap);
-				
-			case Constants.promotionTypeCategory:
-				return new PromotionTypeCategoryDTO(tuple, aliasToIndexMap);
-				
-			case Constants.promotionTypeBag:
-				return new PromotionTypeDTO(tuple, aliasToIndexMap);
-				
-			case Constants.promotionTypeShipping:
-				return new PromotionTypeDTO(tuple, aliasToIndexMap);
-				
-			default:
-				return new PromotionTypeDTO(tuple, aliasToIndexMap);
-		}
-		
+		this.promotionTypeCode 			= tuple[aliasToIndexMap.get(TYPE_CODE_ALIAS)].toString();
+		this.promotionType				= PromotionDTOResultTransformer.getType(tuple[aliasToIndexMap.get(TYPE_CODE_ALIAS)].toString(), tuple, aliasToIndexMap);
 	}
 
 	public String getPromotionCode() {
 		return promotionCode;
 	}
-
 
 	public LocalDateTime getPromotionStartDate() {
 		return promotionStartDate;
@@ -116,7 +90,7 @@ public class PromotionDomainDTO implements IPromotionDTO {
 
 	@Override
 	public String getType() {
-		return this.getPromotionType().typeCode();
+		return this.promotionTypeCode;
 	}
 	
 }

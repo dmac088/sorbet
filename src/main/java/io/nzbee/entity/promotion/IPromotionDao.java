@@ -6,12 +6,7 @@ import io.nzbee.entity.promotion.valdisc.IPromotionDTO;
 
 public interface IPromotionDao {
 	
-
-	List<IPromotionDTO> findBagPromotions();
-	
-	List<IPromotionDTO> findItemPromotion(String itemUPC);
-
-	List<IPromotionDTO> findShippingPromotions();
+	List<IPromotionDTO> findAll();
 
 }
 

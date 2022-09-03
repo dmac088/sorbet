@@ -1,7 +1,5 @@
 package io.nzbee.entity.promotion;
 
-import java.time.LocalDateTime;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import io.nzbee.domain.promotion.Promotion;

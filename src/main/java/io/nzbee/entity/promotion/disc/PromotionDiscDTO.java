@@ -2,6 +2,7 @@ package io.nzbee.entity.promotion.disc;
 
 import java.math.BigDecimal;
 import java.util.Map;
+import io.nzbee.Constants;
 import io.nzbee.entity.promotion.PromotionDomainDTO;
 import io.nzbee.entity.promotion.valdisc.IPromotionDTO;
 
@@ -28,7 +29,7 @@ public class PromotionDiscDTO implements IPromotionDTO {
 	
 	@Override
 	public String getType() {
-		return this.getPromotion().getPromotionType().typeCode();
+		return Constants.promotionDiscriminatorDISC;
 	}
 
 }
