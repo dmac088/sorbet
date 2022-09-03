@@ -11,10 +11,11 @@ import io.nzbee.domain.bag.item.IDiscountableBagItem;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
 import io.nzbee.domain.customer.Customer;
+import io.nzbee.domain.promotion.ports.IBnGnFreePromotionPort;
 import io.nzbee.domain.promotion.ports.IDiscountThresholdPromotionPort;
 import io.nzbee.domain.promotion.ports.IPctgDiscountPromotionPort;
 
-public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromotionPort {
+public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromotionPort, IBnGnFreePromotionPort {
 	
 	private ShippingBagItem shippingItem;
 	
@@ -22,7 +23,7 @@ public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromot
 	
 	private BagIssues bagIssues = new BagIssues();
 	
-	private final List<String> coupons;
+	private final List<String> coupons; 
 	
 	private final List<RegularBagItem> bagItems;
 
@@ -74,9 +75,10 @@ public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromot
 		return this.getBagItems().size();
 	}
 	
-	public int getTotalQuantity() {
-		return this.getBagItems().stream()
-				.mapToInt(r -> r.getBagItem().getQuantity().intValue()).sum();
+	@Override
+	public Long getTotalQuantity() {
+		return new Long(this.getBagItems().stream()
+				.mapToInt(r -> r.getBagItem().getQuantity().intValue()).sum());
 	}
 	
 	public ShippingBagItem getShippingItem() {
@@ -151,5 +153,11 @@ public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromot
 	public List<IDiscountableBagItem> getItems() {
 		return this.getBagItems().stream().map(i -> (IDiscountableBagItem) i).collect(Collectors.toList());
 	}
+
+	@Override
+	public BigDecimal getTotalAmount() {
+		return this.getSubTotalAmount();
+	}
+
 
 }

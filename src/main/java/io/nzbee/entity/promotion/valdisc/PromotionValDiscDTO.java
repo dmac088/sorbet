@@ -64,5 +64,8 @@ public class PromotionValDiscDTO implements IPromotionDTO {
 		return Constants.promotionDiscriminatorValDISC;
 	}
 
-
+	@Override
+	public Boolean isType(String typeCode) {
+		return this.getTypeCode().equals(typeCode);
+	}
 }

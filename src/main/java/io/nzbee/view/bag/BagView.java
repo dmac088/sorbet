@@ -16,7 +16,7 @@ public class BagView {
 	
 	private int totalItems;
 	
-	private int totalQuantity;
+	private Long totalQuantity;
 	
 	private BigDecimal grandTotalAmount;
 	
@@ -55,11 +55,11 @@ public class BagView {
 		this.totalItems = totalItems;
 	}
 
-	public int getTotalQuantity() {
+	public Long getTotalQuantity() {
 		return totalQuantity;
 	}
 
-	public void setTotalQuantity(int totalQuantity) {
+	public void setTotalQuantity(Long totalQuantity) {
 		this.totalQuantity = totalQuantity;
 	}
 

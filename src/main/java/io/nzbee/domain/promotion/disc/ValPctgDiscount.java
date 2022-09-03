@@ -46,12 +46,15 @@ public class ValPctgDiscount extends Promotion implements IBagPromotion<IDiscoun
 	}
 
 	@Override
-	public void execute(IDiscountThresholdPromotionPort object) {
-		object.getItems().stream().forEach(bi -> {
-			if (bi.getBagTotalAmount().compareTo(this.getDollarThreshold()) >= 0) {
-				bi.addDiscount(applyDiscount(bi));
-			}
-		});
+	public void execute(IDiscountThresholdPromotionPort bag) {
+		System.out.println("executing promotion: " + this.getClass().getSimpleName().toString());
+		System.out.println("for promotion type: " + this.getPromotionTypeCode());
+		System.out.println("for item count: " + bag.getItems().size());
+//		bag.getItems().stream().forEach(bi -> {
+//			if (bi.getBagTotalAmount().compareTo(this.getDollarThreshold()) >= 0) {
+//				bi.addDiscount(applyDiscount(bi));
+//			}
+//		});
 	}
 
 	private BagItemDiscount applyDiscount(IDiscountableBagItem bi) {

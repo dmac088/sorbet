@@ -11,5 +11,6 @@ public interface IDiscountableBagItem {
 	BigDecimal getBagTotalAmount();
 	
 	void addDiscount(BagItemDiscount discountItem);
+
 }
  

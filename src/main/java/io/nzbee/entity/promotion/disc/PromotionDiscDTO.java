@@ -37,4 +37,8 @@ public class PromotionDiscDTO implements IPromotionDTO {
 		return Constants.promotionDiscriminatorDISC;
 	}
 
+	@Override
+	public Boolean isType(String typeCode) {
+		return this.getTypeCode().equals(typeCode);
+	}
 }

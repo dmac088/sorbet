@@ -97,5 +97,10 @@ public class PromotionDomainDTO implements IPromotionDTO {
 	public String getMechanicCode() {
 		return this.promotionMechanicCode;
 	}
+
+	@Override
+	public Boolean isType(String typeCode) {
+		return this.promotionTypeCode.equals(typeCode);
+	}
 	
 }

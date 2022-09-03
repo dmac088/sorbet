@@ -9,7 +9,7 @@ import io.nzbee.domain.bag.item.IDiscountableBagItem;
 import io.nzbee.domain.promotion.ports.IBnGnFreePromotionPort;
 import io.nzbee.domain.promotion.ports.IDiscountThresholdPromotionPort;
 
-public class RegularBagItem implements IDiscountThresholdPromotionPort, IBnGnFreePromotionPort, IDiscountableBagItem {
+public class RegularBagItem implements IDiscountableBagItem {
 	
 	private final BagItem bagItem;
 	
@@ -47,21 +47,6 @@ public class RegularBagItem implements IDiscountThresholdPromotionPort, IBnGnFre
 		return this.getBagItem().getBagItemTotal();
 	}
 
-
-	@Override
-	public Long getTotalQuantity() {
-		return this.getBagItem().getQuantity();
-	}
-
-
-	@Override
-	public List<IDiscountableBagItem> getItems() {
-		List<IDiscountableBagItem> rbi = new ArrayList<IDiscountableBagItem>();
-		rbi.add(this);
-		return rbi;
-	}
-
-
 	@Override
 	public String getUPC() {
 		return this.getBagItem().getProductUPC();
@@ -78,4 +63,5 @@ public class RegularBagItem implements IDiscountThresholdPromotionPort, IBnGnFre
 	public void addDiscount(BagItemDiscount discountItem) {
 		this.getBagItem().addDiscount(discountItem);
 	}
+
 }

@@ -45,8 +45,10 @@ public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePr
 	}
 
 	@Override
-	public void execute(IBnGnFreePromotionPort item) {
-		System.out.println("executing promotion: " + this.getClass().getSimpleName().toString() + " for total: " + item.getTotalAmount());
+	public void execute(IBnGnFreePromotionPort bag) {
+		System.out.println("executing promotion: " + this.getClass().getSimpleName().toString());
+		System.out.println("for promotion type: " + this.getPromotionTypeCode());
+		System.out.println("for total: " + bag.getTotalAmount());
 	}
 
 

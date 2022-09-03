@@ -42,7 +42,6 @@ public class PromotionAdapter implements IPromotionPortService {
 	
 		//bag promotions
 		promotionService.findAll()
-		.stream().filter(p -> p.getTypeCode().equals(Constants.promotionTypeBag))
 		.forEach(dto -> {
 			//we need to check if the bag is eligible for the promotion before executing
 			//or this should be done within the execute method of the promotion object itself
@@ -51,6 +50,7 @@ public class PromotionAdapter implements IPromotionPortService {
 			System.out.println(dto.getMechanicCode());
 			
 			IBagPromotion p = (IBagPromotion) promotionMapper.DTOToDo(dto);
+
 			p.execute(bag);
 			
 			bag.getBagItems().forEach(i -> {

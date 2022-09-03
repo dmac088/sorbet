@@ -1,14 +1,11 @@
 package io.nzbee.domain.bag.item.shipping;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.bag.item.BagItemDiscount;
 import io.nzbee.domain.bag.item.IDiscountableBagItem;
-import io.nzbee.domain.promotion.ports.IDiscountThresholdPromotionPort;
 
-public class ShippingBagItem implements IDiscountThresholdPromotionPort, IDiscountableBagItem {
+public class ShippingBagItem implements IDiscountableBagItem {
 
 	private final BagItem bagItem;
 
@@ -19,13 +16,6 @@ public class ShippingBagItem implements IDiscountThresholdPromotionPort, IDiscou
 
 	public BagItem getBagItem() {
 		return bagItem;
-	}
-
-	@Override
-	public List<IDiscountableBagItem> getItems() {
-		List<IDiscountableBagItem> sbi = new ArrayList<IDiscountableBagItem>();
-		sbi.add(this);
-		return sbi;
 	}
 
 	@Override
@@ -47,5 +37,5 @@ public class ShippingBagItem implements IDiscountThresholdPromotionPort, IDiscou
 	public void addDiscount(BagItemDiscount discountItem) {
 		this.getBagItem().addDiscount(discountItem);
 	}
-	
+
 }
