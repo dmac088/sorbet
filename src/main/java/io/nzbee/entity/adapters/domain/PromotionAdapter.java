@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import io.nzbee.Constants;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.ports.IPromotionPortService;
 import io.nzbee.domain.promotion.IBagPromotion;
@@ -40,9 +42,13 @@ public class PromotionAdapter implements IPromotionPortService {
 	
 		//bag promotions
 		promotionService.findAll()
+		.stream().filter(p -> p.getTypeCode().equals(Constants.promotionTypeBag))
 		.forEach(dto -> {
 			//we need to check if the bag is eligible for the promotion before executing
 			//or this should be done within the execute method of the promotion object itself
+			
+			System.out.println(dto.getTypeCode());
+			System.out.println(dto.getMechanicCode());
 			
 			IBagPromotion p = (IBagPromotion) promotionMapper.DTOToDo(dto);
 			p.execute(bag);

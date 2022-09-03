@@ -55,7 +55,12 @@ public class PromotionValDiscDTO implements IPromotionDTO {
 	}
 	
 	@Override
-	public String getType() {
+	public String getTypeCode() {
+		return this.promotion.getTypeCode();
+	}
+
+	@Override
+	public String getMechanicCode() {
 		return Constants.promotionDiscriminatorValDISC;
 	}
 

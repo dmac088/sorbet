@@ -1,5 +1,7 @@
 package io.nzbee.entity.promotion.bngn;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+
 import java.math.BigDecimal;
 import java.util.Map;
 import io.nzbee.Constants;
@@ -37,7 +39,12 @@ public class PromotionBngnDTO implements IPromotionDTO {
 	}
 
 	@Override
-	public String getType() {
+	public String getTypeCode() {
+		return this.promotion.getTypeCode();
+	}
+
+	@Override
+	public String getMechanicCode() {
 		return Constants.promotionDiscriminatorBNGN;
 	}
 

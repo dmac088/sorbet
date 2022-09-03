@@ -89,8 +89,13 @@ public class PromotionDomainDTO implements IPromotionDTO {
 	}
 
 	@Override
-	public String getType() {
+	public String getTypeCode() {
 		return this.promotionTypeCode;
+	}
+
+	@Override
+	public String getMechanicCode() {
+		return this.promotionMechanicCode;
 	}
 	
 }

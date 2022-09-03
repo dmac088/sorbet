@@ -26,7 +26,7 @@ public class PromotionMapperImpl implements IPromotionMapper {
 	@Override
 	public Promotion DTOToDo(IPromotionDTO dto) {
 		System.out.println(dto.getClass().getSimpleName());
-		System.out.println(dto.getType());
+		System.out.println(dto.getTypeCode());
 		if(dto instanceof PromotionBngnDTO) {
 			return this.DTOToDo((PromotionBngnDTO) dto);
 		}
