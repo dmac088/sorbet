@@ -41,6 +41,11 @@ public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromot
 		return bagItems;
 	}
 	
+	@Override
+	public List<IDiscountableBagItem> getDiscountableItems() {
+		return this.getBagItems().stream().map(i -> (IDiscountableBagItem) i).collect(Collectors.toList());
+	}
+	
 	public void addItem(RegularBagItem p, Long qty) {
 		System.out.println("adding quantity " + qty + " for product " + p.getBagItem().getProductUPC());
 		

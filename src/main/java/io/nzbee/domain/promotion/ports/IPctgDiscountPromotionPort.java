@@ -6,6 +6,7 @@ import io.nzbee.domain.bag.item.IDiscountableBagItem;
 public interface IPctgDiscountPromotionPort {
 
 	//we need to spread the discount amount across the line items
-	List<IDiscountableBagItem> getItems();
+	List<IDiscountableBagItem> getDiscountableItems();
+	
 	
 }
