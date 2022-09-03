@@ -43,11 +43,6 @@ public class PromotionAdapter implements IPromotionPortService {
 		//bag promotions
 		promotionService.findAll()
 		.forEach(dto -> {
-			//we need to check if the bag is eligible for the promotion before executing
-			//or this should be done within the execute method of the promotion object itself
-			
-			System.out.println(dto.getTypeCode());
-			System.out.println(dto.getMechanicCode());
 			
 			IBagPromotion p = (IBagPromotion) promotionMapper.DTOToDo(dto);
 
@@ -60,24 +55,6 @@ public class PromotionAdapter implements IPromotionPortService {
 				});
 			});
 		});
-
-		//shipping promotions
-//		promotionService.findShippingPromotions()
-//		.forEach(dto -> {
-//			//we need to check if the bag is eligible for the promotion before executing
-//			//or this should be done within the execute method of the promotion object itself
-//					
-//			IBagPromotion p = (IBagPromotion) promotionMapper.DTOToDo(dto);
-//			if(bag.hasShippingItem()) {
-//				System.out.println(bag.getShippingItem().getUPC());
-//				System.out.println(dto.getType());
-//				p.execute(bag.getShippingItem());
-//				
-//				bag.getShippingItem().getBagItem().getDiscounts().forEach(d -> {
-//					System.out.println("shipping discount is: " + d.getDiscountAmount());
-//				});
-//			}
-//		});
 
 		return bag;
 	}
