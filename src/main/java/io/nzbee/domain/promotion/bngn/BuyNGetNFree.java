@@ -13,6 +13,8 @@ public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePr
 	private Long buyQuantity;
 	
 	private BigDecimal discountPctg;
+	
+	private String productUPC;
 
 
 	public BuyNGetNFree(String promotionCode, 
@@ -29,6 +31,22 @@ public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePr
 		this.discountPctg = discountPctg;
 	}
 	
+	public BuyNGetNFree(String promotionCode, 
+			String promotionTypeCode, 
+			LocalDateTime promotionStartDt,
+			LocalDateTime promotionEndDt,
+			Boolean active,
+			Boolean couponRequired,
+			String couponCode,
+			Long buyQuantity,
+			BigDecimal discountPctg,
+			String productUPC) {
+	super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
+	this.buyQuantity = buyQuantity;
+	this.discountPctg = discountPctg;
+	this.productUPC = productUPC;
+}
+	
 
 	public Long getBuyQuantity() {
 		return buyQuantity;
@@ -44,6 +62,10 @@ public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePr
 
 	public void setDiscountPctg(BigDecimal discountPctg) {
 		this.discountPctg = discountPctg;
+	}
+	
+	public String getProductUPC() {
+		return productUPC;
 	}
 
 	@Override

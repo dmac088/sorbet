@@ -5,7 +5,7 @@ import java.util.Map;
 import io.nzbee.Constants;
 import io.nzbee.entity.promotion.valdisc.IPromotionDTO;
 
-public class PromotionTypeProductDTO implements IPromotionType {
+public class PromotionTypeProductDTO implements IPromotionTypeProductDTO {
 
 	public static final String UPC_CODE_ALIAS = "prm_upc_cd";
 	
@@ -21,6 +21,7 @@ public class PromotionTypeProductDTO implements IPromotionType {
 		return promotion;
 	}
 
+	@Override
 	public String getUpcCode() {
 		return upcCode;
 	}
