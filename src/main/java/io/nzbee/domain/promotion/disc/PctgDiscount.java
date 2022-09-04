@@ -37,7 +37,7 @@ public class PctgDiscount extends Promotion implements IBagPromotion<IPctgDiscou
 	public void execute(IPctgDiscountPromotionPort bag) {
 		System.out.println("executing promotion: " + this.getClass().getSimpleName().toString());
 		System.out.println("for promotion type: " + this.getPromotionTypeCode());
-		System.out.println("for item count: " + bag.getItems().size());
+		System.out.println("for item count: " + bag.getDiscountableItems().size());
 //		object.getItems().stream().forEach(bi -> {
 //			bi.addDiscount(applyDiscount(bi));
 //		}); 
