@@ -12,6 +12,7 @@ public class PctgDiscount extends Promotion implements IBagPromotion<IPctgDiscou
 	
 	private BigDecimal discountPctg;
 	
+	
 	public PctgDiscount(String promotionCode, 
 						String promotionTypeCode, 
 						LocalDateTime promotionStartDt,
@@ -23,6 +24,21 @@ public class PctgDiscount extends Promotion implements IBagPromotion<IPctgDiscou
 		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
 		
 		this.discountPctg = discountPctg;
+	}
+	
+	public PctgDiscount(String promotionCode, 
+			String promotionTypeCode, 
+			LocalDateTime promotionStartDt,
+			LocalDateTime promotionEndDt,
+			BigDecimal discountPctg,
+			Boolean active,
+			Boolean couponRequired,
+			String couponCode,
+			String productUPC) {
+	super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
+	
+	this.discountPctg 	= discountPctg;
+	this.productUPC 	= productUPC;
 	}
 
 	public BigDecimal getDiscountPctg() {
@@ -53,5 +69,7 @@ public class PctgDiscount extends Promotion implements IBagPromotion<IPctgDiscou
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 
 }

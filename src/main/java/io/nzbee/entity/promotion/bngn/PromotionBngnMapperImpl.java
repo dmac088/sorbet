@@ -1,28 +1,20 @@
 package io.nzbee.entity.promotion.bngn;
 
-import java.util.Map;
-
 import org.springframework.stereotype.Component;
-
 import io.nzbee.Constants;
 import io.nzbee.domain.promotion.bngn.BuyNGetNFree;
-import io.nzbee.entity.promotion.PromotionDomainDTO;
-import io.nzbee.entity.promotion.disc.PromotionDiscDTO;
 import io.nzbee.entity.promotion.type.IPromotionTypeProductDTO;
-import io.nzbee.entity.promotion.valdisc.IPromotionDTO;
-import io.nzbee.entity.promotion.valdisc.PromotionValDiscDTO;
 
 @Component(value = "promotionOrderMapper")
 public class PromotionBngnMapperImpl implements IPromotionBngnMapper {
 
 	@Override
 	public BuyNGetNFree DTOToDo(PromotionBngnDTO dto) {
-
-		return 
+		return getDomainObject(dto);
 
 	}
 	
-	private BuyNGetNFree getSubType(PromotionBngnDTO dto) {
+	private BuyNGetNFree getDomainObject(PromotionBngnDTO dto) {
 		 switch(dto.getTypeCode()) {
 			case Constants.promotionTypeProduct:
 				return new BuyNGetNFree(dto.getPromotion().getPromotionCode(), dto.getPromotion().getPromotionType().typeCode(), dto.getPromotion().getPromotionStartDate(),

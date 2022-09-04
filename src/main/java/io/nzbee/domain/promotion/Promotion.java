@@ -18,11 +18,11 @@ public class Promotion implements IProductPromotionType {
 
 	protected final String couponCode;
 
-	private String productUPC;
+	protected String productUPC;
 
-	private String brandCode;
+	protected String brandCode;
 
-	private String categoryCode;
+	protected String categoryCode;
 
 	public Promotion(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
 			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode) {

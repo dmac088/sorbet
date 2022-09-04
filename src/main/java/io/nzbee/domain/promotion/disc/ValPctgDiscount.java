@@ -28,6 +28,18 @@ public class ValPctgDiscount extends Promotion implements IBagPromotion<IDiscoun
 		this.currency = currency;
 		this.direction = direction;
 	}
+	
+	public ValPctgDiscount(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
+			LocalDateTime promotionEndDt, BigDecimal discountPctg, Boolean active, Boolean couponRequired,
+			String couponCode, BigDecimal dollarThreshold, String currency, String direction, String productUPC) {
+		super(promotionCode, promotionTypeCode, promotionStartDt, promotionEndDt, active, couponRequired, couponCode);
+
+		this.discountPctg = discountPctg;
+		this.dollarThreshold = dollarThreshold;
+		this.currency = currency;
+		this.direction = direction;
+		this.productUPC = productUPC;
+	}
 
 	public BigDecimal getDiscountPctg() {
 		return discountPctg;
