@@ -154,7 +154,6 @@ public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromot
 		this.shippingItem = null;
 	}
 
-	@Override
 	public List<IDiscountableBagItem> getItems() {
 		return this.getBagItems().stream().map(i -> (IDiscountableBagItem) i).collect(Collectors.toList());
 	}
@@ -163,6 +162,5 @@ public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromot
 	public BigDecimal getTotalAmount() {
 		return this.getSubTotalAmount();
 	}
-
 
 }

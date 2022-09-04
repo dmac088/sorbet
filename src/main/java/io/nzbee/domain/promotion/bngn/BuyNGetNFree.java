@@ -2,7 +2,9 @@ package io.nzbee.domain.promotion.bngn;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import io.nzbee.Constants;
 import io.nzbee.domain.promotion.IBagPromotion;
+import io.nzbee.domain.promotion.IProductPromotionType;
 import io.nzbee.domain.promotion.Promotion;
 import io.nzbee.domain.promotion.ports.IBnGnFreePromotionPort;
 
@@ -49,7 +51,14 @@ public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePr
 		System.out.println("executing promotion: " + this.getClass().getSimpleName().toString());
 		System.out.println("for promotion type: " + this.getPromotionTypeCode());
 		System.out.println("for total: " + bag.getTotalAmount());
-		
+		if(this.getPromotionTypeCode().equals(Constants.promotionTypeProduct)) {
+			bag.getDiscountableItems().forEach(i -> {
+				if(((IProductPromotionType) this).forUPC(i.getUPC())) {
+					System.out.println("for product: " + i.getUPC());
+				}
+			});
+		}
+			
 	}
 
 
