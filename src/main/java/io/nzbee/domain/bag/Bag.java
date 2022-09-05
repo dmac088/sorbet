@@ -56,7 +56,7 @@ public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromot
 		if(obi.isPresent()) {
 			obi.get().getBagItem().addToQuantity(qty);
 		} else {
-			this.getBagItems().add(new RegularBagItem(new BagItem(this, p.getBagItem().getProductUPC(), qty, p.getBagItem().getMarkdownPrice()), p.getBagItemWeight(), p.isInStock()));
+			this.getBagItems().add(new RegularBagItem(new BagItem(this, p.getBagItem().getProductUPC(), qty, p.getBagItem().getMarkdownPrice(),p.getBrandCode(), p.getCategoryCodes()), p.getBagItemWeight(), p.isInStock()));
 		}
 	}
 	

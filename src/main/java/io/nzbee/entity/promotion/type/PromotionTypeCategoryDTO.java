@@ -4,7 +4,7 @@ import java.util.Map;
 import io.nzbee.Constants;
 import io.nzbee.entity.promotion.valdisc.IPromotionDTO;
 
-public class PromotionTypeCategoryDTO implements IPromotionType  {
+public class PromotionTypeCategoryDTO implements IPromotionTypeCategoryDTO  {
 	
 	public static final String CATEGORY_CODE_ALIAS = "prm_cat_cd";
 	
@@ -20,6 +20,7 @@ public class PromotionTypeCategoryDTO implements IPromotionType  {
 		return promotion;
 	}
 
+	@Override
 	public String getCategoryCode() {
 		return categoryCode;
 	}

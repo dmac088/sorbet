@@ -7,38 +7,47 @@ import io.nzbee.domain.bag.item.IDiscountableBagItem;
 import io.nzbee.domain.promotion.IBagPromotion;
 import io.nzbee.domain.promotion.Promotion;
 import io.nzbee.domain.promotion.ports.IPctgDiscountPromotionPort;
+import io.nzbee.domain.promotion.value.BrandCode;
+import io.nzbee.domain.promotion.value.CategoryCode;
+import io.nzbee.domain.promotion.value.ProductUPC;
 
 public class PctgDiscount extends Promotion implements IBagPromotion<IPctgDiscountPromotionPort> {
-	
+
 	private BigDecimal discountPctg;
-	
-	
-	public PctgDiscount(String promotionCode, 
-						String promotionTypeCode, 
-						LocalDateTime promotionStartDt,
-						LocalDateTime promotionEndDt,
-						BigDecimal discountPctg,
-						Boolean active,
-						Boolean couponRequired,
-						String couponCode) {
+
+	public PctgDiscount(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
+			LocalDateTime promotionEndDt, BigDecimal discountPctg, Boolean active, Boolean couponRequired,
+			String couponCode) {
 		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
-		
+
 		this.discountPctg = discountPctg;
 	}
+
+	public PctgDiscount(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
+			LocalDateTime promotionEndDt, BigDecimal discountPctg, Boolean active, Boolean couponRequired,
+			String couponCode, ProductUPC productUPC) {
+		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
+
+		this.discountPctg = discountPctg;
+		this.productUPC = productUPC.getValue();
+	}
 	
-	public PctgDiscount(String promotionCode, 
-			String promotionTypeCode, 
-			LocalDateTime promotionStartDt,
-			LocalDateTime promotionEndDt,
-			BigDecimal discountPctg,
-			Boolean active,
-			Boolean couponRequired,
-			String couponCode,
-			String productUPC) {
-	super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
+	public PctgDiscount(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
+			LocalDateTime promotionEndDt, BigDecimal discountPctg, Boolean active, Boolean couponRequired,
+			String couponCode, BrandCode brandCode) {
+		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
+
+		this.discountPctg = discountPctg;
+		this.brandCode = brandCode.getValue();
+	}
 	
-	this.discountPctg 	= discountPctg;
-	this.productUPC 	= productUPC;
+	public PctgDiscount(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
+			LocalDateTime promotionEndDt, BigDecimal discountPctg, Boolean active, Boolean couponRequired,
+			String couponCode, CategoryCode categoryCode) {
+		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
+
+		this.discountPctg = discountPctg;
+		this.categoryCode = categoryCode.getValue();
 	}
 
 	public BigDecimal getDiscountPctg() {
@@ -69,7 +78,5 @@ public class PctgDiscount extends Promotion implements IBagPromotion<IPctgDiscou
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
 
 }

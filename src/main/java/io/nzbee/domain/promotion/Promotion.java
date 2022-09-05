@@ -1,8 +1,9 @@
 package io.nzbee.domain.promotion;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-public class Promotion implements IProductPromotionType {
+public class Promotion implements IProductPromotionType, IBrandPromotionType, ICategoryPromotionType {
 
 	protected final String promotionCode;
 
@@ -18,11 +19,11 @@ public class Promotion implements IProductPromotionType {
 
 	protected final String couponCode;
 
-	protected String productUPC;
+	protected  String productUPC;
 
-	protected String brandCode;
+	protected  String brandCode;
 
-	protected String categoryCode;
+	protected  String categoryCode;
 
 	public Promotion(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
 			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode) {
@@ -33,19 +34,6 @@ public class Promotion implements IProductPromotionType {
 		this.active = active;
 		this.couponRequired = couponRequired;
 		this.couponCode = couponCode;
-	}
-
-	public Promotion(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
-			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode,
-			String productUPC) {
-		this.promotionCode = promotionCode;
-		this.promotionTypeCode = promotionTypeCode;
-		this.promotionStartDt = promotionStartDt;
-		this.promotionEndDt = promotionEndDt;
-		this.active = active;
-		this.couponRequired = couponRequired;
-		this.couponCode = couponCode;
-		this.productUPC = productUPC;
 	}
 
 	public String getPromotionCode() {
@@ -88,6 +76,26 @@ public class Promotion implements IProductPromotionType {
 	@Override
 	public Boolean forUPC(String upc) {
 		return this.productUPC.equals(upc);
+	}
+
+	@Override
+	public String getBrandCode() {
+		return this.brandCode;
+	}
+
+	@Override
+	public Boolean forBrandCode(String brandCode) {
+		return this.brandCode.equals(brandCode);
+	}
+
+	@Override
+	public Boolean forCategoryCodes(List<String> categoryCodes) {
+		return categoryCodes.contains(this.categoryCode);
+	}
+
+	@Override
+	public String getCategoryCode() {
+		return this.categoryCode;
 	}
 
 }

@@ -1,6 +1,7 @@
 package io.nzbee.domain.bag.item.shipping;
 
 import java.math.BigDecimal;
+import java.util.List;
 import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.bag.item.BagItemDiscount;
 import io.nzbee.domain.bag.item.IDiscountableBagItem;
@@ -38,4 +39,13 @@ public class ShippingBagItem implements IDiscountableBagItem {
 		this.getBagItem().addDiscount(discountItem);
 	}
 
+	@Override
+	public String getBrandCode() {
+		return this.getBagItem().getBrandCode();
+	}
+
+	@Override
+	public List<String> getCategoryCodes() {
+		return this.getBagItem().getCategoryCodes();
+	}
 }

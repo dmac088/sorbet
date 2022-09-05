@@ -88,8 +88,6 @@ public class ShippingBagItemDomainAdapter implements IShippingBagItemPortService
 		}
 	}
 	
-	
-
 	@Override
 	@Transactional
 	public void save(RegularBagItem domainObject) {

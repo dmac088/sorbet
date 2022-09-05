@@ -42,7 +42,9 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 						new BagItem(bag, 
 						dto.getProductUPC(), 
 						dto.getQuantity(), 
-						dto.getMarkdownPrice()),
+						dto.getMarkdownPrice(),
+						dto.getBrandCode(),
+						dto.getCategoryCodes()),
 						dto.getWeight(),
 						dto.isInStock()
 					);
@@ -56,7 +58,9 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 				new BagItem(bag, 
 				dto.getProductUPC(), 
 				quantity, 
-				dto.getMarkdownPrice()),
+				dto.getMarkdownPrice(),
+				dto.getBrandCode(),
+				dto.getCategoryCodes()),
 				dto.getWeight(),
 				dto.isInStock()
 			);

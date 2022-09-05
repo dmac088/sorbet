@@ -4,7 +4,7 @@ import java.util.Map;
 import io.nzbee.Constants;
 import io.nzbee.entity.promotion.valdisc.IPromotionDTO;
 
-public class PromotionTypeBrandDTO implements IPromotionType  {
+public class PromotionTypeBrandDTO implements IPromotionTypeBrandDTO  {
 	
 	public static final String BRAND_CODE_ALIAS = "prm_bnd_cd";
 	
@@ -20,6 +20,7 @@ public class PromotionTypeBrandDTO implements IPromotionType  {
 		return promotion;
 	}
 	
+	@Override
 	public String getBrandCode() {
 		return brandCode;
 	}

@@ -10,7 +10,11 @@ public class BagItem {
 
 	private Bag bag;
 	
-	private String productUPC;
+	private final List<String> categoryCodes;
+	
+	private final String brandCode;
+	
+	private final String productUPC;
 	
 	private Long quantity;
 	
@@ -20,21 +24,25 @@ public class BagItem {
 	
 	private String bagItemStatus;
 	
-	private BigDecimal markdownPrice;
+	private final BigDecimal markdownPrice;
 	
-	private List<BagItemDiscount> discounts;
+	private final List<BagItemDiscount> discounts;
 
 	
 	public BagItem(	Bag bag, 
 					String productUPC,
 			  	   	Long quantity,
-			  	   	BigDecimal markdownPrice) {
+			  	   	BigDecimal markdownPrice,
+			  	   	String brandCode,
+			  	   	List<String> categoryCodes) {
 		this.bag 				= bag;
 		this.productUPC			= productUPC;
 		this.quantity 			= quantity;
 		this.bagItemStatus 		= Constants.bagItemStatusCodeNew;
 		this.markdownPrice 		= markdownPrice;
 		this.discounts 			= new ArrayList<BagItemDiscount>();
+		this.brandCode			= brandCode;
+		this.categoryCodes  	= categoryCodes;
 	}
 
 	public Bag getBag() {
@@ -95,6 +103,14 @@ public class BagItem {
 
 	public List<BagItemDiscount> getDiscounts() {
 		return discounts;
+	}
+
+	public List<String> getCategoryCodes() {
+		return categoryCodes;
+	}
+
+	public String getBrandCode() {
+		return brandCode;
 	}
 	
 }

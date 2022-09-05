@@ -43,7 +43,8 @@ public class ShippingBagItemDomainDTOMapperImpl implements IShippingBagItemDomai
 				new BagItem(bag, 
 				dto.getProductUPC(), 
 				quantity, 
-				dto.getMarkdownPrice())
+				dto.getMarkdownPrice(),
+				dto.getBrandCode(),dto.getCategoryCodes())
 			);
 	}
 	
@@ -55,7 +56,9 @@ public class ShippingBagItemDomainDTOMapperImpl implements IShippingBagItemDomai
 				new BagItem(bag, 
 				dto.getProductUPC(), 
 				new Long(1), 
-				dto.getMarkdownPrice())
+				dto.getMarkdownPrice(),
+				dto.getBrandCode(),
+				dto.getCategoryCodes())
 			);
 	}
 

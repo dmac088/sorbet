@@ -3,10 +3,19 @@ package io.nzbee.domain.promotion.bngn;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import io.nzbee.Constants;
+import io.nzbee.domain.bag.item.BagItemDiscount;
+import io.nzbee.domain.bag.item.IDiscountableBagItem;
 import io.nzbee.domain.promotion.IBagPromotion;
+import io.nzbee.domain.promotion.IBrandPromotionType;
+import io.nzbee.domain.promotion.ICategoryPromotionType;
 import io.nzbee.domain.promotion.IProductPromotionType;
 import io.nzbee.domain.promotion.Promotion;
 import io.nzbee.domain.promotion.ports.IBnGnFreePromotionPort;
+import io.nzbee.domain.promotion.value.BrandCode;
+import io.nzbee.domain.promotion.value.CategoryCode;
+import io.nzbee.domain.promotion.value.ProductUPC;
+
+import org.apache.tomcat.util.buf.StringUtils;
 
 public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePromotionPort> {
 
@@ -24,13 +33,32 @@ public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePr
 
 	public BuyNGetNFree(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
 			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode, Long buyQuantity,
-			BigDecimal discountPctg, String productUPC) {
+			BigDecimal discountPctg, ProductUPC productUPC) {
 		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
 		this.buyQuantity = buyQuantity;
 		this.discountPctg = discountPctg;
-		this.productUPC = productUPC;
+		this.productUPC = productUPC.getValue();
 	}
-
+	
+	public BuyNGetNFree(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
+			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode, Long buyQuantity,
+			BigDecimal discountPctg, BrandCode brandCode) {
+		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
+		this.buyQuantity = buyQuantity;
+		this.discountPctg = discountPctg;
+		this.brandCode = brandCode.getValue();
+	}
+	
+	public BuyNGetNFree(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
+			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode, Long buyQuantity,
+			BigDecimal discountPctg, CategoryCode categoryCode) {
+		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
+		this.buyQuantity = buyQuantity;
+		this.discountPctg = discountPctg;
+		System.out.println("the value is: " + categoryCode.getValue());
+		this.categoryCode = categoryCode.getValue();
+	}
+	
 	public Long getBuyQuantity() {
 		return buyQuantity;
 	}
@@ -52,14 +80,41 @@ public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePr
 		System.out.println("executing promotion: " + this.getClass().getSimpleName().toString());
 		System.out.println("for promotion type: " + this.getPromotionTypeCode());
 		System.out.println("for total: " + bag.getTotalAmount());
-		if (this.getPromotionTypeCode().equals(Constants.promotionTypeProduct)) {
-			bag.getDiscountableItems().forEach(i -> {
-				if (((IProductPromotionType) this).forUPC(i.getUPC())) {
-					System.out.println("for product: " + i.getUPC());
-				}
-			});
+		switch(this.getPromotionTypeCode()) {
+				case Constants.promotionTypeProduct: 
+					bag.getDiscountableItems().forEach(i -> {
+						if (((IProductPromotionType) this).forUPC(i.getUPC())) {
+							System.out.println("for product: " + i.getUPC());
+							i.addDiscount(applyDiscount(i));
+						}
+					});
+					return;
+				case Constants.promotionTypeBrand:
+					bag.getDiscountableItems().forEach(i -> {
+						if (((IBrandPromotionType) this).forBrandCode(i.getBrandCode())) {
+							System.out.println("for brand: " + i.getBrandCode());
+							i.addDiscount(applyDiscount(i));
+						}
+					});
+					return;
+				case Constants.promotionTypeCategory:
+					bag.getDiscountableItems().forEach(i -> {
+						System.out.println("Promotion category code: " + this.getCategoryCode());
+						System.out.println("test categories: " + StringUtils.join(i.getCategoryCodes()));
+						if (((ICategoryPromotionType) this).forCategoryCodes(i.getCategoryCodes())) {
+							System.out.println("for categories: " + StringUtils.join(i.getCategoryCodes()));
+							i.addDiscount(applyDiscount(i));
+						}
+					});
+					return;
+				default:
+					return;
 		}
-
+	}
+	
+	private BagItemDiscount applyDiscount(IDiscountableBagItem bi) {
+		BigDecimal amount = bi.getTotalAmount().multiply(discountPctg);
+		return new BagItemDiscount(bi, amount);
 	}
 
 	@Override
