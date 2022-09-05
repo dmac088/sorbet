@@ -1,17 +1,17 @@
 package io.nzbee.domain.promotion.value;
 
 
-public class ProductUPC {
+public final class ProductUPC {
 
-	private final String productUPC;
+	private String productUPC;
 
 	public ProductUPC(String productUPC) {
 		super();
 		this.productUPC = productUPC;
 	}
 	
-	public String getValue() {
-		return productUPC;
+	public Boolean sameAs(ProductUPC other) {
+		return this.productUPC.equals(other.productUPC);
 	}
 
 }

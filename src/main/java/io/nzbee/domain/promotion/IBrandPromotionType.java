@@ -1,8 +1,10 @@
 package io.nzbee.domain.promotion;
 
+import io.nzbee.domain.promotion.value.BrandCode;
+
 public interface IBrandPromotionType {
 
-	String getBrandCode();
+	BrandCode getBrandCode();
 	
 	Boolean forBrandCode(String brandCode);
 	

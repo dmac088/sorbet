@@ -37,7 +37,7 @@ public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePr
 		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
 		this.buyQuantity = buyQuantity;
 		this.discountPctg = discountPctg;
-		this.productUPC = productUPC.getValue();
+		this.productUPC = productUPC;
 	}
 	
 	public BuyNGetNFree(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
@@ -46,7 +46,7 @@ public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePr
 		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
 		this.buyQuantity = buyQuantity;
 		this.discountPctg = discountPctg;
-		this.brandCode = brandCode.getValue();
+		this.brandCode = brandCode;
 	}
 	
 	public BuyNGetNFree(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
@@ -55,8 +55,8 @@ public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePr
 		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
 		this.buyQuantity = buyQuantity;
 		this.discountPctg = discountPctg;
-		System.out.println("the value is: " + categoryCode.getValue());
-		this.categoryCode = categoryCode.getValue();
+		System.out.println("the value is: " + categoryCode);
+		this.categoryCode = categoryCode;
 	}
 	
 	public Long getBuyQuantity() {
@@ -100,7 +100,6 @@ public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePr
 				case Constants.promotionTypeCategory:
 					bag.getDiscountableItems().forEach(i -> {
 						System.out.println("Promotion category code: " + this.getCategoryCode());
-						System.out.println("test categories: " + StringUtils.join(i.getCategoryCodes()));
 						if (((ICategoryPromotionType) this).forCategoryCodes(i.getCategoryCodes())) {
 							System.out.println("for categories: " + StringUtils.join(i.getCategoryCodes()));
 							i.addDiscount(applyDiscount(i));

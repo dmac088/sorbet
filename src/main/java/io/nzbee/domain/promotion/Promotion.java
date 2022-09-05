@@ -2,6 +2,9 @@ package io.nzbee.domain.promotion;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import io.nzbee.domain.promotion.value.BrandCode;
+import io.nzbee.domain.promotion.value.CategoryCode;
+import io.nzbee.domain.promotion.value.ProductUPC;
 
 public class Promotion implements IProductPromotionType, IBrandPromotionType, ICategoryPromotionType {
 
@@ -19,11 +22,11 @@ public class Promotion implements IProductPromotionType, IBrandPromotionType, IC
 
 	protected final String couponCode;
 
-	protected  String productUPC;
+	protected  ProductUPC productUPC;
 
-	protected  String brandCode;
+	protected  BrandCode brandCode;
 
-	protected  String categoryCode;
+	protected  CategoryCode categoryCode;
 
 	public Promotion(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
 			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode) {
@@ -69,7 +72,7 @@ public class Promotion implements IProductPromotionType, IBrandPromotionType, IC
 	}
 
 	@Override
-	public String getUPC() {
+	public ProductUPC getUPC() {
 		return this.productUPC;
 	}
 
@@ -79,13 +82,13 @@ public class Promotion implements IProductPromotionType, IBrandPromotionType, IC
 	}
 
 	@Override
-	public String getBrandCode() {
+	public BrandCode getBrandCode() {
 		return this.brandCode;
 	}
 
 	@Override
 	public Boolean forBrandCode(String brandCode) {
-		return this.brandCode.equals(brandCode);
+		return this.brandCode.equals(brandCode); 
 	}
 
 	@Override
@@ -94,7 +97,7 @@ public class Promotion implements IProductPromotionType, IBrandPromotionType, IC
 	}
 
 	@Override
-	public String getCategoryCode() {
+	public CategoryCode getCategoryCode() {
 		return this.categoryCode;
 	}
 

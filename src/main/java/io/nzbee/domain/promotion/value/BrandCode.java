@@ -1,17 +1,17 @@
 package io.nzbee.domain.promotion.value;
 
 
-public class BrandCode {
+public final class BrandCode {
 
-	private final String BrandCode;
+	private String brandCode;
 
 	public BrandCode(String brandCode) {
 		super();
-		BrandCode = brandCode;
+		this.brandCode = brandCode;
 	}
 	
-	public String getValue() {
-		return BrandCode;
+	public Boolean sameAs(BrandCode other) {
+		return this.brandCode.equals(other.brandCode);
 	}
-
+	
 }

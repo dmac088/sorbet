@@ -2,9 +2,11 @@ package io.nzbee.domain.promotion;
 
 import java.util.List;
 
+import io.nzbee.domain.promotion.value.CategoryCode;
+
 public interface ICategoryPromotionType {
 
-    String getCategoryCode();
+    CategoryCode getCategoryCode();
 	
 	Boolean forCategoryCodes(List<String> categoryCodes);
 	

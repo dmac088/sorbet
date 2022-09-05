@@ -1,17 +1,17 @@
 package io.nzbee.domain.promotion.value;
 
 
-public class CategoryCode {
+public final class CategoryCode {
 
-	private final String CategoryCode;
+	private String categoryCode;
 
 	public CategoryCode(String categoryCode) {
 		super();
-		CategoryCode = categoryCode;
+		this.categoryCode = categoryCode;
 	}
 	
-	public String getValue() {
-		return CategoryCode;
+	public Boolean sameAs(CategoryCode other) {
+		return this.categoryCode.equals(other.categoryCode);
 	}
 
 }

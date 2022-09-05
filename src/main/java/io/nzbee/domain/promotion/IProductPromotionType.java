@@ -1,8 +1,10 @@
 package io.nzbee.domain.promotion;
 
+import io.nzbee.domain.promotion.value.ProductUPC;
+
 public interface IProductPromotionType {
 
-	String getUPC();
+	ProductUPC getUPC();
 	
 	Boolean forUPC(String upc);
 	
