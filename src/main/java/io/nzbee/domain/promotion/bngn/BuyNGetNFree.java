@@ -36,29 +36,25 @@ public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePr
 	public BuyNGetNFree(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
 			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode, Long buyQuantity,
 			BigDecimal discountPctg, ProductUPC productUPC) {
-		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
+		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode, productUPC);
 		this.buyQuantity = buyQuantity;
 		this.discountPctg = discountPctg;
-		this.productUPC = productUPC;
 	}
 	
 	public BuyNGetNFree(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
 			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode, Long buyQuantity,
 			BigDecimal discountPctg, BrandCode brandCode) {
-		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
+		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode, brandCode);
 		this.buyQuantity = buyQuantity;
 		this.discountPctg = discountPctg;
-		this.brandCode = brandCode;
 	}
 	
 	public BuyNGetNFree(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
 			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode, Long buyQuantity,
 			BigDecimal discountPctg, CategoryCode categoryCode) {
-		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
+		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode, categoryCode);
 		this.buyQuantity = buyQuantity;
 		this.discountPctg = discountPctg;
-		System.out.println("the value is: " + categoryCode);
-		this.categoryCode = categoryCode;
 	}
 	
 	public Long getBuyQuantity() {

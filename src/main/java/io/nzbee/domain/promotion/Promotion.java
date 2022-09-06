@@ -2,8 +2,6 @@ package io.nzbee.domain.promotion;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import io.nzbee.domain.promotion.value.BrandCode;
 import io.nzbee.domain.promotion.value.CategoryCode;
 import io.nzbee.domain.promotion.value.ProductUPC;
@@ -24,11 +22,11 @@ public class Promotion implements IProductPromotionType, IBrandPromotionType, IC
 
 	protected final String couponCode;
 
-	protected  ProductUPC productUPC;
+	private  ProductUPC productUPC;
 
-	protected  BrandCode brandCode;
+	private  BrandCode brandCode;
 
-	protected  CategoryCode categoryCode;
+	private  CategoryCode categoryCode;
 
 	public Promotion(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
 			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode) {
@@ -39,6 +37,42 @@ public class Promotion implements IProductPromotionType, IBrandPromotionType, IC
 		this.active = active;
 		this.couponRequired = couponRequired;
 		this.couponCode = couponCode;
+	}
+	
+	public Promotion(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
+			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode, ProductUPC productUPC) {
+		this.promotionCode = promotionCode;
+		this.promotionTypeCode = promotionTypeCode;
+		this.promotionStartDt = promotionStartDt;
+		this.promotionEndDt = promotionEndDt;
+		this.active = active;
+		this.couponRequired = couponRequired;
+		this.couponCode = couponCode;
+		this.productUPC = productUPC;
+	}
+	
+	public Promotion(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
+			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode, BrandCode brandCode) {
+		this.promotionCode = promotionCode;
+		this.promotionTypeCode = promotionTypeCode;
+		this.promotionStartDt = promotionStartDt;
+		this.promotionEndDt = promotionEndDt;
+		this.active = active;
+		this.couponRequired = couponRequired;
+		this.couponCode = couponCode;
+		this.brandCode = brandCode;
+	}
+	
+	public Promotion(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
+			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode, CategoryCode categoryCode) {
+		this.promotionCode = promotionCode;
+		this.promotionTypeCode = promotionTypeCode;
+		this.promotionStartDt = promotionStartDt;
+		this.promotionEndDt = promotionEndDt;
+		this.active = active;
+		this.couponRequired = couponRequired;
+		this.couponCode = couponCode;
+		this.categoryCode = categoryCode;
 	}
 
 	public String getPromotionCode() {

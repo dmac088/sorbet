@@ -35,37 +35,34 @@ public class ValPctgDiscount extends Promotion implements IBagPromotion<IDiscoun
 	public ValPctgDiscount(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
 			LocalDateTime promotionEndDt, BigDecimal discountPctg, Boolean active, Boolean couponRequired,
 			String couponCode, BigDecimal dollarThreshold, String currency, String direction, ProductUPC productUPC) {
-		super(promotionCode, promotionTypeCode, promotionStartDt, promotionEndDt, active, couponRequired, couponCode);
+		super(promotionCode, promotionTypeCode, promotionStartDt, promotionEndDt, active, couponRequired, couponCode, productUPC);
 
 		this.discountPctg = discountPctg;
 		this.dollarThreshold = dollarThreshold;
 		this.currency = currency;
 		this.direction = direction;
-		this.productUPC = productUPC;
 	}
 	
 	public ValPctgDiscount(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
 			LocalDateTime promotionEndDt, BigDecimal discountPctg, Boolean active, Boolean couponRequired,
 			String couponCode, BigDecimal dollarThreshold, String currency, String direction, BrandCode brandCode) {
-		super(promotionCode, promotionTypeCode, promotionStartDt, promotionEndDt, active, couponRequired, couponCode);
+		super(promotionCode, promotionTypeCode, promotionStartDt, promotionEndDt, active, couponRequired, couponCode, brandCode);
 
 		this.discountPctg = discountPctg;
 		this.dollarThreshold = dollarThreshold;
 		this.currency = currency;
 		this.direction = direction;
-		this.brandCode = brandCode;
 	}
 	
 	public ValPctgDiscount(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
 			LocalDateTime promotionEndDt, BigDecimal discountPctg, Boolean active, Boolean couponRequired,
 			String couponCode, BigDecimal dollarThreshold, String currency, String direction, CategoryCode categoryCode) {
-		super(promotionCode, promotionTypeCode, promotionStartDt, promotionEndDt, active, couponRequired, couponCode);
+		super(promotionCode, promotionTypeCode, promotionStartDt, promotionEndDt, active, couponRequired, couponCode, categoryCode);
 
 		this.discountPctg = discountPctg;
 		this.dollarThreshold = dollarThreshold;
 		this.currency = currency;
 		this.direction = direction;
-		this.categoryCode = categoryCode;
 	}
 
 	public BigDecimal getDiscountPctg() {
