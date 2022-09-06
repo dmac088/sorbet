@@ -32,7 +32,7 @@ public class BagViewDTOMapperImpl implements IBagViewDTOMapper {
 		// map the entity bagItems to the view bagItems
 		Set<BagItemViewOut> sbi = bag.getBagItems().stream().map(dbi -> {
 			Optional<BagItemViewDTO> oe = bDto.getBagItems().stream().filter(
-					vbi -> vbi.getProduct().getProductDto().getProductUPC().equals(dbi.getBagItem().getProductUPC()))
+					vbi -> vbi.getProduct().getProductDto().getProductUPC().equals(dbi.getBagItem().getProductUPC().toString()))
 					.findAny();
 
 			if (oe.isPresent()) {
@@ -45,7 +45,7 @@ public class BagViewDTOMapperImpl implements IBagViewDTOMapper {
 
 		if (bag.hasShippingItem()) {
 			Optional<BagItemViewDTO> oe = bDto.getBagItems().stream().filter(vbi -> vbi.getProduct().getProductDto()
-					.getProductUPC().equals(bag.getShippingItem().getBagItem().getProductUPC())).findAny();
+					.getProductUPC().equals(bag.getShippingItem().getBagItem().getProductUPC().toString())).findAny();
 
 			if (oe.isPresent()) {
 				b.setShippingItem(bagItemMapper.DTOToView(oe.orElse(null), bag.getShippingItem()));

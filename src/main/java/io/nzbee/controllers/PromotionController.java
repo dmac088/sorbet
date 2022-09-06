@@ -19,7 +19,11 @@ import io.nzbee.domain.promotion.IPromotionService;
 import io.nzbee.domain.promotion.Promotion;
 import io.nzbee.domain.promotion.dto.in.CouponDTO;
 import io.nzbee.domain.services.GenericResponse;
+import io.nzbee.resources.bag.BagResource;
+import io.nzbee.resources.bag.BagResourceAssembler;
 import io.nzbee.resources.product.physical.full.PhysicalProductFullModel;
+import io.nzbee.view.bag.BagView;
+import io.nzbee.view.bag.IBagViewService;
 
 @RestController
 @RequestMapping("/api")
@@ -28,14 +32,20 @@ public class PromotionController {
 	private Logger LOGGER = LoggerFactory.getLogger(getClass());
 
 	@Autowired
+	private IBagViewService viewBagService;
+	
+	@Autowired
 	private IBagDomainService domainBagService;
 	
 	@Autowired 
 	private IPromotionService promotionService;
+	
+	@Autowired
+	private BagResourceAssembler bagResourceAssembler;
 
 	
 	@PostMapping("/Promotion/{locale}/{currency}")
-	public ResponseEntity<PhysicalProductFullModel> getPromotionDiscounts(@PathVariable String locale, 
+	public ResponseEntity<BagResource> getPromotionDiscounts(@PathVariable String locale, 
 																		  @PathVariable String currency,
 																		  Principal principal) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getPromotionDiscounts with parameter {}, {}", locale, currency);
@@ -46,7 +56,10 @@ public class PromotionController {
 		
 		promotionService.applyAll(b);
 		
-		return new ResponseEntity<>(HttpStatus.OK);
+		// get the view containing additional attributes
+		BagView bv = viewBagService.toView(locale, currency, b);
+		
+		return ResponseEntity.ok(bagResourceAssembler.toModel(bv));
 	}
 	
 	@PostMapping("/Promotion/{locale}/{currency}/Code/Validate")
