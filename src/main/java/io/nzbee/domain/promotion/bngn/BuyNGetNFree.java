@@ -2,6 +2,8 @@ package io.nzbee.domain.promotion.bngn;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.stream.Collectors;
+
 import io.nzbee.Constants;
 import io.nzbee.domain.bag.item.BagItemDiscount;
 import io.nzbee.domain.bag.item.IDiscountableBagItem;
@@ -99,9 +101,9 @@ public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePr
 					return;
 				case Constants.promotionTypeCategory:
 					bag.getDiscountableItems().forEach(i -> {
-						System.out.println("Promotion category code: " + this.getCategoryCode());
+						System.out.println("Promotion category code: " + this.getCategoryCode().toString());
 						if (((ICategoryPromotionType) this).forCategoryCodes(i.getCategoryCodes())) {
-							System.out.println("for categories: " + StringUtils.join(i.getCategoryCodes()));
+							System.out.println("for categories: " + StringUtils.join(i.getCategoryCodes().stream().map(cc -> cc.toString()).collect(Collectors.toList())));
 							i.addDiscount(applyDiscount(i));
 						}
 					});

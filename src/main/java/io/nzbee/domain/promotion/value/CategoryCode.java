@@ -13,5 +13,10 @@ public final class CategoryCode {
 	public Boolean sameAs(CategoryCode other) {
 		return this.categoryCode.equals(other.categoryCode);
 	}
+	
+	@Override
+	public String toString() {
+        return categoryCode;
+    }
 
 }

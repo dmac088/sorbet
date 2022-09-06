@@ -5,6 +5,9 @@ import java.util.List;
 import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.bag.item.BagItemDiscount;
 import io.nzbee.domain.bag.item.IDiscountableBagItem;
+import io.nzbee.domain.promotion.value.BrandCode;
+import io.nzbee.domain.promotion.value.CategoryCode;
+import io.nzbee.domain.promotion.value.ProductUPC;
 
 public class ShippingBagItem implements IDiscountableBagItem {
 
@@ -20,7 +23,7 @@ public class ShippingBagItem implements IDiscountableBagItem {
 	}
 
 	@Override
-	public String getUPC() {
+	public ProductUPC getUPC() {
 		return this.getBagItem().getProductUPC();
 	}
 
@@ -40,12 +43,12 @@ public class ShippingBagItem implements IDiscountableBagItem {
 	}
 
 	@Override
-	public String getBrandCode() {
+	public BrandCode getBrandCode() {
 		return this.getBagItem().getBrandCode();
 	}
 
 	@Override
-	public List<String> getCategoryCodes() {
+	public List<CategoryCode> getCategoryCodes() {
 		return this.getBagItem().getCategoryCodes();
 	}
 }

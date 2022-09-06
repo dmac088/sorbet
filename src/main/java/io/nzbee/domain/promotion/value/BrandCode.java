@@ -14,4 +14,9 @@ public final class BrandCode {
 		return this.brandCode.equals(other.brandCode);
 	}
 	
+	@Override
+	public String toString() {
+        return brandCode;
+    }
+	
 }

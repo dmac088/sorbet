@@ -6,6 +6,6 @@ public interface IProductPromotionType {
 
 	ProductUPC getUPC();
 	
-	Boolean forUPC(String upc);
+	Boolean forUPC(ProductUPC upc);
 	
 }

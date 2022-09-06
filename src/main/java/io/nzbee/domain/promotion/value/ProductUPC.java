@@ -14,4 +14,9 @@ public final class ProductUPC {
 		return this.productUPC.equals(other.productUPC);
 	}
 
+	@Override
+	public String toString() {
+        return productUPC;
+    }
+	
 }

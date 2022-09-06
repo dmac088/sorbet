@@ -7,7 +7,7 @@ import io.nzbee.domain.promotion.value.CategoryCode;
 public interface ICategoryPromotionType {
 
     CategoryCode getCategoryCode();
-	
-	Boolean forCategoryCodes(List<String> categoryCodes);
+
+	Boolean forCategoryCodes(List<CategoryCode> categoryCodes);
 	
 }

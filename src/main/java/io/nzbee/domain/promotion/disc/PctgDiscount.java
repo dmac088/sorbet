@@ -29,7 +29,7 @@ public class PctgDiscount extends Promotion implements IBagPromotion<IPctgDiscou
 		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
 
 		this.discountPctg = discountPctg;
-		this.productUPC = productUPC.getValue();
+		this.productUPC = productUPC;
 	}
 	
 	public PctgDiscount(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
@@ -38,7 +38,7 @@ public class PctgDiscount extends Promotion implements IBagPromotion<IPctgDiscou
 		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
 
 		this.discountPctg = discountPctg;
-		this.brandCode = brandCode.getValue();
+		this.brandCode = brandCode;
 	}
 	
 	public PctgDiscount(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
@@ -47,7 +47,7 @@ public class PctgDiscount extends Promotion implements IBagPromotion<IPctgDiscou
 		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
 
 		this.discountPctg = discountPctg;
-		this.categoryCode = categoryCode.getValue();
+		this.categoryCode = categoryCode;
 	}
 
 	public BigDecimal getDiscountPctg() {

@@ -158,8 +158,8 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 						.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.bagItemStatusNotFound,Constants.localeENGB,Constants.bagItemStatusCodeNew)));
 				i.setBagItemType(bagItemTypeService.findByCode(Constants.regularBagItemType)
 						.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.bagItemTypesNotFound,Constants.localeENGB,Constants.regularBagItemType)));
-				i.setProduct(productService.findByCode(bi.getBagItem().getProductUPC())
-						.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound,Constants.localeENGB,bi.getBagItem().getProductUPC())));
+				i.setProduct(productService.findByCode(bi.getBagItem().getProductUPC().toString())
+						.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound,Constants.localeENGB,bi.getBagItem().getProductUPC().toString())));
 				i.setQuantity(bi.getBagItem().getQuantity());
 				b.addItem(i);
 			}

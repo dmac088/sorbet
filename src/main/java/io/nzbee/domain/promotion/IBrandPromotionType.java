@@ -6,6 +6,6 @@ public interface IBrandPromotionType {
 
 	BrandCode getBrandCode();
 	
-	Boolean forBrandCode(String brandCode);
+	Boolean forBrandCode(BrandCode brandCode);
 	
 }

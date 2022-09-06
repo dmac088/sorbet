@@ -2,6 +2,8 @@ package io.nzbee.domain.promotion;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import io.nzbee.domain.promotion.value.BrandCode;
 import io.nzbee.domain.promotion.value.CategoryCode;
 import io.nzbee.domain.promotion.value.ProductUPC;
@@ -77,23 +79,23 @@ public class Promotion implements IProductPromotionType, IBrandPromotionType, IC
 	}
 
 	@Override
-	public Boolean forUPC(String upc) {
-		return this.productUPC.equals(upc);
-	}
-
-	@Override
 	public BrandCode getBrandCode() {
 		return this.brandCode;
 	}
-
+	
 	@Override
-	public Boolean forBrandCode(String brandCode) {
-		return this.brandCode.equals(brandCode); 
+	public Boolean forUPC(ProductUPC upc) {
+		return this.productUPC.sameAs(upc);
 	}
 
 	@Override
-	public Boolean forCategoryCodes(List<String> categoryCodes) {
-		return categoryCodes.contains(this.categoryCode);
+	public Boolean forBrandCode(BrandCode brandCode) {
+		return this.brandCode.sameAs(brandCode); 
+	}
+
+	@Override
+	public Boolean forCategoryCodes(List<CategoryCode> categoryCodes) {
+		return categoryCodes.stream().filter(cc -> this.categoryCode.sameAs(cc)).findAny().isPresent();
 	}
 
 	@Override

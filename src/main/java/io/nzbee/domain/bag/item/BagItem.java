@@ -5,16 +5,19 @@ import java.util.ArrayList;
 import java.util.List;
 import io.nzbee.Constants;
 import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.promotion.value.BrandCode;
+import io.nzbee.domain.promotion.value.CategoryCode;
+import io.nzbee.domain.promotion.value.ProductUPC;
 
 public class BagItem {
 
 	private Bag bag;
 	
-	private final List<String> categoryCodes;
+	private final List<CategoryCode> categoryCodes;
 	
-	private final String brandCode;
+	private final BrandCode brandCode;
 	
-	private final String productUPC;
+	private final ProductUPC productUPC;
 	
 	private Long quantity;
 	
@@ -30,11 +33,11 @@ public class BagItem {
 
 	
 	public BagItem(	Bag bag, 
-					String productUPC,
+					ProductUPC productUPC,
 			  	   	Long quantity,
 			  	   	BigDecimal markdownPrice,
-			  	   	String brandCode,
-			  	   	List<String> categoryCodes) {
+			  	   	BrandCode brandCode,
+			  	   	List<CategoryCode> categoryCodes) {
 		this.bag 				= bag;
 		this.productUPC			= productUPC;
 		this.quantity 			= quantity;
@@ -57,7 +60,7 @@ public class BagItem {
 		this.quantity += quantity;
 	}
 
-	public String getProductUPC() {
+	public ProductUPC getProductUPC() {
 		return this.productUPC;
 	}
 	
@@ -105,11 +108,11 @@ public class BagItem {
 		return discounts;
 	}
 
-	public List<String> getCategoryCodes() {
+	public List<CategoryCode> getCategoryCodes() {
 		return categoryCodes;
 	}
 
-	public String getBrandCode() {
+	public BrandCode getBrandCode() {
 		return brandCode;
 	}
 	

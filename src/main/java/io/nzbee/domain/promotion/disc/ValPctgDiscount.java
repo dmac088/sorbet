@@ -41,7 +41,7 @@ public class ValPctgDiscount extends Promotion implements IBagPromotion<IDiscoun
 		this.dollarThreshold = dollarThreshold;
 		this.currency = currency;
 		this.direction = direction;
-		this.productUPC = productUPC.getValue();
+		this.productUPC = productUPC;
 	}
 	
 	public ValPctgDiscount(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
@@ -53,7 +53,7 @@ public class ValPctgDiscount extends Promotion implements IBagPromotion<IDiscoun
 		this.dollarThreshold = dollarThreshold;
 		this.currency = currency;
 		this.direction = direction;
-		this.brandCode = brandCode.getValue();
+		this.brandCode = brandCode;
 	}
 	
 	public ValPctgDiscount(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
@@ -65,7 +65,7 @@ public class ValPctgDiscount extends Promotion implements IBagPromotion<IDiscoun
 		this.dollarThreshold = dollarThreshold;
 		this.currency = currency;
 		this.direction = direction;
-		this.categoryCode = categoryCode.getValue();
+		this.categoryCode = categoryCode;
 	}
 
 	public BigDecimal getDiscountPctg() {

@@ -3,6 +3,7 @@ package io.nzbee.domain.bag.item;
 import java.math.BigDecimal;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
+import io.nzbee.domain.promotion.value.ProductUPC;
 
 public class DroolsBagItemWrapper {
 	
@@ -28,7 +29,7 @@ public class DroolsBagItemWrapper {
 		return this.bagItem.getBagItem().getBagItemStatus();
 	}
 	
-	public String getProductUPC() {
+	public ProductUPC getProductUPC() {
 		return this.bagItem.getBagItem().getProductUPC();
 	}
 	

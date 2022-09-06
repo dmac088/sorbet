@@ -18,7 +18,7 @@ public class BagItemViewDTOMapperImpl implements IBagItemViewDTOMapper {
 		biv.setBagItemWeight(rbi.getBagItemWeight());
 		biv.setItemId(dto.getBagItemId());
 		biv.setItemQty(dto.getQuantity());
-		biv.setItemUPC(rbi.getBagItem().getProductUPC());
+		biv.setItemUPC(rbi.getBagItem().getProductUPC().toString());
 		biv.setMarkdownPrice(rbi.getBagItem().getMarkdownPrice());
 		return biv;
 	}
@@ -30,7 +30,7 @@ public class BagItemViewDTOMapperImpl implements IBagItemViewDTOMapper {
 		biv.setBagItemWeight(new BigDecimal(0));
 		biv.setItemId(dto.getBagItemId());
 		biv.setItemQty(dto.getQuantity());
-		biv.setItemUPC(sbi.getBagItem().getProductUPC());
+		biv.setItemUPC(sbi.getBagItem().getProductUPC().toString());
 		biv.setMarkdownPrice(sbi.getBagItem().getMarkdownPrice());
 		return biv;
 	} 
