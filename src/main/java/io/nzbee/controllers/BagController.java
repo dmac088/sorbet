@@ -19,6 +19,7 @@ import io.nzbee.domain.bag.IBagDomainService;
 import io.nzbee.domain.bag.item.regular.IRegularBagItemDomainService;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.promotion.dto.in.CouponDTO;
+import io.nzbee.domain.promotion.value.ProductUPC;
 import io.nzbee.resources.bag.BagResource;
 import io.nzbee.resources.bag.BagResourceAssembler;
 import io.nzbee.resources.bag.item.BagItemResource;
@@ -144,7 +145,7 @@ public class BagController {
 		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
 
 		Optional<RegularBagItem> obi = b.getBagItems().stream()
-				.filter(bi -> bi.getBagItem().getProductUPC().equals(itemCode)).findAny();
+				.filter(bi -> bi.getBagItem().getProductUPC().sameAs(new ProductUPC(itemCode))).findAny();
 
 		if (obi.isPresent()) {
 			domainBagItemService.delete(obi.get());

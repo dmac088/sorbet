@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import io.nzbee.view.bag.BagView;
 import io.nzbee.view.bag.item.BagItemViewOut;
 import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.promotion.value.ProductUPC;
 import io.nzbee.entity.bag.item.view.BagItemViewDTO;
 import io.nzbee.entity.bag.item.view.IBagItemViewDTOMapper;
 
@@ -32,7 +33,7 @@ public class BagViewDTOMapperImpl implements IBagViewDTOMapper {
 		// map the entity bagItems to the view bagItems
 		Set<BagItemViewOut> sbi = bag.getBagItems().stream().map(dbi -> {
 			Optional<BagItemViewDTO> oe = bDto.getBagItems().stream().filter(
-					vbi -> vbi.getProduct().getProductDto().getProductUPC().equals(dbi.getBagItem().getProductUPC().toString()))
+					vbi -> new ProductUPC(vbi.getProduct().getProductDto().getProductUPC()).sameAs(dbi.getBagItem().getProductUPC()))
 					.findAny();
 
 			if (oe.isPresent()) {
@@ -44,8 +45,8 @@ public class BagViewDTOMapperImpl implements IBagViewDTOMapper {
 		b.getBagItems().addAll(sbi);
 
 		if (bag.hasShippingItem()) {
-			Optional<BagItemViewDTO> oe = bDto.getBagItems().stream().filter(vbi -> vbi.getProduct().getProductDto()
-					.getProductUPC().equals(bag.getShippingItem().getBagItem().getProductUPC().toString())).findAny();
+			Optional<BagItemViewDTO> oe = bDto.getBagItems().stream().filter(vbi -> new ProductUPC(vbi.getProduct().getProductDto()
+					.getProductUPC()).sameAs(bag.getShippingItem().getBagItem().getProductUPC())).findAny();
 
 			if (oe.isPresent()) {
 				b.setShippingItem(bagItemMapper.DTOToView(oe.orElse(null), bag.getShippingItem()));

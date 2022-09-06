@@ -14,6 +14,7 @@ import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
 import io.nzbee.domain.customer.Customer;
+import io.nzbee.domain.promotion.value.ProductUPC;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.bag.entity.IBagEntityService;
 import io.nzbee.entity.bag.item.domain.IRegularBagItemDomainDTOMapper;
@@ -146,7 +147,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		// map the domain bagItems to entity bagItems
 		d.getBagItems().stream().forEach(bi -> {
 			Optional<BagItemEntity> obi = b.getBagItems().stream()
-					.filter(i -> i.getProduct().getProductUPC().equals(bi.getBagItem().getProductUPC())).findAny();
+					.filter(i -> new ProductUPC(i.getProduct().getProductUPC()).sameAs(bi.getBagItem().getProductUPC())).findAny();
 
 			if (obi.isPresent()) {
 				BagItemEntity bie = obi.get();

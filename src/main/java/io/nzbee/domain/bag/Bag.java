@@ -14,6 +14,7 @@ import io.nzbee.domain.customer.Customer;
 import io.nzbee.domain.promotion.ports.IBnGnFreePromotionPort;
 import io.nzbee.domain.promotion.ports.IDiscountThresholdPromotionPort;
 import io.nzbee.domain.promotion.ports.IPctgDiscountPromotionPort;
+import io.nzbee.domain.promotion.value.ProductUPC;
 
 public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromotionPort, IBnGnFreePromotionPort {
 	
@@ -50,7 +51,7 @@ public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromot
 		System.out.println("adding quantity " + qty + " for product " + p.getBagItem().getProductUPC());
 		
 		Optional<RegularBagItem> obi = this.getBagItems().stream()
-		.filter(bi -> bi.getBagItem().getProductUPC().equals(p.getBagItem().getProductUPC()))
+		.filter(bi -> bi.getBagItem().getProductUPC().sameAs(p.getBagItem().getProductUPC()))
 		.findAny();
 		
 		if(obi.isPresent()) {
@@ -64,12 +65,12 @@ public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromot
 		this.shippingItem = p;	
 	}
 	
-	public boolean bagItemExists(String productUPC) {
-		return this.getBagItems().stream().filter(bi -> bi.getBagItem().getProductUPC().equals(productUPC)).findAny().isPresent();
+	public boolean bagItemExists(ProductUPC productUPC) {
+		return this.getBagItems().stream().filter(bi -> bi.getBagItem().getProductUPC().sameAs(productUPC)).findAny().isPresent();
 	}
 	
-	public RegularBagItem getBagItem(String productUPC) {
-		return this.getBagItems().stream().filter(bi -> bi.getBagItem().getProductUPC().equals(productUPC)).findAny().get();
+	public RegularBagItem getBagItem(ProductUPC productUPC) {
+		return this.getBagItems().stream().filter(bi -> bi.getBagItem().getProductUPC().sameAs(productUPC)).findAny().get();
 	}
 	
 	public void removeItem(RegularBagItem bi) {

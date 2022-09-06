@@ -13,6 +13,7 @@ import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.IShippingBagItemDomainService;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
 import io.nzbee.domain.ports.IBagPortService;
+import io.nzbee.domain.promotion.value.ProductUPC;
 import io.nzbee.view.bag.item.BagItemViewIn;
 import io.nzbee.view.product.shipping.ShippingItemDTOIn;
 
@@ -82,11 +83,11 @@ public class BagDomainServiceImpl implements IBagDomainService {
     							username);
 
     	//check if the product already exists in the bag
-    	boolean exists = b.bagItemExists(dto.getItemUPC());
+    	boolean exists = b.bagItemExists(new ProductUPC(dto.getItemUPC()));
     	
     	//create a bag item if one does not exists otherwise retrieve the existing bag item
     	RegularBagItem bagItem = exists 
-    					? b.getBagItem(dto.getItemUPC()) 
+    					? b.getBagItem(new ProductUPC(dto.getItemUPC())) 
     					: domainBagItemService.getNewPhysicalItem(locale, currency, b, dto.getItemUPC(), dto.getItemQty());
     	
     	

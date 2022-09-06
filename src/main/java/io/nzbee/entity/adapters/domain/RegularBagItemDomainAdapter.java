@@ -11,6 +11,7 @@ import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
 import io.nzbee.domain.ports.IBagItemPortService;
+import io.nzbee.domain.promotion.value.ProductUPC;
 import io.nzbee.entity.bag.domain.IBagDomainDTOService;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.bag.item.domain.IBagItemDomainDTOMapper;
@@ -79,7 +80,7 @@ public class RegularBagItemDomainAdapter implements IBagItemPortService {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".delete with parameters {}", domainObject.getBagItem().getProductUPC());
 		Optional<PersonEntity> op = personService.findByUsernameAndRole(domainObject.getBagItem().getBag().getCustomer().getUserName(), Constants.partyRoleCustomer);
 		BagEntity b = op.get().getPersonParty().getBag();
-		Optional<BagItemEntity> obi = b.getBagItems().stream().filter(bi -> bi.getProduct().getProductUPC().equals(domainObject.getBagItem().getProductUPC())).findAny();
+		Optional<BagItemEntity> obi = b.getBagItems().stream().filter(bi -> (new ProductUPC(bi.getProduct().getProductUPC())).sameAs((domainObject.getBagItem().getProductUPC()))).findAny();
 		io.nzbee.entity.bag.item.entity.BagItemEntity bi = obi.get();
 		b.removeItem(bi);
 		bagService.save(b); 
