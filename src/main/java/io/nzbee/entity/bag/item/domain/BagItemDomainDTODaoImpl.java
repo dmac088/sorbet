@@ -101,23 +101,33 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewItem, with parameters {}, {}, {}, {}, {}", currency, priceType, shipDest, shipType, bagWeight);
 		
 		@SuppressWarnings("deprecation")
-		Query query = em.createQuery(
-				" SELECT "
-				+ "	pe.productUPC									as upc_cd, "
-				+ " '" + Constants.bagItemStatusCodeNew + "'		as bag_item_sts_cd,"
-				+ "	prcs.priceValue									as prc_val, "
-				+ " '" + Constants.shippingBagItemType + "' 		as bag_item_typ_cd "
-				+ " "
-				+ " FROM ProductEntity pe "
-				+ " JOIN pe.productShipping ps "
-				+ " JOIN pe.prices prcs "
-				+ " JOIN prcs.type typ "
-				+ " JOIN prcs.currency curr "
-				+ " WHERE typ.code 				= :priceType "
-				+ " AND curr.code 				= :currency "
-				+ " AND ps.shippingTypeCode 	= :shipType "
-				+ " AND ps.shippingCountryCode 	= :shipDest "
-				+ " AND coalesce(:bagWeight, 0.1) between ps.weightFrom and ps.weightTo ")
+		Query query = em.createNativeQuery(
+				"select \n"
+				+ "  productent0_.upc_cd as upc_cd, \n"
+				+ "  '" + Constants.bagItemStatusCodeNew + "' as bag_item_sts_cd, \n"
+				+ "  prices2_.prc_val as prc_val, \n"
+				+ "  '" + Constants.shippingBagItemType + "' as bag_item_typ_cd,\n"
+				+ "  b.bnd_cd,\n"
+				+ "  string_agg(c.cat_cd, ',') as lst_cat_cd\n"
+				+ "from \n"
+				+ "  mochi.product productent0_ \n"
+				+ "  inner join mochi.product_shipping shippingpr1_ on productent0_.prd_id = shippingpr1_.prd_id \n"
+				+ "  inner join mochi.price prices2_ on productent0_.prd_id = prices2_.prd_id \n"
+				+ "  inner join mochi.price_type productpri3_ on prices2_.prc_typ_id = productpri3_.prc_typ_id \n"
+				+ "  inner join mochi.currency currency4_ on prices2_.ccy_id = currency4_.ccy_id \n"
+				+ "  inner join mochi.brand b on productent0_.bnd_id = b.bnd_id\n"
+				+ "  left join mochi.product_category pc on productent0_.prd_id = pc.prd_id\n"
+				+ "  left join mochi.category c on pc.cat_id = c.cat_id\n"
+				+ "where 0=0\n"
+				+ "  and productpri3_.prc_typ_cd 	= :priceType \n"
+				+ "  and currency4_.ccy_cd 			= :currency \n"
+				+ "  and shippingpr1_.shp_typ_cd   	= :shipType \n"
+				+ "  and shippingpr1_.shp_ctry_cd  	= :shipDest \n"
+				+ "  and coalesce(:bagWeight, 0.1) 	between shp_wgt_frm and shp_wgt_to\n"
+				+ "group by \n"
+				+ "    productent0_.upc_cd, \n"
+				+ "    prices2_.prc_val, \n"
+				+ "    b.bnd_cd")
 		.unwrap(org.hibernate.query.Query.class)
 		.setParameter("currency", currency)
 		.setParameter("priceType", priceType)
@@ -156,9 +166,9 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 				+ "  left join mochi.product_category pc on productent0_.prd_id = pc.prd_id\n"
 				+ "  left join mochi.category c on pc.cat_id = c.cat_id\n"
 				+ "where 0=0\n"
-				+ "  and productpri3_.prc_typ_cd = :priceType\n"
-				+ "  and currency4_.ccy_cd = :currency\n"
-				+ "  and productent0_.upc_cd = :productUPC\n"
+				+ "  and productpri3_.prc_typ_cd 	= :priceType\n"
+				+ "  and currency4_.ccy_cd 			= :currency\n"
+				+ "  and productent0_.upc_cd 		= :productUPC\n"
 				+ "group by \n"
 				+ "    productent0_.upc_cd, \n"
 				+ "    prices2_.prc_val, \n"
