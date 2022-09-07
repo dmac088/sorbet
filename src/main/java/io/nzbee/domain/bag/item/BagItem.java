@@ -1,5 +1,6 @@
 package io.nzbee.domain.bag.item;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import io.nzbee.Constants;
@@ -97,9 +98,8 @@ public class BagItem {
 	}
 	
 	public Money getBagItemDiscount() {
-		Money sum = bag.getMoney();
-		this.discounts.forEach(d -> sum.add(d.getDiscountAmount()));
-		return sum;
+		BigDecimal b = this.getDiscounts().stream().map(d -> d.getDiscountAmount().amount()).reduce(BigDecimal.ZERO, BigDecimal::add);
+		return bag.getMoney().add(new Money(b, bag.getCurrency(), BigDecimal.ROUND_HALF_UP));
 	}
 	
 	public void addDiscount(BagItemDiscount discount) {

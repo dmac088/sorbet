@@ -102,6 +102,8 @@ public class BagController {
 
 		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
 
+		promotionService.applyAll(b);
+		
 		Set<BagItemViewOut> sbi = viewBagService.findByCode(locale, currency, principal.getName(), b).getBagItems();
 
 		return ResponseEntity.ok(bagItemResourceAssembler.toCollectionModel(sbi));

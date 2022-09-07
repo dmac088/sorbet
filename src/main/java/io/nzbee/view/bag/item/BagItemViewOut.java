@@ -18,6 +18,8 @@ public class BagItemViewOut {
 	
 	private BigDecimal bagItemWeight;
 	
+	private BigDecimal bagItemDiscount;
+	
 
 	public BagItemViewOut() {
 		// TODO Auto-generated constructor stub
@@ -77,6 +79,14 @@ public class BagItemViewOut {
 
 	public void setBagItemWeight(BigDecimal bagItemWeight) {
 		this.bagItemWeight = bagItemWeight;
+	}
+
+	public BigDecimal getBagItemDiscount() {
+		return bagItemDiscount;
+	}
+
+	public void setBagItemDiscount(BigDecimal bagItemDiscount) {
+		this.bagItemDiscount = bagItemDiscount;
 	}
 	
 }

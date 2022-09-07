@@ -81,7 +81,7 @@ public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePr
 	public void execute(IBnGnFreePromotionPort bag) {
 		System.out.println("executing promotion: " + this.getClass().getSimpleName().toString());
 		System.out.println("for promotion type: " + this.getPromotionTypeCode());
-		System.out.println("for total: " + bag.getTotalAmount());
+		System.out.println("for total: " + bag.getTotalAmount().amount());
 		switch(this.getPromotionTypeCode().toString()) {
 				case Constants.promotionTypeProduct: 
 					bag.getDiscountableItems().forEach(i -> {

@@ -53,6 +53,9 @@ public class PromotionController {
 		
 		promotionService.applyAll(b);
 		
+		System.out.println("discount items...");
+		System.out.println(b.getDiscountableItems().size());
+		
 		// get the view containing additional attributes
 		BagView bv = viewBagService.toView(locale, currency, b);
 		
