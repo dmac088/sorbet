@@ -15,7 +15,10 @@ import io.nzbee.domain.promotion.Promotion;
 import io.nzbee.domain.promotion.ports.IBnGnFreePromotionPort;
 import io.nzbee.domain.promotion.value.BrandCode;
 import io.nzbee.domain.promotion.value.CategoryCode;
+import io.nzbee.domain.promotion.value.CouponCode;
 import io.nzbee.domain.promotion.value.ProductUPC;
+import io.nzbee.domain.promotion.value.PromotionCode;
+import io.nzbee.domain.promotion.value.PromotionTypeCode;
 
 import org.apache.tomcat.util.buf.StringUtils;
 
@@ -25,34 +28,34 @@ public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePr
 
 	private BigDecimal discountPctg;
 
-	public BuyNGetNFree(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
-			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode, Long buyQuantity,
+	public BuyNGetNFree(PromotionCode promotionCode, PromotionTypeCode promotionTypeCode, LocalDateTime promotionStartDt,
+			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, CouponCode couponCode, Long buyQuantity,
 			BigDecimal discountPctg) {
-		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
+		super(promotionCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode);
 		this.buyQuantity = buyQuantity;
 		this.discountPctg = discountPctg;
 	}
 
-	public BuyNGetNFree(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
-			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode, Long buyQuantity,
+	public BuyNGetNFree(PromotionCode promotionCode, PromotionTypeCode promotionTypeCode, LocalDateTime promotionStartDt,
+			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, CouponCode couponCode, Long buyQuantity,
 			BigDecimal discountPctg, ProductUPC productUPC) {
-		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode, productUPC);
+		super(promotionCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode, productUPC);
 		this.buyQuantity = buyQuantity;
 		this.discountPctg = discountPctg;
 	}
 	
-	public BuyNGetNFree(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
-			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode, Long buyQuantity,
+	public BuyNGetNFree(PromotionCode promotionCode, PromotionTypeCode promotionTypeCode, LocalDateTime promotionStartDt,
+			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, CouponCode couponCode, Long buyQuantity,
 			BigDecimal discountPctg, BrandCode brandCode) {
-		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode, brandCode);
+		super(promotionCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode, brandCode);
 		this.buyQuantity = buyQuantity;
 		this.discountPctg = discountPctg;
 	}
 	
-	public BuyNGetNFree(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
-			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode, Long buyQuantity,
+	public BuyNGetNFree(PromotionCode promotionCode, PromotionTypeCode promotionTypeCode, LocalDateTime promotionStartDt,
+			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, CouponCode couponCode, Long buyQuantity,
 			BigDecimal discountPctg, CategoryCode categoryCode) {
-		super(promotionTypeCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode, categoryCode);
+		super(promotionCode, promotionTypeCode, promotionEndDt, promotionEndDt, active, couponRequired, couponCode, categoryCode);
 		this.buyQuantity = buyQuantity;
 		this.discountPctg = discountPctg;
 	}
@@ -78,7 +81,7 @@ public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePr
 		System.out.println("executing promotion: " + this.getClass().getSimpleName().toString());
 		System.out.println("for promotion type: " + this.getPromotionTypeCode());
 		System.out.println("for total: " + bag.getTotalAmount());
-		switch(this.getPromotionTypeCode()) {
+		switch(this.getPromotionTypeCode().toString()) {
 				case Constants.promotionTypeProduct: 
 					bag.getDiscountableItems().forEach(i -> {
 						if (((IProductPromotionType) this).forUPC(i.getUPC())) {

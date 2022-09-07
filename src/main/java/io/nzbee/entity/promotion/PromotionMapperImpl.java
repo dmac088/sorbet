@@ -3,6 +3,9 @@ package io.nzbee.entity.promotion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import io.nzbee.domain.promotion.Promotion;
+import io.nzbee.domain.promotion.value.CouponCode;
+import io.nzbee.domain.promotion.value.PromotionCode;
+import io.nzbee.domain.promotion.value.PromotionTypeCode;
 import io.nzbee.entity.promotion.bngn.IPromotionBngnMapper;
 import io.nzbee.entity.promotion.bngn.PromotionBngnDTO;
 import io.nzbee.entity.promotion.disc.IPromotionDiscMapper;
@@ -56,13 +59,13 @@ public class PromotionMapperImpl implements IPromotionMapper {
 	
 	@Override
 	public Promotion DTOToDo(PromotionDomainDTO dto) {
-		return new Promotion(dto.getPromotionCode(),
-							 dto.getPromotionType().typeCode(), 
+		return new Promotion(new PromotionCode(dto.getPromotionCode()),
+							 new PromotionTypeCode(dto.getPromotionType().typeCode()), 
 							 dto.getPromotionStartDate(), 
 							 dto.getPromotionEndDate(),
 							 dto.getPromotionIsActive(), 
 							 dto.getCouponRequired(), 
-							 dto.getCouponCode());
+							 new CouponCode(dto.getCouponCode()));
 
 	}
 

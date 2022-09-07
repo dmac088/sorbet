@@ -9,7 +9,10 @@ import io.nzbee.domain.promotion.Promotion;
 import io.nzbee.domain.promotion.ports.IDiscountThresholdPromotionPort;
 import io.nzbee.domain.promotion.value.BrandCode;
 import io.nzbee.domain.promotion.value.CategoryCode;
+import io.nzbee.domain.promotion.value.CouponCode;
 import io.nzbee.domain.promotion.value.ProductUPC;
+import io.nzbee.domain.promotion.value.PromotionCode;
+import io.nzbee.domain.promotion.value.PromotionTypeCode;
 
 public class ValPctgDiscount extends Promotion implements IBagPromotion<IDiscountThresholdPromotionPort> {
 
@@ -21,9 +24,9 @@ public class ValPctgDiscount extends Promotion implements IBagPromotion<IDiscoun
 
 	private final String direction;
 	
-	public ValPctgDiscount(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
+	public ValPctgDiscount(PromotionCode promotionCode, PromotionTypeCode promotionTypeCode, LocalDateTime promotionStartDt,
 			LocalDateTime promotionEndDt, BigDecimal discountPctg, Boolean active, Boolean couponRequired,
-			String couponCode, BigDecimal dollarThreshold, String currency, String direction) {
+			CouponCode couponCode, BigDecimal dollarThreshold, String currency, String direction) {
 		super(promotionCode, promotionTypeCode, promotionStartDt, promotionEndDt, active, couponRequired, couponCode);
 
 		this.discountPctg = discountPctg;
@@ -32,9 +35,9 @@ public class ValPctgDiscount extends Promotion implements IBagPromotion<IDiscoun
 		this.direction = direction;
 	}
 	
-	public ValPctgDiscount(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
+	public ValPctgDiscount(PromotionCode promotionCode, PromotionTypeCode promotionTypeCode, LocalDateTime promotionStartDt,
 			LocalDateTime promotionEndDt, BigDecimal discountPctg, Boolean active, Boolean couponRequired,
-			String couponCode, BigDecimal dollarThreshold, String currency, String direction, ProductUPC productUPC) {
+			CouponCode couponCode, BigDecimal dollarThreshold, String currency, String direction, ProductUPC productUPC) {
 		super(promotionCode, promotionTypeCode, promotionStartDt, promotionEndDt, active, couponRequired, couponCode, productUPC);
 
 		this.discountPctg = discountPctg;
@@ -43,9 +46,9 @@ public class ValPctgDiscount extends Promotion implements IBagPromotion<IDiscoun
 		this.direction = direction;
 	}
 	
-	public ValPctgDiscount(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
+	public ValPctgDiscount(PromotionCode promotionCode, PromotionTypeCode promotionTypeCode, LocalDateTime promotionStartDt,
 			LocalDateTime promotionEndDt, BigDecimal discountPctg, Boolean active, Boolean couponRequired,
-			String couponCode, BigDecimal dollarThreshold, String currency, String direction, BrandCode brandCode) {
+			CouponCode couponCode, BigDecimal dollarThreshold, String currency, String direction, BrandCode brandCode) {
 		super(promotionCode, promotionTypeCode, promotionStartDt, promotionEndDt, active, couponRequired, couponCode, brandCode);
 
 		this.discountPctg = discountPctg;
@@ -54,9 +57,9 @@ public class ValPctgDiscount extends Promotion implements IBagPromotion<IDiscoun
 		this.direction = direction;
 	}
 	
-	public ValPctgDiscount(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
+	public ValPctgDiscount(PromotionCode promotionCode, PromotionTypeCode promotionTypeCode, LocalDateTime promotionStartDt,
 			LocalDateTime promotionEndDt, BigDecimal discountPctg, Boolean active, Boolean couponRequired,
-			String couponCode, BigDecimal dollarThreshold, String currency, String direction, CategoryCode categoryCode) {
+			CouponCode couponCode, BigDecimal dollarThreshold, String currency, String direction, CategoryCode categoryCode) {
 		super(promotionCode, promotionTypeCode, promotionStartDt, promotionEndDt, active, couponRequired, couponCode, categoryCode);
 
 		this.discountPctg = discountPctg;

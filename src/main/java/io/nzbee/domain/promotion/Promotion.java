@@ -4,13 +4,16 @@ import java.time.LocalDateTime;
 import java.util.List;
 import io.nzbee.domain.promotion.value.BrandCode;
 import io.nzbee.domain.promotion.value.CategoryCode;
+import io.nzbee.domain.promotion.value.CouponCode;
 import io.nzbee.domain.promotion.value.ProductUPC;
+import io.nzbee.domain.promotion.value.PromotionCode;
+import io.nzbee.domain.promotion.value.PromotionTypeCode;
 
 public class Promotion implements IProductPromotionType, IBrandPromotionType, ICategoryPromotionType {
 
-	protected final String promotionCode;
+	protected final PromotionCode promotionCode;
 
-	protected final String promotionTypeCode;
+	protected final PromotionTypeCode promotionTypeCode;
 
 	protected final LocalDateTime promotionStartDt;
 
@@ -20,16 +23,16 @@ public class Promotion implements IProductPromotionType, IBrandPromotionType, IC
 
 	protected final Boolean couponRequired;
 
-	protected final String couponCode;
+	protected final CouponCode couponCode;
 
-	private  ProductUPC productUPC;
+	private  ProductUPC productUPC; 
 
 	private  BrandCode brandCode;
 
 	private  CategoryCode categoryCode;
 
-	public Promotion(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
-			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode) {
+	public Promotion(PromotionCode promotionCode, PromotionTypeCode promotionTypeCode, LocalDateTime promotionStartDt,
+			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, CouponCode couponCode) {
 		this.promotionCode = promotionCode;
 		this.promotionTypeCode = promotionTypeCode;
 		this.promotionStartDt = promotionStartDt;
@@ -39,8 +42,8 @@ public class Promotion implements IProductPromotionType, IBrandPromotionType, IC
 		this.couponCode = couponCode;
 	}
 	
-	public Promotion(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
-			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode, ProductUPC productUPC) {
+	public Promotion(PromotionCode promotionCode, PromotionTypeCode promotionTypeCode, LocalDateTime promotionStartDt,
+			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, CouponCode couponCode, ProductUPC productUPC) {
 		this.promotionCode = promotionCode;
 		this.promotionTypeCode = promotionTypeCode;
 		this.promotionStartDt = promotionStartDt;
@@ -51,8 +54,8 @@ public class Promotion implements IProductPromotionType, IBrandPromotionType, IC
 		this.productUPC = productUPC;
 	}
 	
-	public Promotion(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
-			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode, BrandCode brandCode) {
+	public Promotion(PromotionCode promotionCode, PromotionTypeCode promotionTypeCode, LocalDateTime promotionStartDt,
+			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, CouponCode couponCode, BrandCode brandCode) {
 		this.promotionCode = promotionCode;
 		this.promotionTypeCode = promotionTypeCode;
 		this.promotionStartDt = promotionStartDt;
@@ -61,10 +64,10 @@ public class Promotion implements IProductPromotionType, IBrandPromotionType, IC
 		this.couponRequired = couponRequired;
 		this.couponCode = couponCode;
 		this.brandCode = brandCode;
-	}
+	} 
 	
-	public Promotion(String promotionCode, String promotionTypeCode, LocalDateTime promotionStartDt,
-			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, String couponCode, CategoryCode categoryCode) {
+	public Promotion(PromotionCode promotionCode, PromotionTypeCode promotionTypeCode, LocalDateTime promotionStartDt,
+			LocalDateTime promotionEndDt, Boolean active, Boolean couponRequired, CouponCode couponCode, CategoryCode categoryCode) {
 		this.promotionCode = promotionCode;
 		this.promotionTypeCode = promotionTypeCode;
 		this.promotionStartDt = promotionStartDt;
@@ -75,7 +78,8 @@ public class Promotion implements IProductPromotionType, IBrandPromotionType, IC
 		this.categoryCode = categoryCode;
 	}
 
-	public String getPromotionCode() {
+
+	public PromotionCode getPromotionCode() {
 		return promotionCode;
 	}
 
@@ -87,7 +91,7 @@ public class Promotion implements IProductPromotionType, IBrandPromotionType, IC
 		return promotionEndDt;
 	}
 
-	public String getPromotionTypeCode() {
+	public PromotionTypeCode getPromotionTypeCode() {
 		return promotionTypeCode;
 	}
 
@@ -103,7 +107,7 @@ public class Promotion implements IProductPromotionType, IBrandPromotionType, IC
 		return couponRequired;
 	}
 
-	public String getCouponCode() {
+	public CouponCode getCouponCode() {
 		return couponCode;
 	}
 
