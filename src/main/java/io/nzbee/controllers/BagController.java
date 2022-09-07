@@ -18,7 +18,9 @@ import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.IBagDomainService;
 import io.nzbee.domain.bag.item.regular.IRegularBagItemDomainService;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
+import io.nzbee.domain.promotion.IPromotionService;
 import io.nzbee.domain.promotion.dto.in.CouponDTO;
+import io.nzbee.domain.promotion.value.CouponCode;
 import io.nzbee.domain.promotion.value.ProductUPC;
 import io.nzbee.resources.bag.BagResource;
 import io.nzbee.resources.bag.BagResourceAssembler;
@@ -44,6 +46,9 @@ public class BagController {
 
 	@Autowired
 	private IRegularBagItemDomainService domainBagItemService;
+	
+	@Autowired 
+	private IPromotionService promotionService;
 
 	@Autowired
 	private IBagViewMapper bagDTOMapper;
@@ -67,6 +72,8 @@ public class BagController {
 		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
 
 		domainBagService.checkAllBagRules(b);
+		
+		promotionService.applyAll(b);
 
 		// get the view containing additional attributes
 		BagView bv = viewBagService.toView(locale, currency, b);
@@ -79,9 +86,11 @@ public class BagController {
 			 @RequestBody CouponDTO dto, Principal principal) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".addCouponToBag");
 
-		domainBagService.addItemToBag(locale, currency, dto.getCoupon(), principal.getName());
+		domainBagService.addItemToBag(locale, currency, new CouponCode(dto.getCoupon()), principal.getName());
 		
 		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
+		
+		promotionService.applyAll(b);
 		
 		return ResponseEntity.ok(bagResourceAssembler.toModel(bagDTOMapper.toView(b)));
 	}
@@ -111,6 +120,8 @@ public class BagController {
 
 		// rehydrate the bag domain model and view, then return it
 		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
+		
+		promotionService.applyAll(b);
 
 		BagView bv = viewBagService.toView(locale, currency, b);
 
@@ -128,6 +139,8 @@ public class BagController {
 		domainBagService.addShippingItem(locale, currency, dto, principal.getName());
 
 		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
+		
+		promotionService.applyAll(b);
 
 		// re-retrieve the bag view and return it
 		BagView bv = viewBagService.findByCode(locale, currency, principal.getName(), b);
@@ -143,6 +156,8 @@ public class BagController {
 				currency, itemCode);
 		// here we get the bag and bagItems but the products are null
 		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
+		
+		promotionService.applyAll(b);
 
 		Optional<RegularBagItem> obi = b.getBagItems().stream()
 				.filter(bi -> bi.getBagItem().getProductUPC().sameAs(new ProductUPC(itemCode))).findAny();

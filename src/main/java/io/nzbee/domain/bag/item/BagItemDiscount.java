@@ -1,6 +1,6 @@
 package io.nzbee.domain.bag.item;
 
-import java.math.BigDecimal;
+import io.nzbee.domain.promotion.value.Money;
 
 //remember the BagItemDiscount will not be persisted
 //we only need what we need to compute the bagItem total
@@ -8,9 +8,9 @@ public class BagItemDiscount {
 
 	private IDiscountableBagItem bagItem;
 	
-	private BigDecimal discountAmount; 
+	private Money discountAmount; 
 	
-	public BagItemDiscount(IDiscountableBagItem bi, BigDecimal discount) {
+	public BagItemDiscount(IDiscountableBagItem bi, Money discount) {
 		this.bagItem 		= bi;
 		this.discountAmount = discount;
 	}
@@ -19,7 +19,7 @@ public class BagItemDiscount {
 		return bagItem;
 	}
 	
-	public BigDecimal getDiscountAmount() {
+	public Money getDiscountAmount() {
 		return discountAmount;
 	}
 

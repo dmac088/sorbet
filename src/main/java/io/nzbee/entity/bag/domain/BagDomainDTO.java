@@ -15,6 +15,8 @@ public class BagDomainDTO {
 	
 	public static final String COUPONS_ALIAS = "coupons";
 	
+	public static final String CURRENCY_CODE_ALIAS = "curr";
+	
 	private final Long bagId;
 	
 	private List<String> coupons;
@@ -25,12 +27,13 @@ public class BagDomainDTO {
 	
 	private final PersonDomainDTO customer;
 	
+	private final String currency;
+	
 	
 	public BagDomainDTO(Object[] tuple, Map<String, Integer> aliasToIndexMap) {
 		this.bagId = ((Number) tuple[aliasToIndexMap.get(ID_ALIAS)]).longValue();
 		this.customer = new PersonDomainDTO(tuple, aliasToIndexMap);
-		System.out.println("the type is.....");
-		System.out.println(aliasToIndexMap.get(COUPONS_ALIAS).toString());
+		this.currency = tuple[aliasToIndexMap.get(CURRENCY_CODE_ALIAS)].toString();
 		this.coupons = Arrays.asList(tuple[aliasToIndexMap.get(COUPONS_ALIAS)].toString().split(","));
 	}
 	
@@ -57,7 +60,9 @@ public class BagDomainDTO {
 	public List<String> getCoupons() {
 		return coupons;
 	}
-	
-	
+
+	public String getCurrency() {
+		return currency;
+	}
 	
 }

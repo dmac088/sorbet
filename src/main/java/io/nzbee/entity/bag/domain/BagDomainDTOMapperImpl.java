@@ -1,6 +1,7 @@
 package io.nzbee.entity.bag.domain;
 
 import java.time.LocalDateTime;
+import java.util.Currency;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,6 +15,7 @@ import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
 import io.nzbee.domain.customer.Customer;
+import io.nzbee.domain.promotion.value.CouponCode;
 import io.nzbee.domain.promotion.value.ProductUPC;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.bag.entity.IBagEntityService;
@@ -63,7 +65,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 	@Override
 	public Bag DTOToDo(BagDomainDTO dto) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo()");
-		Bag b = new Bag(personMapper.DTOToDo(dto.getCustomer()));
+		Bag b = new Bag(personMapper.DTOToDo(dto.getCustomer()), Currency.getInstance(dto.getCurrency()));
 
 		// map the entity bagItems to the domain bagItems
 		Set<RegularBagItem> sbi = dto.getRegularBagItems().stream()
@@ -84,7 +86,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		}
 		
 		dto.getCoupons().stream().forEach(cpn -> {
-			b.addCoupon(cpn);
+			b.addCoupon(new CouponCode(cpn));
 		});
 		
 		return b;
@@ -98,7 +100,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		Customer c = personMapper.DTOToDo(pDto);
 
 		// create a new bag domain object
-		Bag b = new Bag(c);
+		Bag b = new Bag(c, Currency.getInstance(dto.getCurrency()));
 
 		// map the entity bagItems to the domain bagItems
 		Set<RegularBagItem> sbi = dto.getRegularBagItems().stream()
@@ -119,7 +121,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		}
 		
 		dto.getCoupons().stream().forEach(cpn -> {
-			b.addCoupon(cpn);
+			b.addCoupon(new CouponCode(cpn));
 		});
 		
 		return b;
@@ -187,10 +189,8 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		
 		// add promotion to the bag if the promotion exists
 		d.getCoupons().stream().forEach(c -> {
-			if(!b.getCouponCodes().contains(c)) {
-				if(!c.isEmpty()) {
-					b.getCouponCodes().add(c);
-				}
+			if(!b.getCouponCodes().contains(c.toString())) {
+				b.getCouponCodes().add(c.toString());
 			}
 		});
 		// set the customer of the bag

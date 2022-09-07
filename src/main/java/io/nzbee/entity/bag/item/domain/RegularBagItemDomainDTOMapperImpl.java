@@ -1,5 +1,7 @@
 package io.nzbee.entity.bag.item.domain;
 
+import java.math.BigDecimal;
+import java.util.Currency;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -13,6 +15,7 @@ import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.promotion.value.BrandCode;
 import io.nzbee.domain.promotion.value.CategoryCode;
+import io.nzbee.domain.promotion.value.Money;
 import io.nzbee.domain.promotion.value.ProductUPC;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.bag.entity.IBagEntityService;
@@ -48,7 +51,7 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 						new BagItem(bag, 
 						new ProductUPC(dto.getProductUPC()), 
 						dto.getQuantity(), 
-						dto.getMarkdownPrice(), 
+						new Money(dto.getMarkdownPrice(), Currency.getInstance(dto.getCurrency()), BigDecimal.ROUND_HALF_EVEN),
 						new BrandCode(dto.getBrandCode()),
 						this.toCategoryCodes(dto.getCategoryCodes())),
 						dto.getWeight(),
@@ -69,7 +72,7 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 				new BagItem(bag, 
 				new ProductUPC(dto.getProductUPC()), 
 				quantity, 
-				dto.getMarkdownPrice(),
+				new Money(dto.getMarkdownPrice(), Currency.getInstance(dto.getCurrency()), BigDecimal.ROUND_HALF_EVEN),
 				new BrandCode(dto.getBrandCode()),
 				this.toCategoryCodes(dto.getCategoryCodes())),
 				dto.getWeight(),

@@ -1,5 +1,6 @@
 package io.nzbee.domain.bag;
 
+import io.nzbee.domain.promotion.value.CouponCode;
 import io.nzbee.view.bag.item.BagItemViewIn;
 import io.nzbee.view.product.shipping.ShippingItemDTOIn;
 
@@ -17,7 +18,7 @@ public interface IBagDomainService  {
 
 	void addShippingItem(String locale, String currency, ShippingItemDTOIn dto, String username);
 
-	void addItemToBag(String locale, String currency, String coupon, String name);
+	void addItemToBag(String locale, String currency, CouponCode coupon, String username);
 
 	
 

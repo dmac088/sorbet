@@ -16,6 +16,7 @@ import io.nzbee.domain.promotion.ports.IBnGnFreePromotionPort;
 import io.nzbee.domain.promotion.value.BrandCode;
 import io.nzbee.domain.promotion.value.CategoryCode;
 import io.nzbee.domain.promotion.value.CouponCode;
+import io.nzbee.domain.promotion.value.Money;
 import io.nzbee.domain.promotion.value.ProductUPC;
 import io.nzbee.domain.promotion.value.PromotionCode;
 import io.nzbee.domain.promotion.value.PromotionTypeCode;
@@ -113,7 +114,7 @@ public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePr
 	}
 	
 	private BagItemDiscount applyDiscount(IDiscountableBagItem bi) {
-		BigDecimal amount = bi.getTotalAmount().multiply(discountPctg);
+		Money amount = bi.getTotalAmount().multiply(discountPctg);
 		return new BagItemDiscount(bi, amount);
 	}
 

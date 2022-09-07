@@ -1,12 +1,12 @@
 package io.nzbee.domain.promotion.ports;
 
-import java.math.BigDecimal;
 import java.util.List;
 import io.nzbee.domain.bag.item.IDiscountableBagItem;
+import io.nzbee.domain.promotion.value.Money;
 
 public interface IBnGnFreePromotionPort {
 
-	BigDecimal getTotalAmount();
+	Money getTotalAmount();
 	
 	Long getTotalQuantity();
 

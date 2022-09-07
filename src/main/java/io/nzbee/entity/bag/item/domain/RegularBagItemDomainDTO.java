@@ -25,6 +25,8 @@ public class RegularBagItemDomainDTO {
 	
 	public static final String CATEGORY_CODES_ALIAS = "lst_cat_cd";
 
+	public static final String CURRENCY_CODES_ALIAS = "curr";
+
 	
 	private final String productUPC;
 
@@ -33,6 +35,8 @@ public class RegularBagItemDomainDTO {
 	private final String bagItemType;
 
 	private final BigDecimal markdownPrice;
+	
+	private final String currency;
 
 	private final BigDecimal weight;
 
@@ -52,6 +56,7 @@ public class RegularBagItemDomainDTO {
 		this.quantity = ((Number) tuple[aliasToIndexMap.get(BAG_ITEM_QUANTITY_ALIAS)]).longValue();
 		this.productUPC = tuple[aliasToIndexMap.get(BAG_ITEM_UPC_ALIAS)].toString();
 		this.markdownPrice = ((BigDecimal) tuple[aliasToIndexMap.get(BAG_ITEM_PRICE_ALIAS)]);
+		this.currency = tuple[aliasToIndexMap.get(CURRENCY_CODES_ALIAS)].toString();
 		this.inStock = ((Boolean) tuple[aliasToIndexMap.get(BAG_ITEM_INSTOCK_ALIAS)]);
 		this.brandCode = tuple[aliasToIndexMap.get(BRAND_CODE_ALIAS)].toString();
 		this.categoryCodes = Arrays.asList(tuple[aliasToIndexMap.get(CATEGORY_CODES_ALIAS)].toString().split(","));
@@ -87,6 +92,10 @@ public class RegularBagItemDomainDTO {
 	
 	public String getBrandCode() {
 		return brandCode;
+	}
+	
+	public String getCurrency() {
+		return currency;
 	}
 
 	public List<String> getCategoryCodes() {

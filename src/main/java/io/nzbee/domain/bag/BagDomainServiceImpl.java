@@ -13,6 +13,7 @@ import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.IShippingBagItemDomainService;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
 import io.nzbee.domain.ports.IBagPortService;
+import io.nzbee.domain.promotion.value.CouponCode;
 import io.nzbee.domain.promotion.value.ProductUPC;
 import io.nzbee.view.bag.item.BagItemViewIn;
 import io.nzbee.view.product.shipping.ShippingItemDTOIn;
@@ -41,7 +42,7 @@ public class BagDomainServiceImpl implements IBagDomainService {
 	}
 	
 	@Override
-	public void addItemToBag(String locale, String currency, String coupon, String username) {
+	public void addItemToBag(String locale, String currency, CouponCode coupon, String username) {
 		Bag b = this.findByCode(locale, currency, username);
 
 		b.addCoupon(coupon);

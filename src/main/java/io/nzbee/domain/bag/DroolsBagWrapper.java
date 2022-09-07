@@ -1,8 +1,7 @@
 package io.nzbee.domain.bag;
 
-import java.math.BigDecimal;
-
 import io.nzbee.domain.bag.item.BagItem;
+import io.nzbee.domain.promotion.value.Money;
 
 public class DroolsBagWrapper {
 	
@@ -20,7 +19,7 @@ public class DroolsBagWrapper {
 		return bag.getTotalItems();
 	}
 	
-	public BigDecimal getTotalAmount() {
+	public Money getTotalAmount() {
 		return bag.getSubTotalAmount();
 	}
 

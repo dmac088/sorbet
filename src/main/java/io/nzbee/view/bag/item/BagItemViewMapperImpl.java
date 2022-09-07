@@ -13,8 +13,8 @@ public class BagItemViewMapperImpl implements IBagItemViewMapper {
 			//bi.setItemDesc(d);
 			bi.setItemUPC(d.getBagItem().getProductUPC().toString());
 			bi.setItemQty(d.getBagItem().getQuantity());
-			bi.setMarkdownPrice(d.getBagItem().getMarkdownPrice());
-			bi.setBagItemTotal(d.getBagItem().getBagItemTotal());
+			bi.setMarkdownPrice(d.getBagItem().getMarkdownPrice().amount());
+			bi.setBagItemTotal(d.getBagItem().getBagItemTotal().amount());
 			bi.setBagItemWeight(d.getBagItemWeight());
 			return bi;
 	}
@@ -24,8 +24,8 @@ public class BagItemViewMapperImpl implements IBagItemViewMapper {
 			BagItemViewOut bi = new BagItemViewOut();
 			bi.setItemUPC(d.getBagItem().getProductUPC().toString());
 			bi.setItemQty(d.getBagItem().getQuantity());
-			bi.setMarkdownPrice(d.getBagItem().getMarkdownPrice());
-			bi.setBagItemTotal(d.getBagItem().getBagItemTotal());
+			bi.setMarkdownPrice(d.getBagItem().getMarkdownPrice().amount());
+			bi.setBagItemTotal(d.getBagItem().getBagItemTotal().amount());
 			return bi;
 	}
 

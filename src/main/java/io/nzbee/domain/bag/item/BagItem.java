@@ -1,12 +1,12 @@
 package io.nzbee.domain.bag.item;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import io.nzbee.Constants;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.promotion.value.BrandCode;
 import io.nzbee.domain.promotion.value.CategoryCode;
+import io.nzbee.domain.promotion.value.Money;
 import io.nzbee.domain.promotion.value.ProductUPC;
 
 public class BagItem {
@@ -21,13 +21,13 @@ public class BagItem {
 	
 	private Long quantity;
 	
-	private boolean errors;
+	private Boolean errors = false;
 	
 	private String error;
 	
 	private String bagItemStatus;
 	
-	private final BigDecimal markdownPrice;
+	private final Money markdownPrice;
 	
 	private final List<BagItemDiscount> discounts;
 
@@ -35,7 +35,7 @@ public class BagItem {
 	public BagItem(	Bag bag, 
 					ProductUPC productUPC,
 			  	   	Long quantity,
-			  	   	BigDecimal markdownPrice,
+			  	   	Money markdownPrice,
 			  	   	BrandCode brandCode,
 			  	   	List<CategoryCode> categoryCodes) {
 		this.bag 				= bag;
@@ -64,12 +64,12 @@ public class BagItem {
 		return this.productUPC;
 	}
 	
-	public BigDecimal getMarkdownPrice() {
+	public Money getMarkdownPrice() {
 		return markdownPrice;
 	}
 	
-	public BigDecimal getBagItemTotal() {
-		return new BigDecimal(this.quantity).multiply((this.markdownPrice).subtract(this.getBagItemDiscount()));
+	public Money getBagItemTotal() {
+		return this.markdownPrice.multiply(this.quantity).subtract(this.getBagItemDiscount());
 	}
 
 	public boolean isErrors() {
@@ -96,8 +96,10 @@ public class BagItem {
 		return bagItemStatus;
 	}
 	
-	public BigDecimal getBagItemDiscount() {
-		return new BigDecimal(this.discounts.stream().mapToDouble(d -> d.getDiscountAmount().doubleValue()).sum());
+	public Money getBagItemDiscount() {
+		Money sum = bag.getMoney();
+		this.discounts.forEach(d -> sum.add(d.getDiscountAmount()));
+		return sum;
 	}
 	
 	public void addDiscount(BagItemDiscount discount) {

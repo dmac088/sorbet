@@ -22,7 +22,7 @@ public class DroolsBagItemWrapper {
 	}
 	
 	public BigDecimal getMarkdownPrice() {
-		return this.bagItem.getBagItem().getMarkdownPrice();
+		return this.bagItem.getBagItem().getMarkdownPrice().amount();
 	}
 	
 	public String getBagItemStatus() {

@@ -1,12 +1,12 @@
 package io.nzbee.domain.bag.item.shipping;
 
-import java.math.BigDecimal;
 import java.util.List;
 import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.bag.item.BagItemDiscount;
 import io.nzbee.domain.bag.item.IDiscountableBagItem;
 import io.nzbee.domain.promotion.value.BrandCode;
 import io.nzbee.domain.promotion.value.CategoryCode;
+import io.nzbee.domain.promotion.value.Money;
 import io.nzbee.domain.promotion.value.ProductUPC;
 
 public class ShippingBagItem implements IDiscountableBagItem {
@@ -28,12 +28,12 @@ public class ShippingBagItem implements IDiscountableBagItem {
 	}
 
 	@Override
-	public BigDecimal getTotalAmount() {
+	public Money getTotalAmount() {
 		return this.getBagItem().getBagItemTotal();
 	}
 
 	@Override
-	public BigDecimal getBagTotalAmount() {
+	public Money getBagTotalAmount() {
 		return this.getBagItem().getBag().getSubTotalAmount();
 	}
 

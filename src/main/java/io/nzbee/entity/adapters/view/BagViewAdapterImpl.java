@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import io.nzbee.Globals;
 import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.bag.item.regular.RegularBagItem;
+import io.nzbee.domain.promotion.value.ProductUPC;
 import io.nzbee.entity.bag.view.BagViewDTO;
 import io.nzbee.entity.bag.view.IBagViewDTOMapper;
 import io.nzbee.entity.bag.view.IBagViewDTOService;
@@ -44,11 +46,15 @@ public class BagViewAdapterImpl implements IBagPortService {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".toView with parameter {}, {}, {}", locale, currency, b.getCustomer().getUserName());
 		Optional<BagViewDTO> bvDto = bagService.findByCode(locale, currency, globals.getDefaultProductRootCategoryCode(), b.getCustomer().getUserName());
 		BagView bv = bagMapper.DTOToView(bvDto.get(), b);
-    	bv.setGrandTotalAmount(b.getGrandTotalAmount());
-    	bv.setSubTotalAmount(b.getSubTotalAmount());
+    	bv.setGrandTotalAmount(b.getGrandTotalAmount().amount());
+    	bv.setSubTotalAmount(b.getSubTotalAmount().amount());
     	bv.setTotalQuantity(b.getTotalQuantity());
     	bv.setTotalItems(b.getTotalItems());
     	bv.setTotalWeight(b.getTotalWeight());
+    	bv.getBagItems().forEach(v -> {
+    		RegularBagItem bi = b.getBagItem(new ProductUPC(v.getItemUPC()));
+    		v.setBagItemTotal(bi.getBagItem().getBagItemTotal().amount());
+    	});
     	return bv;	
 	}
 

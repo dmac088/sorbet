@@ -8,6 +8,7 @@ import io.nzbee.domain.bag.item.BagItemDiscount;
 import io.nzbee.domain.bag.item.IDiscountableBagItem;
 import io.nzbee.domain.promotion.value.BrandCode;
 import io.nzbee.domain.promotion.value.CategoryCode;
+import io.nzbee.domain.promotion.value.Money;
 import io.nzbee.domain.promotion.value.ProductUPC;
 
 public class RegularBagItem implements IDiscountableBagItem {
@@ -42,7 +43,7 @@ public class RegularBagItem implements IDiscountableBagItem {
 	}
 
 	@Override
-	public BigDecimal getTotalAmount() {
+	public Money getTotalAmount() {
 		return this.getBagItem().getBagItemTotal();
 	}
 
@@ -52,7 +53,7 @@ public class RegularBagItem implements IDiscountableBagItem {
 	}
 
 	@Override
-	public BigDecimal getBagTotalAmount() {
+	public Money getBagTotalAmount() {
 		return this.getBagItem().getBag().getSubTotalAmount();
 	}
 
