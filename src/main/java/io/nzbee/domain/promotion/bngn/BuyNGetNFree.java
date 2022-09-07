@@ -1,9 +1,9 @@
 package io.nzbee.domain.promotion.bngn;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
-
 import io.nzbee.Constants;
 import io.nzbee.domain.bag.item.BagItemDiscount;
 import io.nzbee.domain.bag.item.IDiscountableBagItem;
@@ -20,7 +20,6 @@ import io.nzbee.domain.promotion.value.Money;
 import io.nzbee.domain.promotion.value.ProductUPC;
 import io.nzbee.domain.promotion.value.PromotionCode;
 import io.nzbee.domain.promotion.value.PromotionTypeCode;
-
 import org.apache.tomcat.util.buf.StringUtils;
 
 public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePromotionPort> {
@@ -114,7 +113,17 @@ public class BuyNGetNFree extends Promotion implements IBagPromotion<IBnGnFreePr
 	}
 	
 	private BagItemDiscount applyDiscount(IDiscountableBagItem bi) {
-		Money amount = bi.getTotalAmount().multiply(discountPctg);
+		BigDecimal bagQ = new BigDecimal(bi.getQuantity());
+		BigDecimal buyQ = new BigDecimal(this.getBuyQuantity());
+		BigDecimal n = bagQ.divide(buyQ, 2, RoundingMode.HALF_UP).setScale(0,RoundingMode.DOWN);
+		
+		System.out.println("item quantity is...." + bagQ);
+		System.out.println("buy quantity is...." + buyQ);
+		System.out.println("multiplier is...." + n);
+		
+		Money amount = bi.getPrice().multiply(n);
+		System.out.println("discount amount is...." + amount.amount());
+		
 		return new BagItemDiscount(bi, amount);
 	}
 

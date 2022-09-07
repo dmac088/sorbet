@@ -72,4 +72,14 @@ public class RegularBagItem implements IDiscountableBagItem {
 		return this.getBagItem().getCategoryCodes();
 	}
 
+	@Override
+	public Long getQuantity() {
+		return this.getBagItem().getQuantity();
+	}
+
+	@Override
+	public Money getPrice() {
+		return this.getBagItem().getMarkdownPrice();
+	}
+
 }

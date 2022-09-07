@@ -51,4 +51,14 @@ public class ShippingBagItem implements IDiscountableBagItem {
 	public List<CategoryCode> getCategoryCodes() {
 		return this.getBagItem().getCategoryCodes();
 	}
+
+	@Override
+	public Long getQuantity() {
+		return this.getBagItem().getQuantity();
+	}
+	
+	@Override
+	public Money getPrice() {
+		return this.getBagItem().getMarkdownPrice();
+	}
 }

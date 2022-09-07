@@ -16,9 +16,13 @@ public interface IDiscountableBagItem {
 	
 	Money getTotalAmount();
 	
+	Money getPrice();
+	
 	Money getBagTotalAmount();
 	
 	void addDiscount(BagItemDiscount discountItem);
+
+	Long getQuantity();
 
 }
  
