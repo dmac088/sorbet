@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.nzbee.view.bag.item.BagItemViewOut;
 
 public class BagView {
@@ -24,6 +26,7 @@ public class BagView {
 	
 	private BigDecimal totalWeight;
 	
+	@JsonIgnore
 	private Set<BagItemViewOut> bagItems = new HashSet<BagItemViewOut>();
 	
 	private BagItemViewOut shippingItem;
