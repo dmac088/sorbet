@@ -69,7 +69,7 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 				+ "  1 as qty,"
 				+ "  '" + Constants.regularBagItemType + "' as bag_item_typ_cd, \n"
 				+ "  b.bnd_cd,\n"
-				+ "  ac.lst_cat_cd\n"
+				+ "  ac.lst_cat_cd, \n"
 				+ "  :currency as curr\n"
 				+ "from \n"
 				+ "  mochi.product p \n"

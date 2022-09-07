@@ -8,7 +8,7 @@ import org.apache.tomcat.util.buf.StringUtils;
 dialect "mvel"
 
 function String pendingItemKey(DroolsBagItemWrapper bagItem) { 
-	return bagItem.getCustomerId() + "-"+ bagItem.getProductUPC();
+	return bagItem.getCustomerId() + "-"+ bagItem.getProductUPC().toString();
 }
 
 rule "Is Out-Of Stock"
@@ -17,7 +17,7 @@ $bagItem : DroolsBagItemWrapper(!bagItemStatus.equals("PRO01") && !isInStock())
 then
 System.out.println("\nIs Out-Of Stock Rule");
 System.out.println("************************************");
-String error = "Can't process " +  $bagItem.getProductUPC() + " is Out-Of-Stock" ;
+String error = "Can't process " +  $bagItem.getProductUPC().toString() + " is Out-Of-Stock" ;
 System.out.println(error);
 $bagItem.setErrors(true);
 $bagItem.setError(error);
@@ -29,7 +29,7 @@ when
 $bagItem : DroolsBagItemWrapper(	!bagItemStatus.equals("PRO01")
 									&& bagItemQuantity > 6)
 then 
-String error = "Can't process " +  $bagItem.getProductUPC() + ", quantity " + $bagItem.getBagItemQuantity() + " is more than the maximum allowed" ;
+String error = "Can't process " +  $bagItem.getProductUPC().toString() + ", quantity " + $bagItem.getBagItemQuantity() + " is more than the maximum allowed" ;
 System.out.println(error);
 $bagItem.setErrors(true);
 $bagItem.setError(error);
@@ -41,7 +41,7 @@ when
 $bagItem : DroolsBagItemWrapper(!bagItemStatus.equals("PRO01")
 								&& bagItemQuantity < 1)
 then 
-String error = "Can't process " +  $bagItem.getProductUPC() + ", quantity " + $bagItem.getBagItemQuantity() + " is below minimum allowed" ;
+String error = "Can't process " +  $bagItem.getProductUPC().toString() + ", quantity " + $bagItem.getBagItemQuantity() + " is below minimum allowed" ;
 System.out.println(error);
 $bagItem.setErrors(true);
 $bagItem.setError(error);
@@ -52,7 +52,7 @@ rule "Bag quantity exceeds limit"
 when  
 $bagItem : DroolsBagItemWrapper(getBag().getTotalQuantity() > 50)
 then 
-String error = "Can't process " +  $bagItem.getProductUPC() + ", bag quantity " + $bagItem.getBagItemQuantity() + " is more than the maximum allowed" ;
+String error = "Can't process " +  $bagItem.getProductUPC().toString() + ", bag quantity " + $bagItem.getBagItemQuantity() + " is more than the maximum allowed" ;
 $bagItem.setErrors(true);
 $bagItem.setError(error);
 $bagItem.logItemError(pendingItemKey($bagItem), $bagItem.getBagItem());
