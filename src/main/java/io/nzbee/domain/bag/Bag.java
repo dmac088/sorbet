@@ -21,7 +21,7 @@ import io.nzbee.domain.promotion.value.CouponCode;
 import io.nzbee.domain.promotion.value.Money;
 import io.nzbee.domain.promotion.value.ProductUPC;
 
-public class Bag implements IBag, IDiscountThresholdPromotionPort, IPctgDiscountPromotionPort, IBnGnFreePromotionPort {
+public class Bag implements IBag, IPromotionBag, IDiscountThresholdPromotionPort, IPctgDiscountPromotionPort, IBnGnFreePromotionPort {
 	
 	private IShippingBagItem shippingItem;
 	
@@ -189,7 +189,7 @@ public class Bag implements IBag, IDiscountThresholdPromotionPort, IPctgDiscount
 	}
 
 	@Override
-	public Object getUserName() {
+	public String getUserName() {
 		return this.getCustomer().getUserName();
 	}
 	
