@@ -10,7 +10,7 @@ import io.nzbee.domain.promotion.value.CategoryCode;
 import io.nzbee.domain.promotion.value.Money;
 import io.nzbee.domain.promotion.value.ProductUPC;
 
-public class BagItem {
+public class BagItem implements IBagItem {
 
 	private Bag bag;
 	
@@ -30,7 +30,7 @@ public class BagItem {
 	
 	private final Money markdownPrice;
 	
-	private final List<BagItemDiscount> discounts;
+	private final List<IBagItemDiscount> discounts;
 
 	
 	public BagItem(	Bag bag, 
@@ -44,7 +44,7 @@ public class BagItem {
 		this.quantity 			= quantity;
 		this.bagItemStatus 		= Constants.bagItemStatusCodeNew;
 		this.markdownPrice 		= markdownPrice;
-		this.discounts 			= new ArrayList<BagItemDiscount>();
+		this.discounts 			= new ArrayList<IBagItemDiscount>();
 		this.brandCode			= brandCode;
 		this.categoryCodes  	= categoryCodes;
 	}
@@ -70,14 +70,15 @@ public class BagItem {
 	}
 	
 	public Money getBagItemTotal() {
-		return this.markdownPrice.multiply(this.quantity).subtract(this.getBagItemDiscount());
+		return this.markdownPrice.multiply(this.quantity).subtract(this.getBagItemDiscountTotal());
 	}
 
 	public boolean isErrors() {
 		return errors;
 	}
 
-	public void setErrors(boolean errors) {
+	@Override
+	public void setErrors(Boolean errors) {
 		this.errors = errors;
 	}
 
@@ -97,16 +98,17 @@ public class BagItem {
 		return bagItemStatus;
 	}
 	
-	public Money getBagItemDiscount() {
+	@Override
+	public Money getBagItemDiscountTotal() {
 		BigDecimal b = this.getDiscounts().stream().map(d -> d.getDiscountAmount().amount()).reduce(BigDecimal.ZERO, BigDecimal::add);
 		return bag.getMoney().add(new Money(b, bag.getCurrency(), BigDecimal.ROUND_HALF_UP));
 	}
 	
-	public void addDiscount(BagItemDiscount discount) {
+	public void addDiscount(IBagItemDiscount discount) {
 		this.discounts.add(discount);
 	}
 
-	public List<BagItemDiscount> getDiscounts() {
+	public List<IBagItemDiscount> getDiscounts() {
 		return discounts;
 	}
 
@@ -117,5 +119,7 @@ public class BagItem {
 	public BrandCode getBrandCode() {
 		return brandCode;
 	}
+
+
 	
 }

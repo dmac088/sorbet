@@ -2,14 +2,13 @@ package io.nzbee.domain.bag;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import io.nzbee.domain.bag.item.BagItem;
+import io.nzbee.domain.bag.item.IBagItem;
 
 public class BagIssues {
-	private Map<String, BagItem> bagErrors = new HashMap<String, BagItem>();
+	private Map<String, IBagItem> bagErrors = new HashMap<String, IBagItem>();
 	
-	public void logItemError(String key, BagItem BagItem) {
-		bagErrors.put(key,  BagItem);
+	public void logItemError(String key, IBagItem bagItem) {
+		bagErrors.put(key,  bagItem);
 	}
 	
 	public String toString() {

@@ -4,7 +4,7 @@ import io.nzbee.domain.promotion.value.Money;
 
 //remember the BagItemDiscount will not be persisted
 //we only need what we need to compute the bagItem total
-public class BagItemDiscount implements IBagItemDIscount {
+public class BagItemDiscount implements IBagItemDiscount {
 
 	private IDiscountableBagItem bagItem;
 	

@@ -48,7 +48,7 @@ public class PromotionAdapter implements IPromotionPortService {
 			
 			bag.getBagItems().forEach(i -> {
 				i.getBagItem().getDiscounts().forEach(d -> {
-					System.out.println("promotion item = " + d.getBagItem().getUPC()  +"\n"
+					System.out.println("promotion item = " + d.getBagItem().getUPC().toString()  +"\n"
 									 + "promotion discount amount = " + d.getDiscountAmount().amount());
 				});
 			});

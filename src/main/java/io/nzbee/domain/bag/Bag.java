@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import io.nzbee.Constants;
 import io.nzbee.domain.bag.item.BagItem;
+import io.nzbee.domain.bag.item.IBagItem;
 import io.nzbee.domain.bag.item.IDiscountableBagItem;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
@@ -138,7 +139,8 @@ public class Bag implements IBag, IDiscountThresholdPromotionPort, IPctgDiscount
 		return sum;
 	}
 	
-	public void logItemError(String key, BagItem bagItem) {
+	@Override
+	public void logItemError(String key, IBagItem bagItem) {
 		bagIssues.logItemError(key, bagItem);
 		bagItem.setBagItemStatus("PND01");
 	}

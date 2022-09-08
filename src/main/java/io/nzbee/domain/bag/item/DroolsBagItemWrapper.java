@@ -1,7 +1,7 @@
 package io.nzbee.domain.bag.item;
 
 import java.math.BigDecimal;
-import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.promotion.value.ProductUPC;
 
@@ -57,19 +57,19 @@ public class DroolsBagItemWrapper {
 		return bagItem.getBagItem().getBag().getCustomer().getCustomerID();
 	}
 	
-	public void addDiscount(BagItemDiscount discount) {
+	public void addDiscount(IBagItemDiscount discount) {
 		this.bagItem.getBagItem().addDiscount(discount);
 	}
 	
-	public void logItemError(String key, BagItem bagItem) {
+	public void logItemError(String key, IBagItem bagItem) {
 		bagItem.getBag().logItemError(key, bagItem);
 	}
 
-	public BagItem getBagItem() {
+	public IBagItem getBagItem() {
 		return bagItem.getBagItem();
 	}
 	
-	public Bag getBag() {
+	public IBag getBag() {
 		return bagItem.getBagItem().getBag();
 	}
 	

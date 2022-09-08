@@ -54,7 +54,7 @@ public class BagViewAdapterImpl implements IBagPortService {
     	bv.getBagItems().forEach(v -> {
     		IRegularBagItem bi = b.getBagItem(new ProductUPC(v.getItemUPC()));
     		v.setBagItemTotal(bi.getBagItem().getBagItemTotal().amount());
-    		v.setBagItemDiscount(bi.getBagItem().getBagItemDiscount().amount());
+    		v.setBagItemDiscount(bi.getBagItem().getBagItemDiscountTotal().amount());
     	});
     	return bv;	
 	}
