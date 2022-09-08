@@ -2,15 +2,15 @@ package io.nzbee.domain.bag.item;
 
 import java.math.BigDecimal;
 import io.nzbee.domain.bag.Bag;
-import io.nzbee.domain.bag.item.regular.RegularBagItem;
+import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.promotion.value.ProductUPC;
 
 public class DroolsBagItemWrapper {
 	
-	private RegularBagItem bagItem;
+	private IRegularBagItem bagItem;
 	
-	public DroolsBagItemWrapper(RegularBagItem bagItem) {
-		this.bagItem = bagItem;
+	public DroolsBagItemWrapper(IRegularBagItem object) {
+		this.bagItem = object;
 	}
 	
 	public Long getBagItemQuantity() {

@@ -108,6 +108,7 @@ import io.nzbee.view.product.tag.facet.TagFacetViewServiceImpl;
 @Configuration
 class BeanConfiguration {
 	
+	
 	@Bean
 	IPromotionDTOService promotionDTOService() {
 		return new PromotionDTOServiceImpl();

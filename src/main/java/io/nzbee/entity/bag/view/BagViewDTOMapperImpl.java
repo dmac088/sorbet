@@ -29,7 +29,7 @@ public class BagViewDTOMapperImpl implements IBagViewDTOMapper {
 
 		// create a new bag domain object
 		BagView b = new BagView();
-
+ 
 		// map the entity bagItems to the view bagItems
 		Set<BagItemViewOut> sbi = bag.getBagItems().stream().map(dbi -> {
 			Optional<BagItemViewDTO> oe = bDto.getBagItems().stream().filter(

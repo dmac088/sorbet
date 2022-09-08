@@ -9,7 +9,7 @@ import io.nzbee.domain.promotion.value.CategoryCode;
 import io.nzbee.domain.promotion.value.Money;
 import io.nzbee.domain.promotion.value.ProductUPC;
 
-public class ShippingBagItem implements IDiscountableBagItem {
+public class ShippingBagItem implements IDiscountableBagItem, IShippingBagItem {
 
 	private final BagItem bagItem;
 
@@ -60,5 +60,10 @@ public class ShippingBagItem implements IDiscountableBagItem {
 	@Override
 	public Money getPrice() {
 		return this.getBagItem().getMarkdownPrice();
+	}
+
+	@Override
+	public String getUserName() {
+		return this.getBagItem().getBag().getCustomer().getUserName();
 	}
 }

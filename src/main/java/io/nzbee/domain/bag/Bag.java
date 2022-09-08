@@ -9,8 +9,9 @@ import java.util.stream.Collectors;
 import io.nzbee.Constants;
 import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.bag.item.IDiscountableBagItem;
+import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
-import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
+import io.nzbee.domain.bag.item.shipping.IShippingBagItem;
 import io.nzbee.domain.customer.Customer;
 import io.nzbee.domain.promotion.ports.IBnGnFreePromotionPort;
 import io.nzbee.domain.promotion.ports.IDiscountThresholdPromotionPort;
@@ -19,9 +20,9 @@ import io.nzbee.domain.promotion.value.CouponCode;
 import io.nzbee.domain.promotion.value.Money;
 import io.nzbee.domain.promotion.value.ProductUPC;
 
-public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromotionPort, IBnGnFreePromotionPort {
+public class Bag implements IBag, IDiscountThresholdPromotionPort, IPctgDiscountPromotionPort, IBnGnFreePromotionPort {
 	
-	private ShippingBagItem shippingItem;
+	private IShippingBagItem shippingItem;
 	
 	private Customer customer;
 	
@@ -29,7 +30,7 @@ public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromot
 	
 	private final List<CouponCode> coupons; 
 	
-	private final List<RegularBagItem> bagItems;
+	private final List<IRegularBagItem> bagItems;
 	
 	private final Currency currency;
 
@@ -51,7 +52,7 @@ public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromot
 		return customer;
 	}
 	
-	public List<RegularBagItem> getBagItems() {
+	public List<IRegularBagItem> getBagItems() {
 		return bagItems;
 	}
 	
@@ -60,29 +61,29 @@ public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromot
 		return this.getBagItems().stream().map(i -> (IDiscountableBagItem) i).collect(Collectors.toList());
 	}
 	
-	public void addItem(RegularBagItem p, Long qty) {
-		System.out.println("adding quantity " + qty + " for product " + p.getBagItem().getProductUPC());
+	public void addItem(IRegularBagItem bagItem, Long qty) {
+		System.out.println("adding quantity " + qty + " for product " + bagItem.getBagItem().getProductUPC());
 		
-		Optional<RegularBagItem> obi = this.getBagItems().stream()
-		.filter(bi -> bi.getBagItem().getProductUPC().sameAs(p.getBagItem().getProductUPC()))
+		Optional<IRegularBagItem> obi = this.getBagItems().stream()
+		.filter(bi -> bi.getBagItem().getProductUPC().sameAs(bagItem.getBagItem().getProductUPC()))
 		.findAny();
 		
 		if(obi.isPresent()) {
 			obi.get().getBagItem().addToQuantity(qty);
 		} else {
-			this.getBagItems().add(new RegularBagItem(new BagItem(this, p.getBagItem().getProductUPC(), qty, p.getBagItem().getMarkdownPrice(),p.getBrandCode(), p.getCategoryCodes()), p.getBagItemWeight(), p.isInStock()));
+			this.getBagItems().add(new RegularBagItem(new BagItem(this, bagItem.getBagItem().getProductUPC(), qty, bagItem.getBagItem().getMarkdownPrice(),bagItem.getBrandCode(), bagItem.getCategoryCodes()), bagItem.getBagItemWeight(), bagItem.isInStock()));
 		}
 	}
 	
-	public void addShippingItem(ShippingBagItem p) {	
-		this.shippingItem = p;	
+	public void addShippingItem(IShippingBagItem sbi) {	
+		this.shippingItem = sbi;	
 	}
 	
 	public Boolean bagItemExists(ProductUPC productUPC) {
 		return this.getBagItems().stream().filter(bi -> bi.getBagItem().getProductUPC().sameAs(productUPC)).findAny().isPresent();
 	}
 	
-	public RegularBagItem getBagItem(ProductUPC productUPC) {
+	public IRegularBagItem getBagItem(ProductUPC productUPC) {
 		return this.getBagItems().stream().filter(bi -> bi.getBagItem().getProductUPC().sameAs(productUPC)).findAny().get();
 	}
 	
@@ -100,7 +101,7 @@ public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromot
 				.mapToInt(r -> r.getBagItem().getQuantity().intValue()).sum());
 	}
 	
-	public ShippingBagItem getShippingItem() {
+	public IShippingBagItem getShippingItem() {
 		return shippingItem;
 	}
 	
@@ -110,7 +111,7 @@ public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromot
 
 	public BigDecimal getTotalWeight() {
 		BigDecimal sum = BigDecimal.ZERO;
-        for (RegularBagItem bi : this.getBagItems()) {
+        for (IRegularBagItem bi : this.getBagItems()) {
             sum = sum.add(bi.getBagItemWeight().multiply(new BigDecimal(bi.getBagItem().getQuantity())));
         }
 		return sum;
@@ -118,7 +119,7 @@ public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromot
 	
 	public Money getGrandTotalAmount() {
 		Money sum = this.getMoney();
-        for (RegularBagItem bi : this.getBagItems()) {
+        for (IRegularBagItem bi : this.getBagItems()) {
             sum = sum.add(bi.getBagItem().getBagItemTotal());
         }
         if(hasShippingItem()) {
@@ -131,7 +132,7 @@ public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromot
 	
 	public Money getSubTotalAmount() {
 		Money sum = this.getMoney();
-        for (RegularBagItem bi : this.getBagItems()) {
+        for (IRegularBagItem bi : this.getBagItems()) {
             sum = sum.add(bi.getBagItem().getBagItemTotal());
         }
 		return sum;
@@ -183,6 +184,11 @@ public class Bag implements IDiscountThresholdPromotionPort, IPctgDiscountPromot
 
 	public Money getMoney() {
 		return new Money(BigDecimal.ZERO, this.getCurrency(), BigDecimal.ROUND_HALF_UP);
+	}
+
+	@Override
+	public Object getUserName() {
+		return this.getCustomer().getUserName();
 	}
 	
 }

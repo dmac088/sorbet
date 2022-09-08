@@ -7,4 +7,5 @@ public interface IPromotionDTO {
 	String getMechanicCode();
 
 	Boolean isType(String typeCode);
+
 }

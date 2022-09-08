@@ -2,7 +2,6 @@ package io.nzbee.domain.bag.item.regular;
 
 import java.math.BigDecimal;
 import java.util.List;
-
 import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.bag.item.BagItemDiscount;
 import io.nzbee.domain.bag.item.IDiscountableBagItem;
@@ -11,7 +10,7 @@ import io.nzbee.domain.promotion.value.CategoryCode;
 import io.nzbee.domain.promotion.value.Money;
 import io.nzbee.domain.promotion.value.ProductUPC;
 
-public class RegularBagItem implements IDiscountableBagItem {
+public class RegularBagItem implements IDiscountableBagItem, IRegularBagItem {
 
 	private final BagItem bagItem;
 
@@ -34,7 +33,7 @@ public class RegularBagItem implements IDiscountableBagItem {
 		return bagItem;
 	}
 
-	public boolean isInStock() {
+	public Boolean isInStock() {
 		return inStock;
 	}
 
@@ -81,5 +80,6 @@ public class RegularBagItem implements IDiscountableBagItem {
 	public Money getPrice() {
 		return this.getBagItem().getMarkdownPrice();
 	}
+
 
 }

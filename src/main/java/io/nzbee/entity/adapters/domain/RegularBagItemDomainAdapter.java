@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import io.nzbee.Constants;
 import io.nzbee.ErrorKeys;
 import io.nzbee.domain.bag.Bag;
-import io.nzbee.domain.bag.item.regular.RegularBagItem;
-import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
+import io.nzbee.domain.bag.item.regular.IRegularBagItem;
+import io.nzbee.domain.bag.item.shipping.IShippingBagItem;
 import io.nzbee.domain.ports.IBagItemPortService;
 import io.nzbee.domain.promotion.value.ProductUPC;
 import io.nzbee.entity.bag.domain.IBagDomainDTOService;
@@ -42,13 +42,13 @@ public class RegularBagItemDomainAdapter implements IBagItemPortService {
 	private IBagItemDomainDTOService bagItemDomainDTOService;
 	
 	@Autowired
-	private IBagItemDomainDTOMapper<RegularBagItemDomainDTO, BagItemEntity, RegularBagItem> regularBagItemDomainMapper;
+	private IBagItemDomainDTOMapper<RegularBagItemDomainDTO, BagItemEntity, IRegularBagItem> regularBagItemDomainMapper;
 	
 	@Autowired
-	private IBagItemDomainDTOMapper<ShippingBagItemDomainDTO, BagItemEntity, ShippingBagItem> shippingBagItemDomainMapper;
+	private IBagItemDomainDTOMapper<ShippingBagItemDomainDTO, BagItemEntity, IShippingBagItem> shippingBagItemDomainMapper;
 
 	@Override
-	public RegularBagItem getNewPhysicalItem(String locale, String currency, Bag bag, String itemUPC, Long quantity) {
+	public IRegularBagItem getNewPhysicalItem(String locale, String currency, Bag bag, String itemUPC, Long quantity) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewPhysicalItem with parameters {}, {}", itemUPC, quantity);
 		
 		//there is no product in the domain model just bagItem
@@ -56,13 +56,13 @@ public class RegularBagItemDomainAdapter implements IBagItemPortService {
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, itemUPC));
 		
 		//create, save and return domain object 
-		RegularBagItem bi = regularBagItemDomainMapper.DTOToDo(bag, biDto, quantity);
+		IRegularBagItem bi = regularBagItemDomainMapper.DTOToDo(bag, biDto, quantity);
 
 		return bi;
 	}
 	
 	@Override
-	public ShippingBagItem getNewShippingItem(String locale, String currency, Bag bag, String destCode, String shipType) {
+	public IShippingBagItem getNewShippingItem(String locale, String currency, Bag bag, String destCode, String shipType) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewShippingItem with parameters {}, {}", destCode, shipType);
 		
 		//there is no product in the domain model just bagItem
@@ -70,13 +70,13 @@ public class RegularBagItemDomainAdapter implements IBagItemPortService {
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, destCode + " - " + shipType + " - " + bag.getTotalWeight()));
 		
 		//create, save and return domain object 
-		ShippingBagItem bi = shippingBagItemDomainMapper.DTOToDo(bag, biDto);
+		IShippingBagItem bi = shippingBagItemDomainMapper.DTOToDo(bag, biDto);
 
 		return bi;
 	}
 	
 	@Override
-	public void delete(RegularBagItem domainObject) {
+	public void delete(IRegularBagItem domainObject) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".delete with parameters {}", domainObject.getBagItem().getProductUPC());
 		Optional<PersonEntity> op = personService.findByUsernameAndRole(domainObject.getBagItem().getBag().getCustomer().getUserName(), Constants.partyRoleCustomer);
 		BagEntity b = op.get().getPersonParty().getBag();
@@ -87,12 +87,12 @@ public class RegularBagItemDomainAdapter implements IBagItemPortService {
 	}
 
 	@Override
-	public void save(RegularBagItem domainObject) {
+	public void save(IRegularBagItem domainObject) {
 		bagItemService.save(regularBagItemDomainMapper.doToEntity(domainObject));
 	}
 	
 	@Override
-	public void save(ShippingBagItem domainObject) {
+	public void save(IShippingBagItem domainObject) {
 		bagItemService.save(shippingBagItemDomainMapper.doToEntity(domainObject));
 	}
 

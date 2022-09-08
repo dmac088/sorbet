@@ -24,5 +24,8 @@ public interface IDiscountableBagItem {
 
 	Long getQuantity();
 
+	BagItem getBagItem();
+
+
 }
  

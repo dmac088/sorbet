@@ -3,15 +3,15 @@ package io.nzbee.entity.bag.item.view;
 import java.math.BigDecimal;
 
 import org.springframework.stereotype.Component;
-import io.nzbee.domain.bag.item.regular.RegularBagItem;
-import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
+import io.nzbee.domain.bag.item.regular.IRegularBagItem;
+import io.nzbee.domain.bag.item.shipping.IShippingBagItem;
 import io.nzbee.view.bag.item.BagItemViewOut;
 
 @Component
 public class BagItemViewDTOMapperImpl implements IBagItemViewDTOMapper {
 
 	@Override
-	public BagItemViewOut DTOToView(BagItemViewDTO dto, RegularBagItem rbi) {
+	public BagItemViewOut DTOToView(BagItemViewDTO dto, IRegularBagItem rbi) {
 		BagItemViewOut biv = new BagItemViewOut();
 		biv.setBagItemTotal(rbi.getBagItem().getBagItemTotal().amount());
 		biv.setItemDesc(dto.getBagItemDesc());
@@ -24,7 +24,7 @@ public class BagItemViewDTOMapperImpl implements IBagItemViewDTOMapper {
 	}
 
 	@Override
-	public BagItemViewOut DTOToView(BagItemViewDTO dto, ShippingBagItem sbi) {
+	public BagItemViewOut DTOToView(BagItemViewDTO dto, IShippingBagItem sbi) {
 		BagItemViewOut biv = new BagItemViewOut();
 		biv.setBagItemTotal(sbi.getBagItem().getBagItemTotal().amount());
 		biv.setBagItemWeight(new BigDecimal(0));

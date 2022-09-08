@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.ports.IPromotionPortService;
 
 public class PromotionServiceImpl implements IPromotionService {
@@ -15,7 +16,7 @@ public class PromotionServiceImpl implements IPromotionService {
 	private IPromotionPortService promotionService;
 	
 	@Override
-	public Bag applyAll(Bag bag) {
+	public IBag applyAll(Bag bag) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".applyAll with parameter {}", bag.getCustomer().getUserName());
 		return promotionService.applyAll(bag);
 	}

@@ -22,25 +22,25 @@ public class RegularBagItemServiceImpl implements IRegularBagItemDomainService{
     private KieContainer kieContainer;
 	
 	@Override
-	public RegularBagItem getNewPhysicalItem(String locale, String currency, Bag bag, String itemUPC, Long quantity) {
+	public IRegularBagItem getNewPhysicalItem(String locale, String currency, Bag bag, String itemUPC, Long quantity) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewPhysicalItem with parameters {}, {}", itemUPC, quantity);
 		return bagItemService.getNewPhysicalItem(locale, currency, bag, itemUPC, quantity);
 	}
 
 	@Override 
-	public void save(RegularBagItem object) {
+	public void save(IRegularBagItem object) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".save()");
 		bagItemService.save(object);
 	}
 
 	@Override
-	public void delete(RegularBagItem object) {
+	public void delete(IRegularBagItem object) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".delete()");
 		bagItemService.delete(object);
 	}
 
 	@Override
-	public void checkAllBagItemRules(RegularBagItem object) {
+	public void checkAllBagItemRules(IRegularBagItem object) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".checkAllBagItemRules()");
 		KieSession kieSession = kieContainer.newKieSession();
     	kieSession.insert(object);

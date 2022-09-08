@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.IBagDomainService;
+import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.bag.item.regular.IRegularBagItemDomainService;
-import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.promotion.IPromotionService;
 import io.nzbee.domain.promotion.dto.in.CouponDTO;
 import io.nzbee.domain.promotion.value.CouponCode;
@@ -161,7 +161,7 @@ public class BagController {
 		
 		promotionService.applyAll(b);
 
-		Optional<RegularBagItem> obi = b.getBagItems().stream()
+		Optional<IRegularBagItem> obi = b.getBagItems().stream()
 				.filter(bi -> bi.getBagItem().getProductUPC().sameAs(new ProductUPC(itemCode))).findAny();
 
 		if (obi.isPresent()) {

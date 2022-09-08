@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import io.nzbee.Constants;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.item.BagItem;
+import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.promotion.value.BrandCode;
 import io.nzbee.domain.promotion.value.CategoryCode;
@@ -82,7 +83,7 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 
 
 	@Override
-	public BagItemEntity doToEntity(RegularBagItem d) {
+	public BagItemEntity doToEntity(IRegularBagItem d) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo doToEntity: {}", d.getBagItem().getProductUPC());
 		Optional<ProductEntity> op = productService.findByCode(d.getBagItem().getProductUPC().toString());
 		Optional<BagItemStatus> obis = bagItemStatusService.findByCode(Constants.bagItemStatusCodeNew);

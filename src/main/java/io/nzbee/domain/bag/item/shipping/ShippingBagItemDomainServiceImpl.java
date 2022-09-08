@@ -14,13 +14,13 @@ public class ShippingBagItemDomainServiceImpl implements IShippingBagItemDomainS
 	private IShippingBagItemPortService shippingBagItemService;
 	
 	@Override
-	public ShippingBagItem getNewShippingItem(String locale, String currency, Bag bag, String destCode, String shipType) {
+	public IShippingBagItem getNewShippingItem(String locale, String currency, Bag bag, String destCode, String shipType) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewShippingItem with parameters {}, {}, {}", destCode, shipType, bag.getTotalWeight());
 		return shippingBagItemService.getNewShippingItem(locale, currency, bag, destCode,  shipType);
 	}
 	
 	@Override
-	public ShippingBagItem getShippingItem(String currency, Bag b, String code) {
+	public IShippingBagItem getShippingItem(String currency, Bag b, String code) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getShippingItem with parameters {}");
 		return shippingBagItemService.getShippingItem(b, code, currency);
 	}

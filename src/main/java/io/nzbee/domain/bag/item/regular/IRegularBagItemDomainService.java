@@ -4,11 +4,11 @@ import io.nzbee.domain.bag.Bag;
 
 public interface IRegularBagItemDomainService {
 
-	void save(RegularBagItem object);
+	void save(IRegularBagItem object);
 
-	void delete(RegularBagItem object);
+	void delete(IRegularBagItem iRegularBagItem);
 
-	void checkAllBagItemRules(RegularBagItem object);
+	void checkAllBagItemRules(IRegularBagItem bagItem);
 
-	RegularBagItem getNewPhysicalItem(String locale, String currency, Bag bag, String itemUPC, Long quantity);
+	IRegularBagItem getNewPhysicalItem(String locale, String currency, Bag bag, String itemUPC, Long quantity);
 }

@@ -126,5 +126,6 @@ public class BagEntity {
     public int hashCode() {
     	return Objects.hash(this.getBagId());
     }
+
 	
 }

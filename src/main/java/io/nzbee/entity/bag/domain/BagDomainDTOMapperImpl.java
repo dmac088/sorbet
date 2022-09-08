@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 import io.nzbee.Constants;
 import io.nzbee.ErrorKeys;
 import io.nzbee.domain.bag.Bag;
-import io.nzbee.domain.bag.item.regular.RegularBagItem;
-import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
+import io.nzbee.domain.bag.item.regular.IRegularBagItem;
+import io.nzbee.domain.bag.item.shipping.IShippingBagItem;
 import io.nzbee.domain.customer.Customer;
 import io.nzbee.domain.promotion.value.CouponCode;
 import io.nzbee.domain.promotion.value.ProductUPC;
@@ -68,7 +68,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		Bag b = new Bag(personMapper.DTOToDo(dto.getCustomer()), Currency.getInstance(dto.getCurrency()));
 
 		// map the entity bagItems to the domain bagItems
-		Set<RegularBagItem> sbi = dto.getRegularBagItems().stream()
+		Set<IRegularBagItem> sbi = dto.getRegularBagItems().stream()
 				.map(bi -> regularBagItemMapper.DTOToDo(b, bi))
 				.collect(Collectors.toSet());
 		
@@ -81,7 +81,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		});
 		
 		if(ossbi.isPresent()) {
-			ShippingBagItem ssbi = shippingItemMapper.DTOToDo(b, ossbi.get());
+			IShippingBagItem ssbi = shippingItemMapper.DTOToDo(b, ossbi.get());
 			b.addShippingItem(ssbi);
 		}
 		
@@ -103,7 +103,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		Bag b = new Bag(c, Currency.getInstance(dto.getCurrency()));
 
 		// map the entity bagItems to the domain bagItems
-		Set<RegularBagItem> sbi = dto.getRegularBagItems().stream()
+		Set<IRegularBagItem> sbi = dto.getRegularBagItems().stream()
 				.map(bi -> regularBagItemMapper.DTOToDo(b, bi))
 				.collect(Collectors.toSet());
 
@@ -116,7 +116,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		});
 		
 		if(ossbi.isPresent()) {
-			ShippingBagItem ssbi = shippingItemMapper.DTOToDo(b, ossbi.get());
+			IShippingBagItem ssbi = shippingItemMapper.DTOToDo(b, ossbi.get());
 			b.addShippingItem(ssbi);
 		}
 		

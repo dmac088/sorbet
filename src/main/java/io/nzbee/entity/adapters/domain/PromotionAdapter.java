@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.ports.IPromotionPortService;
 import io.nzbee.domain.promotion.IBagPromotion;
 import io.nzbee.domain.promotion.Promotion;
@@ -30,9 +30,9 @@ public class PromotionAdapter implements IPromotionPortService {
 	}
 
 	@Override
-	public Bag applyAll(Bag bag) {
+	public IBag applyAll(IBag bag) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".applyAll with parameter {}",
-				bag.getCustomer().getUserName());
+				bag.getUserName());
 
 		bag.getCoupons().forEach(c -> {
 			System.out.println("coupon found: " + c);

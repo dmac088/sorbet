@@ -8,10 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.bag.item.regular.IRegularBagItemDomainService;
-import io.nzbee.domain.bag.item.regular.RegularBagItem;
+import io.nzbee.domain.bag.item.shipping.IShippingBagItem;
 import io.nzbee.domain.bag.item.shipping.IShippingBagItemDomainService;
-import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
 import io.nzbee.domain.ports.IBagPortService;
 import io.nzbee.domain.promotion.value.CouponCode;
 import io.nzbee.domain.promotion.value.ProductUPC;
@@ -64,7 +64,7 @@ public class BagDomainServiceImpl implements IBagDomainService {
     							username);
 		
     	//get the shipping item
-		ShippingBagItem sbi = shippingBagItemService.getShippingItem(currency, b, dto.getShippingProductCode());
+		IShippingBagItem sbi = shippingBagItemService.getShippingItem(currency, b, dto.getShippingProductCode());
 	
     	//add the shipping item to the bag
     	b.addShippingItem(sbi);
@@ -87,7 +87,7 @@ public class BagDomainServiceImpl implements IBagDomainService {
     	boolean exists = b.bagItemExists(new ProductUPC(dto.getItemUPC()));
     	
     	//create a bag item if one does not exists otherwise retrieve the existing bag item
-    	RegularBagItem bagItem = exists 
+    	IRegularBagItem bagItem = exists 
     					? b.getBagItem(new ProductUPC(dto.getItemUPC())) 
     					: domainBagItemService.getNewPhysicalItem(locale, currency, b, dto.getItemUPC(), dto.getItemQty());
     	

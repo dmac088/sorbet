@@ -1,6 +1,5 @@
 package io.nzbee.entity.adapters.view;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
@@ -8,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import io.nzbee.Globals;
 import io.nzbee.domain.bag.Bag;
-import io.nzbee.domain.bag.item.regular.RegularBagItem;
+import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.promotion.value.ProductUPC;
 import io.nzbee.entity.bag.view.BagViewDTO;
 import io.nzbee.entity.bag.view.IBagViewDTOMapper;
@@ -53,7 +52,7 @@ public class BagViewAdapterImpl implements IBagPortService {
     	bv.setTotalItems(b.getTotalItems());
     	bv.setTotalWeight(b.getTotalWeight());
     	bv.getBagItems().forEach(v -> {
-    		RegularBagItem bi = b.getBagItem(new ProductUPC(v.getItemUPC()));
+    		IRegularBagItem bi = b.getBagItem(new ProductUPC(v.getItemUPC()));
     		v.setBagItemTotal(bi.getBagItem().getBagItemTotal().amount());
     		v.setBagItemDiscount(bi.getBagItem().getBagItemDiscount().amount());
     	});
