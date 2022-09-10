@@ -69,6 +69,11 @@ public class BagItem implements IBagItem {
 		return markdownPrice;
 	}
 	
+	public Money getBagItemSubTotal() {
+		return this.markdownPrice.multiply(this.quantity);
+	}
+	
+	@Override
 	public Money getBagItemTotal() {
 		return this.markdownPrice.multiply(this.quantity).subtract(this.getBagItemDiscountTotal());
 	}
@@ -119,7 +124,6 @@ public class BagItem implements IBagItem {
 	public BrandCode getBrandCode() {
 		return brandCode;
 	}
-
 
 	
 }

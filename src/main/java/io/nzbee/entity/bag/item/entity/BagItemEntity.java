@@ -1,5 +1,6 @@
 package io.nzbee.entity.bag.item.entity;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -46,6 +47,18 @@ public class BagItemEntity {
 	
 	@Column(name="qty")
 	private Long quantity;
+	
+	@Column(name="bag_item_bse_amt")
+	private BigDecimal bagItemBaseAmount;
+	
+	@Column(name="bag_item_dis_amt")
+	private BigDecimal bagItemDiscountAmount;
+	
+	@Column(name="bag_item_tot_amt")
+	private BigDecimal bagItemTotalAmount;
+	
+	@Column(name="bag_item_tot_wgt")
+	private BigDecimal bagTotalWeight;
 	
 	public Long getBagItemId() {
 		return bagItemId;
@@ -97,6 +110,38 @@ public class BagItemEntity {
 
 	public void setBagItemType(BagItemTypeEntity bagItemTypeEntity) {
 		this.bagItemType = bagItemTypeEntity;
+	}
+	
+	public BigDecimal getBagItemBaseAmount() {
+		return bagItemBaseAmount;
+	}
+
+	public void setBagItemBaseAmount(BigDecimal bagItemBaseAmount) {
+		this.bagItemBaseAmount = bagItemBaseAmount;
+	}
+
+	public BigDecimal getBagItemDiscountAmount() {
+		return bagItemDiscountAmount;
+	}
+
+	public void setBagItemDiscountAmount(BigDecimal bagItemDiscountAmount) {
+		this.bagItemDiscountAmount = bagItemDiscountAmount;
+	}
+
+	public BigDecimal getBagItemTotalAmount() {
+		return bagItemTotalAmount;
+	}
+
+	public void setBagItemTotalAmount(BigDecimal bagItemTotalAmount) {
+		this.bagItemTotalAmount = bagItemTotalAmount;
+	}
+
+	public BigDecimal getBagTotalWeight() {
+		return bagTotalWeight;
+	}
+
+	public void setBagTotalWeight(BigDecimal bagTotalWeight) {
+		this.bagTotalWeight = bagTotalWeight;
 	}
 
 	@Override

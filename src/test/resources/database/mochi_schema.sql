@@ -3311,7 +3311,11 @@ CREATE TABLE mochi.bag_item (
     prd_id bigint NOT NULL,
     qty smallint NOT NULL,
     bag_item_sts_id bigint NOT NULL,
-    bag_item_typ_id bigint NOT NULL
+    bag_item_typ_id bigint NOT NULL,
+    bag_item_bse_amt numeric NOT NULL,
+    bag_item_dis_amt numeric NOT NULL,
+    bag_item_tot_amt numeric NOT NULL,
+    bag_item_tot_wgt numeric NOT NULL
 );
 
 

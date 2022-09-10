@@ -28,6 +28,8 @@ public interface IBagItem {
 
 	void addDiscount(IBagItemDiscount discount);
 
+	Money getBagItemSubTotal();
+	
 	Money getBagItemTotal();
 
 	void addToQuantity(Long qty);

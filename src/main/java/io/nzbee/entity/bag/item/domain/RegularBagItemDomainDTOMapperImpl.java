@@ -94,6 +94,10 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 		bi.setBagItemStatus(obis.get());
 		bi.setBagItemType(obit.get());
 		bi.setQuantity(d.getBagItem().getQuantity());
+		bi.setBagItemBaseAmount(d.getBagItem().getBagItemSubTotal().amount());
+		bi.setBagItemDiscountAmount(d.getBagItem().getBagItemDiscountTotal().amount());
+		bi.setBagItemTotalAmount(d.getBagItem().getBagItemTotal().amount());
+		bi.setBagTotalWeight(d.getBagItemWeight());
 		return bi;
 	}
 

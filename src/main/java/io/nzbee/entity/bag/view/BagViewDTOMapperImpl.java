@@ -33,11 +33,11 @@ public class BagViewDTOMapperImpl implements IBagViewDTOMapper {
 		// map the entity bagItems to the view bagItems
 		Set<BagItemViewOut> sbi = bag.getBagItems().stream().map(dbi -> {
 			Optional<BagItemViewDTO> oe = bDto.getBagItems().stream().filter(
-					vbi -> new ProductUPC(vbi.getProduct().getProductDto().getProductUPC()).sameAs(dbi.getBagItem().getProductUPC()))
+					vbi -> new ProductUPC(vbi.getBagItemUPC()).sameAs(dbi.getBagItem().getProductUPC()))
 					.findAny();
 
 			if (oe.isPresent()) {
-				return bagItemMapper.DTOToView(oe.get(), dbi);
+				return bagItemMapper.DTOToView(oe.get());
 			}
 			return null;
 		}).collect(Collectors.toSet());
@@ -45,11 +45,10 @@ public class BagViewDTOMapperImpl implements IBagViewDTOMapper {
 		b.getBagItems().addAll(sbi);
 
 		if (bag.hasShippingItem()) {
-			Optional<BagItemViewDTO> oe = bDto.getBagItems().stream().filter(vbi -> new ProductUPC(vbi.getProduct().getProductDto()
-					.getProductUPC()).sameAs(bag.getShippingItem().getBagItem().getProductUPC())).findAny();
+			Optional<BagItemViewDTO> oe = bDto.getBagItems().stream().filter(vbi -> new ProductUPC(vbi.getBagItemUPC()).sameAs(bag.getShippingItem().getBagItem().getProductUPC())).findAny();
 
 			if (oe.isPresent()) {
-				b.setShippingItem(bagItemMapper.DTOToView(oe.orElse(null), bag.getShippingItem()));
+				b.setShippingItem(bagItemMapper.DTOToView(oe.orElse(null)));
 			}
 		}
 
