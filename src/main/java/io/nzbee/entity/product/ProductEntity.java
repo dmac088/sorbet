@@ -64,7 +64,6 @@ import io.nzbee.entity.product.physical.entity.PhysicalProductEntity;
 import io.nzbee.entity.product.price.ProductPriceEntity;
 import io.nzbee.entity.product.shipping.entity.ShippingProductEntity;
 import io.nzbee.entity.product.status.ProductStatusEntity;
-import io.nzbee.entity.promotion.disc.PromotionDiscEntity;
 import io.nzbee.entity.tag.TagEntity;
 
 @Entity
@@ -220,11 +219,6 @@ public class ProductEntity implements Serializable {
 				cascade = CascadeType.ALL,
 				orphanRemoval = true)
 	Set<ProductPriceEntity> prices = new HashSet<ProductPriceEntity>();
-
-	@ManyToMany(mappedBy = "products")
-	@IndexedEmbedded(prefix="product.promotions.", 
-					 includeEmbeddedObjectId=true)
-    private Set<PromotionDiscEntity> promotions = new HashSet<PromotionDiscEntity>();
 	
 	@OneToOne(	mappedBy="physicalProduct",
 				fetch = FetchType.LAZY,
@@ -542,24 +536,6 @@ public class ProductEntity implements Serializable {
 
 	public void setInStock(boolean inStock) {
 		this.inStock = inStock;
-	}
-	
-	public Set<PromotionDiscEntity> getPromotions() {
-		return promotions;
-	}
-
-	public void setPromotions(Set<PromotionDiscEntity> promotions) {
-		this.promotions = promotions;
-	}
-	
-	public void addPromotion(PromotionDiscEntity promotion) {
-		this.getPromotions().add(promotion);
-		promotion.getProducts().add(this);
-	}
-	
-	public void removePromotion(PromotionDiscEntity promotion) {
-		this.getPromotions().remove(promotion);
-		promotion.removeProduct(this);
 	}
 
 	public PhysicalProductEntity getProductPhysical() {

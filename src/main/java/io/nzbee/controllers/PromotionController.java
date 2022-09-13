@@ -15,7 +15,7 @@ import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.IBagDomainService;
 import io.nzbee.domain.promotion.IPromotionService;
 import io.nzbee.domain.promotion.Promotion;
-import io.nzbee.domain.promotion.dto.in.CouponDTO;
+import io.nzbee.domain.promotion.dto.coupon.CouponDTO;
 import io.nzbee.domain.services.GenericResponse;
 import io.nzbee.resources.bag.BagResource;
 import io.nzbee.resources.bag.BagResourceAssembler;
@@ -43,18 +43,31 @@ public class PromotionController {
 	
 	@PostMapping("/Promotion/{locale}/{currency}")
 	public ResponseEntity<BagResource> getPromotionDiscounts(@PathVariable String locale, 
-																		  @PathVariable String currency,
-																		  Principal principal) {
+															 @PathVariable String currency,
+															 Principal principal) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getPromotionDiscounts with parameter {}, {}", locale, currency);
 		
 		
 		//we could just hydrate the Bag domian model and pass to the promotion service 
-		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
+		//Bag b = domainBagService.findByCode(locale, currency, principal.getName());
+		
+		//instead of hydrating the bag domain model we hydrate the promotion domain model 
+		
+		//use the promotion service to fetch the full list of promotion items relevant to the bag in context 
+		//then pass the list of promotion items as a parameter to the service layer and execute the relevant promotions 
+		//this is instead of passing the entire bag from our default domain model
+		
+		//We need to hydrate PromotionItem and Promotion object separately 
+		//The new promotionItem service allow us to hydrate PromotionItem with attributes not available in the Cart model.
+		
+		
+		//get the promotion items
+		//hydrate the promotion domain model
+		//injec the promotion items into the promotion domain model 
+		//execute the 
+		
 		
 		promotionService.applyAll(b);
-		
-		System.out.println("discount items...");
-		System.out.println(b.getDiscountableItems().size());
 		
 		// get the view containing additional attributes
 		BagView bv = viewBagService.toView(locale, currency, b);

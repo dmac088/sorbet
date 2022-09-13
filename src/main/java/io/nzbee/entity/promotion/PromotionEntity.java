@@ -8,14 +8,10 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -26,10 +22,6 @@ import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Store;
 import io.nzbee.Constants;
 import io.nzbee.entity.promotion.attribute.PromotionAttributeEntity;
-import io.nzbee.entity.promotion.bngn.PromotionBngnEntity;
-import io.nzbee.entity.promotion.disc.PromotionDiscEntity;
-import io.nzbee.entity.promotion.mechanic.PromotionMechanicEntity;
-import io.nzbee.entity.promotion.type.PromotionTypeEntity;
 
 @Entity
 @Table(name = "promotion", schema = "mochi")
@@ -62,34 +54,11 @@ public class PromotionEntity implements Serializable {
 	@Column(name="prm_trg_rq")
 	private Boolean promotionCouponRequired;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="prm_mec_id")
-	private PromotionMechanicEntity promotionMechanic;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="prm_typ_id")
-	private PromotionTypeEntity promotionType;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="prm_lvl_id")
-	private PromotionTypeEntity promotionLevel;
-	
 	@OneToMany(	mappedBy="promotion",  
 				cascade = CascadeType.ALL,
 				orphanRemoval = true)
 	private Set<PromotionAttributeEntity> attributes = new HashSet<PromotionAttributeEntity>();
-	
-	@OneToOne(	mappedBy="bngnPromotion",
-			fetch = FetchType.LAZY,
-			cascade = CascadeType.ALL,
-			orphanRemoval = true)
-	private PromotionBngnEntity promotionBngn;
-	
-	@OneToOne(	mappedBy="productPromotion",
-			fetch = FetchType.LAZY,
-			cascade = CascadeType.ALL,
-			orphanRemoval = true)
-	private PromotionDiscEntity promotionProduct;
+
 
 	@Transient
 	private String locale;
@@ -142,22 +111,6 @@ public class PromotionEntity implements Serializable {
 		this.promotionActive = promotionActive;
 	}
 
-	public PromotionMechanicEntity getPromotionMechanic() {
-		return promotionMechanic;
-	}
-
-	public void setPromotionMechanic(PromotionMechanicEntity promotionMechanic) {
-		this.promotionMechanic = promotionMechanic;
-	}
-	
-	public PromotionTypeEntity getPromotionType() {
-		return promotionType;
-	}
-
-	public void setPromotionType(PromotionTypeEntity promotionType) {
-		this.promotionType = promotionType;
-	}
-
 	public Set<PromotionAttributeEntity> getAttributes() {
 		return attributes;
 	}
@@ -182,22 +135,6 @@ public class PromotionEntity implements Serializable {
 
 	public void setLocale(String locale) {
 		this.locale = locale;
-	}
-	
-	public PromotionTypeEntity getPromotionLevel() {
-		return promotionLevel;
-	}
-
-	public void setPromotionLevel(PromotionTypeEntity promotionLevel) {
-		this.promotionLevel = promotionLevel;
-	}
-	
-	public PromotionBngnEntity getPromotionBngn() {
-		return promotionBngn;
-	}
-
-	public void setPromotionBngn(PromotionBngnEntity promotionBngn) {
-		this.promotionBngn = promotionBngn;
 	}
 	
 	public String getPromotionCoupon() {
@@ -226,14 +163,6 @@ public class PromotionEntity implements Serializable {
 	@Field(analyze = Analyze.YES, store=Store.NO, analyzer = @Analyzer(definition = Constants.localeZHHK))
 	public String getPromotionDescZHHK() {
 		return this.getAttributes().stream().filter(pa -> pa.getLocale().equals(Constants.localeZHHK)).findFirst().get().getPromotionDesc();
-	}
-	
-	public PromotionDiscEntity getPromotionProduct() {
-		return promotionProduct;
-	}
-
-	public void setPromotionProduct(PromotionDiscEntity promotionProduct) {
-		this.promotionProduct = promotionProduct;
 	}
 
 	@Override

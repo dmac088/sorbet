@@ -16,7 +16,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -36,7 +35,6 @@ import io.nzbee.entity.category.attribute.CategoryAttributeEntity;
 import io.nzbee.entity.category.brand.CategoryBrandEntity;
 import io.nzbee.entity.category.product.CategoryProductEntity;
 import io.nzbee.entity.category.type.CategoryTypeEntity;
-import io.nzbee.entity.promotion.disc.PromotionDiscEntity;
 
 @Entity
 @Table(name = "category", schema = "mochi")
@@ -76,9 +74,6 @@ public class CategoryEntity implements Serializable {
 				cascade = CascadeType.ALL,
 				orphanRemoval = true)
 	private Set<CategoryAttributeEntity> attributes = new HashSet<CategoryAttributeEntity>();
-
-	@ManyToMany(mappedBy = "categories")
-    private Set<PromotionDiscEntity> promotions = new HashSet<PromotionDiscEntity>();
 	
 	@OneToOne(	mappedBy="category",
 			fetch = FetchType.LAZY,
@@ -268,24 +263,6 @@ public class CategoryEntity implements Serializable {
 
 	public String getCurrency() {
 		return currency;
-	}
-	
-	public Set<PromotionDiscEntity> getPromotions() {
-		return promotions;
-	}
-
-	public void setPromotions(Set<PromotionDiscEntity> promotions) {
-		this.promotions = promotions;
-	}
-
-	public void addPromotion(PromotionDiscEntity promotion) {
-		this.getPromotions().add(promotion);
-		promotion.getCategories().add(this);
-	}
-	
-	public void removePromotion(PromotionDiscEntity promotion) {
-		this.getPromotions().remove(promotion);
-		promotion.removeCategory(this);
 	}
 	
 	public CategoryProductEntity getCategoryProduct() {

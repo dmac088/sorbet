@@ -3,7 +3,6 @@ package io.nzbee.entity.promotion;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
-import io.nzbee.entity.promotion.type.PromotionTypeDTO;
 
 public class PromotionViewDTO {
 
@@ -29,9 +28,6 @@ public class PromotionViewDTO {
 	private LocalDateTime promotionEndDate;
 	
 	private String locale;
-	
-	protected PromotionTypeDTO typeDTO;
-	
 	
 	public PromotionViewDTO(Object[] tuple, Map<String, Integer> aliasToIndexMap) {
 		this.promotionId 		= ((Number) tuple[aliasToIndexMap.get(ID_ALIAS)]).longValue();
@@ -63,14 +59,6 @@ public class PromotionViewDTO {
 
 	public LocalDateTime getPromotionEndDate() {
 		return promotionEndDate;
-	}
-
-	public PromotionTypeDTO getTypeDTO() {
-		return typeDTO;
-	}
-
-	public void setTypeDTO(PromotionTypeDTO typeDTO) {
-		this.typeDTO = typeDTO;
 	}
 
 }

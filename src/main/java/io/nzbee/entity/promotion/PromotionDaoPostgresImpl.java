@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import io.nzbee.Globals;
-import io.nzbee.entity.promotion.valdisc.IPromotionDTO;
 
 @Component(value = "promotionEntityDao")
 public class PromotionDaoPostgresImpl implements IPromotionDao {
@@ -26,7 +25,7 @@ public class PromotionDaoPostgresImpl implements IPromotionDao {
 	
 	@SuppressWarnings({ "deprecation", "unchecked"})
 	@Override
-	public List<IPromotionDTO> findAll() {
+	public List<PromotionDomainDTO> findAll() {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findShippingPromotion()");
 		
 		Session session = em.unwrap(Session.class);

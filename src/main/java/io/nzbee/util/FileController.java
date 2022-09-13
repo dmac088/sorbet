@@ -16,11 +16,6 @@ import io.nzbee.util.inventory.InventoryLocationMasterService;
 import io.nzbee.util.inventory.InventoryMasterService;
 import io.nzbee.util.product.physical.PhysicalProductMasterService;
 import io.nzbee.util.product.shipping.ShippingProductMasterService;
-import io.nzbee.util.promotion.category.CategoryPromotionMasterService;
-import io.nzbee.util.promotion.mechanic.PromotionMechanicMasterService;
-import io.nzbee.util.promotion.order.PromotionOrderMasterService;
-import io.nzbee.util.promotion.product.ProductPromotionMasterService;
-import io.nzbee.util.promotion.regular.PromotionProductMasterService;
 import io.nzbee.util.tag.TagMasterService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -53,21 +48,6 @@ public class FileController {
   
     @Autowired
     private ShippingProductMasterService shippingProductMasterService;
-
-    @Autowired
-    private PromotionProductMasterService promotionRegularMasterService;
-    
-    @Autowired
-    private PromotionOrderMasterService promotionOrderMasterService;
-    
-    @Autowired
-    private CategoryPromotionMasterService categoryPromotionMasterService;
-    
-    @Autowired
-    private ProductPromotionMasterService productPromotionMasterService;
-    
-    @Autowired
-    private PromotionMechanicMasterService promotionMechanicMasterService;
     
     @Autowired
     private InventoryMasterService inventoryMasterService; 
@@ -271,137 +251,7 @@ public class FileController {
         return new UploadFileResponse(fileName, fileDownloadUri,
         		uploadFile.getContentType(), uploadFile.getSize());
     }
-    
-    @PostMapping("/PromotionMechanic/Upload/")
-    public UploadFileResponse uploadPromotionMechanicFile(@RequestParam("file") MultipartFile uploadFile) {
-    	
-    	LOGGER.debug("called uploadCategoryFile with parameters {} ", uploadFile );
-
-        String fileName = fileStorageServiceUpload.storeFile(uploadFile);
-
-        promotionMechanicMasterService.writePromotionMechanicMaster(fileName);
-      
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(fileStorageProperties.getUploadDir())	
-                .path(fileName)
-                .toUriString();
-
-        return new UploadFileResponse(fileName, fileDownloadUri,
-        		uploadFile.getContentType(), uploadFile.getSize());
-    }
-    
-    @PostMapping("/Promotion/Upload/")
-    public UploadFileResponse uploadBNGNPCTPromotionFile(@RequestParam("file") MultipartFile uploadFile) {
-    	
-    	LOGGER.debug("called uploadBNGNPCTPromotionFile with parameters {} ", uploadFile );
-
-        String fileName = fileStorageServiceUpload.storeFile(uploadFile);
-
-        promotionRegularMasterService.writePromotionProductMaster(fileName);
-      
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(fileStorageProperties.getUploadDir())	
-                .path(fileName)
-                .toUriString();
-
-        return new UploadFileResponse(fileName, fileDownloadUri,
-        		uploadFile.getContentType(), uploadFile.getSize());
-    }
-    
-    @PostMapping("/OrderPromotion/Upload/")
-    public UploadFileResponse uploadOrderPromotionFile(@RequestParam("file") MultipartFile uploadFile) {
-    	
-    	LOGGER.debug("called uploadOrderPromotionFile with parameters {} ", uploadFile );
-
-        String fileName = fileStorageServiceUpload.storeFile(uploadFile);
-
-        promotionOrderMasterService.writePromotionCouponMaster(fileName);
-      
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(fileStorageProperties.getUploadDir())	
-                .path(fileName)
-                .toUriString();
-
-        return new UploadFileResponse(fileName, fileDownloadUri,
-        		uploadFile.getContentType(), uploadFile.getSize());
-    }
-    
-    @PostMapping("/CategoryPromotionMapping/Upload/")
-    public UploadFileResponse uploadCategoryPromotionMappingFile(@RequestParam("file") MultipartFile uploadFile) {
-    	
-    	LOGGER.debug("called uploadCategoryPromotionMappingFile with parameters {} ", uploadFile );
-
-        String fileName = fileStorageServiceUpload.storeFile(uploadFile);
-
-        categoryPromotionMasterService.writeCategoryPromotionMaster(fileName);
-      
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(fileStorageProperties.getUploadDir())	
-                .path(fileName)
-                .toUriString();
-
-        return new UploadFileResponse(fileName, fileDownloadUri,
-        		uploadFile.getContentType(), uploadFile.getSize());
-    }
-    
-    @PostMapping("/ProductPromotionMapping/Upload/")
-    public UploadFileResponse uploadProductPromotionMappingFile(@RequestParam("file") MultipartFile uploadFile) {
-    	
-    	LOGGER.debug("called uploadCategoryPromotionMappingFile with parameters {} ", uploadFile );
-
-        String fileName = fileStorageServiceUpload.storeFile(uploadFile);
-
-        productPromotionMasterService.writeProductPromotionMaster(fileName);
-      
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(fileStorageProperties.getUploadDir())	
-                .path(fileName)
-                .toUriString();
-
-        return new UploadFileResponse(fileName, fileDownloadUri,
-        		uploadFile.getContentType(), uploadFile.getSize());
-    }
-    
-//    @GetMapping("/Tag/Download/{fileName:.+}")
-//    public ResponseEntity<Resource> downloadTagFile(@PathVariable String fileName, HttpServletRequest request, HttpServletResponse response) {
-//    	
-//    	LOGGER.debug("called downloadTagFile with parameters {} ", fileStorageProperties.getDownloadDir() + fileName );
-//    	
-//    	//generate the file for downloading
-//    	File file = new File(fileStorageProperties.getDownloadDir() + fileName);
-//        
-//    	//persist the file
-//    	try {
-//    		file.createNewFile();
-//    	} catch (IOException ex)  {
-//    		LOGGER.error(ex.toString());
-//    	}
-//    	
-//        // Load file as Resource
-//        Resource resource = fileStorageServiceDownload.loadFileAsResource(file.getName());
-//
-//        // Try to determine file's content type
-//        String contentType = null;
-//        try {
-//            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-//        } catch (IOException ex) {
-//            LOGGER.info("Could not determine file type.");
-//        }
-// 
-// 		//  Fallback to the default content type if type could not be determined
-//        if(contentType == null) {
-//            contentType = "application/octet-stream";
-//        }
-//        
-//        //write the tag master data to file
-//        tagMasterService.extractTagMaster(resource);
-//        
-//        return ResponseEntity.ok()
-//               .contentType(MediaType.parseMediaType(contentType))
-//               .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-//               .body(resource);
-//    }
-    
+  
     
     @PostMapping("/Inventory/Upload/")
     public UploadFileResponse uploadInventoryFile(@RequestParam("file") MultipartFile uploadFile) {

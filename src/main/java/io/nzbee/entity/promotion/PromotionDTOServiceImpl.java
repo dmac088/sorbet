@@ -5,8 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import io.nzbee.entity.promotion.valdisc.IPromotionDTO;
-
 public class PromotionDTOServiceImpl implements IPromotionDTOService {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
@@ -20,7 +18,7 @@ public class PromotionDTOServiceImpl implements IPromotionDTOService {
 	}
 
 	@Override
-	public List<IPromotionDTO> findAll() {
+	public List<PromotionDomainDTO> findAll() {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findShippingPromotion()");
 		return promotionDao.findAll();
 	}

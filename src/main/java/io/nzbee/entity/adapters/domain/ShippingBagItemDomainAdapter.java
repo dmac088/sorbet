@@ -11,9 +11,7 @@ import org.springframework.stereotype.Service;
 import io.nzbee.Constants;
 import io.nzbee.ErrorKeys;
 import io.nzbee.domain.bag.Bag;
-import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.IShippingBagItem;
-import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
 import io.nzbee.domain.ports.IShippingBagItemPortService;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.bag.item.domain.IRegularBagItemDomainDTOMapper;
@@ -39,9 +37,6 @@ public class ShippingBagItemDomainAdapter implements IShippingBagItemPortService
 	
 	@Autowired
 	private IBagItemDomainDTOService bagItemDomainDTOService;
-	
-	@Autowired
-	private IRegularBagItemDomainDTOMapper regularBagItemDomainMapper;
 	
 	@Autowired
 	private IShippingBagItemDomainDTOMapper shippingBagItemDomainMapper;

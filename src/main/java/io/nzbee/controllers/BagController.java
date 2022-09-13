@@ -19,7 +19,7 @@ import io.nzbee.domain.bag.IBagDomainService;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.bag.item.regular.IRegularBagItemDomainService;
 import io.nzbee.domain.promotion.IPromotionService;
-import io.nzbee.domain.promotion.dto.in.CouponDTO;
+import io.nzbee.domain.promotion.dto.coupon.CouponDTO;
 import io.nzbee.domain.promotion.value.CouponCode;
 import io.nzbee.domain.promotion.value.ProductUPC;
 import io.nzbee.resources.bag.BagResource;
@@ -74,6 +74,8 @@ public class BagController {
 		domainBagService.checkAllBagRules(b);
 		
 		promotionService.applyAll(b);
+		
+		domainBagService.save(b);
 
 		// get the view containing additional attributes
 		BagView bv = viewBagService.toView(locale, currency, b);
@@ -92,6 +94,8 @@ public class BagController {
 		
 		promotionService.applyAll(b);
 		
+		domainBagService.save(b);
+		
 		return ResponseEntity.ok(bagResourceAssembler.toModel(bagDTOMapper.toView(b)));
 	}
 
@@ -103,6 +107,8 @@ public class BagController {
 		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
 
 		promotionService.applyAll(b);
+		
+		domainBagService.save(b);
 		
 		Set<BagItemViewOut> sbi = viewBagService.findByCode(locale, currency, principal.getName(), b).getBagItems();
 
@@ -124,6 +130,8 @@ public class BagController {
 		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
 		
 		promotionService.applyAll(b);
+		
+		domainBagService.save(b);
 
 		BagView bv = viewBagService.toView(locale, currency, b);
 
@@ -143,6 +151,8 @@ public class BagController {
 		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
 		
 		promotionService.applyAll(b);
+		
+		domainBagService.save(b);
 
 		// re-retrieve the bag view and return it
 		BagView bv = viewBagService.findByCode(locale, currency, principal.getName(), b);
@@ -160,6 +170,8 @@ public class BagController {
 		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
 		
 		promotionService.applyAll(b);
+		
+		domainBagService.save(b);
 
 		Optional<IRegularBagItem> obi = b.getBagItems().stream()
 				.filter(bi -> bi.getBagItem().getProductUPC().sameAs(new ProductUPC(itemCode))).findAny();

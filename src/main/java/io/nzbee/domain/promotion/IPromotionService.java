@@ -1,11 +1,10 @@
 package io.nzbee.domain.promotion;
 
-import io.nzbee.domain.bag.Bag;
-import io.nzbee.domain.bag.IPromotionBag;
+import io.nzbee.domain.promotion.item.IPromotionItem;
 
 public interface IPromotionService  {
 
-	IPromotionBag applyAll(Bag bag);
+	void applyAll(IPromotionItem item);
 
 	Promotion findByCouponCode(String coupon);
 	

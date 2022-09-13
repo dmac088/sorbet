@@ -70,11 +70,19 @@ public class BagItem implements IBagItem {
 	}
 	
 	public Money getBagItemSubTotal() {
+//		System.out.println("getBagItemSubTotal()");
+//		System.out.println(this.markdownPrice.multiply(this.quantity).amount());
+//		System.out.println("markdownPrice = " +  this.markdownPrice.amount());
+//		System.out.println("quantity = " +  this.quantity);
 		return this.markdownPrice.multiply(this.quantity);
 	}
 	
 	@Override
 	public Money getBagItemTotal() {
+//		System.out.println("getBagItemTotal()");
+//		System.out.println(this.markdownPrice.multiply(this.quantity).subtract(this.getBagItemDiscountTotal()).amount());
+//		System.out.println("markdownPrice = " +  this.markdownPrice.amount());
+//		System.out.println("quantity = " +  this.quantity);
 		return this.markdownPrice.multiply(this.quantity).subtract(this.getBagItemDiscountTotal());
 	}
 

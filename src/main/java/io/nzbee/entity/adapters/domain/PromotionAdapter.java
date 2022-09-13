@@ -4,10 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import io.nzbee.domain.bag.IPromotionBag;
 import io.nzbee.domain.ports.IPromotionPortService;
-import io.nzbee.domain.promotion.IBagPromotion;
 import io.nzbee.domain.promotion.Promotion;
+import io.nzbee.domain.promotion.item.IPromotionItem;
 import io.nzbee.entity.promotion.IPromotionMapper;
 import io.nzbee.entity.promotion.IPromotionDTOService;
 
@@ -30,10 +29,10 @@ public class PromotionAdapter implements IPromotionPortService {
 	}
 
 	@Override
-	public IPromotionBag applyAll(IPromotionBag bag) {
+	public void applyAll(IPromotionItem item) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".applyAll)()");
 
-		bag.getCoupons().forEach(c -> {
+		item.getCoupons().forEach(c -> {
 			System.out.println("coupon found: " + c);
 		});
 	
@@ -41,19 +40,19 @@ public class PromotionAdapter implements IPromotionPortService {
 		promotionService.findAll()
 		.forEach(dto -> {
 			
-			IBagPromotion p = (IBagPromotion) promotionMapper.DTOToDo(dto);
+	//		IBagPromotion p = (IBagPromotion) promotionMapper.DTOToDo(dto);
 
-			p.execute(bag);
+//			p.execute(item);
 			
-			bag.getBagItems().forEach(i -> {
-				i.getBagItem().getDiscounts().forEach(d -> {
-					System.out.println("promotion item = " + d.getBagItem().getUPC().toString()  +"\n"
-									 + "promotion discount amount = " + d.getDiscountAmount().amount());
-				});
-			});
+//			bag.getBagItems().forEach(i -> {
+//				i.getBagItem().getDiscounts().forEach(d -> {
+//					System.out.println("promotion item = " + d.getBagItem().getUPC().toString()  +"\n"
+//									 + "promotion discount amount = " + d.getDiscountAmount().amount());
+//				});
+//			});
 		});
 
-		return bag;
+	//	return bag;
 	}
 
 }

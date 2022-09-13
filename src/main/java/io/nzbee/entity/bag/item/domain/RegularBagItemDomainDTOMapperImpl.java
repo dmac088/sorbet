@@ -18,6 +18,7 @@ import io.nzbee.domain.promotion.value.BrandCode;
 import io.nzbee.domain.promotion.value.CategoryCode;
 import io.nzbee.domain.promotion.value.Money;
 import io.nzbee.domain.promotion.value.ProductUPC;
+import io.nzbee.domain.promotion.value.Weight;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.bag.entity.IBagEntityService;
 import io.nzbee.entity.bag.item.entity.BagItemEntity;
@@ -55,7 +56,7 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 						new Money(dto.getMarkdownPrice(), Currency.getInstance(dto.getCurrency()), BigDecimal.ROUND_HALF_EVEN),
 						new BrandCode(dto.getBrandCode()),
 						this.toCategoryCodes(dto.getCategoryCodes())),
-						dto.getWeight(),
+						new Weight(dto.getWeight()),
 						dto.isInStock()
 					);
 	}
@@ -76,7 +77,7 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 				new Money(dto.getMarkdownPrice(), Currency.getInstance(dto.getCurrency()), BigDecimal.ROUND_HALF_EVEN),
 				new BrandCode(dto.getBrandCode()),
 				this.toCategoryCodes(dto.getCategoryCodes())),
-				dto.getWeight(),
+				new Weight(dto.getWeight()),
 				dto.isInStock()
 			);
 	}
@@ -97,7 +98,7 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 		bi.setBagItemBaseAmount(d.getBagItem().getBagItemSubTotal().amount());
 		bi.setBagItemDiscountAmount(d.getBagItem().getBagItemDiscountTotal().amount());
 		bi.setBagItemTotalAmount(d.getBagItem().getBagItemTotal().amount());
-		bi.setBagTotalWeight(d.getBagItemWeight());
+		bi.setBagTotalWeight(d.getBagItemWeight().amount());
 		return bi;
 	}
 

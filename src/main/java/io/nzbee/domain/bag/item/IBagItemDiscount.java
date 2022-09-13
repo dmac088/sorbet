@@ -6,6 +6,4 @@ public interface IBagItemDiscount {
 
 	Money getDiscountAmount();
 
-	IDiscountableBagItem getBagItem();
-
 }

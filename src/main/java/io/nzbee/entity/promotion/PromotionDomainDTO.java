@@ -3,10 +3,8 @@ package io.nzbee.entity.promotion;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
-import io.nzbee.entity.promotion.type.IPromotionType;
-import io.nzbee.entity.promotion.valdisc.IPromotionDTO;
 
-public class PromotionDomainDTO implements IPromotionDTO {
+public class PromotionDomainDTO {
 
 	public static final String CODE_ALIAS = "prm_cd";
 	
@@ -21,8 +19,6 @@ public class PromotionDomainDTO implements IPromotionDTO {
 	public static final String COUPON_REQUIRED_ALIAS = "prm_trg_rq";
 	
 	public static final String COUPON_CODE_ALIAS = "prm_trg_cd";
-	
-	public static final String TYPE_CODE_ALIAS = "prm_typ_cd";
 	
 	
 	private final String promotionCode;
@@ -39,11 +35,7 @@ public class PromotionDomainDTO implements IPromotionDTO {
 	
 	private final String couponCode;
 	
-	private final String promotionTypeCode;
-	
-	private IPromotionType promotionType;
-	
-	
+
 	public PromotionDomainDTO(Object[] tuple, Map<String, Integer> aliasToIndexMap) {
 		this.promotionCode 				= tuple[aliasToIndexMap.get(CODE_ALIAS)].toString();
 		this.promotionStartDate 		= LocalDateTime.parse(tuple[aliasToIndexMap.get(START_DATE_ALIAS)].toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"));
@@ -52,8 +44,6 @@ public class PromotionDomainDTO implements IPromotionDTO {
 		this.couponRequired 			= ((Boolean) tuple[aliasToIndexMap.get(ACTIVE_ALIAS)]);
 		this.promotionIsActive 			= ((Boolean) tuple[aliasToIndexMap.get(COUPON_REQUIRED_ALIAS)]);
 		this.couponCode					= tuple[aliasToIndexMap.get(COUPON_CODE_ALIAS)].toString();
-		this.promotionTypeCode 			= tuple[aliasToIndexMap.get(TYPE_CODE_ALIAS)].toString();
-		this.promotionType				= PromotionDTOResultTransformer.getType(tuple[aliasToIndexMap.get(TYPE_CODE_ALIAS)].toString(), tuple, aliasToIndexMap);
 	}
 
 	public String getPromotionCode() {
@@ -84,23 +74,5 @@ public class PromotionDomainDTO implements IPromotionDTO {
 		return couponCode;
 	}
 
-	public IPromotionType getPromotionType() {
-		return promotionType;
-	}
-
-	@Override
-	public String getTypeCode() {
-		return this.promotionTypeCode;
-	}
-
-	@Override
-	public String getMechanicCode() {
-		return this.promotionMechanicCode;
-	}
-
-	@Override
-	public Boolean isType(String typeCode) {
-		return this.promotionTypeCode.equals(typeCode);
-	}
 	
 }

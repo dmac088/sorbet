@@ -5,23 +5,18 @@ import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import io.nzbee.Constants;
 import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.bag.item.IBagItem;
-import io.nzbee.domain.bag.item.IDiscountableBagItem;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.IShippingBagItem;
 import io.nzbee.domain.customer.Customer;
-import io.nzbee.domain.promotion.ports.IBnGnFreePromotionPort;
-import io.nzbee.domain.promotion.ports.IDiscountThresholdPromotionPort;
-import io.nzbee.domain.promotion.ports.IPctgDiscountPromotionPort;
 import io.nzbee.domain.promotion.value.CouponCode;
 import io.nzbee.domain.promotion.value.Money;
 import io.nzbee.domain.promotion.value.ProductUPC;
 
-public class Bag implements IBag, IPromotionBag, IDiscountThresholdPromotionPort, IPctgDiscountPromotionPort, IBnGnFreePromotionPort {
+public class Bag implements IBag {
 	
 	private IShippingBagItem shippingItem;
 	
@@ -55,11 +50,6 @@ public class Bag implements IBag, IPromotionBag, IDiscountThresholdPromotionPort
 	
 	public List<IRegularBagItem> getBagItems() {
 		return bagItems;
-	}
-	
-	@Override
-	public List<IDiscountableBagItem> getDiscountableItems() {
-		return this.getBagItems().stream().map(i -> (IDiscountableBagItem) i).collect(Collectors.toList());
 	}
 	
 	public void addItem(IRegularBagItem bagItem, Long qty) {
@@ -113,7 +103,7 @@ public class Bag implements IBag, IPromotionBag, IDiscountThresholdPromotionPort
 	public BigDecimal getTotalWeight() {
 		BigDecimal sum = BigDecimal.ZERO;
         for (IRegularBagItem bi : this.getBagItems()) {
-            sum = sum.add(bi.getBagItemWeight().multiply(new BigDecimal(bi.getBagItem().getQuantity())));
+            sum = sum.add(bi.getBagItemWeight().multiply(bi.getBagItem().getQuantity()));
         }
 		return sum;
 	}
@@ -171,13 +161,8 @@ public class Bag implements IBag, IPromotionBag, IDiscountThresholdPromotionPort
 		this.shippingItem = null;
 	}
 
-	public List<IDiscountableBagItem> getItems() {
-		return this.getBagItems().stream().map(i -> (IDiscountableBagItem) i).collect(Collectors.toList());
-	}
-
-	@Override
-	public Money getTotalAmount() {
-		return this.getSubTotalAmount();
+	public List<IBagItem> getItems() {
+		return null;
 	}
 
 	public Currency getCurrency() {
