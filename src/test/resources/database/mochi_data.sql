@@ -374,8 +374,8 @@ INSERT INTO mochi.bag VALUES (234473, 232304, '2020-12-01 21:33:14.43+08', '2020
 INSERT INTO mochi.bag VALUES (234476, 232304, '2020-12-01 21:40:31.98+08', '2020-12-01 21:40:31.98+08', '{}');
 INSERT INTO mochi.bag VALUES (234487, 234485, '2022-06-23 16:36:19.391+08', '2022-06-23 16:36:19.391+08', '{}');
 INSERT INTO mochi.bag VALUES (234491, 234489, '2022-08-18 11:08:53.563+08', '2022-08-18 11:08:53.563+08', '{}');
+INSERT INTO mochi.bag VALUES (234484, 234482, '2020-12-02 12:54:34.693+08', '2022-09-11 19:28:12.663+08', '{"test 2","test 1","test 3","test 4","test 5"}');
 INSERT INTO mochi.bag VALUES (234492, 234490, '2022-09-07 20:18:28.784+08', '2022-09-07 20:19:39.458+08', '{""}');
-INSERT INTO mochi.bag VALUES (234484, 234482, '2020-12-02 12:54:34.693+08', '2022-09-08 18:33:00.755+08', '{"test 2","test 1","test 3","test 4","test 5"}');
 
 
 --
@@ -391,11 +391,12 @@ INSERT INTO mochi.bag_item_status VALUES (3, 'PND01', 'Pending');
 -- Data for Name: bag_item; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
-INSERT INTO mochi.bag_item VALUES (234778, 234484, 29, 2, 1, 1, 0, 0, 0, 0);
-INSERT INTO mochi.bag_item VALUES (234780, 234484, 2031068, 1, 1, 2, 0, 0, 0, 0);
 INSERT INTO mochi.bag_item VALUES (234756, 234492, 6, 1, 1, 1, 0, 0, 0, 0);
 INSERT INTO mochi.bag_item VALUES (234757, 234492, 10, 1, 1, 1, 0, 0, 0, 0);
 INSERT INTO mochi.bag_item VALUES (234758, 234492, 9, 1, 1, 1, 0, 0, 0, 0);
+INSERT INTO mochi.bag_item VALUES (234958, 234484, 6, 2, 1, 1, 28.00, 0.00, 28.00, 0.10);
+INSERT INTO mochi.bag_item VALUES (235047, 234484, 2031069, 1, 1, 2, 18.00, 0.00, 18.00, 0);
+INSERT INTO mochi.bag_item VALUES (234943, 234484, 17, 2, 1, 1, 64.00, 0.00, 64.00, 0.26);
 
 
 --
@@ -578,12 +579,6 @@ INSERT INTO mochi.brand_category VALUES (11, 32, 45);
 INSERT INTO mochi.brand_category VALUES (12, 33, 45);
 INSERT INTO mochi.brand_category VALUES (13, 34, 45);
 INSERT INTO mochi.brand_category VALUES (14, 35, 45);
-
-
---
--- Data for Name: brand_promotion; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
---
-
 
 
 --
@@ -842,14 +837,6 @@ INSERT INTO mochi.category_product VALUES (233182);
 INSERT INTO mochi.category_product VALUES (233185);
 INSERT INTO mochi.category_product VALUES (233188);
 INSERT INTO mochi.category_product VALUES (46);
-
-
---
--- Data for Name: category_promotion; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
---
-
-INSERT INTO mochi.category_promotion VALUES (10, 234464);
-INSERT INTO mochi.category_promotion VALUES (14, 234467);
 
 
 --
@@ -7025,15 +7012,6 @@ INSERT INTO mochi.product_category VALUES (2288, 2031888, 8);
 
 
 --
--- Data for Name: product_promotion; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
---
-
-INSERT INTO mochi.product_promotion VALUES (13, 234464);
-INSERT INTO mochi.product_promotion VALUES (25, 234467);
-INSERT INTO mochi.product_promotion VALUES (2031276, 234464);
-
-
---
 -- Data for Name: product_rating; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
@@ -9779,70 +9757,6 @@ INSERT INTO mochi.product_tag VALUES (136, 2031888, 15);
 
 
 --
--- Data for Name: promotion; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
---
-
-INSERT INTO mochi.promotion VALUES (2030864, 'C10PCT', '2020-03-07 00:00:00+08', '2021-01-31 00:00:00+08', 3, true, 'test 3', 2, true, NULL, NULL, NULL);
-INSERT INTO mochi.promotion VALUES (2030866, 'SHPFRE', '2020-03-07 00:00:00+08', '2020-03-07 00:00:00+08', 2, true, NULL, 3, false, NULL, NULL, NULL);
-INSERT INTO mochi.promotion VALUES (234464, 'RB2G50', '2020-03-07 00:00:00+08', '2021-01-31 00:00:00+08', 1, true, 'test 1', 1, true, NULL, NULL, '15483827');
-INSERT INTO mochi.promotion VALUES (234467, 'RB3G33', '2020-03-08 00:00:00+08', '2021-02-01 00:00:00+08', 1, true, 'test 2', 5, true, 'CIT01', NULL, NULL);
-
-
---
--- Data for Name: promotion_attr_lcl; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
---
-
-INSERT INTO mochi.promotion_attr_lcl VALUES (234465, 234464, 'Buy 1 get 1 free', 'en-GB');
-INSERT INTO mochi.promotion_attr_lcl VALUES (234466, 234464, '買1送1', 'zh-HK');
-INSERT INTO mochi.promotion_attr_lcl VALUES (234468, 234467, '買二送一', 'zh-HK');
-INSERT INTO mochi.promotion_attr_lcl VALUES (234469, 234467, 'Buy 2 get 1 free', 'en-GB');
-INSERT INTO mochi.promotion_attr_lcl VALUES (2030865, 2030864, '10% off total basket', 'en-GB');
-INSERT INTO mochi.promotion_attr_lcl VALUES (2030866, 2030864, '總籃可享10％的折扣', 'zh-HK');
-
-
---
--- Data for Name: promotion_bngn; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
---
-
-INSERT INTO mochi.promotion_bngn VALUES (234464, 2, 0.5);
-INSERT INTO mochi.promotion_bngn VALUES (234467, 3, 0.33);
-
-
---
--- Data for Name: promotion_disc; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
---
-
-INSERT INTO mochi.promotion_disc VALUES (2030864, 0.1);
-
-
---
--- Data for Name: promotion_mech; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
---
-
-INSERT INTO mochi.promotion_mech VALUES (3, 'PCTGOFF', 'Percentage of whole bag');
-INSERT INTO mochi.promotion_mech VALUES (1, 'BNGNF', 'Buy N Get N Free');
-INSERT INTO mochi.promotion_mech VALUES (2, 'VALPCTOFF', 'Value threshold percentage discount');
-
-
---
--- Data for Name: promotion_type; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
---
-
-INSERT INTO mochi.promotion_type VALUES (1, 'PRD', 'Product promotion');
-INSERT INTO mochi.promotion_type VALUES (2, 'BAG', 'Bag promotion');
-INSERT INTO mochi.promotion_type VALUES (3, 'SHP', 'Shipping promotion');
-INSERT INTO mochi.promotion_type VALUES (4, 'BND', 'Brand Promotion');
-INSERT INTO mochi.promotion_type VALUES (5, 'CAT', 'Category Promotion');
-
-
---
--- Data for Name: promotion_valdisc; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
---
-
-INSERT INTO mochi.promotion_valdisc VALUES (2030866, 500, 0.3, 'HKD', 'gte');
-
-
---
 -- Data for Name: rating; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
@@ -10042,7 +9956,7 @@ SELECT pg_catalog.setval('mochi.bag_bag_id_seq', 234492, true);
 -- Name: bag_item_bag_item_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
 --
 
-SELECT pg_catalog.setval('mochi.bag_item_bag_item_id_seq', 234780, true);
+SELECT pg_catalog.setval('mochi.bag_item_bag_item_id_seq', 235047, true);
 
 
 --

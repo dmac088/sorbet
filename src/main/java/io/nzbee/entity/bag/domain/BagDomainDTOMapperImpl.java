@@ -192,7 +192,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 			b.getBagItems().add(sie);
 		}
 		
-		// add promotion to the bag if the promotion exists
+		// add coupon to the bag if the coupon exists
 		d.getCoupons().stream().forEach(c -> {
 			if(!b.getCouponCodes().contains(c.toString())) {
 				b.getCouponCodes().add(c.toString());
