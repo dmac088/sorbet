@@ -1,6 +1,6 @@
 package io.nzbee.domain.bag.item;
 
-import io.nzbee.domain.promotion.value.Money;
+import io.nzbee.domain.valueObjects.Money;
 
 public interface IBagItemDiscount {
 

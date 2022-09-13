@@ -66,8 +66,6 @@ import io.nzbee.entity.product.shipping.view.IShippingProductViewDTOMapper;
 import io.nzbee.entity.product.shipping.view.ShippingProductViewDTOMapperImpl;
 import io.nzbee.entity.product.status.IProductStatusService;
 import io.nzbee.entity.product.status.ProductStatusServiceImpl;
-import io.nzbee.entity.promotion.IPromotionDTOService;
-import io.nzbee.entity.promotion.PromotionDTOServiceImpl;
 import io.nzbee.hkpost.IHKPostPort;
 import io.nzbee.resources.product.physical.light.PhysicalProductLightModel;
 import io.nzbee.resources.product.shipping.ShippingProductResource;
@@ -107,12 +105,6 @@ import io.nzbee.view.product.tag.facet.TagFacetViewServiceImpl;
 
 @Configuration
 class BeanConfiguration {
-	
-	
-	@Bean
-	IPromotionDTOService promotionDTOService() {
-		return new PromotionDTOServiceImpl();
-	}
 	
 	@Bean
 	IRegularBagItemDomainDTODao<RegularBagItemDomainDTO> regularBagItemDomainDTODao() {

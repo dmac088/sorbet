@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import io.nzbee.view.bag.BagView;
 import io.nzbee.view.bag.item.BagItemViewOut;
 import io.nzbee.domain.bag.Bag;
-import io.nzbee.domain.promotion.value.ProductUPC;
+import io.nzbee.domain.valueObjects.ProductUPC;
 import io.nzbee.entity.bag.item.view.BagItemViewDTO;
 import io.nzbee.entity.bag.item.view.IBagItemViewDTOMapper;
 

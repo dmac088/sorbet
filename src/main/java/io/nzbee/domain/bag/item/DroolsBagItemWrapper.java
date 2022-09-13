@@ -3,7 +3,7 @@ package io.nzbee.domain.bag.item;
 import java.math.BigDecimal;
 import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
-import io.nzbee.domain.promotion.value.ProductUPC;
+import io.nzbee.domain.valueObjects.ProductUPC;
 
 public class DroolsBagItemWrapper {
 	

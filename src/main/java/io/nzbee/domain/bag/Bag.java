@@ -12,9 +12,9 @@ import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.IShippingBagItem;
 import io.nzbee.domain.customer.Customer;
-import io.nzbee.domain.promotion.value.CouponCode;
-import io.nzbee.domain.promotion.value.Money;
-import io.nzbee.domain.promotion.value.ProductUPC;
+import io.nzbee.domain.valueObjects.CouponCode;
+import io.nzbee.domain.valueObjects.Money;
+import io.nzbee.domain.valueObjects.ProductUPC;
 
 public class Bag implements IBag {
 	

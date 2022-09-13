@@ -1,6 +1,6 @@
 package io.nzbee.domain.bag;
 
-import io.nzbee.domain.promotion.value.CouponCode;
+import io.nzbee.domain.valueObjects.CouponCode;
 import io.nzbee.view.bag.item.BagItemViewIn;
 import io.nzbee.view.product.shipping.ShippingItemDTOIn;
 

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import io.nzbee.Globals;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
-import io.nzbee.domain.promotion.value.ProductUPC;
+import io.nzbee.domain.valueObjects.ProductUPC;
 import io.nzbee.entity.bag.view.BagViewDTO;
 import io.nzbee.entity.bag.view.IBagViewDTOMapper;
 import io.nzbee.entity.bag.view.IBagViewDTOService;

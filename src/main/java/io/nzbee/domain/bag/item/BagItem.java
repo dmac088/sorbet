@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import io.nzbee.Constants;
 import io.nzbee.domain.bag.Bag;
-import io.nzbee.domain.promotion.value.BrandCode;
-import io.nzbee.domain.promotion.value.CategoryCode;
-import io.nzbee.domain.promotion.value.Money;
-import io.nzbee.domain.promotion.value.ProductUPC;
+import io.nzbee.domain.valueObjects.BrandCode;
+import io.nzbee.domain.valueObjects.CategoryCode;
+import io.nzbee.domain.valueObjects.Money;
+import io.nzbee.domain.valueObjects.ProductUPC;
 
 public class BagItem implements IBagItem {
 

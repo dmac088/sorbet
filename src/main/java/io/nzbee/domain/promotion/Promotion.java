@@ -1,8 +1,9 @@
 package io.nzbee.domain.promotion;
 
 import java.time.LocalDateTime;
-import io.nzbee.domain.promotion.value.CouponCode;
-import io.nzbee.domain.promotion.value.PromotionCode;
+
+import io.nzbee.domain.valueObjects.CouponCode;
+import io.nzbee.domain.valueObjects.PromotionCode;
 
 public class Promotion {
 

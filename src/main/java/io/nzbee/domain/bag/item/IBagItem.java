@@ -3,8 +3,8 @@ package io.nzbee.domain.bag.item;
 import java.util.List;
 
 import io.nzbee.domain.bag.IBag;
-import io.nzbee.domain.promotion.value.Money;
-import io.nzbee.domain.promotion.value.ProductUPC;
+import io.nzbee.domain.valueObjects.Money;
+import io.nzbee.domain.valueObjects.ProductUPC;
 
 public interface IBagItem {
 

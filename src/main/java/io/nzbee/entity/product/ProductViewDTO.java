@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 import io.nzbee.entity.category.product.CategoryProductDomainDTO;
 import io.nzbee.entity.product.department.DepartmentDomainDTO;
-import io.nzbee.entity.promotion.PromotionDomainDTO;
 
 public class ProductViewDTO implements Serializable {
 	
@@ -53,9 +52,7 @@ public class ProductViewDTO implements Serializable {
 	
 	//these fields will contain all the categories related to the product 1->N relationship
 	protected Set<CategoryProductDomainDTO> categories = new HashSet<CategoryProductDomainDTO>();
-	
-	protected Set<PromotionDomainDTO> promotions = new HashSet<PromotionDomainDTO>();
-	
+
 	//pricing objects
 	protected BigDecimal retailPrice;
 	
@@ -137,14 +134,6 @@ public class ProductViewDTO implements Serializable {
 
 	public void setCategories(Set<CategoryProductDomainDTO> categories) {
 		this.categories = categories;
-	}
-	
-	public Set<PromotionDomainDTO> getPromotions() {
-		return promotions;
-	}
-
-	public void setPromotions(Set<PromotionDomainDTO> promotions) {
-		this.promotions = promotions;
 	}
 
 	public BigDecimal getRetailPrice() {

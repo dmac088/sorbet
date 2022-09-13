@@ -6,15 +6,12 @@ import java.util.List;
 import java.util.Map;
 import org.hibernate.transform.ResultTransformer;
 import io.nzbee.entity.product.ProductDomainDTO;
-import io.nzbee.entity.promotion.PromotionDomainDTO;
 
 public class PhysicalProductDTOResultTransformer implements ResultTransformer {
 
 	private static final long serialVersionUID = 1L;
 	
 	private Map<Long, PhysicalProductDTO> physicalProductDTOMap = new LinkedHashMap<>();
-	
-	private Map<Long, PromotionDomainDTO> promotionDTOMap = new LinkedHashMap<>();
 	
 	private Map<String, Integer> aliasToIndexMap;
 	
@@ -30,28 +27,7 @@ public class PhysicalProductDTOResultTransformer implements ResultTransformer {
         PhysicalProductDTO productDTO = physicalProductDTOMap.computeIfAbsent(
             productId,
             id -> {
-            	ProductDomainDTO pDto = null;
-            	PhysicalProductDTO spDto = new PhysicalProductDTO(tuple, aliasToIndexMap);
-            	pDto = spDto.getProductDto();
-            	
-            			
-            	if(!( tuple[aliasToIndexMap.get(PromotionDomainDTO.CODE_ALIAS)] == null)) {
-                	
-                	Long promotionId = ((Number) tuple[aliasToIndexMap.get(PromotionDomainDTO.CODE_ALIAS)]).longValue();
-                	
-                	PromotionDomainDTO promotionDTO = promotionDTOMap.computeIfAbsent(
-                		promotionId,
-            	        pId -> {
-            	            PromotionDomainDTO promoDto = new PromotionDomainDTO(tuple, aliasToIndexMap);
-            	            
-            	            return promoDto;
-            	        }
-                	);
-                	
-                	pDto.getPromotions().add(promotionDTO);
-                	
-                }
-                 
+            	PhysicalProductDTO spDto = new PhysicalProductDTO(tuple, aliasToIndexMap); 
             	return spDto;
             }
         );

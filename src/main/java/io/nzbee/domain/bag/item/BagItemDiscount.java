@@ -1,7 +1,7 @@
 package io.nzbee.domain.bag.item;
 
 import io.nzbee.domain.promotion.item.IPromotionItem;
-import io.nzbee.domain.promotion.value.Money;
+import io.nzbee.domain.valueObjects.Money;
 
 //remember the BagItemDiscount will not be persisted
 //we only need what we need to compute the bagItem total

@@ -1,4 +1,4 @@
-package io.nzbee.domain.promotion.value;
+package io.nzbee.domain.valueObjects;
 
 
 public final class CategoryCode {

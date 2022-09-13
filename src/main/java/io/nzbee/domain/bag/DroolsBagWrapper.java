@@ -1,7 +1,7 @@
 package io.nzbee.domain.bag;
 
 import io.nzbee.domain.bag.item.BagItem;
-import io.nzbee.domain.promotion.value.Money;
+import io.nzbee.domain.valueObjects.Money;
 
 public class DroolsBagWrapper {
 	

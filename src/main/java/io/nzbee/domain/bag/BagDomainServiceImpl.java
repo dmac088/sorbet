@@ -13,8 +13,8 @@ import io.nzbee.domain.bag.item.regular.IRegularBagItemDomainService;
 import io.nzbee.domain.bag.item.shipping.IShippingBagItem;
 import io.nzbee.domain.bag.item.shipping.IShippingBagItemDomainService;
 import io.nzbee.domain.ports.IBagPortService;
-import io.nzbee.domain.promotion.value.CouponCode;
-import io.nzbee.domain.promotion.value.ProductUPC;
+import io.nzbee.domain.valueObjects.CouponCode;
+import io.nzbee.domain.valueObjects.ProductUPC;
 import io.nzbee.view.bag.item.BagItemViewIn;
 import io.nzbee.view.product.shipping.ShippingItemDTOIn;
 
