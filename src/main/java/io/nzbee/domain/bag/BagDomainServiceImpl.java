@@ -14,6 +14,7 @@ import io.nzbee.domain.bag.item.shipping.IShippingBagItem;
 import io.nzbee.domain.bag.item.shipping.IShippingBagItemDomainService;
 import io.nzbee.domain.ports.IBagPortService;
 import io.nzbee.domain.valueObjects.CouponCode;
+import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.ProductUPC;
 import io.nzbee.view.bag.item.BagItemViewIn;
 import io.nzbee.view.product.shipping.ShippingItemDTOIn;
@@ -36,14 +37,14 @@ public class BagDomainServiceImpl implements IBagDomainService {
     private KieContainer kieContainer;
 	
 	@Override
-	public Bag findByCode(String locale, String currency, String userName) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode with parameters {}, {}, {}", locale, currency, userName);
-		return bagService.findByCode(locale, currency, userName);
+	public Bag findByCode(Locale locale, String userName) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode with parameters {}, {}, {}", locale.getLocale(), locale.getCurrency().getCurrencyCode(), userName);
+		return bagService.findByCode(locale, userName);
 	}
 	
 	@Override
-	public void addItemToBag(String locale, String currency, CouponCode coupon, String username) {
-		Bag b = this.findByCode(locale, currency, username);
+	public void addItemToBag(Locale locale, CouponCode coupon, String username) {
+		Bag b = this.findByCode(locale, username);
 
 		b.addCoupon(coupon);
 
@@ -55,16 +56,15 @@ public class BagDomainServiceImpl implements IBagDomainService {
 
 	@Override
 	@Transactional
-	public void addShippingItem(String locale, String currency, ShippingItemDTOIn dto, String username) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".addShippingItem with parameters {}, {}, {}, {}", locale, currency, dto.getShippingProductCode(), username);
+	public void addShippingItem(Locale locale, ShippingItemDTOIn dto, String username) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".addShippingItem with parameters {}, {}, {}, {}", locale, locale.getCurrency().getCurrencyCode(), dto.getShippingProductCode(), username);
 		
 		//get the bag domain model with the items
     	Bag b = this.findByCode(locale, 
-    							currency, 
     							username);
 		
     	//get the shipping item
-		IShippingBagItem sbi = shippingBagItemService.getShippingItem(currency, b, dto.getShippingProductCode());
+		IShippingBagItem sbi = shippingBagItemService.getShippingItem(locale, b, dto.getShippingProductCode());
 	
     	//add the shipping item to the bag
     	b.addShippingItem(sbi);
@@ -75,12 +75,11 @@ public class BagDomainServiceImpl implements IBagDomainService {
 	
 	@Override
 	@Transactional
-	public void addPhysicalItem(String locale, String currency, BagItemViewIn dto, String username) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".addPhysicalItem with parameters {}, {}, {}, {}, {}", locale, currency, dto.getItemUPC(), dto.getItemQty(), username);
+	public void addPhysicalItem(Locale locale, BagItemViewIn dto, String username) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".addPhysicalItem with parameters {}, {}, {}, {}, {}", locale, locale.getCurrency().getCurrencyCode(), dto.getItemUPC(), dto.getItemQty(), username);
 		
 		//get the bag domain model with the items
-    	Bag b = this.findByCode(locale, 
-    							currency, 
+    	Bag b = this.findByCode(locale,
     							username);
 
     	//check if the product already exists in the bag
@@ -89,7 +88,7 @@ public class BagDomainServiceImpl implements IBagDomainService {
     	//create a bag item if one does not exists otherwise retrieve the existing bag item
     	IRegularBagItem bagItem = exists 
     					? b.getBagItem(new ProductUPC(dto.getItemUPC())) 
-    					: domainBagItemService.getNewPhysicalItem(locale, currency, b, dto.getItemUPC(), dto.getItemQty());
+    					: domainBagItemService.getNewPhysicalItem(locale, b, dto.getItemUPC(), dto.getItemQty());
     	
     	
     	b.addItem(bagItem, dto.getItemQty());

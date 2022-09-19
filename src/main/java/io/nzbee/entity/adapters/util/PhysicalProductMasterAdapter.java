@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import io.nzbee.Constants;
 import io.nzbee.ErrorKeys;
+import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.entity.brand.BrandEntity;
 import io.nzbee.entity.category.product.CategoryProductEntity;
 import io.nzbee.entity.product.IProductService;
@@ -33,7 +34,7 @@ public class PhysicalProductMasterAdapter implements IPhysicalProductMasterPort 
 
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 	
-	private final String locale = Constants.localeENGB;
+	private final Locale locale = Constants.defaultLocale;
 
 	@Autowired
 	private IProductService productService;

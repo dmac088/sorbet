@@ -2,7 +2,6 @@ package io.nzbee.domain.bag;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.List;
 import java.util.Optional;
 import io.nzbee.Constants;
@@ -13,6 +12,7 @@ import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.IShippingBagItem;
 import io.nzbee.domain.customer.Customer;
 import io.nzbee.domain.valueObjects.CouponCode;
+import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.Money;
 import io.nzbee.domain.valueObjects.ProductUPC;
 
@@ -28,20 +28,21 @@ public class Bag implements IBag {
 	
 	private final List<IRegularBagItem> bagItems;
 	
-	private final Currency currency;
-
-	public Bag(Customer customer, Currency currency) {
+	private final Locale locale;
+	
+	
+	public Bag(Customer customer, Locale locale) {
 		this.customer = customer;
 		this.bagItems = new ArrayList<>();
 		this.coupons = new ArrayList<CouponCode>();
-		this.currency = currency;
+		this.locale = locale;
 	}
 	
 	public Bag(Customer customer) {
 		this.customer = customer;
 		this.bagItems = new ArrayList<>();
 		this.coupons = new ArrayList<CouponCode>();
-		this.currency = Currency.getInstance(Constants.currencyUSD);
+		this.locale = Constants.defaultLocale;
 	}
 	
 	public Customer getCustomer() {
@@ -165,17 +166,17 @@ public class Bag implements IBag {
 		return null;
 	}
 
-	public Currency getCurrency() {
-		return currency;
-	}
-
 	public Money getMoney() {
-		return new Money(BigDecimal.ZERO, this.getCurrency(), Constants.defaultMoneyRounding);
+		return new Money(BigDecimal.ZERO, this.getLocale().getCurrency(), Constants.defaultMoneyRounding);
 	}
 
 	@Override
 	public String getUserName() {
 		return this.getCustomer().getUserName();
+	}
+
+	public Locale getLocale() {
+		return this.locale;
 	}
 	
 }

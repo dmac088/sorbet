@@ -11,6 +11,7 @@ import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.bag.item.shipping.IShippingBagItem;
 import io.nzbee.domain.ports.IBagItemPortService;
+import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.ProductUPC;
 import io.nzbee.entity.bag.domain.IBagDomainDTOService;
 import io.nzbee.entity.bag.entity.BagEntity;
@@ -48,11 +49,11 @@ public class RegularBagItemDomainAdapter implements IBagItemPortService {
 	private IBagItemDomainDTOMapper<ShippingBagItemDomainDTO, BagItemEntity, IShippingBagItem> shippingBagItemDomainMapper;
 
 	@Override
-	public IRegularBagItem getNewPhysicalItem(String locale, String currency, Bag bag, String itemUPC, Long quantity) {
+	public IRegularBagItem getNewPhysicalItem(Locale locale, Bag bag, String itemUPC, Long quantity) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewPhysicalItem with parameters {}, {}", itemUPC, quantity);
 		
 		//there is no product in the domain model just bagItem
-		RegularBagItemDomainDTO biDto = bagItemDomainDTOService.getNewPhysicalItem(itemUPC, currency)
+		RegularBagItemDomainDTO biDto = bagItemDomainDTOService.getNewPhysicalItem(itemUPC, locale.getLocale())
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, itemUPC));
 		
 		//create, save and return domain object 
@@ -62,11 +63,11 @@ public class RegularBagItemDomainAdapter implements IBagItemPortService {
 	}
 	
 	@Override
-	public IShippingBagItem getNewShippingItem(String locale, String currency, Bag bag, String destCode, String shipType) {
+	public IShippingBagItem getNewShippingItem(Locale locale, Bag bag, String destCode, String shipType) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewShippingItem with parameters {}, {}", destCode, shipType);
 		
 		//there is no product in the domain model just bagItem
-		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getNewShippingItem(currency,  destCode,  shipType, bag.getTotalWeight())
+		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getNewShippingItem(locale.getLocale(),  destCode,  shipType, bag.getTotalWeight())
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, destCode + " - " + shipType + " - " + bag.getTotalWeight()));
 		
 		//create, save and return domain object 

@@ -6,6 +6,8 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.view.ports.IBrandFacetViewPortService;
 
 public class BrandFacetViewServiceImpl implements IBrandFacetViewService {
@@ -16,14 +18,14 @@ public class BrandFacetViewServiceImpl implements IBrandFacetViewService {
 	private IBrandFacetViewPortService brandService;
 	
 	@Override
-	public List<BrandFacetView> findAll(String locale, String currency, String categoryCode, Set<String> categoryCodes,
+	public List<BrandFacetView> findAll(Locale locale, String categoryCode, Set<String> categoryCodes,
 			Set<String> brandCodes, Set<String> tagCodes, Double maxPrice) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findAll()");
-		return brandService.findAll(locale, currency, categoryCode, categoryCodes, tagCodes, maxPrice);
+		return brandService.findAll(locale, categoryCode, categoryCodes, tagCodes, maxPrice);
 	}
 
 	@Override
-	public BrandFacetView findByCode(String locale, String rootCategory, String brandCode) {
+	public BrandFacetView findByCode(Locale locale, String rootCategory, String brandCode) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode()");
 		return brandService.findByCode(locale, rootCategory, brandCode);
 	}

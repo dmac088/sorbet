@@ -41,10 +41,11 @@ import io.nzbee.entity.bag.item.type.IBagItemTypeService;
 import io.nzbee.entity.bag.item.domain.RegularBagItemDomainDTOMapperImpl;
 import io.nzbee.entity.bag.item.domain.ShippingBagItemDomainDTO;
 import io.nzbee.entity.bag.item.domain.ShippingBagItemDomainDTOMapperImpl;
-import io.nzbee.entity.bag.item.domain.promotion.IPromotionBagItemDomainDTODao;
+import io.nzbee.entity.bag.item.domain.promotion.IPromotionBagItemDomainDTOMapper;
 import io.nzbee.entity.bag.item.domain.promotion.IPromotionBagItemDomainDTOService;
-import io.nzbee.entity.bag.item.domain.promotion.PromotionBagItemDomainDTO;
+import io.nzbee.entity.bag.item.domain.promotion.IPromotionBagItemDomianDTODaoPostgres;
 import io.nzbee.entity.bag.item.domain.promotion.PromotionBagItemDomainDTODaoPostgresImpl;
+import io.nzbee.entity.bag.item.domain.promotion.PromotionBagItemDomainDTOMapperImpl;
 import io.nzbee.entity.bag.item.domain.promotion.PromotionBagItemDomainDTOServiceImpl;
 import io.nzbee.entity.bag.item.domain.RegularBagItemDomainDTO;
 import io.nzbee.entity.bag.item.domain.BagItemDomainDTODaoImpl;
@@ -112,7 +113,12 @@ import io.nzbee.view.product.tag.facet.TagFacetViewServiceImpl;
 class BeanConfiguration {
 	
 	@Bean
-	IPromotionBagItemDomainDTODao<PromotionBagItemDomainDTO> promotionBagItemDomianDTODaoPostgres() {
+	IPromotionBagItemDomainDTOMapper promotionBagItemDomainDTOMapper() {
+		return new PromotionBagItemDomainDTOMapperImpl();
+	}
+	
+	@Bean
+	IPromotionBagItemDomianDTODaoPostgres promotionBagItemDomianDTODaoPostgres() {
 		return new PromotionBagItemDomainDTODaoPostgresImpl();
 	}
 	

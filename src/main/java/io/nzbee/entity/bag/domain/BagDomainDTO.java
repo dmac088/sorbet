@@ -17,6 +17,8 @@ public class BagDomainDTO {
 	
 	public static final String CURRENCY_CODE_ALIAS = "curr";
 	
+	public static final String LOCALE_CODE_ALIAS = "lcl";
+	
 	private final Long bagId;
 	
 	private List<String> coupons;
@@ -27,6 +29,8 @@ public class BagDomainDTO {
 	
 	private final PersonDomainDTO customer;
 	
+	private final String locale;
+	
 	private final String currency;
 	
 	
@@ -34,6 +38,7 @@ public class BagDomainDTO {
 		this.bagId = ((Number) tuple[aliasToIndexMap.get(ID_ALIAS)]).longValue();
 		this.customer = new PersonDomainDTO(tuple, aliasToIndexMap);
 		this.currency = tuple[aliasToIndexMap.get(CURRENCY_CODE_ALIAS)].toString();
+		this.locale = tuple[aliasToIndexMap.get(LOCALE_CODE_ALIAS)].toString();
 		this.coupons = Arrays.asList(tuple[aliasToIndexMap.get(COUPONS_ALIAS)].toString().split(","));
 	}
 	
@@ -59,6 +64,10 @@ public class BagDomainDTO {
 
 	public List<String> getCoupons() {
 		return coupons;
+	}
+	
+	public String getLocale() {
+		return locale;
 	}
 
 	public String getCurrency() {

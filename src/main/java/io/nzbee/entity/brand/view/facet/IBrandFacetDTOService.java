@@ -9,7 +9,7 @@ public interface IBrandFacetDTOService extends ISearchDimensionService<BrandFace
 	
 	List<BrandFacetDTO> findAll(String locale, String currency, String caetgoryCode, StringCollectionWrapper categoryCodes,
 			StringCollectionWrapper tagCodes, Double maxPrice);
-	
+
 	Optional<BrandFacetDTO> findByCode(String locale, String rootCategory, String brandCode);
 
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.item.DroolsBagItemWrapper;
 import io.nzbee.domain.ports.IBagItemPortService;
+import io.nzbee.domain.valueObjects.Locale;
 
 public class RegularBagItemServiceImpl implements IRegularBagItemDomainService{
 
@@ -22,9 +23,9 @@ public class RegularBagItemServiceImpl implements IRegularBagItemDomainService{
     private KieContainer kieContainer;
 	
 	@Override
-	public IRegularBagItem getNewPhysicalItem(String locale, String currency, Bag bag, String itemUPC, Long quantity) {
+	public IRegularBagItem getNewPhysicalItem(Locale locale, Bag bag, String itemUPC, Long quantity) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewPhysicalItem with parameters {}, {}", itemUPC, quantity);
-		return bagItemService.getNewPhysicalItem(locale, currency, bag, itemUPC, quantity);
+		return bagItemService.getNewPhysicalItem(locale, bag, itemUPC, quantity);
 	}
 
 	@Override 

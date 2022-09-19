@@ -60,7 +60,7 @@ public class CategoryMasterService {
 							.findByCode(c.getCategoryParentCode());
 					if (opc.isPresent()) {
 						CategoryEntity pc = opc.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.categoryNotFound,
-							Constants.localeENGB, c.getCategoryParentCode()));
+								Constants.defaultLocale, c.getCategoryParentCode()));
 						c.setCategoryParentId(pc.getCategoryId());
 					}
 					categoryService.save(c);
@@ -110,7 +110,7 @@ public class CategoryMasterService {
 		}
 		
 		CategoryTypeEntity ct = categoryTypeService.findByCode(categoryType).orElseThrow(() -> new EntityNotFoundException(ErrorKeys.categoryNotFound,
-							Constants.localeENGB, categoryType));
+				Constants.defaultLocale, categoryType));
 
 		cp.getCategory().setCategoryCode(categoryCode);
 		cp.getCategory().setCategoryLevel(categoryLevel);

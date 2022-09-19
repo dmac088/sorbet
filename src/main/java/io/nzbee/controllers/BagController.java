@@ -21,6 +21,8 @@ import io.nzbee.domain.bag.item.regular.IRegularBagItemDomainService;
 import io.nzbee.domain.promotion.IPromotionService;
 import io.nzbee.domain.promotion.dto.coupon.CouponDTO;
 import io.nzbee.domain.valueObjects.CouponCode;
+import io.nzbee.domain.valueObjects.Locale;
+//import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.ProductUPC;
 import io.nzbee.resources.bag.BagResource;
 import io.nzbee.resources.bag.BagResourceAssembler;
@@ -69,7 +71,7 @@ public class BagController {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getCustomerBag");
 
 		// get the domain model to compute the bag total
-		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
+		Bag b = domainBagService.findByCode(Locale.localize(locale, currency), principal.getName());
 
 		domainBagService.checkAllBagRules(b);
 		
@@ -87,10 +89,10 @@ public class BagController {
 	public ResponseEntity<BagResource> addCouponToBag(@PathVariable String locale, @PathVariable String currency,
 			 @RequestBody CouponDTO dto, Principal principal) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".addCouponToBag");
-
-		domainBagService.addItemToBag(locale, currency, new CouponCode(dto.getCoupon()), principal.getName());
 		
-		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
+		domainBagService.addItemToBag(Locale.localize(locale, currency), new CouponCode(dto.getCoupon()), principal.getName());
+		
+		Bag b = domainBagService.findByCode(Locale.localize(locale, currency), principal.getName());
 		
 		//promotionService.applyAll(b);
 		
@@ -104,7 +106,7 @@ public class BagController {
 			@PathVariable String currency, Principal principal) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getBagContents");
 
-		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
+		Bag b = domainBagService.findByCode(Locale.localize(locale, currency), principal.getName());
 
 		//promotionService.applyAll(b);
 		
@@ -122,12 +124,12 @@ public class BagController {
 
 		LOGGER.debug("call " + getClass().getSimpleName() + ".addPhysicalItemToBag with parameters {}, {}, {}, {}", locale,
 				currency, dto.getItemUPC(), dto.getItemQty());
-
+		
 		// persist the domain BagItem to the Bag
-		domainBagService.addPhysicalItem(locale, currency, dto, principal.getName());
+		domainBagService.addPhysicalItem(Locale.localize(locale, currency), dto, principal.getName());
 
 		// rehydrate the bag domain model and view, then return it
-		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
+		Bag b = domainBagService.findByCode(Locale.localize(locale, currency), principal.getName());
 		
 		//promotionService.applyAll(b);
 		
@@ -144,11 +146,11 @@ public class BagController {
 
 		LOGGER.debug("call " + getClass().getSimpleName() + ".addShippingItemToBag with parameters {}, {}, {}", locale,
 				currency, dto.getShippingProductCode());
-
+		
 		// persist the domain BagItem to the Bag
-		domainBagService.addShippingItem(locale, currency, dto, principal.getName());
+		domainBagService.addShippingItem(Locale.localize(locale, currency), dto, principal.getName());
 
-		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
+		Bag b = domainBagService.findByCode(Locale.localize(locale, currency), principal.getName());
 		
 		//promotionService.applyAll(b);
 		
@@ -167,7 +169,7 @@ public class BagController {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".removeItemFromBag for parameters {}, {}, {} ", locale,
 				currency, itemCode);
 		// here we get the bag and bagItems but the products are null
-		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
+		Bag b = domainBagService.findByCode(Locale.localize(locale, currency), principal.getName());
 		
 		//promotionService.applyAll(b);
 		
@@ -179,7 +181,9 @@ public class BagController {
 		if (obi.isPresent()) {
 			domainBagItemService.delete(obi.get());
 		}
+		
 		return null;
 	}
+
 
 }

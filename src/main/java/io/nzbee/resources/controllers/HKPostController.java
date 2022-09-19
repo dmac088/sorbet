@@ -2,6 +2,7 @@ package io.nzbee.resources.controllers;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import io.nzbee.Constants;
+import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.enums.hkpost.country.ShippingCountry;
 import io.nzbee.enums.hkpost.type.ShippingTypeInternational;
 import io.nzbee.enums.hkpost.type.ShippingTypeLocal;
@@ -83,8 +85,10 @@ public class HKPostController {
 	}
 	
 	
-	@GetMapping("/RefreshShippingProducts/{locale}")
-	public ResponseEntity<String> refreshShippingProducts(@PathVariable String locale) {
+	@GetMapping("/RefreshShippingProducts/{locale}/{currency}")
+	public ResponseEntity<String> refreshShippingProducts(@PathVariable String locale, @PathVariable String currency) {
+		
+		Locale loc = new Locale(locale, Currency.getInstance(currency));
 		
 		ShippingCountry countries[] = ShippingCountry.values();
 		
@@ -92,18 +96,18 @@ public class HKPostController {
 			if(country.toString().equals(Constants.hongKongLocalShipCode)) {
 				LOGGER.debug("processing country: " + country);
 			    for(ShippingTypeLocal type: ShippingTypeLocal.values()) {
-			    	writeValues(locale, country.toString(), type.toString());
+			    	writeValues(loc, country.toString(), type.toString());
 		        }
 			    continue;
 			}
 			for(ShippingTypeInternational type: ShippingTypeInternational.values()) {
-		    	writeValues(locale, country.toString(), type.toString());
+		    	writeValues(loc, country.toString(), type.toString());
 	        }
 		}
 		return ResponseEntity.ok("success");
 	}
 	
-	private void writeValues(String locale, String country, String type) {
+	private void writeValues(Locale locale, String country, String type) {
 		LOGGER.debug("processing type : " + type);
     	//get the current weight limit
     	BigDecimal weightLimit = new BigDecimal(WeightLimits.getWeightLimit(type.toString()));
@@ -122,7 +126,7 @@ public class HKPostController {
 	}
 	
 	
-	private boolean persistShippingProductResponse(String locale, String countryCode, String postageType, String weightFrom, String weightTo) {
+	private boolean persistShippingProductResponse(Locale locale, String countryCode, String postageType, String weightFrom, String weightTo) {
 		ResponseEntity<PostageResponse>  response = this.getHKPostageFee(countryCode, postageType, weightTo);
 		hkPostAdapter.save(locale, response.getBody(), countryCode + "_" + postageType + "_" + weightFrom + "_" + weightTo, weightFrom, weightTo, postageType, countryCode);
 		return response.getBody().getTotalPostage() == null;

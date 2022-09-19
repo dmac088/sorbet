@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import io.nzbee.domain.valueObjects.Locale;
+
 @Service
 public class ShippingProductViewDTOServiceImpl implements IShippingProductViewDTOService {
 	
@@ -17,10 +19,10 @@ public class ShippingProductViewDTOServiceImpl implements IShippingProductViewDT
 	private IShippingProductViewDTORepository shippingProductViewDTORepository;
 	
 	@Override
-	public Optional<ShippingProductViewDTO> findByDestinationAndTypeAndBagWeight(String locale, String currency, String shippingDestinationCode,
+	public Optional<ShippingProductViewDTO> findByDestinationAndTypeAndBagWeight(Locale locale, String currency, String shippingDestinationCode,
 			String shippingTypeCode, BigDecimal bagWeightKg) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findByDestinationAndTypeAndBagWeight with parameter {}, {}, {}, {}, {}", locale, currency, shippingDestinationCode, shippingTypeCode, bagWeightKg);
-		return shippingProductViewDTORepository.findByDestinationAndTypeAndBagWeight(locale, currency, shippingDestinationCode, shippingTypeCode, bagWeightKg);
+		return shippingProductViewDTORepository.findByDestinationAndTypeAndBagWeight(locale.getLocale(), currency, shippingDestinationCode, shippingTypeCode, bagWeightKg);
 	}
 
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import io.nzbee.domain.customer.dto.in.CustomerDTOIn;
 import io.nzbee.domain.ports.ICustomerPortService;
+import io.nzbee.domain.valueObjects.Locale;
 
 public class CustomerDomainServiceImpl implements ICustomerDomainService {
 
@@ -15,7 +16,7 @@ public class CustomerDomainServiceImpl implements ICustomerDomainService {
 	private ICustomerPortService customerService;
 
 	@Override
-	public Customer findByUsername(String locale, String userName) {
+	public Customer findByUsername(Locale locale, String userName) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findByUsername with parameters {}", userName);
 		return customerService.findByUsername(locale, userName);
 	}
@@ -39,7 +40,7 @@ public class CustomerDomainServiceImpl implements ICustomerDomainService {
     }
     
 	@Override
-	public void registerNewCustomer(CustomerDTOIn customer, String ipAddress, String url, String locale) {
+	public void registerNewCustomer(CustomerDTOIn customer, String ipAddress, String url, Locale locale) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".registerNewCustomer with parameters {}", customer);
 		customerService.registerNewCustomer(customer, ipAddress, url, locale);
 	}

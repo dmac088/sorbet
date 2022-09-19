@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import io.nzbee.exceptions.EntityNotFoundException;
 import io.nzbee.Constants;
 import io.nzbee.ErrorKeys;
+import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.entity.brand.BrandEntity;
 import io.nzbee.entity.brand.IBrandService;
 import io.nzbee.entity.category.product.CategoryProductEntity;
@@ -70,7 +71,7 @@ public class HKPostAdapter implements IHKPostPort {
 	
 	@Override
 	@Transactional
-	public void save(String locale, PostageResponse postageResponse, String upc, String weightFrom, String weightTo, String type, String country) {
+	public void save(Locale locale, PostageResponse postageResponse, String upc, String weightFrom, String weightTo, String type, String country) {
 		LOGGER.debug("call " + getClass() + ".save()");
 		LOGGER.debug(postageResponse.toString());
 		

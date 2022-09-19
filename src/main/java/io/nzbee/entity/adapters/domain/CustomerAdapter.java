@@ -18,6 +18,7 @@ import io.nzbee.ErrorKeys;
 import io.nzbee.domain.customer.Customer;
 import io.nzbee.domain.customer.dto.in.CustomerDTOIn;
 import io.nzbee.domain.ports.ICustomerPortService;
+import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.entity.party.person.IPersonService;
 import io.nzbee.entity.party.person.PersonEntity;
 import io.nzbee.exceptions.AlreadyExistsException;
@@ -48,7 +49,7 @@ public class CustomerAdapter implements ICustomerPortService {
     private VerificationTokenRepository tokenRepository;
 	
 	@Override
-	public Customer findByUsername(String locale, String userName) {
+	public Customer findByUsername(Locale locale, String userName) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findByUsername with parameters {}", userName);
 		PersonEntity c = personService.findByUsernameAndRole(userName, Constants.partyRoleCustomer)
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.customerNotFound, locale, userName));
@@ -112,7 +113,7 @@ public class CustomerAdapter implements ICustomerPortService {
     
 	@Override
     @Transactional
-	public void registerNewCustomer(CustomerDTOIn customer, String ipAddress, String url, String locale) {
+	public void registerNewCustomer(CustomerDTOIn customer, String ipAddress, String url, Locale locale) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".registerNewCustomer with parameters {}", customer);
 		boolean exists = personService.userExists(customer.getUserName(), Constants.partyRoleCustomer);
 		if(exists) {
@@ -142,7 +143,7 @@ public class CustomerAdapter implements ICustomerPortService {
 
 	@Override
 	@Transactional
-	public void save(CustomerDTOIn customer, String locale) {
+	public void save(CustomerDTOIn customer, Locale locale) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".save with parameters {}", customer);
 		personService.save(customerDomainMapper.toEntity(customer, locale));
 	}

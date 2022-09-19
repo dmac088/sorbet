@@ -16,6 +16,7 @@ import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.bag.item.shipping.IShippingBagItem;
 import io.nzbee.domain.customer.Customer;
 import io.nzbee.domain.valueObjects.CouponCode;
+import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.ProductUPC;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.bag.entity.IBagEntityService;
@@ -65,7 +66,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 	@Override
 	public Bag toDo(BagDomainDTO dto) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo()");
-		Bag b = new Bag(personMapper.toDo(dto.getCustomer()), Currency.getInstance(dto.getCurrency()));
+		Bag b = new Bag(personMapper.toDo(dto.getCustomer()),new Locale(dto.getLocale(), Currency.getInstance(dto.getCurrency())));
 
 		// map the entity bagItems to the domain bagItems
 		Set<IRegularBagItem> sbi = dto.getRegularBagItems().stream()
@@ -100,7 +101,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		Customer c = personMapper.toDo(pDto);
 
 		// create a new bag domain object
-		Bag b = new Bag(c, Currency.getInstance(dto.getCurrency()));
+		Bag b = new Bag(c, new Locale(locale,Currency.getInstance(dto.getCurrency())));
 
 		// map the entity bagItems to the domain bagItems
 		Set<IRegularBagItem> sbi = dto.getRegularBagItems().stream()
@@ -158,11 +159,11 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 				BagItemEntity i = new BagItemEntity();
 				i.setBag(b);
 				i.setBagItemStatus(bagItemStatusService.findByCode(Constants.bagItemStatusCodeNew)
-						.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.bagItemStatusNotFound,Constants.localeENGB,Constants.bagItemStatusCodeNew)));
+						.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.bagItemStatusNotFound,d.getLocale(),Constants.bagItemStatusCodeNew)));
 				i.setBagItemType(bagItemTypeService.findByCode(Constants.regularBagItemType)
-						.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.bagItemTypesNotFound,Constants.localeENGB,Constants.regularBagItemType)));
+						.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.bagItemTypesNotFound,d.getLocale(),Constants.regularBagItemType)));
 				i.setProduct(productService.findByCode(bi.getBagItem().getProductUPC().toString())
-						.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound,Constants.localeENGB,bi.getBagItem().getProductUPC().toString())));
+						.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound,d.getLocale(),bi.getBagItem().getProductUPC().toString())));
 				i.setQuantity(bi.getBagItem().getQuantity());
 				i.setBagTotalWeight(bi.getBagItemWeight().amount());
 				i.setBagItemBaseAmount(bi.getBagItem().getBagItemSubTotal().amount());

@@ -104,7 +104,7 @@ public class BagItem implements IBagItem {
 	@Override
 	public Money getBagItemDiscountTotal() {
 		BigDecimal b = this.getDiscounts().stream().map(d -> d.getDiscountAmount().amount()).reduce(BigDecimal.ZERO, BigDecimal::add);
-		return bag.getMoney().add(new Money(b, bag.getCurrency(), Constants.defaultMoneyRounding));
+		return bag.getMoney().add(new Money(b, bag.getLocale().getCurrency(), Constants.defaultMoneyRounding));
 	}
 	
 	public void addDiscount(IBagItemDiscount discount) {

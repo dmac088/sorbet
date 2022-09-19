@@ -21,6 +21,7 @@ import io.nzbee.Globals;
 import io.nzbee.domain.customer.ICustomerDomainService;
 import io.nzbee.domain.customer.dto.in.CustomerDTOIn;
 import io.nzbee.domain.services.GenericResponse;
+import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.resources.customer.CustomerResource;
 import io.nzbee.resources.customer.CustomerResourceAssembler;
 import io.nzbee.resources.customer.address.CustomerAddressResource;
@@ -74,7 +75,7 @@ public class CustomerController {
     public GenericResponse registerNewCustomer(@RequestBody final CustomerDTOIn customer, @PathVariable String locale, @PathVariable String currency, final HttpServletRequest request) {
     	LOGGER.debug("Signing up a new customer with information: {}", customer);
         
-      	customerDomainService.registerNewCustomer(customer, getClientIP(request), getAppUrl(request), locale);
+      	customerDomainService.registerNewCustomer(customer, getClientIP(request), getAppUrl(request), Locale.localize(locale, currency));
         
         eventPublisher.publishEvent(new OnRegistrationCompleteEvent(customer, locale, currency, globals.getFeURL()));
         

@@ -2,6 +2,7 @@ package io.nzbee.entity.party.person;
 
 import io.nzbee.domain.customer.Customer;
 import io.nzbee.domain.customer.dto.in.CustomerDTOIn;
+import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.entity.IDomainObjectMapper;
 
 public interface ICustomerDomainMapper extends IDomainObjectMapper<Customer, PersonDomainDTO> {
@@ -10,6 +11,6 @@ public interface ICustomerDomainMapper extends IDomainObjectMapper<Customer, Per
 
 	Customer toDo(CustomerDTOIn customer);
 
-	PersonEntity toEntity(CustomerDTOIn customer, String locale);
+	PersonEntity toEntity(CustomerDTOIn dtoObject, Locale locale);
 
 }

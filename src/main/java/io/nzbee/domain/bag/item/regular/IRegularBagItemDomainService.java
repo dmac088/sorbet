@@ -1,6 +1,7 @@
 package io.nzbee.domain.bag.item.regular;
 
 import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.valueObjects.Locale;
 
 public interface IRegularBagItemDomainService {
 
@@ -10,5 +11,5 @@ public interface IRegularBagItemDomainService {
 
 	void checkAllBagItemRules(IRegularBagItem bagItem);
 
-	IRegularBagItem getNewPhysicalItem(String locale, String currency, Bag bag, String itemUPC, Long quantity);
+	IRegularBagItem getNewPhysicalItem(Locale locale, Bag b, String itemUPC, Long itemQty);
 }

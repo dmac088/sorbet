@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import io.nzbee.Constants;
 import io.nzbee.entity.bag.item.domain.RegularBagItemDomainDTOResultTransformer;
 
-public class PromotionBagItemDomainDTODaoPostgresImpl implements IPromotionBagItemDomainDTODao<PromotionBagItemDomainDTO> { 
+public class PromotionBagItemDomainDTODaoPostgresImpl implements IPromotionBagItemDomianDTODaoPostgres { 
 
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 	

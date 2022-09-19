@@ -1,12 +1,13 @@
 package io.nzbee.domain.bag;
 
 import io.nzbee.domain.valueObjects.CouponCode;
+import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.view.bag.item.BagItemViewIn;
 import io.nzbee.view.product.shipping.ShippingItemDTOIn;
 
 public interface IBagDomainService  {
 
-	Bag findByCode(String locale, String currency, String userName);
+	Bag findByCode(Locale locale, String userName);
 	
 	void checkAllBagRules(Bag object);
 
@@ -14,11 +15,12 @@ public interface IBagDomainService  {
 
 	void update(Bag object);
 
-	void addPhysicalItem(String locale, String currency, BagItemViewIn dto, String username);
+	void addPhysicalItem(Locale locale, BagItemViewIn dto, String username);
 
-	void addShippingItem(String locale, String currency, ShippingItemDTOIn dto, String username);
+	void addShippingItem(Locale locale, ShippingItemDTOIn dto, String username);
 
-	void addItemToBag(String locale, String currency, CouponCode coupon, String username);
+	void addItemToBag(Locale locale, CouponCode coupon, String username);
+
 
 	
 

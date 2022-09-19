@@ -214,15 +214,15 @@ public class ShippingProductMasterService {
 		Optional<ProductEntity> op 	= productService.findByCode(upcCode);
 
 		BrandEntity be 				= cachedBrandList.stream().filter(b -> b.getBrandCode().equals(brandCode)).findAny()
-				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.brandNotFound, Constants.localeENGB, brandCode));
+				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.brandNotFound, Constants.defaultLocale, brandCode));
 		
 		DepartmentEntity de 		= cachedDepartmentList.stream().filter(d -> d.getDepartmentCode().equals(templateCode)).findAny()
-				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.departmentNotFound, Constants.localeENGB, templateCode));
+				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.departmentNotFound, Constants.defaultLocale, templateCode));
 		
 		Optional<ProductStatusEntity> ops 		= cachedProductStatusList.stream().filter(ps -> ps.getCode().equals(Constants.activeSKUCode)).findAny();
 		
 		CategoryProductEntity pce 	= cachedProductCategoryList.stream().filter(pc -> pc.getCategory().getCategoryCode().equals(Constants.shippingRootCategoryCode)).findAny()
-				.orElseThrow(() ->  new EntityNotFoundException(ErrorKeys.categoryNotFound, Constants.localeENGB, Constants.shippingRootCategoryCode));
+				.orElseThrow(() ->  new EntityNotFoundException(ErrorKeys.categoryNotFound, Constants.defaultLocale, Constants.shippingRootCategoryCode));
 				
 		Optional<ProductAttributeEntity> opa 	= 	(op.isPresent()) 
 				 									? op.get().getAttributes().stream().filter(a -> a.getLclCd().equals(locale)).findAny().isPresent()
@@ -268,13 +268,13 @@ public class ShippingProductMasterService {
 		
 		
 		Currency curr 				= cachedCurrencies.stream().filter(c -> c.getCode().equals(currency)).findAny()
-				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.currencyNotFound, Constants.localeENGB, currency));
+				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.currencyNotFound, Constants.defaultLocale, currency));
 		
 		ProductPriceType ptr 		= cachedPriceTypes.stream().filter(pt -> pt.getCode().equals(Constants.retailPriceCode)).findAny()
-				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.priceTypeNotFound, Constants.localeENGB, Constants.retailPriceCode));
+				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.priceTypeNotFound, Constants.defaultLocale, Constants.retailPriceCode));
 		
 		ProductPriceType ptm 		= cachedPriceTypes.stream().filter(pt -> pt.getCode().equals(Constants.markdownPriceCode)).findAny()
-				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.priceTypeNotFound, Constants.localeENGB, Constants.markdownPriceCode));
+				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.priceTypeNotFound, Constants.defaultLocale, Constants.markdownPriceCode));
 		
 		
 

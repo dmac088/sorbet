@@ -32,6 +32,7 @@ import io.nzbee.ErrorKeys;
 import io.nzbee.Globals;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.IBagDomainService;
+import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.enums.FacetNameEnum;
 import io.nzbee.exceptions.EntityNotFoundException;
 import io.nzbee.exceptions.ImageNotFoundException;
@@ -119,7 +120,7 @@ public class ProductController {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".get with parameter {}, {}, {}", locale, currency, code);
 		
 		PhysicalProductFullView p = physicalProductFullService.findByCode(locale, currency, code)
-				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, code));
+				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, Locale.localize(locale, currency), code));
 		
 		PhysicalProductFullModel pr = prodFullResourceAssembler
 				.toModel(p, locale, currency);
@@ -216,10 +217,10 @@ public class ProductController {
 			@PathVariable String currency, @PathVariable String code, @PathVariable String type, Principal principal) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getByDestinationAndType with parameter {}, {}, {}, {}, {}", locale, currency, code, type, principal.getName());
 		
-		Bag b = bagService.findByCode(locale, currency, principal.getName());
+		Bag b = bagService.findByCode(Locale.localize(locale, currency), principal.getName());
 
 		ShippingProductResource pr = prodShippingResourceAssembler.toModel(shippingProductViewService
-				.findByDestinationAndTypeAndBagWeight(locale, currency, code, type, b.getTotalWeight()));
+				.findByDestinationAndTypeAndBagWeight(Locale.localize(locale, currency), code, type, b.getTotalWeight()));
 
 		return new ResponseEntity<>(pr, HttpStatus.OK);
 	}

@@ -1,5 +1,6 @@
 package io.nzbee.resources.controllers;
 
+import java.util.Currency;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.resources.brand.facet.BrandFacetModel;
 import io.nzbee.resources.brand.facet.BrandFacetModelAssembler;
 import io.nzbee.search.facet.EntityFacet;
@@ -57,8 +59,8 @@ public class BrandController {
     	}
     	
     	final List<EntityFacet> collection =
-    			brandService.findAll(locale, 
-    								 currency, 
+    			brandService.findAll(new Locale(locale, 
+    								 			Currency.getInstance(currency)), 
     								 categoryCode,
     								 selectedFacets.stream().filter(f -> f.getFacetingName().equals("category")).map(f -> f.getValue()).collect(Collectors.toSet()),
     								 selectedFacets.stream().filter(f -> f.getFacetingName().equals("brand")).map(f -> f.getValue()).collect(Collectors.toSet()),
@@ -84,8 +86,8 @@ public class BrandController {
     	}
     	
     	List<EntityFacet> collection =
-    			brandService.findAll(locale, 
-    								 currency, 
+    			brandService.findAll(new Locale(locale, 
+			 									Currency.getInstance(currency)), 
     								 categoryCode,
     								 selectedFacets.stream().filter(f -> f.getFacetingName().equals("category")).map(f -> f.getValue()).collect(Collectors.toSet()),
     								 selectedFacets.stream().filter(f -> f.getFacetingName().equals("brand")).map(f -> f.getValue()).collect(Collectors.toSet()),

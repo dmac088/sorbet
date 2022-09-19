@@ -4,6 +4,7 @@ import io.nzbee.Constants;
 import io.nzbee.ErrorKeys;
 import io.nzbee.domain.customer.Customer;
 import io.nzbee.domain.customer.dto.in.CustomerDTOIn;
+import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.party.Party;
 import io.nzbee.entity.party.address.entity.PartyAddressEntity;
@@ -68,7 +69,7 @@ public class CustomerMapperImpl implements ICustomerDomainMapper {
 	}
 	
 	@Override
-	public PersonEntity toEntity(CustomerDTOIn dtoObject, String locale) {
+	public PersonEntity toEntity(CustomerDTOIn dtoObject, Locale locale) {
 		//in our domain world a customer is a person
 		
 		Optional<PartyTypeEntity> opte = partyTypeService.findByPartyTypeDesc(Constants.partyTypePerson);

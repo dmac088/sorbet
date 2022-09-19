@@ -14,6 +14,8 @@ import io.nzbee.ErrorKeys;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.ports.IBagPortService;
 import io.nzbee.domain.promotion.item.PromotionItem;
+import io.nzbee.domain.valueObjects.Locale;
+import io.nzbee.domain.valueObjects.UserName;
 import io.nzbee.entity.bag.domain.BagDomainDTO;
 import io.nzbee.entity.bag.domain.IBagDomainDTOMapper;
 import io.nzbee.entity.bag.domain.IBagDomainDTOService;
@@ -41,10 +43,10 @@ public class BagDomainAdapter implements IBagPortService {
 	
 	
 	@Override
-	public Bag findByCode(String locale, String currency, String userName) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode with parameter {}, {}, {}", locale, currency, userName);
+	public Bag findByCode(Locale locale, String userName) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode with parameter {}, {}, {}", locale.getLocale(), locale.getCurrency().getCurrencyCode(), userName);
 		
-		Optional<BagDomainDTO> ob = bagService.findByCode(currency, userName);
+		Optional<BagDomainDTO> ob = bagService.findByCode(locale.getCurrency().getCurrencyCode(), userName);
 
 		//if there is no current bag, get a new one
 		BagDomainDTO b = ob.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.customerNotFound, locale, userName));
@@ -63,9 +65,9 @@ public class BagDomainAdapter implements IBagPortService {
 	}
 	
 	@Override
-	public List<PromotionItem> getPromotionItems(String locale, String currency, String userName) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".getPromotionItems() with parameter {}, {}, {}", locale, currency, userName);
-		return promotionBagItemService.getItems(currency, currency, userName)
+	public List<PromotionItem> getPromotionItems(Locale locale, UserName userName) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".getPromotionItems() with parameter {}, {}, {}", locale, userName);
+		return promotionBagItemService.getItems(locale.getLocale(), locale.getCurrency().getCurrencyCode(), userName.toString())
 			.stream().map(i -> promotionBagItemMapper.toDo(i)).collect(Collectors.toList());
 	}
 
