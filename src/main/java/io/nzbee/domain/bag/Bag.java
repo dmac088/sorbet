@@ -62,7 +62,7 @@ public class Bag implements IBag {
 		if(obi.isPresent()) {
 			obi.get().getBagItem().addToQuantity(qty);
 		} else {
-			this.getBagItems().add(new RegularBagItem(new BagItem(this, bagItem.getBagItem().getProductUPC(), qty, bagItem.getBagItem().getMarkdownPrice(),bagItem.getBrandCode(), bagItem.getCategoryCodes()), bagItem.getBagItemWeight(), bagItem.isInStock()));
+			this.getBagItems().add(new RegularBagItem(new BagItem(this, bagItem.getBagItem().getProductUPC(), qty, bagItem.getBagItem().getMarkdownPrice()), bagItem.getBagItemWeight(), bagItem.isInStock()));
 		}
 	}
 	
@@ -170,7 +170,7 @@ public class Bag implements IBag {
 	}
 
 	public Money getMoney() {
-		return new Money(BigDecimal.ZERO, this.getCurrency(), BigDecimal.ROUND_HALF_UP);
+		return new Money(BigDecimal.ZERO, this.getCurrency(), Constants.defaultMoneyRounding);
 	}
 
 	@Override

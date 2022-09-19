@@ -1,5 +1,7 @@
 package io.nzbee;
 
+import java.math.BigDecimal;
+
 public class Constants {
 
 	public static final String testDbScriptPath = "src/test/resources/database";
@@ -49,4 +51,6 @@ public class Constants {
 	
 	public static final String genericResponseSuccess = "success";
 	public static final String genericResponseFailure = "failure";
+	
+	public static final int defaultMoneyRounding = BigDecimal.ROUND_HALF_EVEN;
 }

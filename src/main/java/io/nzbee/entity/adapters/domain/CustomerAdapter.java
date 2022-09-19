@@ -53,7 +53,7 @@ public class CustomerAdapter implements ICustomerPortService {
 		PersonEntity c = personService.findByUsernameAndRole(userName, Constants.partyRoleCustomer)
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.customerNotFound, locale, userName));
 		
-		return customerDomainMapper.EntityToDo(c);
+		return customerDomainMapper.toDo(c);
 	}
 
 
@@ -120,7 +120,7 @@ public class CustomerAdapter implements ICustomerPortService {
 		}
 					
 		//create a domain object for which to process the rules we defined 
-		Customer c = customerDomainMapper.toDomain(customer);
+		Customer c = customerDomainMapper.toDo(customer);
 		
 		//set the password on the domain object
 		c.setPassword(customer.getPassword(), customer.getConfirmPassword());

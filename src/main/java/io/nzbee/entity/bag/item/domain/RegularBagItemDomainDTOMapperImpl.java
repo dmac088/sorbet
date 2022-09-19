@@ -1,11 +1,9 @@
 package io.nzbee.entity.bag.item.domain;
 
-import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
-import io.nzbee.domain.valueObjects.BrandCode;
 import io.nzbee.domain.valueObjects.CategoryCode;
 import io.nzbee.domain.valueObjects.Money;
 import io.nzbee.domain.valueObjects.ProductUPC;
@@ -53,9 +50,7 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 						new BagItem(bag, 
 						new ProductUPC(dto.getProductUPC()), 
 						dto.getQuantity(), 
-						new Money(dto.getMarkdownPrice(), Currency.getInstance(dto.getCurrency()), BigDecimal.ROUND_HALF_EVEN),
-						new BrandCode(dto.getBrandCode()),
-						this.toCategoryCodes(dto.getCategoryCodes())),
+						new Money(dto.getMarkdownPrice(), Currency.getInstance(dto.getCurrency()), Constants.defaultMoneyRounding)),
 						new Weight(dto.getWeight()),
 						dto.isInStock()
 					);
@@ -74,9 +69,7 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 				new BagItem(bag, 
 				new ProductUPC(dto.getProductUPC()), 
 				quantity, 
-				new Money(dto.getMarkdownPrice(), Currency.getInstance(dto.getCurrency()), BigDecimal.ROUND_HALF_EVEN),
-				new BrandCode(dto.getBrandCode()),
-				this.toCategoryCodes(dto.getCategoryCodes())),
+				new Money(dto.getMarkdownPrice(), Currency.getInstance(dto.getCurrency()), Constants.defaultMoneyRounding)),
 				new Weight(dto.getWeight()),
 				dto.isInStock()
 			);

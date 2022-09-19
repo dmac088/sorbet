@@ -5,18 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import io.nzbee.Constants;
 import io.nzbee.domain.bag.Bag;
-import io.nzbee.domain.valueObjects.BrandCode;
-import io.nzbee.domain.valueObjects.CategoryCode;
 import io.nzbee.domain.valueObjects.Money;
 import io.nzbee.domain.valueObjects.ProductUPC;
 
 public class BagItem implements IBagItem {
 
 	private Bag bag;
-	
-	private final List<CategoryCode> categoryCodes;
-	
-	private final BrandCode brandCode;
 	
 	private final ProductUPC productUPC;
 	
@@ -36,17 +30,13 @@ public class BagItem implements IBagItem {
 	public BagItem(	Bag bag, 
 					ProductUPC productUPC,
 			  	   	Long quantity,
-			  	   	Money markdownPrice,
-			  	   	BrandCode brandCode,
-			  	   	List<CategoryCode> categoryCodes) {
+			  	   	Money markdownPrice) {
 		this.bag 				= bag;
 		this.productUPC			= productUPC;
 		this.quantity 			= quantity;
 		this.bagItemStatus 		= Constants.bagItemStatusCodeNew;
 		this.markdownPrice 		= markdownPrice;
 		this.discounts 			= new ArrayList<IBagItemDiscount>();
-		this.brandCode			= brandCode;
-		this.categoryCodes  	= categoryCodes;
 	}
 
 	public Bag getBag() {
@@ -114,7 +104,7 @@ public class BagItem implements IBagItem {
 	@Override
 	public Money getBagItemDiscountTotal() {
 		BigDecimal b = this.getDiscounts().stream().map(d -> d.getDiscountAmount().amount()).reduce(BigDecimal.ZERO, BigDecimal::add);
-		return bag.getMoney().add(new Money(b, bag.getCurrency(), BigDecimal.ROUND_HALF_UP));
+		return bag.getMoney().add(new Money(b, bag.getCurrency(), Constants.defaultMoneyRounding));
 	}
 	
 	public void addDiscount(IBagItemDiscount discount) {
@@ -125,13 +115,4 @@ public class BagItem implements IBagItem {
 		return discounts;
 	}
 
-	public List<CategoryCode> getCategoryCodes() {
-		return categoryCodes;
-	}
-
-	public BrandCode getBrandCode() {
-		return brandCode;
-	}
-
-	
 }

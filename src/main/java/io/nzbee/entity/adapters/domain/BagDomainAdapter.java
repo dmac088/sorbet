@@ -1,6 +1,8 @@
 package io.nzbee.entity.adapters.domain;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -11,10 +13,13 @@ import org.springframework.stereotype.Service;
 import io.nzbee.ErrorKeys;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.ports.IBagPortService;
+import io.nzbee.domain.promotion.item.PromotionItem;
 import io.nzbee.entity.bag.domain.BagDomainDTO;
 import io.nzbee.entity.bag.domain.IBagDomainDTOMapper;
 import io.nzbee.entity.bag.domain.IBagDomainDTOService;
 import io.nzbee.entity.bag.entity.BagEntity;
+import io.nzbee.entity.bag.item.domain.promotion.IPromotionBagItemDomainDTOService;
+import io.nzbee.entity.bag.item.domain.promotion.IPromotionBagItemDomainDTOMapper;
 import io.nzbee.exceptions.EntityNotFoundException;
 
 @Service
@@ -24,6 +29,12 @@ public class BagDomainAdapter implements IBagPortService {
 	
 	@Autowired
 	private IBagDomainDTOService bagService;
+	
+	@Autowired
+	private IPromotionBagItemDomainDTOService promotionBagItemService;
+	
+	@Autowired
+	private IPromotionBagItemDomainDTOMapper promotionBagItemMapper;
 	
 	@Autowired
 	private IBagDomainDTOMapper bagMapper;
@@ -39,16 +50,23 @@ public class BagDomainAdapter implements IBagPortService {
 		BagDomainDTO b = ob.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.customerNotFound, locale, userName));
 	
 		//map the bag to a domain object
-		return bagMapper.DTOToDo(b);
+		return bagMapper.toDo(b);
 	}
-
+	
 	@Override
 	@Transactional
 	public void save(Bag domainObject) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".save()");
 		
-		BagEntity b = bagMapper.doToEntity(domainObject);
+		BagEntity b = bagMapper.toEntity(domainObject);
 		bagService.save(b);
+	}
+	
+	@Override
+	public List<PromotionItem> getPromotionItems(String locale, String currency, String userName) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".getPromotionItems() with parameter {}, {}, {}", locale, currency, userName);
+		return promotionBagItemService.getItems(currency, currency, userName)
+			.stream().map(i -> promotionBagItemMapper.toDo(i)).collect(Collectors.toList());
 	}
 
 }

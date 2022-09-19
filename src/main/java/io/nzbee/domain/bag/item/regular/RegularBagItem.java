@@ -1,9 +1,6 @@
 package io.nzbee.domain.bag.item.regular;
 
-import java.util.List;
 import io.nzbee.domain.bag.item.BagItem;
-import io.nzbee.domain.valueObjects.BrandCode;
-import io.nzbee.domain.valueObjects.CategoryCode;
 import io.nzbee.domain.valueObjects.Weight;
 
 public class RegularBagItem implements IRegularBagItem {
@@ -36,15 +33,4 @@ public class RegularBagItem implements IRegularBagItem {
 	public Weight getWeight() {
 		return weight; 
 	}
-
-	@Override
-	public BrandCode getBrandCode() {
-		return this.getBagItem().getBrandCode();
-	}
-
-	@Override
-	public List<CategoryCode> getCategoryCodes() {
-		return this.getBagItem().getCategoryCodes();
-	}
-
 }

@@ -40,7 +40,7 @@ public class CustomerMapperImpl implements ICustomerDomainMapper {
 	private IAddressTypeService addressTypeService;
 	
 	@Override
-	public Customer DTOToDo(PersonDomainDTO dto) {
+	public Customer toDo(PersonDomainDTO dto) {
 
 		Customer co = new Customer(
 			dto.getUserName(),
@@ -49,15 +49,9 @@ public class CustomerMapperImpl implements ICustomerDomainMapper {
 		);		
 		return co;	
 	}
-
-	@Override
-	public PersonEntity doToEntity(Customer d) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	@Override
-	public Customer EntityToDo(PersonEntity person) {
+	public Customer toDo(PersonEntity person) {
 		Customer co = new Customer(
 						person.getPersonParty().getUser().getUsername(),
 						((CustomerEntity) person.getPersonParty().getPartyRoles().stream().filter(r -> r.getRoleType().getRoleTypeDesc().equals(Constants.partyRoleCustomer)).findAny().get().getRoleCustomer()).getCustomerNumber(),
@@ -67,12 +61,12 @@ public class CustomerMapperImpl implements ICustomerDomainMapper {
 	}
 
 	@Override
-	public Customer toDomain(CustomerDTOIn customer) {
+	public Customer toDo(CustomerDTOIn customer) {
 		return new Customer(customer.getUserName(),
 				customer.getCustomerId(),
 				customer.isEnabled());
 	}
-
+	
 	@Override
 	public PersonEntity toEntity(CustomerDTOIn dtoObject, String locale) {
 		//in our domain world a customer is a person
@@ -139,4 +133,6 @@ public class CustomerMapperImpl implements ICustomerDomainMapper {
 		
 		return p;
 	}
+
+
 }

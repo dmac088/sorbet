@@ -5,7 +5,6 @@ import java.util.Currency;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.bag.item.shipping.IShippingBagItem;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
-import io.nzbee.domain.valueObjects.BrandCode;
 import io.nzbee.domain.valueObjects.CategoryCode;
 import io.nzbee.domain.valueObjects.Money;
 import io.nzbee.domain.valueObjects.ProductUPC;
@@ -52,9 +50,7 @@ public class ShippingBagItemDomainDTOMapperImpl implements IShippingBagItemDomai
 				new BagItem(bag, 
 				new ProductUPC(dto.getProductUPC()), 
 				quantity, 
-				new Money(dto.getMarkdownPrice(), Currency.getInstance(dto.getCurrency()), BigDecimal.ROUND_HALF_EVEN),
-				new BrandCode(dto.getBrandCode()),
-				this.toCategoryCodes(dto.getCategoryCodes()))
+				new Money(dto.getMarkdownPrice(), Currency.getInstance(dto.getCurrency()), Constants.defaultMoneyRounding))
 			);
 	}
 	
@@ -66,9 +62,7 @@ public class ShippingBagItemDomainDTOMapperImpl implements IShippingBagItemDomai
 				new BagItem(bag, 
 				new ProductUPC(dto.getProductUPC()),
 				new Long(1), 
-				new Money(dto.getMarkdownPrice(), Currency.getInstance(dto.getCurrency()), BigDecimal.ROUND_HALF_EVEN),
-				new BrandCode(dto.getBrandCode()),
-				this.toCategoryCodes(dto.getCategoryCodes()))
+				new Money(dto.getMarkdownPrice(), Currency.getInstance(dto.getCurrency()), Constants.defaultMoneyRounding))
 			);
 	}
 	

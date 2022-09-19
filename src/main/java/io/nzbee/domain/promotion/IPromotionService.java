@@ -5,7 +5,5 @@ import io.nzbee.domain.promotion.item.IPromotionItem;
 public interface IPromotionService  {
 
 	void applyAll(IPromotionItem item);
-
-	Promotion findByCouponCode(String coupon);
 	
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import io.nzbee.domain.valueObjects.BrandCode;
 import io.nzbee.domain.valueObjects.CategoryCode;
-import io.nzbee.domain.valueObjects.CouponCode;
 import io.nzbee.domain.valueObjects.Money;
 import io.nzbee.domain.valueObjects.ProductUPC;
 
@@ -20,9 +19,7 @@ public interface IPromotionItem {
 
 	Long getQuantity();
 
-	Money getPrice();
-
-	List<CouponCode> getCoupons();
+	Money getPrice();;
 
 	void addDiscount(Money discount);
 

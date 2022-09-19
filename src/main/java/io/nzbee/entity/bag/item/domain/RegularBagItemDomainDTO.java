@@ -1,8 +1,6 @@
 package io.nzbee.entity.bag.item.domain;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class RegularBagItemDomainDTO {
@@ -20,10 +18,6 @@ public class RegularBagItemDomainDTO {
 	public static final String BAG_ITEM_WEIGHT_ALIAS = "weight";
 
 	public static final String BAG_ITEM_QUANTITY_ALIAS = "qty";
-	
-	public static final String BRAND_CODE_ALIAS = "bnd_cd";
-	
-	public static final String CATEGORY_CODES_ALIAS = "lst_cat_cd";
 
 	public static final String CURRENCY_CODES_ALIAS = "curr";
 
@@ -43,11 +37,6 @@ public class RegularBagItemDomainDTO {
 	private final Boolean inStock;
 
 	private final Long quantity;
-	
-	private final String brandCode;
-	
-	private final List<String> categoryCodes;
-	
 
 	public RegularBagItemDomainDTO(Object[] tuple, Map<String, Integer> aliasToIndexMap) {
 		this.bagItemStatus = tuple[aliasToIndexMap.get(BAG_ITEM_STATUS_CODE_ALIAS)].toString();
@@ -58,8 +47,6 @@ public class RegularBagItemDomainDTO {
 		this.markdownPrice = ((BigDecimal) tuple[aliasToIndexMap.get(BAG_ITEM_PRICE_ALIAS)]);
 		this.currency = tuple[aliasToIndexMap.get(CURRENCY_CODES_ALIAS)].toString();
 		this.inStock = ((Boolean) tuple[aliasToIndexMap.get(BAG_ITEM_INSTOCK_ALIAS)]);
-		this.brandCode = tuple[aliasToIndexMap.get(BRAND_CODE_ALIAS)].toString();
-		this.categoryCodes = Arrays.asList(tuple[aliasToIndexMap.get(CATEGORY_CODES_ALIAS)].toString().split(","));
 	}
 
 	public String getProductUPC() {
@@ -90,16 +77,8 @@ public class RegularBagItemDomainDTO {
 		return quantity;
 	}
 	
-	public String getBrandCode() {
-		return brandCode;
-	}
-	
 	public String getCurrency() {
 		return currency;
-	}
-
-	public List<String> getCategoryCodes() {
-		return categoryCodes;
 	}
 
 }

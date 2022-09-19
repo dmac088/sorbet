@@ -25,7 +25,7 @@ public class TagFacetAdapterImpl  implements ITagFacetViewPortService {
 	public List<TagFacetView> findAll(String locale, String currency, String categoryCode, Set<String> categoryCodes,
 			Set<String> brandCodes, Double maxPrice) {
 		return tagService.findAll(locale, currency, categoryCode, new StringCollectionWrapper(categoryCodes), new StringCollectionWrapper(brandCodes), maxPrice)
-				.stream().map(b -> (TagFacetView) tagMapper.DTOToDo(b)).collect(Collectors.toList());
+				.stream().map(b -> (TagFacetView) tagMapper.toDo(b)).collect(Collectors.toList());
 	}
 
 

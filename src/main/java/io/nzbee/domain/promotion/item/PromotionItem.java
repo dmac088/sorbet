@@ -2,11 +2,9 @@ package io.nzbee.domain.promotion.item;
 
 import java.util.Currency;
 import java.util.List;
-
 import io.nzbee.domain.valueObjects.BagID;
 import io.nzbee.domain.valueObjects.BrandCode;
 import io.nzbee.domain.valueObjects.CategoryCode;
-import io.nzbee.domain.valueObjects.CouponCode;
 import io.nzbee.domain.valueObjects.CustomerID;
 import io.nzbee.domain.valueObjects.Money;
 import io.nzbee.domain.valueObjects.ProductUPC;
@@ -28,18 +26,14 @@ public class PromotionItem implements IPromotionItem {
 	private final List<CategoryCode> categoryCodes;
 
 	private final Money itemPrice;
-	
-	private final List<CouponCode> couponCodes;
-	
-	private Money discountAmount;
 
 	private final Money totalAmount;
 	
+	private Money discountAmount;
 	
 	
 	public PromotionItem(CustomerID customerID, BagID bagID, Long numberOfOrders, ProductUPC itemUPC, Long quantity,
-			BrandCode brandCode, List<CategoryCode> categoryCodes, Currency currency, Money itemPrice,
-			List<CouponCode> couponCodes, Money totalAmount) {
+			BrandCode brandCode, List<CategoryCode> categoryCodes, Currency currency, Money itemPrice, Money totalAmount) {
 		super();
 		this.customerID = customerID;
 		this.bagID = bagID;
@@ -49,8 +43,8 @@ public class PromotionItem implements IPromotionItem {
 		this.brandCode = brandCode;
 		this.categoryCodes = categoryCodes;
 		this.itemPrice = itemPrice;
-		this.couponCodes = couponCodes;
 		this.totalAmount = totalAmount;
+		this.discountAmount = new Money();
 	}
 
 	public CustomerID getCustomerID() {
@@ -86,10 +80,6 @@ public class PromotionItem implements IPromotionItem {
 		this.discountAmount.add(discount);
 	}
 	
-	@Override
-	public Money getDiscountAmount() {
-		return this.discountAmount;
-	}
 	
 	@Override
 	public Money getTotalAmount() {
@@ -102,8 +92,8 @@ public class PromotionItem implements IPromotionItem {
 	}
 
 	@Override
-	public List<CouponCode> getCoupons() {
-		return couponCodes;
+	public Money getDiscountAmount() {
+		return this.discountAmount;
 	}
 
 }

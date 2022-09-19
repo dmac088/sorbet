@@ -1,10 +1,8 @@
 package io.nzbee.entity;
 
 
-public interface IDomainObjectMapper<D, E, DTO> {
+public interface IDomainObjectMapper<D, DTO> {
 
-	D DTOToDo(DTO dto);
-
-	E doToEntity(D d);
+	D toDo(DTO dto);
 
 }

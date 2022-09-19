@@ -73,7 +73,7 @@ public class BagController {
 
 		domainBagService.checkAllBagRules(b);
 		
-		promotionService.applyAll(b);
+		// promotionService.applyAll(b);
 		
 		domainBagService.save(b);
 
@@ -92,7 +92,7 @@ public class BagController {
 		
 		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
 		
-		promotionService.applyAll(b);
+		//promotionService.applyAll(b);
 		
 		domainBagService.save(b);
 		
@@ -106,7 +106,7 @@ public class BagController {
 
 		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
 
-		promotionService.applyAll(b);
+		//promotionService.applyAll(b);
 		
 		domainBagService.save(b);
 		
@@ -129,7 +129,7 @@ public class BagController {
 		// rehydrate the bag domain model and view, then return it
 		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
 		
-		promotionService.applyAll(b);
+		//promotionService.applyAll(b);
 		
 		domainBagService.save(b);
 
@@ -150,7 +150,7 @@ public class BagController {
 
 		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
 		
-		promotionService.applyAll(b);
+		//promotionService.applyAll(b);
 		
 		domainBagService.save(b);
 
@@ -169,7 +169,7 @@ public class BagController {
 		// here we get the bag and bagItems but the products are null
 		Bag b = domainBagService.findByCode(locale, currency, principal.getName());
 		
-		promotionService.applyAll(b);
+		//promotionService.applyAll(b);
 		
 		domainBagService.save(b);
 

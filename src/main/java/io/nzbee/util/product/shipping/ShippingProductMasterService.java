@@ -289,8 +289,8 @@ public class ShippingProductMasterService {
 		prcr.setType(ptr);
 		prcr.setCurrency(curr);
 		
-		if(prcr.getPriceValue() != null && !(prcr.getPriceValue().setScale(2, BigDecimal.ROUND_HALF_EVEN).equals(
-				new BigDecimal(retailPrice).setScale(2, BigDecimal.ROUND_HALF_EVEN)))) {
+		if(prcr.getPriceValue() != null && !(prcr.getPriceValue().setScale(2, Constants.defaultMoneyRounding).equals(
+				new BigDecimal(retailPrice).setScale(2, Constants.defaultMoneyRounding)))) {
 			prcr.setPriceValue(new BigDecimal(retailPrice));
 		}
 
@@ -307,7 +307,7 @@ public class ShippingProductMasterService {
 		
 		sp.getShippingProduct().setProductStatus(ops.get());
 
-		if(prcm.getPriceValue() != null &&!(prcm.getPriceValue().setScale(2, BigDecimal.ROUND_HALF_EVEN).equals(new BigDecimal(markdownPrice).setScale(2, BigDecimal.ROUND_HALF_EVEN)))) {
+		if(prcm.getPriceValue() != null &&!(prcm.getPriceValue().setScale(2, Constants.defaultMoneyRounding).equals(new BigDecimal(markdownPrice).setScale(2, Constants.defaultMoneyRounding)))) {
 			prcm.setPriceValue(new BigDecimal(markdownPrice));
 		}
 		

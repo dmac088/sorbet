@@ -4,11 +4,11 @@ import io.nzbee.domain.customer.Customer;
 import io.nzbee.domain.customer.dto.in.CustomerDTOIn;
 import io.nzbee.entity.IDomainObjectMapper;
 
-public interface ICustomerDomainMapper extends IDomainObjectMapper<Customer, PersonEntity, PersonDomainDTO> {
+public interface ICustomerDomainMapper extends IDomainObjectMapper<Customer, PersonDomainDTO> {
 
-	Customer EntityToDo(PersonEntity person);
+	Customer toDo(PersonEntity person);
 
-	Customer toDomain(CustomerDTOIn customer);
+	Customer toDo(CustomerDTOIn customer);
 
 	PersonEntity toEntity(CustomerDTOIn customer, String locale);
 

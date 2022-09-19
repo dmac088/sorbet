@@ -63,9 +63,9 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 
 
 	@Override
-	public Bag DTOToDo(BagDomainDTO dto) {
+	public Bag toDo(BagDomainDTO dto) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo()");
-		Bag b = new Bag(personMapper.DTOToDo(dto.getCustomer()), Currency.getInstance(dto.getCurrency()));
+		Bag b = new Bag(personMapper.toDo(dto.getCustomer()), Currency.getInstance(dto.getCurrency()));
 
 		// map the entity bagItems to the domain bagItems
 		Set<IRegularBagItem> sbi = dto.getRegularBagItems().stream()
@@ -93,11 +93,11 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 	}
 
 	@Override
-	public Bag DTOToDo(String locale, String currency, PersonDomainDTO pDto, BagDomainDTO dto) {
+	public Bag toDo(String locale, String currency, PersonDomainDTO pDto, BagDomainDTO dto) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo() with parameters: {}, {}", locale, currency);
 		
 		// we need a customer to instantiate a new bag
-		Customer c = personMapper.DTOToDo(pDto);
+		Customer c = personMapper.toDo(pDto);
 
 		// create a new bag domain object
 		Bag b = new Bag(c, Currency.getInstance(dto.getCurrency()));
@@ -128,7 +128,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 	}
 
 	@Override
-	public BagEntity doToEntity(Bag d) {
+	public BagEntity toEntity(Bag d) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".doToEntity()");
 		
 		// get the bag, status, and customer from the database

@@ -5,6 +5,8 @@ import java.util.Currency;
 
 import org.junit.Assert;
 
+import io.nzbee.Constants;
+
 public class Money {
 	
 	
@@ -14,7 +16,7 @@ public class Money {
 
 	//default rounding preference for this Money object
 	@SuppressWarnings("unused")
-	private int roundingMode = BigDecimal.ROUND_HALF_EVEN;
+	private int roundingMode = Constants.defaultMoneyRounding;
 
 	public Money() {
 
@@ -101,7 +103,7 @@ public class Money {
 	}
 
 	public Money multiply(BigDecimal amount) {
-		return multiply(amount, BigDecimal.ROUND_HALF_EVEN);
+		return multiply(amount, Constants.defaultMoneyRounding);
 	}
 
 	public Money multiply(BigDecimal amount, int roundingMode) {
