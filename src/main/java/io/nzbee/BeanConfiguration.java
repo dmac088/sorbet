@@ -41,6 +41,11 @@ import io.nzbee.entity.bag.item.type.IBagItemTypeService;
 import io.nzbee.entity.bag.item.domain.RegularBagItemDomainDTOMapperImpl;
 import io.nzbee.entity.bag.item.domain.ShippingBagItemDomainDTO;
 import io.nzbee.entity.bag.item.domain.ShippingBagItemDomainDTOMapperImpl;
+import io.nzbee.entity.bag.item.domain.promotion.IPromotionBagItemDomainDTODao;
+import io.nzbee.entity.bag.item.domain.promotion.IPromotionBagItemDomainDTOService;
+import io.nzbee.entity.bag.item.domain.promotion.PromotionBagItemDomainDTO;
+import io.nzbee.entity.bag.item.domain.promotion.PromotionBagItemDomainDTODaoPostgresImpl;
+import io.nzbee.entity.bag.item.domain.promotion.PromotionBagItemDomainDTOServiceImpl;
 import io.nzbee.entity.bag.item.domain.RegularBagItemDomainDTO;
 import io.nzbee.entity.bag.item.domain.BagItemDomainDTODaoImpl;
 import io.nzbee.entity.bag.item.domain.BagItemDomainDTOServiceImpl;
@@ -105,6 +110,16 @@ import io.nzbee.view.product.tag.facet.TagFacetViewServiceImpl;
 
 @Configuration
 class BeanConfiguration {
+	
+	@Bean
+	IPromotionBagItemDomainDTODao<PromotionBagItemDomainDTO> promotionBagItemDomianDTODaoPostgres() {
+		return new PromotionBagItemDomainDTODaoPostgresImpl();
+	}
+	
+	@Bean
+	IPromotionBagItemDomainDTOService promotionBagItemDomainDTOService() {
+		return new PromotionBagItemDomainDTOServiceImpl();
+	}
 	
 	@Bean
 	IRegularBagItemDomainDTODao<RegularBagItemDomainDTO> regularBagItemDomainDTODao() {
