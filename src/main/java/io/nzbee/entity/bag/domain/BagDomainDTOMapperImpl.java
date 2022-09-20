@@ -45,22 +45,21 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 
 	@Autowired
 	private IRegularBagItemDomainDTOMapper regularBagItemMapper;
-	
+
 	@Autowired
 	private IShippingBagItemDomainDTOMapper shippingItemMapper;
-	
+
 	@Autowired
 	private IBagItemStatusService bagItemStatusService;
-	
+
 	@Autowired
 	private IBagItemTypeService bagItemTypeService;
 
 	@Autowired
 	private IPersonService personService;
-	
+
 	@Autowired
 	private IProductService productService;
-
 
 	@Override
 	public Bag toDo(BagDomainDTO dto) {
@@ -68,34 +67,33 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		Bag b = new Bag(personMapper.toDo(dto.getCustomer()), Locale.localize(dto.getLocale(), dto.getCurrency()));
 
 		// map the entity bagItems to the domain bagItems
-		Set<IRegularBagItem> sbi = dto.getRegularBagItems().stream()
-				.map(bi -> regularBagItemMapper.DTOToDo(b, bi))
+		Set<IRegularBagItem> sbi = dto.getRegularBagItems().stream().map(bi -> regularBagItemMapper.DTOToDo(b, bi))
 				.collect(Collectors.toSet());
-		
+
 		Optional<ShippingBagItemDomainDTO> ossbi = Optional.ofNullable(dto.getShippingBagItem());
-		
+
 		// use the add item method on the domain object to
 		// ensure business rules are fired against each added bagItem
 		sbi.forEach(bi -> {
 			b.addItem(bi, bi.getBagItem().getQuantity());
 		});
-		
-		if(ossbi.isPresent()) {
+
+		if (ossbi.isPresent()) {
 			IShippingBagItem ssbi = shippingItemMapper.DTOToDo(b, ossbi.get());
 			b.addShippingItem(ssbi);
 		}
-		
+
 		dto.getCoupons().stream().forEach(cpn -> {
 			b.addCoupon(new CouponCode(cpn));
 		});
-		
+
 		return b;
 	}
 
 	@Override
 	public Bag toDo(String locale, String currency, PersonDomainDTO pDto, BagDomainDTO dto) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo() with parameters: {}, {}", locale, currency);
-		
+
 		// we need a customer to instantiate a new bag
 		Customer c = personMapper.toDo(pDto);
 
@@ -103,39 +101,37 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		Bag b = new Bag(c, Locale.localize(dto.getLocale(), dto.getCurrency()));
 
 		// map the entity bagItems to the domain bagItems
-		Set<IRegularBagItem> sbi = dto.getRegularBagItems().stream()
-				.map(bi -> regularBagItemMapper.DTOToDo(b, bi))
+		Set<IRegularBagItem> sbi = dto.getRegularBagItems().stream().map(bi -> regularBagItemMapper.DTOToDo(b, bi))
 				.collect(Collectors.toSet());
 
 		Optional<ShippingBagItemDomainDTO> ossbi = Optional.ofNullable(dto.getShippingBagItem());
-		
+
 		// use the add item method on the domain object to
 		// ensure business rules are fired against each added bagItem
 		sbi.forEach(bi -> {
 			b.addItem(bi, bi.getBagItem().getQuantity());
 		});
-		
-		if(ossbi.isPresent()) {
+
+		if (ossbi.isPresent()) {
 			IShippingBagItem ssbi = shippingItemMapper.DTOToDo(b, ossbi.get());
 			b.addShippingItem(ssbi);
 		}
-		
+
 		dto.getCoupons().stream().forEach(cpn -> {
 			b.addCoupon(new CouponCode(cpn));
 		});
-		
+
 		return b;
 	}
 
 	@Override
 	public BagEntity toEntity(Bag d) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".doToEntity()");
-		
+
 		// get the bag, status, and customer from the database
 		Optional<BagEntity> obe = bagService.findByCode(d.getCustomer().getUserName());
 		Optional<PersonEntity> op = personService.findByUsernameAndRole(d.getCustomer().getUserName(),
 				Constants.partyRoleCustomer);
-		
 
 		BagEntity nbe = new BagEntity();
 		nbe.setBagCreatedDateTime(LocalDateTime.now());
@@ -149,52 +145,54 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		// map the domain bagItems to entity bagItems
 		d.getBagItems().stream().forEach(bi -> {
 			Optional<BagItemEntity> obi = b.getBagItems().stream()
-					.filter(i -> new ProductUPC(i.getProduct().getProductUPC()).sameAs(bi.getBagItem().getProductUPC())).findAny();
+					.filter(i -> new ProductUPC(i.getProduct().getProductUPC()).sameAs(bi.getBagItem().getProductUPC()))
+					.findAny();
 
-			if (obi.isPresent()) {
-				BagItemEntity bie = obi.get();
-				bie.setQuantity(bi.getBagItem().getQuantity());
-			} else {
-				BagItemEntity i = new BagItemEntity();
-				i.setBag(b);
-				i.setBagItemStatus(bagItemStatusService.findByCode(Constants.bagItemStatusCodeNew)
-						.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.bagItemStatusNotFound,d.getLocale(),Constants.bagItemStatusCodeNew)));
-				i.setBagItemType(bagItemTypeService.findByCode(Constants.regularBagItemType)
-						.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.bagItemTypesNotFound,d.getLocale(),Constants.regularBagItemType)));
-				i.setProduct(productService.findByCode(bi.getBagItem().getProductUPC().toString())
-						.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound,d.getLocale(),bi.getBagItem().getProductUPC().toString())));
-				i.setQuantity(bi.getBagItem().getQuantity());
-				i.setBagTotalWeight(bi.getBagItemWeight().amount());
-				i.setBagItemBaseAmount(bi.getBagItem().getBagItemSubTotal().amount());
-				i.setBagItemDiscountAmount(bi.getBagItem().getBagItemDiscountTotal().amount());
-				System.out.println(bi.getBagItem().getBagItemTotal().amount());
-				i.setBagItemTotalAmount(bi.getBagItem().getBagItemTotal().amount());
-				b.addItem(i);
-			}
+			BagItemEntity i = obi.orElse(new BagItemEntity());
+			i.setQuantity(bi.getBagItem().getQuantity());
+			i.setBag(b);
+			i.setBagItemStatus(bagItemStatusService.findByCode(Constants.bagItemStatusCodeNew)
+					.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.bagItemStatusNotFound, d.getLocale(),
+							Constants.bagItemStatusCodeNew)));
+			i.setBagItemType(bagItemTypeService.findByCode(Constants.regularBagItemType)
+					.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.bagItemTypesNotFound, d.getLocale(),
+							Constants.regularBagItemType)));
+			i.setProduct(productService.findByCode(bi.getBagItem().getProductUPC().toString())
+					.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, d.getLocale(),
+							bi.getBagItem().getProductUPC().toString())));
+			i.setQuantity(bi.getBagItem().getQuantity());
+			i.setBagTotalWeight(bi.getBagItemWeight().amount());
+			i.setBagItemBaseAmount(bi.getBagItem().getBagItemSubTotal().amount());
+			i.setBagItemDiscountAmount(bi.getBagItem().getBagItemDiscountTotal().amount());
+			i.setBagItemTotalAmount(bi.getBagItem().getBagItemTotal().amount());
+			b.addItem(i);
+
 		});
-		
-		//remove any shipping item if it exists 
-		if(d.hasShippingItem() ) {
-		
-			//find the shipping item among the existing bag item entities 
-			Optional<BagItemEntity> oe = b.getBagItems().stream().filter(i -> i.getBagItemType().getBagItemTypeCode().equals(Constants.shippingBagItemType)).findAny();
 
-			if(oe.isPresent()) {
+		// remove any shipping item if it exists
+		if (d.hasShippingItem()) {
+
+			// find the shipping item among the existing bag item entities
+			Optional<BagItemEntity> oe = b.getBagItems().stream()
+					.filter(i -> i.getBagItemType().getBagItemTypeCode().equals(Constants.shippingBagItemType))
+					.findAny();
+
+			if (oe.isPresent()) {
 				LOGGER.debug("Shipping item with id: {} was found!", d.getShippingItem().getBagItem().getProductUPC());
 				b.getBagItems().remove(oe.get());
 			}
 		}
-				
-		//add the new shipping item to the bag
-		if(d.hasShippingItem()) {
+
+		// add the new shipping item to the bag
+		if (d.hasShippingItem()) {
 			BagItemEntity sie = shippingItemMapper.doToEntity(d.getShippingItem());
 			LOGGER.debug("Adding shipping item with id {}", sie.getProduct().getUPC());
 			b.getBagItems().add(sie);
 		}
-		
+
 		// add coupon to the bag if the coupon exists
 		d.getCoupons().stream().forEach(c -> {
-			if(!b.getCouponCodes().contains(c.toString())) {
+			if (!b.getCouponCodes().contains(c.toString())) {
 				b.getCouponCodes().add(c.toString());
 			}
 		});

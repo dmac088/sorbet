@@ -23,18 +23,18 @@ public class BagItemDomainDTOServiceImpl implements IBagItemDomainDTOService {
 	private IBagItemRepository bagItemRepository;
 	
 	@Override
-	public Optional<RegularBagItemDomainDTO> getNewPhysicalItem(String productUPC, String currency) {
-		return regularBagItemDao.getNewItem(productUPC, currency, Constants.markdownPriceCode);
+	public Optional<RegularBagItemDomainDTO> getNewPhysicalItem(String productUPC, String locale, String currency) {
+		return regularBagItemDao.getNewItem(productUPC, locale, currency, Constants.markdownPriceCode);
 	}
 	
 	@Override
-	public Optional<ShippingBagItemDomainDTO> getNewShippingItem(String currency, String shipDest, String shipType, BigDecimal bagWeight) {
-		return shippingBagItemDao.getNewItem(currency, Constants.markdownPriceCode, shipDest, shipType, bagWeight);
+	public Optional<ShippingBagItemDomainDTO> getNewShippingItem(String locale, String currency, String shipDest, String shipType, BigDecimal bagWeight) {
+		return shippingBagItemDao.getNewItem(locale, currency, Constants.markdownPriceCode, shipDest, shipType, bagWeight);
 	}
 	
 	@Override
-	public Optional<ShippingBagItemDomainDTO> getShippingItem(String currency, String priceType, String code) {
-		return shippingBagItemDao.getItem(currency, priceType, code);
+	public Optional<ShippingBagItemDomainDTO> getShippingItem(String locale, String currency, String priceType, String code) {
+		return shippingBagItemDao.getItem(locale, currency, priceType, code);
 	}
 	
 	@Override

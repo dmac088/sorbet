@@ -128,13 +128,6 @@ public class BagController {
 		// persist the domain BagItem to the Bag
 		domainBagService.addPhysicalItem(Locale.localize(locale, currency), dto, principal.getName());
 
-		// rehydrate the bag domain model and view, then return it
-		Bag b = domainBagService.findByCode(Locale.localize(locale, currency), principal.getName());
-		
-		//promotionService.applyAll(b);
-		
-		domainBagService.save(b);
-
 		BagView bv = viewBagService.findByCode(Locale.localize(locale, currency), principal.getName());
 
 		return ResponseEntity.ok(bagResourceAssembler.toModel(bv));

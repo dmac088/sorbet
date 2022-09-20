@@ -22,7 +22,7 @@ public class BagDomainDTODaoImpl implements IBagDomainDTODao {
 	@SuppressWarnings({ "deprecation" })
 	@Override
 	public Optional<BagDomainDTO> findByCode(String locale, String currency, String username) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode, with parameters {}, {}", currency, username);
+		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode, with parameters {}, {}, {}", locale, currency, username);
 		Query query = em.createNativeQuery(" SELECT be.bag_id, "
 									+ "		  		array_to_string(be.coupons, ',') as coupons, "
 									+ "		  		pty.pty_id, "

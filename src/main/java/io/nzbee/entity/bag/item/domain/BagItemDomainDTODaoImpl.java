@@ -20,7 +20,7 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 	private EntityManager em;
 	
 	@Override
-	public Optional<RegularBagItemDomainDTO> getNewItem(String productUPC, String currency, String priceType) {
+	public Optional<RegularBagItemDomainDTO> getNewItem(String locale, String currency, String productUPC, String priceType) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewItem, with parameters {}, {}, {}", productUPC, currency, priceType);
 		
 		@SuppressWarnings("deprecation")
@@ -32,8 +32,9 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 						+ "	prcs.priceValue as prc_val, "
 						+ "	pp.weightDimension as weight, "	
 						+ "	stk.stockOnHand > 0 as in_stock, "			
-						+ " 1 as qty "
-						+ " '" + currency + "' as curr"
+						+ " 1 as qty, "
+						+ " '" + currency + "' as curr,"
+						+ " '" + locale + "' as lcl"
 						+ " FROM ProductEntity pe "
 						+ " JOIN pe.productPhysical pp "
 						+ " JOIN pe.prices prcs "
@@ -57,7 +58,7 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 	}
 	
 	@Override
-	public Optional<ShippingBagItemDomainDTO> getNewItem(String currency, String priceType, String shipDest, String shipType, BigDecimal bagWeight) {
+	public Optional<ShippingBagItemDomainDTO> getNewItem(String locale, String currency, String priceType, String shipDest, String shipType, BigDecimal bagWeight) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewItem, with parameters {}, {}, {}, {}, {}", currency, priceType, shipDest, shipType, bagWeight);
 		
 		@SuppressWarnings("deprecation")
@@ -67,8 +68,8 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 				+ "'" + Constants.bagItemStatusCodeNew + "' as bag_item_sts_cd,"
 				+ "'" + Constants.shippingBagItemType + "' as bag_item_typ_cd,\n"
 				+ "prcs.priceValue as prc_val, "
-				+ "'" + currency + "' as curr"
-				+ " "
+				+ " '" + currency + "' as curr, "
+				+ " '" + locale + "' as lcl"
 				+ " FROM ProductEntity pe "
 				+ " JOIN pe.productShipping ps "
 				+ " JOIN pe.prices prcs "
@@ -95,7 +96,7 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 	}
 
 	@Override
-	public Optional<ShippingBagItemDomainDTO> getItem(String currency, String priceType, String productUPC) {
+	public Optional<ShippingBagItemDomainDTO> getItem(String locale, String currency, String priceType, String productUPC) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getItem, with parameters {}, {}, {}", currency, priceType, productUPC);
 		
 		@SuppressWarnings("deprecation")
@@ -104,8 +105,8 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 				+ "'" + Constants.bagItemStatusCodeNew + " ' as bag_item_sts_cd,"
 				+ "'" + Constants.shippingBagItemType + "'   as bag_item_typ_cd,\n"
 				+ "prcs.priceValue as prc_val, "
-				+ "'" + currency + "' as curr"
-				+ " "
+				+ "'" + currency + "' as curr, "
+				+ " '" + locale + "' as lcl"
 				+ " FROM ProductEntity pe "
 				+ " JOIN pe.productShipping ps "
 				+ " JOIN pe.prices prcs "

@@ -4,6 +4,6 @@ import java.util.Optional;
 
 public interface IRegularBagItemDomainDTODao<T> {
 
-	Optional<T> getNewItem(String productUPC, String currency, String priceType);
+	Optional<T> getNewItem(String productUPC, String locale, String currency, String priceType);
 
 }

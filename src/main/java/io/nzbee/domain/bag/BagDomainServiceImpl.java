@@ -93,11 +93,6 @@ public class BagDomainServiceImpl implements IBagDomainService {
     	
     	b.addItem(bagItem, dto.getItemQty());
     	
-    	//Run through the business rules
-	    	//Checks out of stock
-	    	//Checks bag and bagItem limits
-	    	//Checks promotion eligibility, and applies discount 
-    	
     	domainBagItemService.checkAllBagItemRules(bagItem);
     
      	if(bagItem.getBagItem().isErrors()) {

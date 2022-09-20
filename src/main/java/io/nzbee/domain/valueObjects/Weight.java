@@ -12,7 +12,7 @@ public class Weight {
 
 
 	public BigDecimal multiply(Long quantity) {
-		return null;
+		return this.weight.multiply(new BigDecimal(quantity));
 	}
 	
 	
