@@ -17,6 +17,10 @@ public class Locale {
 	public java.util.Locale getLocale() {
 		return locale;
 	}
+	
+	public String getLanguageCode() {
+		return this.locale.toLanguageTag();
+	}
 
 	public Currency getCurrency() {
 		return currency;

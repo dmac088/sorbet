@@ -53,7 +53,7 @@ public class RegularBagItemDomainAdapter implements IBagItemPortService {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewPhysicalItem with parameters {}, {}", itemUPC, quantity);
 		
 		//there is no product in the domain model just bagItem
-		RegularBagItemDomainDTO biDto = bagItemDomainDTOService.getNewPhysicalItem(itemUPC, locale.getLocale().getISO3Country())
+		RegularBagItemDomainDTO biDto = bagItemDomainDTOService.getNewPhysicalItem(itemUPC, locale.getLanguageCode())
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, itemUPC));
 		
 		//create, save and return domain object 
@@ -67,7 +67,7 @@ public class RegularBagItemDomainAdapter implements IBagItemPortService {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewShippingItem with parameters {}, {}", destCode, shipType);
 		
 		//there is no product in the domain model just bagItem
-		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getNewShippingItem(locale.getLocale().getISO3Country(),  destCode,  shipType, bag.getTotalWeight())
+		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getNewShippingItem(locale.getLanguageCode(),  destCode,  shipType, bag.getTotalWeight())
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, destCode + " - " + shipType + " - " + bag.getTotalWeight()));
 		
 		//create, save and return domain object 

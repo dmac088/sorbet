@@ -45,7 +45,7 @@ public class ShippingBagItemDomainAdapter implements IShippingBagItemPortService
 	public IShippingBagItem getShippingItem(Bag b, String code, Locale locale) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getShippingItem with parameters {}, {}, {}", locale.getLocale(), Constants.markdownPriceCode, code);
 		
-		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getShippingItem(locale.getLocale().getISO3Country(), Constants.markdownPriceCode, code)
+		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getShippingItem(locale.getLanguageCode(), Constants.markdownPriceCode, code)
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, code));
 		
 		IShippingBagItem sbi = shippingBagItemDomainMapper.DTOToDo(b, biDto);
@@ -59,7 +59,7 @@ public class ShippingBagItemDomainAdapter implements IShippingBagItemPortService
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewShippingItem with parameters {}, {}, {}, {}", locale, locale.getCurrency().getCurrencyCode(), destCode, shipType);
 		
 		//there is no product in the domain model just bagItem
-		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getNewShippingItem(locale.getLocale().getISO3Country(), destCode, shipType, b.getTotalWeight())
+		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getNewShippingItem(locale.getLanguageCode(), destCode, shipType, b.getTotalWeight())
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, destCode + " - " + shipType + " - " + b.getTotalWeight()));
 		
 		//create, save and return domain object 

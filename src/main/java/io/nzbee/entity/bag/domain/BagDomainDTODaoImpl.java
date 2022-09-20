@@ -21,7 +21,7 @@ public class BagDomainDTODaoImpl implements IBagDomainDTODao {
 	 
 	@SuppressWarnings({ "deprecation" })
 	@Override
-	public Optional<BagDomainDTO> findByCode(String currency, String username) {
+	public Optional<BagDomainDTO> findByCode(String locale, String currency, String username) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode, with parameters {}, {}", currency, username);
 		Query query = em.createNativeQuery(" SELECT be.bag_id, "
 									+ "		  		array_to_string(be.coupons, ',') as coupons, "
@@ -47,7 +47,8 @@ public class BagDomainDTODaoImpl implements IBagDomainDTODao {
 									+ "       		bit.bag_item_typ_cd, "
 									+ "       		b.bnd_cd, "
 									+ "				string_agg(c.cat_cd, ',') as lst_cat_cd,"
-									+ "				:currency as curr"
+									+ "				:currency as curr,"
+									+ " 			:locale as lcl"
 									+ " FROM   mochi.bag be "
 									+ "       JOIN mochi.party pty "
 									+ "         ON be.pty_id = pty.pty_id "
@@ -113,6 +114,7 @@ public class BagDomainDTODaoImpl implements IBagDomainDTODao {
 												+ " bit.bag_item_typ_cd, "
 												+ " b.bnd_cd")
 		.unwrap(org.hibernate.query.Query.class)
+		.setParameter("locale", locale)
 		.setParameter("currency", currency)
 		.setParameter("username", username)
 		.setParameter("pricetype", Constants.markdownPriceCode)

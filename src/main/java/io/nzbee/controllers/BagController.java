@@ -80,7 +80,7 @@ public class BagController {
 		domainBagService.save(b);
 
 		// get the view containing additional attributes
-		BagView bv = viewBagService.toView(locale, currency, b);
+		BagView bv = viewBagService.findByCode(Locale.localize(locale, currency), principal.getName());
 
 		return ResponseEntity.ok(bagResourceAssembler.toModel(bv));
 	}
@@ -112,7 +112,7 @@ public class BagController {
 		
 		domainBagService.save(b);
 		
-		Set<BagItemViewOut> sbi = viewBagService.findByCode(locale, currency, principal.getName(), b).getBagItems();
+		Set<BagItemViewOut> sbi = viewBagService.findByCode(Locale.localize(locale, currency), principal.getName()).getBagItems();
 
 		return ResponseEntity.ok(bagItemResourceAssembler.toCollectionModel(sbi));
 
@@ -135,7 +135,7 @@ public class BagController {
 		
 		domainBagService.save(b);
 
-		BagView bv = viewBagService.toView(locale, currency, b);
+		BagView bv = viewBagService.findByCode(Locale.localize(locale, currency), principal.getName());
 
 		return ResponseEntity.ok(bagResourceAssembler.toModel(bv));
 	}
@@ -157,7 +157,7 @@ public class BagController {
 		domainBagService.save(b);
 
 		// re-retrieve the bag view and return it
-		BagView bv = viewBagService.findByCode(locale, currency, principal.getName(), b);
+		BagView bv = viewBagService.findByCode(Locale.localize(locale, currency), principal.getName());
 
 		return ResponseEntity.ok(bagResourceAssembler.toModel(bv));
 	}

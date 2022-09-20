@@ -18,9 +18,9 @@ public class BagDomainDTOServiceImpl implements IBagDomainDTOService {
 	private IBagDomainDTODao bagDao;
 	
 	@Override
-	public Optional<BagDomainDTO> findByCode(String currency, String userName) {
+	public Optional<BagDomainDTO> findByCode(String locale, String currency, String userName) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode with parameter {}, {}", currency, userName);
-		return bagDao.findByCode(currency, userName);
+		return bagDao.findByCode(locale, currency, userName);
 	}
 
 	@Override

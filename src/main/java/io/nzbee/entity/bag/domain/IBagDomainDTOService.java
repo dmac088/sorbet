@@ -9,6 +9,6 @@ public interface IBagDomainDTOService {
 	
 	void save(BagEntity b);
 
-	Optional<BagDomainDTO> findByCode(String currency, String userName);
+	Optional<BagDomainDTO> findByCode(String locale, String currency, String userName);
 
 }

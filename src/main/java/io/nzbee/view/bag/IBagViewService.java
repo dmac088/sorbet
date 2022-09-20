@@ -1,11 +1,9 @@
 package io.nzbee.view.bag;
 
-import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.valueObjects.Locale;
 
 public interface IBagViewService {
 
-	BagView toView(String locale, String currency, Bag b);
+	BagView findByCode(Locale locale, String userName);
 
-	BagView findByCode(String locale, String currency, String userName, Bag bag);
-	
 }

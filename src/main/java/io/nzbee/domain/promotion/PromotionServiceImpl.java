@@ -5,7 +5,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import io.nzbee.domain.ports.IBagPortService;
 import io.nzbee.domain.promotion.item.IPromotionItem;
 import io.nzbee.domain.promotion.item.PromotionItem;
@@ -25,6 +24,7 @@ public class PromotionServiceImpl implements IPromotionService {
 	}
 	
 	public List<PromotionItem> find(Locale locale, UserName userName) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".findAll with parameters {}, {}", locale.getLocale(), userName);
 		return bagAdapter.getPromotionItems(locale, userName);
 	}
 

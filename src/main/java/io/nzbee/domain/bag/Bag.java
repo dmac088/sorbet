@@ -100,12 +100,18 @@ public class Bag implements IBag {
 	public Boolean hasShippingItem() {
 		return !(shippingItem == null);
 	}
+	
+	public Boolean hasRegularItems() {
+		return !(this.bagItems.size() == 0);
+	}
 
 	public BigDecimal getTotalWeight() {
 		BigDecimal sum = BigDecimal.ZERO;
-        for (IRegularBagItem bi : this.getBagItems()) {
-            sum = sum.add(bi.getBagItemWeight().multiply(bi.getBagItem().getQuantity()));
-        }
+		if(this.hasRegularItems()) {
+	        for (IRegularBagItem bi : this.getBagItems()) {
+	            sum = sum.add(bi.getBagItemWeight().multiply(bi.getBagItem().getQuantity()));
+	        }
+		}
 		return sum;
 	}
 	

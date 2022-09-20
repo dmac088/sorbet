@@ -46,7 +46,7 @@ public class BagDomainAdapter implements IBagPortService {
 	public Bag findByCode(Locale locale, String userName) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode with parameter {}, {}, {}", locale.getLocale(), locale.getCurrency().getCurrencyCode(), userName);
 		
-		Optional<BagDomainDTO> ob = bagService.findByCode(locale.getCurrency().getCurrencyCode(), userName);
+		Optional<BagDomainDTO> ob = bagService.findByCode(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(), userName);
 
 		//if there is no current bag, get a new one
 		BagDomainDTO b = ob.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.customerNotFound, locale, userName));
@@ -67,7 +67,7 @@ public class BagDomainAdapter implements IBagPortService {
 	@Override
 	public List<PromotionItem> getPromotionItems(Locale locale, UserName userName) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getPromotionItems() with parameter {}, {}, {}", locale, userName);
-		return promotionBagItemService.getItems(locale.getLocale().getISO3Country(), locale.getCurrency().getCurrencyCode(), userName.toString())
+		return promotionBagItemService.getItems(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(), userName.toString())
 			.stream().map(i -> promotionBagItemMapper.toDo(i)).collect(Collectors.toList());
 	}
 

@@ -23,7 +23,7 @@ public class ShippingProductAdapterImpl  implements IShippingProductPortService 
 	@Transactional
 	public ShippingProductView findByDestinationAndTypeAndBagWeight(Locale locale, String code,
 			String type, BigDecimal totalWeight) { 
-		return productMapper.toView(shippingProductService.findByDestinationAndTypeAndBagWeight(locale.getLocale().getISO3Country(), locale.getCurrency().getCurrencyCode(), code, type, totalWeight)
+		return productMapper.toView(shippingProductService.findByDestinationAndTypeAndBagWeight(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(), code, type, totalWeight)
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, code + " - " + type + " - " + totalWeight.toString())));
 	}
 
