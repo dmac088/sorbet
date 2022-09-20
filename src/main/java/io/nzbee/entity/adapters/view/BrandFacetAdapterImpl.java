@@ -26,13 +26,13 @@ public class BrandFacetAdapterImpl implements IBrandFacetViewPortService {
 	public List<BrandFacetView> findAll(Locale locale, String categoryCode, Set<String> categoryCodes,
 			Set<String> tagCodes, Double maxPrice) {
 		
-		return brandFacetService.findAll(locale.getLocale(), locale.getCurrency().getCurrencyCode(), categoryCode, new StringCollectionWrapper(categoryCodes), new StringCollectionWrapper(tagCodes), maxPrice)
+		return brandFacetService.findAll(locale.getLocale().getISO3Country(), locale.getCurrency().getCurrencyCode(), categoryCode, new StringCollectionWrapper(categoryCodes), new StringCollectionWrapper(tagCodes), maxPrice)
 				.stream().map(b -> brandFacetMapper.toView(b)).collect(Collectors.toList());
 	}
 
 	@Override
 	public BrandFacetView findByCode(Locale locale, String rootCategory, String brandCode) {
-		BrandFacetDTO dto = brandFacetService.findByCode(locale.getLocale(), rootCategory, brandCode)
+		BrandFacetDTO dto = brandFacetService.findByCode(locale.getLocale().getISO3Country(), rootCategory, brandCode)
 			.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.brandNotFound, locale, brandCode));
 		return brandFacetMapper.toView(dto);
 	}

@@ -67,7 +67,7 @@ public class BagDomainAdapter implements IBagPortService {
 	@Override
 	public List<PromotionItem> getPromotionItems(Locale locale, UserName userName) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getPromotionItems() with parameter {}, {}, {}", locale, userName);
-		return promotionBagItemService.getItems(locale.getLocale(), locale.getCurrency().getCurrencyCode(), userName.toString())
+		return promotionBagItemService.getItems(locale.getLocale().getISO3Country(), locale.getCurrency().getCurrencyCode(), userName.toString())
 			.stream().map(i -> promotionBagItemMapper.toDo(i)).collect(Collectors.toList());
 	}
 

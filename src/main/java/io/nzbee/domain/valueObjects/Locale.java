@@ -2,8 +2,6 @@ package io.nzbee.domain.valueObjects;
 
 import java.util.Currency;
 
-import org.apache.commons.lang3.LocaleUtils;
-
 public class Locale {
 
 	private final java.util.Locale locale;
@@ -26,7 +24,7 @@ public class Locale {
 	
 	
 	public static Locale localize(String locale, String currency) {
-		return new Locale(LocaleUtils.toLocale(locale), 
+		return new Locale(java.util.Locale.forLanguageTag(locale), 
 					Currency.getInstance(currency));
 	}
 	

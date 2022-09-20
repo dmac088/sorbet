@@ -2,7 +2,6 @@ package io.nzbee.resources.controllers;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Currency;
 import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -88,7 +87,7 @@ public class HKPostController {
 	@GetMapping("/RefreshShippingProducts/{locale}/{currency}")
 	public ResponseEntity<String> refreshShippingProducts(@PathVariable String locale, @PathVariable String currency) {
 		
-		Locale loc = new Locale(locale, Currency.getInstance(currency));
+		Locale loc = Locale.localize(locale, currency);
 		
 		ShippingCountry countries[] = ShippingCountry.values();
 		

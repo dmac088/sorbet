@@ -1,7 +1,6 @@
 package io.nzbee.entity.bag.domain;
 
 import java.time.LocalDateTime;
-import java.util.Currency;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -66,7 +65,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 	@Override
 	public Bag toDo(BagDomainDTO dto) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo()");
-		Bag b = new Bag(personMapper.toDo(dto.getCustomer()),new Locale(dto.getLocale(), Currency.getInstance(dto.getCurrency())));
+		Bag b = new Bag(personMapper.toDo(dto.getCustomer()), Locale.localize(dto.getLocale(), dto.getCurrency()));
 
 		// map the entity bagItems to the domain bagItems
 		Set<IRegularBagItem> sbi = dto.getRegularBagItems().stream()
@@ -101,7 +100,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		Customer c = personMapper.toDo(pDto);
 
 		// create a new bag domain object
-		Bag b = new Bag(c, new Locale(locale,Currency.getInstance(dto.getCurrency())));
+		Bag b = new Bag(c, Locale.localize(dto.getLocale(), dto.getCurrency()));
 
 		// map the entity bagItems to the domain bagItems
 		Set<IRegularBagItem> sbi = dto.getRegularBagItems().stream()

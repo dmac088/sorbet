@@ -12,9 +12,9 @@ public class ShippingProductViewServiceImpl implements IShippingProductViewServi
 	private IShippingProductPortService shippingProductPortService;
 	
 	@Override
-	public ShippingProductView findByDestinationAndTypeAndBagWeight(Locale locale, String currency, String code,
+	public ShippingProductView findByDestinationAndTypeAndBagWeight(Locale locale, String code,
 			String type, BigDecimal totalWeight) {
-		return shippingProductPortService.findByDestinationAndTypeAndBagWeight(locale, currency, code, type, totalWeight);
+		return shippingProductPortService.findByDestinationAndTypeAndBagWeight(locale, code, type, totalWeight);
 	}
 
 }
