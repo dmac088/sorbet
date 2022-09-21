@@ -4,6 +4,6 @@ import io.nzbee.view.bag.BagView;
 
 public interface IBagViewDTOMapper {
 
-	BagView DTOToView(BagViewDTO bagViewDTO);
+	BagView toView(BagViewDTO bDto);
 	
 }

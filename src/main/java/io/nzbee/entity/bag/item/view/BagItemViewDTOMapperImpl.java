@@ -7,7 +7,7 @@ import io.nzbee.view.bag.item.BagItemViewOut;
 public class BagItemViewDTOMapperImpl implements IBagItemViewDTOMapper {
 
 	@Override
-	public BagItemViewOut DTOToView(BagItemViewDTO dto) {
+	public BagItemViewOut toView(BagItemViewDTO dto) {
 		BagItemViewOut biv = new BagItemViewOut();
 		biv.setBagItemTotal(dto.getBagItemTotalAmount());
 		biv.setItemDesc(dto.getBagItemDesc());
@@ -16,6 +16,7 @@ public class BagItemViewDTOMapperImpl implements IBagItemViewDTOMapper {
 		biv.setItemQty(dto.getQuantity());
 		biv.setItemUPC(dto.getBagItemUPC());
 		biv.setMarkdownPrice(dto.getMarkdownPrice());
+		biv.setBagItemSubTotal(dto.getBagItemBaseAmount());
 		return biv;
 	}
 

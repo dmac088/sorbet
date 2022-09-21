@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import io.nzbee.view.bag.item.BagItemViewOut;
 
 public class BagView {
@@ -15,14 +13,6 @@ public class BagView {
 	private String bagStatusCode;
 	
 	private String bagStatusDesc;
-	
-	private int totalItems;
-	
-	private Long totalQuantity;
-	
-	private BigDecimal grandTotalAmount;
-	
-	private BigDecimal subTotalAmount;
 	
 	private BigDecimal totalWeight;
 	
@@ -51,43 +41,35 @@ public class BagView {
 	}
 
 	public int getTotalItems() {
-		return totalItems;
-	}
-
-	public void setTotalItems(int totalItems) {
-		this.totalItems = totalItems;
+		return this.getBagItems().size();
 	}
 
 	public Long getTotalQuantity() {
-		return totalQuantity;
-	}
-
-	public void setTotalQuantity(Long totalQuantity) {
-		this.totalQuantity = totalQuantity;
+		return this.getBagItems().stream().mapToLong(i -> i.getItemQty()).sum();
 	}
 
 	public BigDecimal getGrandTotalAmount() {
-		return grandTotalAmount;
-	}
-
-	public void setGrandTotalAmount(BigDecimal grandTotalAmount) {
-		this.grandTotalAmount = grandTotalAmount;
+		BigDecimal sum = BigDecimal.ZERO;
+        for (BagItemViewOut bi : this.bagItems) {
+            sum = sum.add(bi.getBagItemTotal());
+        }
+		return sum;
 	}
 
 	public BigDecimal getSubTotalAmount() {
-		return subTotalAmount;
-	}
-
-	public void setSubTotalAmount(BigDecimal subTotalAmount) {
-		this.subTotalAmount = subTotalAmount;
+		BigDecimal sum = BigDecimal.ZERO;
+        for (BagItemViewOut bi : this.bagItems) {
+            sum = sum.add(bi.getBagItemSubTotal());
+        }
+		return sum;
 	}
 
 	public BigDecimal getTotalWeight() {
-		return totalWeight;
-	}
-
-	public void setTotalWeight(BigDecimal totalWeight) {
-		this.totalWeight = totalWeight;
+		BigDecimal sum = BigDecimal.ZERO;
+        for (BagItemViewOut bi : this.bagItems) {
+            sum = sum.add(bi.getBagItemWeight());
+        }
+		return sum;
 	}
 
 	public Set<BagItemViewOut> getBagItems() {

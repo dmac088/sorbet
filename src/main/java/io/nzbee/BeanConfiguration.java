@@ -31,6 +31,10 @@ import io.nzbee.entity.bag.domain.BagDomainDTODaoImpl;
 import io.nzbee.entity.bag.domain.BagDomainDTOServiceImpl;
 import io.nzbee.entity.bag.domain.IBagDomainDTODao;
 import io.nzbee.entity.bag.domain.IBagDomainDTOService;
+import io.nzbee.entity.bag.domain.promotion.IPromotionBagDomainDTODao;
+import io.nzbee.entity.bag.domain.promotion.IPromotionBagDomainDTOService;
+import io.nzbee.entity.bag.domain.promotion.PromotionBagDomainDTODaoImpl;
+import io.nzbee.entity.bag.domain.promotion.PromotionBagDomainDTOServiceImpl;
 import io.nzbee.entity.bag.item.domain.IRegularBagItemDomainDTOMapper;
 import io.nzbee.entity.bag.item.domain.IShippingBagItemDomainDTODao;
 import io.nzbee.entity.bag.item.domain.IShippingBagItemDomainDTOMapper;
@@ -107,6 +111,16 @@ import io.nzbee.view.product.tag.facet.TagFacetViewServiceImpl;
 
 @Configuration
 class BeanConfiguration {
+	
+	@Bean
+	IPromotionBagDomainDTODao promotionBagDomainDTODao() {
+		return new PromotionBagDomainDTODaoImpl();
+	}
+	
+	@Bean
+	IPromotionBagDomainDTOService promotionBagDomainDTOService() {
+		return new PromotionBagDomainDTOServiceImpl();
+	}
 	
 	@Bean
 	IPromotionBagItemDomainDTOMapper promotionBagItemDomainDTOMapper() {

@@ -4,11 +4,10 @@ import io.nzbee.domain.bag.Bag;
 
 public interface IBagItemDomainDTOMapper<T, E, D> {
 
-	D DTOToDo(Bag bag, T dto);
+	D toDo(Bag bag, T dto);
 
-	D DTOToDo(Bag bag, T dto, Long quantity);
+	D toDo(Bag bag, T dto, Long quantity);
 	
-	E doToEntity(D d);
-	
+	E toEntity(D d);
 
 }

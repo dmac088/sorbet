@@ -102,10 +102,10 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 		@SuppressWarnings("deprecation")
 		Query query = em.createQuery(
 				" SELECT pe.productUPC as upc_cd, "
-				+ "'" + Constants.bagItemStatusCodeNew + " ' as bag_item_sts_cd,"
-				+ "'" + Constants.shippingBagItemType + "'   as bag_item_typ_cd,\n"
-				+ "prcs.priceValue as prc_val, "
-				+ "'" + currency + "' as curr, "
+				+ " '" + Constants.bagItemStatusCodeNew + " ' as bag_item_sts_cd,"
+				+ " '" + Constants.shippingBagItemType + "'   as bag_item_typ_cd,\n"
+				+ " prcs.priceValue as prc_val, "
+				+ " '" + currency + "' as curr, "
 				+ " '" + locale + "' as lcl"
 				+ " FROM ProductEntity pe "
 				+ " JOIN pe.productShipping ps "

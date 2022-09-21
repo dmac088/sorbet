@@ -44,8 +44,8 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 
 	
 	@Override
-	public RegularBagItem DTOToDo(Bag bag, RegularBagItemDomainDTO dto) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo parameters: {}, {}", bag.getCustomer().getUserName(), dto.getProductUPC());
+	public RegularBagItem toDo(Bag bag, RegularBagItemDomainDTO dto) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".toDo parameters: {}, {}", bag.getCustomer().getUserName(), dto.getProductUPC());
 		return new RegularBagItem(
 						new BagItem(bag, 
 						new ProductUPC(dto.getProductUPC()), 
@@ -63,8 +63,8 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 
 	
 	@Override
-	public RegularBagItem DTOToDo(Bag bag, RegularBagItemDomainDTO dto, Long quantity) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo parameters: {}, {}, {}", bag.getCustomer().getUserName(), dto.getProductUPC());
+	public RegularBagItem toDo(Bag bag, RegularBagItemDomainDTO dto, Long quantity) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".toDo parameters: {}, {}, {}", bag.getCustomer().getUserName(), dto.getProductUPC());
 		return new RegularBagItem(
 				new BagItem(bag, 
 				new ProductUPC(dto.getProductUPC()), 
@@ -77,8 +77,8 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 
 
 	@Override
-	public BagItemEntity doToEntity(IRegularBagItem d) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo doToEntity: {}", d.getBagItem().getProductUPC());
+	public BagItemEntity toEntity(IRegularBagItem d) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".toDo doToEntity: {}", d.getBagItem().getProductUPC());
 		Optional<ProductEntity> op = productService.findByCode(d.getBagItem().getProductUPC().toString());
 		Optional<BagItemStatus> obis = bagItemStatusService.findByCode(Constants.bagItemStatusCodeNew);
 		Optional<BagEntity> ob = bagEntityService.findByCode(d.getBagItem().getBag().getCustomer().getUserName());

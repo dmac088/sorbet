@@ -90,7 +90,7 @@ public class Bag implements IBag {
 	@Override
 	public Long getTotalQuantity() {
 		return new Long(this.getBagItems().stream()
-				.mapToInt(r -> r.getBagItem().getQuantity().intValue()).sum());
+				.mapToLong(r -> r.getBagItem().getQuantity()).sum());
 	}
 	
 	public IShippingBagItem getShippingItem() {

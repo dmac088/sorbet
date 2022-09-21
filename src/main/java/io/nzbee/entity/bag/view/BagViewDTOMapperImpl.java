@@ -21,21 +21,21 @@ public class BagViewDTOMapperImpl implements IBagViewDTOMapper {
 	private IBagItemViewDTOMapper bagItemMapper;
 
 	@Override
-	public BagView DTOToView(BagViewDTO bDto) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToView()");
+	public BagView toView(BagViewDTO dto) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".toView()");
 
 		// create a new bag view object
 		BagView b = new BagView();
  
 		// map the entity bagItems to the view bagItems
-		Set<BagItemViewOut> sbi =  bDto.getBagItems().stream()
+		Set<BagItemViewOut> sbi =  dto.getBagItems().stream()
 				.filter(bi -> bi.getBagItemTypeCode().equals(Constants.regularBagItemType))
-				.map(bi -> bagItemMapper.DTOToView(bi)).collect(Collectors.toSet());
+				.map(bi -> bagItemMapper.toView(bi)).collect(Collectors.toSet());
 		b.setBagItems(sbi);
 		
-		Optional<BagItemViewOut> ssbi = bDto.getBagItems().stream()
+		Optional<BagItemViewOut> ssbi = dto.getBagItems().stream()
 				.filter(bi -> bi.getBagItemTypeCode().equals(Constants.shippingBagItemType))
-				.map(bi -> bagItemMapper.DTOToView(bi)).findAny();
+				.map(bi -> bagItemMapper.toView(bi)).findAny();
 		
 		if(ssbi.isPresent() ) {
 			b.setShippingItem(ssbi.get());

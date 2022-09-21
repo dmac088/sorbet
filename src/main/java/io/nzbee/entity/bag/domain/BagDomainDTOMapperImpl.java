@@ -63,11 +63,11 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 
 	@Override
 	public Bag toDo(BagDomainDTO dto) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo()");
+		LOGGER.debug("call " + getClass().getSimpleName() + ".toDo()");
 		Bag b = new Bag(personMapper.toDo(dto.getCustomer()), Locale.localize(dto.getLocale(), dto.getCurrency()));
 
 		// map the entity bagItems to the domain bagItems
-		Set<IRegularBagItem> sbi = dto.getRegularBagItems().stream().map(bi -> regularBagItemMapper.DTOToDo(b, bi))
+		Set<IRegularBagItem> sbi = dto.getRegularBagItems().stream().map(bi -> regularBagItemMapper.toDo(b, bi))
 				.collect(Collectors.toSet());
 
 		Optional<ShippingBagItemDomainDTO> ossbi = Optional.ofNullable(dto.getShippingBagItem());
@@ -79,7 +79,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		});
 
 		if (ossbi.isPresent()) {
-			IShippingBagItem ssbi = shippingItemMapper.DTOToDo(b, ossbi.get());
+			IShippingBagItem ssbi = shippingItemMapper.toDo(b, ossbi.get());
 			b.addShippingItem(ssbi);
 		}
 
@@ -92,7 +92,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 
 	@Override
 	public Bag toDo(String locale, String currency, PersonDomainDTO pDto, BagDomainDTO dto) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo() with parameters: {}, {}", locale, currency);
+		LOGGER.debug("call " + getClass().getSimpleName() + ".toDo() with parameters: {}, {}", locale, currency);
 
 		// we need a customer to instantiate a new bag
 		Customer c = personMapper.toDo(pDto);
@@ -101,7 +101,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		Bag b = new Bag(c, Locale.localize(dto.getLocale(), dto.getCurrency()));
 
 		// map the entity bagItems to the domain bagItems
-		Set<IRegularBagItem> sbi = dto.getRegularBagItems().stream().map(bi -> regularBagItemMapper.DTOToDo(b, bi))
+		Set<IRegularBagItem> sbi = dto.getRegularBagItems().stream().map(bi -> regularBagItemMapper.toDo(b, bi))
 				.collect(Collectors.toSet());
 
 		Optional<ShippingBagItemDomainDTO> ossbi = Optional.ofNullable(dto.getShippingBagItem());
@@ -113,7 +113,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		});
 
 		if (ossbi.isPresent()) {
-			IShippingBagItem ssbi = shippingItemMapper.DTOToDo(b, ossbi.get());
+			IShippingBagItem ssbi = shippingItemMapper.toDo(b, ossbi.get());
 			b.addShippingItem(ssbi);
 		}
 
@@ -185,7 +185,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 
 		// add the new shipping item to the bag
 		if (d.hasShippingItem()) {
-			BagItemEntity sie = shippingItemMapper.doToEntity(d.getShippingItem());
+			BagItemEntity sie = shippingItemMapper.toEntity(d.getShippingItem());
 			LOGGER.debug("Adding shipping item with id {}", sie.getProduct().getUPC());
 			b.getBagItems().add(sie);
 		}

@@ -48,7 +48,7 @@ public class ShippingBagItemDomainAdapter implements IShippingBagItemPortService
 		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getShippingItem(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(), Constants.markdownPriceCode, code)
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, code));
 		
-		IShippingBagItem sbi = shippingBagItemDomainMapper.DTOToDo(b, biDto);
+		IShippingBagItem sbi = shippingBagItemDomainMapper.toDo(b, biDto);
 		
 		return sbi;
 	}
@@ -63,7 +63,7 @@ public class ShippingBagItemDomainAdapter implements IShippingBagItemPortService
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, destCode + " - " + shipType + " - " + b.getTotalWeight()));
 		
 		//create, save and return domain object 
-		IShippingBagItem sbi = shippingBagItemDomainMapper.DTOToDo(b, biDto);
+		IShippingBagItem sbi = shippingBagItemDomainMapper.toDo(b, biDto);
 		
 		this.save(sbi);
 		
@@ -85,7 +85,7 @@ public class ShippingBagItemDomainAdapter implements IShippingBagItemPortService
 	@Override
 	@Transactional
 	public void save(IShippingBagItem domainObject) {
-		bagItemService.save(shippingBagItemDomainMapper.doToEntity(domainObject));
+		bagItemService.save(shippingBagItemDomainMapper.toEntity(domainObject));
 	}
 
 

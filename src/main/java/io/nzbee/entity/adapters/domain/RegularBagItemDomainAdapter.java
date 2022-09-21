@@ -57,7 +57,7 @@ public class RegularBagItemDomainAdapter implements IBagItemPortService {
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, itemUPC));
 		
 		//create, save and return domain object 
-		IRegularBagItem bi = regularBagItemDomainMapper.DTOToDo(bag, biDto, quantity);
+		IRegularBagItem bi = regularBagItemDomainMapper.toDo(bag, biDto, quantity);
 
 		return bi;
 	}
@@ -71,7 +71,7 @@ public class RegularBagItemDomainAdapter implements IBagItemPortService {
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, destCode + " - " + shipType + " - " + bag.getTotalWeight()));
 		
 		//create, save and return domain object 
-		IShippingBagItem bi = shippingBagItemDomainMapper.DTOToDo(bag, biDto);
+		IShippingBagItem bi = shippingBagItemDomainMapper.toDo(bag, biDto);
 
 		return bi;
 	}
@@ -89,12 +89,12 @@ public class RegularBagItemDomainAdapter implements IBagItemPortService {
 
 	@Override
 	public void save(IRegularBagItem domainObject) {
-		bagItemService.save(regularBagItemDomainMapper.doToEntity(domainObject));
+		bagItemService.save(regularBagItemDomainMapper.toEntity(domainObject));
 	}
 	
 	@Override
 	public void save(IShippingBagItem domainObject) {
-		bagItemService.save(shippingBagItemDomainMapper.doToEntity(domainObject));
+		bagItemService.save(shippingBagItemDomainMapper.toEntity(domainObject));
 	}
 
 }

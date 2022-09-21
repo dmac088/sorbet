@@ -21,14 +21,12 @@ import io.nzbee.domain.bag.item.regular.IRegularBagItemDomainService;
 import io.nzbee.domain.promotion.dto.coupon.CouponDTO;
 import io.nzbee.domain.valueObjects.CouponCode;
 import io.nzbee.domain.valueObjects.Locale;
-//import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.ProductUPC;
 import io.nzbee.resources.bag.BagResource;
 import io.nzbee.resources.bag.BagResourceAssembler;
 import io.nzbee.resources.bag.item.BagItemResource;
 import io.nzbee.resources.bag.item.BagItemResourceAssembler;
 import io.nzbee.view.bag.BagView;
-import io.nzbee.view.bag.IBagViewMapper;
 import io.nzbee.view.bag.IBagViewService;
 import io.nzbee.view.bag.item.BagItemViewIn;
 import io.nzbee.view.bag.item.BagItemViewOut;
@@ -48,9 +46,6 @@ public class BagController {
 	@Autowired
 	private IRegularBagItemDomainService domainBagItemService;
 	
-	@Autowired
-	private IBagViewMapper bagDTOMapper;
-
 	@Autowired
 	private BagResourceAssembler bagResourceAssembler;
 
@@ -93,8 +88,11 @@ public class BagController {
 		//promotionService.applyAll(b);
 		
 		domainBagService.save(b);
-		
-		return ResponseEntity.ok(bagResourceAssembler.toModel(bagDTOMapper.toView(b)));
+
+
+		BagView bv = viewBagService.findByCode(Locale.localize(locale, currency), principal.getName());
+
+		return ResponseEntity.ok(bagResourceAssembler.toModel(bv));
 	}
 
 	@GetMapping("/Bag/{locale}/{currency}/Items")
