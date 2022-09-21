@@ -1,6 +1,6 @@
 package io.nzbee.domain.promotion;
 
-import io.nzbee.domain.promotion.item.IPromotionItem;
+import io.nzbee.domain.promotion.bag.IPromotionItem;
 
 public interface IPromotionService  {
 

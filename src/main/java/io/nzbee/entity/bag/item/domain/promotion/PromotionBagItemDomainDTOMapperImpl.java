@@ -3,7 +3,7 @@ package io.nzbee.entity.bag.item.domain.promotion;
 import java.util.Currency;
 import java.util.stream.Collectors;
 import io.nzbee.Constants;
-import io.nzbee.domain.promotion.item.PromotionItem;
+import io.nzbee.domain.promotion.bag.PromotionItem;
 import io.nzbee.domain.valueObjects.BagID;
 import io.nzbee.domain.valueObjects.BrandCode;
 import io.nzbee.domain.valueObjects.CategoryCode;

@@ -1,4 +1,4 @@
-package io.nzbee.domain.promotion.item;
+package io.nzbee.domain.promotion.bag;
 
 import java.util.List;
 

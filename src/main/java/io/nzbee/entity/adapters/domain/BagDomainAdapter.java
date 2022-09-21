@@ -1,11 +1,7 @@
 package io.nzbee.entity.adapters.domain;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
 import javax.transaction.Transactional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +9,16 @@ import org.springframework.stereotype.Service;
 import io.nzbee.ErrorKeys;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.ports.IBagPortService;
-import io.nzbee.domain.promotion.item.PromotionItem;
+import io.nzbee.domain.promotion.bag.PromotionBag;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.UserName;
 import io.nzbee.entity.bag.domain.BagDomainDTO;
 import io.nzbee.entity.bag.domain.IBagDomainDTOMapper;
 import io.nzbee.entity.bag.domain.IBagDomainDTOService;
+import io.nzbee.entity.bag.domain.promotion.IPromotionBagDomainDTOMapper;
+import io.nzbee.entity.bag.domain.promotion.IPromotionBagDomainDTOService;
+import io.nzbee.entity.bag.domain.promotion.PromotionBagDomainDTO;
 import io.nzbee.entity.bag.entity.BagEntity;
-import io.nzbee.entity.bag.item.domain.promotion.IPromotionBagItemDomainDTOService;
-import io.nzbee.entity.bag.item.domain.promotion.IPromotionBagItemDomainDTOMapper;
 import io.nzbee.exceptions.EntityNotFoundException;
 
 @Service
@@ -33,10 +30,10 @@ public class BagDomainAdapter implements IBagPortService {
 	private IBagDomainDTOService bagService;
 	
 	@Autowired
-	private IPromotionBagItemDomainDTOService promotionBagItemService;
+	private IPromotionBagDomainDTOService promotionBagService;
 	
 	@Autowired
-	private IPromotionBagItemDomainDTOMapper promotionBagItemMapper;
+	private IPromotionBagDomainDTOMapper promotionBagMapper;
 	
 	@Autowired
 	private IBagDomainDTOMapper bagMapper;
@@ -66,10 +63,11 @@ public class BagDomainAdapter implements IBagPortService {
 	}
 	
 	@Override
-	public List<PromotionItem> getPromotionItems(Locale locale, UserName userName) {
+	public PromotionBag findByCode(Locale locale, UserName userName) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getPromotionItems() with parameter {}, {}, {}", locale, userName);
-		return promotionBagItemService.getItems(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(), userName.toString())
-			.stream().map(i -> promotionBagItemMapper.toDo(i)).collect(Collectors.toList());
+		PromotionBagDomainDTO pb = promotionBagService.findByCode(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(), userName.toString())
+				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.bagNotFound, locale, userName.toString()));
+		return promotionBagMapper.toDo(pb);
 	}
 
 }

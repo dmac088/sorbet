@@ -18,7 +18,6 @@ import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.IBagDomainService;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.bag.item.regular.IRegularBagItemDomainService;
-import io.nzbee.domain.promotion.IPromotionService;
 import io.nzbee.domain.promotion.dto.coupon.CouponDTO;
 import io.nzbee.domain.valueObjects.CouponCode;
 import io.nzbee.domain.valueObjects.Locale;
@@ -49,9 +48,6 @@ public class BagController {
 	@Autowired
 	private IRegularBagItemDomainService domainBagItemService;
 	
-	@Autowired 
-	private IPromotionService promotionService;
-
 	@Autowired
 	private IBagViewMapper bagDTOMapper;
 
