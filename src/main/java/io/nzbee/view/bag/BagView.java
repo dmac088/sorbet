@@ -14,8 +14,6 @@ public class BagView {
 	
 	private String bagStatusDesc;
 	
-	private BigDecimal totalWeight;
-	
 	@JsonIgnore
 	private Set<BagItemViewOut> bagItems = new HashSet<BagItemViewOut>();
 	
