@@ -8,15 +8,10 @@ import io.nzbee.domain.valueObjects.Locale;
 
 public interface IBagItemPortService extends IDomainPortService<RegularBagItem> {
 	
-	void delete(IRegularBagItem domainObject);
-	
-	void save(IRegularBagItem object);
-
 	IRegularBagItem getNewPhysicalItem(Locale locale, Bag bag, String itemUPC, Long quantity);
 
 	IShippingBagItem getNewShippingItem(Locale locale, Bag bag, String destCode, String shipType);
 
-	void save(IShippingBagItem domainObject);
 
 	
 

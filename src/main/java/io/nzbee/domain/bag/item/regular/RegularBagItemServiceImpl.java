@@ -28,18 +28,6 @@ public class RegularBagItemServiceImpl implements IRegularBagItemDomainService{
 		return bagItemService.getNewPhysicalItem(locale, bag, itemUPC, quantity);
 	}
 
-	@Override 
-	public void save(IRegularBagItem object) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".save()");
-		bagItemService.save(object);
-	}
-
-	@Override
-	public void delete(IRegularBagItem object) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".delete()");
-		bagItemService.delete(object);
-	}
-
 	@Override
 	public void checkAllBagItemRules(IRegularBagItem object) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".checkAllBagItemRules()");

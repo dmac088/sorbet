@@ -14,11 +14,6 @@ public class ShippingBagItemDomainServiceImpl implements IShippingBagItemDomainS
 	@Autowired
 	private IShippingBagItemPortService shippingBagItemService;
 	
-	@Override
-	public IShippingBagItem getNewShippingItem(Locale locale, Bag bag, String destCode, String shipType) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewShippingItem with parameters {}, {}, {}", destCode, shipType, bag.getTotalWeight());
-		return shippingBagItemService.getNewShippingItem(locale, bag, destCode,  shipType);
-	}
 	
 	@Override
 	public IShippingBagItem getShippingItem(Locale locale, Bag b, String code) {

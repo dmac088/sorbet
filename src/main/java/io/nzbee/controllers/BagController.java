@@ -19,6 +19,7 @@ import io.nzbee.domain.bag.IBagDomainService;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.bag.item.regular.IRegularBagItemDomainService;
 import io.nzbee.domain.promotion.dto.coupon.CouponDTO;
+import io.nzbee.domain.services.GenericResponse;
 import io.nzbee.domain.valueObjects.CouponCode;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.ProductUPC;
@@ -43,9 +44,6 @@ public class BagController {
 	@Autowired
 	private IBagDomainService domainBagService;
 
-	@Autowired
-	private IRegularBagItemDomainService domainBagItemService;
-	
 	@Autowired
 	private BagResourceAssembler bagResourceAssembler;
 
@@ -150,7 +148,7 @@ public class BagController {
 	}
 
 	@GetMapping("/Bag/{locale}/{currency}/Items/Remove/{itemCode}")
-	public ResponseEntity<Void> removeItemFromBag(@PathVariable String locale, @PathVariable String currency,
+	public GenericResponse removeItemFromBag(@PathVariable String locale, @PathVariable String currency,
 			@PathVariable String itemCode, Principal principal) {
 
 		LOGGER.debug("call " + getClass().getSimpleName() + ".removeItemFromBag for parameters {}, {}, {} ", locale,
@@ -160,16 +158,16 @@ public class BagController {
 		
 		//promotionService.applyAll(b);
 		
-		domainBagService.save(b);
-
+		
 		Optional<IRegularBagItem> obi = b.getBagItems().stream()
 				.filter(bi -> bi.getBagItem().getProductUPC().sameAs(new ProductUPC(itemCode))).findAny();
-
-		if (obi.isPresent()) {
-			domainBagItemService.delete(obi.get());
-		}
 		
-		return null;
+		if(obi.isPresent()) {
+			b.getBagItems().remove(obi.get());
+			domainBagService.save(b);
+		}
+
+		return new GenericResponse("success"); 
 	}
 
 

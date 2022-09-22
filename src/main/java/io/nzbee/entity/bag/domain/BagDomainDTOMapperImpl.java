@@ -126,7 +126,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 
 	@Override
 	public BagEntity toEntity(Bag d) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".doToEntity()");
+		LOGGER.debug("call " + getClass().getSimpleName() + ".toEntity()");
 
 		// get the bag, status, and customer from the database
 		Optional<BagEntity> obe = bagService.findByCode(d.getCustomer().getUserName());
@@ -144,6 +144,8 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 
 		// map the domain bagItems to entity bagItems
 		d.getBagItems().stream().forEach(bi -> {
+			System.out.println("processing: " + bi.getBagItem().getProductUPC());
+			
 			Optional<BagItemEntity> obi = b.getBagItems().stream()
 					.filter(i -> new ProductUPC(i.getProduct().getProductUPC()).sameAs(bi.getBagItem().getProductUPC()))
 					.findAny();
@@ -166,21 +168,16 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 			i.setBagItemDiscountAmount(bi.getBagItem().getBagItemDiscountTotal().amount());
 			i.setBagItemTotalAmount(bi.getBagItem().getBagItemTotal().amount());
 			b.addItem(i);
-
 		});
 
-		// remove any shipping item if it exists
-		if (d.hasShippingItem()) {
+		// find the shipping item among the existing bag item entities
+		Optional<BagItemEntity> oe = b.getBagItems().stream()
+				.filter(i -> i.getBagItemType().getBagItemTypeCode().equals(Constants.shippingBagItemType)).findAny();
 
-			// find the shipping item among the existing bag item entities
-			Optional<BagItemEntity> oe = b.getBagItems().stream()
-					.filter(i -> i.getBagItemType().getBagItemTypeCode().equals(Constants.shippingBagItemType))
-					.findAny();
-
-			if (oe.isPresent()) {
-				LOGGER.debug("Shipping item with id: {} was found!", d.getShippingItem().getBagItem().getProductUPC());
-				b.getBagItems().remove(oe.get());
-			}
+		//if found then remove the shipping item
+		if (oe.isPresent()) {
+			LOGGER.debug("Shipping item with id: {} was found!", d.getShippingItem().getBagItem().getProductUPC());
+			b.getBagItems().remove(oe.get());
 		}
 
 		// add the new shipping item to the bag

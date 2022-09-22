@@ -7,7 +7,4 @@ public interface IShippingBagItemDomainService {
 
 	IShippingBagItem getShippingItem(Locale locale, Bag b, String code);
 
-	IShippingBagItem getNewShippingItem(Locale locale, Bag bag, String destCode, String shipType);
-
-
 }

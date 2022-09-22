@@ -1,7 +1,5 @@
 package io.nzbee.domain.bag;
 
-import javax.transaction.Transactional;
-
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.slf4j.Logger;
@@ -55,7 +53,6 @@ public class BagDomainServiceImpl implements IBagDomainService {
 	}
 
 	@Override
-	@Transactional
 	public void addShippingItem(Locale locale, ShippingItemDTOIn dto, String username) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".addShippingItem with parameters {}, {}, {}, {}", locale, locale.getCurrency().getCurrencyCode(), dto.getShippingProductCode(), username);
 		
@@ -74,7 +71,6 @@ public class BagDomainServiceImpl implements IBagDomainService {
 	}
 	
 	@Override
-	@Transactional
 	public void addPhysicalItem(Locale locale, BagItemViewIn dto, String username) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".addPhysicalItem with parameters {}, {}, {}, {}, {}", locale, locale.getCurrency().getCurrencyCode(), dto.getItemUPC(), dto.getItemQty(), username);
 		

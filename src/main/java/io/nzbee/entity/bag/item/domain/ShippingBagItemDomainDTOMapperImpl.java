@@ -45,7 +45,7 @@ public class ShippingBagItemDomainDTOMapperImpl implements IShippingBagItemDomai
 
 	@Override
 	public ShippingBagItem toDo(Bag bag, ShippingBagItemDomainDTO dto, Long quantity) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo parameters: {}, {}, {}", bag.getCustomer().getUserName(), dto.getProductUPC(), quantity);
+		LOGGER.debug("call " + getClass().getSimpleName() + ".toDo parameters: {}, {}, {}", bag.getCustomer().getUserName(), dto.getProductUPC(), quantity);
 		return new ShippingBagItem(
 				new BagItem(bag, 
 				new ProductUPC(dto.getProductUPC()), 
@@ -72,10 +72,10 @@ public class ShippingBagItemDomainDTOMapperImpl implements IShippingBagItemDomai
 
 	@Override
 	public BagItemEntity toEntity(IShippingBagItem d) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo doToEntity: {}", d.getBagItem().getProductUPC());
+		LOGGER.debug("call " + getClass().getSimpleName() + ".toEntity doToEntity: {}", d.getUserName());
 		Optional<ProductEntity> op = productService.findByCode(d.getBagItem().getProductUPC().toString());
 		Optional<BagItemStatus> obis = bagItemStatusService.findByCode(Constants.bagItemStatusCodeNew);
-		Optional<BagEntity> ob = bagEntityService.findByCode(d.getBagItem().getBag().getCustomer().getUserName());
+		Optional<BagEntity> ob = bagEntityService.findByCode(d.getUserName());
 		Optional<BagItemTypeEntity> obit = bagItemTypeService.findByCode(Constants.shippingBagItemType);
 		BagItemEntity bi = new BagItemEntity(op.get());
 		bi.setBag(ob.get());
