@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.IBagDomainService;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
-import io.nzbee.domain.bag.item.regular.IRegularBagItemDomainService;
 import io.nzbee.domain.promotion.dto.coupon.CouponDTO;
 import io.nzbee.domain.services.GenericResponse;
 import io.nzbee.domain.valueObjects.CouponCode;
@@ -135,12 +134,6 @@ public class BagController {
 		// persist the domain BagItem to the Bag
 		domainBagService.addShippingItem(Locale.localize(locale, currency), dto, principal.getName());
 
-		Bag b = domainBagService.findByCode(Locale.localize(locale, currency), principal.getName());
-		
-		//promotionService.applyAll(b);
-		
-		domainBagService.save(b);
-
 		// re-retrieve the bag view and return it
 		BagView bv = viewBagService.findByCode(Locale.localize(locale, currency), principal.getName());
 
@@ -163,7 +156,7 @@ public class BagController {
 				.filter(bi -> bi.getBagItem().getProductUPC().sameAs(new ProductUPC(itemCode))).findAny();
 		
 		if(obi.isPresent()) {
-			b.getBagItems().remove(obi.get());
+			b.removeItem(obi.get());
 			domainBagService.save(b);
 		}
 

@@ -12,7 +12,4 @@ public interface IBagItemPortService extends IDomainPortService<RegularBagItem> 
 
 	IShippingBagItem getNewShippingItem(Locale locale, Bag bag, String destCode, String shipType);
 
-
-	
-
 }

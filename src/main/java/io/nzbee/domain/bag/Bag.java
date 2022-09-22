@@ -79,8 +79,8 @@ public class Bag implements IBag {
 		return this.getBagItems().stream().filter(bi -> bi.getBagItem().getProductUPC().sameAs(productUPC)).findAny().get();
 	}
 	
-	public void removeItem(RegularBagItem bi) {
-		this.getBagItems().remove(bi);
+	public void removeItem(IRegularBagItem iRegularBagItem) {
+		this.getBagItems().remove(iRegularBagItem);
 	}
 	
 	public int getTotalItems() {
