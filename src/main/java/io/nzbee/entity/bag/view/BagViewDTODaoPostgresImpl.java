@@ -22,7 +22,7 @@ public class BagViewDTODaoPostgresImpl implements IBagViewDTODao {
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	public Optional<BagViewDTO> findByCode(String locale, String currency, String rootCategory, String userName) {
+	public Optional<BagViewDTO> findByCode(String locale, String currency, String userName) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode parameters : {}, {}, {}", locale, currency, userName);
 		
 		Query query = em.createNativeQuery(this.getSQL())

@@ -4,6 +4,6 @@ import java.util.Optional;
 
 public interface IBagViewDTODao {
 
-	Optional<BagViewDTO> findByCode(String locale, String currency, String rootCategory, String userName);
+	Optional<BagViewDTO> findByCode(String locale, String currency, String userName);
 	
 }

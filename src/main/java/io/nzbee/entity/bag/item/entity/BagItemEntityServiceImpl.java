@@ -16,26 +16,8 @@ public class BagItemEntityServiceImpl implements IBagItemService {
 
 	@Override
 	public Optional<BagItemEntity> findById(Long id) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".findById() with parameters: {}", id);
 		return bagItemRepository.findById(id);
 	}
-	
-	@Override
-	public void save(BagItemEntity t) {
-		bagItemRepository.save(t);
-	}
-
-	@Override
-	public void update(BagItemEntity t) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".save with parameters {}", t.getBagItemId());
-		bagItemRepository.save(t);
-	}
-
-	@Override
-	public void delete(BagItemEntity t) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".delete with parameters {}", t.getBagItemId());
-		bagItemRepository.delete(t);
-	}
-
-
 
 }

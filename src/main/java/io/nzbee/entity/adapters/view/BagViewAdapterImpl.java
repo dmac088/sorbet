@@ -5,7 +5,6 @@ import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import io.nzbee.Globals;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.entity.bag.view.BagViewDTO;
 import io.nzbee.entity.bag.view.IBagViewDTOMapper;
@@ -16,9 +15,6 @@ import io.nzbee.view.ports.IBagPortService;
 public class BagViewAdapterImpl implements IBagPortService {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
-	
-	@Autowired 
-	private Globals globals;
 	
 	@Autowired
 	private IBagViewDTOService bagService;
@@ -32,7 +28,7 @@ public class BagViewAdapterImpl implements IBagPortService {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode with parameter {}, {}, {}", locale, locale.getCurrency().getCurrencyCode(), userName);
 		
 		//this will also retrieve the items of the bag
-		Optional<BagViewDTO> b = bagService.findByCode(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(), globals.getDefaultProductRootCategoryCode(),userName);
+		Optional<BagViewDTO> b = bagService.findByCode(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(),userName);
 		
 		return bagMapper.toView(b.get());
 	}
@@ -42,7 +38,7 @@ public class BagViewAdapterImpl implements IBagPortService {
 	public BagView toView(Locale locale, String userName) {
 		//this function will convert the bag domain object to a view representation
 		LOGGER.debug("call " + getClass().getSimpleName() + ".toView with parameter {}, {}, {}", locale, locale.getCurrency().getCurrencyCode(), userName );
-		Optional<BagViewDTO> bvDto = bagService.findByCode(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(), globals.getDefaultProductRootCategoryCode(), userName);
+		Optional<BagViewDTO> bvDto = bagService.findByCode(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(), userName);
 		BagView bv = bagMapper.toView(bvDto.get());
     	return bv;	
 	}

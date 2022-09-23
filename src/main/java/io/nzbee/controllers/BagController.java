@@ -58,15 +58,6 @@ public class BagController {
 			Principal principal) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getCustomerBag");
 
-		// get the domain model to compute the bag total
-		Bag b = domainBagService.findByCode(Locale.localize(locale, currency), principal.getName());
-
-		domainBagService.checkAllBagRules(b);
-		
-		// promotionService.applyAll(b);
-		
-		domainBagService.save(b);
-
 		// get the view containing additional attributes
 		BagView bv = viewBagService.findByCode(Locale.localize(locale, currency), principal.getName());
 

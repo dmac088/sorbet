@@ -16,6 +16,7 @@ public class BagEntityServiceImpl implements IBagEntityService {
 	
 	@Override
 	public Optional<BagEntity> findById(Long id) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".findById() with parameter {}", id);
 		return bagRepository.findById(id);
 	}
 
@@ -28,17 +29,8 @@ public class BagEntityServiceImpl implements IBagEntityService {
 
 	@Override
 	public void save(BagEntity t) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".save() with parameter {}", t.getParty().getUser().getUsername());
 		bagRepository.save(t);
-	}
-
-	@Override
-	public void update(BagEntity t) {
-		bagRepository.save(t);
-	}
-
-	@Override
-	public void delete(BagEntity t) {
-		bagRepository.delete(t);
 	}
 
 }

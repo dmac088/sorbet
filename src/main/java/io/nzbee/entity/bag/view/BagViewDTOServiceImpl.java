@@ -17,9 +17,9 @@ public class BagViewDTOServiceImpl implements IBagViewDTOService {
 	private IBagViewDTORepository bagRepository;
 	
 	@Override
-	public Optional<BagViewDTO> findByCode(String locale, String currency, String rootCategory, String userName) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode with parameter {}, {}, {}, {}", locale, currency, rootCategory, userName);
-		return bagDao.findByCode(locale, currency, rootCategory, userName);
+	public Optional<BagViewDTO> findByCode(String locale, String currency, String userName) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode with parameter {}, {}, {}", locale, currency, userName);
+		return bagDao.findByCode(locale, currency, userName);
 	}
 
 	@Override

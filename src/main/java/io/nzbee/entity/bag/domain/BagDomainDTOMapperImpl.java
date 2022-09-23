@@ -1,6 +1,7 @@
 package io.nzbee.entity.bag.domain;
 
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -142,8 +143,27 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 
 		b.setBagUpdatedDateTime(LocalDateTime.now());
 
+		Iterator<BagItemEntity> eitr = b.getBagItems().iterator();
+		
+		while(eitr.hasNext()) {
+			BagItemEntity nxt = eitr.next();
+			
+			Optional<IRegularBagItem> obi = d.getBagItems().stream() 
+					.filter(i -> i.getBagItem().getProductUPC().sameAs(new ProductUPC(nxt.getProduct().getUPC()))).findAny();
+			
+			if(!(obi.isPresent())) { 
+				eitr.remove();
+				//b.getBagItems().remove(nxt);
+			}
+		}
+		
+		Iterator<IRegularBagItem> diter = d.getBagItems().iterator();
+		
 		// map the domain bagItems to entity bagItems
-		d.getBagItems().stream().forEach(bi -> {
+		while(diter.hasNext()) {
+			
+			IRegularBagItem bi = diter.next();
+			
 			System.out.println("processing: " + bi.getBagItem().getProductUPC());
 			
 			Optional<BagItemEntity> obi = b.getBagItems().stream()
@@ -168,7 +188,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 			i.setBagItemDiscountAmount(bi.getBagItem().getBagItemDiscountTotal().amount());
 			i.setBagItemTotalAmount(bi.getBagItem().getBagItemTotal().amount());
 			b.addItem(i);
-		});
+		};
 
 		// find the shipping item among the existing bag item entities
 		Optional<BagItemEntity> oe = b.getBagItems().stream()
