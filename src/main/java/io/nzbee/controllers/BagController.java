@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.IBagDomainService;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
-import io.nzbee.domain.bag.item.regular.IRegularBagItemDomainService;
 import io.nzbee.domain.promotion.dto.coupon.CouponDTO;
 import io.nzbee.domain.services.GenericResponse;
 import io.nzbee.domain.valueObjects.CouponCode;
@@ -44,8 +43,8 @@ public class BagController {
 	@Autowired
 	private IBagDomainService domainBagService;
 	
-    @Autowired
-    private IRegularBagItemDomainService domainBagItemService;
+//    @Autowired
+//    private IRegularBagItemDomainService domainBagItemService;
 
 	@Autowired
 	private BagResourceAssembler bagResourceAssembler;
@@ -78,7 +77,7 @@ public class BagController {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".addCouponToBag");
 
 		//service will take care of everything
-		Bag b = domainBagService.addItemToBag(Locale.localize(locale, currency), new CouponCode(dto.getCoupon()), principal.getName());
+		Bag b = domainBagService.addCouponToBag(Locale.localize(locale, currency), new CouponCode(dto.getCoupon()), principal.getName());
 		
 		if(!b.hasIssues()) {
 			domainBagService.save(b);
@@ -111,11 +110,8 @@ public class BagController {
 		// add the BagItem to the Bag
 		Bag b = domainBagService.addPhysicalItem(Locale.localize(locale, currency), dto, principal.getName());
 
-		domainBagService.checkAllBagRules(b);
-		
+		//if there are no issues then save the bag
 		if(!b.hasIssues()) {
-			LOGGER.debug("the bag has no issues!");
-			LOGGER.debug("saving bag with quantity: " + b.getTotalQuantity());
 			domainBagService.save(b);
 		}
 		

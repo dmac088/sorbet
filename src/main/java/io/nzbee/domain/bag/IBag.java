@@ -6,10 +6,12 @@ import io.nzbee.domain.bag.item.IBagItem;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.customer.ICustomer;
 import io.nzbee.domain.valueObjects.CouponCode;
+import io.nzbee.domain.valueObjects.Money;
+import io.nzbee.domain.valueObjects.UserName;
 
 public interface IBag {
 
-	String getUserName();
+	UserName getUserName();
 
 	List<CouponCode> getCoupons();
 
@@ -28,5 +30,9 @@ public interface IBag {
 	String getError();
 
 	Boolean isErrors();
+
+	int getTotalItems();
+
+	Money getSubTotalAmount();
 
 }

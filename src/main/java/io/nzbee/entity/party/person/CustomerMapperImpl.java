@@ -5,6 +5,7 @@ import io.nzbee.ErrorKeys;
 import io.nzbee.domain.customer.Customer;
 import io.nzbee.domain.customer.dto.in.CustomerDTOIn;
 import io.nzbee.domain.valueObjects.Locale;
+import io.nzbee.domain.valueObjects.UserName;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.party.Party;
 import io.nzbee.entity.party.address.entity.PartyAddressEntity;
@@ -44,7 +45,7 @@ public class CustomerMapperImpl implements ICustomerDomainMapper {
 	public Customer toDo(PersonDomainDTO dto) {
 
 		Customer co = new Customer(
-			dto.getUserName(),
+			new UserName(dto.getUserName()),
 			dto.getCustomerNumber(),
 			dto.getEnabled()
 		);		
@@ -54,7 +55,7 @@ public class CustomerMapperImpl implements ICustomerDomainMapper {
 	@Override
 	public Customer toDo(PersonEntity person) {
 		Customer co = new Customer(
-						person.getPersonParty().getUser().getUsername(),
+						new UserName(person.getPersonParty().getUser().getUsername()),
 						((CustomerEntity) person.getPersonParty().getPartyRoles().stream().filter(r -> r.getRoleType().getRoleTypeDesc().equals(Constants.partyRoleCustomer)).findAny().get().getRoleCustomer()).getCustomerNumber(),
 						person.getPersonParty().getUser().isEnabled()
 					);
@@ -63,7 +64,8 @@ public class CustomerMapperImpl implements ICustomerDomainMapper {
 
 	@Override
 	public Customer toDo(CustomerDTOIn customer) {
-		return new Customer(customer.getUserName(),
+		return new Customer(
+				new UserName(customer.getUserName()),
 				customer.getCustomerId(),
 				customer.isEnabled());
 	}

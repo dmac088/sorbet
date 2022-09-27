@@ -17,6 +17,7 @@ import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.Money;
 import io.nzbee.domain.valueObjects.ProductUPC;
 import io.nzbee.domain.valueObjects.Quantity;
+import io.nzbee.domain.valueObjects.UserName;
 
 public class Bag implements IBag {
 	
@@ -201,9 +202,9 @@ public class Bag implements IBag {
 	public Money getMoney() {
 		return new Money(BigDecimal.ZERO, this.getLocale().getCurrency(), Constants.defaultMoneyRounding);
 	}
-
+ 
 	@Override
-	public String getUserName() {
+	public UserName getUserName() {
 		return this.getCustomer().getUserName();
 	}
 

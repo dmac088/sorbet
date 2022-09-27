@@ -82,7 +82,7 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 		LOGGER.debug("call " + getClass().getSimpleName() + ".toDo doToEntity: {}", d.getBagItem().getProductUPC());
 		Optional<ProductEntity> op = productService.findByCode(d.getBagItem().getProductUPC().toString());
 		Optional<BagItemStatus> obis = bagItemStatusService.findByCode(Constants.bagItemStatusCodeNew);
-		Optional<BagEntity> ob = bagEntityService.findByCode(d.getBagItem().getBag().getCustomer().getUserName());
+		Optional<BagEntity> ob = bagEntityService.findByCode(d.getBagItem().getBag().getCustomer().getUserName().toString());
 		Optional<BagItemTypeEntity> obit = bagItemTypeService.findByCode(Constants.regularBagItemType);
 		BagItemEntity bi = new BagItemEntity(op.get());
 		bi.setBag(ob.get());

@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import io.nzbee.Constants;
 import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.valueObjects.UserName;
 
 //we don't bother about dealing with party, even though our data model and persistence layer cater
 //for both persons and organizations in the "Role" of customers, we're only interested in running a 
@@ -16,7 +17,7 @@ public class Customer implements ICustomer {
 
     private String customerId;
 	
-    private String userName;
+    private UserName userName;
     
     private String password;
     
@@ -29,7 +30,7 @@ public class Customer implements ICustomer {
     private Map<String, String> errors;
 
     public Customer(
-			String userName,
+			UserName userName,
 			String customerId,
 			boolean isEnabled) {
 
@@ -46,7 +47,7 @@ public class Customer implements ICustomer {
 		return customerId;
 	}
 
-	public String getUserName() {
+	public UserName getUserName() {
         return userName;
     }
     

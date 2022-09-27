@@ -42,7 +42,7 @@ public class BagDomainServiceImpl implements IBagDomainService {
 	}
 	
 	@Override
-	public Bag addItemToBag(Locale locale, CouponCode coupon, String username) {
+	public Bag addCouponToBag(Locale locale, CouponCode coupon, String username) {
 		Bag b = this.findByCode(locale, username);
 
 		b.addCoupon(coupon);
@@ -87,6 +87,9 @@ public class BagDomainServiceImpl implements IBagDomainService {
     	
     	b.addItem(bagItem, new Quantity(dto.getItemQty()));
     	
+    	//check the bag rules
+    	this.checkAllBagRules(bagItem.getBag());
+    	
     	domainBagItemService.checkAllBagItemRules(bagItem);
     
      	if(bagItem.getBagItem().getBag().isErrors()) {
@@ -111,7 +114,7 @@ public class BagDomainServiceImpl implements IBagDomainService {
 	}
 
 	@Override
-	public void checkAllBagRules(Bag bag) {
+	public void checkAllBagRules(IBag bag) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".checkAllBagRules()");
 		KieSession kieSession = kieContainer.newKieSession();
     	kieSession.insert(bag);

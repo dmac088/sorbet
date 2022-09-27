@@ -9,8 +9,6 @@ public interface IBagDomainService  {
 
 	Bag findByCode(Locale locale, String userName);
 	
-	void checkAllBagRules(Bag object);
-
 	void save(Bag object);
 
 	void update(Bag object);
@@ -19,9 +17,8 @@ public interface IBagDomainService  {
 
 	Bag addShippingItem(Locale locale, ShippingItemDTOIn dto, String username);
 
-	Bag addItemToBag(Locale locale, CouponCode coupon, String username);
+	void checkAllBagRules(IBag bag);
 
-
-	
+	Bag addCouponToBag(Locale locale, CouponCode coupon, String username);
 
 }

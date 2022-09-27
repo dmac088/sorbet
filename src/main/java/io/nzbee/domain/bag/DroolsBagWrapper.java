@@ -5,9 +5,9 @@ import io.nzbee.domain.valueObjects.Money;
 
 public class DroolsBagWrapper {
 	
-	private Bag bag;
+	private IBag bag;
 	
-	public DroolsBagWrapper(Bag bag) {
+	public DroolsBagWrapper(IBag bag) {
 		this.bag = bag;
 	}
 	

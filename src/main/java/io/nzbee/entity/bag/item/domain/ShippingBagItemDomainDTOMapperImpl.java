@@ -76,7 +76,7 @@ public class ShippingBagItemDomainDTOMapperImpl implements IShippingBagItemDomai
 		LOGGER.debug("call " + getClass().getSimpleName() + ".toEntity doToEntity: {}", d.getUserName());
 		Optional<ProductEntity> op = productService.findByCode(d.getBagItem().getProductUPC().toString());
 		Optional<BagItemStatus> obis = bagItemStatusService.findByCode(Constants.bagItemStatusCodeNew);
-		Optional<BagEntity> ob = bagEntityService.findByCode(d.getUserName());
+		Optional<BagEntity> ob = bagEntityService.findByCode(d.getUserName().toString());
 		Optional<BagItemTypeEntity> obit = bagItemTypeService.findByCode(Constants.shippingBagItemType);
 		BagItemEntity bi = new BagItemEntity(op.get());
 		bi.setBag(ob.get());

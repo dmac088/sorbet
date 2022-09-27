@@ -130,8 +130,8 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".toEntity()");
 
 		// get the bag, status, and customer from the database
-		Optional<BagEntity> obe = bagService.findByCode(d.getCustomer().getUserName());
-		Optional<PersonEntity> op = personService.findByUsernameAndRole(d.getCustomer().getUserName(),
+		Optional<BagEntity> obe = bagService.findByCode(d.getCustomer().getUserName().toString());
+		Optional<PersonEntity> op = personService.findByUsernameAndRole(d.getCustomer().getUserName().toString(),
 				Constants.partyRoleCustomer);
 
 		BagEntity nbe = new BagEntity();
