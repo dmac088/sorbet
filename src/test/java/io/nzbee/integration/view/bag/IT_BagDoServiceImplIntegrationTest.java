@@ -23,6 +23,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import io.nzbee.Constants;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.ports.IBagPortService;
+import io.nzbee.domain.valueObjects.Locale;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -60,7 +61,7 @@ public class IT_BagDoServiceImplIntegrationTest {
 	@Rollback(false)
 	@WithUserDetails(value = "admin")
 	public void whenValidCode_thenBagShouldBeFound() {
-		Bag found = bagService.findByCode(Constants.localeENGB, Constants.currencyHKD, USER_NAME);
+		Bag found = bagService.findByCode(Locale.localize(Constants.localeENGB, Constants.currencyHKD), USER_NAME);
 
 		assertFound(found);
 	}

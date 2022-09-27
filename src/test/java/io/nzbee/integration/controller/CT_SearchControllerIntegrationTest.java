@@ -10,7 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
+import javax.transaction.Transactional; 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -78,11 +78,6 @@ import io.nzbee.entity.product.shipping.attribute.type.ShippingTypeViewMapperImp
 import io.nzbee.entity.product.shipping.attribute.view.ShippingProductAttributeViewServiceImpl;
 import io.nzbee.entity.product.shipping.view.ShippingProductViewDTOMapperImpl;
 import io.nzbee.entity.product.shipping.view.ShippingProductViewDTOServiceImpl;
-import io.nzbee.entity.promotion.PromotionDaoPostgresImpl;
-import io.nzbee.entity.promotion.PromotionEntityServiceImpl;
-import io.nzbee.entity.promotion.PromotionMapperImpl;
-import io.nzbee.entity.promotion.bngn.PromotionBngnMapperImpl;
-import io.nzbee.entity.promotion.disc.PromotionDiscMapperImpl;
 import io.nzbee.entity.tag.view.facet.TagFacetDTOPostgresDaoImpl;
 import io.nzbee.entity.tag.view.facet.TagFacetDTOServiceImpl;
 import io.nzbee.resources.brand.BrandViewModelAssembler;
@@ -119,10 +114,8 @@ import io.nzbee.view.product.shipping.type.ShippingTypeViewServiceImpl;
 		IUserRepository.class, OAuth2ResourceServerConfig.class, ProductCategoryFacetDTOServiceImpl.class,
 		BrandFacetDTOServiceImpl.class, TagFacetDTOServiceImpl.class, FacetServicesImpl.class,
 		ProductCategoryFacetDTODaoImpl.class, BrandFacetDTODaoImpl.class, TagFacetDTOPostgresDaoImpl.class,
-		BagDomainAdapter.class, BagDomainServiceImpl.class, CustomerMapperImpl.class, PromotionMapperImpl.class,
-		PromotionBngnMapperImpl.class, PromotionDiscMapperImpl.class, ProductEntityServiceImpl.class,
-		BagItemStatusServiceImpl.class, PersonServiceImpl.class, PromotionEntityServiceImpl.class,
-		PromotionDaoPostgresImpl.class, BagConfiguration.class, BrandViewServiceImpl.class, BrandAdapterImpl.class,
+		BagDomainAdapter.class, BagDomainServiceImpl.class, CustomerMapperImpl.class, ProductEntityServiceImpl.class,
+		BagItemStatusServiceImpl.class, PersonServiceImpl.class, BagConfiguration.class, BrandViewServiceImpl.class, BrandAdapterImpl.class,
 		BrandViewServiceImpl.class, BrandDTOServiceImpl.class, BrandDTOMapperImpl.class,
 		ShippingProductAdapterImpl.class, ShippingProductViewDTOMapperImpl.class,
 		ShippingDestinationResourceAssembler.class, ShippingTypeResourceAssembler.class,

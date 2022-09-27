@@ -35,11 +35,10 @@ public class RegularBagItemServiceImpl implements IRegularBagItemDomainService{
     	kieSession.insert(object);
     	DroolsBagItemWrapper dpw = new DroolsBagItemWrapper(object);
     	kieSession.insert(dpw);
-    	//System.out.println(StringUtils.join(dpw.getPromotionCodes()));
     	System.out.println("************* Fire Bag Item Rules **************");
     	kieSession.fireAllRules();
         System.out.println("************************************");
-        System.out.println("Customer bag\n" + object.getBagItem().getBag().getCustomer().getUserName());
+        System.out.println("Customer bag\n" + object.getBag());
 	}
 
 }

@@ -41,11 +41,6 @@ import io.nzbee.entity.product.physical.full.PhysicalProductFullDaoImpl;
 import io.nzbee.entity.product.physical.full.PhysicalProductFullViewMapperImpl;
 import io.nzbee.entity.product.price.ProductPriceServiceImpl;
 import io.nzbee.entity.product.price.ProductPriceTypeService;
-import io.nzbee.entity.promotion.PromotionDaoPostgresImpl;
-import io.nzbee.entity.promotion.PromotionEntityServiceImpl;
-import io.nzbee.entity.promotion.mechanic.PromotionMechanicServiceImpl;
-import io.nzbee.entity.promotion.type.PromotionTypeServiceImpl;
-import io.nzbee.entity.promotion.type.PromotionTypeServiceImpl;
 import io.nzbee.entity.role.supplier.SupplierServiceImpl;
 import io.nzbee.entity.stock.StockOnHandServiceImpl;
 import io.nzbee.entity.tag.TagDaoPostgresImpl;
@@ -65,11 +60,6 @@ import io.nzbee.util.inventory.InventoryLocationMasterService;
 import io.nzbee.util.inventory.InventoryMasterService;
 import io.nzbee.util.product.physical.PhysicalProductMasterService;
 import io.nzbee.util.product.shipping.ShippingProductMasterService;
-import io.nzbee.util.promotion.category.CategoryPromotionMasterService;
-import io.nzbee.util.promotion.mechanic.PromotionMechanicMasterService;
-import io.nzbee.util.promotion.order.PromotionOrderMasterService;
-import io.nzbee.util.promotion.product.ProductPromotionMasterService;
-import io.nzbee.util.promotion.regular.PromotionProductMasterService;
 import io.nzbee.util.tag.TagMasterService;
 
 @RunWith(SpringRunner.class)
@@ -103,16 +93,6 @@ import io.nzbee.util.tag.TagMasterService;
 							     BrandMasterService.class,
 							     TagMasterService.class,
 							     ShippingProductMasterService.class,
-							     PromotionProductMasterService.class,
-							     PromotionEntityServiceImpl.class,
-							     PromotionDaoPostgresImpl.class,
-							     PromotionTypeServiceImpl.class,
-							     PromotionMechanicServiceImpl.class,
-							     PromotionTypeServiceImpl.class,
-							     PromotionOrderMasterService.class,
-							     CategoryPromotionMasterService.class,
-							     ProductPromotionMasterService.class,
-							     PromotionMechanicMasterService.class,
 							     InventoryMasterService.class,
 							     InventoryTransactionServiceImpl.class,
 							     InventoryLocationServiceImpl.class,

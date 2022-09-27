@@ -5,11 +5,12 @@ import java.util.List;
 
 import io.nzbee.domain.valueObjects.CouponCode;
 import io.nzbee.domain.valueObjects.Locale;
+import io.nzbee.domain.valueObjects.Quantity;
 import io.nzbee.domain.valueObjects.UserName;
 
-public class PromotionBag {
+public class PromotionBag implements IPromotionBag {
 	
-	private final List<PromotionItem> promotionItems;
+	private final List<PromotionBagItem> promotionItems;
 	
 	private final List<CouponCode> coupons; 
 	
@@ -17,20 +18,25 @@ public class PromotionBag {
 	
 	private final Locale locale;
 	
-	public PromotionBag(UserName userName, Locale locale) {
+	private final Quantity quantity;
+	
+	private final int itemCount;
+	
+	public PromotionBag(UserName userName, Locale locale, Quantity quantity, int itemCount) {
 		super();
 		this.locale = locale;
-		this.promotionItems = new ArrayList<PromotionItem>();
+		this.promotionItems = new ArrayList<PromotionBagItem>();
 		this.coupons = new ArrayList<CouponCode>();
 		this.userName = userName;
+		this.quantity = quantity;
+		this.itemCount = itemCount;
 	}
 
-
-	public List<PromotionItem> getPromotionItems() {
+	public List<PromotionBagItem> getPromotionItems() {
 		return promotionItems;
 	}
 	
-	public void addPromotionItem(PromotionItem promotionItem) {
+	public void addPromotionItem(PromotionBagItem promotionItem) {
 		this.promotionItems.add(promotionItem);
 	}
 
@@ -50,6 +56,16 @@ public class PromotionBag {
 
 	public Locale getLocale() {
 		return locale;
+	}
+
+	@Override
+	public Quantity getQuantity() {
+		return this.quantity;
+	}
+
+	@Override
+	public int getItemCount() {
+		return itemCount;
 	}
 		
 }

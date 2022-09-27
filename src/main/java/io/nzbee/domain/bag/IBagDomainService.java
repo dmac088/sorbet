@@ -15,11 +15,11 @@ public interface IBagDomainService  {
 
 	void update(Bag object);
 
-	void addPhysicalItem(Locale locale, BagItemViewIn dto, String username);
+	Bag addPhysicalItem(Locale locale, BagItemViewIn dto, String username);
 
-	void addShippingItem(Locale locale, ShippingItemDTOIn dto, String username);
+	Bag addShippingItem(Locale locale, ShippingItemDTOIn dto, String username);
 
-	void addItemToBag(Locale locale, CouponCode coupon, String username);
+	Bag addItemToBag(Locale locale, CouponCode coupon, String username);
 
 
 	

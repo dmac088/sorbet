@@ -41,19 +41,16 @@ public class BagDomainServiceImpl implements IBagDomainService {
 	}
 	
 	@Override
-	public void addItemToBag(Locale locale, CouponCode coupon, String username) {
+	public Bag addItemToBag(Locale locale, CouponCode coupon, String username) {
 		Bag b = this.findByCode(locale, username);
 
 		b.addCoupon(coupon);
 
-		this.checkAllBagRules(b);
-
-		this.save(b);
-		
+		return b;
 	}
 
 	@Override
-	public void addShippingItem(Locale locale, ShippingItemDTOIn dto, String username) {
+	public Bag addShippingItem(Locale locale, ShippingItemDTOIn dto, String username) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".addShippingItem with parameters {}, {}, {}, {}", locale, locale.getCurrency().getCurrencyCode(), dto.getShippingProductCode(), username);
 		
 		//get the bag domain model with the items
@@ -66,12 +63,12 @@ public class BagDomainServiceImpl implements IBagDomainService {
     	//add the shipping item to the bag
     	b.addShippingItem(sbi);
     	
-    	//save the bag to the database 
-    	this.save(b);
+    	//return the bag
+    	return b;
 	}
 	
 	@Override
-	public void addPhysicalItem(Locale locale, BagItemViewIn dto, String username) {
+	public Bag addPhysicalItem(Locale locale, BagItemViewIn dto, String username) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".addPhysicalItem with parameters {}, {}, {}, {}, {}", locale, locale.getCurrency().getCurrencyCode(), dto.getItemUPC(), dto.getItemQty(), username);
 		
 		//get the bag domain model with the items
@@ -91,13 +88,12 @@ public class BagDomainServiceImpl implements IBagDomainService {
     	
     	domainBagItemService.checkAllBagItemRules(bagItem);
     
-     	if(bagItem.getBagItem().isErrors()) {
+     	if(bagItem.getBagItem().getBag().isErrors()) {
      		LOGGER.debug("The BagItem has errors!");
-     		return;
     	}
     	
-    	//save the current state of the bag to the database 
-    	this.save(b);
+    	//return the bag 
+    	return b;
 	}
 	
 

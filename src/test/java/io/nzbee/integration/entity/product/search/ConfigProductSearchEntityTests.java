@@ -16,8 +16,6 @@ import io.nzbee.entity.product.physical.light.IPhysicalProductLightDTOService;
 import io.nzbee.entity.product.physical.light.PhysicalProductLightDaoImpl;
 import io.nzbee.entity.product.physical.light.PhysicalProductLightMapperImpl;
 import io.nzbee.entity.product.physical.light.PhysicalProductLightDTOServiceImpl;
-import io.nzbee.entity.promotion.IPromotionDao;
-import io.nzbee.entity.promotion.PromotionDaoPostgresImpl;
 import io.nzbee.entity.tag.ITagDao;
 import io.nzbee.entity.tag.TagDaoPostgresImpl;
 import io.nzbee.entity.tag.view.facet.ITagFacetDao;
@@ -100,11 +98,6 @@ public class ConfigProductSearchEntityTests {
 	@Bean
 	IDepartmentDao departmentDao() {
 		return new DepartmentDaoImpl();
-	}
-	
-	@Bean
-	IPromotionDao promotionDao() {
-		return new PromotionDaoPostgresImpl();
 	}
 	
 	@Bean

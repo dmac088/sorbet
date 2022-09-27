@@ -33,7 +33,6 @@ import io.nzbee.domain.bag.item.regular.RegularBagItemServiceImpl;
 import io.nzbee.domain.promotion.PromotionServiceImpl;
 import io.nzbee.entity.adapters.domain.BagDomainAdapter;
 import io.nzbee.entity.adapters.domain.RegularBagItemDomainAdapter;
-import io.nzbee.entity.adapters.domain.PromotionAdapter;
 import io.nzbee.entity.adapters.view.BagViewAdapterImpl;
 import io.nzbee.entity.bag.domain.BagDomainDTODaoImpl;
 import io.nzbee.entity.bag.domain.BagDomainDTOMapperImpl;
@@ -57,12 +56,6 @@ import io.nzbee.entity.product.physical.view.PhysicalProductDTOServiceImpl;
 import io.nzbee.entity.product.ProductEntityServiceImpl;
 import io.nzbee.entity.product.price.ProductPriceServiceImpl;
 import io.nzbee.entity.product.price.ProductPriceTypeService;
-import io.nzbee.entity.promotion.PromotionDaoPostgresImpl;
-import io.nzbee.entity.promotion.PromotionEntityServiceImpl;
-import io.nzbee.entity.promotion.PromotionMapperImpl;
-import io.nzbee.entity.promotion.bngn.PromotionBngnMapperImpl;
-import io.nzbee.entity.promotion.bngn.PromotionBngnServiceImpl;
-import io.nzbee.entity.promotion.disc.PromotionDiscMapperImpl;
 import io.nzbee.payment.PaymentService;
 import io.nzbee.resources.bag.BagResourceAssembler;
 import io.nzbee.resources.bag.item.BagItemResourceAssembler;
@@ -71,9 +64,7 @@ import io.nzbee.security.OAuth2ResourceServerConfig;
 import io.nzbee.security.SecurityBeanConfiguration;
 import io.nzbee.security.WebSecurityConfig;
 import io.nzbee.security.user.UserService;
-import io.nzbee.view.bag.BagViewMapperImpl;
 import io.nzbee.view.bag.BagViewServiceImpl;
-import io.nzbee.view.bag.item.BagItemViewMapperImpl;
 
 @RunWith(SpringRunner.class)
 @EnableJpaRepositories(entityManagerFactoryRef = "mochiEntityManagerFactory", transactionManagerRef = "mochiTransactionManager", basePackages = {
@@ -81,19 +72,17 @@ import io.nzbee.view.bag.item.BagItemViewMapperImpl;
 @ContextConfiguration(classes = { PaymentService.class, ConfigControllerTest.class, SecurityBeanConfiguration.class,
 		OAuth2AuthorizationServerConfig.class, OAuth2ResourceServerConfig.class, UserService.class,
 		WebSecurityConfig.class, Globals.class, BagController.class, BagDomainAdapter.class, CustomerMapperImpl.class,
-		PromotionMapperImpl.class, PromotionBngnMapperImpl.class, PromotionDiscMapperImpl.class,
 		ProductEntityServiceImpl.class, BagItemStatusServiceImpl.class, PersonServiceImpl.class,
-		PromotionServiceImpl.class, PromotionEntityServiceImpl.class, PromotionDaoPostgresImpl.class,
-		BagDomainServiceImpl.class, BagConfiguration.class, RegularBagItemDomainAdapter.class, BagItemEntityServiceImpl.class,
-		BagItemConfiguration.class, ProductAttributeServiceImpl.class, ProductPriceServiceImpl.class,
-		CurrencyServiceImpl.class, ProductPriceTypeService.class, PromotionAdapter.class,
-		PromotionBngnServiceImpl.class, BagViewMapperImpl.class, BagItemViewMapperImpl.class,
-		BagResourceAssembler.class, BagItemResourceAssembler.class, BagViewServiceImpl.class, BagViewAdapterImpl.class,
-		PhysicalProductDTOServiceImpl.class, PhysicalProductDTODaoPostgresImpl.class, BagViewDTOServiceImpl.class,
-		BagViewDTODaoPostgresImpl.class, BagViewDTOMapperImpl.class, BagItemViewMapperImpl.class,
-		BagItemViewDTOMapperImpl.class, PhysicalProductDTOMapperImpl.class, BagItemDomainDTOServiceImpl.class,
-		RegularBagItemDomainDTOMapperImpl.class, BagDomainDTOServiceImpl.class, BagDomainDTOMapperImpl.class,
-		BagEntityServiceImpl.class, RegularBagItemServiceImpl.class, BagDomainDTODaoImpl.class})
+		PromotionServiceImpl.class, BagDomainServiceImpl.class, BagConfiguration.class,
+		RegularBagItemDomainAdapter.class, BagItemEntityServiceImpl.class, BagItemConfiguration.class,
+		ProductAttributeServiceImpl.class, ProductPriceServiceImpl.class, CurrencyServiceImpl.class,
+		ProductPriceTypeService.class, BagResourceAssembler.class, BagItemResourceAssembler.class,
+		BagViewServiceImpl.class, BagViewAdapterImpl.class, PhysicalProductDTOServiceImpl.class,
+		PhysicalProductDTODaoPostgresImpl.class, BagViewDTOServiceImpl.class, BagViewDTODaoPostgresImpl.class,
+		BagViewDTOMapperImpl.class, BagItemViewDTOMapperImpl.class, PhysicalProductDTOMapperImpl.class,
+		BagItemDomainDTOServiceImpl.class, RegularBagItemDomainDTOMapperImpl.class, BagDomainDTOServiceImpl.class,
+		BagDomainDTOMapperImpl.class, BagEntityServiceImpl.class, RegularBagItemServiceImpl.class,
+		BagDomainDTODaoImpl.class })
 @WebMvcTest
 public class CT_BagControllerTest {
 
@@ -111,41 +100,40 @@ public class CT_BagControllerTest {
 		IntegrationTestSetupHelper.dbInit(database);
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).apply(springSecurity()).build();
 	}
-	
+
 	@Test
 	public void testWhenBagIsEmpty_ThenReturnAnEmptyBag() throws Exception {
 		// to-do
 		String accessToken = ConfigControllerTest.obtainAccessToken(ConfigControllerTest.TEST_USERNAME,
-																	ConfigControllerTest.TEST_PASSWORD, webApplicationContext);
-		
-		
+				ConfigControllerTest.TEST_PASSWORD, webApplicationContext);
+
 		// remove the items to empty the bag
-		//this is a Pomegranate
+		// this is a Pomegranate
 		String url = "/api/Bag/" + Constants.localeENGB + "/" + Constants.currencyHKD + "/Items/Remove/17235347";
 		mockMvc.perform(get(url).header("Authorization", "Bearer " + accessToken).with(csrf())
 				.contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8").accept(MediaType.ALL))
 				.andDo(print()).andExpect(status().isOk());
-		
-		//this is a mango
+
+		// this is a mango
 		url = "/api/Bag/" + Constants.localeENGB + "/" + Constants.currencyHKD + "/Items/Remove/12345678";
 		mockMvc.perform(get(url).header("Authorization", "Bearer " + accessToken).with(csrf())
 				.contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8").accept(MediaType.ALL))
 				.andDo(print()).andExpect(status().isOk());
-		
-		//check the bag is still viewable through the api
+
+		// check the bag is still viewable through the api
 		url = "/api/Bag/" + Constants.localeENGB + "/" + Constants.currencyHKD;
 		mockMvc.perform(get(url).header("Authorization", "Bearer " + accessToken).with(csrf())
 				.contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8").accept(MediaType.ALL))
 				.andDo(print()).andExpect(status().isOk()).andExpect(content().contentType("application/hal+json"))
 				.andExpect(jsonPath("$.data.totalItems", is(0))).andExpect(jsonPath("$.data.totalQuantity", is(0)));
-		
-		//add items back to restore integrity
+
+		// add items back to restore integrity
 		url = "/api/Bag/" + Constants.localeENGB + "/" + Constants.currencyHKD + "/Items/Physical/Add";
 		mockMvc.perform(post(url).header("Authorization", "Bearer " + accessToken)
 				.content("{\n" + "  \"itemUPC\": \"17235347\",\n" + "  \"itemQty\": 1\n" + "}").with(csrf())
 				.contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8").accept(MediaType.ALL))
 				.andDo(print()).andExpect(status().isOk()).andExpect(content().contentType("application/hal+json"));
-		
+
 		url = "/api/Bag/" + Constants.localeENGB + "/" + Constants.currencyHKD + "/Items/Physical/Add";
 		mockMvc.perform(post(url).header("Authorization", "Bearer " + accessToken)
 				.content("{\n" + "  \"itemUPC\": \"12345678\",\n" + "  \"itemQty\": 1\n" + "}").with(csrf())
@@ -157,8 +145,7 @@ public class CT_BagControllerTest {
 	public void testWhenCustomerLoginSuccessfully_ThenCustomerCanViewBag() throws Exception {
 		String accessToken = ConfigControllerTest.obtainAccessToken(ConfigControllerTest.TEST_USERNAME,
 				ConfigControllerTest.TEST_PASSWORD, webApplicationContext);
-		String 
-		url = "/api/Bag/" + Constants.localeENGB + "/" + Constants.currencyHKD;
+		String url = "/api/Bag/" + Constants.localeENGB + "/" + Constants.currencyHKD;
 		mockMvc.perform(get(url).header("Authorization", "Bearer " + accessToken).with(csrf())
 				.contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8").accept(MediaType.ALL))
 				.andDo(print()).andExpect(status().isOk()).andExpect(content().contentType("application/hal+json"))

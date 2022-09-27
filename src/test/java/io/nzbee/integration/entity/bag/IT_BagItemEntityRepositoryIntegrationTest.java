@@ -22,7 +22,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import io.nzbee.Constants;
-import io.nzbee.Globals;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.bag.entity.IBagEntityService;
 import io.nzbee.entity.bag.item.entity.BagItemEntity;
@@ -42,9 +41,6 @@ import io.nzbee.integration.entity.beans.bag.IBagEntityBeanFactory;
 @ContextConfiguration(classes = {ConfigBagEntityTests.class})
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class IT_BagItemEntityRepositoryIntegrationTest {
-	
-	@Autowired
-	private Globals globals;
 	
 	@Autowired
 	private IBagEntityBeanFactory bagEntityBeanFactory;
@@ -133,7 +129,7 @@ public class IT_BagItemEntityRepositoryIntegrationTest {
      public void whenFindByUsername_thenReturnBagDTOWithCorrectItems() {
      	
      	//persist a bag and then make sure we can retrieve it by username which is the natural key of the bag
-     	Optional<BagViewDTO> found = bagViewService.findByCode(Constants.localeENGB, Constants.currencyHKD, globals.getDefaultProductRootCategoryCode(), "bob@bob");
+     	Optional<BagViewDTO> found = bagViewService.findByCode(Constants.localeENGB, Constants.currencyHKD, "bob@bob");
      	
      	//then
      	assertDTOFound(found);
@@ -153,9 +149,9 @@ public class IT_BagItemEntityRepositoryIntegrationTest {
     	
     	BagViewDTO bDto = bag.get();
     	
-    	assertTrue(bDto.getBagItems().stream().filter(bi -> bi.getProduct().getProductDto().getProductUPC().equals("76477789")).findAny().isPresent());
+    	assertTrue(bDto.getBagItems().stream().filter(bi -> bi.getBagItemUPC().equals("76477789")).findAny().isPresent());
     	
-    	assertThat(bDto.getBagItems().stream().filter(bi -> bi.getProduct().getProductDto().getProductUPC().equals("76477789")).findAny().get().getQuantity()).isEqualTo(2);
+    	assertThat(bDto.getBagItems().stream().filter(bi -> bi.getBagItemUPC().equals("76477789")).findAny().get().getQuantity()).isEqualTo(2);
     	
 //    	assertThat(bDto.getBagItems().stream().filter(bi -> bi.getProductUPC().equals("76477789"))
 //				.findAny().get()

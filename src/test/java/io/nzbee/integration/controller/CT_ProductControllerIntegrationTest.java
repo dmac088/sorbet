@@ -30,7 +30,6 @@ import io.nzbee.domain.bag.BagConfiguration;
 import io.nzbee.domain.bag.BagDomainServiceImpl;
 import io.nzbee.domain.bag.item.BagItemConfiguration;
 import io.nzbee.domain.bag.item.regular.RegularBagItemServiceImpl;
-import io.nzbee.entity.promotion.PromotionEntityServiceImpl;
 import io.nzbee.entity.DataSourceBeanMochi;
 import io.nzbee.entity.adapters.domain.BagDomainAdapter;
 import io.nzbee.entity.adapters.domain.RegularBagItemDomainAdapter;
@@ -76,10 +75,6 @@ import io.nzbee.entity.product.shipping.attribute.type.ShippingTypeViewMapperImp
 import io.nzbee.entity.product.shipping.attribute.view.ShippingProductAttributeViewServiceImpl;
 import io.nzbee.entity.product.shipping.view.ShippingProductViewDTOMapperImpl;
 import io.nzbee.entity.product.shipping.view.ShippingProductViewDTOServiceImpl;
-import io.nzbee.entity.promotion.PromotionDaoPostgresImpl;
-import io.nzbee.entity.promotion.PromotionMapperImpl;
-import io.nzbee.entity.promotion.bngn.PromotionBngnMapperImpl;
-import io.nzbee.entity.promotion.disc.PromotionDiscMapperImpl;
 import io.nzbee.entity.tag.view.facet.TagFacetDTOPostgresDaoImpl;
 import io.nzbee.entity.tag.view.facet.TagFacetDTOServiceImpl;
 import io.nzbee.resources.brand.BrandViewModelAssembler;
@@ -114,28 +109,25 @@ import io.nzbee.view.product.shipping.type.ShippingTypeViewServiceImpl;
 		IUserRepository.class, OAuth2ResourceServerConfig.class, ProductCategoryFacetDTOServiceImpl.class,
 		BrandFacetDTOServiceImpl.class, TagFacetDTOServiceImpl.class, FacetServicesImpl.class,
 		ProductCategoryFacetDTODaoImpl.class, BrandFacetDTODaoImpl.class, TagFacetDTOPostgresDaoImpl.class,
-		BagDomainAdapter.class, BagDomainServiceImpl.class, CustomerMapperImpl.class, 
-		PromotionMapperImpl.class, PromotionBngnMapperImpl.class,
-		PromotionDiscMapperImpl.class, ProductEntityServiceImpl.class, BagItemStatusServiceImpl.class,
-		PersonServiceImpl.class, PromotionEntityServiceImpl.class, PromotionDaoPostgresImpl.class,
-		BagConfiguration.class, BrandViewServiceImpl.class, BrandAdapterImpl.class, BrandViewServiceImpl.class,
-		BrandDTOServiceImpl.class, BrandDTOMapperImpl.class, ShippingProductAdapterImpl.class,
-		ShippingProductViewDTOMapperImpl.class, ShippingDestinationResourceAssembler.class,
-		ShippingTypeResourceAssembler.class, ShippingProductResourceAssembler.class, BrandViewModelAssembler.class,
-		PhysicalProductFullModelAssembler.class, ProductAttributeServiceImpl.class, ProductPriceServiceImpl.class,
-		CurrencyServiceImpl.class, ProductPriceTypeService.class, PhysicalProductFullAdapterImpl.class,
-		PhysicalProductFullDTOServiceImpl.class, PhysicalProductFullDaoImpl.class,
-		PhysicalProductFullViewMapperImpl.class, RegularBagItemDomainAdapter.class,
+		BagDomainAdapter.class, BagDomainServiceImpl.class, CustomerMapperImpl.class, ProductEntityServiceImpl.class,
+		BagItemStatusServiceImpl.class, PersonServiceImpl.class, BagConfiguration.class, BrandViewServiceImpl.class,
+		BrandAdapterImpl.class, BrandViewServiceImpl.class, BrandDTOServiceImpl.class, BrandDTOMapperImpl.class,
+		ShippingProductAdapterImpl.class, ShippingProductViewDTOMapperImpl.class,
+		ShippingDestinationResourceAssembler.class, ShippingTypeResourceAssembler.class,
+		ShippingProductResourceAssembler.class, BrandViewModelAssembler.class, PhysicalProductFullModelAssembler.class,
+		ProductAttributeServiceImpl.class, ProductPriceServiceImpl.class, CurrencyServiceImpl.class,
+		ProductPriceTypeService.class, PhysicalProductFullAdapterImpl.class, PhysicalProductFullDTOServiceImpl.class,
+		PhysicalProductFullDaoImpl.class, PhysicalProductFullViewMapperImpl.class, RegularBagItemDomainAdapter.class,
 		BagItemEntityServiceImpl.class, BagItemConfiguration.class, WebSecurityConfig.class,
 		ShippingDestinationViewServiceImpl.class, ShippingDestinationAdapterImpl.class,
 		ShippingDestinationViewMapperImpl.class, ShippingTypeViewServiceImpl.class, ShippingTypeAdapterImpl.class,
 		ShippingTypeViewMapperImpl.class, BagViewDTOServiceImpl.class, BagViewDTODaoPostgresImpl.class,
 		PhysicalProductDTOServiceImpl.class, PhysicalProductDTODaoPostgresImpl.class, BagItemDomainDTOServiceImpl.class,
-		RegularBagItemDomainDTOMapperImpl.class, ShippingProductViewServiceImpl.class, ShippingProductViewDTOServiceImpl.class,
-		OAuth2AuthorizationServerConfig.class, OAuth2ResourceServerConfig.class, BagDomainDTOServiceImpl.class,
-		ShippingProductAttributeViewServiceImpl.class, BagDomainDTOMapperImpl.class, BagEntityServiceImpl.class,
-		BagItemDomainDTOServiceImpl.class, RegularBagItemServiceImpl.class, RegularBagItemDomainAdapter.class,
-		BagDomainDTODaoImpl.class})
+		RegularBagItemDomainDTOMapperImpl.class, ShippingProductViewServiceImpl.class,
+		ShippingProductViewDTOServiceImpl.class, OAuth2AuthorizationServerConfig.class,
+		OAuth2ResourceServerConfig.class, BagDomainDTOServiceImpl.class, ShippingProductAttributeViewServiceImpl.class,
+		BagDomainDTOMapperImpl.class, BagEntityServiceImpl.class, BagItemDomainDTOServiceImpl.class,
+		RegularBagItemServiceImpl.class, RegularBagItemDomainAdapter.class, BagDomainDTODaoImpl.class })
 @WebMvcTest(ProductController.class)
 @Import(ProductController.class)
 public class CT_ProductControllerIntegrationTest {

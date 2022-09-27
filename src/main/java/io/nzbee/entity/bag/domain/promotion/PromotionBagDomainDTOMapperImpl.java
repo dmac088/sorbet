@@ -7,10 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import io.nzbee.ErrorKeys;
 import io.nzbee.domain.promotion.bag.PromotionBag;
-import io.nzbee.domain.promotion.bag.PromotionItem;
+import io.nzbee.domain.promotion.bag.PromotionBagItem;
 import io.nzbee.domain.valueObjects.CouponCode;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.ProductUPC;
+import io.nzbee.domain.valueObjects.Quantity;
 import io.nzbee.domain.valueObjects.UserName;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.bag.entity.IBagEntityService;
@@ -33,7 +34,7 @@ public class PromotionBagDomainDTOMapperImpl implements IPromotionBagDomainDTOMa
 	public PromotionBag toDo(PromotionBagDomainDTO dto) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo()");
 
-		PromotionBag pb = new PromotionBag(new UserName(dto.getCustomer().getUserName()), Locale.localize(dto.getLocale(), dto.getCurrency()));
+		PromotionBag pb = new PromotionBag(new UserName(dto.getCustomer().getUserName()), Locale.localize(dto.getLocale(), dto.getCurrency()), new Quantity(new Long(10)), 1);
 
 		//add the items to PromotionBag one by one
 		dto.getPromotionBagItems().stream().forEach(i -> {
@@ -56,7 +57,7 @@ public class PromotionBagDomainDTOMapperImpl implements IPromotionBagDomainDTOMa
 				() -> new EntityNotFoundException(ErrorKeys.bagNotFound, d.getLocale(), d.getUserName().toString()));
 		
 		be.getBagItems().stream().forEach(i -> {
-			Optional<PromotionItem> opi = d.getPromotionItems().stream().filter(pi ->  pi.getItemUPC().sameAs(new ProductUPC(i.getProduct().getUPC()))).findAny();
+			Optional<PromotionBagItem> opi = d.getPromotionItems().stream().filter(pi ->  pi.getItemUPC().sameAs(new ProductUPC(i.getProduct().getUPC()))).findAny();
 			if(opi.isPresent()) {
 				//we only update the line item discount amount
 				i.setBagItemDiscountAmount(opi.get().getDiscountAmount().amount());

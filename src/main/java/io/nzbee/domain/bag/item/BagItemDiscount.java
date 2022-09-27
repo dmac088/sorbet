@@ -1,15 +1,15 @@
 package io.nzbee.domain.bag.item;
 
-import io.nzbee.domain.promotion.bag.IPromotionItem;
+import io.nzbee.domain.promotion.bag.IPromotionBagItem;
 import io.nzbee.domain.valueObjects.Money;
 
 //remember the BagItemDiscount will not be persisted
 //we only need what we need to compute the bagItem total
 public class BagItemDiscount implements IBagItemDiscount {
 
-	private IPromotionItem bagItem;
+	private IPromotionBagItem bagItem;
 	
-	public BagItemDiscount(IPromotionItem bi) {
+	public BagItemDiscount(IPromotionBagItem bi) {
 		this.bagItem = bi;
 	}
 

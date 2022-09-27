@@ -18,14 +18,6 @@ public interface IBagItem {
 
 	ProductUPC getProductUPC();
 
-	boolean isErrors();
-
-	void setErrors(Boolean errors);
-
-	String getError();
-
-	void setError(String error);
-
 	void addDiscount(IBagItemDiscount discount);
 
 	Money getBagItemSubTotal();

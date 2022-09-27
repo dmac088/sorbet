@@ -8,9 +8,12 @@ import io.nzbee.domain.valueObjects.CategoryCode;
 import io.nzbee.domain.valueObjects.CustomerID;
 import io.nzbee.domain.valueObjects.Money;
 import io.nzbee.domain.valueObjects.ProductUPC;
+import io.nzbee.domain.valueObjects.Quantity;
 
-public class PromotionItem implements IPromotionItem {
+public class PromotionBagItem implements IPromotionBagItem {
 
+	private final IPromotionBag bag;
+	
 	private final CustomerID customerID;
 	
 	private final BagID bagID;
@@ -19,7 +22,7 @@ public class PromotionItem implements IPromotionItem {
 	
 	private final ProductUPC itemUPC;
 	
-	private final Long quantity;
+	private final Quantity quantity;
 	
 	private final BrandCode brandCode;
 	
@@ -32,9 +35,10 @@ public class PromotionItem implements IPromotionItem {
 	private Money discountAmount;
 	
 	
-	public PromotionItem(CustomerID customerID, BagID bagID, Long numberOfOrders, ProductUPC itemUPC, Long quantity,
+	public PromotionBagItem(IPromotionBag bag, CustomerID customerID, BagID bagID, Long numberOfOrders, ProductUPC itemUPC, Quantity quantity,
 			BrandCode brandCode, List<CategoryCode> categoryCodes, Currency currency, Money itemPrice, Money totalAmount) {
 		super();
+		this.bag = bag;
 		this.customerID = customerID;
 		this.bagID = bagID;
 		this.numberOfOrders = numberOfOrders;
@@ -63,7 +67,7 @@ public class PromotionItem implements IPromotionItem {
 		return itemUPC;
 	}
 
-	public Long getQuantity() {
+	public Quantity getQuantity() {
 		return quantity;
 	}
 
@@ -94,6 +98,23 @@ public class PromotionItem implements IPromotionItem {
 	@Override
 	public Money getDiscountAmount() {
 		return this.discountAmount;
+	}
+
+	@Override
+	public void setError(String error) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getError() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IPromotionBag getBag() {
+		return this.bag;
 	}
 
 }

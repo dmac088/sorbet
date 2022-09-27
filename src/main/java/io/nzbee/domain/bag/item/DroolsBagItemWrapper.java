@@ -3,7 +3,6 @@ package io.nzbee.domain.bag.item;
 import java.math.BigDecimal;
 import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
-import io.nzbee.domain.valueObjects.ProductUPC;
 
 public class DroolsBagItemWrapper {
 	
@@ -17,8 +16,8 @@ public class DroolsBagItemWrapper {
 		return this.bagItem.getBagItem().getQuantity();
 	}
 	
-	public Long getBagQuantity() {
-		return this.bagItem.getBagItem().getBag().getTotalQuantity();
+	public int getBagQuantity() {
+		return this.bagItem.getBagItem().getBag().getTotalQuantity().intValue();
 	}
 	
 	public BigDecimal getMarkdownPrice() {
@@ -29,35 +28,36 @@ public class DroolsBagItemWrapper {
 		return this.bagItem.getBagItem().getBagItemStatus();
 	}
 	
-	public ProductUPC getProductUPC() {
-		return this.bagItem.getBagItem().getProductUPC();
+	public String getProductUPC() {
+		return this.bagItem.getBagItem().getProductUPC().toString();
 	}
 	
-	public boolean isInStock() {
+	
+	public Boolean isInStock() {
 		return this.bagItem.isInStock();
 	}
 	
-	public boolean isErrors() {
-		return this.bagItem.getBagItem().isErrors();
+	public Boolean isErrors() {
+		return this.bagItem.getBagItem().getBag().isErrors();
 	}
 	
 	public void setErrors(Boolean errors) {
-		this.bagItem.getBagItem().setErrors(errors);
+		this.bagItem.getBagItem().getBag().setErrors(errors);
 	}
 
 	public String getError() {
-		return this.bagItem.getBagItem().getError();
+		return this.bagItem.getBagItem().getBag().getError();
 	}
 
 	public void setError(String error) {
-		this.bagItem.getBagItem().setError(error);
+		this.bagItem.getBagItem().getBag().setError(error);
 	}
 	
 	public String getCustomerId() {
 		return bagItem.getBagItem().getBag().getCustomer().getCustomerID();
 	}
 	
-	public void addDiscount(IBagItemDiscount discount) {
+	public void addDiscount(BagItemDiscount discount) {
 		this.bagItem.getBagItem().addDiscount(discount);
 	}
 	

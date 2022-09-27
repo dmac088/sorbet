@@ -21,4 +21,12 @@ public interface IBag {
 
 	void logItemError(String key, IBagItem bagItem);
 
+	void setErrors(Boolean errors);
+
+	void setError(String error);
+
+	String getError();
+
+	Boolean isErrors();
+
 }

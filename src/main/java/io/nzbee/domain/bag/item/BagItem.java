@@ -16,10 +16,6 @@ public class BagItem implements IBagItem {
 	
 	private Long quantity;
 	
-	private Boolean errors = false;
-	
-	private String error;
-	
 	private String bagItemStatus;
 	
 	private final Money markdownPrice;
@@ -75,23 +71,6 @@ public class BagItem implements IBagItem {
 //		System.out.println("quantity = " +  this.quantity);
 		return this.markdownPrice.multiply(this.quantity).subtract(this.getBagItemDiscountTotal());
 	}
-
-	public boolean isErrors() {
-		return errors;
-	}
-
-	@Override
-	public void setErrors(Boolean errors) {
-		this.errors = errors;
-	}
-
-	public String getError() {
-		return error;
-	}
-
-	public void setError(String error) {
-		this.error = error;
-	}
 	
 	public void setBagItemStatus(String bagItemStatus) {
 		this.bagItemStatus = bagItemStatus;
@@ -114,5 +93,6 @@ public class BagItem implements IBagItem {
 	public List<IBagItemDiscount> getDiscounts() {
 		return discounts;
 	}
+
 
 }

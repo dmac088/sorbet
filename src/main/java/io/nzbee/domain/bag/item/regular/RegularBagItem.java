@@ -1,5 +1,6 @@
 package io.nzbee.domain.bag.item.regular;
 
+import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.valueObjects.Weight;
 
@@ -32,5 +33,10 @@ public class RegularBagItem implements IRegularBagItem {
 
 	public Weight getWeight() {
 		return weight; 
+	}
+
+	@Override
+	public IBag getBag() {
+		return this.bagItem.getBag();
 	}
 }

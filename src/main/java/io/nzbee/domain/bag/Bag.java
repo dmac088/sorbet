@@ -30,6 +30,10 @@ public class Bag implements IBag {
 	
 	private final Locale locale;
 	
+	private Boolean errors = false;
+	
+	private String error;
+	
 	
 	public Bag(Customer customer, Locale locale) {
 		this.customer = customer;
@@ -150,6 +154,26 @@ public class Bag implements IBag {
 		if(!this.getCoupons().contains(couponCode)) {
 			this.getCoupons().add(couponCode);
 		}
+	}
+	
+	@Override
+	public Boolean isErrors() {
+		return errors;
+	}
+
+	@Override
+	public void setErrors(Boolean errors) {
+		this.errors = errors;
+	}
+
+	@Override
+	public String getError() {
+		return error;
+	}
+
+	@Override
+	public void setError(String error) {
+		this.error = error;
 	}
 
 	public List<CouponCode> getCoupons() {
