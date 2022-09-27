@@ -1,6 +1,5 @@
 package io.nzbee.domain.bag;
 
-import java.math.BigDecimal;
 import java.util.List;
 import io.nzbee.domain.bag.item.IBagItem;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
