@@ -114,6 +114,8 @@ public class BagController {
 		domainBagService.checkAllBagRules(b);
 		
 		if(!b.hasIssues()) {
+			LOGGER.debug("the bag has no issues!");
+			LOGGER.debug("saving bag with quantity: " + b.getTotalQuantity());
 			domainBagService.save(b);
 		}
 		

@@ -11,4 +11,12 @@ public interface IPromotionBag {
 	
 	int getItemCount();
 
+	Boolean isErrors();
+
+	void setErrors(Boolean errors);
+
+	String getError();
+
+	void setError(String error);
+
 }

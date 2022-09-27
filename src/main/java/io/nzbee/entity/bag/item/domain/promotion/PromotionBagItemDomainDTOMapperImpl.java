@@ -4,7 +4,7 @@ import java.util.Currency;
 import java.util.stream.Collectors;
 import io.nzbee.Constants;
 import io.nzbee.domain.promotion.bag.PromotionBag;
-import io.nzbee.domain.promotion.bag.PromotionBagItem;
+import io.nzbee.domain.promotion.bag.item.PromotionBagItem;
 import io.nzbee.domain.valueObjects.BagID;
 import io.nzbee.domain.valueObjects.BrandCode;
 import io.nzbee.domain.valueObjects.CategoryCode;

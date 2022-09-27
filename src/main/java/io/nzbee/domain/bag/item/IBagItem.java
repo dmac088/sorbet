@@ -3,18 +3,20 @@ package io.nzbee.domain.bag.item;
 import java.util.List;
 
 import io.nzbee.domain.bag.IBag;
+import io.nzbee.domain.valueObjects.BagItemStatus;
 import io.nzbee.domain.valueObjects.Money;
 import io.nzbee.domain.valueObjects.ProductUPC;
+import io.nzbee.domain.valueObjects.Quantity;
 
 public interface IBagItem {
 
-	Long getQuantity();
+	Quantity getQuantity();
 
 	IBag getBag();
 
 	Money getMarkdownPrice();
 
-	String getBagItemStatus();
+	BagItemStatus getBagItemStatus();
 
 	ProductUPC getProductUPC();
 
@@ -24,13 +26,13 @@ public interface IBagItem {
 	
 	Money getBagItemTotal();
 
-	void addToQuantity(Long qty);
+	void addToQuantity(Quantity qty);
 
 	List<IBagItemDiscount> getDiscounts();
 
 	Money getBagItemDiscountTotal();
 
-	void setBagItemStatus(String string);
+	void setBagItemStatus(BagItemStatus string);
 
 	
 

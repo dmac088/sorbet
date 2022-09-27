@@ -13,7 +13,7 @@ public class DroolsBagItemWrapper {
 	}
 	
 	public Long getBagItemQuantity() {
-		return this.bagItem.getBagItem().getQuantity();
+		return this.bagItem.getBagItem().getQuantity().amount();
 	}
 	
 	public int getBagQuantity() {
@@ -25,7 +25,7 @@ public class DroolsBagItemWrapper {
 	}
 	
 	public String getBagItemStatus() {
-		return this.bagItem.getBagItem().getBagItemStatus();
+		return this.bagItem.getBagItem().getBagItemStatus().toString();
 	}
 	
 	public String getProductUPC() {

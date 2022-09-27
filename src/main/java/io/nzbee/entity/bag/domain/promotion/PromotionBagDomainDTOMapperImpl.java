@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import io.nzbee.ErrorKeys;
 import io.nzbee.domain.promotion.bag.PromotionBag;
-import io.nzbee.domain.promotion.bag.PromotionBagItem;
+import io.nzbee.domain.promotion.bag.item.PromotionBagItem;
 import io.nzbee.domain.valueObjects.CouponCode;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.ProductUPC;

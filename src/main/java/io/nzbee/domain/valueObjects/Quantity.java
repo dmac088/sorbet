@@ -8,9 +8,8 @@ public class Quantity {
 		this.quantity = quantity;
 	}
 
-
-	public Long multiply(Long quantity) {
-		return this.quantity * quantity;
+	public Quantity add(Quantity other) {
+		return new Quantity(this.amount() + other.amount());
 	}
 	
 	public Long amount() {

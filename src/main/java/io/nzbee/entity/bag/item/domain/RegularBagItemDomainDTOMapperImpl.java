@@ -15,6 +15,7 @@ import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.valueObjects.CategoryCode;
 import io.nzbee.domain.valueObjects.Money;
 import io.nzbee.domain.valueObjects.ProductUPC;
+import io.nzbee.domain.valueObjects.Quantity;
 import io.nzbee.domain.valueObjects.Weight;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.bag.entity.IBagEntityService;
@@ -49,7 +50,7 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 		return new RegularBagItem(
 						new BagItem(bag, 
 						new ProductUPC(dto.getProductUPC()), 
-						dto.getQuantity(), 
+						new Quantity(dto.getQuantity()), 
 						new Money(dto.getMarkdownPrice(), Currency.getInstance(dto.getCurrency()), Constants.defaultMoneyRounding)),
 						new Weight(dto.getWeight()),
 						dto.isInStock()
@@ -68,7 +69,7 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 		return new RegularBagItem(
 				new BagItem(bag, 
 				new ProductUPC(dto.getProductUPC()), 
-				quantity, 
+				new Quantity(quantity), 
 				new Money(dto.getMarkdownPrice(), Currency.getInstance(dto.getCurrency()), Constants.defaultMoneyRounding)),
 				new Weight(dto.getWeight()),
 				dto.isInStock()
@@ -87,7 +88,7 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 		bi.setBag(ob.get());
 		bi.setBagItemStatus(obis.get());
 		bi.setBagItemType(obit.get());
-		bi.setQuantity(d.getBagItem().getQuantity());
+		bi.setQuantity(d.getBagItem().getQuantity().amount());
 		bi.setBagItemBaseAmount(d.getBagItem().getBagItemSubTotal().amount());
 		bi.setBagItemDiscountAmount(d.getBagItem().getBagItemDiscountTotal().amount());
 		bi.setBagItemTotalAmount(d.getBagItem().getBagItemTotal().amount());

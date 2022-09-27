@@ -11,10 +11,12 @@ import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
 import io.nzbee.domain.bag.item.shipping.IShippingBagItem;
 import io.nzbee.domain.customer.Customer;
+import io.nzbee.domain.valueObjects.BagItemStatus;
 import io.nzbee.domain.valueObjects.CouponCode;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.Money;
 import io.nzbee.domain.valueObjects.ProductUPC;
+import io.nzbee.domain.valueObjects.Quantity;
 
 public class Bag implements IBag {
 	
@@ -57,8 +59,8 @@ public class Bag implements IBag {
 		return bagItems;
 	}
 	
-	public void addItem(IRegularBagItem bagItem, Long qty) {
-		System.out.println("adding quantity " + qty + " for product " + bagItem.getBagItem().getProductUPC());
+	public void addItem(IRegularBagItem bagItem, Quantity qty) {
+		System.out.println("adding quantity " + qty.amount() + " for product " + bagItem.getBagItem().getProductUPC());
 		
 		Optional<IRegularBagItem> obi = this.getBagItems().stream()
 		.filter(bi -> bi.getBagItem().getProductUPC().sameAs(bagItem.getBagItem().getProductUPC()))
@@ -94,7 +96,7 @@ public class Bag implements IBag {
 	@Override
 	public Long getTotalQuantity() {
 		return new Long(this.getBagItems().stream()
-				.mapToLong(r -> r.getBagItem().getQuantity()).sum());
+				.mapToLong(r -> r.getBagItem().getQuantity().amount()).sum());
 	}
 	
 	public IShippingBagItem getShippingItem() {
@@ -113,7 +115,7 @@ public class Bag implements IBag {
 		BigDecimal sum = BigDecimal.ZERO;
 		if(this.hasRegularItems()) {
 	        for (IRegularBagItem bi : this.getBagItems()) {
-	            sum = sum.add(bi.getBagItemWeight().multiply(bi.getBagItem().getQuantity()));
+	            sum = sum.add(bi.getBagItemWeight().multiply(bi.getBagItem().getQuantity().amount()));
 	        }
 		}
 		return sum;
@@ -143,7 +145,7 @@ public class Bag implements IBag {
 	@Override
 	public void logItemError(String key, IBagItem bagItem) {
 		bagIssues.logItemError(key, bagItem);
-		bagItem.setBagItemStatus("PND01");
+		bagItem.setBagItemStatus(new BagItemStatus("PND01"));
 	}
 	
 	public BagIssues getBagIssues() {

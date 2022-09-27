@@ -16,7 +16,7 @@ import io.nzbee.domain.bag.item.BagItemConfiguration;
 import io.nzbee.domain.bag.item.regular.IRegularBagItemDomainService;
 import io.nzbee.domain.customer.Customer;
 import io.nzbee.domain.ports.IBagItemPortService;
-import io.nzbee.domain.promotion.bag.IPromotionBagItem;
+import io.nzbee.domain.promotion.bag.item.IPromotionBagItem;
 import io.nzbee.unit.domain.beans.customer.CustomerDoBeanFactory;
 
 @RunWith(SpringRunner.class)

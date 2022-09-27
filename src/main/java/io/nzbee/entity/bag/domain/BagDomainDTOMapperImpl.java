@@ -171,7 +171,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 					.findAny();
 
 			BagItemEntity i = obi.orElse(new BagItemEntity());
-			i.setQuantity(bi.getBagItem().getQuantity());
+			i.setQuantity(bi.getBagItem().getQuantity().amount());
 			i.setBag(b);
 			i.setBagItemStatus(bagItemStatusService.findByCode(Constants.bagItemStatusCodeNew)
 					.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.bagItemStatusNotFound, d.getLocale(),
@@ -182,7 +182,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 			i.setProduct(productService.findByCode(bi.getBagItem().getProductUPC().toString())
 					.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, d.getLocale(),
 							bi.getBagItem().getProductUPC().toString())));
-			i.setQuantity(bi.getBagItem().getQuantity());
+			i.setQuantity(bi.getBagItem().getQuantity().amount());
 			i.setBagTotalWeight(bi.getBagItemWeight().amount());
 			i.setBagItemBaseAmount(bi.getBagItem().getBagItemSubTotal().amount());
 			i.setBagItemDiscountAmount(bi.getBagItem().getBagItemDiscountTotal().amount());

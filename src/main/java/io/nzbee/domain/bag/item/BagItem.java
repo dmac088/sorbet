@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import io.nzbee.Constants;
 import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.valueObjects.BagItemStatus;
 import io.nzbee.domain.valueObjects.Money;
 import io.nzbee.domain.valueObjects.ProductUPC;
+import io.nzbee.domain.valueObjects.Quantity;
 
 public class BagItem implements IBagItem {
 
@@ -14,9 +16,9 @@ public class BagItem implements IBagItem {
 	
 	private final ProductUPC productUPC;
 	
-	private Long quantity;
+	private Quantity quantity;
 	
-	private String bagItemStatus;
+	private BagItemStatus bagItemStatus;
 	
 	private final Money markdownPrice;
 	
@@ -25,12 +27,12 @@ public class BagItem implements IBagItem {
 	
 	public BagItem(	Bag bag, 
 					ProductUPC productUPC,
-			  	   	Long quantity,
+			  	   	Quantity quantity,
 			  	   	Money markdownPrice) {
 		this.bag 				= bag;
 		this.productUPC			= productUPC;
 		this.quantity 			= quantity;
-		this.bagItemStatus 		= Constants.bagItemStatusCodeNew;
+		this.bagItemStatus 		= new BagItemStatus(Constants.bagItemStatusCodeNew);
 		this.markdownPrice 		= markdownPrice;
 		this.discounts 			= new ArrayList<IBagItemDiscount>();
 	}
@@ -39,12 +41,12 @@ public class BagItem implements IBagItem {
 		return bag;
 	}
 
-	public Long getQuantity() {
+	public Quantity getQuantity() {
 		return quantity;
 	}
 	
-	public void addToQuantity(Long quantity) {
-		this.quantity += quantity;
+	public void addToQuantity(Quantity quantity) {
+		this.quantity = this.quantity.add(quantity);
 	}
 
 	public ProductUPC getProductUPC() {
@@ -60,7 +62,7 @@ public class BagItem implements IBagItem {
 //		System.out.println(this.markdownPrice.multiply(this.quantity).amount());
 //		System.out.println("markdownPrice = " +  this.markdownPrice.amount());
 //		System.out.println("quantity = " +  this.quantity);
-		return this.markdownPrice.multiply(this.quantity);
+		return this.markdownPrice.multiply(this.quantity.amount());
 	}
 	
 	@Override
@@ -69,14 +71,14 @@ public class BagItem implements IBagItem {
 //		System.out.println(this.markdownPrice.multiply(this.quantity).subtract(this.getBagItemDiscountTotal()).amount());
 //		System.out.println("markdownPrice = " +  this.markdownPrice.amount());
 //		System.out.println("quantity = " +  this.quantity);
-		return this.markdownPrice.multiply(this.quantity).subtract(this.getBagItemDiscountTotal());
+		return this.markdownPrice.multiply(this.quantity.amount()).subtract(this.getBagItemDiscountTotal());
 	}
 	
-	public void setBagItemStatus(String bagItemStatus) {
+	public void setBagItemStatus(BagItemStatus bagItemStatus) {
 		this.bagItemStatus = bagItemStatus;
 	}
 
-	public String getBagItemStatus() {
+	public BagItemStatus getBagItemStatus() {
 		return bagItemStatus;
 	}
 	
@@ -93,6 +95,5 @@ public class BagItem implements IBagItem {
 	public List<IBagItemDiscount> getDiscounts() {
 		return discounts;
 	}
-
 
 }

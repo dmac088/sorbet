@@ -3,6 +3,7 @@ package io.nzbee.domain.promotion.bag;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.nzbee.domain.promotion.bag.item.PromotionBagItem;
 import io.nzbee.domain.valueObjects.CouponCode;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.Quantity;
@@ -21,6 +22,10 @@ public class PromotionBag implements IPromotionBag {
 	private final Quantity quantity;
 	
 	private final int itemCount;
+	
+	private Boolean errors = false;
+	
+	private String error;
 	
 	public PromotionBag(UserName userName, Locale locale, Quantity quantity, int itemCount) {
 		super();
@@ -66,6 +71,26 @@ public class PromotionBag implements IPromotionBag {
 	@Override
 	public int getItemCount() {
 		return itemCount;
+	}
+	
+	@Override
+	public Boolean isErrors() {
+		return errors;
+	}
+
+	@Override
+	public void setErrors(Boolean errors) {
+		this.errors = errors;
+	}
+
+	@Override
+	public String getError() {
+		return error;
+	}
+
+	@Override
+	public void setError(String error) {
+		this.error = error;
 	}
 		
 }

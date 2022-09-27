@@ -4,8 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import io.nzbee.domain.ports.IBagPortService;
-import io.nzbee.domain.promotion.bag.IPromotionBagItem;
 import io.nzbee.domain.promotion.bag.PromotionBag;
+import io.nzbee.domain.promotion.bag.item.IPromotionBagItem;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.UserName;
 

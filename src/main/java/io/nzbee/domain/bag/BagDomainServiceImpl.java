@@ -14,6 +14,7 @@ import io.nzbee.domain.ports.IBagPortService;
 import io.nzbee.domain.valueObjects.CouponCode;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.ProductUPC;
+import io.nzbee.domain.valueObjects.Quantity;
 import io.nzbee.view.bag.item.BagItemViewIn;
 import io.nzbee.view.product.shipping.ShippingItemDTOIn;
 
@@ -84,7 +85,7 @@ public class BagDomainServiceImpl implements IBagDomainService {
     					: domainBagItemService.getNewPhysicalItem(locale, b, dto.getItemUPC(), dto.getItemQty());
     	
     	
-    	b.addItem(bagItem, dto.getItemQty());
+    	b.addItem(bagItem, new Quantity(dto.getItemQty()));
     	
     	domainBagItemService.checkAllBagItemRules(bagItem);
     
@@ -110,16 +111,16 @@ public class BagDomainServiceImpl implements IBagDomainService {
 	}
 
 	@Override
-	public void checkAllBagRules(Bag object) {
+	public void checkAllBagRules(Bag bag) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".checkAllBagRules()");
 		KieSession kieSession = kieContainer.newKieSession();
-    	kieSession.insert(object);
-    	DroolsBagWrapper dpw = new DroolsBagWrapper(object);
+    	kieSession.insert(bag);
+    	DroolsBagWrapper dpw = new DroolsBagWrapper(bag);
     	kieSession.insert(dpw);
     	System.out.println("************* Fire Rules **************");
     	kieSession.fireAllRules();
         System.out.println("************************************");
-        System.out.println("Customer bag\n" + object.getCustomer().getUserName());
+        System.out.println("Customer bag\n" + bag.getCustomer().getUserName());
 	}
 
 

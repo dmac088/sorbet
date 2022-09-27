@@ -1,6 +1,6 @@
 package io.nzbee.domain.bag.item;
 
-import io.nzbee.domain.promotion.bag.IPromotionBagItem;
+import io.nzbee.domain.promotion.bag.item.IPromotionBagItem;
 import io.nzbee.domain.valueObjects.Money;
 
 //remember the BagItemDiscount will not be persisted
