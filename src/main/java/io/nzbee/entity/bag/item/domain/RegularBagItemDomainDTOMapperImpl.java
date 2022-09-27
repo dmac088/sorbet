@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import io.nzbee.Constants;
 import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.bag.item.regular.RegularBagItem;
@@ -45,7 +46,7 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 
 	
 	@Override
-	public RegularBagItem toDo(Bag bag, RegularBagItemDomainDTO dto) {
+	public RegularBagItem toDo(IBag bag, RegularBagItemDomainDTO dto) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".toDo parameters: {}, {}", bag.getCustomer().getUserName(), dto.getProductUPC());
 		return new RegularBagItem(
 						new BagItem(bag, 
@@ -64,7 +65,7 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 
 	
 	@Override
-	public RegularBagItem toDo(Bag bag, RegularBagItemDomainDTO dto, Long quantity) {
+	public RegularBagItem toDo(IBag bag, RegularBagItemDomainDTO dto, Long quantity) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".toDo parameters: {}, {}, {}", bag.getCustomer().getUserName(), dto.getProductUPC());
 		return new RegularBagItem(
 				new BagItem(bag, 

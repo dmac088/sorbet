@@ -18,6 +18,7 @@ import io.nzbee.domain.valueObjects.Money;
 import io.nzbee.domain.valueObjects.ProductUPC;
 import io.nzbee.domain.valueObjects.Quantity;
 import io.nzbee.domain.valueObjects.UserName;
+import io.nzbee.domain.valueObjects.Weight;
 
 public class Bag implements IBag {
 	
@@ -112,14 +113,14 @@ public class Bag implements IBag {
 		return !(this.bagItems.size() == 0);
 	}
 
-	public BigDecimal getTotalWeight() {
+	public Weight getTotalWeight() {
 		BigDecimal sum = BigDecimal.ZERO;
 		if(this.hasRegularItems()) {
 	        for (IRegularBagItem bi : this.getBagItems()) {
 	            sum = sum.add(bi.getBagItemWeight().multiply(bi.getBagItem().getQuantity().amount()));
 	        }
 		}
-		return sum;
+		return new Weight(sum);
 	}
 	
 	public Money getGrandTotalAmount() {

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import io.nzbee.Constants;
 import io.nzbee.ErrorKeys;
-import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.bag.item.shipping.IShippingBagItem;
 import io.nzbee.domain.ports.IShippingBagItemPortService;
 import io.nzbee.domain.valueObjects.Locale;
@@ -29,7 +29,7 @@ public class ShippingBagItemDomainAdapter implements IShippingBagItemPortService
 
 	@Override
 	@Transactional
-	public IShippingBagItem getShippingItem(Bag b, String code, Locale locale) {
+	public IShippingBagItem getShippingItem(IBag b, String code, Locale locale) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getShippingItem with parameters {}, {}, {}", locale.getLocale(), Constants.markdownPriceCode, code);
 		
 		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getShippingItem(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(), Constants.markdownPriceCode, code)

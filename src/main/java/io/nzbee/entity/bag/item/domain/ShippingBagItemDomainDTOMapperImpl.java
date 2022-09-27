@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import io.nzbee.Constants;
 import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.bag.item.shipping.IShippingBagItem;
 import io.nzbee.domain.bag.item.shipping.ShippingBagItem;
@@ -45,7 +46,7 @@ public class ShippingBagItemDomainDTOMapperImpl implements IShippingBagItemDomai
 
 
 	@Override
-	public ShippingBagItem toDo(Bag bag, ShippingBagItemDomainDTO dto, Long quantity) {
+	public ShippingBagItem toDo(IBag bag, ShippingBagItemDomainDTO dto, Long quantity) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".toDo parameters: {}, {}, {}", bag.getCustomer().getUserName(), dto.getProductUPC(), quantity);
 		return new ShippingBagItem(
 				new BagItem(bag, 
@@ -57,7 +58,7 @@ public class ShippingBagItemDomainDTOMapperImpl implements IShippingBagItemDomai
 	
 	
 	@Override
-	public ShippingBagItem toDo(Bag bag, ShippingBagItemDomainDTO dto) {
+	public ShippingBagItem toDo(IBag bag, ShippingBagItemDomainDTO dto) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".DTOToDo parameters: {}, {}, {}", bag.getCustomer().getUserName(), dto.getProductUPC());
 		return new ShippingBagItem(
 				new BagItem(bag, 

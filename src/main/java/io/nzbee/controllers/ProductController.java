@@ -30,9 +30,10 @@ import org.springframework.web.bind.annotation.RestController;
 import io.nzbee.Constants;
 import io.nzbee.ErrorKeys;
 import io.nzbee.Globals;
-import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.bag.IBagDomainService;
 import io.nzbee.domain.valueObjects.Locale;
+import io.nzbee.domain.valueObjects.UserName;
 import io.nzbee.enums.FacetNameEnum;
 import io.nzbee.exceptions.EntityNotFoundException;
 import io.nzbee.exceptions.ImageNotFoundException;
@@ -217,10 +218,10 @@ public class ProductController {
 			@PathVariable String currency, @PathVariable String code, @PathVariable String type, Principal principal) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getByDestinationAndType with parameter {}, {}, {}, {}, {}", locale, currency, code, type, principal.getName());
 		
-		Bag b = bagService.findByCode(Locale.localize(locale, currency), principal.getName());
+		IBag b = bagService.findByCode(Locale.localize(locale, currency), new UserName(principal.getName()));
 
 		ShippingProductResource pr = prodShippingResourceAssembler.toModel(shippingProductViewService
-				.findByDestinationAndTypeAndBagWeight(Locale.localize(locale, currency), code, type, b.getTotalWeight()));
+				.findByDestinationAndTypeAndBagWeight(Locale.localize(locale, currency), code, type, b.getTotalWeight().amount()));
 
 		return new ResponseEntity<>(pr, HttpStatus.OK);
 	}

@@ -14,14 +14,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.bag.IBagDomainService;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
+import io.nzbee.domain.promotion.IPromotionService;
+import io.nzbee.domain.promotion.bag.IPromotionBag;
 import io.nzbee.domain.promotion.dto.coupon.CouponDTO;
 import io.nzbee.domain.services.GenericResponse;
 import io.nzbee.domain.valueObjects.CouponCode;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.ProductUPC;
+import io.nzbee.domain.valueObjects.UserName;
 import io.nzbee.resources.bag.BagResource;
 import io.nzbee.resources.bag.BagResourceAssembler;
 import io.nzbee.resources.bag.item.BagItemResource;
@@ -43,8 +46,8 @@ public class BagController {
 	@Autowired
 	private IBagDomainService domainBagService;
 	
-//    @Autowired
-//    private IRegularBagItemDomainService domainBagItemService;
+    @Autowired
+    private IPromotionService promotionService;
 
 	@Autowired
 	private BagResourceAssembler bagResourceAssembler;
@@ -76,12 +79,17 @@ public class BagController {
 			 @RequestBody CouponDTO dto, Principal principal) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".addCouponToBag");
 
-		//service will take care of everything
-		Bag b = domainBagService.addCouponToBag(Locale.localize(locale, currency), new CouponCode(dto.getCoupon()), principal.getName());
+		//add the coupon to the bag
+		IBag b = domainBagService.addCouponToBag(Locale.localize(locale, currency), new CouponCode(dto.getCoupon()), new UserName(principal.getName()));
 		
 		if(!b.hasIssues()) {
 			domainBagService.save(b);
 		}
+		
+		//get the promotion bag
+		IPromotionBag pb = promotionService.find(Locale.localize(locale, currency), new UserName(principal.getName()));
+		
+		promotionService.applyAll(pb);
 
 		BagView bv = viewBagService.findByCode(Locale.localize(locale, currency), principal.getName());
 
@@ -108,7 +116,7 @@ public class BagController {
 				currency, dto.getItemUPC(), dto.getItemQty());
 		
 		// add the BagItem to the Bag
-		Bag b = domainBagService.addPhysicalItem(Locale.localize(locale, currency), dto, principal.getName());
+		IBag b = domainBagService.addPhysicalItem(Locale.localize(locale, currency), dto, new UserName(principal.getName()));
 
 		//if there are no issues then save the bag
 		if(!b.hasIssues()) {
@@ -128,7 +136,7 @@ public class BagController {
 				currency, dto.getShippingProductCode());
 		
 		// persist the domain BagItem to the Bag
-		Bag b = domainBagService.addShippingItem(Locale.localize(locale, currency), dto, principal.getName());
+		IBag b = domainBagService.addShippingItem(Locale.localize(locale, currency), dto, new UserName(principal.getName()));
 		
 		domainBagService.checkAllBagRules(b);
 		
@@ -151,7 +159,7 @@ public class BagController {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".removeItemFromBag for parameters {}, {}, {} ", locale,
 				currency, itemCode);
 		// here we get the bag and bagItems but the products are null
-		Bag b = domainBagService.findByCode(Locale.localize(locale, currency), principal.getName());
+		IBag b = domainBagService.findByCode(Locale.localize(locale, currency), new UserName(principal.getName()));
 		
 		domainBagService.checkAllBagRules(b);
 		

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import io.nzbee.Constants;
 import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.valueObjects.BagItemStatus;
 import io.nzbee.domain.valueObjects.Money;
 import io.nzbee.domain.valueObjects.ProductUPC;
@@ -12,7 +13,7 @@ import io.nzbee.domain.valueObjects.Quantity;
 
 public class BagItem implements IBagItem {
 
-	private Bag bag;
+	private IBag bag;
 	
 	private final ProductUPC productUPC;
 	
@@ -25,7 +26,7 @@ public class BagItem implements IBagItem {
 	private final List<IBagItemDiscount> discounts;
 
 	
-	public BagItem(	Bag bag, 
+	public BagItem(	IBag bag, 
 					ProductUPC productUPC,
 			  	   	Quantity quantity,
 			  	   	Money markdownPrice) {
@@ -37,7 +38,7 @@ public class BagItem implements IBagItem {
 		this.discounts 			= new ArrayList<IBagItemDiscount>();
 	}
 
-	public Bag getBag() {
+	public IBag getBag() {
 		return bag;
 	}
 
@@ -85,7 +86,7 @@ public class BagItem implements IBagItem {
 	@Override
 	public Money getBagItemDiscountTotal() {
 		BigDecimal b = this.getDiscounts().stream().map(d -> d.getDiscountAmount().amount()).reduce(BigDecimal.ZERO, BigDecimal::add);
-		return bag.getMoney().add(new Money(b, bag.getLocale().getCurrency(), Constants.defaultMoneyRounding));
+		return new Money();//bag.getMoney().add(new Money(b, bag.getLocale().getCurrency(), Constants.defaultMoneyRounding));
 	}
 	
 	public void addDiscount(IBagItemDiscount discount) {

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import io.nzbee.Constants;
 import io.nzbee.ErrorKeys;
 import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.bag.item.shipping.IShippingBagItem;
 import io.nzbee.domain.customer.Customer;
@@ -126,7 +127,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 	}
 
 	@Override
-	public BagEntity toEntity(Bag d) {
+	public BagEntity toEntity(IBag d) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".toEntity()");
 
 		// get the bag, status, and customer from the database

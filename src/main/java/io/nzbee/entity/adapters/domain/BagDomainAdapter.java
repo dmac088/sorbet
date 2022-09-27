@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import io.nzbee.ErrorKeys;
 import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.ports.IBagPortService;
+import io.nzbee.domain.promotion.bag.IPromotionBag;
 import io.nzbee.domain.promotion.bag.PromotionBag;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.UserName;
@@ -40,21 +42,29 @@ public class BagDomainAdapter implements IBagPortService {
 	
 	
 	@Override
-	public Bag findByCode(Locale locale, String userName) {
+	public IBag findBagByCode(Locale locale, UserName userName) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode with parameter {}, {}, {}", locale.getLocale(), locale.getCurrency().getCurrencyCode(), userName);
 		
-		Optional<BagDomainDTO> ob = bagService.findByCode(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(), userName);
+		Optional<BagDomainDTO> ob = bagService.findByCode(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(), userName.toString());
 
 		//if there is no current bag, get a new one
-		BagDomainDTO b = ob.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.customerNotFound, locale, userName));
+		BagDomainDTO b = ob.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.customerNotFound, locale, userName.toString()));
 	
 		//map the bag to a domain object
 		return bagMapper.toDo(b);
 	}
 	
 	@Override
+	public IPromotionBag findPromotionBagByCode(Locale locale, UserName userName) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".getPromotionItems() with parameter {}, {}, {}", locale, userName);
+		PromotionBagDomainDTO pb = promotionBagService.findByCode(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(), userName.toString())
+				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.bagNotFound, locale, userName.toString()));
+		return promotionBagMapper.toDo(pb);
+	}
+	
+	@Override
 	@Transactional
-	public void save(Bag domainObject) {
+	public void save(IBag domainObject) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".save()");
 		
 		BagEntity b = bagMapper.toEntity(domainObject);
@@ -62,12 +72,6 @@ public class BagDomainAdapter implements IBagPortService {
 		bagService.save(b);
 	}
 	
-	@Override
-	public PromotionBag findByCode(Locale locale, UserName userName) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".getPromotionItems() with parameter {}, {}, {}", locale, userName);
-		PromotionBagDomainDTO pb = promotionBagService.findByCode(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(), userName.toString())
-				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.bagNotFound, locale, userName.toString()));
-		return promotionBagMapper.toDo(pb);
-	}
+
 
 }
