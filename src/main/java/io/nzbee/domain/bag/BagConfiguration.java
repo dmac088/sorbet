@@ -12,9 +12,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BagConfiguration {
 
-	private static final String drlFile = "rules/bagRules.drl";
+	private static final String drlFile = "rules/promotionRules.drl";
     
-    @Bean(name = "bagRulesContainer")
+    @Bean(name = "promotionRulesContainer")
     public KieContainer kieContainer() {
         KieServices kieServices = KieServices.Factory.get();
  

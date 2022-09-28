@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import io.nzbee.ErrorKeys;
 import io.nzbee.domain.promotion.bag.PromotionBag;
-import io.nzbee.domain.promotion.bag.item.PromotionBagItem;
+import io.nzbee.domain.promotion.bag.item.IPromotionBagItem;
 import io.nzbee.domain.valueObjects.CouponCode;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.ProductUPC;
@@ -57,7 +57,7 @@ public class PromotionBagDomainDTOMapperImpl implements IPromotionBagDomainDTOMa
 				() -> new EntityNotFoundException(ErrorKeys.bagNotFound, d.getLocale(), d.getUserName().toString()));
 		
 		be.getBagItems().stream().forEach(i -> {
-			Optional<PromotionBagItem> opi = d.getPromotionItems().stream().filter(pi ->  pi.getItemUPC().sameAs(new ProductUPC(i.getProduct().getUPC()))).findAny();
+			Optional<IPromotionBagItem> opi = d.getPromotionItems().stream().filter(pi ->  pi.getItemUPC().sameAs(new ProductUPC(i.getProduct().getUPC()))).findAny();
 			if(opi.isPresent()) {
 				//we only update the line item discount amount
 				i.setBagItemDiscountAmount(opi.get().getDiscountAmount().amount());

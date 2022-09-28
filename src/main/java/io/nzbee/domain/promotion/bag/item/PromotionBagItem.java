@@ -34,14 +34,14 @@ public class PromotionBagItem implements IPromotionBagItem {
 	private final BagItemStatus bagItemStatus;
 
 	private final Money itemPrice;
-
-	private final Money totalAmount;
 	
 	private Money discountAmount;
 	
+	private List<IPromotionDiscountItem> discountItems;
+	
 	
 	public PromotionBagItem(IPromotionBag bag, CustomerID customerID, BagID bagID, Long numberOfOrders, ProductUPC itemUPC, Quantity quantity,
-			BrandCode brandCode, List<CategoryCode> categoryCodes, Currency currency, Money itemPrice, Money totalAmount, BagItemStatus bagItemStatus) {
+			BrandCode brandCode, List<CategoryCode> categoryCodes, Currency currency, Money itemPrice, BagItemStatus bagItemStatus) {
 		super();
 		this.bag = bag;
 		this.customerID = customerID;
@@ -52,7 +52,6 @@ public class PromotionBagItem implements IPromotionBagItem {
 		this.brandCode = brandCode;
 		this.categoryCodes = categoryCodes;
 		this.itemPrice = itemPrice;
-		this.totalAmount = totalAmount;
 		this.discountAmount = new Money();
 		this.bagItemStatus = bagItemStatus;
 	}
@@ -93,7 +92,7 @@ public class PromotionBagItem implements IPromotionBagItem {
 	
 	@Override
 	public Money getTotalAmount() {
-		return this.totalAmount;
+		return this.itemPrice.multiply(this.quantity.amount());
 	}
 
 	@Override
@@ -114,6 +113,11 @@ public class PromotionBagItem implements IPromotionBagItem {
 	@Override
 	public BagItemStatus getBagItemStatus() {
 		return bagItemStatus;
+	}
+	
+	@Override
+	public void addDiscountItem(IPromotionDiscountItem discountItem) {
+		this.discountItems.add(discountItem);
 	}
 
 }
