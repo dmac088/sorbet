@@ -1,26 +1,28 @@
-import io.nzbee.domain.promotion.bag.Bag;
-import io.nzbee.domain.promotion.bag.item.PromotionBagItem;
 import io.nzbee.domain.promotion.bag.item.PromotionDiscountItem;
-import io.nzbee.domain.promotion.bag.item.DroolsPromotionBagItemWrapper;
+import io.nzbee.domain.promotion.bag.DroolsPromotionBagItemWrapper;
+import io.nzbee.domain.valueObjects.PromotionCode;
+import io.nzbee.domain.valueObjects.Money;
 import java.util.List;
+import java.math.BigDecimal;
 import org.apache.tomcat.util.buf.StringUtils;
 
 dialect "mvel"
 
 rule "Buy 2 get 1 free"
 when 
-$bagItem : DroolsPromotionBagItemWrapper(isInStock() && bagItemQuantity >= 2 && promotionCodes.contains("B2G50"))
+$bagItem : DroolsPromotionBagItemWrapper(getBagItemQuantity() >= 2 && getCouponCodes().contains("B2G50"))
 then  
-System.out.println("promotion codes = " + StringUtils.join($bagItem.getPromotionCodes()));
 System.out.println("current quantity = " + $bagItem.getBagItemQuantity());
+System.out.println("current price = " + $bagItem.getBagItemPrice());
 System.out.println("promotion = \"Buy 2 get 50% off\"");
-System.out.println("total line amount = " + $bagItem.getBagItemQuantity() * $bagItem.getMarkdownPrice());
-Double discAmt = new Double((Math.floor($bagItem.getBagItemQuantity() / 2) * $bagItem.getMarkdownPrice()));
+System.out.println("total line amount = " + $bagItem.getBagItemQuantity() * $bagItem.getBagItemPrice().doubleValue());
+Double discAmt = new Double((Math.floor($bagItem.getBagItemQuantity() / 2) * $bagItem.getBagItemPrice().doubleValue()));
 System.out.println("discount amount is = " + discAmt);
-Discount discount = new Discount($bagItem.getBagItem(), $bagItem.getPromotion("B2G50"), discAmt);
-$bagItem.addDiscount(discount);
+PromotionDiscountItem discount = new PromotionDiscountItem($bagItem.getPromotionBagItem(), new PromotionCode("B2G50"), new Money(discAmt, $bagItem.getCurrency()));
+$bagItem.getPromotionBagItem().addDiscountItem(discount);
 end
 
+/*
 rule "Buy 3 get 1 free"
 when 
 $bagItem : DroolsPromotionBagItemWrapper(isInStock() && promotionCodes.contains("B3G33") && bagItemQuantity >= 2)
@@ -39,3 +41,4 @@ rule "If spend over $500 then 10% off"
 when 
 then
 end
+*/

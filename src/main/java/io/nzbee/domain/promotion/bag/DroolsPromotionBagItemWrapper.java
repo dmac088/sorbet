@@ -1,17 +1,16 @@
 package io.nzbee.domain.promotion.bag;
 
 import java.math.BigDecimal;
+import java.util.Currency;
 import java.util.List;
 import java.util.stream.Collectors;
 import io.nzbee.domain.promotion.bag.item.IPromotionBagItem;
-import io.nzbee.domain.valueObjects.Money;
-import io.nzbee.domain.valueObjects.Quantity;
 
-public class DroolsPromotionBagItemWrapper {
+public class DroolsPromotionBagItemWrapper implements IDroolsPromotionBagItemWrapper {
 	
-	private IPromotionBag bag;
+	private final IPromotionBag bag;
 	
-	private IPromotionBagItem bagItem;
+	private final IPromotionBagItem bagItem;
 	
 	public DroolsPromotionBagItemWrapper(IPromotionBagItem bagItem) {
 		this.bag = bagItem.getBag();
@@ -22,12 +21,12 @@ public class DroolsPromotionBagItemWrapper {
 		return bag.getItemCount();
 	}
 	
-	public Quantity getTotalBagQuantity() {
-		return bag.getQuantity();
+	public int getTotalBagQuantity() {
+		return bag.getQuantity().amount().intValue();
 	}
 	
-	public Money getTotalBagAmount() {
-		return bag.getTotalAmount();
+	public BigDecimal getTotalBagAmount() {
+		return bag.getTotalAmount().amount();
 	}
 
 	public int getBagItemQuantity() {
@@ -52,6 +51,14 @@ public class DroolsPromotionBagItemWrapper {
 	
 	public List<String> getCouponCodes() {
 		return this.bag.getCoupons().stream().map(c -> c.toString()).collect(Collectors.toList());
+	}
+
+	public IPromotionBagItem getPromotionBagItem() {
+		return bagItem;
+	}
+	
+	public Currency getCurrency() {
+		return this.bag.getLocale().getCurrency();
 	}
 	
 }

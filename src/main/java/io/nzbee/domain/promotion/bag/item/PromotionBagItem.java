@@ -89,7 +89,6 @@ public class PromotionBagItem implements IPromotionBagItem {
 		this.discountAmount.add(discount);
 	}
 	
-	
 	@Override
 	public Money getTotalAmount() {
 		return this.itemPrice.multiply(this.quantity.amount());

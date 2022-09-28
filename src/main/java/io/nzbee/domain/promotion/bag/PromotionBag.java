@@ -63,6 +63,7 @@ public class PromotionBag implements IPromotionBag {
 		return userName;
 	}
 
+	@Override
 	public Locale getLocale() {
 		return locale;
 	}

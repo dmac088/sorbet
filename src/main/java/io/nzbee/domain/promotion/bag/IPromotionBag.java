@@ -4,6 +4,7 @@ import java.util.List;
 
 import io.nzbee.domain.promotion.bag.item.IPromotionBagItem;
 import io.nzbee.domain.valueObjects.CouponCode;
+import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.Money;
 import io.nzbee.domain.valueObjects.Quantity;
 import io.nzbee.domain.valueObjects.UserName;
@@ -31,5 +32,7 @@ public interface IPromotionBag {
 	Money getTotalAmount();
 
 	List<CouponCode> getCoupons();
+
+	Locale getLocale();
 
 }
