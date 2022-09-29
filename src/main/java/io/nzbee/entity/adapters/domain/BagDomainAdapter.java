@@ -69,6 +69,15 @@ public class BagDomainAdapter implements IBagPortService {
 		
 		bagService.save(b);
 	}
+
+	@Override
+	public void save(IPromotionBag pb) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".save()");
+		
+		BagEntity b = bagMapper.toEntity(pb);
+		
+		bagService.save(b);
+	}
 	
 
 

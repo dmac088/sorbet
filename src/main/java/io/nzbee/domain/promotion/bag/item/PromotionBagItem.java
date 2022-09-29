@@ -2,7 +2,6 @@ package io.nzbee.domain.promotion.bag.item;
 
 import java.util.Currency;
 import java.util.List;
-
 import io.nzbee.domain.promotion.bag.IPromotionBag;
 import io.nzbee.domain.valueObjects.BagID;
 import io.nzbee.domain.valueObjects.BagItemStatus;
@@ -21,8 +20,6 @@ public class PromotionBagItem implements IPromotionBagItem {
 	
 	private final BagID bagID;
 	
-	private final Long numberOfOrders;
-	
 	private final ProductUPC itemUPC;
 	
 	private final Quantity quantity;
@@ -37,24 +34,22 @@ public class PromotionBagItem implements IPromotionBagItem {
 	
 	private Money discountAmount;
 	
-	private List<IPromotionDiscountItem> discountItems;
 	
-	
-	public PromotionBagItem(IPromotionBag bag, CustomerID customerID, BagID bagID, Long numberOfOrders, ProductUPC itemUPC, Quantity quantity,
+	public PromotionBagItem(IPromotionBag bag, CustomerID customerID, BagID bagID, ProductUPC itemUPC, Quantity quantity,
 			BrandCode brandCode, List<CategoryCode> categoryCodes, Currency currency, Money itemPrice, BagItemStatus bagItemStatus) {
 		super();
 		this.bag = bag;
 		this.customerID = customerID;
 		this.bagID = bagID;
-		this.numberOfOrders = numberOfOrders;
 		this.itemUPC = itemUPC;
 		this.quantity = quantity;
 		this.brandCode = brandCode;
 		this.categoryCodes = categoryCodes;
 		this.itemPrice = itemPrice;
-		this.discountAmount = new Money();
+		this.discountAmount = this.bag.getMoney();
 		this.bagItemStatus = bagItemStatus;
 	}
+
 
 	public CustomerID getCustomerID() {
 		return customerID;
@@ -62,10 +57,6 @@ public class PromotionBagItem implements IPromotionBagItem {
 
 	public BagID getBagID() {
 		return bagID;
-	}
-
-	public Long getNumberOfOrders() {
-		return numberOfOrders;
 	}
 
 	public ProductUPC getItemUPC() {
@@ -111,12 +102,8 @@ public class PromotionBagItem implements IPromotionBagItem {
 
 	@Override
 	public BagItemStatus getBagItemStatus() {
-		return bagItemStatus;
+		return this.bagItemStatus;
 	}
 	
-	@Override
-	public void addDiscountItem(IPromotionDiscountItem discountItem) {
-		this.discountItems.add(discountItem);
-	}
 
 }

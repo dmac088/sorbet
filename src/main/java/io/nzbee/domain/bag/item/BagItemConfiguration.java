@@ -15,7 +15,7 @@ public class BagItemConfiguration {
 	private static final String drlFile = "rules/bagItemRules.drl";
     
     @Bean(name = "bagItemRulesContainer")
-    public KieContainer kieContainer() {
+    KieContainer kieContainer() {
         KieServices kieServices = KieServices.Factory.get();
  
         KieFileSystem kieFileSystem = kieServices.newKieFileSystem();

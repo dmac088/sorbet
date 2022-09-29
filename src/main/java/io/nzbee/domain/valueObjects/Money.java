@@ -67,7 +67,7 @@ public class Money {
 		assertSameCurrencyAs(other);
 		return newMoney(amount + other.amount);
 	}
-
+	
 	private void assertSameCurrencyAs(Money arg) {
 		Assert.assertEquals("money math mismatch", currency, arg.currency);
 	}

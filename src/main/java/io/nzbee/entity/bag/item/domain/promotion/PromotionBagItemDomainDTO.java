@@ -29,10 +29,6 @@ public class PromotionBagItemDomainDTO {
 
 	public static final String CURRENCY_CODES_ALIAS = "curr";
 	
-	public static final String BASE_TOTAL_ALIAS = "base_amt";
-	
-	
-
 	
 	private final String productUPC;
 
@@ -54,9 +50,6 @@ public class PromotionBagItemDomainDTO {
 	
 	private final List<String> categoryCodes;
 
-	private final BigDecimal baseTotal;
-	
-	
 
 	public PromotionBagItemDomainDTO(Object[] tuple, Map<String, Integer> aliasToIndexMap) {
 		this.bagItemStatus = tuple[aliasToIndexMap.get(BAG_ITEM_STATUS_CODE_ALIAS)].toString();
@@ -69,7 +62,7 @@ public class PromotionBagItemDomainDTO {
 		this.inStock = ((Boolean) tuple[aliasToIndexMap.get(BAG_ITEM_INSTOCK_ALIAS)]);
 		this.brandCode = tuple[aliasToIndexMap.get(BRAND_CODE_ALIAS)].toString();
 		this.categoryCodes = Arrays.asList(tuple[aliasToIndexMap.get(CATEGORY_CODES_ALIAS)].toString().split(","));
-		this.baseTotal = ((BigDecimal) tuple[aliasToIndexMap.get(BASE_TOTAL_ALIAS)]);
+		//this.baseTotal = ((BigDecimal) tuple[aliasToIndexMap.get(BASE_TOTAL_ALIAS)]);
 	}
 
 	public String getProductUPC() {
@@ -111,9 +104,6 @@ public class PromotionBagItemDomainDTO {
 	public List<String> getCategoryCodes() {
 		return categoryCodes;
 	}
-
-	public BigDecimal getBaseTotal() {
-		return baseTotal;
-	}
+	
 
 }

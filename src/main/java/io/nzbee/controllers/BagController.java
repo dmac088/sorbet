@@ -82,7 +82,7 @@ public class BagController {
 		//add the coupon to the bag
 		IBag b = domainBagService.addCouponToBag(Locale.localize(locale, currency), new CouponCode(dto.getCoupon()), new UserName(principal.getName()));
 		
-		if(!b.hasIssues()) {
+		if(!b.isErrors()) {
 			domainBagService.save(b);
 		}
 		
@@ -90,6 +90,15 @@ public class BagController {
 		IPromotionBag pb = promotionService.find(Locale.localize(locale, currency), new UserName(principal.getName()));
 		
 		promotionService.applyAll(pb);
+		
+		pb.getBagItems().forEach(i -> {
+			LOGGER.debug(i.getDiscountAmount().amount().toString());
+		});
+		
+		if(!pb.isErrors()) {
+			LOGGER.debug("no bag issues found!");
+			promotionService.save(pb);
+		}
 
 		BagView bv = viewBagService.findByCode(Locale.localize(locale, currency), principal.getName());
 

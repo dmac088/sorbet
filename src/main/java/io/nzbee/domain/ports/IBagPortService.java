@@ -13,5 +13,7 @@ public interface IBagPortService  extends IDomainPortService<Bag> {
 	IPromotionBag findPromotionBagByCode(Locale locale, UserName userName);
 
 	void save(IBag object);
+
+	void save(IPromotionBag pb);
 	
 }

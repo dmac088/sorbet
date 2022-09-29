@@ -4,9 +4,15 @@ import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import io.nzbee.Constants;
 import io.nzbee.domain.promotion.bag.item.IPromotionBagItem;
+import io.nzbee.domain.valueObjects.Money;
 
 public class DroolsPromotionBagItemWrapper implements IDroolsPromotionBagItemWrapper {
+	
+	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 	
 	private final IPromotionBag bag;
 	
@@ -60,5 +66,12 @@ public class DroolsPromotionBagItemWrapper implements IDroolsPromotionBagItemWra
 	public Currency getCurrency() {
 		return this.bag.getLocale().getCurrency();
 	}
+	
+	public void addDiscount(BigDecimal discount) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".addDiscount() with parameter: {}", discount);
+		Money md = new Money(discount, this.getCurrency(), Constants.defaultMoneyRounding);
+		this.bagItem.addDiscount(md);
+	}
+	
 	
 }

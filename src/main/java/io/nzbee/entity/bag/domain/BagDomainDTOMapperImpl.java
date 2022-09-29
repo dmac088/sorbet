@@ -16,6 +16,8 @@ import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.bag.item.shipping.IShippingBagItem;
 import io.nzbee.domain.customer.Customer;
+import io.nzbee.domain.promotion.bag.IPromotionBag;
+import io.nzbee.domain.promotion.bag.item.IPromotionBagItem;
 import io.nzbee.domain.valueObjects.CouponCode;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.ProductUPC;
@@ -154,7 +156,6 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 			
 			if(!(obi.isPresent())) { 
 				eitr.remove();
-				//b.getBagItems().remove(nxt);
 			}
 		}
 		
@@ -214,10 +215,43 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 				b.getCouponCodes().add(c.toString());
 			}
 		});
+		
 		// set the customer of the bag
 		b.setParty(op.get().getPersonParty());
 
 		// persist the bags
+		return b;
+	}
+
+	@Override
+	public BagEntity toEntity(IPromotionBag pb) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".toEntity()");
+		
+		Optional<BagEntity> obe = bagService.findByCode(pb.getUserName().toString());
+		
+		BagEntity nbe = new BagEntity();
+		nbe.setBagCreatedDateTime(LocalDateTime.now());
+		nbe.setBagUpdatedDateTime(LocalDateTime.now());
+		
+		BagEntity b = obe.orElse(nbe);
+		
+		Iterator<IPromotionBagItem> diter = pb.getBagItems().iterator();
+		
+		while(diter.hasNext()) {
+			
+			IPromotionBagItem bi = diter.next();
+			
+			Optional<BagItemEntity> obi = b.getBagItems().stream()
+					.filter(i -> new ProductUPC(i.getProduct().getProductUPC()).sameAs(bi.getItemUPC()))
+					.findAny();
+			
+			BagItemEntity i = obi.get();
+			
+			//update the discount amount
+			LOGGER.debug("adding discount amount " + bi.getDiscountAmount().amount());
+			i.setBagItemDiscountAmount(bi.getDiscountAmount().amount());
+			
+		};
 		return b;
 	}
 

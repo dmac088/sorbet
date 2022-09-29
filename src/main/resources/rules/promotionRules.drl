@@ -18,8 +18,7 @@ System.out.println("promotion = \"Buy 2 get 50% off\"");
 System.out.println("total line amount = " + $bagItem.getBagItemQuantity() * $bagItem.getBagItemPrice().doubleValue());
 Double discAmt = new Double((Math.floor($bagItem.getBagItemQuantity() / 2) * $bagItem.getBagItemPrice().doubleValue()));
 System.out.println("discount amount is = " + discAmt);
-PromotionDiscountItem discount = new PromotionDiscountItem($bagItem.getPromotionBagItem(), new PromotionCode("B2G50"), new Money(discAmt, $bagItem.getCurrency()));
-$bagItem.getPromotionBagItem().addDiscountItem(discount);
+$bagItem.addDiscount(discAmt);
 end
 
 /*

@@ -38,7 +38,7 @@ public class PromotionBagDomainDTOMapperImpl implements IPromotionBagDomainDTOMa
 
 		//add the items to PromotionBag one by one
 		dto.getPromotionBagItems().stream().forEach(i -> {
-			pb.addPromotionItem(bagItemMapper.toDo(i));
+			pb.addPromotionItem(bagItemMapper.toDo(pb, i));
 		});
 		
 		//add the coupons to the PromotionBag one by one

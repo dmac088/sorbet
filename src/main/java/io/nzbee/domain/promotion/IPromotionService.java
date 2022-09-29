@@ -9,5 +9,7 @@ public interface IPromotionService  {
 	void applyAll(IPromotionBag pb);
 
 	IPromotionBag find(Locale locale, UserName userName);
+
+	void save(IPromotionBag pb);
 	
 }

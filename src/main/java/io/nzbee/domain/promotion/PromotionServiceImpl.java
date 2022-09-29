@@ -33,7 +33,6 @@ public class PromotionServiceImpl implements IPromotionService {
 	    	System.out.println("************* Fire Rules **************");
 	    	kieSession.fireAllRules();
 	        System.out.println("************************************");
-	        System.out.println("Customer bag\n" + bag.getUserName());	
 		});	
 	}
 	
@@ -41,6 +40,12 @@ public class PromotionServiceImpl implements IPromotionService {
 	public IPromotionBag find(Locale locale, UserName userName) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findAll with parameters {}, {}", locale.getLocale().toLanguageTag(), userName);
 		return bagAdapter.findPromotionBagByCode(locale, userName);
+	}
+
+	@Override
+	public void save(IPromotionBag pb) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".save()");
+		bagAdapter.save(pb);
 	}
 	
 }

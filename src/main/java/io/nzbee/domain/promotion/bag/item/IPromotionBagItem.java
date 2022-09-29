@@ -32,7 +32,5 @@ public interface IPromotionBagItem {
 
 	BagItemStatus getBagItemStatus();
 
-	void addDiscountItem(IPromotionDiscountItem discountItem);
-
 
 }
