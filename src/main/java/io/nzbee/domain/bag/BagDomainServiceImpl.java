@@ -1,7 +1,6 @@
 package io.nzbee.domain.bag;
 
 import org.kie.api.runtime.KieContainer;
-import org.kie.api.runtime.KieSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,9 +85,6 @@ public class BagDomainServiceImpl implements IBagDomainService {
     	
     	b.addItem(bagItem, new Quantity(dto.getItemQty()));
     	
-    	//check the bag rules
-    	this.checkAllBagRules(bagItem.getBag());
-    	
     	domainBagItemService.checkAllBagItemRules(bagItem);
     
      	if(bagItem.getBagItem().getBag().isErrors()) {
@@ -112,20 +108,7 @@ public class BagDomainServiceImpl implements IBagDomainService {
 		bagService.save(object);
 	}
 
-	@Override
-	public void checkAllBagRules(IBag bag) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".checkAllBagRules()");
-		KieSession kieSession = kieContainer.newKieSession();
-    	kieSession.insert(bag);
-    	DroolsBagWrapper dpw = new DroolsBagWrapper(bag);
-    	kieSession.insert(dpw);
-    	System.out.println("************* Fire Rules **************");
-    	kieSession.fireAllRules();
-        System.out.println("************************************");
-        System.out.println("Customer bag\n" + bag.getCustomer().getUserName());
-	}
-
-
+	
 
 
 }

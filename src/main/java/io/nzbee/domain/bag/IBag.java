@@ -21,8 +21,6 @@ public interface IBag {
 
 	List<IRegularBagItem> getBagItems();
 
-	Long getTotalQuantity();
-
 	ICustomer getCustomer();
 
 	void logItemError(String key, IBagItem bagItem);
@@ -34,10 +32,6 @@ public interface IBag {
 	String getError();
 
 	Boolean isErrors();
-
-	int getTotalItems();
-
-	Money getSubTotalAmount();
 
 	Boolean hasIssues();
 
@@ -62,5 +56,7 @@ public interface IBag {
 	void addItem(IRegularBagItem bagItem, Quantity quantity);
 
 	Money getMoney();
+
+	Long getTotalQuantity();
 
 }

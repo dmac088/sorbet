@@ -16,10 +16,6 @@ public class DroolsBagItemWrapper {
 		return this.bagItem.getBagItem().getQuantity().amount();
 	}
 	
-	public int getBagQuantity() {
-		return this.bagItem.getBagItem().getBag().getTotalQuantity().intValue();
-	}
-	
 	public BigDecimal getMarkdownPrice() {
 		return this.bagItem.getBagItem().getMarkdownPrice().amount();
 	}
@@ -54,10 +50,6 @@ public class DroolsBagItemWrapper {
 	
 	public String getCustomerId() {
 		return bagItem.getBagItem().getBag().getCustomer().getCustomerID();
-	}
-	
-	public void addDiscount(BagItemDiscount discount) {
-		this.bagItem.getBagItem().addDiscount(discount);
 	}
 	
 	public void logItemError(String key, IBagItem bagItem) {

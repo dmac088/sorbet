@@ -39,10 +39,6 @@ public class PromotionBag implements IPromotionBag {
 		this.itemCount = itemCount;
 	}
 
-	public List<IPromotionBagItem> getPromotionItems() {
-		return promotionItems;
-	}
-	
 	public void addPromotionItem(IPromotionBagItem promotionItem) {
 		this.promotionItems.add(promotionItem);
 	}

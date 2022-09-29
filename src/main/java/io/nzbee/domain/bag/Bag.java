@@ -123,27 +123,6 @@ public class Bag implements IBag {
 		return new Weight(sum);
 	}
 	
-	public Money getGrandTotalAmount() {
-		Money sum = this.getMoney();
-        for (IRegularBagItem bi : this.getBagItems()) {
-            sum = sum.add(bi.getBagItem().getBagItemTotal());
-        }
-        if(hasShippingItem()) {
-        	System.out.println("the bag has a shipping item");
-        	System.out.println("the amount is: " + shippingItem.getBagItem().getBagItemTotal());
-        	sum = sum.add(shippingItem.getBagItem().getBagItemTotal());
-        }
-		return sum;
-	}
-	
-	public Money getSubTotalAmount() {
-		Money sum = this.getMoney();
-        for (IRegularBagItem bi : this.getBagItems()) {
-            sum = sum.add(bi.getBagItem().getBagItemTotal());
-        }
-		return sum;
-	}
-	
 	@Override
 	public void logItemError(String key, IBagItem bagItem) {
 		bagIssues.logItemError(key, bagItem);

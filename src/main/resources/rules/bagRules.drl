@@ -1,7 +1,5 @@
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.item.BagItem;
-import io.nzbee.domain.bag.item.BagItemDiscount;
-import io.nzbee.domain.bag.DroolsBagWrapper;
 import java.util.List;
 import org.apache.tomcat.util.buf.StringUtils;
 

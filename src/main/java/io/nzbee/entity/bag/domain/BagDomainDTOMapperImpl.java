@@ -186,9 +186,6 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 							bi.getBagItem().getProductUPC().toString())));
 			i.setQuantity(bi.getBagItem().getQuantity().amount());
 			i.setBagTotalWeight(bi.getBagItemWeight().amount());
-			i.setBagItemBaseAmount(bi.getBagItem().getBagItemSubTotal().amount());
-			i.setBagItemDiscountAmount(bi.getBagItem().getBagItemDiscountTotal().amount());
-			i.setBagItemTotalAmount(bi.getBagItem().getBagItemTotal().amount());
 			b.addItem(i);
 		};
 

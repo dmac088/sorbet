@@ -33,7 +33,7 @@ public class PromotionServiceImpl implements IPromotionService {
 	    	System.out.println("************* Fire Rules **************");
 	    	kieSession.fireAllRules();
 	        System.out.println("************************************");
-		});	
+		});
 	}
 	
 	@Override

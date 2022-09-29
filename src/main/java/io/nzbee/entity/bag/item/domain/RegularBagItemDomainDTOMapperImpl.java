@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import io.nzbee.Constants;
-import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.bag.item.BagItem;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
@@ -90,9 +89,6 @@ public class RegularBagItemDomainDTOMapperImpl implements IRegularBagItemDomainD
 		bi.setBagItemStatus(obis.get());
 		bi.setBagItemType(obit.get());
 		bi.setQuantity(d.getBagItem().getQuantity().amount());
-		bi.setBagItemBaseAmount(d.getBagItem().getBagItemSubTotal().amount());
-		bi.setBagItemDiscountAmount(d.getBagItem().getBagItemDiscountTotal().amount());
-		bi.setBagItemTotalAmount(d.getBagItem().getBagItemTotal().amount());
 		bi.setBagTotalWeight(d.getBagItemWeight().amount());
 		return bi;
 	}

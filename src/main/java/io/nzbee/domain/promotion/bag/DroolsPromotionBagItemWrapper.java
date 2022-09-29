@@ -70,6 +70,7 @@ public class DroolsPromotionBagItemWrapper implements IDroolsPromotionBagItemWra
 	public void addDiscount(BigDecimal discount) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".addDiscount() with parameter: {}", discount);
 		Money md = new Money(discount, this.getCurrency(), Constants.defaultMoneyRounding);
+		LOGGER.debug("created new Money() with amount: {}", md.amount());
 		this.bagItem.addDiscount(md);
 	}
 	

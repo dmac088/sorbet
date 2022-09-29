@@ -77,12 +77,13 @@ public class PromotionBagItem implements IPromotionBagItem {
 	
 	@Override
 	public void addDiscount(Money discount) {
-		this.discountAmount.add(discount);
+		System.out.println("adding discount amount: " + discount.amount());
+		this.discountAmount = this.discountAmount.add(discount);
 	}
 	
 	@Override
 	public Money getTotalAmount() {
-		return this.itemPrice.multiply(this.quantity.amount());
+		return this.itemPrice.multiply(this.quantity.amount()).subtract(discountAmount);
 	}
 
 	@Override

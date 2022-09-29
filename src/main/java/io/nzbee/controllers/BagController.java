@@ -132,6 +132,15 @@ public class BagController {
 			domainBagService.save(b);
 		}
 		
+		//get the promotion bag
+		IPromotionBag pb = promotionService.find(Locale.localize(locale, currency), new UserName(principal.getName()));
+		
+		promotionService.applyAll(pb);
+		
+		pb.getBagItems().forEach(i -> {
+			LOGGER.debug(i.getDiscountAmount().amount().toString());
+		});
+		
 		BagView bv = viewBagService.findByCode(Locale.localize(locale, currency), principal.getName());
 
 		return ResponseEntity.ok(bagResourceAssembler.toModel(bv));
@@ -146,8 +155,6 @@ public class BagController {
 		
 		// persist the domain BagItem to the Bag
 		IBag b = domainBagService.addShippingItem(Locale.localize(locale, currency), dto, new UserName(principal.getName()));
-		
-		domainBagService.checkAllBagRules(b);
 		
 		domainBagService.save(b);
 		
@@ -169,8 +176,6 @@ public class BagController {
 				currency, itemCode);
 		// here we get the bag and bagItems but the products are null
 		IBag b = domainBagService.findByCode(Locale.localize(locale, currency), new UserName(principal.getName()));
-		
-		domainBagService.checkAllBagRules(b);
 		
 		Optional<IRegularBagItem> obi = b.getBagItems().stream()
 				.filter(bi -> bi.getBagItem().getProductUPC().sameAs(new ProductUPC(itemCode))).findAny();

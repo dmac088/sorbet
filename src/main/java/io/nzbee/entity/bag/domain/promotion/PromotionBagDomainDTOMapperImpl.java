@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import io.nzbee.ErrorKeys;
+import io.nzbee.domain.promotion.bag.IPromotionBag;
 import io.nzbee.domain.promotion.bag.PromotionBag;
 import io.nzbee.domain.promotion.bag.item.IPromotionBagItem;
 import io.nzbee.domain.valueObjects.CouponCode;
@@ -51,16 +52,18 @@ public class PromotionBagDomainDTOMapperImpl implements IPromotionBagDomainDTOMa
 
 
 	@Override
-	public BagEntity toEntity(PromotionBag d) {
-		
+	public BagEntity toEntity(IPromotionBag d) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".toEntity()");
 		BagEntity be = bagService.findByCode(d.getUserName().toString()).orElseThrow(
 				() -> new EntityNotFoundException(ErrorKeys.bagNotFound, d.getLocale(), d.getUserName().toString()));
 		
 		be.getBagItems().stream().forEach(i -> {
-			Optional<IPromotionBagItem> opi = d.getPromotionItems().stream().filter(pi ->  pi.getItemUPC().sameAs(new ProductUPC(i.getProduct().getUPC()))).findAny();
+			Optional<IPromotionBagItem> opi = d.getBagItems().stream().filter(pi ->  pi.getItemUPC().sameAs(new ProductUPC(i.getProduct().getUPC()))).findAny();
 			if(opi.isPresent()) {
 				//we only update the line item discount amount
+				LOGGER.debug("setBagItemDiscountAmount(" + opi.get().getDiscountAmount().amount() + ")");
 				i.setBagItemDiscountAmount(opi.get().getDiscountAmount().amount());
+				
 			}
 		});
 		

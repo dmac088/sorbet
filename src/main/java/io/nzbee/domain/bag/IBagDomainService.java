@@ -16,8 +16,6 @@ public interface IBagDomainService  {
 
 	IBag addPhysicalItem(Locale locale, BagItemViewIn dto, UserName username);
 
-	void checkAllBagRules(IBag bag);
-
 	IBag addCouponToBag(Locale locale, CouponCode coupon, UserName username);
 
 	IBag addShippingItem(Locale locale, ShippingItemDTOIn dto, UserName username);
