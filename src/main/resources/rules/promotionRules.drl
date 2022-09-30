@@ -28,7 +28,7 @@ then
 System.out.println("current quantity = " + $bagItem.getBagItemQuantity().amount().toString());
 System.out.println("current price = " + $bagItem.getBagItemPrice());
 System.out.println("promotion = \"Buy 3 get 33% off\"");
-Double discPctg = (((Math.floor($bagItem.getBagItemQuantity().divide(new Long(3)))*3)/$bagItem.getBagItemQuantity().amount().intValue()) * 0.33);
+Double discPctg = (((Math.floor($bagItem.getBagItemQuantity().divide(new Long(3)))*3)/$bagItem.getBagItemQuantity().amount().intValue()) * 0.3333);
 System.out.println("discount percentage is = " + discPctg);
 $bagItem.addDiscount(discPctg);
 end
