@@ -65,6 +65,14 @@ public class BagView {
         }
 		return sum;
 	}
+	
+	public BigDecimal getTotalDiscount() {
+		BigDecimal sum = BigDecimal.ZERO;
+        for (BagItemViewOut bi : this.bagItems) {
+            sum = sum.add(bi.getBagItemDiscount());
+        }
+		return sum;
+	}
 
 	public Set<BagItemViewOut> getBagItems() {
 		return bagItems;

@@ -73,7 +73,7 @@ public class DroolsPromotionBagItemWrapper implements IDroolsPromotionBagItemWra
 	}
 	
 	
-//	public Double test() {
-//		return (Math.floor(this.getBagItemQuantity().divide(new Long(2)))*2)/this.getBagItemQuantity().amount().doubleValue();
-//	}
+	public Double test() {
+		return (Math.floor(this.getBagItemQuantity().divide(new Long(2)))*2)/this.getBagItemQuantity().amount().intValue();
+	}
 }

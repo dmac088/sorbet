@@ -15,26 +15,24 @@ then
 System.out.println("current quantity = " + $bagItem.getBagItemQuantity().amount().toString());
 System.out.println("current price = " + $bagItem.getBagItemPrice());
 System.out.println("promotion = \"Buy 2 get 50% off\"");
-Double discPctg = ((Math.floor($bagItem.getBagItemQuantity().divide(new Long(2)))*2)/$bagItem.getBagItemQuantity().amount().doubleValue() * 0.5);
+Double discPctg = (((Math.floor($bagItem.getBagItemQuantity().divide(new Long(2)))*2)/$bagItem.getBagItemQuantity().amount().intValue()) * 0.5);
 System.out.println("discount percentage is = " + discPctg);
 $bagItem.addDiscount(discPctg);
 end
 
-/*
+
 rule "Buy 3 get 1 free"
 when 
-$bagItem : DroolsPromotionBagItemWrapper(isInStock() && promotionCodes.contains("B3G33") && bagItemQuantity >= 2)
+$bagItem : DroolsPromotionBagItemWrapper(getBagItemQuantity().amount().intValue() >= 3 && getCouponCodes().contains("B3G33"))
 then  
-System.out.println("promotion codes = " + StringUtils.join($bagItem.getPromotionCodes()));
-System.out.println("current quantity = " + $bagItem.getBagItemQuantity());
+System.out.println("current quantity = " + $bagItem.getBagItemQuantity().amount().toString());
+System.out.println("current price = " + $bagItem.getBagItemPrice());
 System.out.println("promotion = \"Buy 3 get 33% off\"");
-System.out.println("total line amount = " + $bagItem.getBagItemQuantity() * $bagItem.getMarkdownPrice());
-Double discAmt = new Double((Math.floor($bagItem.getBagItemQuantity() / 3) * $bagItem.getMarkdownPrice()));
-System.out.println("discount amount is = " + discAmt);
-Discount discount = new Discount($bagItem.getBagItem(), $bagItem.getPromotion("B3G33"), discAmt);
-$bagItem.addDiscount(discount);
+Double discPctg = (((Math.floor($bagItem.getBagItemQuantity().divide(new Long(3)))*3)/$bagItem.getBagItemQuantity().amount().intValue()) * 0.33);
+System.out.println("discount percentage is = " + discPctg);
+$bagItem.addDiscount(discPctg);
 end
-
+/*
 rule "If spend over $500 then 10% off"
 when 
 then

@@ -15,7 +15,7 @@ public class BagItemViewDTOMapperImpl implements IBagItemViewDTOMapper {
 		biv.setItemQty(dto.getQuantity());
 		biv.setItemUPC(dto.getBagItemUPC());
 		biv.setMarkdownPrice(dto.getMarkdownPrice());
-		biv.setBagItemDiscount(dto.getBagItemDiscountAmount());
+		biv.setBagItemDiscountPercentage(dto.getBagItemDiscountPercentage());
 		return biv;
 	}
 

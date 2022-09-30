@@ -42,7 +42,7 @@ public class BagItemViewDTO {
 	
 	private final Long quantity;
 	
-	private final BigDecimal bagItemDiscountAmount;
+	private final BigDecimal bagItemDiscountPercentage;
 	
 	private final BigDecimal bagItemTotalWeight;
 	
@@ -59,7 +59,7 @@ public class BagItemViewDTO {
 		this.bagItemStatusDesc 		= tuple[aliasToIndexMap.get(BAG_ITEM_STATUS_DESC_ALIAS)].toString();
 		this.bagItemDesc 			= tuple[aliasToIndexMap.get(BAG_ITEM_DESC_ALIAS)].toString();
 		this.quantity				= ((Number) tuple[aliasToIndexMap.get(QUANTITY_ALIAS)]).longValue();
-		this.bagItemDiscountAmount	= ((BigDecimal) tuple[aliasToIndexMap.get(BAG_ITEM_DISCOUNT_ALIAS)]);
+		this.bagItemDiscountPercentage	= ((BigDecimal) tuple[aliasToIndexMap.get(BAG_ITEM_DISCOUNT_ALIAS)]);
 		this.bagItemUPC				= tuple[aliasToIndexMap.get(BAG_ITEM_UPC_ALIAS)].toString();
 		this.markdownPrice			= ((BigDecimal) tuple[aliasToIndexMap.get(BAG_ITEM_MARKDOWN_PRICE_ALIAS)]);
 		this.bagItemTotalWeight		= ((BigDecimal) tuple[aliasToIndexMap.get(BAG_ITEM_TOTAL_WEIGHT_ALIAS)]);
@@ -93,10 +93,6 @@ public class BagItemViewDTO {
 		return bagItemDesc;
 	}
 
-	public BigDecimal getBagItemDiscountAmount() {
-		return bagItemDiscountAmount;
-	}
-
 	public String getBagItemUPC() {
 		return bagItemUPC;
 	}
@@ -121,6 +117,10 @@ public class BagItemViewDTO {
 	@Override
 	public int hashCode() {
 		return Objects.hash(this.getBagItemId());
+	}
+
+	public BigDecimal getBagItemDiscountPercentage() {
+		return bagItemDiscountPercentage;
 	}
 
 }
