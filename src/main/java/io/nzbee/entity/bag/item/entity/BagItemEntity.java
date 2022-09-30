@@ -48,8 +48,8 @@ public class BagItemEntity {
 	@Column(name="qty")
 	private Long quantity;
 	
-	@Column(name="bag_item_dis_amt")
-	private BigDecimal bagItemDiscountAmount;
+	@Column(name="bag_item_dis_pctg")
+	private BigDecimal bagItemDiscountPercentage;
 	
 	@Column(name="bag_item_tot_wgt")
 	private BigDecimal bagTotalWeight;
@@ -107,11 +107,11 @@ public class BagItemEntity {
 	}
 
 	public BigDecimal getBagItemDiscountAmount() {
-		return bagItemDiscountAmount;
+		return bagItemDiscountPercentage;
 	}
 
-	public void setBagItemDiscountAmount(BigDecimal bagItemDiscountAmount) {
-		this.bagItemDiscountAmount = bagItemDiscountAmount;
+	public void setBagItemDiscountPercentage(BigDecimal bagItemDiscountPercentage) {
+		this.bagItemDiscountPercentage = bagItemDiscountPercentage;
 	}
 
 	public BigDecimal getBagTotalWeight() {

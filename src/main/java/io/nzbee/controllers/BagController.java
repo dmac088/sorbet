@@ -92,7 +92,7 @@ public class BagController {
 		promotionService.applyAll(pb);
 		
 		pb.getBagItems().forEach(i -> {
-			LOGGER.debug(i.getDiscountAmount().amount().toString());
+			LOGGER.debug(i.getDiscountPercentage().amount().toString());
 		});
 		
 		if(!pb.isErrors()) {
@@ -126,9 +126,10 @@ public class BagController {
 		
 		// add the BagItem to the Bag
 		IBag b = domainBagService.addPhysicalItem(Locale.localize(locale, currency), dto, new UserName(principal.getName()));
-
+		
 		//if there are no issues then save the bag
 		if(!b.hasIssues()) {
+			LOGGER.debug("saving the bag!");
 			domainBagService.save(b);
 		}
 		
@@ -137,9 +138,11 @@ public class BagController {
 		
 		promotionService.applyAll(pb);
 		
-		pb.getBagItems().forEach(i -> {
-			LOGGER.debug(i.getDiscountAmount().amount().toString());
-		});
+		//if there are no issues then save the bag
+		if(!b.hasIssues()) {
+			LOGGER.debug("saving the promotion discount!");
+			promotionService.save(pb);
+		}
 		
 		BagView bv = viewBagService.findByCode(Locale.localize(locale, currency), principal.getName());
 

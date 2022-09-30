@@ -6,9 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
-import io.nzbee.Constants;
 import io.nzbee.domain.promotion.bag.item.IPromotionBagItem;
-import io.nzbee.domain.valueObjects.Money;
+import io.nzbee.domain.valueObjects.Percentage;
 
 public class DroolsPromotionBagItemWrapper implements IDroolsPromotionBagItemWrapper {
 	
@@ -67,11 +66,9 @@ public class DroolsPromotionBagItemWrapper implements IDroolsPromotionBagItemWra
 		return this.bag.getLocale().getCurrency();
 	}
 	
-	public void addDiscount(BigDecimal discount) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".addDiscount() with parameter: {}", discount);
-		Money md = new Money(discount, this.getCurrency(), Constants.defaultMoneyRounding);
-		LOGGER.debug("created new Money() with amount: {}", md.amount());
-		this.bagItem.addDiscount(md);
+	public void addDiscount(BigDecimal discountPercentage) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".addDiscount() with parameter: {}", discountPercentage);
+		this.bagItem.addDiscount(new Percentage(discountPercentage));
 	}
 	
 	

@@ -15,5 +15,5 @@ public interface IBagPortService  extends IDomainPortService<Bag> {
 	void save(IBag object);
 
 	void save(IPromotionBag pb);
-	
+
 }

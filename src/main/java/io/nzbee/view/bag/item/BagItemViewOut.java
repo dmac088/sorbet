@@ -14,10 +14,6 @@ public class BagItemViewOut {
 	
 	private BigDecimal markdownPrice;
 	
-	private BigDecimal bagItemSubTotal;
-	
-	private BigDecimal bagItemTotal;
-	
 	private BigDecimal bagItemWeight;
 	
 	private BigDecimal bagItemDiscount;
@@ -68,19 +64,11 @@ public class BagItemViewOut {
 	}
 
 	public BigDecimal getBagItemTotal() {
-		return bagItemTotal;
-	}
-	
-	public void setBagItemTotal(BigDecimal bagItemTotal) {
-		this.bagItemTotal = bagItemTotal;
+		return this.getMarkdownPrice().multiply(new BigDecimal(this.itemQty)).multiply(BigDecimal.ONE.subtract(this.bagItemDiscount));
 	}
 	
 	public BigDecimal getBagItemSubTotal() {
-		return bagItemSubTotal;
-	}
-
-	public void setBagItemSubTotal(BigDecimal bagItemSubTotal) {
-		this.bagItemSubTotal = bagItemSubTotal;
+		return this.getMarkdownPrice().multiply(new BigDecimal(this.itemQty));
 	}
 
 	public BigDecimal getBagItemWeight() {

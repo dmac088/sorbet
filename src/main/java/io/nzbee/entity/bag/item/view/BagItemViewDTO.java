@@ -19,11 +19,7 @@ public class BagItemViewDTO {
     
     public static final String BAG_ITEM_DESC_ALIAS = "bag_item_desc";
     
-    public static final String BAG_ITEM_BASE_ALIAS = "bag_item_bse_amt";
-    
-    public static final String BAG_ITEM_DISCOUNT_ALIAS = "bag_item_dis_amt";
-    
-    public static final String BAG_ITEM_TOTAL_AMOUNT_ALIAS = "bag_item_tot_amt";
+    public static final String BAG_ITEM_DISCOUNT_ALIAS = "bag_item_dis_pctg";
     
     public static final String BAG_ITEM_TOTAL_WEIGHT_ALIAS = "bag_item_tot_wgt";
     
@@ -46,20 +42,13 @@ public class BagItemViewDTO {
 	
 	private final Long quantity;
 	
-	private final BigDecimal bagItemBaseAmount;
-	
 	private final BigDecimal bagItemDiscountAmount;
-	
-	private final BigDecimal bagItemTotalAmount;
 	
 	private final BigDecimal bagItemTotalWeight;
 	
 	private final String bagItemUPC;
 	
 	private final BigDecimal markdownPrice;
-	
-	
-	
 	
 
 	public BagItemViewDTO(Object[] tuple, Map<String, Integer> aliasToIndexMap) {
@@ -70,9 +59,7 @@ public class BagItemViewDTO {
 		this.bagItemStatusDesc 		= tuple[aliasToIndexMap.get(BAG_ITEM_STATUS_DESC_ALIAS)].toString();
 		this.bagItemDesc 			= tuple[aliasToIndexMap.get(BAG_ITEM_DESC_ALIAS)].toString();
 		this.quantity				= ((Number) tuple[aliasToIndexMap.get(QUANTITY_ALIAS)]).longValue();
-		this.bagItemBaseAmount		= ((BigDecimal) tuple[aliasToIndexMap.get(BAG_ITEM_BASE_ALIAS)]);
 		this.bagItemDiscountAmount	= ((BigDecimal) tuple[aliasToIndexMap.get(BAG_ITEM_DISCOUNT_ALIAS)]);
-		this.bagItemTotalAmount		= ((BigDecimal) tuple[aliasToIndexMap.get(BAG_ITEM_TOTAL_AMOUNT_ALIAS)]);
 		this.bagItemUPC				= tuple[aliasToIndexMap.get(BAG_ITEM_UPC_ALIAS)].toString();
 		this.markdownPrice			= ((BigDecimal) tuple[aliasToIndexMap.get(BAG_ITEM_MARKDOWN_PRICE_ALIAS)]);
 		this.bagItemTotalWeight		= ((BigDecimal) tuple[aliasToIndexMap.get(BAG_ITEM_TOTAL_WEIGHT_ALIAS)]);
@@ -106,16 +93,8 @@ public class BagItemViewDTO {
 		return bagItemDesc;
 	}
 
-	public BigDecimal getBagItemBaseAmount() {
-		return bagItemBaseAmount;
-	}
-
 	public BigDecimal getBagItemDiscountAmount() {
 		return bagItemDiscountAmount;
-	}
-
-	public BigDecimal getBagItemTotalAmount() {
-		return bagItemTotalAmount;
 	}
 
 	public String getBagItemUPC() {

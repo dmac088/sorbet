@@ -61,8 +61,8 @@ public class PromotionBagDomainDTOMapperImpl implements IPromotionBagDomainDTOMa
 			Optional<IPromotionBagItem> opi = d.getBagItems().stream().filter(pi ->  pi.getItemUPC().sameAs(new ProductUPC(i.getProduct().getUPC()))).findAny();
 			if(opi.isPresent()) {
 				//we only update the line item discount amount
-				LOGGER.debug("setBagItemDiscountAmount(" + opi.get().getDiscountAmount().amount() + ")");
-				i.setBagItemDiscountAmount(opi.get().getDiscountAmount().amount());
+				LOGGER.debug("setBagItemDiscountPercentage(" + opi.get().getDiscountPercentage().amount() + ")");
+				i.setBagItemDiscountPercentage(opi.get().getDiscountPercentage().amount());
 				
 			}
 		});

@@ -20,4 +20,5 @@ public interface IBagDomainService  {
 
 	IBag addShippingItem(Locale locale, ShippingItemDTOIn dto, UserName username);
 
+
 }

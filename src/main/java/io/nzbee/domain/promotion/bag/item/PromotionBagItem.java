@@ -1,5 +1,6 @@
 package io.nzbee.domain.promotion.bag.item;
 
+import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.List;
 import io.nzbee.domain.promotion.bag.IPromotionBag;
@@ -9,6 +10,7 @@ import io.nzbee.domain.valueObjects.BrandCode;
 import io.nzbee.domain.valueObjects.CategoryCode;
 import io.nzbee.domain.valueObjects.CustomerID;
 import io.nzbee.domain.valueObjects.Money;
+import io.nzbee.domain.valueObjects.Percentage;
 import io.nzbee.domain.valueObjects.ProductUPC;
 import io.nzbee.domain.valueObjects.Quantity;
 
@@ -32,7 +34,7 @@ public class PromotionBagItem implements IPromotionBagItem {
 
 	private final Money itemPrice;
 	
-	private Money discountAmount;
+	private Percentage discountPercentage;
 	
 	
 	public PromotionBagItem(IPromotionBag bag, CustomerID customerID, BagID bagID, ProductUPC itemUPC, Quantity quantity,
@@ -46,7 +48,7 @@ public class PromotionBagItem implements IPromotionBagItem {
 		this.brandCode = brandCode;
 		this.categoryCodes = categoryCodes;
 		this.itemPrice = itemPrice;
-		this.discountAmount = this.bag.getMoney();
+		this.discountPercentage = new Percentage(new BigDecimal(0));
 		this.bagItemStatus = bagItemStatus;
 	}
 
@@ -76,14 +78,14 @@ public class PromotionBagItem implements IPromotionBagItem {
 	}
 	
 	@Override
-	public void addDiscount(Money discount) {
+	public void addDiscount(Percentage discount) {
 		System.out.println("adding discount amount: " + discount.amount());
-		this.discountAmount = this.discountAmount.add(discount);
+		this.discountPercentage = new Percentage(discount.amount());
 	}
 	
 	@Override
 	public Money getTotalAmount() {
-		return this.itemPrice.multiply(this.quantity.amount()).subtract(discountAmount);
+		return this.itemPrice.multiply(this.quantity.amount()).multiply(BigDecimal.ONE.subtract(this.discountPercentage.amount()));
 	}
 
 	@Override
@@ -92,8 +94,8 @@ public class PromotionBagItem implements IPromotionBagItem {
 	}
 
 	@Override
-	public Money getDiscountAmount() {
-		return this.discountAmount;
+	public Percentage getDiscountPercentage() {
+		return this.discountPercentage;
 	}
 
 	@Override

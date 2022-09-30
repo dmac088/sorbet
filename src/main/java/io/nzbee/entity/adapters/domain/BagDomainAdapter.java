@@ -78,7 +78,5 @@ public class BagDomainAdapter implements IBagPortService {
 		
 		bagService.save(b);
 	}
-	
-
 
 }

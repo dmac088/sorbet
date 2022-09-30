@@ -108,7 +108,4 @@ public class BagDomainServiceImpl implements IBagDomainService {
 		bagService.save(object);
 	}
 
-	
-
-
 }

@@ -4,7 +4,7 @@ import io.nzbee.domain.bag.item.DroolsBagItemWrapper;
 import java.util.List;
 import org.apache.tomcat.util.buf.StringUtils;
 
-dialect "mvel"
+//dialect "mvel"
 
 function String pendingItemKey(DroolsBagItemWrapper bagItem) { 
 	return bagItem.getCustomerId() + "-"+ bagItem.getProductUPC();

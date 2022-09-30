@@ -7,6 +7,7 @@ import io.nzbee.domain.valueObjects.BagItemStatus;
 import io.nzbee.domain.valueObjects.BrandCode;
 import io.nzbee.domain.valueObjects.CategoryCode;
 import io.nzbee.domain.valueObjects.Money;
+import io.nzbee.domain.valueObjects.Percentage;
 import io.nzbee.domain.valueObjects.ProductUPC;
 import io.nzbee.domain.valueObjects.Quantity;
 
@@ -18,19 +19,19 @@ public interface IPromotionBagItem {
 
 	ProductUPC getItemUPC();
 
-	Money getDiscountAmount();
-
 	Quantity getQuantity();
 
 	Money getPrice();;
-
-	void addDiscount(Money discount);
 
 	Money getTotalAmount();
 
 	IPromotionBag getBag();
 
 	BagItemStatus getBagItemStatus();
+
+	Percentage getDiscountPercentage();
+
+	void addDiscount(Percentage discount);
 
 
 }

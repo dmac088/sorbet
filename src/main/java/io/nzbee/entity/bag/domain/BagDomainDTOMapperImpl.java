@@ -1,5 +1,6 @@
 package io.nzbee.entity.bag.domain;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.Optional;
@@ -173,6 +174,8 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 					.findAny();
 
 			BagItemEntity i = obi.orElse(new BagItemEntity());
+			
+			
 			i.setQuantity(bi.getBagItem().getQuantity().amount());
 			i.setBag(b);
 			i.setBagItemStatus(bagItemStatusService.findByCode(Constants.bagItemStatusCodeNew)
@@ -186,6 +189,10 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 							bi.getBagItem().getProductUPC().toString())));
 			i.setQuantity(bi.getBagItem().getQuantity().amount());
 			i.setBagTotalWeight(bi.getBagItemWeight().amount());
+			
+			//reset the discount percentage
+			i.setBagItemDiscountPercentage(BigDecimal.ZERO);
+			
 			b.addItem(i);
 		};
 
@@ -245,8 +252,8 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 			BagItemEntity i = obi.get();
 			
 			//update the discount amount
-			LOGGER.debug("adding discount amount " + bi.getDiscountAmount().amount());
-			i.setBagItemDiscountAmount(bi.getDiscountAmount().amount());
+			LOGGER.debug("adding discount percentage " + bi.getDiscountPercentage().amount());
+			i.setBagItemDiscountPercentage(bi.getDiscountPercentage().amount());
 			
 		};
 		return b;
