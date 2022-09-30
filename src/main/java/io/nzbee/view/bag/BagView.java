@@ -46,6 +46,14 @@ public class BagView {
 		return this.getBagItems().stream().mapToLong(i -> i.getItemQty()).sum();
 	}
 
+	public BigDecimal getTotalAmount() {
+		BigDecimal sum = BigDecimal.ZERO;
+        for (BagItemViewOut bi : this.bagItems) {
+            sum = sum.add(bi.getBagItemSubTotal());
+        }
+		return sum;
+	}
+	
 	public BigDecimal getGrandTotalAmount() {
 		return this.getSubTotalAmount().add(this.getShippingItem().getBagItemTotal());
 	}
