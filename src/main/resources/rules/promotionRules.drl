@@ -10,13 +10,12 @@ dialect "mvel"
 
 rule "Buy 2 get 1 free"
 when 
-$bagItem : DroolsPromotionBagItemWrapper(getBagItemQuantity() >= 2 && getCouponCodes().contains("B2G50"))
+$bagItem : DroolsPromotionBagItemWrapper(getBagItemQuantity().amount().intValue() >= 2 && getCouponCodes().contains("B2G50"))
 then  
-System.out.println("current quantity = " + $bagItem.getBagItemQuantity());
+System.out.println("current quantity = " + $bagItem.getBagItemQuantity().amount().toString());
 System.out.println("current price = " + $bagItem.getBagItemPrice());
 System.out.println("promotion = \"Buy 2 get 50% off\"");
-System.out.println("total line amount = " + $bagItem.getBagItemQuantity() * $bagItem.getBagItemPrice().doubleValue());
-Double discPctg = new Double(0.5);
+Double discPctg = ((Math.floor($bagItem.getBagItemQuantity().divide(new Long(2)))*2)/$bagItem.getBagItemQuantity().amount().doubleValue() * 0.5);
 System.out.println("discount percentage is = " + discPctg);
 $bagItem.addDiscount(discPctg);
 end

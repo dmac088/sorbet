@@ -15,4 +15,8 @@ public class Quantity {
 	public Long amount() {
 		return quantity;
 	}	
+	
+	public Double divide(Long divisor) {
+		return this.quantity.doubleValue() / divisor; 
+	}
 }

@@ -47,17 +47,13 @@ public class BagView {
 	}
 
 	public BigDecimal getGrandTotalAmount() {
-		BigDecimal sum = BigDecimal.ZERO;
-        for (BagItemViewOut bi : this.bagItems) {
-            sum = sum.add(bi.getBagItemTotal());
-        }
-		return sum;
+		return this.getSubTotalAmount().add(this.getShippingItem().getBagItemTotal());
 	}
 
 	public BigDecimal getSubTotalAmount() {
 		BigDecimal sum = BigDecimal.ZERO;
         for (BagItemViewOut bi : this.bagItems) {
-            sum = sum.add(bi.getBagItemSubTotal());
+            sum = sum.add(bi.getBagItemTotal());
         }
 		return sum;
 	}

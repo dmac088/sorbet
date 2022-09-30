@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import io.nzbee.domain.promotion.bag.item.IPromotionBagItem;
 import io.nzbee.domain.valueObjects.Percentage;
+import io.nzbee.domain.valueObjects.Quantity;
 
 public class DroolsPromotionBagItemWrapper implements IDroolsPromotionBagItemWrapper {
 	
@@ -26,16 +27,16 @@ public class DroolsPromotionBagItemWrapper implements IDroolsPromotionBagItemWra
 		return bag.getItemCount();
 	}
 	
-	public int getTotalBagQuantity() {
-		return bag.getQuantity().amount().intValue();
+	public Quantity getTotalBagQuantity() {
+		return bag.getQuantity();
 	}
 	
 	public BigDecimal getTotalBagAmount() {
 		return bag.getTotalAmount().amount();
 	}
 
-	public int getBagItemQuantity() {
-		return bagItem.getQuantity().amount().intValue();
+	public Quantity getBagItemQuantity() {
+		return bagItem.getQuantity();
 	}
 	
 	public BigDecimal getBagItemPrice() {
@@ -72,4 +73,7 @@ public class DroolsPromotionBagItemWrapper implements IDroolsPromotionBagItemWra
 	}
 	
 	
+//	public Double test() {
+//		return (Math.floor(this.getBagItemQuantity().divide(new Long(2)))*2)/this.getBagItemQuantity().amount().doubleValue();
+//	}
 }

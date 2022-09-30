@@ -62,13 +62,9 @@ public class BagItemViewOut {
 	public void setMarkdownPrice(BigDecimal bigDecimal) {
 		this.markdownPrice = bigDecimal;
 	}
-
+	
 	public BigDecimal getBagItemTotal() {
 		return this.getMarkdownPrice().multiply(new BigDecimal(this.itemQty)).multiply(BigDecimal.ONE.subtract(this.bagItemDiscount));
-	}
-	
-	public BigDecimal getBagItemSubTotal() {
-		return this.getMarkdownPrice().multiply(new BigDecimal(this.itemQty));
 	}
 
 	public BigDecimal getBagItemWeight() {
