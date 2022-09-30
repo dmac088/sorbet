@@ -165,6 +165,17 @@ public class BagController {
 			domainBagService.save(b);
 		}
 
+		
+		//get the promotion bag
+		IPromotionBag pb = promotionService.find(Locale.localize(locale, currency), new UserName(principal.getName()));
+				
+		promotionService.applyAll(pb);
+				
+		if(!b.hasIssues()) {
+			LOGGER.debug("saving the promotion discount!");
+			promotionService.save(pb);
+		}
+		
 		//get a view of the bag and return it
 		BagView bv = viewBagService.findByCode(Locale.localize(locale, currency), principal.getName());
 
@@ -186,6 +197,16 @@ public class BagController {
 		if(obi.isPresent()) {
 			b.removeItem(obi.get());
 			domainBagService.save(b);
+		}
+		
+		//get the promotion bag
+		IPromotionBag pb = promotionService.find(Locale.localize(locale, currency), new UserName(principal.getName()));
+				
+		promotionService.applyAll(pb);
+				
+		if(!b.hasIssues()) {
+			LOGGER.debug("saving the promotion discount!");
+			promotionService.save(pb);
 		}
 
 		return new GenericResponse("success"); 
