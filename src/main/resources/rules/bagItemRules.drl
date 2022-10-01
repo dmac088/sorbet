@@ -10,7 +10,7 @@ function String pendingItemKey(DroolsBagItemWrapper bagItem) {
 	return bagItem.getCustomerId() + "-"+ bagItem.getProductUPC();
 }
 
-/*
+
 rule "Is Out-Of Stock"
 when
 $bagItem : DroolsBagItemWrapper(!bagItemStatus.equals("PRO01") && !isInStock())
@@ -23,7 +23,7 @@ $bagItem.getBag().setErrors(true);
 $bagItem.getBag().setError(error);
 $bagItem.logItemError(pendingItemKey($bagItem), $bagItem.getBagItem());
 end
-*/
+
 
 rule "Item quantity exceeds limit"
 when 
