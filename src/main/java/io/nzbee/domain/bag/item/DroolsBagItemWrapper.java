@@ -28,15 +28,15 @@ public class DroolsBagItemWrapper {
 		return this.bagItem.getBagItem().getProductUPC().toString();
 	}
 	
-	public Boolean isInStock() {
+	public boolean isInStock() {
 		return this.bagItem.isInStock();
 	}
 	
-	public Boolean isErrors() {
+	public boolean isErrors() {
 		return this.bagItem.getBagItem().getBag().isErrors();
 	}
 	
-	public void setErrors(Boolean errors) {
+	public void setErrors(boolean errors) {
 		this.bagItem.getBagItem().getBag().setErrors(errors);
 	}
 
