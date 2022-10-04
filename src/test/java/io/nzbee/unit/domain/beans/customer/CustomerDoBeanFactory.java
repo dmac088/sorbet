@@ -3,6 +3,7 @@ package io.nzbee.unit.domain.beans.customer;
 
 import org.springframework.stereotype.Service;
 import io.nzbee.domain.customer.Customer;
+import io.nzbee.domain.valueObjects.UserName;
 
 @Service
 
@@ -13,7 +14,7 @@ public class CustomerDoBeanFactory implements ICustomerDoBeanFactory {
 		
 		Customer c = 
 				new Customer(
-				"tst088",
+				new UserName("tst088"),
 				"123456789",
 				true
 				);

@@ -12,7 +12,6 @@ import io.nzbee.integration.entity.brand.ConfigBrandEntityTests;
 import io.nzbee.integration.entity.category.ConfigCategoryEntityTests;
 import io.nzbee.integration.entity.department.ConfigDepartmentEntityTests;
 import io.nzbee.integration.entity.product.ConfigProductEntityTests;
-import io.nzbee.integration.entity.promotion.ConfigPromotionEntityTests;
 import io.nzbee.integration.entity.tag.ConfigTagEntityTests;
 
 @Configuration
@@ -20,7 +19,6 @@ import io.nzbee.integration.entity.tag.ConfigTagEntityTests;
 			ConfigBrandEntityTests.class, 
 			ConfigDepartmentEntityTests.class, 
 			ConfigCategoryEntityTests.class, 
-			ConfigPromotionEntityTests.class,
 			ConfigTagEntityTests.class})
 public class ConfigPhysicalProductFullEntityTests {
 	

@@ -21,9 +21,10 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import io.nzbee.Constants;
-import io.nzbee.domain.bag.Bag;
+import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.ports.IBagPortService;
 import io.nzbee.domain.valueObjects.Locale;
+import io.nzbee.domain.valueObjects.UserName;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -61,12 +62,12 @@ public class IT_BagDoServiceImplIntegrationTest {
 	@Rollback(false)
 	@WithUserDetails(value = "admin")
 	public void whenValidCode_thenBagShouldBeFound() {
-		Bag found = bagService.findByCode(Locale.localize(Constants.localeENGB, Constants.currencyHKD), USER_NAME);
+		IBag found = bagService.findBagByCode(Locale.localize(Constants.localeENGB, Constants.currencyHKD), new UserName(USER_NAME));
 
 		assertFound(found);
 	}
 
-	private void assertFound(Bag found) {
+	private void assertFound(IBag found) {
 		
 		assertNotNull(found);
 		

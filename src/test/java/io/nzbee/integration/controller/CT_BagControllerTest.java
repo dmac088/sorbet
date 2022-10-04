@@ -30,24 +30,36 @@ import io.nzbee.domain.bag.BagConfiguration;
 import io.nzbee.domain.bag.BagDomainServiceImpl;
 import io.nzbee.domain.bag.item.BagItemConfiguration;
 import io.nzbee.domain.bag.item.regular.RegularBagItemServiceImpl;
+import io.nzbee.domain.bag.item.shipping.ShippingBagItemDomainServiceImpl;
 import io.nzbee.domain.promotion.PromotionServiceImpl;
+import io.nzbee.domain.promotion.bag.PromotionBagConfiguration;
 import io.nzbee.entity.adapters.domain.BagDomainAdapter;
 import io.nzbee.entity.adapters.domain.RegularBagItemDomainAdapter;
+import io.nzbee.entity.adapters.domain.ShippingBagItemDomainAdapter;
 import io.nzbee.entity.adapters.view.BagViewAdapterImpl;
 import io.nzbee.entity.bag.domain.BagDomainDTODaoImpl;
 import io.nzbee.entity.bag.domain.BagDomainDTOMapperImpl;
 import io.nzbee.entity.bag.domain.BagDomainDTOServiceImpl;
+import io.nzbee.entity.bag.domain.promotion.PromotionBagDomainDTODaoImpl;
+import io.nzbee.entity.bag.domain.promotion.PromotionBagDomainDTOMapperImpl;
+import io.nzbee.entity.bag.domain.promotion.PromotionBagDomainDTOServiceImpl;
 import io.nzbee.entity.bag.entity.BagEntityServiceImpl;
 import io.nzbee.entity.bag.item.view.BagItemViewDTOMapperImpl;
 import io.nzbee.entity.bag.item.domain.RegularBagItemDomainDTOMapperImpl;
+import io.nzbee.entity.bag.item.domain.ShippingBagItemDomainDTOMapperImpl;
+import io.nzbee.entity.bag.item.domain.promotion.PromotionBagItemDomainDTOMapperImpl;
+import io.nzbee.entity.bag.item.domain.BagItemDomainDTODaoImpl;
 import io.nzbee.entity.bag.item.domain.BagItemDomainDTOServiceImpl;
 import io.nzbee.entity.bag.item.entity.BagItemEntityServiceImpl;
+import io.nzbee.entity.bag.item.type.BagItemTypeServiceImpl;
 import io.nzbee.entity.bag.status.BagItemStatusServiceImpl;
 import io.nzbee.entity.bag.view.BagViewDTODaoPostgresImpl;
 import io.nzbee.entity.bag.view.BagViewDTOMapperImpl;
 import io.nzbee.entity.bag.view.BagViewDTOServiceImpl;
+import io.nzbee.entity.party.address.type.AddressTypeServiceImpl;
 import io.nzbee.entity.party.person.CustomerMapperImpl;
 import io.nzbee.entity.party.person.PersonServiceImpl;
+import io.nzbee.entity.party.type.PartyTypeServiceImpl;
 import io.nzbee.entity.product.attribute.ProductAttributeServiceImpl;
 import io.nzbee.entity.product.currency.CurrencyServiceImpl;
 import io.nzbee.entity.product.physical.view.PhysicalProductDTODaoPostgresImpl;
@@ -64,6 +76,7 @@ import io.nzbee.security.OAuth2ResourceServerConfig;
 import io.nzbee.security.SecurityBeanConfiguration;
 import io.nzbee.security.WebSecurityConfig;
 import io.nzbee.security.user.UserService;
+import io.nzbee.security.user.role.UserRoleServiceImpl;
 import io.nzbee.view.bag.BagViewServiceImpl;
 
 @RunWith(SpringRunner.class)
@@ -82,7 +95,13 @@ import io.nzbee.view.bag.BagViewServiceImpl;
 		BagViewDTOMapperImpl.class, BagItemViewDTOMapperImpl.class, PhysicalProductDTOMapperImpl.class,
 		BagItemDomainDTOServiceImpl.class, RegularBagItemDomainDTOMapperImpl.class, BagDomainDTOServiceImpl.class,
 		BagDomainDTOMapperImpl.class, BagEntityServiceImpl.class, RegularBagItemServiceImpl.class,
-		BagDomainDTODaoImpl.class })
+		BagDomainDTODaoImpl.class, PromotionBagDomainDTOServiceImpl.class, PromotionBagDomainDTODaoImpl.class,
+		PromotionBagDomainDTOMapperImpl.class, PromotionBagItemDomainDTOMapperImpl.class,UserRoleServiceImpl.class,
+		PartyTypeServiceImpl.class, AddressTypeServiceImpl.class, BagItemTypeServiceImpl.class, 
+		ShippingBagItemDomainDTOMapperImpl.class, BagItemDomainDTODaoImpl.class, ShippingBagItemDomainServiceImpl.class,
+		ShippingBagItemDomainAdapter.class, PromotionBagConfiguration.class
+		
+ })
 @WebMvcTest
 public class CT_BagControllerTest {
 

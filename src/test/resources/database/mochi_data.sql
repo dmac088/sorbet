@@ -361,9 +361,9 @@ INSERT INTO mochi.party VALUES (234490, 1);
 INSERT INTO mochi.address VALUES (1, 'Test Line 1', 'Test Line 2', 'Test Line 3', 'Test Ctry', 'Test PC', 2, 234482);
 INSERT INTO mochi.address VALUES (10, NULL, NULL, NULL, NULL, NULL, 1, 234489);
 INSERT INTO mochi.address VALUES (11, NULL, NULL, NULL, NULL, NULL, 2, 234489);
-INSERT INTO mochi.address VALUES (2, 'Test Line 1', 'Test Line 2', 'Test Line 3', 'Test Ctry', 'Test PC', 1, 234482);
 INSERT INTO mochi.address VALUES (12, NULL, NULL, NULL, NULL, NULL, 1, 234490);
 INSERT INTO mochi.address VALUES (13, NULL, NULL, NULL, NULL, NULL, 2, 234490);
+INSERT INTO mochi.address VALUES (2, 'Test Line 1', 'Test Line 2', 'Test Line 3', 'Test Ctry', 'Test PC', 1, 234482);
 
 
 --
@@ -391,18 +391,12 @@ INSERT INTO mochi.bag_item_status VALUES (3, 'PND01', 'Pending');
 -- Data for Name: bag_item; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
-INSERT INTO mochi.bag_item VALUES (234756, 234492, 6, 1, 1, 1, 0, 0, 0, 0);
-INSERT INTO mochi.bag_item VALUES (234757, 234492, 10, 1, 1, 1, 0, 0, 0, 0);
-INSERT INTO mochi.bag_item VALUES (234758, 234492, 9, 1, 1, 1, 0, 0, 0, 0);
-INSERT INTO mochi.bag_item VALUES (234958, 234484, 6, 2, 1, 1, 28.00, 0.00, 28.00, 0.10);
-INSERT INTO mochi.bag_item VALUES (235047, 234484, 2031069, 1, 1, 2, 18.00, 0.00, 18.00, 0);
-INSERT INTO mochi.bag_item VALUES (234943, 234484, 17, 2, 1, 1, 64.00, 0.00, 64.00, 0.26);
-
-
---
--- Data for Name: bag_item_disc; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
---
-
+INSERT INTO mochi.bag_item VALUES (234756, 234492, 6, 1, 1, 1, 0, 0);
+INSERT INTO mochi.bag_item VALUES (234757, 234492, 10, 1, 1, 1, 0, 0);
+INSERT INTO mochi.bag_item VALUES (234758, 234492, 9, 1, 1, 1, 0, 0);
+INSERT INTO mochi.bag_item VALUES (234958, 234484, 6, 2, 1, 1, 0.00, 0);
+INSERT INTO mochi.bag_item VALUES (235047, 234484, 2031069, 1, 1, 2, 0.00, 0);
+INSERT INTO mochi.bag_item VALUES (234943, 234484, 17, 2, 1, 1, 0.00, 0);
 
 
 --
@@ -9956,7 +9950,7 @@ SELECT pg_catalog.setval('mochi.bag_bag_id_seq', 234492, true);
 -- Name: bag_item_bag_item_id_seq; Type: SEQUENCE SET; Schema: mochi; Owner: postgres
 --
 
-SELECT pg_catalog.setval('mochi.bag_item_bag_item_id_seq', 235047, true);
+SELECT pg_catalog.setval('mochi.bag_item_bag_item_id_seq', 235049, true);
 
 
 --

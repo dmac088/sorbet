@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import io.nzbee.Constants;
 import io.nzbee.ErrorKeys;
+import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.entity.bag.entity.BagEntity;
 import io.nzbee.entity.party.Party;
 import io.nzbee.entity.party.address.entity.PartyAddressEntity;
@@ -100,9 +101,9 @@ public class PartyEntityBeanFactory implements IPartyEntityBeanFactory {
 		Optional<AddressTypeEntity> omat = addressTypeService.findByCode(Constants.shippingAddressCode);
 
 		AddressTypeEntity bat = obat.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.addressTypeNotFound,
-				Constants.localeENGB, Constants.billingAddressCode));
+				Locale.localize(Constants.localeENGB, Constants.currencyHKD), Constants.billingAddressCode));
 		AddressTypeEntity mat = omat.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.addressTypeNotFound,
-				Constants.localeENGB, Constants.shippingAddressCode));
+				Locale.localize(Constants.localeENGB, Constants.currencyHKD), Constants.shippingAddressCode));
 
 		ba.setType(bat);
 		ma.setType(mat);
@@ -168,9 +169,9 @@ public class PartyEntityBeanFactory implements IPartyEntityBeanFactory {
 		Optional<AddressTypeEntity> omat = addressTypeService.findByCode(Constants.shippingAddressCode);
 
 		AddressTypeEntity bat = obat.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.addressTypeNotFound,
-				Constants.localeENGB, Constants.billingAddressCode));
+				Locale.localize(Constants.localeENGB, Constants.currencyHKD), Constants.billingAddressCode));
 		AddressTypeEntity mat = omat.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.addressTypeNotFound,
-				Constants.localeENGB, Constants.shippingAddressCode));
+				Locale.localize(Constants.localeENGB, Constants.currencyHKD), Constants.shippingAddressCode));
 
 		ba.setType(bat);
 		ma.setType(mat);

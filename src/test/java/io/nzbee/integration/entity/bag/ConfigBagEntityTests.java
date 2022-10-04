@@ -3,7 +3,6 @@ package io.nzbee.integration.entity.bag;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-
 import io.nzbee.entity.bag.entity.BagEntityServiceImpl;
 import io.nzbee.entity.bag.entity.IBagEntityService;
 import io.nzbee.entity.bag.item.entity.BagItemEntityServiceImpl;

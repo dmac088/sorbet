@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 import io.nzbee.domain.bag.item.BagItemConfiguration;
 import io.nzbee.unit.domain.beans.customer.CustomerDoBeanFactory;
-import io.nzbee.unit.domain.beans.promotion.PromotionDoBeanFactory;
 
 
 @Configuration
@@ -21,11 +20,6 @@ public class UT_Config {
 	@Bean
 	CustomerDoBeanFactory customerDoBeanFactory() {
 		return new CustomerDoBeanFactory();
-	}
-	
-	@Bean
-	PromotionDoBeanFactory PromotionDoBeanFactory() {
-		return new PromotionDoBeanFactory();
 	}
 	
 	@Bean 

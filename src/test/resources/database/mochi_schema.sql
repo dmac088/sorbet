@@ -60,7 +60,6 @@ ALTER TABLE ONLY mochi.brand_attr_lcl DROP CONSTRAINT brand_attr_lcl_lcl_cd_fkey
 ALTER TABLE ONLY mochi.brand_attr_lcl DROP CONSTRAINT brand_attr_lcl_bnd_id_fkey;
 ALTER TABLE ONLY mochi.bag DROP CONSTRAINT bag_pty_id_party_pty_id_fkey;
 ALTER TABLE ONLY mochi.bag_item DROP CONSTRAINT bag_item_sts_id_bag_item_sts_bag_item_sts_id_fkey;
-ALTER TABLE ONLY mochi.bag_item_disc DROP CONSTRAINT bag_item_disc_bag_item_id_bag_item_bag_item_id_fkey;
 ALTER TABLE ONLY mochi.bag_item DROP CONSTRAINT bag_item_bag_id_bag_bag_id_fkey;
 ALTER TABLE ONLY mochi.address DROP CONSTRAINT address_pty_id_party_pty_id_fkey;
 ALTER TABLE ONLY mochi.address DROP CONSTRAINT address_addr_typ_id_address_type_addr_typ_id_fkey;
@@ -145,7 +144,6 @@ ALTER TABLE ONLY mochi.bag_item_type DROP CONSTRAINT bag_type_pkey;
 ALTER TABLE ONLY mochi.bag_item_status DROP CONSTRAINT bag_status_pkey;
 ALTER TABLE ONLY mochi.bag DROP CONSTRAINT bag_pkey;
 ALTER TABLE ONLY mochi.bag_item DROP CONSTRAINT bag_item_pkey;
-ALTER TABLE ONLY mochi.bag_item_disc DROP CONSTRAINT bag_item_disc_pkey;
 ALTER TABLE ONLY mochi.address_type DROP CONSTRAINT address_type_pkey;
 ALTER TABLE ONLY mochi.address DROP CONSTRAINT address_pkey;
 ALTER TABLE ONLY mochi.accessories_attr_lcl DROP CONSTRAINT accessories_attr_lcl_pkey;
@@ -258,7 +256,6 @@ DROP TABLE mochi.bag_item_type;
 DROP SEQUENCE mochi.bag_item_type_bag_item_typ_id_seq;
 DROP TABLE mochi.bag_item_status;
 DROP SEQUENCE mochi.bag_item_status_bag_item_sts_id_seq;
-DROP TABLE mochi.bag_item_disc;
 DROP SEQUENCE mochi.bag_item_disc_bag_item_disc_id_seq;
 DROP TABLE mochi.bag_item;
 DROP SEQUENCE mochi.bag_item_bag_item_id_seq;
@@ -3278,9 +3275,7 @@ CREATE TABLE mochi.bag_item (
     qty smallint NOT NULL,
     bag_item_sts_id bigint NOT NULL,
     bag_item_typ_id bigint NOT NULL,
-    bag_item_bse_amt numeric NOT NULL,
-    bag_item_dis_amt numeric NOT NULL,
-    bag_item_tot_amt numeric NOT NULL,
+    bag_item_dis_pctg numeric,
     bag_item_tot_wgt numeric NOT NULL
 );
 
@@ -3300,19 +3295,6 @@ CREATE SEQUENCE mochi.bag_item_disc_bag_item_disc_id_seq
 
 
 ALTER TABLE mochi.bag_item_disc_bag_item_disc_id_seq OWNER TO postgres;
-
---
--- Name: bag_item_disc; Type: TABLE; Schema: mochi; Owner: mochidb_owner
---
-
-CREATE TABLE mochi.bag_item_disc (
-    bag_item_disc_id bigint DEFAULT nextval('mochi.bag_item_disc_bag_item_disc_id_seq'::regclass) NOT NULL,
-    bag_item_id bigint NOT NULL,
-    disc_amt numeric NOT NULL
-);
-
-
-ALTER TABLE mochi.bag_item_disc OWNER TO mochidb_owner;
 
 --
 -- Name: bag_item_status_bag_item_sts_id_seq; Type: SEQUENCE; Schema: mochi; Owner: postgres
@@ -4840,14 +4822,6 @@ ALTER TABLE ONLY mochi.address_type
 
 
 --
--- Name: bag_item_disc bag_item_disc_pkey; Type: CONSTRAINT; Schema: mochi; Owner: mochidb_owner
---
-
-ALTER TABLE ONLY mochi.bag_item_disc
-    ADD CONSTRAINT bag_item_disc_pkey PRIMARY KEY (bag_item_disc_id);
-
-
---
 -- Name: bag_item bag_item_pkey; Type: CONSTRAINT; Schema: mochi; Owner: mochidb_owner
 --
 
@@ -5517,14 +5491,6 @@ ALTER TABLE ONLY mochi.bag_item
 
 
 --
--- Name: bag_item_disc bag_item_disc_bag_item_id_bag_item_bag_item_id_fkey; Type: FK CONSTRAINT; Schema: mochi; Owner: mochidb_owner
---
-
-ALTER TABLE ONLY mochi.bag_item_disc
-    ADD CONSTRAINT bag_item_disc_bag_item_id_bag_item_bag_item_id_fkey FOREIGN KEY (bag_item_id) REFERENCES mochi.bag_item(bag_item_id);
-
-
---
 -- Name: bag_item bag_item_sts_id_bag_item_sts_bag_item_sts_id_fkey; Type: FK CONSTRAINT; Schema: mochi; Owner: mochidb_owner
 --
 
@@ -5965,13 +5931,6 @@ GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE mochi.bag_item TO mochi_app;
 
 GRANT ALL ON SEQUENCE mochi.bag_item_disc_bag_item_disc_id_seq TO mochi_app;
 GRANT ALL ON SEQUENCE mochi.bag_item_disc_bag_item_disc_id_seq TO mochidb_owner;
-
-
---
--- Name: TABLE bag_item_disc; Type: ACL; Schema: mochi; Owner: mochidb_owner
---
-
-GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE mochi.bag_item_disc TO mochi_app;
 
 
 --

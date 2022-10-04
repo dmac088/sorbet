@@ -23,9 +23,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import io.nzbee.Constants;
 import io.nzbee.domain.customer.dto.in.CustomerDTOIn;
+import io.nzbee.domain.ports.ICustomerPortService;
+import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.integration.view.beans.customer.ICustomerViewBeanFactory;
 import io.nzbee.view.customer.CustomerDTOOut;
-import io.nzbee.view.ports.ICustomerPortService;
+import io.nzbee.view.customer.ICustomerViewService;
+
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -35,6 +38,9 @@ public class IT_CustomerDoServiceImplIntegrationTest {
 
 	@Autowired
 	private ICustomerPortService customerService;
+	
+	@Autowired
+	private ICustomerViewService customerViewService;
 
 	@Autowired
 	private ICustomerViewBeanFactory customerViewBeanFactory;
@@ -67,7 +73,7 @@ public class IT_CustomerDoServiceImplIntegrationTest {
 	public void persistNewCustomer() { 
 		CustomerDTOIn customer = customerViewBeanFactory.getBean();
 	    	
-		customerService.save(customer, Constants.localeENGB);
+		customerService.save(customer, Locale.localize(Constants.localeENGB, Constants.currencyHKD));
 	}
 	
 	@After
@@ -81,7 +87,7 @@ public class IT_CustomerDoServiceImplIntegrationTest {
 	public void whenFindCustomerByUsername_thenReturnCustomer() {
 		
 		// when
-		CustomerDTOOut found = customerService.findByUsername("tst088");
+		CustomerDTOOut found = customerViewService.findByUsername("tst088");
 
 		// then
 		assertFound(found);

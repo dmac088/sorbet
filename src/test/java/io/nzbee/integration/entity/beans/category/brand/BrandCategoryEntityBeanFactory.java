@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import io.nzbee.Constants;
 import io.nzbee.ErrorKeys;
+import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.entity.category.CategoryEntity;
 import io.nzbee.entity.category.attribute.CategoryAttributeEntity;
 import io.nzbee.entity.category.brand.CategoryBrandEntity;
@@ -33,8 +34,10 @@ public class BrandCategoryEntityBeanFactory implements IBrandCategoryEntityBeanF
 		category.setCategory(ce);
 		ce.setCategoryBrand(category);
 		
+		
+		
 		CategoryTypeEntity ct = categoryTypeService.findByCode(Constants.categoryTypeProduct)
-				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.categoryTypeNotFound, Constants.localeENGB,
+				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.categoryTypeNotFound, Locale.localize(Constants.localeENGB, Constants.currencyHKD),
 						Constants.categoryTypeProduct));
 		
 		category.getCategory().setCategoryType(ct);

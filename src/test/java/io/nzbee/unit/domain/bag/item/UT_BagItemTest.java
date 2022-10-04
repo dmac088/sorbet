@@ -10,13 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import io.nzbee.Constants;
 import io.nzbee.UT_Config;
 import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.item.BagItemConfiguration;
 import io.nzbee.domain.bag.item.regular.IRegularBagItemDomainService;
 import io.nzbee.domain.customer.Customer;
 import io.nzbee.domain.ports.IBagItemPortService;
+import io.nzbee.domain.promotion.IPromotionService;
+import io.nzbee.domain.promotion.bag.IPromotionBag;
 import io.nzbee.domain.promotion.bag.item.IPromotionBagItem;
+import io.nzbee.domain.valueObjects.Locale;
+import io.nzbee.domain.valueObjects.UserName;
 import io.nzbee.unit.domain.beans.customer.CustomerDoBeanFactory;
 
 @RunWith(SpringRunner.class)
@@ -24,43 +30,39 @@ import io.nzbee.unit.domain.beans.customer.CustomerDoBeanFactory;
 public class UT_BagItemTest {
 
 	@Autowired
-	private CustomerDoBeanFactory customerDoBeanFactory;
+    private IPromotionService promotionService;
 	
-	@Autowired
-    private IRegularBagItemDomainService bagItemService;
+    private IPromotionBag pb;
     
-	@MockBean
-	private IBagItemPortService bagItemPortService;
-	
-    private IPromotionBagItem bagItem = null;
+    private final UserName TEST_USERNAME = new UserName("nob@nob");
     
 	@Before
 	public void setUp() {
 		// we setup a mock so that when
 		MockitoAnnotations.openMocks(this);
 		
-		Customer c = customerDoBeanFactory.getBean();
-		
+		pb = promotionService.find(Locale.localize(Constants.localeENGB, Constants.currencyHKD), TEST_USERNAME);
+				
 	}
 
 	
 	@Test
 	public void when3EligableItemsAdded_thenB3G33PromotionDiscountIsApplied() {
 		
-		bagItemService.checkAllBagItemRules(bagItem);
+		promotionService.applyAll(pb);
 		
-    	assertThat(bagItem.getDiscountAmount())
-    	.isEqualTo(Double.valueOf(10.0));
+//    	assertThat(bagItem.getDiscountPercentage())
+//    	.isEqualTo(Double.valueOf(10.0));
 	}
 	
 	
 	@Test
 	public void when6EligableItemsAdded_thenB3G33PromotionDiscountIsApplied() {
 		
-		bagItemService.checkAllBagItemRules(bagItem);
+		promotionService.applyAll(pb);
 		
-    	assertThat(bagItem.getDiscountAmount())
-    	.isEqualTo(Double.valueOf(10.0));
+//    	assertThat(bagItem.getDiscountPercentage())
+//    	.isEqualTo(Double.valueOf(10.0));
 	}
 	
 }

@@ -10,7 +10,6 @@ import io.nzbee.integration.entity.category.ConfigCategoryEntityTests;
 import io.nzbee.integration.entity.category.product.ConfigCategoryProductEntityTests;
 import io.nzbee.integration.entity.department.ConfigDepartmentEntityTests;
 import io.nzbee.integration.entity.product.ConfigProductEntityTests;
-import io.nzbee.integration.entity.promotion.ConfigPromotionEntityTests;
 import io.nzbee.integration.entity.tag.ConfigTagEntityTests;
 import io.nzbee.util.product.shipping.ShippingProductMasterService;
 
@@ -20,7 +19,6 @@ import io.nzbee.util.product.shipping.ShippingProductMasterService;
 		 ConfigDepartmentEntityTests.class,
 		 ConfigCategoryEntityTests.class,
 		 ConfigCategoryProductEntityTests.class,
-		 ConfigPromotionEntityTests.class,
 		 ConfigTagEntityTests.class})
 public class ConfigShippingProductEntityTests {
 	
