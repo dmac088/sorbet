@@ -101,7 +101,7 @@ import io.nzbee.view.product.brand.BrandViewServiceImpl;
 import io.nzbee.view.product.physical.full.PhysicalProductFullServiceImpl;
 import io.nzbee.view.product.physical.light.PhysicalProductLightViewServiceImpl;
 import io.nzbee.view.product.shipping.ShippingProductViewServiceImpl;
-import io.nzbee.view.product.shipping.destination.ShippingDestinationViewServiceImpl;
+import io.nzbee.view.product.shipping.country.ShippingCountryViewServiceImpl;
 import io.nzbee.view.product.shipping.type.ShippingTypeViewServiceImpl;
 
 @RunWith(SpringRunner.class)
@@ -124,7 +124,7 @@ import io.nzbee.view.product.shipping.type.ShippingTypeViewServiceImpl;
 		ProductPriceTypeService.class, PhysicalProductFullAdapterImpl.class, PhysicalProductFullDTOServiceImpl.class,
 		PhysicalProductFullDaoImpl.class, PhysicalProductFullViewMapperImpl.class, SearchResourceController.class,
 		SearchFacetModelAssembler.class, WebSecurityConfig.class, RegularBagItemDomainAdapter.class,
-		BagItemEntityServiceImpl.class, BagItemConfiguration.class, ShippingDestinationViewServiceImpl.class,
+		BagItemEntityServiceImpl.class, BagItemConfiguration.class, ShippingCountryViewServiceImpl.class,
 		ShippingDestinationAdapterImpl.class, ShippingDestinationViewMapperImpl.class,
 		ShippingTypeViewServiceImpl.class, ShippingTypeAdapterImpl.class, ShippingTypeViewMapperImpl.class,
 		BagViewDTOServiceImpl.class, BagViewDTODaoPostgresImpl.class, PhysicalProductDTOServiceImpl.class,

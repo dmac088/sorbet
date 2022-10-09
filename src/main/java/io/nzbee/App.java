@@ -8,11 +8,12 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.event.ContextRefreshedEvent;
 import io.nzbee.cache.CacheConfiguration;
+import io.nzbee.hkpost.HKPostConfig;
 import io.nzbee.util.FileStorageProperties;
 
 @SpringBootApplication
 @EnableCaching
-@EnableConfigurationProperties({ FileStorageProperties.class, Globals.class, CacheConfiguration.class})
+@EnableConfigurationProperties({ FileStorageProperties.class, Globals.class, CacheConfiguration.class, HKPostConfig.class})
 public class App {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());

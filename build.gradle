@@ -117,8 +117,6 @@ bootRun {
     environment 'RESOURCEPATH', '/Users/danielmackie/projects/sorbet' 
 }
 
-
-
 publishing {
     publications {
         maven(MavenPublication) {

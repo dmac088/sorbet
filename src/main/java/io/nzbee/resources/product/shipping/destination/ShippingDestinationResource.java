@@ -1,17 +1,18 @@
 package io.nzbee.resources.product.shipping.destination;
 
 import org.springframework.hateoas.RepresentationModel;
-import io.nzbee.view.product.shipping.destination.ShippingDestinationView;
+
+import io.nzbee.view.product.shipping.country.ShippingCountryView;
 
 public class ShippingDestinationResource  extends RepresentationModel<ShippingDestinationResource> {
 
-	private final ShippingDestinationView data;
+	private final ShippingCountryView data;
 	
-	public ShippingDestinationResource(final ShippingDestinationView product) {
+	public ShippingDestinationResource(final ShippingCountryView product) {
 		this.data = product;
 	}
 	
-	public ShippingDestinationView getData() {
+	public ShippingCountryView getData() {
 		return data;
 	}
 	

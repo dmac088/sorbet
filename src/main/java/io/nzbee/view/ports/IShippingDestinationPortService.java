@@ -1,10 +1,10 @@
 package io.nzbee.view.ports;
 import java.util.List;
 
-import io.nzbee.view.product.shipping.destination.ShippingDestinationView;
+import io.nzbee.view.product.shipping.country.ShippingCountryView;
 
-public interface IShippingDestinationPortService extends IViewPortService<ShippingDestinationView> {
+public interface IShippingDestinationPortService extends IViewPortService<ShippingCountryView> {
 
-	List<ShippingDestinationView> findAll(String locale);
+	List<ShippingCountryView> findAll(String locale);
 
 }

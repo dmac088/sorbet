@@ -58,8 +58,8 @@ import io.nzbee.view.product.physical.full.PhysicalProductFullView;
 import io.nzbee.view.product.physical.light.IPhysicalProductLightViewService;
 import io.nzbee.view.product.physical.light.PhysicalProductLightView;
 import io.nzbee.view.product.shipping.IShippingProductViewService;
-import io.nzbee.view.product.shipping.destination.IShippingDestiantionViewService;
-import io.nzbee.view.product.shipping.destination.ShippingDestinationView;
+import io.nzbee.view.product.shipping.country.IShippingCountryViewService;
+import io.nzbee.view.product.shipping.country.ShippingCountryView;
 import io.nzbee.view.product.shipping.type.IShippingTypeViewService;
 import io.nzbee.view.product.shipping.type.ShippingTypeView;
 
@@ -85,7 +85,7 @@ public class ProductController {
 	private IBrandViewService brandService;
 
 	@Autowired
-	private IShippingDestiantionViewService shippingDestiantionService;
+	private IShippingCountryViewService shippingDestiantionService;
 
 	@Autowired
 	private IShippingTypeViewService shippingTypeService;
@@ -198,7 +198,7 @@ public class ProductController {
 			@PathVariable String locale) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getShippingDestinations with parameter {}", locale);
 
-		List<ShippingDestinationView> pr = shippingDestiantionService.findByAllShippingDestinations(locale);
+		List<ShippingCountryView> pr = shippingDestiantionService.findByAllShippingDestinations(locale);
 		return ResponseEntity.ok(shippingDestinationResourceAssembler.toCollectionModel(pr));
 	}
 

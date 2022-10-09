@@ -1,10 +1,14 @@
 package io.nzbee.hkpost;
 
-import io.nzbee.domain.valueObjects.Locale;
+import java.util.List;
+
+import io.nzbee.view.product.shipping.ShippingProductView;
+import io.nzbee.view.product.shipping.country.ShippingCountryView;
 
 public interface IHKPostPort {
 
-	void save(Locale locale, PostageResponse postageResponse, String upc, String weightFrom, String weightTo,
-			String type, String country);
+	ShippingProductView getHKPostageFee(String countryCode, String shipCode, String weight);
+
+	List<ShippingCountryView> getCountries();
 	
 }

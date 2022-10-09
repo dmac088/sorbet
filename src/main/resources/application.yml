@@ -103,6 +103,11 @@ app:
     defaultPageSize: 10
     defaultProductRootCategoryCode: PRM02
     
+  hkpost:
+    countriesURL: "https://service.hongkongpost.hk/ecshipAPI-trial/version/1/common/counrtyList/get"
+    costURL: "https://service.hongkongpost.hk/ecshipAPI-trial/version/1/postage/get?countryCode={countryCode}&shipCode={shipCode}&weight={weight}"
+    usernname: "dmac088"
+    password: "e75c62d3-853d-4e1e-ad9c-97dd93ccbf4e"
 
 support:
     email: admin@littlebagshop.com

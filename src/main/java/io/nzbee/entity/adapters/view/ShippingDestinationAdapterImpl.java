@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import io.nzbee.entity.product.shipping.attribute.destination.IShippingDestinationViewMapper;
 import io.nzbee.entity.product.shipping.attribute.view.IShippingProductAttributeViewService;
 import io.nzbee.view.ports.IShippingDestinationPortService;
-import io.nzbee.view.product.shipping.destination.ShippingDestinationView;
+import io.nzbee.view.product.shipping.country.ShippingCountryView;
 
 public class ShippingDestinationAdapterImpl implements IShippingDestinationPortService{
 
@@ -19,7 +19,7 @@ public class ShippingDestinationAdapterImpl implements IShippingDestinationPortS
 	
 	@Override
 	@Transactional
-	public List<ShippingDestinationView> findAll(String locale) {
+	public List<ShippingCountryView> findAll(String locale) {
 		return shippingAttributeService.findAllShippingDestiantion(locale).stream().map(sa -> shippingDestinationMapper.toView(sa)).collect(Collectors.toList());
 	}
 	

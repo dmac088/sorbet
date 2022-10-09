@@ -102,8 +102,8 @@ import io.nzbee.view.product.physical.light.IPhysicalProductLightViewService;
 import io.nzbee.view.product.physical.light.PhysicalProductLightViewServiceImpl;
 import io.nzbee.view.product.shipping.IShippingProductViewService;
 import io.nzbee.view.product.shipping.ShippingProductViewServiceImpl;
-import io.nzbee.view.product.shipping.destination.IShippingDestiantionViewService;
-import io.nzbee.view.product.shipping.destination.ShippingDestinationViewServiceImpl;
+import io.nzbee.view.product.shipping.country.IShippingCountryViewService;
+import io.nzbee.view.product.shipping.country.ShippingCountryViewServiceImpl;
 import io.nzbee.view.product.shipping.type.IShippingTypeViewService;
 import io.nzbee.view.product.shipping.type.ShippingTypeViewServiceImpl;
 import io.nzbee.view.product.tag.facet.ITagFacetViewService;
@@ -208,8 +208,8 @@ class BeanConfiguration {
 	}
 	
 	@Bean
-	IShippingDestiantionViewService shippingDestiantionViewService() {
-		return new ShippingDestinationViewServiceImpl();
+	IShippingCountryViewService shippingDestiantionViewService() {
+		return new ShippingCountryViewServiceImpl();
 	}
 	
 	@Bean
