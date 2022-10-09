@@ -8,5 +8,4 @@ public interface IHKPostService {
 
 	PostageResponse getHKPostageFee(String countryCode, String shipCode, String weight);
 
-	
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.hkpost.IHKPostPort;
 import io.nzbee.hkpost.IHKPostService;
 import io.nzbee.hkpost.country.ICountryViewMapper;
@@ -28,9 +30,9 @@ public class HKPostAdapter implements IHKPostPort {
 	}
 
 	@Override
-	public List<ShippingCountryView> getCountries() {
+	public List<ShippingCountryView> getCountries(String locale, String currency) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getCountries()");
-		return countryViewMapper.toView(hkPostService.getCountries());
+		return countryViewMapper.toView(Locale.localize(locale, currency), hkPostService.getCountries());
 	}
 
 }

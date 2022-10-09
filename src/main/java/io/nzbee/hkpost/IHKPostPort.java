@@ -9,6 +9,6 @@ public interface IHKPostPort {
 
 	ShippingProductView getHKPostageFee(String countryCode, String shipCode, String weight);
 
-	List<ShippingCountryView> getCountries();
+	List<ShippingCountryView> getCountries(String locale, String currency);
 	
 }

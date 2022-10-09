@@ -26,8 +26,8 @@ public class HKPostDaoImpl implements IHKPostDao {
 	
 	@Override
 	public PostageResponse getHKPostageFee(	String countryCode, 
-															String shipCode, 
-															String weight) {
+											String shipCode, 
+											String weight) {
 		LOGGER.debug("call " + getClass() + ".getHKPostRequest()");
 		
 		RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
