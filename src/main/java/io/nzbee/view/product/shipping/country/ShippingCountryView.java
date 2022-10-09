@@ -2,24 +2,24 @@ package io.nzbee.view.product.shipping.country;
 
 public class ShippingCountryView {
 
-	private String productDestinationCode;
+	private String CountryCode;
 	
-	private String productDestinationDesc;
+	private String CountryDesc;
 
-	public String getProductDestinationCode() {
-		return productDestinationCode;
+	public String getCountryCode() {
+		return CountryCode;
 	}
 
-	public void setProductDestinationCode(String productDestinationCode) {
-		this.productDestinationCode = productDestinationCode;
+	public void setCountryCode(String CountryCode) {
+		this.CountryCode = CountryCode;
 	}
 
-	public String getProductDestinationDesc() {
-		return productDestinationDesc;
+	public String getCountryDesc() {
+		return CountryDesc;
 	}
 
-	public void setProductDestinationDesc(String productDestinationDesc) {
-		this.productDestinationDesc = productDestinationDesc;
+	public void setCountryDesc(String CountryDesc) {
+		this.CountryDesc = CountryDesc;
 	}
 	
 }

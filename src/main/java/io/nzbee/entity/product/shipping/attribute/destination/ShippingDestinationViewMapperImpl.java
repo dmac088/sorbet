@@ -10,8 +10,8 @@ public class ShippingDestinationViewMapperImpl implements IShippingDestinationVi
 	@Override
 	public ShippingCountryView toView(ShippingDestinationDTO d) {
 		ShippingCountryView sdv = new ShippingCountryView();
-		sdv.setProductDestinationCode(d.getShippingDestinationCode());
-		sdv.setProductDestinationDesc(d.getShippingDestinationDesc());
+		sdv.setCountryCode(d.getShippingDestinationCode());
+		sdv.setCountryDesc(d.getShippingDestinationDesc());
 		return sdv;
 	}
 

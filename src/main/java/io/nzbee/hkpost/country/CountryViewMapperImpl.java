@@ -21,8 +21,8 @@ public class CountryViewMapperImpl implements ICountryViewMapper {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".toView() with parameters : {}", locale);
 		return dto.getData().stream().map(c -> { 
 			ShippingCountryView scv = new ShippingCountryView();
-			scv.setProductDestinationCode(c.getHkpCtyCode());
-			scv.setProductDestinationDesc(getDesc(locale.getLanguageCode(), c));
+			scv.setCountryCode(c.getHkpCtyCode());
+			scv.setCountryDesc(getDesc(locale.getLanguageCode(), c));
 			return scv;
 		}).collect(Collectors.toList());
 	}
