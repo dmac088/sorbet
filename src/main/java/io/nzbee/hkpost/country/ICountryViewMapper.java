@@ -7,6 +7,6 @@ import io.nzbee.view.product.shipping.country.ShippingCountryView;
 
 public interface ICountryViewMapper {
 
-	List<ShippingCountryView> toView(Locale locale, CountryResponseDTO dto);
+	List<ShippingCountryView> toView(Locale locale, List<CountryViewDTO> list);
 
 }

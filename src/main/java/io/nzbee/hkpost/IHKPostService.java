@@ -1,10 +1,11 @@
 package io.nzbee.hkpost;
 
-import io.nzbee.hkpost.country.CountryResponseDTO;
+import java.util.List;
+import io.nzbee.hkpost.country.CountryViewDTO;
 
 public interface IHKPostService {
 
-	CountryResponseDTO getCountries();
+	List<CountryViewDTO> getCountries();
 
 	PostageResponse getHKPostageFee(String countryCode, String shipCode, String weight);
 

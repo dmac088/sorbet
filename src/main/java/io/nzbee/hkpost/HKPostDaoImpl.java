@@ -1,7 +1,12 @@
 package io.nzbee.hkpost;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.EnumUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +19,9 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
+import io.nzbee.hkpost.country.AllowedCountryCodes;
 import io.nzbee.hkpost.country.CountryResponseDTO;
+import io.nzbee.hkpost.country.CountryViewDTO;
 
 @Component
 public class HKPostDaoImpl implements IHKPostDao {
@@ -64,7 +71,7 @@ public class HKPostDaoImpl implements IHKPostDao {
 	}
 	
 	@Override
-	public CountryResponseDTO getCountries() {
+	public List<CountryViewDTO> getCountries() {
 		LOGGER.debug("call " + getClass() + ".getCountries()");
 		
 		RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
@@ -89,12 +96,16 @@ public class HKPostDaoImpl implements IHKPostDao {
 											params
 											);
 			
-			return response.getBody();
+			CountryResponseDTO cr = response.getBody();
+			
+			return cr.getData().stream().filter(c -> EnumUtils.isValidEnum(AllowedCountryCodes.class, c.getHkpCtyCode())).collect(Collectors.toList());
+			
 		} catch (RestClientException e) {
 			//throw ???????? 
 			e.printStackTrace();
 		}
-		return response.getBody();
+		
+		return new ArrayList<CountryViewDTO>();
 	}
 	
 }

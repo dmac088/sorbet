@@ -17,9 +17,9 @@ public class CountryViewMapperImpl implements ICountryViewMapper {
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 	
 	@Override
-	public List<ShippingCountryView> toView(Locale locale, CountryResponseDTO dto) {
+	public List<ShippingCountryView> toView(Locale locale, List<CountryViewDTO> list) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".toView() with parameters : {}", locale);
-		return dto.getData().stream().map(c -> { 
+		return list.stream().map(c -> { 
 			ShippingCountryView scv = new ShippingCountryView();
 			scv.setCountryCode(c.getHkpCtyCode());
 			scv.setCountryDesc(getDesc(locale.getLanguageCode(), c));
@@ -36,5 +36,5 @@ public class CountryViewMapperImpl implements ICountryViewMapper {
 			return dto.getNameE();
 		}
 	}
-	
+
 }

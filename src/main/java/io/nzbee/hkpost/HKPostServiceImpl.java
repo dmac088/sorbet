@@ -1,8 +1,9 @@
 package io.nzbee.hkpost;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import io.nzbee.hkpost.country.CountryResponseDTO;
+import io.nzbee.hkpost.country.CountryViewDTO;
 
 @Service
 public class HKPostServiceImpl implements IHKPostService {
@@ -11,15 +12,12 @@ public class HKPostServiceImpl implements IHKPostService {
 	private IHKPostDao hkPostDao;
 
 	@Override
-	public CountryResponseDTO getCountries() {
+	public List<CountryViewDTO> getCountries() {
 		return hkPostDao.getCountries();
 	}
 
 	@Override
 	public PostageResponse getHKPostageFee(String countryCode, String shipCode, String weight) {
 		return hkPostDao.getHKPostageFee(countryCode, shipCode, weight);
-	}
-	
-	
-	
+	}	
 }
