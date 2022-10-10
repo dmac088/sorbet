@@ -33,7 +33,7 @@ import io.nzbee.view.bag.BagView;
 import io.nzbee.view.bag.IBagViewService;
 import io.nzbee.view.bag.item.BagItemViewIn;
 import io.nzbee.view.bag.item.BagItemViewOut;
-import io.nzbee.view.product.shipping.ShippingItemDTOIn;
+import io.nzbee.view.shipping.ShippingItemDTOIn;
 
 @RestController
 @RequestMapping("/api")

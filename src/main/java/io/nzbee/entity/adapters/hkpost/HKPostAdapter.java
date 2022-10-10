@@ -10,8 +10,8 @@ import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.hkpost.IHKPostPort;
 import io.nzbee.hkpost.IHKPostService;
 import io.nzbee.hkpost.country.ICountryViewMapper;
-import io.nzbee.view.product.shipping.ShippingProductView;
-import io.nzbee.view.product.shipping.country.ShippingCountryView;
+import io.nzbee.view.shipping.ShippingProductView;
+import io.nzbee.view.shipping.country.ShippingCountryView;
 
 public class HKPostAdapter implements IHKPostPort {
 

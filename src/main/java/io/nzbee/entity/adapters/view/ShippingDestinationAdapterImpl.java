@@ -6,10 +6,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import io.nzbee.entity.product.shipping.attribute.destination.IShippingDestinationViewMapper;
 import io.nzbee.entity.product.shipping.attribute.view.IShippingProductAttributeViewService;
-import io.nzbee.view.ports.IShippingDestinationPortService;
-import io.nzbee.view.product.shipping.country.ShippingCountryView;
+import io.nzbee.view.ports.IShippingCountryPortService;
+import io.nzbee.view.shipping.country.ShippingCountryView;
 
-public class ShippingDestinationAdapterImpl implements IShippingDestinationPortService{
+public class ShippingDestinationAdapterImpl implements IShippingCountryPortService{
 
 	@Autowired
 	private IShippingProductAttributeViewService shippingAttributeService;

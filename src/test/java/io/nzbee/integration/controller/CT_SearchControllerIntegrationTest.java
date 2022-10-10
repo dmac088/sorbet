@@ -100,9 +100,9 @@ import io.nzbee.security.user.UserService;
 import io.nzbee.view.product.brand.BrandViewServiceImpl;
 import io.nzbee.view.product.physical.full.PhysicalProductFullServiceImpl;
 import io.nzbee.view.product.physical.light.PhysicalProductLightViewServiceImpl;
-import io.nzbee.view.product.shipping.ShippingProductViewServiceImpl;
-import io.nzbee.view.product.shipping.country.ShippingCountryViewServiceImpl;
 import io.nzbee.view.product.shipping.type.ShippingTypeViewServiceImpl;
+import io.nzbee.view.shipping.ShippingProductViewServiceImpl;
+import io.nzbee.view.shipping.country.ShippingCountryViewServiceImpl;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = { ProductController.class, PhysicalProductLightViewServiceImpl.class,

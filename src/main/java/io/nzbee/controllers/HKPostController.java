@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import io.nzbee.hkpost.IHKPostPort;
 import io.nzbee.hkpost.PostageResponse;
-import io.nzbee.view.product.shipping.country.ShippingCountryView;
+import io.nzbee.view.shipping.country.ShippingCountryView;
 
 @RestController
 @RequestMapping("/api")

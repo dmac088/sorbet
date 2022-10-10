@@ -2,7 +2,7 @@ package io.nzbee.entity.product.shipping.attribute.destination;
 
 import org.springframework.stereotype.Component;
 
-import io.nzbee.view.product.shipping.country.ShippingCountryView;
+import io.nzbee.view.shipping.country.ShippingCountryView;
 
 @Component
 public class ShippingDestinationViewMapperImpl implements IShippingDestinationViewMapper {

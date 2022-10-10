@@ -89,7 +89,7 @@ import io.nzbee.view.ports.ICategoryViewPortService;
 import io.nzbee.view.ports.ICustomerPortService;
 import io.nzbee.view.ports.IPhysicalProductFullPortService;
 import io.nzbee.view.ports.IPhysicalProductLightPortService;
-import io.nzbee.view.ports.IShippingDestinationPortService;
+import io.nzbee.view.ports.IShippingCountryPortService;
 import io.nzbee.view.ports.IShippingProductPortService;
 import io.nzbee.view.ports.IShippingTypePortService;
 import io.nzbee.view.product.brand.IBrandViewService;
@@ -100,14 +100,14 @@ import io.nzbee.view.product.physical.full.IPhysicalProductFullService;
 import io.nzbee.view.product.physical.full.PhysicalProductFullServiceImpl;
 import io.nzbee.view.product.physical.light.IPhysicalProductLightViewService;
 import io.nzbee.view.product.physical.light.PhysicalProductLightViewServiceImpl;
-import io.nzbee.view.product.shipping.IShippingProductViewService;
-import io.nzbee.view.product.shipping.ShippingProductViewServiceImpl;
-import io.nzbee.view.product.shipping.country.IShippingCountryViewService;
-import io.nzbee.view.product.shipping.country.ShippingCountryViewServiceImpl;
 import io.nzbee.view.product.shipping.type.IShippingTypeViewService;
 import io.nzbee.view.product.shipping.type.ShippingTypeViewServiceImpl;
 import io.nzbee.view.product.tag.facet.ITagFacetViewService;
 import io.nzbee.view.product.tag.facet.TagFacetViewServiceImpl;
+import io.nzbee.view.shipping.IShippingProductViewService;
+import io.nzbee.view.shipping.ShippingProductViewServiceImpl;
+import io.nzbee.view.shipping.country.IShippingCountryViewService;
+import io.nzbee.view.shipping.country.ShippingCountryViewServiceImpl;
 
 @Configuration
 class BeanConfiguration {
@@ -203,7 +203,7 @@ class BeanConfiguration {
 	}
 	
 	@Bean
-	IShippingDestinationPortService shippingDestinationPortService() {
+	IShippingCountryPortService shippingDestinationPortService() {
 		return new ShippingDestinationAdapterImpl();
 	}
 	

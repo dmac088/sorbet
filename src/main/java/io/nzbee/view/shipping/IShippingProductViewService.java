@@ -1,4 +1,4 @@
-package io.nzbee.view.product.shipping;
+package io.nzbee.view.shipping;
 
 import java.math.BigDecimal;
 import io.nzbee.domain.valueObjects.Locale;

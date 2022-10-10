@@ -2,7 +2,7 @@ package io.nzbee.resources.product.shipping.destination;
 
 import org.springframework.hateoas.RepresentationModel;
 
-import io.nzbee.view.product.shipping.country.ShippingCountryView;
+import io.nzbee.view.shipping.country.ShippingCountryView;
 
 public class ShippingDestinationResource  extends RepresentationModel<ShippingDestinationResource> {
 

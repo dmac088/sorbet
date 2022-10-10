@@ -1,7 +1,8 @@
 package io.nzbee.resources.product.shipping;
 
 import org.springframework.hateoas.RepresentationModel;
-import io.nzbee.view.product.shipping.ShippingProductView;
+
+import io.nzbee.view.shipping.ShippingProductView;
 
 public class ShippingProductResource  extends RepresentationModel<ShippingProductResource> {
 

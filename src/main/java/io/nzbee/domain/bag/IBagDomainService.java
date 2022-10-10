@@ -4,7 +4,7 @@ import io.nzbee.domain.valueObjects.CouponCode;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.UserName;
 import io.nzbee.view.bag.item.BagItemViewIn;
-import io.nzbee.view.product.shipping.ShippingItemDTOIn;
+import io.nzbee.view.shipping.ShippingItemDTOIn;
 
 public interface IBagDomainService  {
 

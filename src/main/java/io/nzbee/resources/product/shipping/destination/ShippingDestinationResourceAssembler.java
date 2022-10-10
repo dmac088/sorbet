@@ -6,7 +6,7 @@ import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSuppor
 import org.springframework.stereotype.Component;
 
 import io.nzbee.controllers.ProductController;
-import io.nzbee.view.product.shipping.country.ShippingCountryView;
+import io.nzbee.view.shipping.country.ShippingCountryView;
 
 @Component
 public class ShippingDestinationResourceAssembler extends RepresentationModelAssemblerSupport<ShippingCountryView, ShippingDestinationResource> {

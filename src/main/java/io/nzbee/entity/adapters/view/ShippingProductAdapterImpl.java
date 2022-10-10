@@ -9,7 +9,7 @@ import io.nzbee.ErrorKeys;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.entity.product.shipping.view.IShippingProductViewDTOMapper;
 import io.nzbee.view.ports.IShippingProductPortService;
-import io.nzbee.view.product.shipping.ShippingProductView;
+import io.nzbee.view.shipping.ShippingProductView;
 
 public class ShippingProductAdapterImpl  implements IShippingProductPortService {
 

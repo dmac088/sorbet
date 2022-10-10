@@ -2,8 +2,8 @@ package io.nzbee.hkpost;
 
 import java.util.List;
 
-import io.nzbee.view.product.shipping.ShippingProductView;
-import io.nzbee.view.product.shipping.country.ShippingCountryView;
+import io.nzbee.view.shipping.ShippingProductView;
+import io.nzbee.view.shipping.country.ShippingCountryView;
 
 public interface IHKPostPort {
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import io.nzbee.Constants;
 import io.nzbee.domain.valueObjects.Locale;
-import io.nzbee.view.product.shipping.country.ShippingCountryView;
+import io.nzbee.view.shipping.country.ShippingCountryView;
 
 @Component
 public class CountryViewMapperImpl implements ICountryViewMapper {

@@ -1,4 +1,4 @@
-package io.nzbee.view.product.shipping.country;
+package io.nzbee.view.shipping.country;
 
 import java.util.List;
 import io.nzbee.view.IViewService;

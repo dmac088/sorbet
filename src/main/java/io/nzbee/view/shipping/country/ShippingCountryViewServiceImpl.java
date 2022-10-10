@@ -1,13 +1,13 @@
-package io.nzbee.view.product.shipping.country;
+package io.nzbee.view.shipping.country;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import io.nzbee.view.ports.IShippingDestinationPortService;
+import io.nzbee.view.ports.IShippingCountryPortService;
 
 public class ShippingCountryViewServiceImpl implements IShippingCountryViewService {
 
 	@Autowired 
-	private IShippingDestinationPortService shippingDestinationAdapter;
+	private IShippingCountryPortService shippingDestinationAdapter;
 	
 	@Override
 	public List<ShippingCountryView> findByAllShippingDestinations(String locale) {

@@ -16,7 +16,7 @@ import io.nzbee.domain.valueObjects.ProductUPC;
 import io.nzbee.domain.valueObjects.Quantity;
 import io.nzbee.domain.valueObjects.UserName;
 import io.nzbee.view.bag.item.BagItemViewIn;
-import io.nzbee.view.product.shipping.ShippingItemDTOIn;
+import io.nzbee.view.shipping.ShippingItemDTOIn;
 
 public class BagDomainServiceImpl implements IBagDomainService {
 	

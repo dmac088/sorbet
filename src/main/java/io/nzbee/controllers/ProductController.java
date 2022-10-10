@@ -57,11 +57,11 @@ import io.nzbee.view.product.physical.full.IPhysicalProductFullService;
 import io.nzbee.view.product.physical.full.PhysicalProductFullView;
 import io.nzbee.view.product.physical.light.IPhysicalProductLightViewService;
 import io.nzbee.view.product.physical.light.PhysicalProductLightView;
-import io.nzbee.view.product.shipping.IShippingProductViewService;
-import io.nzbee.view.product.shipping.country.IShippingCountryViewService;
-import io.nzbee.view.product.shipping.country.ShippingCountryView;
 import io.nzbee.view.product.shipping.type.IShippingTypeViewService;
 import io.nzbee.view.product.shipping.type.ShippingTypeView;
+import io.nzbee.view.shipping.IShippingProductViewService;
+import io.nzbee.view.shipping.country.IShippingCountryViewService;
+import io.nzbee.view.shipping.country.ShippingCountryView;
 
 @RestController
 @RequestMapping("/api")
