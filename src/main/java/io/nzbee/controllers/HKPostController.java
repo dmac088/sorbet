@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import io.nzbee.hkpost.IHKPostPort;
 import io.nzbee.hkpost.PostageResponse;
+import io.nzbee.view.shipping.code.ShippingCodeView;
 import io.nzbee.view.shipping.country.ShippingCountryView;
 
 @RestController
@@ -37,6 +38,13 @@ public class HKPostController {
 		LOGGER.debug("call " + getClass() + ".getCountries() with params: {}, {}", locale, currency);
 		
 		return hkPostAdapter.getCountries(locale, currency);
+	}
+	
+	@GetMapping("/hkpost/{locale}/{currency}/shipcodes")
+	public List<ShippingCodeView> getShipCodes(@PathVariable String locale, @PathVariable String currency) {
+		LOGGER.debug("call " + getClass() + ".getCountries() with params: {}, {}", locale, currency);
+		
+		return hkPostAdapter.getShipCodes(locale, currency);
 	}
 	
 }

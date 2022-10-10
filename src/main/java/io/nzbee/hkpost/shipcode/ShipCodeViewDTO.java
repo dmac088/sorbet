@@ -6,17 +6,17 @@ public class ShipCodeViewDTO {
 	
 	private String nameE;
 	
-	private String nameT;
+	private String nameC;
 	
 	private String nameS;
 	
 	private String status;
 
-	public ShipCodeViewDTO(String code, String nameE, String nameT, String nameS, String status) {
+	public ShipCodeViewDTO(String code, String nameE, String nameC, String nameS, String status) {
 		super();
 		this.code = code;
 		this.nameE = nameE;
-		this.nameT = nameT;
+		this.nameC = nameC;
 		this.nameS = nameS;
 		this.status = status;
 	}
@@ -37,12 +37,12 @@ public class ShipCodeViewDTO {
 		this.nameE = nameE;
 	}
 
-	public String getNameT() {
-		return nameT;
+	public String getNameC() {
+		return nameC;
 	}
 
-	public void setNameT(String nameT) {
-		this.nameT = nameT;
+	public void setNameC(String nameT) {
+		this.nameC = nameT;
 	}
 
 	public String getNameS() {
@@ -60,5 +60,6 @@ public class ShipCodeViewDTO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	
 }
