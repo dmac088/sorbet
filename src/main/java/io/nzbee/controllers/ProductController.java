@@ -30,10 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.nzbee.Constants;
 import io.nzbee.ErrorKeys;
 import io.nzbee.Globals;
-import io.nzbee.domain.bag.IBag;
-import io.nzbee.domain.bag.IBagDomainService;
 import io.nzbee.domain.valueObjects.Locale;
-import io.nzbee.domain.valueObjects.UserName;
 import io.nzbee.enums.FacetNameEnum;
 import io.nzbee.exceptions.EntityNotFoundException;
 import io.nzbee.exceptions.ImageNotFoundException;
@@ -44,8 +41,6 @@ import io.nzbee.resources.product.physical.full.PhysicalProductFullModel;
 import io.nzbee.resources.product.physical.full.PhysicalProductFullModelAssembler;
 import io.nzbee.resources.product.physical.light.PhysicalProductLightModel;
 import io.nzbee.resources.product.physical.light.PhysicalProductLightModelAssembler;
-import io.nzbee.resources.product.shipping.ShippingProductResource;
-import io.nzbee.resources.product.shipping.ShippingProductResourceAssembler;
 import io.nzbee.resources.product.shipping.destination.ShippingDestinationResource;
 import io.nzbee.resources.product.shipping.destination.ShippingDestinationResourceAssembler;
 import io.nzbee.resources.product.shipping.type.ShippingTypeResource;
@@ -59,7 +54,6 @@ import io.nzbee.view.product.physical.light.IPhysicalProductLightViewService;
 import io.nzbee.view.product.physical.light.PhysicalProductLightView;
 import io.nzbee.view.product.shipping.type.IShippingTypeViewService;
 import io.nzbee.view.product.shipping.type.ShippingTypeView;
-import io.nzbee.view.shipping.IShippingProductViewService;
 import io.nzbee.view.shipping.country.IShippingCountryViewService;
 import io.nzbee.view.shipping.country.ShippingCountryView;
 
@@ -79,9 +73,6 @@ public class ProductController {
 	private IPhysicalProductLightViewService physicalProductLightService;
 
 	@Autowired
-	private IBagDomainService bagService;
-
-	@Autowired
 	private IBrandViewService brandService;
 
 	@Autowired
@@ -89,13 +80,7 @@ public class ProductController {
 
 	@Autowired
 	private IShippingTypeViewService shippingTypeService;
-
-	@Autowired
-	private IShippingProductViewService shippingProductViewService;
-
-	@Autowired
-	private ShippingProductResourceAssembler prodShippingResourceAssembler;
-
+	
 	@Autowired
 	private PhysicalProductLightModelAssembler prodLightResourceAssembler;
 
@@ -211,19 +196,6 @@ public class ProductController {
 		List<ShippingTypeView> pr = shippingTypeService.findByAllShippingTypesByDestinationAndWeight(locale,
 				destination, principal.getName());
 		return ResponseEntity.ok(shippingTypeResourceAssembler.toCollectionModel(pr));
-	}
-
-	@GetMapping("/Product/{locale}/{currency}/Destination/{code}/Type/{type}")
-	public ResponseEntity<ShippingProductResource> getByDestinationAndType(@PathVariable String locale,
-			@PathVariable String currency, @PathVariable String code, @PathVariable String type, Principal principal) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".getByDestinationAndType with parameter {}, {}, {}, {}, {}", locale, currency, code, type, principal.getName());
-		
-		IBag b = bagService.findByCode(Locale.localize(locale, currency), new UserName(principal.getName()));
-
-		ShippingProductResource pr = prodShippingResourceAssembler.toModel(shippingProductViewService
-				.findByDestinationAndTypeAndBagWeight(Locale.localize(locale, currency), code, type, b.getTotalWeight().amount()));
-
-		return new ResponseEntity<>(pr, HttpStatus.OK);
 	}
 
 }

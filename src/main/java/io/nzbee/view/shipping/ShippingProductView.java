@@ -1,68 +1,48 @@
 package io.nzbee.view.shipping;
 
+import java.math.BigDecimal;
+
 public class ShippingProductView  {
-	
-	private final String productUPC;
-	
-	private final String shippingDestinationCode;
-	
-	private final String shippingDestinationDesc;
-	
-	private final String shippingTypeCode;
-	
-	private final String shippingTypeDesc;
-	
-	private final Double weightLimit;
-    
-    private final Double weightFrom;
-    
-    private final Double weightTo;
     
     
+	private final BigDecimal totalPostage;
+    
+    private final BigDecimal additionalCharge;
+    
+    private final BigDecimal insurancePremiumFee;
+    
+    private final BigDecimal withPostageSurcharge;
+    
+    private final BigDecimal withHighValueSurcharge;
 
-	public ShippingProductView(String productUPC, String shippingDestinationCode, String shippingDestinationDesc,
-			String shippingTypeCode, String shippingTypeDesc, Double weightLimit, Double weightFrom, Double weightTo) {
+	public ShippingProductView(BigDecimal totalPostage, BigDecimal additionalCharge, BigDecimal insurancePremiumFee,
+			BigDecimal withPostageSurcharge, BigDecimal withHighValueSurcharge) {
 		super();
-		this.productUPC = productUPC;
-		this.shippingDestinationCode = shippingDestinationCode;
-		this.shippingDestinationDesc = shippingDestinationDesc;
-		this.shippingTypeCode = shippingTypeCode;
-		this.shippingTypeDesc = shippingTypeDesc;
-		this.weightLimit = weightLimit;
-		this.weightFrom = weightFrom;
-		this.weightTo = weightTo;
+		this.totalPostage = totalPostage;
+		this.additionalCharge = additionalCharge;
+		this.insurancePremiumFee = insurancePremiumFee;
+		this.withPostageSurcharge = withPostageSurcharge;
+		this.withHighValueSurcharge = withHighValueSurcharge;
 	}
 
-	public String getShippingDestinationCode() {
-		return shippingDestinationCode;
+	public BigDecimal getTotalPostage() {
+		return totalPostage;
 	}
 
-	public String getShippingDestinationDesc() {
-		return shippingDestinationDesc;
+	public BigDecimal getAdditionalCharge() {
+		return additionalCharge;
 	}
 
-	public String getShippingTypeCode() {
-		return shippingTypeCode;
+	public BigDecimal getInsurancePremiumFee() {
+		return insurancePremiumFee;
 	}
 
-	public String getShippingTypeDesc() {
-		return shippingTypeDesc;
+	public BigDecimal getWithPostageSurcharge() {
+		return withPostageSurcharge;
 	}
 
-	public Double getWeightLimit() {
-		return weightLimit;
-	}
-
-	public Double getWeightFrom() {
-		return weightFrom;
-	}
-
-	public Double getWeightTo() {
-		return weightTo;
-	}
-
-	public String getProductUPC() {
-		return productUPC;
+	public BigDecimal getWithHighValueSurcharge() {
+		return withHighValueSurcharge;
 	}
     
 }

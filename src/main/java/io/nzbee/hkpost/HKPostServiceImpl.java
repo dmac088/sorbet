@@ -17,7 +17,7 @@ public class HKPostServiceImpl implements IHKPostService {
 	}
 
 	@Override
-	public PostageResponse getHKPostageFee(String countryCode, String shipCode, String weight) {
+	public PostageProductViewDTO getHKPostageFee(String countryCode, String shipCode, String weight) {
 		return hkPostDao.getHKPostageFee(countryCode, shipCode, weight);
 	}	
 }

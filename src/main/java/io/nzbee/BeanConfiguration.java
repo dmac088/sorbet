@@ -23,7 +23,6 @@ import io.nzbee.entity.adapters.view.PhysicalProductFullAdapterImpl;
 import io.nzbee.entity.adapters.view.PhysicalProductLightAdapterImpl;
 import io.nzbee.entity.adapters.view.ProductCategoryAdapterImpl;
 import io.nzbee.entity.adapters.view.ShippingDestinationAdapterImpl;
-import io.nzbee.entity.adapters.view.ShippingProductAdapterImpl;
 import io.nzbee.entity.adapters.view.ShippingTypeAdapterImpl;
 import io.nzbee.entity.bag.view.BagViewDTOServiceImpl;
 import io.nzbee.entity.bag.view.IBagViewDTOService;
@@ -68,13 +67,12 @@ import io.nzbee.entity.product.physical.view.IPhysicalProductDTODao;
 import io.nzbee.entity.product.physical.view.IPhysicalProductDTOMapper;
 import io.nzbee.entity.product.physical.view.PhysicalProductDTODaoPostgresImpl;
 import io.nzbee.entity.product.physical.view.PhysicalProductDTOMapperImpl;
-import io.nzbee.entity.product.shipping.view.IShippingProductViewDTOMapper;
-import io.nzbee.entity.product.shipping.view.ShippingProductViewDTOMapperImpl;
 import io.nzbee.entity.product.status.IProductStatusService;
 import io.nzbee.entity.product.status.ProductStatusServiceImpl;
 import io.nzbee.hkpost.IHKPostPort;
+import io.nzbee.hkpost.IPostageProductViewMapper;
+import io.nzbee.hkpost.PostageProductViewMapperImpl;
 import io.nzbee.resources.product.physical.light.PhysicalProductLightModel;
-import io.nzbee.resources.product.shipping.ShippingProductResource;
 import io.nzbee.util.ports.IPhysicalProductMasterPort;
 import io.nzbee.view.bag.BagViewServiceImpl;
 import io.nzbee.view.bag.IBagViewService;
@@ -90,7 +88,6 @@ import io.nzbee.view.ports.ICustomerPortService;
 import io.nzbee.view.ports.IPhysicalProductFullPortService;
 import io.nzbee.view.ports.IPhysicalProductLightPortService;
 import io.nzbee.view.ports.IShippingCountryPortService;
-import io.nzbee.view.ports.IShippingProductPortService;
 import io.nzbee.view.ports.IShippingTypePortService;
 import io.nzbee.view.product.brand.IBrandViewService;
 import io.nzbee.view.product.brand.BrandViewServiceImpl;
@@ -104,13 +101,16 @@ import io.nzbee.view.product.shipping.type.IShippingTypeViewService;
 import io.nzbee.view.product.shipping.type.ShippingTypeViewServiceImpl;
 import io.nzbee.view.product.tag.facet.ITagFacetViewService;
 import io.nzbee.view.product.tag.facet.TagFacetViewServiceImpl;
-import io.nzbee.view.shipping.IShippingProductViewService;
-import io.nzbee.view.shipping.ShippingProductViewServiceImpl;
 import io.nzbee.view.shipping.country.IShippingCountryViewService;
 import io.nzbee.view.shipping.country.ShippingCountryViewServiceImpl;
 
 @Configuration
 class BeanConfiguration {
+	
+	@Bean
+	IPostageProductViewMapper postageProductViewMapper() {
+		return new PostageProductViewMapperImpl();
+	}
 	
 	@Bean
 	IPromotionBagDomainDTODao promotionBagDomainDTODao() {
@@ -170,16 +170,6 @@ class BeanConfiguration {
 	@Bean
 	IBagDomainDTOService bagDomainDTOService() {
 		return new BagDomainDTOServiceImpl();
-	}
-	
-	@Bean
-	IShippingProductViewDTOMapper shippingProductViewMapper() {
-		return new ShippingProductViewDTOMapperImpl();
-	}
-	
-	@Bean
-	IShippingProductViewService shippingProductViewService() {
-		return new ShippingProductViewServiceImpl();
 	}
 	
 	@Bean 
@@ -317,11 +307,6 @@ class BeanConfiguration {
 		return new PhysicalProductFullServiceImpl();
 	}
 	
-	@Bean
-	IShippingProductPortService shippingProductPortService() {
-		return new ShippingProductAdapterImpl();
-	}
-	
 	@Bean	
 	IPhysicalProductLightPortService productLightPortService() {
 		return new PhysicalProductLightAdapterImpl();
@@ -342,11 +327,6 @@ class BeanConfiguration {
 	IPhysicalProductFullViewMapper productFullMapper() {
 		return new PhysicalProductFullViewMapperImpl();
 	}
-	
-	@Bean
-    PagedResourcesAssembler<ShippingProductResource> pagedShippingProductResourceAssembler() {
-    	return new PagedResourcesAssembler<ShippingProductResource>(null, null);
-    }
 	
 	@Bean
     PagedResourcesAssembler<PhysicalProductLightModel> pagedPhysicalProductLightResourceAssembler() {

@@ -7,6 +7,6 @@ public interface IHKPostService {
 
 	List<CountryViewDTO> getCountries();
 
-	PostageResponse getHKPostageFee(String countryCode, String shipCode, String weight);
+	PostageProductViewDTO getHKPostageFee(String countryCode, String shipCode, String weight);
 
 }

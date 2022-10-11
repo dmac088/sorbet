@@ -32,7 +32,7 @@ public class HKPostDaoImpl implements IHKPostDao {
 	private HKPostConfig config;
 	
 	@Override
-	public PostageResponse getHKPostageFee(	String countryCode, 
+	public PostageProductViewDTO getHKPostageFee(	String countryCode, 
 											String shipCode, 
 											String weight) {
 		LOGGER.debug("call " + getClass() + ".getHKPostRequest()");
@@ -46,7 +46,7 @@ public class HKPostDaoImpl implements IHKPostDao {
 		params.put("shipCode", shipCode);
 		params.put("weight", weight);
 		
-		ResponseEntity<PostageResponse> response = null;
+		ResponseEntity<PostageProductViewDTO> response = null;
 		
 		try {
 			
@@ -58,7 +58,7 @@ public class HKPostDaoImpl implements IHKPostDao {
 											builder.toUriString(), 
 											HttpMethod.GET,
 											requestEntity,
-											PostageResponse.class,
+											PostageProductViewDTO.class,
 											params
 											);
 			

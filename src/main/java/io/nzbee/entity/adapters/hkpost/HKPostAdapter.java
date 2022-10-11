@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.hkpost.IHKPostPort;
 import io.nzbee.hkpost.IHKPostService;
+import io.nzbee.hkpost.IPostageProductViewMapper;
 import io.nzbee.hkpost.country.ICountryViewMapper;
 import io.nzbee.hkpost.shipcode.IShipCodeService;
 import io.nzbee.hkpost.shipcode.IShipCodeViewMapper;
@@ -32,11 +33,14 @@ public class HKPostAdapter implements IHKPostPort {
 	@Autowired
 	private IShipCodeViewMapper shipCodeViewMapper;
 
+	@Autowired
+	private IPostageProductViewMapper productViewMapper;
+	
+	
 	
 	@Override
-	public ShippingProductView getHKPostageFee(String countryCode, String shipCode, String weight) {
-		// TODO Auto-generated method stub
-		return null;//hkPostService.getHKPostageFee(countryCode, shipCode, weight);
+	public ShippingProductView getHKPostageFee(String locale, String currency, String countryCode, String shipCode, String weight) {
+		return productViewMapper.toView(Locale.localize(locale, currency), hkPostService.getHKPostageFee(countryCode, shipCode, weight));
 	}
 
 	@Override
