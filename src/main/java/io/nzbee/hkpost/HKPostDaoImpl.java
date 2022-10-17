@@ -33,8 +33,8 @@ public class HKPostDaoImpl implements IHKPostDao {
 	
 	@Override
 	public PostageProductViewDTO getHKPostageFee(	String countryCode, 
-											String shipCode, 
-											String weight) {
+													String shipCode, 
+													String weight) {
 		LOGGER.debug("call " + getClass() + ".getHKPostRequest()");
 		
 		RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
@@ -50,7 +50,12 @@ public class HKPostDaoImpl implements IHKPostDao {
 		
 		try {
 			
-			UriComponents builder = UriComponentsBuilder.fromHttpUrl(config.getCostURL()).build();
+			UriComponentsBuilder builder = UriComponentsBuilder
+					  .fromUriString(config.getCostURL())
+					  .queryParam("countryCode", countryCode)
+				      .queryParam("shipCode", shipCode)
+				      .queryParam("weight", weight);
+				      
 			
 			HttpEntity<String> requestEntity = new HttpEntity<>(null, null);
 			
