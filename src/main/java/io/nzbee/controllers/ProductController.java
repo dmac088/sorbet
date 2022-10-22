@@ -41,10 +41,10 @@ import io.nzbee.resources.product.physical.full.PhysicalProductFullModel;
 import io.nzbee.resources.product.physical.full.PhysicalProductFullModelAssembler;
 import io.nzbee.resources.product.physical.light.PhysicalProductLightModel;
 import io.nzbee.resources.product.physical.light.PhysicalProductLightModelAssembler;
-import io.nzbee.resources.product.shipping.destination.ShippingDestinationResource;
-import io.nzbee.resources.product.shipping.destination.ShippingDestinationResourceAssembler;
-import io.nzbee.resources.product.shipping.type.ShippingTypeResource;
-import io.nzbee.resources.product.shipping.type.ShippingTypeResourceAssembler;
+import io.nzbee.resources.shipping.country.ShippingCountryResource;
+import io.nzbee.resources.shipping.country.ShippingCountryResourceAssembler;
+import io.nzbee.resources.shipping.type.ShippingTypeResource;
+import io.nzbee.resources.shipping.type.ShippingTypeResourceAssembler;
 import io.nzbee.search.facet.IFacet;
 import io.nzbee.view.product.brand.BrandView;
 import io.nzbee.view.product.brand.IBrandViewService;
@@ -88,7 +88,7 @@ public class ProductController {
 	private BrandViewModelAssembler brandResourceAssembler;
 
 	@Autowired
-	private ShippingDestinationResourceAssembler shippingDestinationResourceAssembler;
+	private ShippingCountryResourceAssembler shippingDestinationResourceAssembler;
 
 	@Autowired
 	private ShippingTypeResourceAssembler shippingTypeResourceAssembler;
@@ -179,7 +179,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/Product/Shipping/Destination/{locale}")
-	public ResponseEntity<CollectionModel<ShippingDestinationResource>> getShippingDestinations(
+	public ResponseEntity<CollectionModel<ShippingCountryResource>> getShippingDestinations(
 			@PathVariable String locale) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getShippingDestinations with parameter {}", locale);
 
@@ -187,15 +187,15 @@ public class ProductController {
 		return ResponseEntity.ok(shippingDestinationResourceAssembler.toCollectionModel(pr));
 	}
 
-	@GetMapping("/Product/Shipping/Type/{locale}/Destination/Code/{destination}")
-	public ResponseEntity<CollectionModel<ShippingTypeResource>> getShippingTypes(@PathVariable String locale,
-			@PathVariable String destination, Principal principal) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".getShippingTypes with parameter {} ,{}", locale,
-				destination);
-
-		List<ShippingTypeView> pr = shippingTypeService.findByAllShippingTypesByDestinationAndWeight(locale,
-				destination, principal.getName());
-		return ResponseEntity.ok(shippingTypeResourceAssembler.toCollectionModel(pr));
-	}
+//	@GetMapping("/Product/Shipping/Type/{locale}/Destination/Code/{destination}")
+//	public ResponseEntity<CollectionModel<ShippingTypeResource>> getShippingTypes(@PathVariable String locale,
+//			@PathVariable String destination, Principal principal) {
+//		LOGGER.debug("call " + getClass().getSimpleName() + ".getShippingTypes with parameter {} ,{}", locale,
+//				destination);
+//
+//		List<ShippingTypeView> pr = shippingTypeService.findByAllShippingTypesByDestinationAndWeight(locale,
+//				destination, principal.getName());
+//		return ResponseEntity.ok(shippingTypeResourceAssembler.toCollectionModel(pr));
+//	}
 
 }

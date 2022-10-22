@@ -1,18 +1,20 @@
 package io.nzbee.controllers;
 
-import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import io.nzbee.hkpost.IHKPostPort;
+import io.nzbee.resources.shipping.country.ShippingCountryResource;
+import io.nzbee.resources.shipping.country.ShippingCountryResourceAssembler;
+import io.nzbee.resources.shipping.type.ShippingTypeResource;
+import io.nzbee.resources.shipping.type.ShippingTypeResourceAssembler;
 import io.nzbee.view.shipping.ShippingProductView;
-import io.nzbee.view.shipping.code.ShippingCodeView;
-import io.nzbee.view.shipping.country.ShippingCountryView;
 
 @RestController
 @RequestMapping("/api")
@@ -22,6 +24,12 @@ public class HKPostController {
 	
 	@Autowired
 	private IHKPostPort hkPostAdapter;
+	
+	@Autowired
+	private ShippingCountryResourceAssembler countryAssembler;
+	
+	@Autowired
+	private ShippingTypeResourceAssembler typeAssembler;
 	
 	@GetMapping("/hkpost/postagefee/{locale}/{currency}")
 	public ShippingProductView getHKPostageFee(	@PathVariable String locale, 
@@ -35,17 +43,17 @@ public class HKPostController {
 	}
 	
 	@GetMapping("/hkpost/{locale}/{currency}/countries")
-	public List<ShippingCountryView> getCountries(@PathVariable String locale, @PathVariable String currency) {
+	public CollectionModel<ShippingCountryResource> getCountries(@PathVariable String locale, @PathVariable String currency) {
 		LOGGER.debug("call " + getClass() + ".getCountries() with params: {}, {}", locale, currency);
 		
-		return hkPostAdapter.getCountries(locale, currency);
+		return countryAssembler.toCollectionModel(hkPostAdapter.getCountries(locale, currency));
 	}
 	
 	@GetMapping("/hkpost/{locale}/{currency}/shipcodes")
-	public List<ShippingCodeView> getShipCodes(@PathVariable String locale, @PathVariable String currency) {
+	public CollectionModel<ShippingTypeResource> getShipCodes(@PathVariable String locale, @PathVariable String currency) {
 		LOGGER.debug("call " + getClass() + ".getCountries() with params: {}, {}", locale, currency);
 		
-		return hkPostAdapter.getShipCodes(locale, currency);
+		return typeAssembler.toCollectionModel(hkPostAdapter.getShipCodes(locale, currency));
 	}
 	
 }

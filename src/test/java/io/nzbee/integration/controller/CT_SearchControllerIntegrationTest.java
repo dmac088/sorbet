@@ -82,10 +82,10 @@ import io.nzbee.resources.brand.BrandViewModelAssembler;
 import io.nzbee.resources.controllers.SearchResourceController;
 import io.nzbee.resources.product.physical.full.PhysicalProductFullModelAssembler;
 import io.nzbee.resources.product.physical.light.PhysicalProductLightModelAssembler;
-import io.nzbee.resources.product.shipping.destination.ShippingDestinationResourceAssembler;
-import io.nzbee.resources.product.shipping.type.ShippingTypeResourceAssembler;
 import io.nzbee.resources.search.SearchFacetModelAssembler;
 import io.nzbee.resources.search.SearchURIResourceAssembler;
+import io.nzbee.resources.shipping.country.ShippingCountryResourceAssembler;
+import io.nzbee.resources.shipping.type.ShippingTypeResourceAssembler;
 import io.nzbee.search.FacetServicesImpl;
 import io.nzbee.search.SearchServiceImpl;
 import io.nzbee.security.DataSourceBeanSecurity;
@@ -113,7 +113,7 @@ import io.nzbee.view.shipping.country.ShippingCountryViewServiceImpl;
 		BagDomainAdapter.class, BagDomainServiceImpl.class, CustomerMapperImpl.class, ProductEntityServiceImpl.class,
 		BagItemStatusServiceImpl.class, PersonServiceImpl.class, BagConfiguration.class, BrandViewServiceImpl.class, BrandAdapterImpl.class,
 		BrandViewServiceImpl.class, BrandDTOServiceImpl.class, BrandDTOMapperImpl.class,
-		ShippingDestinationResourceAssembler.class, ShippingTypeResourceAssembler.class, BrandViewModelAssembler.class, 
+		ShippingCountryResourceAssembler.class, ShippingTypeResourceAssembler.class, BrandViewModelAssembler.class, 
 		PhysicalProductFullModelAssembler.class,
 		ProductAttributeServiceImpl.class, ProductPriceServiceImpl.class, CurrencyServiceImpl.class,
 		ProductPriceTypeService.class, PhysicalProductFullAdapterImpl.class, PhysicalProductFullDTOServiceImpl.class,
