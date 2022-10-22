@@ -12,7 +12,7 @@ public class ShipCodeServiceImpl implements IShipCodeService {
 	
 	@Override
 	public List<ShipCodeViewDTO> findAll() {
-		return shipCodeDao.findAll();
+		return shipCodeDao.getAll();
 	}
 	
 }

@@ -9,11 +9,12 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.event.ContextRefreshedEvent;
 import io.nzbee.cache.CacheConfiguration;
 import io.nzbee.hkpost.HKPostConfig;
+import io.nzbee.hkpost.shipcode.ShipCodeFileStorageProperties;
 import io.nzbee.util.FileStorageProperties;
 
 @SpringBootApplication
 @EnableCaching
-@EnableConfigurationProperties({ FileStorageProperties.class, Globals.class, CacheConfiguration.class, HKPostConfig.class})
+@EnableConfigurationProperties({ ShipCodeFileStorageProperties.class, FileStorageProperties.class, Globals.class, CacheConfiguration.class, HKPostConfig.class})
 public class App {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());

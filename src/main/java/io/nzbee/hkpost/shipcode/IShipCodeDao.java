@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface IShipCodeDao {
 
-	List<ShipCodeViewDTO> findAll();
+	List<ShipCodeViewDTO> getAll();
 
 }

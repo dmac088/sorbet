@@ -2,7 +2,6 @@ package io.nzbee.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,6 @@ public class FileStorageServiceUpload {
 	
     private final Path fileStorageLocation;
 
-    @Autowired
     public FileStorageServiceUpload(FileStorageProperties fileStorageProperties) {
         this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
                 .toAbsolutePath().normalize();

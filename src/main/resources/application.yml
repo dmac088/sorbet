@@ -82,6 +82,7 @@ file:
   upload-dir: data/uploads/
   download-dir: data/downloads/
   product-master-file: product_master.tsv
+  shipCodeFile: "src/main/resources/data/product/shipping/types.tsv"
   
 
 server:

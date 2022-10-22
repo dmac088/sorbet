@@ -79,6 +79,7 @@ app:
     costURL: "https://service.hongkongpost.hk/ecshipAPI-trial/version/1/postage/get"
     username: "dmac088"
     password: "e75c62d3-853d-4e1e-ad9c-97dd93ccbf4e"
+    shipCodePath: ""
         
 server:
   port: 8080
