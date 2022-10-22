@@ -37,7 +37,6 @@ import io.nzbee.entity.adapters.view.BrandAdapterImpl;
 import io.nzbee.entity.adapters.view.PhysicalProductFullAdapterImpl;
 import io.nzbee.entity.adapters.view.PhysicalProductLightAdapterImpl;
 import io.nzbee.entity.adapters.view.ShippingDestinationAdapterImpl;
-import io.nzbee.entity.adapters.view.ShippingProductAdapterImpl;
 import io.nzbee.entity.adapters.view.ShippingTypeAdapterImpl;
 import io.nzbee.entity.bag.domain.BagDomainDTODaoImpl;
 import io.nzbee.entity.bag.domain.BagDomainDTOMapperImpl;
@@ -73,14 +72,12 @@ import io.nzbee.entity.product.price.ProductPriceTypeService;
 import io.nzbee.entity.product.shipping.attribute.destination.ShippingDestinationViewMapperImpl;
 import io.nzbee.entity.product.shipping.attribute.type.ShippingTypeViewMapperImpl;
 import io.nzbee.entity.product.shipping.attribute.view.ShippingProductAttributeViewServiceImpl;
-import io.nzbee.entity.product.shipping.view.ShippingProductViewDTOMapperImpl;
 import io.nzbee.entity.product.shipping.view.ShippingProductViewDTOServiceImpl;
 import io.nzbee.entity.tag.view.facet.TagFacetDTOPostgresDaoImpl;
 import io.nzbee.entity.tag.view.facet.TagFacetDTOServiceImpl;
 import io.nzbee.resources.brand.BrandViewModelAssembler;
 import io.nzbee.resources.product.physical.full.PhysicalProductFullModelAssembler;
 import io.nzbee.resources.product.physical.light.PhysicalProductLightModelAssembler;
-import io.nzbee.resources.product.shipping.ShippingProductResourceAssembler;
 import io.nzbee.resources.product.shipping.destination.ShippingDestinationResourceAssembler;
 import io.nzbee.resources.product.shipping.type.ShippingTypeResourceAssembler;
 import io.nzbee.search.FacetServicesImpl;
@@ -96,7 +93,6 @@ import io.nzbee.view.product.brand.BrandViewServiceImpl;
 import io.nzbee.view.product.physical.full.PhysicalProductFullServiceImpl;
 import io.nzbee.view.product.physical.light.PhysicalProductLightViewServiceImpl;
 import io.nzbee.view.product.shipping.type.ShippingTypeViewServiceImpl;
-import io.nzbee.view.shipping.ShippingProductViewServiceImpl;
 import io.nzbee.view.shipping.country.ShippingCountryViewServiceImpl;
 
 @RunWith(SpringRunner.class)
@@ -112,9 +108,8 @@ import io.nzbee.view.shipping.country.ShippingCountryViewServiceImpl;
 		BagDomainAdapter.class, BagDomainServiceImpl.class, CustomerMapperImpl.class, ProductEntityServiceImpl.class,
 		BagItemStatusServiceImpl.class, PersonServiceImpl.class, BagConfiguration.class, BrandViewServiceImpl.class,
 		BrandAdapterImpl.class, BrandViewServiceImpl.class, BrandDTOServiceImpl.class, BrandDTOMapperImpl.class,
-		ShippingProductAdapterImpl.class, ShippingProductViewDTOMapperImpl.class,
 		ShippingDestinationResourceAssembler.class, ShippingTypeResourceAssembler.class,
-		ShippingProductResourceAssembler.class, BrandViewModelAssembler.class, PhysicalProductFullModelAssembler.class,
+		BrandViewModelAssembler.class, PhysicalProductFullModelAssembler.class,
 		ProductAttributeServiceImpl.class, ProductPriceServiceImpl.class, CurrencyServiceImpl.class,
 		ProductPriceTypeService.class, PhysicalProductFullAdapterImpl.class, PhysicalProductFullDTOServiceImpl.class,
 		PhysicalProductFullDaoImpl.class, PhysicalProductFullViewMapperImpl.class, RegularBagItemDomainAdapter.class,
@@ -123,7 +118,7 @@ import io.nzbee.view.shipping.country.ShippingCountryViewServiceImpl;
 		ShippingDestinationViewMapperImpl.class, ShippingTypeViewServiceImpl.class, ShippingTypeAdapterImpl.class,
 		ShippingTypeViewMapperImpl.class, BagViewDTOServiceImpl.class, BagViewDTODaoPostgresImpl.class,
 		PhysicalProductDTOServiceImpl.class, PhysicalProductDTODaoPostgresImpl.class, BagItemDomainDTOServiceImpl.class,
-		RegularBagItemDomainDTOMapperImpl.class, ShippingProductViewServiceImpl.class,
+		RegularBagItemDomainDTOMapperImpl.class,
 		ShippingProductViewDTOServiceImpl.class, OAuth2AuthorizationServerConfig.class,
 		OAuth2ResourceServerConfig.class, BagDomainDTOServiceImpl.class, ShippingProductAttributeViewServiceImpl.class,
 		BagDomainDTOMapperImpl.class, BagEntityServiceImpl.class, BagItemDomainDTOServiceImpl.class,
