@@ -1,22 +1,20 @@
 package io.nzbee.hkpost.shipcode;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import io.nzbee.util.FileStorageServiceUpload;
 
 @Component
 public class ShipCodeDaoImpl implements IShipCodeDao {
@@ -25,7 +23,7 @@ public class ShipCodeDaoImpl implements IShipCodeDao {
 
 	@Autowired
 	private ShipCodeFileStorageProperties scfsp;
-	
+
 	@Autowired
 	private IShipCodeSchemaToDTOMapper scMapper;
 
@@ -34,18 +32,20 @@ public class ShipCodeDaoImpl implements IShipCodeDao {
 		LOGGER.debug("called getAll()");
 
 		try {
-			Path filePath = Paths.get(scfsp.getShipCodeFile()).normalize();
-			Resource resource = new UrlResource(filePath.toUri());
+			System.out.println(scfsp.getShipCodeFile());
+			InputStream resource = this.getFileFromResourceAsStream(scfsp.getShipCodeFile());
+			
+			//printInputStream(resource);
+			// Resource resource = new UrlResource(filePath.toUri());
 			CsvSchema bootstrapSchema = CsvSchema.emptySchema().withHeader().withColumnSeparator('\t')
 					.withQuoteChar('"');
 
-			File file = resource.getFile();
-			
 			CsvMapper mapper = new CsvMapper();
+			
 			MappingIterator<ShipCodeFileSchema> readValues = mapper.readerFor(ShipCodeFileSchema.class)
-					.with(bootstrapSchema).readValues(file);
+					.with(bootstrapSchema).readValues(resource);
 
-			return readValues.readAll().stream().map(s -> scMapper.toDTO(s)).collect(Collectors.toList()); 
+			return readValues.readAll().stream().map(s -> scMapper.toDTO(s)).collect(Collectors.toList());
 
 		} catch (IOException e) {
 			LOGGER.error(e.toString());
@@ -53,6 +53,21 @@ public class ShipCodeDaoImpl implements IShipCodeDao {
 		return new ArrayList<ShipCodeViewDTO>();
 	}
 
+	
+	private InputStream getFileFromResourceAsStream(String fileName) {
+
+        // The class loader that loaded the class
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream(fileName);
+
+        // the stream holding the file content
+        if (inputStream == null) {
+            throw new IllegalArgumentException("file not found! " + fileName);
+        } else {
+            return inputStream;
+        }
+
+    }
 //	@Override
 //	public List<ShipCodeViewDTO> findAll() {
 //		List<ShipCodeViewDTO> lsc = new ArrayList<ShipCodeViewDTO>();
