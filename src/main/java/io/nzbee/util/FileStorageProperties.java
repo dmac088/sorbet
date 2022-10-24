@@ -9,6 +9,9 @@ public class FileStorageProperties {
     private String downloadDir;
     
     private String productMasterFile;
+    
+    private String shipCodeFile;
+
 
     public String getUploadDir() {
         return uploadDir;
@@ -32,5 +35,13 @@ public class FileStorageProperties {
 
 	public void setProductMasterFile(String productMasterFile) {
 		this.productMasterFile = productMasterFile;
+	}
+
+	public String getShipCodeFile() {
+		return shipCodeFile;
+	}
+
+	public void setShipCodeFile(String shipCodeFile) {
+		this.shipCodeFile = shipCodeFile;
 	}
 }

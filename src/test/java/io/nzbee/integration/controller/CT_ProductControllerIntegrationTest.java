@@ -79,7 +79,7 @@ import io.nzbee.resources.brand.BrandViewModelAssembler;
 import io.nzbee.resources.product.physical.full.PhysicalProductFullModelAssembler;
 import io.nzbee.resources.product.physical.light.PhysicalProductLightModelAssembler;
 import io.nzbee.resources.shipping.country.ShippingCountryResourceAssembler;
-import io.nzbee.resources.shipping.type.ShippingTypeResourceAssembler;
+import io.nzbee.resources.shipping.shipcode.ShippingTypeResourceAssembler;
 import io.nzbee.search.FacetServicesImpl;
 import io.nzbee.search.SearchServiceImpl;
 import io.nzbee.security.DataSourceBeanSecurity;

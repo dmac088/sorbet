@@ -7,12 +7,12 @@ import io.nzbee.controllers.CategoryController;
 import io.nzbee.resources.ISimpleResourceAssembler;
 
 @Component
-public class CategoryModelAssembler implements ISimpleResourceAssembler<CategoryLinkResource> {
+public class CategoryModelAssembler implements ISimpleResourceAssembler<CategoryResource> {
 
 
 	@Override
-	public CategoryLinkResource toModel() {
-		CategoryLinkResource cm =  new CategoryLinkResource();
+	public CategoryResource toModel() {
+		CategoryResource cm =  new CategoryResource();
 		Link l1 = linkTo(methodOn(CategoryController.class).getProductCategories(null, null)).withRel("categories");
 		cm.add(l1);
 		return cm;

@@ -1,10 +1,10 @@
 package io.nzbee.hkpost;
 
 import io.nzbee.domain.valueObjects.Locale;
-import io.nzbee.view.shipping.ShippingProductView;
+import io.nzbee.view.shipping.ShippingFeeView;
 
 public interface IPostageProductViewMapper {
 
-	ShippingProductView toView(Locale locale, PostageProductViewDTO dto);
+	ShippingFeeView toView(Locale locale, PostageProductViewDTO dto);
 
 }

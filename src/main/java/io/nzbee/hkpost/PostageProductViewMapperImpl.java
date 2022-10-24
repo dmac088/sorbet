@@ -1,13 +1,13 @@
 package io.nzbee.hkpost;
 
 import io.nzbee.domain.valueObjects.Locale;
-import io.nzbee.view.shipping.ShippingProductView;
+import io.nzbee.view.shipping.ShippingFeeView;
 
 public class PostageProductViewMapperImpl implements IPostageProductViewMapper {
 
 	@Override
-	public ShippingProductView toView(Locale locale, PostageProductViewDTO dto) {
-		return new ShippingProductView(dto.getTotalPostage(), 
+	public ShippingFeeView toView(Locale locale, PostageProductViewDTO dto) {
+		return new ShippingFeeView(dto.getTotalPostage(), 
 									   dto.getAdditionalCharge(), 
 									   dto.getInsurancePremiumFee(),
 									   dto.getWithPostageSurcharge(), 

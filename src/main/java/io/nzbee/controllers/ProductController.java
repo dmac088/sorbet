@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -43,8 +42,6 @@ import io.nzbee.resources.product.physical.light.PhysicalProductLightModel;
 import io.nzbee.resources.product.physical.light.PhysicalProductLightModelAssembler;
 import io.nzbee.resources.shipping.country.ShippingCountryResource;
 import io.nzbee.resources.shipping.country.ShippingCountryResourceAssembler;
-import io.nzbee.resources.shipping.type.ShippingTypeResource;
-import io.nzbee.resources.shipping.type.ShippingTypeResourceAssembler;
 import io.nzbee.search.facet.IFacet;
 import io.nzbee.view.product.brand.BrandView;
 import io.nzbee.view.product.brand.IBrandViewService;
@@ -52,8 +49,6 @@ import io.nzbee.view.product.physical.full.IPhysicalProductFullService;
 import io.nzbee.view.product.physical.full.PhysicalProductFullView;
 import io.nzbee.view.product.physical.light.IPhysicalProductLightViewService;
 import io.nzbee.view.product.physical.light.PhysicalProductLightView;
-import io.nzbee.view.product.shipping.type.IShippingTypeViewService;
-import io.nzbee.view.product.shipping.type.ShippingTypeView;
 import io.nzbee.view.shipping.country.IShippingCountryViewService;
 import io.nzbee.view.shipping.country.ShippingCountryView;
 
@@ -79,9 +74,6 @@ public class ProductController {
 	private IShippingCountryViewService shippingDestiantionService;
 
 	@Autowired
-	private IShippingTypeViewService shippingTypeService;
-	
-	@Autowired
 	private PhysicalProductLightModelAssembler prodLightResourceAssembler;
 
 	@Autowired
@@ -89,9 +81,6 @@ public class ProductController {
 
 	@Autowired
 	private ShippingCountryResourceAssembler shippingDestinationResourceAssembler;
-
-	@Autowired
-	private ShippingTypeResourceAssembler shippingTypeResourceAssembler;
 
 	@Autowired
 	private PhysicalProductFullModelAssembler prodFullResourceAssembler;
@@ -187,15 +176,5 @@ public class ProductController {
 		return ResponseEntity.ok(shippingDestinationResourceAssembler.toCollectionModel(pr));
 	}
 
-//	@GetMapping("/Product/Shipping/Type/{locale}/Destination/Code/{destination}")
-//	public ResponseEntity<CollectionModel<ShippingTypeResource>> getShippingTypes(@PathVariable String locale,
-//			@PathVariable String destination, Principal principal) {
-//		LOGGER.debug("call " + getClass().getSimpleName() + ".getShippingTypes with parameter {} ,{}", locale,
-//				destination);
-//
-//		List<ShippingTypeView> pr = shippingTypeService.findByAllShippingTypesByDestinationAndWeight(locale,
-//				destination, principal.getName());
-//		return ResponseEntity.ok(shippingTypeResourceAssembler.toCollectionModel(pr));
-//	}
 
 }

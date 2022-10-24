@@ -13,7 +13,7 @@ import io.nzbee.hkpost.IPostageProductViewMapper;
 import io.nzbee.hkpost.country.ICountryViewMapper;
 import io.nzbee.hkpost.shipcode.IShipCodeService;
 import io.nzbee.hkpost.shipcode.IShipCodeViewMapper;
-import io.nzbee.view.shipping.ShippingProductView;
+import io.nzbee.view.shipping.ShippingFeeView;
 import io.nzbee.view.shipping.code.ShippingCodeView;
 import io.nzbee.view.shipping.country.ShippingCountryView;
 
@@ -39,7 +39,7 @@ public class HKPostAdapter implements IHKPostPort {
 	
 	
 	@Override
-	public ShippingProductView getHKPostageFee(String locale, String currency, String countryCode, String shipCode, String weight) {
+	public ShippingFeeView getHKPostageFee(String locale, String currency, String countryCode, String shipCode, String weight) {
 		return productViewMapper.toView(Locale.localize(locale, currency), hkPostService.getHKPostageFee(countryCode, shipCode, weight));
 	}
 

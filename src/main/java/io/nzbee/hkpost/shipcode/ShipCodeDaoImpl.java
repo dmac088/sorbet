@@ -1,10 +1,7 @@
 package io.nzbee.hkpost.shipcode;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,13 +13,15 @@ import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 
+import io.nzbee.util.FileStorageProperties;
+
 @Component
 public class ShipCodeDaoImpl implements IShipCodeDao {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
 	@Autowired
-	private ShipCodeFileStorageProperties scfsp;
+	private FileStorageProperties scfsp;
 
 	@Autowired
 	private IShipCodeSchemaToDTOMapper scMapper;

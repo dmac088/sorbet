@@ -31,6 +31,7 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
         		.antMatchers(HttpMethod.GET,"/api/searchResource").permitAll()
         		.antMatchers(HttpMethod.GET,"/api/customerResource").permitAll()
         		.antMatchers(HttpMethod.GET,"/api/categoryResource").permitAll()
+        		.antMatchers(HttpMethod.GET,"/api/shippingResource").permitAll()
         		.antMatchers(HttpMethod.POST,"/api/suggestResource").permitAll()
         		.antMatchers(HttpMethod.POST,"/api/searchResource").permitAll()
         		.antMatchers(HttpMethod.GET,"/api/hkpost/**").permitAll()

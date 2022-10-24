@@ -85,7 +85,7 @@ import io.nzbee.resources.product.physical.light.PhysicalProductLightModelAssemb
 import io.nzbee.resources.search.SearchFacetModelAssembler;
 import io.nzbee.resources.search.SearchURIResourceAssembler;
 import io.nzbee.resources.shipping.country.ShippingCountryResourceAssembler;
-import io.nzbee.resources.shipping.type.ShippingTypeResourceAssembler;
+import io.nzbee.resources.shipping.shipcode.ShippingTypeResourceAssembler;
 import io.nzbee.search.FacetServicesImpl;
 import io.nzbee.search.SearchServiceImpl;
 import io.nzbee.security.DataSourceBeanSecurity;
