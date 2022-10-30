@@ -32,5 +32,8 @@ public class BagViewAdapterImpl implements IBagPortService {
 		
 		return bagMapper.toView(b.get());
 	}
+	
+	
+	
 
 }

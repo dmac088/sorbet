@@ -21,6 +21,9 @@ public class BagView {
 	
 	private List<String> coupons = new ArrayList<String>();
 	
+	public Boolean hasShippingItem() {
+		return !(this.shippingItem == null);
+	}
 
 	public String getBagStatusCode() {
 		return bagStatusCode;
@@ -55,7 +58,10 @@ public class BagView {
 	}
 	
 	public BigDecimal getGrandTotalAmount() {
-		return this.getSubTotalAmount().add(this.getShippingItem().getBagItemTotal());
+		if(this.hasShippingItem()) {
+			return this.getSubTotalAmount().add(this.getShippingItem().getBagItemTotal());
+		} 
+		return this.getSubTotalAmount();
 	}
 
 	public BigDecimal getSubTotalAmount() {

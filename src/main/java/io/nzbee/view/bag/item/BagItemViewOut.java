@@ -16,7 +16,7 @@ public class BagItemViewOut {
 	
 	private BigDecimal bagItemWeight;
 	
-	private BigDecimal bagItemDiscountPercentage;
+	private BigDecimal bagItemDiscountPercentage = new BigDecimal(0);
 	
 
 	public BagItemViewOut() {
