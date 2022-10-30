@@ -37,19 +37,13 @@ public class ShippingProductEntity implements Serializable  {
 	@Column(name="prd_id")
 	private Long productId;
 
-	@Column(name="shp_wgt_lim")
+	@Column(name="shp_max_wt")
 	private BigDecimal weightLimit;
 	
-	@Column(name="shp_wgt_frm")
-	private BigDecimal weightFrom;
+	@Column(name="shp_shp_cd")
+	private String shippingCode;
 	
-	@Column(name="shp_wgt_to")
-	private BigDecimal weightTo;
-	
-	@Column(name="shp_typ_cd")
-	private String shippingTypeCode;
-	
-	@Column(name="shp_ctry_cd")
+	@Column(name="shp_dst_cd")
 	private String shippingCountryCode;
 
 	public BigDecimal getWeightLimit() {
@@ -58,22 +52,6 @@ public class ShippingProductEntity implements Serializable  {
 
 	public void setWeightLimit(BigDecimal weightLimit) {
 		this.weightLimit = weightLimit;
-	}
-
-	public BigDecimal getWeightFrom() {
-		return weightFrom;
-	}
-
-	public void setWeightFrom(BigDecimal weightFrom) {
-		this.weightFrom = weightFrom;
-	}
-
-	public BigDecimal getWeightTo() {
-		return weightTo;
-	}
-
-	public void setWeightTo(BigDecimal weightTo) {
-		this.weightTo = weightTo;
 	}
 
 	public ProductEntity getShippingProduct() {
@@ -106,14 +84,12 @@ public class ShippingProductEntity implements Serializable  {
 		this.shippingCountryCode = shippingCountryCode;
 	}
 
-	public String getShippingTypeCode() {
-		return shippingTypeCode;
+	public String getShippingCode() {
+		return shippingCode;
 	}
 
-	public void setShippingTypeCode(String shippingTypeCode) {
-		this.shippingTypeCode = shippingTypeCode;
+	public void setShippingCode(String shippingCode) {
+		this.shippingCode = shippingCode;
 	}
 	
-	
-
 }

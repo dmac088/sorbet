@@ -23,7 +23,7 @@ public interface IShippingProductAttributeViewRepository extends JpaRepository<S
 	
 	
 	@Query(	  " SELECT distinct new io.nzbee.entity.product.shipping.attribute.type.ShippingTypeDTO("
-			+ "												sp.shippingTypeCode, "
+			+ "												sp.shippingCode, "
 			+ "												spa.shippingTypeDesc, "
 			+ "												spa.lclCd "		
 			+ ") "
@@ -31,7 +31,7 @@ public interface IShippingProductAttributeViewRepository extends JpaRepository<S
 			+ " JOIN spa.product sp"
 			+ " WHERE spa.lclCd = :locale"
 			+ " AND sp.shippingCountryCode = :shippingDestinationCode"
-			+ " AND :bagWeight between sp.weightFrom AND sp.weightTo "
+			+ " AND :bagWeight <= sp.weightLimit "
 			)
 	List<ShippingTypeDTO> findAllShippingType(String locale, String shippingDestinationCode, BigDecimal bagWeight);
 }

@@ -18,11 +18,9 @@ public interface IShippingProductViewDTORepository extends JpaRepository<Shippin
 			+ "																	pe.productUPC, "
 			+ "																	ps.shippingCountryCode, "
 			+ "																	attr.shippingCountryDesc, "
-			+ "																	ps.shippingTypeCode, "
+			+ "																	ps.shippingCode, "
 			+ "																	attr.shippingTypeDesc, "
-			+ "																	ps.weightLimit, "
-			+ "																	ps.weightFrom, "
-			+ "																	ps.weightTo "	
+			+ "																	ps.weightLimit "
 			+ ") "
 			+ " FROM ProductEntity pe "
 			+ " JOIN pe.productShipping ps "
@@ -33,12 +31,12 @@ public interface IShippingProductViewDTORepository extends JpaRepository<Shippin
 			+ " WHERE typ.code = '" + Constants.markdownPriceCode + "'"
 			+ " AND curr.code 				= :currency "
 			+ " AND attr.lclCd 				= :locale "
-			+ " AND ps.shippingTypeCode 	= :shipType "
+			+ " AND ps.shippingCode 		= :shipCode "
 			+ " AND ps.shippingCountryCode 	= :shipDest "
-			+ " AND :bagWeight between ps.weightFrom and ps.weightTo "
+			+ " AND ps.weightLimit <= :bagWeight "
 			)
 	Optional<ShippingProductViewDTO> findByDestinationAndTypeAndBagWeight(String locale, String currency, String shipDest,
-			String shipType, BigDecimal bagWeight);
+			String shipCode, BigDecimal bagWeight);
 	
 }
 

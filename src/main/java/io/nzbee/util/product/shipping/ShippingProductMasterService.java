@@ -243,7 +243,7 @@ public class ShippingProductMasterService {
 		pe.setProductShipping(sp);			
 		sp.setShippingProduct(pe);
 		
-		sp.setShippingTypeCode(ShipTypeCode);
+		sp.setShippingCode(ShipTypeCode);
 		sp.setShippingCountryCode(ShipCountryCode);
 		
 		ProductAttributeEntity pa = opa.isPresent()
@@ -312,10 +312,7 @@ public class ShippingProductMasterService {
 		}
 		
 		sp.getShippingProduct().setInStock(true);
-		
 		sp.setWeightLimit(new BigDecimal(weightLimit));
-		sp.setWeightFrom(new BigDecimal(weightFrom));
-		sp.setWeightTo(new BigDecimal(weightTo));
 		
 		return sp;
 		

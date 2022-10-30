@@ -58,8 +58,8 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 	}
 	
 	@Override
-	public Optional<ShippingBagItemDomainDTO> getNewItem(String locale, String currency, String priceType, String shipDest, String shipType, BigDecimal bagWeight) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewItem, with parameters {}, {}, {}, {}, {}", currency, priceType, shipDest, shipType, bagWeight);
+	public Optional<ShippingBagItemDomainDTO> getNewItem(String locale, String currency, String priceType, String shipDest, String shipCode, BigDecimal bagWeight) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewItem, with parameters {}, {}, {}, {}, {}", currency, priceType, shipDest, shipCode, bagWeight);
 		
 		@SuppressWarnings("deprecation")
 		Query query = em.createQuery(
@@ -77,14 +77,14 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 				+ " JOIN prcs.currency curr "
 				+ " WHERE typ.code = :priceType "
 				+ " AND curr.code 				= :currency "
-				+ " AND ps.shippingTypeCode 	= :shipType "
+				+ " AND ps.shippingCode 		= :shipCode "
 				+ " AND ps.shippingCountryCode 	= :shipDest "
-				+ " AND :bagWeight between ps.weightFrom and ps.weightTo ")
+				+ " AND :bagWeight <= ps.weightLimit ")
 		.unwrap(org.hibernate.query.Query.class)
 		.setParameter("currency", currency)
 		.setParameter("priceType", priceType)
 		.setParameter("shipDest", shipDest)
-		.setParameter("shipType", shipType)
+		.setParameter("shipCode", shipCode)
 		.setParameter("bagWeight", bagWeight)
 		.setResultTransformer(new ShippingBagItemDomainDTOResultTransformer());
 		

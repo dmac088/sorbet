@@ -4365,11 +4365,10 @@ ALTER TABLE mochi.product_shipping_prd_id_seq OWNER TO postgres;
 
 CREATE TABLE mochi.product_shipping (
     prd_id bigint DEFAULT nextval('mochi.product_shipping_prd_id_seq'::regclass) NOT NULL,
-    shp_wgt_lim numeric,
-    shp_wgt_frm numeric NOT NULL,
-    shp_wgt_to numeric NOT NULL,
-    shp_typ_cd character varying(6) NOT NULL,
-    shp_ctry_cd character varying(3) NOT NULL
+    shp_prv_cd character varying(3) NOT NULL,
+    shp_dst_cd character varying(3) NOT NULL,
+    shp_shp_cd character varying(3) NOT NULL,
+    shp_max_wt numeric NOT NULL
 );
 
 

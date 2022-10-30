@@ -16,18 +16,12 @@ public class ShippingProductViewDTO  {
 	
 	private final BigDecimal weightLimit;
     
-    private final BigDecimal weightFrom;
-    
-    private final BigDecimal weightTo;
-    
 	public ShippingProductViewDTO(String productUPC, 
 								  String shippingDestinationCode, 
 								  String shippingDestinationDesc,
 								  String shippingTypeCode, 
 								  String shippingTypeDesc, 
-								  BigDecimal weightLimit, 
-								  BigDecimal weightFrom, 
-								  BigDecimal weightTo) {
+								  BigDecimal weightLimit) {
 		super();
 		this.productUPC = productUPC;
 		this.shippingDestinationCode = shippingDestinationCode;
@@ -35,8 +29,6 @@ public class ShippingProductViewDTO  {
 		this.shippingTypeCode = shippingTypeCode;
 		this.shippingTypeDesc = shippingTypeDesc;
 		this.weightLimit = weightLimit;
-		this.weightFrom = weightFrom;
-		this.weightTo = weightTo;
 	}
 
 	public String getShippingDestinationCode() {
@@ -58,15 +50,7 @@ public class ShippingProductViewDTO  {
 	public BigDecimal getWeightLimit() {
 		return weightLimit;
 	}
-
-	public BigDecimal getWeightFrom() {
-		return weightFrom;
-	}
-
-	public BigDecimal getWeightTo() {
-		return weightTo;
-	}
-
+	
 	public String getProductUPC() {
 		return productUPC;
 	}
