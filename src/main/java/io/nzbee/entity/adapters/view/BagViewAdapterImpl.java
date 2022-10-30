@@ -33,14 +33,4 @@ public class BagViewAdapterImpl implements IBagPortService {
 		return bagMapper.toView(b.get());
 	}
 
-	@Override
-	@Transactional
-	public BagView toView(Locale locale, String userName) {
-		//this function will convert the bag domain object to a view representation
-		LOGGER.debug("call " + getClass().getSimpleName() + ".toView with parameter {}, {}, {}", locale, locale.getCurrency().getCurrencyCode(), userName );
-		Optional<BagViewDTO> bvDto = bagService.findByCode(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(), userName);
-		BagView bv = bagMapper.toView(bvDto.get());
-    	return bv;	
-	}
-
 }
