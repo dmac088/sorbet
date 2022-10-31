@@ -1,11 +1,10 @@
 package io.nzbee.entity.adapters.hkpost;
 
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.hkpost.IHKPostPort;
 import io.nzbee.hkpost.IHKPostService;
@@ -36,8 +35,6 @@ public class HKPostAdapter implements IHKPostPort {
 	@Autowired
 	private IPostageProductViewMapper productViewMapper;
 	
-	
-	
 	@Override
 	public ShippingFeeView getHKPostageFee(String locale, String currency, String countryCode, String shipCode, String weight) {
 		return productViewMapper.toView(Locale.localize(locale, currency), hkPostService.getHKPostageFee(countryCode, shipCode, weight));
@@ -50,9 +47,10 @@ public class HKPostAdapter implements IHKPostPort {
 	}
 
 	@Override
-	public List<ShippingCodeView> getShipCodes(String locale, String currency) {
+	public List<ShippingCodeView> getShipCodes(String locale, String currency, String destinationCode, IBag b) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getShipCodes()");
-		return shipCodeViewMapper.toView(Locale.localize(locale, currency), shipCodeService.findAll());
+		
+		return shipCodeViewMapper.toView(Locale.localize(locale, currency), shipCodeService.findAll(locale, destinationCode, b.getTotalWeight().amount()));
 	}
 
 }

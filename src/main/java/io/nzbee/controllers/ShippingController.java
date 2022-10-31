@@ -1,5 +1,7 @@
 package io.nzbee.controllers;
 
+import java.security.Principal;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.nzbee.domain.bag.IBag;
+import io.nzbee.domain.bag.IBagDomainService;
+import io.nzbee.domain.valueObjects.Locale;
+import io.nzbee.domain.valueObjects.UserName;
 import io.nzbee.hkpost.IHKPostPort;
 import io.nzbee.resources.shipping.country.ShippingCountryResource;
 import io.nzbee.resources.shipping.country.ShippingCountryResourceAssembler;
@@ -31,6 +38,9 @@ public class ShippingController {
 	@Autowired
 	private ShippingTypeResourceAssembler typeAssembler;
 	
+	@Autowired
+	private IBagDomainService domainBagService;
+	
 	@GetMapping("/hkpost/postagefee/{locale}/{currency}")
 	public ShippingFeeView getHKPostageFee(	@PathVariable String locale, 
 												@PathVariable String currency,
@@ -49,11 +59,14 @@ public class ShippingController {
 		return countryAssembler.toCollectionModel(hkPostAdapter.getCountries(locale, currency));
 	}
 	
-	@GetMapping("/hkpost/{locale}/{currency}/shipcodes")
-	public CollectionModel<ShippingCodeResource> getShipCodes(@PathVariable String locale, @PathVariable String currency) {
+	@GetMapping("/hkpost/{locale}/{currency}/destinationCode/{destinationCode}/shipcodes")
+	public CollectionModel<ShippingCodeResource> getShipCodes(@PathVariable String locale, @PathVariable String currency, @PathVariable String destinationCode, Principal principal) {
 		LOGGER.debug("call " + getClass() + ".getCountries() with params: {}, {}", locale, currency);
 		
-		return typeAssembler.toCollectionModel(hkPostAdapter.getShipCodes(locale, currency));
+		IBag b = domainBagService.findByCode(Locale.localize(locale, currency), new UserName(principal.getName()));
+		
+		return typeAssembler.toCollectionModel(hkPostAdapter.getShipCodes(locale, currency, destinationCode, b));
+		
 	}
 	
 }

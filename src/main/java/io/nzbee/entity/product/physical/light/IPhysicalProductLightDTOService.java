@@ -17,9 +17,4 @@ public interface IPhysicalProductLightDTOService {
 	Page<PhysicalProductLightDTO> findAll(String locale, String currency, String rootCategoryCode, Pageable pageable,
 			String orderby);
 
-	public PhysicalProductLightDTO findByDesc(String locale, String currency, String desc);
-
-	public PhysicalProductLightDTO findByCode(String locale, String currency, String code);
-
-
 }

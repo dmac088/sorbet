@@ -29,8 +29,4 @@ public interface IPhysicalProductLightViewService extends IViewService<PhysicalP
 	List<PhysicalProductLightView> findAll(String locale, String currency, String rootCategoryCode, Set<String> codes);
 
 	List<PhysicalProductLightView> findAll(String locale, String currency, Set<String> codes);
-
-	PhysicalProductLightView findByDesc(String localeengb, String currencyhkd, String string);
-
-	PhysicalProductLightView findByCode(String localeengb, String currencyhkd, String string);
 }

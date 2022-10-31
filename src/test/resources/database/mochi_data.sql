@@ -1093,7 +1093,7 @@ INSERT INTO mochi.product VALUES (19, '10760430', '2020-03-16 00:00:00+08', 33, 
 INSERT INTO mochi.product VALUES (8, '25556789', '2020-03-17 00:00:00+08', 41, 2, 1);
 INSERT INTO mochi.product VALUES (1, '12345678', '2020-03-18 00:00:00+08', 38, 2, 1);
 INSERT INTO mochi.product VALUES (5, '12383658', '2020-03-19 00:00:00+08', 34, 2, 1);
-INSERT INTO mochi.product VALUES (2031066, 'HKG_LEG_0.01_0.20', '2022-05-21 22:39:09.009+08', 42, 1, 1);
+INSERT INTO mochi.product VALUES (2031066, 'HKP_HKG_LEG', '2022-05-21 22:39:09.009+08', 42, 1, 1);
 INSERT INTO mochi.product VALUES (2031888, '43254232', '2020-04-11 00:00:00+08', 35, 2, 1);
 
 
@@ -2217,7 +2217,7 @@ INSERT INTO mochi.product_rating VALUES (120, 18, 3, 232254, '2020-04-21 12:26:0
 -- Data for Name: product_shipping; Type: TABLE DATA; Schema: mochi; Owner: mochidb_owner
 --
 
-INSERT INTO mochi.product_shipping VALUES (2031066, 'HKP', 'HKG', 'LEG', 20);
+INSERT INTO mochi.product_shipping VALUES (2031066, 'HKP', 'HKG', 'LEG', 20, 'A');
 
 
 --

@@ -16,8 +16,4 @@ public interface IPhysicalProductLightDao {
 			StringCollectionWrapper brandCodes, StringCollectionWrapper tagCodes, Double maxPrice, String page,
 			String size, String sort);
 
-	PhysicalProductLightDTO findByDesc(String locale, String currency, String desc);
-
-	PhysicalProductLightDTO findByCode(String locale, String currency, String code);
-
 }

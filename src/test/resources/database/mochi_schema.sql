@@ -4368,7 +4368,8 @@ CREATE TABLE mochi.product_shipping (
     shp_prv_cd character varying(3) NOT NULL,
     shp_dst_cd character varying(3) NOT NULL,
     shp_shp_cd character varying(3) NOT NULL,
-    shp_max_wt numeric NOT NULL
+    shp_max_wt numeric NOT NULL,
+    shp_sts_cd character(1)
 );
 
 

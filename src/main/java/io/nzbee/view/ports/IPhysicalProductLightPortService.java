@@ -28,8 +28,4 @@ public interface IPhysicalProductLightPortService extends IViewPortService<Physi
 
 	List<PhysicalProductLightView> findAll(String locale, String currency, Set<String> codes);
 
-	PhysicalProductLightView findByDesc(String localeengb, String currencyhkd, String string);
-
-	PhysicalProductLightView findByCode(String localeengb, String currencyhkd, String string);
-
 }

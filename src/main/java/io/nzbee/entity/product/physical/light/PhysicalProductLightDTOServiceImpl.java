@@ -82,14 +82,4 @@ public class PhysicalProductLightDTOServiceImpl implements IPhysicalProductLight
 		return productDao.findAll(locale, currency, rootCategory, categoryCodes, brandCodes, tagCodes, maxPrice, page, size, orderby);
 	}
 
-	@Override
-	public PhysicalProductLightDTO findByDesc(String locale, String currency, String desc) {
-		return productDao.findByDesc(locale, currency, desc);
-	}
-
-	@Override
-	public PhysicalProductLightDTO findByCode(String locale, String currency, String code) {
-		return productDao.findByCode(locale, currency, code);
-	}
-
 }

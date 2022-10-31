@@ -28,20 +28,6 @@ public class PhysicalProductLightDaoImpl implements IPhysicalProductLightDao {
 	private EntityManager em;
 
 
-	@Override
-	public PhysicalProductLightDTO findByDesc(String locale, String currency, String desc) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	@Override
-	public PhysicalProductLightDTO findByCode(String locale, String currency, String code) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Override
 	@Caching(

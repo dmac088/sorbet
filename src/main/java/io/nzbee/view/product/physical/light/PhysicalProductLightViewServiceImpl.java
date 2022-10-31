@@ -69,17 +69,6 @@ public class PhysicalProductLightViewServiceImpl implements IPhysicalProductLigh
 		return physicalProductLightPortService.findAll(locale, currency, currency, codes);
 	}
 
-	@Override
-	public PhysicalProductLightView findByDesc(String locale, String currency, String desc) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".findByDesc() with parameters {}. {}. {}, {}", locale, currency, desc);
-		return physicalProductLightPortService.findByDesc(locale, currency, desc);
-	}
-
-	@Override
-	public PhysicalProductLightView findByCode(String locale, String currency, String code) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode() with parameters {}. {}. {}, {}", locale, currency, code);
-		return physicalProductLightPortService.findByCode(locale, currency, code);
-	}
 
 
 }

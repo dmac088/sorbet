@@ -1,48 +1,30 @@
 package io.nzbee.hkpost.shipcode;
 
+import java.math.BigDecimal;
+
 public class ShipCodeViewDTO {
 
 	private final String code;
 	
-	private final String nameE;
-	
-	private final String nameC;
-	
-	private final String nameS;
+	private final String name;
 	
 	private final String status;
 	
 	private final Double weightLimit;
 
 	public ShipCodeViewDTO( String code, 
-							String nameE, 
-							String nameC, 
-							String nameS, 
+							String name, 
 							String status,
-							Double weightLimit) {
+							BigDecimal weightLimit) {
 		super();
 		this.code = code;
-		this.nameE = nameE;
-		this.nameC = nameC;
-		this.nameS = nameS;
+		this.name = name;
 		this.status = status;
-		this.weightLimit = weightLimit;
+		this.weightLimit = weightLimit.doubleValue();
 	}
 
 	public String getCode() {
 		return code;
-	}
-
-	public String getNameE() {
-		return nameE;
-	}
-
-	public String getNameC() {
-		return nameC;
-	}
-
-	public String getNameS() {
-		return nameS;
 	}
 
 	public String getStatus() {
@@ -51,6 +33,10 @@ public class ShipCodeViewDTO {
 
 	public Double getWeightLimit() {
 		return weightLimit;
+	}
+
+	public String getName() {
+		return name;
 	}
 	
 }

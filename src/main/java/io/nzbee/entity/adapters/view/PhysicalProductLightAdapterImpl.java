@@ -111,18 +111,4 @@ public class PhysicalProductLightAdapterImpl implements IPhysicalProductLightPor
 		return searchService.getSuggestions(searchTerm, rootCategory, locale, currency);
 	}
 
-
-	@Override
-	@Transactional
-	public PhysicalProductLightView findByDesc(String locale, String currency, String desc) {
-		return productLightMapper.toView(productEntityService.findByDesc(locale, currency, desc));
-	}
-
-
-	@Override
-	@Transactional
-	public PhysicalProductLightView findByCode(String locale, String currency, String code) {
-		return productLightMapper.toView(productEntityService.findByCode(locale, currency, code));
-	}
-
 }

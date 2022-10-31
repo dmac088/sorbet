@@ -165,7 +165,6 @@ public class BagController {
 			domainBagService.save(b);
 		}
 
-		
 		//get the promotion bag
 		IPromotionBag pb = promotionService.find(Locale.localize(locale, currency), new UserName(principal.getName()));
 				
