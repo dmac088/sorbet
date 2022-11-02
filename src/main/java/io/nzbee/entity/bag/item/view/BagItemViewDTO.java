@@ -101,7 +101,7 @@ public class BagItemViewDTO {
 		return markdownPrice;
 	}
 
-	public BigDecimal getBagTotalWeight() {
+	public BigDecimal getBagItemTotalWeight() {
 		return bagItemTotalWeight;
 	}
 

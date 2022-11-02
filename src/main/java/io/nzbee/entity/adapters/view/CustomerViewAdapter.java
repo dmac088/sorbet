@@ -11,7 +11,7 @@ import io.nzbee.view.ports.ICustomerPortService;
 
 public class CustomerViewAdapter implements ICustomerPortService {
 
-private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
     
     @Autowired
     private ICustomerViewMapper customerViewMapper;

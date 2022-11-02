@@ -34,10 +34,8 @@ public class ShippingBagItemDomainAdapter implements IShippingBagItemPortService
 	public IShippingBagItem getShippingItem(IBag b, String productCode, Locale locale) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getShippingItem with parameters {}, {}, {}", locale.getLocale(), Constants.markdownPriceCode, productCode);
 		
-		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getShippingItem(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(), Constants.markdownPriceCode, productCode)
+		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getShippingItem(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(), productCode)
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, productCode));
-		
-		
 		
 		IShippingBagItem sbi = shippingBagItemDomainMapper.toDo(b, biDto, new BigDecimal(0), locale);
 		

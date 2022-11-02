@@ -93,46 +93,14 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		return b;
 	}
 	
-//	@Override
-//	public Bag toDo(String locale, String currency, PersonDomainDTO pDto, BagDomainDTO dto) {
-//		LOGGER.debug("call " + getClass().getSimpleName() + ".toDo() with parameters: {}, {}", locale, currency);
-//
-//		// we need a customer to instantiate a new bag
-//		Customer c = personMapper.toDo(pDto);
-//
-//		// create a new bag domain object
-//		Bag b = new Bag(c, Locale.localize(dto.getLocale(), dto.getCurrency()));
-//
-//		// map the entity bagItems to the domain bagItems
-//		Set<IRegularBagItem> sbi = dto.getRegularBagItems().stream().map(bi -> regularBagItemMapper.toDo(b, bi))
-//				.collect(Collectors.toSet());
-//
-//		Optional<ShippingBagItemDomainDTO> ossbi = Optional.ofNullable(dto.getShippingBagItem());
-//
-//		// use the add item method on the domain object to
-//		// ensure business rules are fired against each added bagItem
-//		sbi.forEach(bi -> {
-//			b.addItem(bi, bi.getBagItem().getQuantity());
-//		});
-//
-//		if (ossbi.isPresent()) {
-//			IShippingBagItem ssbi = shippingItemMapper.toDo(b, ossbi.get());
-//			b.addShippingItem(ssbi);
-//		}
-//
-//		dto.getCoupons().stream().forEach(cpn -> {
-//			b.addCoupon(new CouponCode(cpn));
-//		});
-//
-//		return b;
-//	}
-
 	@Override
 	public BagEntity toEntity(IBag d) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".toEntity()");
+		LOGGER.debug("call " + getClass().getSimpleName() + ".toEntity() with Bag parameter: {}", d.getUserName());
 
 		// get the bag, status, and customer from the database
 		Optional<BagEntity> obe = bagService.findByCode(d.getCustomer().getUserName().toString());
+		
+		
 		Optional<PersonEntity> op = personService.findByUsernameAndRole(d.getCustomer().getUserName().toString(),
 				Constants.partyRoleCustomer);
 
@@ -227,7 +195,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 
 	@Override
 	public BagEntity toEntity(IPromotionBag pb) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".toEntity()");
+		LOGGER.debug("call " + getClass().getSimpleName() + ".toEntity() with IPromotionBag parameter: {}", pb.getUserName());
 		
 		Optional<BagEntity> obe = bagService.findByCode(pb.getUserName().toString());
 		

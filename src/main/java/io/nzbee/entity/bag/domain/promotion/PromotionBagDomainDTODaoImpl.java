@@ -31,7 +31,7 @@ public class PromotionBagDomainDTODaoImpl implements IPromotionBagDomainDTODao {
 									+ "       		p.upc_cd, "
 									+ " 	  		bi.bag_item_id, "
 									+ "       		bis.bag_item_sts_cd, "
-									+ "       		prc.prc_val, "
+									+ "       		COALESCE(prc.prc_val, 0) as prc_val, "
 									+ "       		(case "
 									+ "				when bit.bag_item_typ_cd = '" + Constants.shippingBagItemType + "' "
 									+ "				then 0 "

@@ -12,4 +12,9 @@ public class ShippingProductServiceImpl implements IShippingProductService {
 		return spr.findOne(locale, desitnationCode, shipCode);
 	}
 
+	@Override
+	public ShippingProductEntity findByUpc(String shippingUpc) {
+		return spr.findByShippingProductProductUPC(shippingUpc);
+	}
+
 }

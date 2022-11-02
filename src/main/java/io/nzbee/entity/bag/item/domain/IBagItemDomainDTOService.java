@@ -9,10 +9,10 @@ public interface IBagItemDomainDTOService {
 	Optional<ShippingBagItemDomainDTO> getNewShippingItem(String locale, String currency, String shipDest, String shipType,
 			BigDecimal bagWeight);
 
-	Optional<ShippingBagItemDomainDTO> getShippingItem(String locale, String currency, String priceType, String code);
-
 	Optional<RegularBagItemDomainDTO> getNewPhysicalItem(String locale, String currency, String productUPC);
 	
 	void delete(BagItemEntity e);
+
+	Optional<ShippingBagItemDomainDTO> getShippingItem(String locale, String currency, String code);
 	
 }

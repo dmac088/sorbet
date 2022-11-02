@@ -16,5 +16,7 @@ public interface IShippingProductRepository extends JpaRepository<ShippingProduc
 			+ " AND ps.shippingCountryCode 	= 	:desitnationCode "
 			+ " AND ps.shippingCode       	=   :shipCode ")
 	ShippingProductViewDTO findOne(String locale, String desitnationCode, String shipCode);
+	
+	ShippingProductEntity findByShippingProductProductUPC(String upc);
 }
  

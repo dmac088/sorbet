@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import io.nzbee.domain.bag.item.regular.IRegularBagItem;
+import io.nzbee.domain.valueObjects.Weight;
 import io.nzbee.view.bag.item.BagItemViewOut;
 
 public class BagView {
@@ -13,6 +16,8 @@ public class BagView {
 	private String bagStatusCode;
 	
 	private String bagStatusDesc;
+	
+	private BigDecimal bagWeight;
 	
 	@JsonIgnore
 	private Set<BagItemViewOut> bagItems = new HashSet<BagItemViewOut>();
@@ -48,7 +53,7 @@ public class BagView {
 	public Long getTotalQuantity() {
 		return this.getBagItems().stream().mapToLong(i -> i.getItemQty()).sum();
 	}
-
+	
 	public BigDecimal getTotalAmount() {
 		BigDecimal sum = BigDecimal.ZERO;
         for (BagItemViewOut bi : this.bagItems) {
@@ -86,6 +91,14 @@ public class BagView {
             sum = sum.add(bi.getBagItemDiscount());
         }
 		return sum;
+	}
+
+	public BigDecimal getBagWeight() {
+		return bagWeight;
+	}
+
+	public void setBagWeight(BigDecimal bagWeight) {
+		this.bagWeight = bagWeight;
 	}
 
 	public Set<BagItemViewOut> getBagItems() {

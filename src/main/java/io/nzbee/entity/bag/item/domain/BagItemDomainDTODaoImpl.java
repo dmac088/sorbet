@@ -96,24 +96,21 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 	}
 
 	@Override
-	public Optional<ShippingBagItemDomainDTO> getItem(String locale, String currency, String priceType, String productUPC) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".getItem, with parameters {}, {}, {}", currency, priceType, productUPC);
+	public Optional<ShippingBagItemDomainDTO> getItem(String locale, String currency, String upc) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".getItem, with parameters {}, {}, {}", locale, currency, upc);
 		
 		@SuppressWarnings("deprecation")
 		Query query = em.createQuery(
 				" SELECT pe.productUPC as upc_cd, "
 				+ " '" + Constants.bagItemStatusCodeNew + " ' as bag_item_sts_cd,"
-				+ " '" + Constants.shippingBagItemType + "'   as bag_item_typ_cd,\n"
-				+ " null as prc_val, "
+				+ " '" + Constants.shippingBagItemType + "'   as bag_item_typ_cd,"
 				+ " '" + currency + "' as curr, "
 				+ " '" + locale + "' as lcl"
 				+ " FROM ProductEntity pe "
 				+ " JOIN pe.productShipping ps "
-				+ " WHERE pe.productUPC 	= :productUPC ")
+				+ " WHERE pe.productUPC 	= :upc ")
 		.unwrap(org.hibernate.query.Query.class)
-		.setParameter("currency", currency)
-		.setParameter("priceType", priceType)
-		.setParameter("productUPC", productUPC)
+		.setParameter("upc", upc)
 		.setResultTransformer(new ShippingBagItemDomainDTOResultTransformer());
 		
 		try {

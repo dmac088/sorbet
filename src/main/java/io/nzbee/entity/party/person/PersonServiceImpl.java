@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class PersonServiceImpl implements IPersonService {
 
+	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+	
 	@Autowired
 	private IPersonRepository personRepository; 
 	
@@ -24,7 +29,6 @@ public class PersonServiceImpl implements IPersonService {
 		}
 		return Persons;
 	}
-	
 	
 	@Override
 	@PreAuthorize("hasAuthority('PERSON_READ')")
@@ -52,11 +56,13 @@ public class PersonServiceImpl implements IPersonService {
 	@Override
 	@PreAuthorize("hasAuthority('PERSON_READ')")
 	public Optional<PersonEntity> findByUsernameAndRole(String userName, String roleType) {
-		return personRepository.findByUsernameAndRoleWithBagAndItems(userName, roleType);
+		LOGGER.debug("call " + getClass().getSimpleName() + ".findByUsernameAndRole with parameters {}", userName);
+		return personRepository.findByUsernameAndRole(userName, roleType);
 	}
 	
 	@Override
 	public boolean userExists(String userName, String roleType) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".userExists with parameters {}", userName);
 		return personRepository.findByUsernameAndRole(userName, roleType).isPresent();
 	}
 

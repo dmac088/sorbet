@@ -33,8 +33,8 @@ public class BagItemDomainDTOServiceImpl implements IBagItemDomainDTOService {
 	}
 	
 	@Override
-	public Optional<ShippingBagItemDomainDTO> getShippingItem(String locale, String currency, String priceType, String code) {
-		return shippingBagItemDao.getItem(locale, currency, priceType, code);
+	public Optional<ShippingBagItemDomainDTO> getShippingItem(String locale, String currency, String code) {
+		return shippingBagItemDao.getItem(locale, currency, code);
 	}
 	
 	@Override

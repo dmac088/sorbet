@@ -25,8 +25,7 @@ public class BagEntityServiceImpl implements IBagEntityService {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode() with parameter {}", userName);
 		return bagRepository.findByPartyPartyUserUsername(userName);
 	}
-
-
+	
 	@Override
 	public void save(BagEntity t) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".save() with parameter {}", t.getParty().getUser().getUsername());

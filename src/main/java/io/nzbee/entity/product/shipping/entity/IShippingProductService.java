@@ -4,4 +4,6 @@ public interface IShippingProductService {
 
 	ShippingProductViewDTO findOne(String locale, String desitnationCode, String shipCode);
 
+	ShippingProductEntity findByUpc(String shippingUpc);
+	
 }

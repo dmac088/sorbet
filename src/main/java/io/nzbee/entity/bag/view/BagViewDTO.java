@@ -1,5 +1,6 @@
 package io.nzbee.entity.bag.view;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -38,6 +39,14 @@ public class BagViewDTO {
 
 	public void setCustomer(PersonViewDTO customer) {
 		this.customer = customer;
+	}
+	
+	public BigDecimal getTotalWeight() {
+		BigDecimal sum = BigDecimal.ZERO;
+        for (BagItemViewDTO bi : this.bagItems) {
+            sum = sum.add(bi.getBagItemTotalWeight());
+        }
+		return sum;
 	}
 	
 }
