@@ -67,6 +67,8 @@ import io.nzbee.entity.product.physical.view.IPhysicalProductDTODao;
 import io.nzbee.entity.product.physical.view.IPhysicalProductDTOMapper;
 import io.nzbee.entity.product.physical.view.PhysicalProductDTODaoPostgresImpl;
 import io.nzbee.entity.product.physical.view.PhysicalProductDTOMapperImpl;
+import io.nzbee.entity.product.shipping.entity.IShippingProductService;
+import io.nzbee.entity.product.shipping.entity.ShippingProductServiceImpl;
 import io.nzbee.entity.product.status.IProductStatusService;
 import io.nzbee.entity.product.status.ProductStatusServiceImpl;
 import io.nzbee.hkpost.IHKPostPort;
@@ -106,6 +108,11 @@ import io.nzbee.view.shipping.country.ShippingCountryViewServiceImpl;
 
 @Configuration
 class BeanConfiguration {
+	
+	@Bean
+	IShippingProductService shippingProductService() {
+		return new ShippingProductServiceImpl();
+	}
 	
 	@Bean
 	IPostageProductViewMapper postageProductViewMapper() {

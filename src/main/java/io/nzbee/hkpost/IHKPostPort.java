@@ -1,5 +1,6 @@
 package io.nzbee.hkpost;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import io.nzbee.domain.bag.IBag;
@@ -11,9 +12,10 @@ public interface IHKPostPort {
 
 	List<ShippingCountryView> getCountries(String locale, String currency);
 
-	ShippingFeeView getHKPostageFee(String locale, String currency, String countryCode, String shipCode,
-			String weight);
 
 	List<ShippingCodeView> getShipCodes(String locale, String currency, String destinationCode, IBag bag);
+
+	ShippingFeeView getHKPostageFee(String locale, String currency, String countryCode, String shipCode,
+			BigDecimal weight);
 	
 }

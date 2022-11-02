@@ -31,11 +31,13 @@ public class ShippingBagItemDomainAdapter implements IShippingBagItemPortService
 
 	@Override 
 	@Transactional
-	public IShippingBagItem getShippingItem(IBag b, String code, Locale locale) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".getShippingItem with parameters {}, {}, {}", locale.getLocale(), Constants.markdownPriceCode, code);
+	public IShippingBagItem getShippingItem(IBag b, String productCode, Locale locale) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".getShippingItem with parameters {}, {}, {}", locale.getLocale(), Constants.markdownPriceCode, productCode);
 		
-		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getShippingItem(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(), Constants.markdownPriceCode, code)
-				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, code));
+		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getShippingItem(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(), Constants.markdownPriceCode, productCode)
+				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, productCode));
+		
+		
 		
 		IShippingBagItem sbi = shippingBagItemDomainMapper.toDo(b, biDto, new BigDecimal(0), locale);
 		

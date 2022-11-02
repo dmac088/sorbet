@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PostageProductViewDTO {
-
+	
     private BigDecimal totalPostage;
     
     private BigDecimal additionalCharge;
@@ -20,6 +20,7 @@ public class PostageProductViewDTO {
     
     private BigDecimal withHighValueSurcharge;
 
+   
 	public BigDecimal getTotalPostage() {
 		return totalPostage;
 	}

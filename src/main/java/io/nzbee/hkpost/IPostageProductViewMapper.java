@@ -5,6 +5,6 @@ import io.nzbee.view.shipping.ShippingFeeView;
 
 public interface IPostageProductViewMapper {
 
-	ShippingFeeView toView(Locale locale, PostageProductViewDTO dto);
+	ShippingFeeView toView(Locale locale, PostageProductViewDTO dto, String productUPC);
 
 }

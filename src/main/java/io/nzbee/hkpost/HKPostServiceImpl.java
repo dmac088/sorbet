@@ -1,5 +1,6 @@
 package io.nzbee.hkpost;
 
+import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,9 @@ public class HKPostServiceImpl implements IHKPostService {
 	}
 
 	@Override
-	public PostageProductViewDTO getHKPostageFee(String countryCode, String shipCode, String weight) {
+	public PostageProductViewDTO getHKPostageFee(String countryCode, String shipCode, BigDecimal weight) {
 		return hkPostDao.getHKPostageFee(countryCode, shipCode, weight);
 	}	
+	
+	
 }

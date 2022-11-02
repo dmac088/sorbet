@@ -1,5 +1,6 @@
 package io.nzbee.entity.adapters.domain;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,13 @@ import io.nzbee.domain.ports.IBagItemPortService;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.entity.bag.item.domain.IBagItemDomainDTOMapper;
 import io.nzbee.entity.bag.item.domain.IBagItemDomainDTOService;
+import io.nzbee.entity.bag.item.domain.IShippingBagItemDomainDTOMapper;
 import io.nzbee.entity.bag.item.domain.RegularBagItemDomainDTO;
 import io.nzbee.entity.bag.item.domain.ShippingBagItemDomainDTO;
 import io.nzbee.entity.bag.item.entity.BagItemEntity;
 import io.nzbee.exceptions.EntityNotFoundException;
+import io.nzbee.hkpost.IHKPostService;
+import io.nzbee.hkpost.PostageProductViewDTO;
 
 @Service
 public class RegularBagItemDomainAdapter implements IBagItemPortService {
@@ -29,7 +33,10 @@ public class RegularBagItemDomainAdapter implements IBagItemPortService {
 	private IBagItemDomainDTOMapper<RegularBagItemDomainDTO, BagItemEntity, IRegularBagItem> regularBagItemDomainMapper;
 	
 	@Autowired
-	private IBagItemDomainDTOMapper<ShippingBagItemDomainDTO, BagItemEntity, IShippingBagItem> shippingBagItemDomainMapper;
+	private IShippingBagItemDomainDTOMapper shippingBagItemDomainMapper;
+	
+	@Autowired
+	private IHKPostService hkPostService;
 
 	@Override
 	public IRegularBagItem getNewPhysicalItem(Locale locale, IBag bag, String itemUPC, Long quantity) {
@@ -53,8 +60,10 @@ public class RegularBagItemDomainAdapter implements IBagItemPortService {
 		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getNewShippingItem(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(),  destCode,  shipType, bag.getTotalWeight().amount())
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, destCode + " - " + shipType + " - " + bag.getTotalWeight().amount()));
 		
+		PostageProductViewDTO dto = hkPostService.getHKPostageFee(destCode, shipType, bag.getTotalWeight().amount());
+		
 		//create, save and return domain object 
-		IShippingBagItem bi = shippingBagItemDomainMapper.toDo(bag, biDto);
+		IShippingBagItem bi = shippingBagItemDomainMapper.toDo(bag, biDto, dto.getTotalPostage(), locale);
 
 		return bi;
 	}

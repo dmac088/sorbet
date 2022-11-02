@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public class ShippingFeeView  {
     
+	private final String productUPC;
     
 	private final BigDecimal totalPostage;
     
@@ -15,14 +16,19 @@ public class ShippingFeeView  {
     
     private final BigDecimal withHighValueSurcharge;
 
-	public ShippingFeeView(BigDecimal totalPostage, BigDecimal additionalCharge, BigDecimal insurancePremiumFee,
+	public ShippingFeeView(String productUPC, BigDecimal totalPostage, BigDecimal additionalCharge, BigDecimal insurancePremiumFee,
 			BigDecimal withPostageSurcharge, BigDecimal withHighValueSurcharge) {
 		super();
+		this.productUPC = productUPC;
 		this.totalPostage = totalPostage;
 		this.additionalCharge = additionalCharge;
 		this.insurancePremiumFee = insurancePremiumFee;
 		this.withPostageSurcharge = withPostageSurcharge;
 		this.withHighValueSurcharge = withHighValueSurcharge;
+	}
+
+	public String getProductUPC() {
+		return productUPC;
 	}
 
 	public BigDecimal getTotalPostage() {

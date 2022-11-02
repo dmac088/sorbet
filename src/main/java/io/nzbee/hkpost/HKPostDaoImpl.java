@@ -1,5 +1,6 @@
 package io.nzbee.hkpost;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +35,7 @@ public class HKPostDaoImpl implements IHKPostDao {
 	@Override
 	public PostageProductViewDTO getHKPostageFee(	String countryCode, 
 													String shipCode, 
-													String weight) {
+													BigDecimal weight) {
 		LOGGER.debug("call " + getClass() + ".getHKPostRequest()");
 		
 		RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
@@ -44,7 +45,7 @@ public class HKPostDaoImpl implements IHKPostDao {
 		Map<String, String> params = new HashMap<>();
 		params.put("countryCode", countryCode);
 		params.put("shipCode", shipCode);
-		params.put("weight", weight);
+		params.put("weight", Double.toString(weight.doubleValue()));
 		
 		ResponseEntity<PostageProductViewDTO> response = null;
 		

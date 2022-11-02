@@ -1,5 +1,6 @@
 package io.nzbee.controllers;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 
 import org.slf4j.Logger;
@@ -49,7 +50,7 @@ public class ShippingController {
 												@RequestParam("weight") String weight) {
 		LOGGER.debug("call " + getClass() + ".getHKPostRequest()");
 		
-		return hkPostAdapter.getHKPostageFee(locale, currency, countryCode, shipCode, weight);
+		return hkPostAdapter.getHKPostageFee(locale, currency, countryCode, shipCode, new BigDecimal(weight));
 	}
 	
 	@GetMapping("/hkpost/{locale}/{currency}/countries")
