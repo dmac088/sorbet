@@ -44,7 +44,7 @@ public class BagViewDTO {
 	public BigDecimal getTotalWeight() {
 		BigDecimal sum = BigDecimal.ZERO;
         for (BagItemViewDTO bi : this.bagItems) {
-            sum = sum.add(bi.getBagItemTotalWeight());
+            sum = sum.add(bi.getBagItemTotalWeight().multiply(new BigDecimal(bi.getQuantity())));
         }
 		return sum;
 	}

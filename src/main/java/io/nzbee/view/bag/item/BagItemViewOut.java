@@ -22,6 +22,10 @@ public class BagItemViewOut {
 	public BagItemViewOut() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	private boolean hasQuantity() {
+		return (this.itemQty != null && this.itemQty > 0);
+	}
 
 	public Long getItemId() {
 		return itemId;
@@ -64,15 +68,21 @@ public class BagItemViewOut {
 	}
 	
 	public BigDecimal getBagItemSubTotal() {
-		return this.getMarkdownPrice().multiply(new BigDecimal(this.itemQty));
+		return 	this.hasQuantity() 
+		? this.getMarkdownPrice().multiply(new BigDecimal(this.itemQty))
+		: BigDecimal.ZERO;
 	}
 	
 	public BigDecimal getBagItemTotal() {
-		return this.getMarkdownPrice().multiply(new BigDecimal(this.itemQty)).multiply(BigDecimal.ONE.subtract(this.bagItemDiscountPercentage));
+		return 	this.hasQuantity() 
+				? getBagItemSubTotal().multiply(BigDecimal.ONE.subtract(this.bagItemDiscountPercentage))
+				: BigDecimal.ZERO;
 	}
 
 	public BigDecimal getBagItemWeight() {
-		return bagItemWeight.multiply(new BigDecimal(this.itemQty));
+		return 	this.hasQuantity() 
+				? bagItemWeight.multiply(new BigDecimal(this.itemQty))
+				: BigDecimal.ZERO;
 	}
 
 	public void setBagItemWeight(BigDecimal bagItemWeight) {

@@ -50,9 +50,13 @@ public class ShippingController {
 		//we get the weight from the bag, not the front end
 		IBag b = domainBagService.findByCode(Locale.localize(locale, currency), new UserName(principal.getName()));
 		
-		System.out.println("weight of the bag is " + b.getTotalWeight().amount());
+		//System.out.println("weight of the bag is " + b.getTotalWeight().amount());
 		
-		return hkPostAdapter.getHKPostageFee(locale, currency, countryCode, shipCode, b.getTotalWeight().amount());
+		ShippingFeeView f = hkPostAdapter.getHKPostageFee(locale, currency, countryCode, shipCode, b.getTotalWeight().amount());
+		
+		//System.out.println("postage fee is " + f.getTotalPostage());
+		
+		return f;
 	}
 	
 	@GetMapping("/hkpost/{locale}/{currency}/countries")

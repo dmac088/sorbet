@@ -54,7 +54,11 @@ public class BagViewAdapterImpl implements IBagPortService {
 			//get the postage free from hk post
 			PostageProductViewDTO postageFee = hkPostService.getHKPostageFee(s.getShippingCountryCode(), s.getShippingCode(), ob.get().getTotalWeight());
 			
-			return bagMapper.toView(ob.get(), postageFee.getTotalPostage(), locale);
+			BigDecimal fee = (postageFee != null && postageFee.getTotalPostage() != null)
+								? postageFee.getTotalPostage()
+								: BigDecimal.ZERO;
+			
+			return bagMapper.toView(ob.get(), fee, locale);
 			
 		}
 		return bagMapper.toView(ob.get());
