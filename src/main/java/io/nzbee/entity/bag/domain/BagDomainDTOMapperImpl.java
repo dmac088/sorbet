@@ -16,7 +16,6 @@ import io.nzbee.domain.bag.Bag;
 import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.bag.item.regular.IRegularBagItem;
 import io.nzbee.domain.bag.item.shipping.IShippingBagItem;
-import io.nzbee.domain.customer.Customer;
 import io.nzbee.domain.promotion.bag.IPromotionBag;
 import io.nzbee.domain.promotion.bag.item.IPromotionBagItem;
 import io.nzbee.domain.valueObjects.CouponCode;
@@ -35,7 +34,6 @@ import io.nzbee.entity.party.person.IPersonService;
 import io.nzbee.entity.party.person.PersonEntity;
 import io.nzbee.entity.product.IProductService;
 import io.nzbee.exceptions.EntityNotFoundException;
-import io.nzbee.entity.party.person.PersonDomainDTO;
 
 @Component
 public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
@@ -67,7 +65,7 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 	private IProductService productService;
 
 	@Override
-	public Bag toDo(BagDomainDTO dto) {
+	public Bag toDo(BagDomainDTO dto, BigDecimal price) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".toDo()");
 		Bag b = new Bag(personMapper.toDo(dto.getCustomer()), Locale.localize(dto.getLocale(), dto.getCurrency()));
 
@@ -82,9 +80,9 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 		sbi.forEach(bi -> {
 			b.addItem(bi, bi.getBagItem().getQuantity());
 		});
-
+	
 		if (ossbi.isPresent()) {
-			IShippingBagItem ssbi = shippingItemMapper.toDo(b, ossbi.get());
+			IShippingBagItem ssbi = shippingItemMapper.toDo(b, ossbi.get(), price, Locale.localize(dto.getLocale(), dto.getCurrency()));
 			b.addShippingItem(ssbi);
 		}
 
@@ -94,40 +92,40 @@ public class BagDomainDTOMapperImpl implements IBagDomainDTOMapper {
 
 		return b;
 	}
-
-	@Override
-	public Bag toDo(String locale, String currency, PersonDomainDTO pDto, BagDomainDTO dto) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".toDo() with parameters: {}, {}", locale, currency);
-
-		// we need a customer to instantiate a new bag
-		Customer c = personMapper.toDo(pDto);
-
-		// create a new bag domain object
-		Bag b = new Bag(c, Locale.localize(dto.getLocale(), dto.getCurrency()));
-
-		// map the entity bagItems to the domain bagItems
-		Set<IRegularBagItem> sbi = dto.getRegularBagItems().stream().map(bi -> regularBagItemMapper.toDo(b, bi))
-				.collect(Collectors.toSet());
-
-		Optional<ShippingBagItemDomainDTO> ossbi = Optional.ofNullable(dto.getShippingBagItem());
-
-		// use the add item method on the domain object to
-		// ensure business rules are fired against each added bagItem
-		sbi.forEach(bi -> {
-			b.addItem(bi, bi.getBagItem().getQuantity());
-		});
-
-		if (ossbi.isPresent()) {
-			IShippingBagItem ssbi = shippingItemMapper.toDo(b, ossbi.get());
-			b.addShippingItem(ssbi);
-		}
-
-		dto.getCoupons().stream().forEach(cpn -> {
-			b.addCoupon(new CouponCode(cpn));
-		});
-
-		return b;
-	}
+	
+//	@Override
+//	public Bag toDo(String locale, String currency, PersonDomainDTO pDto, BagDomainDTO dto) {
+//		LOGGER.debug("call " + getClass().getSimpleName() + ".toDo() with parameters: {}, {}", locale, currency);
+//
+//		// we need a customer to instantiate a new bag
+//		Customer c = personMapper.toDo(pDto);
+//
+//		// create a new bag domain object
+//		Bag b = new Bag(c, Locale.localize(dto.getLocale(), dto.getCurrency()));
+//
+//		// map the entity bagItems to the domain bagItems
+//		Set<IRegularBagItem> sbi = dto.getRegularBagItems().stream().map(bi -> regularBagItemMapper.toDo(b, bi))
+//				.collect(Collectors.toSet());
+//
+//		Optional<ShippingBagItemDomainDTO> ossbi = Optional.ofNullable(dto.getShippingBagItem());
+//
+//		// use the add item method on the domain object to
+//		// ensure business rules are fired against each added bagItem
+//		sbi.forEach(bi -> {
+//			b.addItem(bi, bi.getBagItem().getQuantity());
+//		});
+//
+//		if (ossbi.isPresent()) {
+//			IShippingBagItem ssbi = shippingItemMapper.toDo(b, ossbi.get());
+//			b.addShippingItem(ssbi);
+//		}
+//
+//		dto.getCoupons().stream().forEach(cpn -> {
+//			b.addCoupon(new CouponCode(cpn));
+//		});
+//
+//		return b;
+//	}
 
 	@Override
 	public BagEntity toEntity(IBag d) {

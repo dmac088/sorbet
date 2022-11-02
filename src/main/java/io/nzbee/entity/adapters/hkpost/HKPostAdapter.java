@@ -37,6 +37,7 @@ public class HKPostAdapter implements IHKPostPort {
 	
 	@Override
 	public ShippingFeeView getHKPostageFee(String locale, String currency, String countryCode, String shipCode, String weight) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".getHKPostageFee()");
 		return productViewMapper.toView(Locale.localize(locale, currency), hkPostService.getHKPostageFee(countryCode, shipCode, weight));
 	}
 
@@ -49,8 +50,8 @@ public class HKPostAdapter implements IHKPostPort {
 	@Override
 	public List<ShippingCodeView> getShipCodes(String locale, String currency, String destinationCode, IBag b) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getShipCodes()");
-		
 		return shipCodeViewMapper.toView(Locale.localize(locale, currency), shipCodeService.findAll(locale, destinationCode, b.getTotalWeight().amount()));
 	}
 
 }
+

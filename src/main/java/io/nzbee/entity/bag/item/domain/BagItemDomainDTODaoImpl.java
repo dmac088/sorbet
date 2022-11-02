@@ -75,7 +75,7 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 				+ " JOIN pe.prices prcs "
 				+ " JOIN prcs.type typ "
 				+ " JOIN prcs.currency curr "
-				+ " WHERE typ.code = :priceType "
+				+ " WHERE typ.code 				= :priceType "
 				+ " AND curr.code 				= :currency "
 				+ " AND ps.shippingCode 		= :shipCode "
 				+ " AND ps.shippingCountryCode 	= :shipDest "
@@ -104,17 +104,12 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 				" SELECT pe.productUPC as upc_cd, "
 				+ " '" + Constants.bagItemStatusCodeNew + " ' as bag_item_sts_cd,"
 				+ " '" + Constants.shippingBagItemType + "'   as bag_item_typ_cd,\n"
-				+ " prcs.priceValue as prc_val, "
+				+ " null as prc_val, "
 				+ " '" + currency + "' as curr, "
 				+ " '" + locale + "' as lcl"
 				+ " FROM ProductEntity pe "
 				+ " JOIN pe.productShipping ps "
-				+ " JOIN pe.prices prcs "
-				+ " JOIN prcs.type typ "
-				+ " JOIN prcs.currency curr "
-				+ " WHERE typ.code 		= :priceType "
-				+ " AND curr.code 		= :currency "
-				+ " AND pe.productUPC 	= :productUPC ")
+				+ " WHERE pe.productUPC 	= :productUPC ")
 		.unwrap(org.hibernate.query.Query.class)
 		.setParameter("currency", currency)
 		.setParameter("priceType", priceType)

@@ -1,5 +1,7 @@
 package io.nzbee.entity.adapters.domain;
 
+import java.math.BigDecimal;
+
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +29,7 @@ public class ShippingBagItemDomainAdapter implements IShippingBagItemPortService
 	@Autowired
 	private IShippingBagItemDomainDTOMapper shippingBagItemDomainMapper;
 
-	@Override
+	@Override 
 	@Transactional
 	public IShippingBagItem getShippingItem(IBag b, String code, Locale locale) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getShippingItem with parameters {}, {}, {}", locale.getLocale(), Constants.markdownPriceCode, code);
@@ -35,11 +37,9 @@ public class ShippingBagItemDomainAdapter implements IShippingBagItemPortService
 		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getShippingItem(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(), Constants.markdownPriceCode, code)
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, code));
 		
-		IShippingBagItem sbi = shippingBagItemDomainMapper.toDo(b, biDto);
+		IShippingBagItem sbi = shippingBagItemDomainMapper.toDo(b, biDto, new BigDecimal(0), locale);
 		
 		return sbi;
 	}
-	
-
 
 }

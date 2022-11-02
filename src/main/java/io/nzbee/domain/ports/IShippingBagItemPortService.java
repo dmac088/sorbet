@@ -8,4 +8,5 @@ public interface IShippingBagItemPortService {
 
 	IShippingBagItem getShippingItem(IBag b, String code, Locale locale);
 
+
 }

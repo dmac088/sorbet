@@ -1,5 +1,6 @@
 package io.nzbee.entity.adapters.domain;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
@@ -48,8 +49,8 @@ public class BagDomainAdapter implements IBagPortService {
 		//if there is no current bag, get a new one
 		BagDomainDTO b = ob.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.customerNotFound, locale, userName.toString()));
 	
-		//map the bag to a domain object
-		return bagMapper.toDo(b);
+		//map the bag to a domain object and inject the shipping from hkpost api
+		return bagMapper.toDo(b, new BigDecimal(0));
 	}
 	
 	@Override
