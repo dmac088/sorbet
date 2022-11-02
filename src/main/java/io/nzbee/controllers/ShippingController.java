@@ -1,8 +1,6 @@
 package io.nzbee.controllers;
 
-import java.math.BigDecimal;
 import java.security.Principal;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.bag.IBagDomainService;
 import io.nzbee.domain.valueObjects.Locale;
@@ -44,13 +41,18 @@ public class ShippingController {
 	
 	@GetMapping("/hkpost/postagefee/{locale}/{currency}")
 	public ShippingFeeView getHKPostageFee(	@PathVariable String locale, 
-												@PathVariable String currency,
-												@RequestParam("countryCode") String countryCode, 
-											    @RequestParam("shipCode") String shipCode, 
-												@RequestParam("weight") String weight) {
+											@PathVariable String currency,
+											@RequestParam("countryCode") String countryCode, 
+											@RequestParam("shipCode") String shipCode, 
+											    Principal principal) {
 		LOGGER.debug("call " + getClass() + ".getHKPostRequest()");
 		
-		return hkPostAdapter.getHKPostageFee(locale, currency, countryCode, shipCode, new BigDecimal(weight));
+		//we get the weight from the bag, not the front end
+		IBag b = domainBagService.findByCode(Locale.localize(locale, currency), new UserName(principal.getName()));
+		
+		System.out.println("weight of the bag is " + b.getTotalWeight().amount());
+		
+		return hkPostAdapter.getHKPostageFee(locale, currency, countryCode, shipCode, b.getTotalWeight().amount());
 	}
 	
 	@GetMapping("/hkpost/{locale}/{currency}/countries")

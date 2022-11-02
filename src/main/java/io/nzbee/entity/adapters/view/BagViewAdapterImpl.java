@@ -40,17 +40,24 @@ public class BagViewAdapterImpl implements IBagPortService {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".findByCode with parameter {}, {}, {}", locale, locale.getCurrency().getCurrencyCode(), userName);
 		
 		//this will also retrieve the items of the bag
-		Optional<BagViewDTO> b = bagService.findByCode(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(),userName);
-
-		String shippingUpc = b.get().getBagItems().stream().filter(i -> i.getBagItemTypeCode().equals(Constants.shippingBagItemType)).findAny().get().getBagItemUPC();
+		Optional<BagViewDTO> ob = bagService.findByCode(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(),userName);
 		
-		//get the postage product details from the database
-		ShippingProductEntity s = shippingProductService.findByUpc(shippingUpc);
 		
-		//get the postage free from hk post
-		PostageProductViewDTO postageFee = hkPostService.getHKPostageFee(s.getShippingCountryCode(), s.getShippingCode(), b.get().getTotalWeight());
 		
-		return bagMapper.toView(b.get(), postageFee.getTotalPostage(), locale);
+		if(ob.get().getBagItems().stream().filter(i -> i.getBagItemTypeCode().equals(Constants.shippingBagItemType)).findAny().isPresent()) {
+	
+			String shippingUpc = ob.get().getBagItems().stream().filter(i -> i.getBagItemTypeCode().equals(Constants.shippingBagItemType)).findAny().get().getBagItemUPC();
+			
+			//get the postage product details from the database
+			ShippingProductEntity s = shippingProductService.findByUpc(shippingUpc);
+			
+			//get the postage free from hk post
+			PostageProductViewDTO postageFee = hkPostService.getHKPostageFee(s.getShippingCountryCode(), s.getShippingCode(), ob.get().getTotalWeight());
+			
+			return bagMapper.toView(ob.get(), postageFee.getTotalPostage(), locale);
+			
+		}
+		return bagMapper.toView(ob.get());
 	}
 	
 	
