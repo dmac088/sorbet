@@ -1,13 +1,15 @@
 package io.nzbee.entity.adapters.view;
 
-import java.math.BigDecimal;
+import java.util.Currency;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import io.nzbee.Constants;
+import io.nzbee.domain.valueObjects.HKPostageFee;
 import io.nzbee.domain.valueObjects.Locale;
+import io.nzbee.domain.valueObjects.Money;
 import io.nzbee.entity.bag.view.BagViewDTO;
 import io.nzbee.entity.bag.view.IBagViewDTOMapper;
 import io.nzbee.entity.bag.view.IBagViewDTOService;
@@ -55,10 +57,10 @@ public class BagViewAdapterImpl implements IBagPortService {
 		PostageProductViewDTO postageFee = hkPostService.getHKPostageFee(s.getShippingCountryCode(),
 				s.getShippingCode(), ob.get().getTotalWeight());
 
-		BigDecimal fee = (postageFee != null && postageFee.getTotalPostage() != null) ? postageFee.getTotalPostage()
-				: BigDecimal.ZERO;
+		HKPostageFee fee = (postageFee != null && postageFee.getTotalPostage() != null) ? new HKPostageFee(new Money(postageFee.getTotalPostage(),  Currency.getInstance(Constants.currencyHKD), Constants.defaultMoneyRounding))
+				: new HKPostageFee(new Money(postageFee.getTotalPostage(), Currency.getInstance(Constants.currencyHKD), Constants.defaultMoneyRounding));
 
-		return bagMapper.toView(ob.get(), fee, locale);
+		return bagMapper.toView(ob.get(), fee.amount(locale.getCurrency()), locale);
 	}
 
 }

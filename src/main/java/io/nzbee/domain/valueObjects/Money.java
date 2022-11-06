@@ -109,7 +109,7 @@ public class Money {
 	public Money multiply(BigDecimal amount, int roundingMode) {
 		return new Money(amount().multiply(amount), currency, roundingMode);
 	}
-
+	
 	//these two methods allocate money among multiple targets without losing cents
 	public Money[] allocate(int targets) {
 		Money lowResult = newMoney(amount / targets);

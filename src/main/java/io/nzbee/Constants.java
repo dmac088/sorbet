@@ -1,6 +1,7 @@
 package io.nzbee;
 
 import java.math.BigDecimal;
+import java.util.Currency;
 
 import io.nzbee.domain.valueObjects.Locale;
 
@@ -59,4 +60,7 @@ public class Constants {
 	public static final int defaultMoneyRounding = BigDecimal.ROUND_HALF_EVEN;
 	
 	public static final Locale defaultLocale = Locale.localize(Constants.localeENGB, Constants.currencyUSD);
+	public static final Currency currencyObjectUSD = Currency.getInstance(Constants.currencyUSD);
+	public static final BigDecimal hkdToUsdRate = new BigDecimal(0.13);
+	
 }

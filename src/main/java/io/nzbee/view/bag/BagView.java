@@ -6,9 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import io.nzbee.domain.bag.item.regular.IRegularBagItem;
-import io.nzbee.domain.valueObjects.Weight;
 import io.nzbee.view.bag.item.BagItemViewOut;
 
 public class BagView {
