@@ -1,5 +1,6 @@
 package io.nzbee.entity.adapters.view;
 
+import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -10,6 +11,7 @@ import io.nzbee.Constants;
 import io.nzbee.domain.valueObjects.HKPostageFee;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.domain.valueObjects.Money;
+import io.nzbee.entity.bag.item.view.BagItemViewDTO;
 import io.nzbee.entity.bag.view.BagViewDTO;
 import io.nzbee.entity.bag.view.IBagViewDTOMapper;
 import io.nzbee.entity.bag.view.IBagViewDTOService;
@@ -46,21 +48,27 @@ public class BagViewAdapterImpl implements IBagPortService {
 		Optional<BagViewDTO> ob = bagService.findByCode(locale.getLanguageCode(),
 				locale.getCurrency().getCurrencyCode(), userName);
 
-		String shippingUpc = ob.get().getBagItems().stream()
+		Optional<BagItemViewDTO> osi = ob.get().getBagItems().stream()
+		.filter(i -> i.getBagItemTypeCode().equals(Constants.shippingBagItemType)).findAny();
+		
+		if(osi.isPresent()) {
+			String shippingUpc = ob.get().getBagItems().stream()
 				.filter(i -> i.getBagItemTypeCode().equals(Constants.shippingBagItemType)).findAny().get()
 				.getBagItemUPC();
 
-		// get the postage product details from the database
-		ShippingProductEntity s = shippingProductService.findByUpc(shippingUpc);
+			// get the postage product details from the database
+			ShippingProductEntity s = shippingProductService.findByUpc(shippingUpc);
 
-		// get the postage free from hk post
-		PostageProductViewDTO postageFee = hkPostService.getHKPostageFee(s.getShippingCountryCode(),
-				s.getShippingCode(), ob.get().getTotalWeight());
+			// get the postage free from hk post
+			PostageProductViewDTO postageFee = hkPostService.getHKPostageFee(s.getShippingCountryCode(),
+					s.getShippingCode(), ob.get().getTotalWeight());
 
-		HKPostageFee fee = (postageFee != null && postageFee.getTotalPostage() != null) ? new HKPostageFee(new Money(postageFee.getTotalPostage(),  Currency.getInstance(Constants.currencyHKD), Constants.defaultMoneyRounding))
-				: new HKPostageFee(new Money(postageFee.getTotalPostage(), Currency.getInstance(Constants.currencyHKD), Constants.defaultMoneyRounding));
+			HKPostageFee fee = (postageFee != null && postageFee.getTotalPostage() != null) ? new HKPostageFee(new Money(postageFee.getTotalPostage(),  Currency.getInstance(Constants.currencyHKD), Constants.defaultMoneyRounding))
+					: new HKPostageFee(new Money(postageFee.getTotalPostage(), Currency.getInstance(Constants.currencyHKD), Constants.defaultMoneyRounding));
 
-		return bagMapper.toView(ob.get(), fee.amount(locale.getCurrency()), locale);
+			return bagMapper.toView(ob.get(), fee.amount(locale.getCurrency()), locale);
+		}
+		return bagMapper.toView(ob.get(), BigDecimal.ZERO, locale);
 	}
 
 }

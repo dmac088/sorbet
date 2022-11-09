@@ -1,6 +1,5 @@
 package io.nzbee.entity.bag.item.domain;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -58,8 +57,8 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 	}
 	
 	@Override
-	public Optional<ShippingBagItemDomainDTO> getNewItem(String locale, String currency, String priceType, String shipDest, String shipCode, BigDecimal bagWeight) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewItem, with parameters {}, {}, {}, {}, {}", currency, priceType, shipDest, shipCode, bagWeight);
+	public Optional<ShippingBagItemDomainDTO> getNewItem(String locale, String currency, String priceType, String shipDest, String shipCode) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewItem, with parameters {}, {}, {}, {}, {}", currency, priceType, shipDest, shipCode);
 		
 		@SuppressWarnings("deprecation")
 		Query query = em.createQuery(
@@ -78,14 +77,12 @@ public class BagItemDomainDTODaoImpl implements IRegularBagItemDomainDTODao<Regu
 				+ " WHERE typ.code 				= :priceType "
 				+ " AND curr.code 				= :currency "
 				+ " AND ps.shippingCode 		= :shipCode "
-				+ " AND ps.shippingCountryCode 	= :shipDest "
-				+ " AND :bagWeight <= ps.weightLimit ")
+				+ " AND ps.shippingCountryCode 	= :shipDest ")
 		.unwrap(org.hibernate.query.Query.class)
 		.setParameter("currency", currency)
 		.setParameter("priceType", priceType)
 		.setParameter("shipDest", shipDest)
 		.setParameter("shipCode", shipCode)
-		.setParameter("bagWeight", bagWeight)
 		.setResultTransformer(new ShippingBagItemDomainDTOResultTransformer());
 		
 		try {

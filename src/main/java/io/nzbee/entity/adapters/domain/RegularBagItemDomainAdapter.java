@@ -57,7 +57,7 @@ public class RegularBagItemDomainAdapter implements IBagItemPortService {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getNewShippingItem with parameters {}, {}", destCode, shipType);
 		
 		//there is no product in the domain model just bagItem
-		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getNewShippingItem(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(),  destCode,  shipType, bag.getTotalWeight().amount())
+		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getNewShippingItem(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(),  destCode,  shipType)
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, destCode + " - " + shipType + " - " + bag.getTotalWeight().amount()));
 		
 		PostageProductViewDTO dto = hkPostService.getHKPostageFee(destCode, shipType, bag.getTotalWeight().amount());

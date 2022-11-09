@@ -1,7 +1,6 @@
 package io.nzbee.entity.product.shipping.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -46,9 +45,6 @@ public class ShippingProductEntity implements Serializable  {
 	@Column(name="shp_sts_cd")
 	private String shippingStatusCode;
 	
-	@Column(name="shp_max_wt")
-	private BigDecimal weightLimit;
-
 	public ProductEntity getShippingProduct() {
 		return shippingProduct;
 	}
@@ -95,12 +91,5 @@ public class ShippingProductEntity implements Serializable  {
 		this.shippingStatusCode = shippingStatusCode;
 	}
 
-	public BigDecimal getWeightLimit() {
-		return weightLimit;
-	}
-	
-	public void setWeightLimit(BigDecimal weightLimit) {
-		this.weightLimit = weightLimit;	
-	}
 	
 }

@@ -312,7 +312,6 @@ public class ShippingProductMasterService {
 		}
 		
 		sp.getShippingProduct().setInStock(true);
-		sp.setWeightLimit(new BigDecimal(weightLimit));
 		
 		return sp;
 		

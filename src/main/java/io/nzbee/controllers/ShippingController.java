@@ -70,9 +70,7 @@ public class ShippingController {
 	public CollectionModel<ShippingCodeResource> getShipCodes(@PathVariable String locale, @PathVariable String currency, @PathVariable String destinationCode, Principal principal) {
 		LOGGER.debug("call " + getClass() + ".getCountries() with params: {}, {}", locale, currency);
 		
-		IBag b = domainBagService.findByCode(Locale.localize(locale, currency), new UserName(principal.getName()));
-		
-		return typeAssembler.toCollectionModel(hkPostAdapter.getShipCodes(locale, currency, destinationCode, b));
+		return typeAssembler.toCollectionModel(hkPostAdapter.getShipCodes(locale, currency, destinationCode));
 		
 	}
 	

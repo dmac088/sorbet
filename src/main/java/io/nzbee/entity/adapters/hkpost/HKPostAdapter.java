@@ -5,7 +5,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import io.nzbee.domain.bag.IBag;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.entity.product.shipping.entity.IShippingProductService;
 import io.nzbee.entity.product.shipping.entity.ShippingProductViewDTO;
@@ -56,9 +55,9 @@ public class HKPostAdapter implements IHKPostPort {
 	}
 
 	@Override
-	public List<ShippingCodeView> getShipCodes(String locale, String currency, String destinationCode, IBag b) {
+	public List<ShippingCodeView> getShipCodes(String locale, String currency, String destinationCode) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getShipCodes()");
-		return shipCodeViewMapper.toView(Locale.localize(locale, currency), shipCodeService.findAll(locale, destinationCode, b.getTotalWeight().amount()));
+		return shipCodeViewMapper.toView(Locale.localize(locale, currency), shipCodeService.findAll(locale, destinationCode));
 	}
 
 }

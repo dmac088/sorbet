@@ -1,6 +1,5 @@
 package io.nzbee.entity.bag.item.domain;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,8 +27,8 @@ public class BagItemDomainDTOServiceImpl implements IBagItemDomainDTOService {
 	}
 	
 	@Override
-	public Optional<ShippingBagItemDomainDTO> getNewShippingItem(String locale, String currency, String shipDest, String shipType, BigDecimal bagWeight) {
-		return shippingBagItemDao.getNewItem(locale, currency, Constants.markdownPriceCode, shipDest, shipType, bagWeight);
+	public Optional<ShippingBagItemDomainDTO> getNewShippingItem(String locale, String currency, String shipDest, String shipType) {
+		return shippingBagItemDao.getNewItem(locale, currency, Constants.markdownPriceCode, shipDest, shipType);
 	}
 	
 	@Override

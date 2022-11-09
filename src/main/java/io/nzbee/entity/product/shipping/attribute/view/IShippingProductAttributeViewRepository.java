@@ -1,10 +1,8 @@
 package io.nzbee.entity.product.shipping.attribute.view;
 
-import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
 import io.nzbee.entity.product.shipping.attribute.destination.ShippingDestinationDTO;
 import io.nzbee.entity.product.shipping.attribute.entity.ShippingProductAttributeEntity;
 import io.nzbee.entity.product.shipping.attribute.type.ShippingTypeDTO;
@@ -31,7 +29,6 @@ public interface IShippingProductAttributeViewRepository extends JpaRepository<S
 			+ " JOIN spa.product sp"
 			+ " WHERE spa.lclCd = :locale"
 			+ " AND sp.shippingCountryCode = :shippingDestinationCode"
-			+ " AND :bagWeight <= sp.weightLimit "
 			)
-	List<ShippingTypeDTO> findAllShippingType(String locale, String shippingDestinationCode, BigDecimal bagWeight);
+	List<ShippingTypeDTO> findAllShippingType(String locale, String shippingDestinationCode);
 }

@@ -1,6 +1,5 @@
 package io.nzbee.entity.product.shipping.attribute.view;
 
-import java.math.BigDecimal;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,10 +23,9 @@ public class ShippingProductAttributeViewServiceImpl implements IShippingProduct
 	}
 	
 	@Override
-	public List<ShippingTypeDTO> findAllShippingTypeByDestinationAndWeight(String locale, String shippingDestination,
-			BigDecimal bagWeight) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".findAllShippingTypeByDestinationAndWeight with parameter {}, {}, {}", locale, shippingDestination, bagWeight);
-		return productAttributeRepository.findAllShippingType(locale, shippingDestination, (bagWeight == null) ? new BigDecimal(0.01) : bagWeight );
+	public List<ShippingTypeDTO> findAllShippingTypeByDestinationAndWeight(String locale, String shippingDestination) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".findAllShippingTypeByDestinationAndWeight with parameter {}, {}, {}", locale, shippingDestination);
+		return productAttributeRepository.findAllShippingType(locale, shippingDestination);
 	}
 
 }
