@@ -5,14 +5,18 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import io.nzbee.ErrorKeys;
 import io.nzbee.domain.valueObjects.Locale;
 import io.nzbee.entity.product.shipping.entity.IShippingProductService;
 import io.nzbee.entity.product.shipping.entity.ShippingProductViewDTO;
 import io.nzbee.entity.product.shipping.entity.shipcode.IShipCodeService;
 import io.nzbee.entity.product.shipping.entity.shipcode.IShipCodeViewMapper;
+import io.nzbee.exceptions.PostageNotFoundException;
 import io.nzbee.hkpost.IHKPostPort;
 import io.nzbee.hkpost.IHKPostService;
 import io.nzbee.hkpost.IPostageProductViewMapper;
+import io.nzbee.hkpost.PostageProductViewDTO;
 import io.nzbee.hkpost.country.ICountryViewMapper;
 import io.nzbee.view.shipping.ShippingFeeView;
 import io.nzbee.view.shipping.code.ShippingCodeView;
@@ -45,7 +49,9 @@ public class HKPostAdapter implements IHKPostPort {
 	public ShippingFeeView getHKPostageFee(String locale, String currency, String countryCode, String shipCode, BigDecimal weight) {
 		LOGGER.debug("call " + getClass().getSimpleName() + ".getHKPostageFee()");
 		ShippingProductViewDTO dto = shippingProductService.findOne(locale, countryCode, shipCode);
-		return productViewMapper.toView(Locale.localize(locale, currency), hkPostService.getHKPostageFee(countryCode, shipCode, weight), dto.getCode());
+		PostageProductViewDTO ppv = hkPostService.getHKPostageFee(countryCode, shipCode, weight)
+			.orElseThrow(() -> new PostageNotFoundException(ErrorKeys.postageNotFound, Locale.localize(locale, currency), countryCode + " - " + shipCode));
+		return productViewMapper.toView(Locale.localize(locale, currency), ppv, dto.getCode());
 	}
 
 	@Override

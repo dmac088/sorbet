@@ -1,7 +1,5 @@
 package io.nzbee.entity.product.shipping.view;
 
-import java.math.BigDecimal;
-
 public class ShippingProductViewDTO  {
 	
 	private final String productUPC;
@@ -14,21 +12,17 @@ public class ShippingProductViewDTO  {
 	
 	private final String shippingTypeDesc;
 	
-	private final BigDecimal weightLimit;
-    
 	public ShippingProductViewDTO(String productUPC, 
 								  String shippingDestinationCode, 
 								  String shippingDestinationDesc,
 								  String shippingTypeCode, 
-								  String shippingTypeDesc, 
-								  BigDecimal weightLimit) {
+								  String shippingTypeDesc) {
 		super();
 		this.productUPC = productUPC;
 		this.shippingDestinationCode = shippingDestinationCode;
 		this.shippingDestinationDesc = shippingDestinationDesc;
 		this.shippingTypeCode = shippingTypeCode;
 		this.shippingTypeDesc = shippingTypeDesc;
-		this.weightLimit = weightLimit;
 	}
 
 	public String getShippingDestinationCode() {
@@ -47,10 +41,6 @@ public class ShippingProductViewDTO  {
 		return shippingTypeDesc;
 	}
 
-	public BigDecimal getWeightLimit() {
-		return weightLimit;
-	}
-	
 	public String getProductUPC() {
 		return productUPC;
 	}

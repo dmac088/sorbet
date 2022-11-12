@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.EnumUtils;
@@ -33,7 +34,7 @@ public class HKPostDaoImpl implements IHKPostDao {
 	private HKPostConfig config;
 	
 	@Override
-	public PostageProductViewDTO getHKPostageFee(	String countryCode, 
+	public Optional<PostageProductViewDTO> getHKPostageFee(	String countryCode, 
 													String shipCode, 
 													BigDecimal weight) {
 		LOGGER.debug("call " + getClass() + ".getHKPostRequest()");
@@ -68,12 +69,17 @@ public class HKPostDaoImpl implements IHKPostDao {
 											params
 											);
 			
-			return response.getBody();
+			if(response.getBody().getTotalPostage() == null) {
+				return Optional.empty();
+			}
+			
+			return Optional.ofNullable(response.getBody());
+					
 		} catch (RestClientException e) {
 			//throw ???????? 
 			e.printStackTrace();
 		}
-		return response.getBody();
+		return Optional.empty();
 	}
 	
 	@Override

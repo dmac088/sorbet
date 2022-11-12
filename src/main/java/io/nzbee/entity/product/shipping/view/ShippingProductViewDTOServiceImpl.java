@@ -1,6 +1,5 @@
 package io.nzbee.entity.product.shipping.view;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +16,9 @@ public class ShippingProductViewDTOServiceImpl implements IShippingProductViewDT
 	
 	@Override
 	public Optional<ShippingProductViewDTO> findByDestinationAndTypeAndBagWeight(String locale, String currency, String shippingDestinationCode,
-			String shippingTypeCode, BigDecimal bagWeightKg) {
-		LOGGER.debug("call " + getClass().getSimpleName() + ".findByDestinationAndTypeAndBagWeight with parameter {}, {}, {}, {}, {}", locale, currency, shippingDestinationCode, shippingTypeCode, bagWeightKg);
-		return shippingProductViewDTORepository.findByDestinationAndTypeAndBagWeight(locale, currency, shippingDestinationCode, shippingTypeCode, bagWeightKg);
+			String shippingTypeCode) {
+		LOGGER.debug("call " + getClass().getSimpleName() + ".findByDestinationAndTypeAndBagWeight with parameter {}, {}, {}, {}, {}", locale, currency, shippingDestinationCode, shippingTypeCode);
+		return shippingProductViewDTORepository.findByDestinationAndTypeAndBagWeight(locale, currency, shippingDestinationCode, shippingTypeCode);
 	}
 
 

@@ -60,15 +60,20 @@ public class BagViewAdapterImpl implements IBagPortService {
 			ShippingProductEntity s = shippingProductService.findByUpc(shippingUpc);
 
 			// get the postage free from hk post
-			PostageProductViewDTO postageFee = hkPostService.getHKPostageFee(s.getShippingCountryCode(),
+			Optional<PostageProductViewDTO> postageFee =hkPostService.getHKPostageFee(s.getShippingCountryCode(),
 					s.getShippingCode(), ob.get().getTotalWeight());
 
-			HKPostageFee fee = (postageFee != null && postageFee.getTotalPostage() != null) ? new HKPostageFee(new Money(postageFee.getTotalPostage(),  Currency.getInstance(Constants.currencyHKD), Constants.defaultMoneyRounding))
-					: new HKPostageFee(new Money(postageFee.getTotalPostage(), Currency.getInstance(Constants.currencyHKD), Constants.defaultMoneyRounding));
+			if(postageFee.isPresent()) {
+				HKPostageFee fee = (postageFee.get().getTotalPostage() != null) 
+									? new HKPostageFee(new Money(postageFee.get().getTotalPostage(),  Currency.getInstance(Constants.currencyHKD), Constants.defaultMoneyRounding))
+									: new HKPostageFee(new Money(BigDecimal.ZERO, Currency.getInstance(Constants.currencyHKD), Constants.defaultMoneyRounding));
 
-			return bagMapper.toView(ob.get(), fee.amount(locale.getCurrency()), locale);
+				return bagMapper.toView(ob.get(), fee.amount(locale.getCurrency()), locale);
+			}
 		}
 		return bagMapper.toView(ob.get(), BigDecimal.ZERO, locale);
 	}
 
 }
+
+	

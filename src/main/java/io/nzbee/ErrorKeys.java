@@ -2,6 +2,7 @@ package io.nzbee;
 
 public class ErrorKeys {
 
+	public static final String postageNotFound 				= "PTGNF001";
 	public static final String categoryNotFound 			= "CATNF001";
 	public static final String departmentNotFound 			= "DEPNF001";
 	public static final String brandNotFound 				= "BNDNF001";

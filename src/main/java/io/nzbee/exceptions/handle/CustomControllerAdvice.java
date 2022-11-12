@@ -10,6 +10,7 @@ import io.nzbee.exceptions.AlreadyExistsException;
 import io.nzbee.exceptions.EntityNotFoundException;
 import io.nzbee.exceptions.ImageNotFoundException;
 import io.nzbee.exceptions.PasswordsNotMatchException;
+import io.nzbee.exceptions.PostageNotFoundException;
 import io.nzbee.exceptions.response.CustomExceptionResponse;
 
 @ControllerAdvice
@@ -35,6 +36,13 @@ public class CustomControllerAdvice {
 		CustomExceptionResponse response = new CustomExceptionResponse(ex.getErrorCode(), ex.getLocalizedMessage());
 		return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	}
+	
+	@ResponseBody
+	@ExceptionHandler(PostageNotFoundException.class)
+	public final ResponseEntity<CustomExceptionResponse> notFoundResponse(PostageNotFoundException ex) {
+		CustomExceptionResponse response = new CustomExceptionResponse(ex.getErrorCode(), ex.getLocalizedMessage());
+		return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+	}
 
 	@ResponseBody
 	@ExceptionHandler(ImageNotFoundException.class)
@@ -43,11 +51,4 @@ public class CustomControllerAdvice {
 		return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	}
 	
-//	@ResponseBody
-//	@ExceptionHandler({InvalidGrantException.class})
-//	public ResponseEntity<Object> handleOAuth2Exception(OAuth2Exception ex) {
-//		UserIsDisabledException cex = new UserIsDisabledException(ErrorKeys.userIsDisabled, Constants.localeENGB, "test");
-//		CustomExceptionResponse response = new CustomExceptionResponse(cex.getErrorCode(), cex.getLocalizedMessage());
-//		return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-//	}
 }

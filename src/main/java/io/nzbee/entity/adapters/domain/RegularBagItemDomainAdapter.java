@@ -1,6 +1,5 @@
 package io.nzbee.entity.adapters.domain;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ import io.nzbee.entity.bag.item.domain.RegularBagItemDomainDTO;
 import io.nzbee.entity.bag.item.domain.ShippingBagItemDomainDTO;
 import io.nzbee.entity.bag.item.entity.BagItemEntity;
 import io.nzbee.exceptions.EntityNotFoundException;
+import io.nzbee.exceptions.PostageNotFoundException;
 import io.nzbee.hkpost.IHKPostService;
 import io.nzbee.hkpost.PostageProductViewDTO;
 
@@ -60,7 +60,8 @@ public class RegularBagItemDomainAdapter implements IBagItemPortService {
 		ShippingBagItemDomainDTO biDto = bagItemDomainDTOService.getNewShippingItem(locale.getLanguageCode(), locale.getCurrency().getCurrencyCode(),  destCode,  shipType)
 				.orElseThrow(() -> new EntityNotFoundException(ErrorKeys.productNotFound, locale, destCode + " - " + shipType + " - " + bag.getTotalWeight().amount()));
 		
-		PostageProductViewDTO dto = hkPostService.getHKPostageFee(destCode, shipType, bag.getTotalWeight().amount());
+		PostageProductViewDTO dto = hkPostService.getHKPostageFee(destCode, shipType, bag.getTotalWeight().amount())
+				.orElseThrow(() -> new PostageNotFoundException(ErrorKeys.postageNotFound, locale, destCode + " - " + shipType));
 		
 		//create, save and return domain object 
 		IShippingBagItem bi = shippingBagItemDomainMapper.toDo(bag, biDto, dto.getTotalPostage(), locale);
