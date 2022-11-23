@@ -15,5 +15,4 @@ public class CouponDTO {
 		this.coupon = coupon;
 	}
 
-	
 }
